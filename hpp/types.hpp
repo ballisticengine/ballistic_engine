@@ -5,7 +5,6 @@ typedef float e_loc;
 
 struct vertex {
     e_loc x,y,z;
-    
 };
 
 struct triangle {
