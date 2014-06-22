@@ -1,13 +1,13 @@
-CFLAGS=-Ihpp/ 
-OUTPUT=ballistic
+CFLAGS=-Ihpp/ -lSDL
+OUTPUT=ballistic -lstdc++
 
 
-$(OUTPUT): main.o sdl.o 
-	gcc $(CFLAGS) main.o sdl.o -o $(OUTPUT)
+$(OUTPUT): main.o sdl.o singleton.o renderer.o
+	gcc $(CFLAGS) main.o sdl.o singleton.o renderer.o -o $(OUTPUT)
 	
 
 main.o: main.cpp sdl.o
-	g++ $(CFLAGS) -c main.cpp sdl.o -o main.o
+	g++ $(CFLAGS) -c main.cpp -o main.o
 
 
 sdl.o: cpp/sdlio.cpp
