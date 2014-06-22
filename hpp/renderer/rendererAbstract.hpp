@@ -4,7 +4,7 @@
 #include "helpers/singleton.hpp"
 
 
-class renderer : public(singleton) {
+class renderer : public singleton {
     renderer();
     virtual ~renderer();
 };
