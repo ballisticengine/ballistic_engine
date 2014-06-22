@@ -1,4 +1,4 @@
-CFLAGS=-Ihpp/
+CFLAGS=-Ihpp/ -lsdl
 OUTPUT=ballistic
 
 
