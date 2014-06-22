@@ -2,7 +2,7 @@ CFLAGS=-Ihpp/ -lsdl
 OUTPUT=ballistic
 
 
-$(OUTPUT): main.o renderer.o sdlio.o
+$(OUTPUT): main.o renderer.o sdlio.o singleton.o
 	gcc $(CFLAGS) main.o -o $(OUTPUT)
 	
 
@@ -15,6 +15,9 @@ renderer.o: cpp/rendererAbstract.cpp
 
 renderer.o: cpp/sdlio.cpp
 	g++ $(CFLAGS) -c cpp/sdlio.cpp -o sdlio.o
+	
+singleton.o: cpp/singleton.cpp
+	g++ $(CFLAGS) -c cpp/singleton.cpp -o singleton.o
 	
 clean:
 	rm ./*.o

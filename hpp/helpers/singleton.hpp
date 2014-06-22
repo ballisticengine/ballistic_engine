@@ -8,16 +8,7 @@ protected:
     void setParams(void *params = 0);
 public:
 
-    static singleton *getInstance(void *params = 0) {
-        if (!singleton::instance) {
-            singleton::instance = new singleton();
-            if (params) {
-                singleton::instance->setParams(params);
-            }
-
-        }
-        return singleton::instance;
-    }
+    static singleton *getInstance(void *params = 0);
 };
 
 
