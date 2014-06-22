@@ -13,6 +13,7 @@ void sdlIO::initWindow() {
    this->screen=SDL_SetVideoMode( vd.width, vd.height, vd.bpp, SDL_OPENGL);
    this->renderer=new rendererGL();
    this->renderer->init(vd);
+   this->renderer->setFlush(SDL_GL_SwapBuffers);
    
 }
 
@@ -26,6 +27,7 @@ void sdlIO::eventLoop() {
             {
                 this->exit = true;
             }
+            this->renderer->render();
         }
     }
 } 
