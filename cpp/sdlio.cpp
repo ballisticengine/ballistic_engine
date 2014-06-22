@@ -1,4 +1,4 @@
-#include "io/sdlio.hpp"
+#include "sdlio.hpp"
 
 sdlIO::sdlIO() {
     

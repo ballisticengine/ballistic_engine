@@ -1,7 +1,7 @@
 #ifndef RENDERERABSTRACT_HPP
 #define	RENDERERABSTRACT_HPP
 
-#include "helpers/singleton.hpp"
+#include "singleton.hpp"
 
 
 class renderer : public singleton {

@@ -19,6 +19,7 @@ renderer.o: cpp/sdlio.cpp
 singleton.o: cpp/singleton.cpp
 	g++ $(CFLAGS) -c cpp/singleton.cpp -o singleton.o
 	
+
 clean:
 	rm ./*.o
 	rm ./ballistic || rm ./ballistic.exe

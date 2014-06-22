@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 
-#include "helpers/singleton.hpp"
+#include "singleton.hpp"
 
 class sdlIO : public singleton {
     void initWindow();
