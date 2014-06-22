@@ -1,20 +1,23 @@
-CFLAGS=-Ihpp/ -lsdl
+CFLAGS=-Ihpp/ 
 OUTPUT=ballistic
 
 
-$(OUTPUT): main.o renderer.o sdlio.o singleton.o
-	gcc $(CFLAGS) main.o -o $(OUTPUT)
+$(OUTPUT): main.o sdl.o 
+	gcc $(CFLAGS) main.o sdl.o -o $(OUTPUT)
 	
 
-main.o: main.cpp
-	g++ $(CFLAGS) -c main.cpp -o main.o
+main.o: main.cpp sdl.o
+	g++ $(CFLAGS) -c main.cpp sdl.o -o main.o
+
+
+sdl.o: cpp/sdlio.cpp
+	g++ $(CFLAGS) -c cpp/sdlio.cpp -o sdl.o
 
 
 renderer.o: cpp/rendererAbstract.cpp
 	g++ $(CFLAGS) -c cpp/rendererAbstract.cpp -o renderer.o
 
-renderer.o: cpp/sdlio.cpp
-	g++ $(CFLAGS) -c cpp/sdlio.cpp -o sdlio.o
+
 	
 singleton.o: cpp/singleton.cpp
 	g++ $(CFLAGS) -c cpp/singleton.cpp -o singleton.o
@@ -22,4 +25,4 @@ singleton.o: cpp/singleton.cpp
 
 clean:
 	rm ./*.o
-	rm ./ballistic || rm ./ballistic.exe
+	

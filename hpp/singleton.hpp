@@ -4,11 +4,20 @@
 class singleton {
 protected:
     static singleton *instance;
-    void *params;
-    void setParams(void *params = 0);
 public:
+    singleton() {}
+    static singleton *getInstance() {
+        
+        if (!singleton::instance) {
+            singleton::instance = new singleton;
+//            if (params) {
+//                singleton::instance->setParams(params);
+//            }
 
-    static singleton *getInstance(void *params = 0);
+        }
+        return singleton::instance;
+    
+    }
 };
 
 

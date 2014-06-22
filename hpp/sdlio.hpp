@@ -1,11 +1,11 @@
 #ifndef SDLIO_HPP
 #define	SDLIO_HPP
 
-#include <SDL.h>
 
-#include "singleton.hpp"
 
-class sdlIO : public singleton {
+
+class sdlIO {
+public:
     void initWindow();
     sdlIO();
 };
