@@ -27,12 +27,23 @@ class shape {
     /*unsigned int n_tris;
     triangle * tris;
      * */
-    vector <vertex *> tris;
+    vector <vertex> vertices;
+    vector <triangle *> triangles;
 public:
     bool operator==(shape &s);
     
-    void addVertex(vertex *v);
-    void addVertex(e_loc x,e_loc y,e_loc z);
+    /*
+     Dodaje trójkąt do bryły przyporządkowując wieszchołki wspólne
+     */
+    triangle * addTriangle(triangle *t);
+    /*
+     Dodaje wierchołek, jeśli nie istnieje i zwraca wskaźnik do niego. Jeśli już istnieje zwraca wskaźnik
+     */
+    vertex * addVertex(vertex *v);
+    vertex * addVertex(e_loc x,e_loc y,e_loc z);
+    /*
+     Szuka identycznego wieszchołka i zwraca go
+     */
     vertex * findVertex(vertex *v);
 };
 
