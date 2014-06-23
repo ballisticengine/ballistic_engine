@@ -3,7 +3,7 @@ OUTPUT=ballistic -lstdc++
 
 
 $(OUTPUT): main.o sdl.o singleton.o renderer.o rendererGL.o entity.o
-	gcc $(CFLAGS) main.o sdl.o singleton.o renderer.o rendererGL.o types.o -o $(OUTPUT)
+	gcc $(CFLAGS) main.o sdl.o singleton.o renderer.o rendererGL.o types.o  entity.o -o $(OUTPUT)
 	
 
 main.o: main.cpp sdl.o

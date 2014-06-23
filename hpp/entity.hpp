@@ -11,6 +11,7 @@
 class entity {
 protected:
     e_loc x,y,z;
+
 };
 
 
