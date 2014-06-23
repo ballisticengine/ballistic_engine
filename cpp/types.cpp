@@ -35,11 +35,11 @@ bool triangle::operator==(triangle &t) {
 /* kształty */
 
 bool shape::operator==(shape &s) {
-    if (s.tris.size() != this->tris.size()) {
+    if (s.triangles.size() != this->triangles.size()) {
         return false;
     }
-    for (int i; i < tris.size(); i++) {
-        if (!(*(s.tris[i]) == *(this->tris[i]))) {
+    for (int i; i < triangles.size(); i++) {
+        if (!(*(s.triangles[i]) == *(this->triangles[i]))) {
             return false;
         }
     }
@@ -48,23 +48,23 @@ bool shape::operator==(shape &s) {
 
 
 
-void shape::addVertex(vertex *v) {
-    if(tris.size()>0) {
+vertex * shape::addVertex(vertex *v) {
+    if(vertices.size()>0) {
         
     } else {
-       tris.push_back(v); 
+       vertices.push_back(v); 
     }
 }
 
-void shape::addVertex(e_loc x, e_loc y, e_loc z) {
+vertex * shape::addVertex(e_loc x, e_loc y, e_loc z) {
     vertex *v = new vertex(x,y,z);
     this->addVertex(v);
 }
 
 vertex * shape::findVertex(vertex *v) {
-    for(int i=0; i<tris.size(); i++) {
-        if(*tris[i]==*v) {
-            return tris[i];
+    for(int i=0; i<vertices.size(); i++) {
+        if(*vertices[i]==*v) {
+            return vertices[i];
         }
     }
     return 0;

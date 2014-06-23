@@ -27,7 +27,7 @@ class shape {
     /*unsigned int n_tris;
     triangle * tris;
      * */
-    vector <vertex> vertices;
+    vector <vertex *> vertices;
     vector <triangle *> triangles;
 public:
     bool operator==(shape &s);
