@@ -6,6 +6,8 @@
 #include <GL/gl.h>
 
 class rendererGL : public renderer {
+    protected:
+     virtual void renderVertex(vertex *v);
     float frustum_start,frustum_end;
     
     virtual void specificInit();

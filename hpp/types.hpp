@@ -3,10 +3,15 @@
 #define	TYPES_HPP
 
 #include <vector>
+#include <iostream>
+
 
 using namespace std;
 
 typedef float e_loc;
+
+class triangle;
+typedef vector <triangle *> tris_list;
 
 class vertex {
 public:
@@ -21,6 +26,9 @@ class triangle {
 public:
     vertex *v[3];
     bool operator==(triangle &t);
+    triangle();
+    triangle(vertex *a,vertex *b,vertex *c);
+    triangle(vertex v[3]);
 };
 
 class shape {
@@ -31,11 +39,12 @@ class shape {
     vector <triangle *> triangles;
 public:
     bool operator==(shape &s);
-    
+    vector <triangle *> getTris();
     /*
      Dodaje trójkąt do bryły przyporządkowując wieszchołki wspólne
      */
     triangle * addTriangle(triangle *t);
+    triangle * addTriangle(vertex v[3]);
     /*
      Dodaje wierchołek, jeśli nie istnieje i zwraca wskaźnik do niego. Jeśli już istnieje zwraca wskaźnik
      */
@@ -45,6 +54,7 @@ public:
      Szuka identycznego wieszchołka i zwraca go
      */
     vertex * findVertex(vertex *v);
+    ~shape();
 };
 
 

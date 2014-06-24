@@ -1,6 +1,20 @@
 #include "rendererGL.hpp"
+#include "types.hpp"
+
+void rendererGL::renderVertex(vertex *v) {
+   glVertex3f(v->x,v->y,v->z);  
+}
 
 void rendererGL::render() {
+    shape s;
+    vertex v1(0,0,0),v2(1,1,0),v3(1,0,0),v4(0,1,0);
+    triangle t(&v1,&v4,&v2);
+    triangle t2(&v1,&v2,&v3);
+    tris_list tris;
+    s.addTriangle(&t2);
+    s.addTriangle(&t);
+    
+    tris=s.getTris();
     glClearColor(1, 1, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
@@ -8,9 +22,11 @@ void rendererGL::render() {
     glTranslatef(0, 0, -frustum_start);
     glColor3f(1, 0, 0);
     glBegin(GL_TRIANGLES);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 1, 0);
-    glVertex3f(1, 1, 0);
+
+    e_loc x,y,z;
+    
+   // cout << tris.size() << endl;
+    this->renderShape(&s);
     glEnd();
     glFlush();
     this->flush_callback();
