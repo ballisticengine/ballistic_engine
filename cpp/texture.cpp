@@ -5,7 +5,11 @@ texture::texture(string fn) {
 }
 
 bool texture::load() {
-   SDL_LoadBMP(this->filename.c_str());
+   surf=SDL_LoadBMP(this->filename.c_str());
+   if(!surf) {
+       return false;
+   }
+   return true;
 }
 
 void texture::free() {

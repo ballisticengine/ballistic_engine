@@ -17,10 +17,14 @@ using namespace std;
 class texture {
 protected:
     string filename;
+    SDL_Surface *surf;
 public:
     texture(string fn);
-    bool load();
-    void free();
+    virtual bool load();
+    virtual void free();
+    virtual void setup()=0;
+    virtual void assign()=0;
+    Uint8 * getPixels();
     
 };
 
