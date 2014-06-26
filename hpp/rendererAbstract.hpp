@@ -3,6 +3,7 @@
 
 #include "singleton.hpp"
 #include "types.hpp"
+#include "texture.hpp"
 
 struct videoData {
     int width,height,bpp;

@@ -28,6 +28,7 @@ public:
     
 };
 
+//potem
 class textureFactory {
    vector<texture *>  textures; 
    
