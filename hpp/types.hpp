@@ -15,10 +15,11 @@ typedef vector <triangle *> tris_list;
 
 class vertex {
 public:
-    e_loc x, y, z;
+    e_loc x, y, z,u,v;
     bool operator==(vertex &v);
     vertex();
     vertex(e_loc x,e_loc y,e_loc z);
+    vertex(e_loc x,e_loc y,e_loc z,e_loc u,e_loc v);
     
 };
 

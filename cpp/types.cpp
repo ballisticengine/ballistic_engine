@@ -21,13 +21,21 @@ vertex::vertex(e_loc x, e_loc y, e_loc z) {
     this->z = z;
 }
 
+vertex::vertex(e_loc x, e_loc y, e_loc z, e_loc u, e_loc v) {
+    this->x = x;
+    this->y = y;
+    this->z = z;
+    this->u = u;
+    this->v = v;
+}
+
 /* trójkąty */
 
 triangle::triangle() {
 
 }
 
-triangle::triangle(vertex *a,vertex *b,vertex *c) {
+triangle::triangle(vertex *a, vertex *b, vertex *c) {
     this->v[0] = a;
     this->v[1] = b;
     this->v[2] = c;
@@ -72,11 +80,11 @@ triangle * shape::addTriangle(triangle *t) {
 triangle * shape::addTriangle(vertex v[3]) {
     triangle *t = new triangle(v);
     this->addTriangle(t);
-  
+
 }
 
 vertex * shape::addVertex(vertex *v) {
-    if (vertices.size()!=0) { //
+    if (vertices.size() != 0) { //
         vertex *f = findVertex(v);
         if (f) {
             return f;
@@ -105,7 +113,7 @@ vertex * shape::findVertex(vertex *v) {
 }
 
 vector <triangle *> shape::getTris() {
-//    cout << vertices.size() << endl;
+    //    cout << vertices.size() << endl;
     return this->triangles;
 }
 
