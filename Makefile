@@ -2,8 +2,8 @@ CFLAGS=-Ihpp/ -lSDL -lGL
 OUTPUT=ballistic -lstdc++
 
 
-$(OUTPUT): main.o sdl.o singleton.o renderer.o rendererGL.o entity.o texture.o world.o
-	gcc $(CFLAGS) main.o sdl.o singleton.o renderer.o rendererGL.o types.o texture.o world.o entity.o -o $(OUTPUT)
+$(OUTPUT): main.o sdl.o singleton.o renderer.o rendererGL.o entity.o texture.o world.o skybox.o
+	gcc $(CFLAGS) main.o sdl.o singleton.o renderer.o rendererGL.o types.o texture.o world.o skybox.o entity.o -o $(OUTPUT)
 	
 
 main.o: main.cpp sdl.o

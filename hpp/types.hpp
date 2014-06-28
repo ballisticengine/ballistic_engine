@@ -13,6 +13,7 @@ typedef float e_loc;
 class triangle;
 typedef vector <triangle *> tris_list;
 
+
 class vertex {
 public:
     e_loc x, y, z,u,v;
@@ -22,7 +23,7 @@ public:
     vertex(e_loc x,e_loc y,e_loc z,e_loc u,e_loc v);
     
 };
-
+typedef vector <vertex *> vert_list;
 class triangle {
 public:
     vertex *v[3];
@@ -41,6 +42,9 @@ class shape {
 public:
     bool operator==(shape &s);
     vector <triangle *> getTris();
+    vert_list getVertices();
+    void addVertices(vertex *vs,int num_tris);
+    
     /*
      Dodaje trójkąt do bryły przyporządkowując wieszchołki wspólne
      */

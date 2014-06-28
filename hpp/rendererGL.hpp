@@ -11,6 +11,7 @@ class rendererGL : public renderer {
     float frustum_start,frustum_end;
     
     virtual void specificInit();
+    virtual void renderSkybox(skybox *sky);
         
     public:
     

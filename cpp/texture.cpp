@@ -13,5 +13,6 @@ bool texture::load() {
 }
 
 void texture::free() {
-
+    delete surf;
 }
+    

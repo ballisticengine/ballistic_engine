@@ -7,14 +7,16 @@ void rendererGL::renderVertex(vertex *v) {
 
 void rendererGL::render() {
     shape s;
-    vertex v1(0,0,0),v2(1,1,0),v3(1,0,0),v4(0,1,0);
-    triangle t(&v1,&v4,&v2);
-    triangle t2(&v1,&v2,&v3);
-    tris_list tris;
-    s.addTriangle(&t2);
-    s.addTriangle(&t);
-    
-    tris=s.getTris();
+//    vertex v1(0,0,0),v2(1,1,0),v3(1,0,0),v4(0,1,0);
+//    triangle t(&v1,&v4,&v2);
+//    triangle t2(&v1,&v2,&v3);
+//    tris_list tris;
+//    s.addTriangle(&t2);
+//    s.addTriangle(&t);
+//    
+//    tris=s.getTris();
+    vertex vs[4]={vertex(0,0,0),vertex(1,1,0),vertex(1,0,0),vertex(0,1,0)};
+    s.addVertices(vs,4);
     glClearColor(1, 1, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
@@ -26,7 +28,7 @@ void rendererGL::render() {
     e_loc x,y,z;
     
    // cout << tris.size() << endl;
-    this->renderShape(&s);
+    this->renderPShape(&s);
     glEnd();
     glFlush();
     this->flush_callback();
@@ -42,4 +44,8 @@ void rendererGL::specificInit() {
      glCullFace( GL_BACK );
     glFrontFace( GL_CCW );
     glEnable( GL_CULL_FACE );
+}
+
+void rendererGL::renderSkybox(skybox *sky) {
+    
 }

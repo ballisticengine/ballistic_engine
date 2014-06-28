@@ -22,8 +22,8 @@ public:
     texture(string fn);
     virtual bool load();
     virtual void free();
-    virtual void setup()=0;
-    virtual void assign()=0;
+//    virtual void setup()=0;
+//    virtual void assign()=0;
     Uint8 * getPixels();
     
 };

@@ -112,6 +112,16 @@ vertex * shape::findVertex(vertex *v) {
     return 0;
 }
 
+void shape::addVertices(vertex *vs, int num_tris) {
+    for (int i = 0; i < num_tris; i++) {
+        vertices.push_back(&vs[i]);
+    }
+}
+
+vert_list shape::getVertices() {
+    return vertices;
+}
+
 vector <triangle *> shape::getTris() {
     //    cout << vertices.size() << endl;
     return this->triangles;
