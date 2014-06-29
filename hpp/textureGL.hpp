@@ -4,7 +4,9 @@
 #include "texture.hpp"
 
 class textureGL : public texture {
-    
+public:
+    virtual void setup();
+    virtual void assign();
 };
 
 

@@ -6,6 +6,7 @@ void rendererGL::renderVertex(vertex *v) {
 }
 
 void rendererGL::render() {
+    static texture tex("data/test_texture.bmp");
     shape s;
 //    vertex v1(0,0,0),v2(1,1,0),v3(1,0,0),v4(0,1,0);
 //    triangle t(&v1,&v4,&v2);

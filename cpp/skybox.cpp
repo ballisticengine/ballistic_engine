@@ -1,7 +1,7 @@
 #include "skybox.hpp"    
 
 skybox::skybox(string tex_name) {
-    sky=new texture(tex_name);
+    //sky=new texture(tex_name);
     if(!sky) {
         cout << "Texture error";
     }
