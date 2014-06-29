@@ -9,5 +9,5 @@ skybox * world::getSkybox() {
 }
 
  void world::makeTestWorld() {
-     this->sky=new skybox("test_texture");
+     this->sky=new skybox("test_texture.bmp");
  }
