@@ -8,7 +8,7 @@
 class rendererGL : public renderer {
     protected:
      virtual void renderVertex(vertex *v);
-    float frustum_start,frustum_end;
+    
     
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);

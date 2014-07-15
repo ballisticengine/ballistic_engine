@@ -4,8 +4,9 @@
 #include <SDL/SDL.h>
 #include "rendererAbstract.hpp"
 #include "rendererGL.hpp"
+#include "singleton.hpp"
 
-class sdlIO  {
+class sdlIO  :  public singleton {
 private:
     SDL_Surface *screen;
     videoData vd;

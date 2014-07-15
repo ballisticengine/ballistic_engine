@@ -18,6 +18,7 @@ void sdlIO::initWindow() {
 }
 
 void sdlIO::eventLoop() {
+   
     SDL_Event event;
     while( !this->exit )
     {

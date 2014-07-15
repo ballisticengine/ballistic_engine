@@ -3,15 +3,15 @@
 #include <cstdlib>
 
 
-#include "sdlio.hpp"
+#include "engine.hpp"
 
 using namespace std;
 
 
 int main(int argc, char** argv) {
-    sdlIO *io=new sdlIO();
-    io->initWindow();
-    io->eventLoop();
+    engine *e=(engine *)engine::getInstance();
+    e->prepare();
+    e->start();
     return 0;
 }
 

@@ -14,10 +14,12 @@ using namespace std;
 class skybox {
     texture *sky;
     shape *box;
-    void makeShape();
+   
 public:
     skybox(string tex_name);
     skybox(texture *tex);
+    shape *getShape();
+     void makeShape(float x,float y);
 };
 
 

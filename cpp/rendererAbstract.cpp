@@ -10,7 +10,15 @@ renderer::~renderer() {
 }
 
 void renderer::init(videoData vd) {
+     frustum_start = 1;
+    frustum_end = 100;
+    frustum_x=20;
+    frustum_y=20;
     this->vd=vd;
+    this->w=(world *)world::getInstance();
+    skybox *sky=this->w->getSkybox();
+   
+    sky->makeShape(frustum_x,frustum_y);
     
 } 
 

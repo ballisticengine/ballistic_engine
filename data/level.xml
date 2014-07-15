@@ -1,0 +1,15 @@
+<world>
+    <config>
+        <skybox>
+            test_texture.bmp
+        </skybox>
+        <jump_point>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </jump_point>
+    </config>
+    <entities>
+        
+    </entities>
+</world>
