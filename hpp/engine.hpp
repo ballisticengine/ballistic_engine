@@ -9,6 +9,7 @@
 #define	ENGINE_HPP
 
 #include <iostream>
+
 using namespace std;
 
 #include "singleton.hpp"

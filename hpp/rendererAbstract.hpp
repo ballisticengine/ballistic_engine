@@ -39,12 +39,9 @@ public:
     };
     
        virtual void setupTexture(texture *t) {}
-    
-void test() {
-    
-}    
+   
     virtual ~renderer();
-
+    void operator()();
     virtual void render()=0;
 };
 

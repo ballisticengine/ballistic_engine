@@ -6,7 +6,7 @@ sdlIO::sdlIO() {
 
 void sdlIO::initWindow() {
    SDL_Init( SDL_INIT_EVERYTHING );
-   
+   //init rederera do engine.cpp
    vd.width=640;
    vd.height=480;
    vd.bpp=32;
@@ -28,7 +28,7 @@ void sdlIO::eventLoop() {
             {
                 this->exit = true;
             }
-            this->renderer->render();
+            //this->renderer->render();
         }
     }
 } 
