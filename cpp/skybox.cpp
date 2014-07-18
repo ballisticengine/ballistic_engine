@@ -1,15 +1,22 @@
 #include "skybox.hpp"    
 
 skybox::skybox(string tex_name) {
-    //sky=new texture(tex_name);
-    if(!sky) {
+    sky=new texture(tex_name);
+    if(! sky->load()) {
         cout << "Texture error";
+        cout.flush();
     }
+    cout << tex_name << endl;
+   
     
 }
 
 skybox::skybox(texture *tex) {
 
+}
+
+texture *skybox::getTexture() {
+    return this->sky;
 }
 
 void skybox::makeShape(float x,float y) {
@@ -21,10 +28,10 @@ void skybox::makeShape(float x,float y) {
     s.addTriangle(&t2);
     s.addTriangle(&t);*/
     box=new shape();
-    box->addVertex(x/2,-y/2,0);
-    box->addVertex(-x/2,-y/2,0);
-    box->addVertex(-x/2,y/2,0);
-    box->addVertex(x/2,y/2,0);
+    box->addVertex(new vertex(x/2,-y/2,0,1,0));
+    box->addVertex(new vertex(-x/2,-y/2,0,0,0));
+    box->addVertex(new vertex(-x/2,y/2,0,0,1));
+    box->addVertex(new vertex(x/2,y/2,0,1,1));
 }
 
 shape * skybox::getShape() {

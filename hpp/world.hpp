@@ -13,6 +13,7 @@ using namespace std;
 #include "singleton.hpp"
 #include "skybox.hpp"
 
+
 typedef vector <entity *> ent_list;
 
 class world : public singleton {

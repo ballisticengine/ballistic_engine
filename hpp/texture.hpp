@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include <SDL/SDL.h>
 
 using namespace std;
@@ -25,7 +26,9 @@ public:
     //todo: tać poniższe do renderera
 //    virtual void setup()=0;
 //    virtual void assign()=0;
-    Uint8 * getPixels();
+    void * getPixels();
+    int getWidth();
+    int getHeight();
     
 };
 

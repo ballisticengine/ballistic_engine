@@ -28,6 +28,8 @@ protected:
     virtual void renderPShape(shape *s);
     virtual void renderVertex(vertex *v)=0;
     virtual void renderSkybox(skybox *sky)=0;
+    virtual void assignTexture(texture *t) {};
+ 
 public:
     renderer();
     void setFlush(flushf flush_callback);
@@ -36,11 +38,13 @@ public:
         
     };
     
+       virtual void setupTexture(texture *t) {}
     
+void test() {
     
-    
+}    
     virtual ~renderer();
-public:
+
     virtual void render()=0;
 };
 

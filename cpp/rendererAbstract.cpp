@@ -19,6 +19,7 @@ void renderer::init(videoData vd) {
     skybox *sky=this->w->getSkybox();
    
     sky->makeShape(frustum_x,frustum_y);
+    this->specificInit();
     
 } 
 

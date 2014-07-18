@@ -19,6 +19,7 @@ public:
     skybox(string tex_name);
     skybox(texture *tex);
     shape *getShape();
+    texture *getTexture();
      void makeShape(float x,float y);
 };
 

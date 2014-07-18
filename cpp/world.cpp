@@ -17,6 +17,7 @@ bool world::parseXml(const string &fn) {
     ptree pt;
     read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
     string skyfn= pt.get<string>("world.config.skybox");
-    cout << "}"<<skyfn << "}" << endl;
-   this->sky = new skybox(skyfn);
+   // cout << "}"<<skyfn << "}" << endl;
+   this->sky = new skybox("data/"+skyfn);
+  
 }
