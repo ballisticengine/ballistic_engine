@@ -19,7 +19,12 @@ void renderer::init(videoData vd) {
     skybox *sky = this->w->getSkybox();
 
     sky->makeShape(frustum_x, frustum_y);
-    this->specificInit();
+   
+    gx=0;
+    gy=0;
+    gz=0;
+    gr=0;
+     this->specificInit();
 
 }
 
@@ -48,4 +53,14 @@ void renderer::operator()() {
     while (1) {
         this->render();
     }
+}
+
+void renderer::translate(float x, float y, float z) {
+    gx=x;
+    gy=y;
+    gz=z;
+}
+
+void renderer::rotate(float x) {
+    gr=x;
 }

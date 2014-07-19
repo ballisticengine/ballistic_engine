@@ -16,11 +16,33 @@ void sdlIO::initWindow(videoData vd, renderer *r) {
 void sdlIO::eventLoop() {
 
     SDL_Event event;
+    float rot=0,tr=0;
+    SDL_EnableKeyRepeat(300, 30) ;
     while (!this->exit) {
+        
+        
         while (SDL_PollEvent(& event)) {
             if (event.type == SDL_QUIT) {
                 this->exit = true;
             }
+            if(event.type==SDL_KEYDOWN)  {
+                if(event.key.keysym.sym==SDLK_LEFT) {
+                     rot++;
+                } 
+                if(event.key.keysym.sym==SDLK_RIGHT) {
+                    rot--;
+                }
+                if(event.key.keysym.sym==SDLK_UP) {
+                 tr+=0.1;   
+                }
+                if(event.key.keysym.sym==SDLK_DOWN) {
+                    tr-=0.1;
+                }
+                this->renderer_i->rotate(rot);
+                this->renderer_i->translate(0,0,tr);
+            }
+            
+            
             this->renderer_i->render();
         }
     }

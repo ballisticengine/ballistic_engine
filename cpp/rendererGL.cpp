@@ -21,12 +21,16 @@ void rendererGL::render() {
 
     this->renderSkybox(w->getSkybox());
     glEnable(GL_DEPTH_TEST);
-     
+    
+    glTranslatef(gx,gy,gz);
+    glRotatef(gr,0,1,0);
+    
+    
     this->assignTexture(qt);
      glTranslatef(0,0,0);
     gluSphere(q1,1.3f,32,32);
-    this->assignTexture(tt);
-    glTranslatef(0,0,-3);
+//    this->assignTexture(qt);
+    glTranslatef(7,2,-3);
      gluSphere(q1,1.3f,32,32);
     glFlush();
     this->flush_callback();
