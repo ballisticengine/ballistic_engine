@@ -5,10 +5,11 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
+#include <boost/foreach.hpp>
 #include <iostream>
 
 using namespace std;
-
+using namespace boost::property_tree;
 #include "entity.hpp"
 #include "singleton.hpp"
 #include "skybox.hpp"

@@ -1,7 +1,7 @@
 <world>
     <config>
         <skybox>
-            test_texture.bmp
+            skybox.bmp
         </skybox>
         <jump_point>
             <x>0.0</x>
@@ -14,14 +14,14 @@
             <name>test1</name>
             <quadric>sphere</quadric>
             <x>5.0</x>
-            <y>5.0</y>
+            <y>0.0</y>
             <z>-1.0</z>
         </entity>
         <entity>
             <name>test2</name>
             <quadric>torus</quadric>
-            <x>5.0</x>
-            <y>5.0</y>
+            <x>3.0</x>
+            <y>0.0</y>
             <z>-1.0</z>
         </entity>
     </entities>

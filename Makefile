@@ -1,4 +1,4 @@
-CFLAGS=-Ihpp/ -lSDL -lGL -lboost_thread
+CFLAGS=-Ihpp/ -lSDL -lGL -lGLU -lboost_thread
 OUTPUT=ballistic -lstdc++ 
 
 
