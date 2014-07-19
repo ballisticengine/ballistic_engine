@@ -11,9 +11,9 @@ private:
     SDL_Surface *screen;
     videoData vd;
     bool exit;
-    rendererGL *renderer;
+    rendererGL *renderer_i;
 public:
-    void initWindow();
+    void initWindow(videoData vd,renderer *r);
     void eventLoop();
     sdlIO();
     ~sdlIO();

@@ -1,25 +1,29 @@
 #include "engine.hpp"
 
- void engine::prepare() {
+void engine::prepare() {
     cout << "Preparing..." << endl;
     cout << "World\n";
-    world *w=(world *)world::getInstance();
+    world *w = (world *) world::getInstance();
     w->parseXml("data/level.xml");
-    
-    //na razie tak
-    rendererGL *r=(rendererGL *)rendererGL::getInstance();
-//    skybox *s=w->getSkybox();
-//    texture *t=s->getTexture();
-    
-    
-    
+
+
+    rendererGL *r = new rendererGL();
+
+    //    skybox *s=w->getSkybox();
+    //    texture *t=s->getTexture();
+
+    videoData vd;
+    vd.width = 640;
+    vd.height = 480;
+    vd.bpp = 32;
+    // 
     cout << "IO\n";
-    io=new sdlIO();//(sdlIO *)sdlIO::getInstance();
-    io->initWindow();
-    
-    
- }
- 
- void engine::start() {
-     io->eventLoop();
- }
+    io = new sdlIO(); //(sdlIO *)sdlIO::getInstance();
+    io->initWindow(vd, r);
+
+
+}
+
+void engine::start() {
+    io->eventLoop();
+}
