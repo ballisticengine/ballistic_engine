@@ -30,6 +30,8 @@
 64 	int 	ofs_end 	Offset to end of file
  */
 
+
+
 struct md2header {
     int ident,version,skinwidth,skinheight,framesize,num_skins,num_xyz,num_st,num_tris,num_glcmds,num_frames,
     ofs_skins,ofs_st,ofs_tris,ofs_frames,ofs_glcmds,ofs_end;
@@ -59,6 +61,13 @@ struct md2_vertex_t
 
 struct md2st {
     short s,t;
+};
+
+struct md2file {
+ md2header header;
+ md2frame *frames;
+ md2triangle *tris;
+ md2st *st;
 };
 
 #endif	/* MD2STUCT_HPP */

@@ -10,6 +10,7 @@
 
 #include <string>
 #include <cstdio>
+#include <cstdlib>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ using namespace std;
 
 
 class loaderMD2 {
-   
+    void md2ToShape(md2file *md2,shape *s);
 public:
     bool loadMD2(string fn,shape *s);
 };
