@@ -2,13 +2,15 @@ CFLAGS=-Ihpp/ -lSDL -lGL -lGLU -lboost_thread
 OUTPUT=ballistic -lstdc++ 
 
 
-$(OUTPUT): main.o sdl.o singleton.o renderer.o rendererGL.o entity.o texture.o world.o skybox.o texturegl.o engine.o sprite.o abstractEntity.o
-	gcc $(CFLAGS) main.o sdl.o singleton.o renderer.o rendererGL.o types.o texture.o world.o skybox.o entity.o  engine.o sprite.o texturegl.o  abstractEntity.o -o $(OUTPUT)
+$(OUTPUT): main.o sdl.o singleton.o renderer.o rendererGL.o entity.o texture.o world.o skybox.o texturegl.o engine.o sprite.o abstractEntity.o loaderMD2.o
+	gcc $(CFLAGS) main.o sdl.o singleton.o renderer.o rendererGL.o types.o texture.o world.o skybox.o entity.o  engine.o sprite.o texturegl.o  abstractEntity.o loaderMD2.o -o $(OUTPUT)
 	
 
 main.o: main.cpp sdl.o
 	g++ $(CFLAGS) -c main.cpp -o main.o
 
+loaderMD2.o: cpp/loaderMD2.cpp
+	g++ $(CFLAGS) -c cpp/loaderMD2.cpp -o loaderMD2.o
 
 engine.o: cpp/engine.cpp
 	g++ $(CFLAGS) -c cpp/engine.cpp  -o engine.o
