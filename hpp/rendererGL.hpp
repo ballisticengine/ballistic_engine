@@ -2,6 +2,7 @@
 #define	RENDERERGL_HPP
 
 #include "rendererAbstract.hpp"
+#include "loaderMD2.hpp"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -14,7 +15,7 @@ class rendererGL : public renderer {
     map<texture *,GLuint> textures_ids;
     virtual void renderVertex(vertex *v);
     texture *tt,*qt;
-    
+    shape *test;
     GLUquadricObj *q1,*q2;   
     
     virtual void specificInit();

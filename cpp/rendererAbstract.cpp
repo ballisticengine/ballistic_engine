@@ -10,10 +10,10 @@ renderer::~renderer() {
 }
 
 void renderer::init(videoData vd) {
-    frustum_start = 1;
-    frustum_end = 100;
-    frustum_x = 20;
-    frustum_y = 20;
+    frustum_start = 100;
+    frustum_end = 100000;
+    frustum_x = 200;
+    frustum_y = 200;
     this->vd = vd;
     this->w = (world *) world::getInstance();
     skybox *sky = this->w->getSkybox();
@@ -34,6 +34,7 @@ void renderer::setFlush(flushf flush_callback) {
 
 void renderer::renderPShape(shape *s) {
     vert_list verts = s->getVertices();
+   
     for (int i = 0; i < verts.size(); i++) {
         this->renderVertex(verts[i]);
     }

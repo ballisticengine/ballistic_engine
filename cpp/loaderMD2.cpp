@@ -1,17 +1,44 @@
 #include "loaderMD2.hpp"
 
- void loaderMD2::md2ToShape(md2file *md2,shape *s) {
- 
- }
+void loaderMD2::md2ToShape(md2file *md2, shape *s) {
+    int i;
+    vertex *vs_tmp[3],*vp;
+    triangle *vt;
+    for (int t = 0; t < md2->header.num_tris; t++) {
 
- bool loaderMD2::loadMD2(string fn, shape *s) {
+
+        for(int vi=0; vi<3; vi++) {
+            
+            i=md2->tris[t].vertex[vi];    
+            
+       // cout << i << endl;    
+        md2_vertex_t md2v = md2->frames[0].verts[i];
+            float * scale = md2->frames[0].scale;
+            float *translate = md2->frames[0].translate;
+            vec3_t scaled;
+            for (int n = 0; n < 3; n++) {
+                scaled[n] = (float) md2v.v[n] * scale[n]; //+translate[n];
+            }
+            vs_tmp[vi]=new vertex(scaled[0],scaled[1],scaled[2]);
+            // cout << scaled[0] << "," << scaled[1] << "," << scaled[2] << endl;
+          
+        }
+        vt=new triangle(vs_tmp[0],vs_tmp[1],vs_tmp[2]);
+        s->addTriangle(vt);
+        
+    }
+
+
+}
+
+bool loaderMD2::loadMD2(string fn, shape *s) {
     FILE *f;
     f = fopen(fn.c_str(), "rb");
     if (!f) {
         return false;
     }
-    md2file *md2=new md2file;
-   
+    md2file *md2 = new md2file;
+
     fread(&md2->header, 1, sizeof (md2header), f);
     if (md2->header.ident != MD2_MAGIC) {
         return false;
@@ -38,5 +65,6 @@
     }
 
     fclose(f);
+    this->md2ToShape(md2, s);
     return true;
 }

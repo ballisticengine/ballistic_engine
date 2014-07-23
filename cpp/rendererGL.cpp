@@ -17,21 +17,24 @@ void rendererGL::render() {
     glTranslatef(0, 0, -frustum_start);
     glColor3f(1, 0, 0);
 
-    this->assignTexture(tt);
+   // this->assignTexture(tt);
 
-    this->renderSkybox(w->getSkybox());
+    //this->renderSkybox(w->getSkybox());
     glEnable(GL_DEPTH_TEST);
     
     glTranslatef(gx,gy,gz);
     glRotatef(gr,0,1,0);
     
     
-    this->assignTexture(qt);
-     glTranslatef(0,0,0);
-    gluSphere(q1,1.3f,32,32);
+  //  this->assignTexture(qt);
+   //  glTranslatef(0,0,-500);
+   glBegin(GL_TRIANGLES); 
+    this->renderShape(test);
+    glEnd();
+     //gluSphere(q1,1.3f,32,32);
 //    this->assignTexture(qt);
-    glTranslatef(7,2,-3);
-     gluSphere(q1,1.3f,32,32);
+    //glTranslatef(7,2,-3);
+    // gluSphere(q1,1.3f,32,32);
     glFlush();
     this->flush_callback();
 }
@@ -43,10 +46,10 @@ void rendererGL::specificInit() {
     glLoadIdentity();
     glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
     glCullFace(GL_FRONT);
-    glFrontFace(GL_CCW);
+    glFrontFace(GL_CW);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 
@@ -61,7 +64,9 @@ void rendererGL::specificInit() {
     q1 = gluNewQuadric(); // Create A Pointer To The Quadric Object ( NEW )
     gluQuadricNormals(q1, GLU_SMOOTH); // Create Smooth Normals ( NEW )
     gluQuadricTexture(q1, GL_TRUE); // Create Texture Coords ( NEW )
-    
+    loaderMD2 loader;
+    test=new shape();
+    loader.loadMD2("data/test.md2",test);
 
 }
 
