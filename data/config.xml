@@ -8,9 +8,10 @@
         <fullscreen>0</fullscreen>
         <frustum_start>10</frustum_start>
         <frustum_end>100</frustum_end>
+        <frustum_with>100</frustum_with>
+        <frustum_height>100</frustum_height>
     </screen>
     <dirs>
-        <level_dir>levels</level_dir>
-        
+        <level_dir>levels</level_dir>        
     </dirs>
 </config>
