@@ -33,10 +33,10 @@ void sdlIO::eventLoop() {
                     rot--;
                 }
                 if(event.key.keysym.sym==SDLK_UP) {
-                 tr+=0.1;   
+                 tr+=1;   
                 }
                 if(event.key.keysym.sym==SDLK_DOWN) {
-                    tr-=0.1;
+                    tr-=1;
                 }
                 this->renderer_i->rotate(rot);
                 this->renderer_i->translate(0,0,tr);

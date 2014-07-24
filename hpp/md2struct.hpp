@@ -38,6 +38,7 @@ struct md2header {
 };
 
 typedef float vec3_t[3];
+typedef float vec2_t[2];
 
 struct md2frame
 {

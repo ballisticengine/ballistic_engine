@@ -14,7 +14,7 @@ void rendererGL::render() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glDisable(GL_DEPTH_TEST);
-    glTranslatef(0, 0, -frustum_start);
+    glTranslatef(0, 0, -frustum_start*5);
     glColor3f(1, 0, 0);
 
    // this->assignTexture(tt);
@@ -26,7 +26,7 @@ void rendererGL::render() {
     glRotatef(gr,0,1,0);
     
     
-  //  this->assignTexture(qt);
+    this->assignTexture(qt);
    //  glTranslatef(0,0,-500);
    glBegin(GL_TRIANGLES); 
     this->renderShape(test);
@@ -45,11 +45,11 @@ void rendererGL::specificInit() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
-    glCullFace(GL_FRONT);
-    glFrontFace(GL_CW);
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_DEPTH_TEST);
-    //glEnable(GL_TEXTURE_2D);
+//    glCullFace(GL_FRONT);
+//    glFrontFace(GL_CCW);
+//    glEnable(GL_CULL_FACE);
+//    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 
@@ -58,7 +58,7 @@ void rendererGL::specificInit() {
     tt = new texture("data/skybox.bmp");
     tt->load();
     this->setupTexture(tt);
-    qt=new texture("data/checker_small.bmp");
+    qt=new texture("data/car.bmp");
     qt->load();
     this->setupTexture(qt);
     q1 = gluNewQuadric(); // Create A Pointer To The Quadric Object ( NEW )
