@@ -16,7 +16,10 @@ using namespace boost::property_tree;
 #define CONFIG_FN "config.xml"
 
 class config : public singleton {
-    
+    /*
+     Konfiguracja klucz-wartość w słowniku
+     * Funkcja get("klucz") do pobrania
+     */
     public:
         config();
 };
