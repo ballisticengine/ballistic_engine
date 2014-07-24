@@ -2,6 +2,10 @@
 
 void engine::prepare() {
     cout << "Preparing..." << endl;
+    
+    cout << "Config init..." << endl;
+    config::getInstance();
+    
     cout << "World\n";
     world *w = (world *) world::getInstance();
     w->parseXml("data/level.xml");

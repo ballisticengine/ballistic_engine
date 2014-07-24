@@ -16,6 +16,7 @@ using namespace std;
 #include "world.hpp"
 #include "rendererGL.hpp"
 #include "sdlio.hpp"
+#include "config.hpp"
 
 
 class engine : public singleton {
