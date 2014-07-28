@@ -6,7 +6,7 @@
 #include "rendererGL.hpp"
 #include "singleton.hpp"
 
-class sdlIO  :  public singleton {
+class sdlIO  :  public singleton<sdlIO> {
 private:
     SDL_Surface *screen;
     videoData vd;

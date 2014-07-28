@@ -17,7 +17,7 @@ using namespace boost::property_tree;
 
 typedef vector <entity *> ent_list;
 
-class world : public singleton {
+class world : public singleton<world> {
 protected:
     ent_list entities;
     skybox *sky;
