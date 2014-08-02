@@ -9,7 +9,8 @@
 class sdlIO  :  public singleton<sdlIO> {
 private:
     SDL_Surface *screen;
-    static SDL_Window *window;
+    static SDL_Renderer* displayRenderer;
+	static SDL_Window *window;
     videoData vd;
     bool exit;
     rendererGL *renderer_i;
