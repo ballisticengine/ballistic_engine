@@ -8,13 +8,13 @@ void engine::prepare() {
     
     cout << "World\n";
     world *w = (world *) world::getInstance();
-    w->parseXml("data/level.xml");
-
+    w->makeTestWorld();
+	
 
     rendererGL *r = new rendererGL();
 
-    //    skybox *s=w->getSkybox();
-    //    texture *t=s->getTexture();
+      skybox *s=w->getSkybox();
+     texture *t=s->getTexture();
 
     videoData vd;
     vd.width = 640;

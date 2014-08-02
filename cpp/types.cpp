@@ -75,11 +75,12 @@ triangle * shape::addTriangle(triangle *t) {
         this->addVertex(t->v[i]);
         triangles.push_back(t);
     }
+	return t;
 }
 
 triangle * shape::addTriangle(vertex v[3]) {
     triangle *t = new triangle(v);
-    this->addTriangle(t);
+    return this->addTriangle(t);
 
 }
 
@@ -100,7 +101,7 @@ vertex * shape::addVertex(vertex *v) {
 
 vertex * shape::addVertex(e_loc x, e_loc y, e_loc z) {
     vertex *v = new vertex(x, y, z);
-    this->addVertex(v);
+   return  this->addVertex(v);
 }
 
 vertex * shape::findVertex(vertex *v) {

@@ -61,9 +61,7 @@ void rendererGL::specificInit() {
     qt=new texture("data/car.bmp");
     qt->load();
     this->setupTexture(qt);
-    q1 = gluNewQuadric(); // Create A Pointer To The Quadric Object ( NEW )
-    gluQuadricNormals(q1, GLU_SMOOTH); // Create Smooth Normals ( NEW )
-    gluQuadricTexture(q1, GL_TRUE); // Create Texture Coords ( NEW )
+  
     loaderMD2 loader;
     test=new shape();
     loader.loadMD2("data/test.md2",test);
@@ -97,5 +95,5 @@ void rendererGL::setupTexture(texture *t) {
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
     //for testing
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
 }

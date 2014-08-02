@@ -1,6 +1,6 @@
 #ifndef RENDERERGL_HPP
 #define	RENDERERGL_HPP
-
+#include "windows.h"
 #include "rendererAbstract.hpp"
 #include "loaderMD2.hpp"
 
