@@ -19,7 +19,7 @@ using namespace std;
 #include "config.hpp"
 
 
-class engine : public singleton {
+class engine : public singleton<engine> {
     sdlIO *io;
     public:
         void prepare();

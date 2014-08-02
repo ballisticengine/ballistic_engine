@@ -1,7 +1,4 @@
 <config>
-    <start_level>
-        level
-    </start_level>
     <screen>
         <resx>800</resx>
         <resy>600</resy>
@@ -11,7 +8,9 @@
         <frustum_with>100</frustum_with>
         <frustum_height>100</frustum_height>
     </screen>
-    <dirs>
-        <level_dir>levels</level_dir>        
-    </dirs>
+    <game>
+        <start_level>
+            level
+        </start_level>
+    </game>
 </config>
