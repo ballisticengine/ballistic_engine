@@ -9,7 +9,20 @@
             <z>0.0</z>
         </jump_point>
     </config>
+    <models>
+        <model name="test">
+            <file>test.md2</file>
+            <scale>1.0</scale>
+        </model>
+    </models>
     <entities>
-        
+        <entity type="object">
+            <model>test</model>
+            <location>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </location>
+        </entity>
     </entities>
 </world>

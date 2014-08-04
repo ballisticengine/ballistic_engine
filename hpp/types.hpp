@@ -10,6 +10,11 @@ using namespace std;
 
 typedef float e_loc;
 
+
+struct coords {
+ e_loc x,y,z,rx,ry,rz;
+};
+
 class triangle;
 typedef vector <triangle *> tris_list;
 

@@ -10,7 +10,11 @@
 
 class entity {
 protected:
-    e_loc x,y,z;
+    e_loc x,y,z,rx,ry,rz;
+public:
+	coords getCoords();
+	void translate(e_loc x,e_loc y,e_loc z);
+	void rotate(e_loc x,e_loc y, e_loc z);
 
 };
 
