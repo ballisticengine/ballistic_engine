@@ -10,10 +10,11 @@ renderer::~renderer() {
 }
 
 void renderer::init(videoData vd) {
-    frustum_start = 100;
-    frustum_end = 100000;
-    frustum_x = 200;
-    frustum_y = 200;
+	config *c=config::getInstance();
+	frustum_start = c->getVD()->frustum_start;
+	frustum_end = c->getVD()->frustum_end;
+	frustum_x = c->getVD()->frustum_x;
+	frustum_y = c->getVD()->frustum_y;
     this->vd = vd;
     this->w = (world *) world::getInstance();
     skybox *sky = this->w->getSkybox();

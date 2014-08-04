@@ -15,16 +15,21 @@ using namespace boost::property_tree;
 #define CONFIG_DIR "data"
 #define DS "/"
 #define CONFIG_FN "config.xml"
+struct videoData {
+    int width, height, bpp;
+	float frustum_start, frustum_end, frustum_x, frustum_y;
 
+};
 class config : public singleton<config> {
-    /*
-     Konfiguracja klucz-wartość w słowniku
-     * Funkcja get("klucz") do pobrania
-     */
-    map<string, string> cfg;
+
+	videoData vd;
+	string start_level;
 
 public:
     config();
+	videoData * getVD();
+	string & getStart();
+	 
 };
 
 #endif	/* CONFIG_HPP */

@@ -41,7 +41,7 @@ void rendererGL::render() {
 
 void rendererGL::specificInit() {
 
-    glViewport(0, 0, vd.width, vd.height);
+	glViewport(0, 0,config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);

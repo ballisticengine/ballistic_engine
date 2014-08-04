@@ -3,10 +3,10 @@
         <resx>800</resx>
         <resy>600</resy>
         <fullscreen>0</fullscreen>
-        <frustum_start>10</frustum_start>
-        <frustum_end>100</frustum_end>
-        <frustum_with>100</frustum_with>
-        <frustum_height>100</frustum_height>
+        <frustum_start>50</frustum_start>
+        <frustum_end>1000</frustum_end>
+        <frustum_width>200</frustum_width>
+        <frustum_height>200</frustum_height>
     </screen>
     <game>
         <start_level>

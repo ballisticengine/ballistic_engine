@@ -22,10 +22,10 @@ bool world::parseXml(const string &fn) {
    cout << "}"<<skyfn << "}" << endl;
    this->sky = new skybox("data/"+skyfn);
    cout << "X" << endl;
-   /*ptree& entities = pt.get_child("world.entities");
+   ptree& entities = pt.get_child("world.entities");
    BOOST_FOREACH(const ptree::value_type &v, entities) {
        cout << v.second.get<string>("name") << endl;
        
-   }*/
+   }
   return true;
 }

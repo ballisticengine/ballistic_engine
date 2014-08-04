@@ -9,7 +9,7 @@ sdlIO::sdlIO() {
 void sdlIO::initWindow(videoData vd, renderer *r) {
    // SDL_Init(SDL_INIT_EVERYTHING);
 	 SDL_Init(SDL_INIT_VIDEO);
-	SDL_CreateWindowAndRenderer(vd.width, vd.height, SDL_WINDOW_OPENGL, &sdlIO::window, &sdlIO::displayRenderer);
+	 SDL_CreateWindowAndRenderer(config::getInstance()->getVD()->width, config::getInstance()->getVD()->height, SDL_WINDOW_OPENGL, &sdlIO::window, &sdlIO::displayRenderer);
 	/*sdlIO::window = SDL_CreateWindow("My Game Window",
             SDL_WINDOWPOS_UNDEFINED,
             SDL_WINDOWPOS_UNDEFINED,
@@ -26,7 +26,7 @@ context = SDL_GL_CreateContext(window);
 
 void sdlIO::flush() {
  SDL_GL_SwapWindow(sdlIO::window);
-  SDL_RenderPresent(displayRenderer);
+  //SDL_RenderPresent(displayRenderer);
 }
 
 void sdlIO::eventLoop() {
@@ -54,8 +54,8 @@ void sdlIO::eventLoop() {
                 if (event.key.keysym.sym == SDLK_DOWN) {
                     tr -= 1;
                 }
-               // this->renderer_i->rotate(rot);
-               // this->renderer_i->translate(0, 0, tr);
+                this->renderer_i->rotate(rot);
+                this->renderer_i->translate(0, 0, tr);
             }
 
 

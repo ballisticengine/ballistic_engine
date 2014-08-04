@@ -4,13 +4,12 @@ void engine::prepare() {
     cout << "Preparing..." << endl;
     
     cout << "Config init..." << endl;
-   // config::getInstance();
+    config::getInstance();
     
     cout << "World\n";
     world *w = (world *) world::getInstance();
-    w->makeTestWorld();
+	w->parseXml("data/level.xml");
 	
-
     rendererGL *r = new rendererGL();
 
       skybox *s=w->getSkybox();

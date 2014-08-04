@@ -10,11 +10,8 @@ using namespace std;
 #include "texture.hpp"
 #include "skybox.hpp"
 #include "world.hpp"
+#include "config.hpp"
 
-struct videoData {
-    int width, height, bpp;
-
-};
 
 typedef void (*flushf)();
 
