@@ -10,7 +10,7 @@
     </screen>
     <game>
         <start_level>
-            level
+            level1
         </start_level>
     </game>
 </config>

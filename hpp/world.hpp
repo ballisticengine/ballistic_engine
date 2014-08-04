@@ -13,6 +13,7 @@ using namespace boost::property_tree;
 #include "entity.hpp"
 #include "singleton.hpp"
 #include "skybox.hpp"
+#include "config.hpp"
 
 
 typedef vector <entity *> ent_list;

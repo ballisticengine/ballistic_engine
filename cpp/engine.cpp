@@ -8,7 +8,10 @@ void engine::prepare() {
     
     cout << "World\n";
     world *w = (world *) world::getInstance();
-	w->parseXml("data/level.xml");
+	string start_lvl_dir=string(CONFIG_DIR)+string(DS)+string(LVL_DIR),
+		start_lvl=start_lvl_dir+DS+config::getInstance()->getStart()+DS+"level.xml";
+	cout << start_lvl << endl;
+	w->parseXml(start_lvl);  //some error in XML hence problem
 	
     rendererGL *r = new rendererGL();
 
