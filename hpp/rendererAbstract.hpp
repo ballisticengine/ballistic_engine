@@ -18,7 +18,7 @@ typedef void (*flushf)();
 class renderer : public singleton<renderer> {
 protected:
     videoData vd;
-    float frustum_start, frustum_end, frustum_x, frustum_y; //może jednak do GL
+    float frustum_start, frustum_end, frustum_x, frustum_y; 
     flushf flush_callback;
     world *w;
     virtual void renderShape(shape *s);
