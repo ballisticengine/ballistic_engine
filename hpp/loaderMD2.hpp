@@ -16,10 +16,14 @@ using namespace std;
 
 #include "types.hpp"
 #include "md2struct.hpp"
+#include "loader.hpp"
 
-
-class loaderMD2 {
-    void md2ToShape(md2file *md2,shape *s);
+class loaderMD2 : public loader {
+protected:
+	void md2ToShape(md2file *md2,shape *s);
+	virtual void * actualLoad(string fn) {
+	 return 0;
+	}
 public:
     bool loadMD2(string fn,shape *s);
 };
