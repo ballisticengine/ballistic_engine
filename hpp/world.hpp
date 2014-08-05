@@ -20,14 +20,17 @@ using namespace boost::property_tree;
 
 
 typedef vector <entity *> ent_list;
+typedef vector <objectEntity *> obj_list;
 
 class world : public singleton<world> {
 protected:
     ent_list entities;
+	obj_list models;
     skybox *sky;
     public:
         ~world();
         ent_list getEntities();
+		obj_list getModels();
         skybox * getSkybox();
         void makeTestWorld();
         bool parseXml(string &fn);

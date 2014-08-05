@@ -25,7 +25,7 @@ protected:
     virtual void renderPShape(shape *s);
     virtual void renderVertex(vertex *v) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
-
+	virtual void renderAllEntities();
     virtual void assignTexture(texture *t) {
     };
     float gx,gy,gz,gr; //globalne transformacje 

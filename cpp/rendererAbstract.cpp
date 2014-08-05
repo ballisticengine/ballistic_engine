@@ -29,6 +29,15 @@ void renderer::init(videoData vd) {
 
 }
 
+void renderer::renderAllEntities() {
+	obj_list ents=w->getModels();
+	for(int i=0; i<ents.size(); i++) {
+		cout << i << endl;
+		//ents[i]->getModel();
+		this->renderShape(ents[i]->getModel());
+	}
+}
+
 void renderer::setFlush(flushf flush_callback) {
     this->flush_callback = flush_callback;
 }

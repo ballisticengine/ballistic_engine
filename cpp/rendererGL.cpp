@@ -17,9 +17,6 @@ void rendererGL::render() {
     glTranslatef(0, 0, -frustum_start*5);
     glColor3f(1, 0, 0);
 
-   // this->assignTexture(tt);
-
-    //this->renderSkybox(w->getSkybox());
     glEnable(GL_DEPTH_TEST);
     
     glTranslatef(gx,gy,gz);
@@ -27,14 +24,14 @@ void rendererGL::render() {
     
     
     this->assignTexture(qt);
-   //  glTranslatef(0,0,-500);
-   glBegin(GL_TRIANGLES); 
+   
+	//  glTranslatef(0,0,-500);
+   /*glBegin(GL_TRIANGLES); 
     this->renderShape(test);
-    glEnd();
-     //gluSphere(q1,1.3f,32,32);
-//    this->assignTexture(qt);
-    //glTranslatef(7,2,-3);
-    // gluSphere(q1,1.3f,32,32);
+    glEnd();*/
+  
+	this->renderAllEntities();
+
     glFlush();
     this->flush_callback();
 }

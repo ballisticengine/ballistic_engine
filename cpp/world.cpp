@@ -8,6 +8,10 @@ skybox * world::getSkybox() {
     return this->sky;
 }
 
+obj_list world::getModels() {
+	return this->models;
+}
+
 void world::makeTestWorld() {
     this->sky = new skybox("skybox.bmp");
 }
@@ -29,6 +33,7 @@ bool world::parseXml(string &fn) {
 	   string mfn=wd+string(DS)+v.second.get<string>("file");
 	   e_loc sc=v.second.get<e_loc>("scale");
 	   shapef->get(mfn);
+	   
 	   cout << "MODEL: " <<  mfn << ", " << "scale: " << sc << endl;
 
    } 
@@ -39,9 +44,13 @@ bool world::parseXml(string &fn) {
 		   ry=v.second.get<float>("facing.y"),rz=v.second.get<float>("facing.z");
 	  
 	   objectEntity *oe=new objectEntity();
-	   oe->setModel((shape *)shapef->get(v.second.get<string>("model")));
+	   shape *shp;
+	   shp=(shape *)shapef->get(v.second.get<string>("model"));
+	   oe->setModel(shp);
 	   oe->locate(x,y,z);
 	   oe->face(rx,ry,rz);
+	   this->entities.push_back((entity *)oe);
+	   this->models.push_back(oe);
    }
   return true;
 }
