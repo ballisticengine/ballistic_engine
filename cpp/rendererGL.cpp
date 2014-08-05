@@ -45,10 +45,10 @@ void rendererGL::specificInit() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
-//    glCullFace(GL_FRONT);
-//    glFrontFace(GL_CCW);
-//    glEnable(GL_CULL_FACE);
-//    glEnable(GL_DEPTH_TEST);
+    glCullFace(GL_FRONT);
+    glFrontFace(GL_CCW);
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -62,9 +62,9 @@ void rendererGL::specificInit() {
     qt->load();
     this->setupTexture(qt);
   
-    loaderMD2 loader;
+    loaderMD2 *loader=loaderMD2::getInstance();
     test=new shape();
-    loader.loadMD2("data/test.md2",test);
+    loader->loadMD2("data/test.md2",test);
 
 }
 

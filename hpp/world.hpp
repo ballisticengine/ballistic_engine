@@ -14,6 +14,7 @@ using namespace boost::property_tree;
 #include "singleton.hpp"
 #include "skybox.hpp"
 #include "config.hpp"
+#include "shapeFactory.hpp"
 
 
 typedef vector <entity *> ent_list;

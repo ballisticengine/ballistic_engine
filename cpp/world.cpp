@@ -13,7 +13,7 @@ void world::makeTestWorld() {
 }
 
 bool world::parseXml(const string &fn) {
-
+	shapeFactory *shapef=shapeFactory::getInstance();
 	cout << "FN: " << fn << endl;
 	using boost::property_tree::ptree;
     ptree pt;
@@ -26,6 +26,7 @@ bool world::parseXml(const string &fn) {
    BOOST_FOREACH(const ptree::value_type &v, models) {
 	   string mfn=v.second.get<string>("file");
 	   cout << "MODEL: " <<  mfn << endl;
+
    } 
    ptree& entities = pt.get_child("world.entities");
    BOOST_FOREACH(const ptree::value_type &v, entities) {

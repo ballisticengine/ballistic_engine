@@ -16,14 +16,12 @@ using namespace std;
 
 #include "types.hpp"
 #include "md2struct.hpp"
-#include "loader.hpp"
+#include "singleton.hpp"
 
-class loaderMD2 : public loader {
+class loaderMD2 : public singleton<loaderMD2>{
 protected:
 	void md2ToShape(md2file *md2,shape *s);
-	virtual void * actualLoad(string fn) {
-	 return 0;
-	}
+	
 public:
     bool loadMD2(string fn,shape *s);
 };

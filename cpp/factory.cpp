@@ -1,6 +1,6 @@
-#include "loader.hpp"
+#include "factory.hpp"
 
-void * loader::get(string fn) {
+template <typename T,typename S> T * factory<T,S>::get(string fn) {
 	if(items.find(fn)==items.end()) {
 	  items[fn]=this->actualLoad(fn);
 	}
