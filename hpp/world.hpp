@@ -7,6 +7,7 @@
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
 #include <iostream>
+#include <string>
 
 using namespace std;
 using namespace boost::property_tree;

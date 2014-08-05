@@ -32,9 +32,10 @@ void renderer::init(videoData vd) {
 void renderer::renderAllEntities() {
 	obj_list ents=w->getModels();
 	for(int i=0; i<ents.size(); i++) {
-		cout << i << endl;
-		//ents[i]->getModel();
+		
+		
 		this->renderShape(ents[i]->getModel());
+		
 	}
 }
 
@@ -45,19 +46,26 @@ void renderer::setFlush(flushf flush_callback) {
 void renderer::renderPShape(shape *s) {
     vert_list verts = s->getVertices();
    
-    for (int i = 0; i < verts.size(); i++) {
+	this->begin();
+	for (int i = 0; i < verts.size(); i++) {
         this->renderVertex(verts[i]);
     }
+	this->end();
 }
 
 void renderer::renderShape(shape *s) {
     tris_list tris;
-    tris = s->getTris();
-    for (int i = 0; i < tris.size(); i++) {
-        for (int n = 0; n < 3; n++) {
+  
+	tris = s->getTris();
+
+    this->begin();
+	for (int i = 0; i < tris.size(); i++) {
+       
+		for (int n = 0; n < 3; n++) {
             this->renderVertex(tris[i]->v[n]);
         }
     }
+	this->end();
 }
 
 void renderer::operator()() {

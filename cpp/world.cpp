@@ -45,7 +45,9 @@ bool world::parseXml(string &fn) {
 	  
 	   objectEntity *oe=new objectEntity();
 	   shape *shp;
-	   shp=(shape *)shapef->get(v.second.get<string>("model"));
+	   string mfn=v.second.get<string>("model");
+	   mfn=wd+DS+MODEL_DIR+DS+mfn;
+	   shp=(shape *)shapef->get(mfn);
 	   oe->setModel(shp);
 	   oe->locate(x,y,z);
 	   oe->face(rx,ry,rz);

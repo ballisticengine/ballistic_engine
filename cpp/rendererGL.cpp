@@ -6,6 +6,14 @@ void rendererGL::renderVertex(vertex *v) {
     glVertex3f(v->x, v->y, v->z);
 }
 
+void rendererGL::begin() {
+ glBegin(GL_TRIANGLES); 
+}
+
+void rendererGL::end() {
+ glEnd();
+}
+
 void rendererGL::render() {
 
     glClearColor(1, 1, 1, 1);
@@ -25,7 +33,7 @@ void rendererGL::render() {
     
     this->assignTexture(qt);
    
-	//  glTranslatef(0,0,-500);
+	 glTranslatef(0,0,-500);
    /*glBegin(GL_TRIANGLES); 
     this->renderShape(test);
     glEnd();*/

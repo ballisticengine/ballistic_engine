@@ -16,6 +16,8 @@ using namespace boost::property_tree;
 #define LVL_DIR "levels" //w data/
 #define DS "/"
 #define CONFIG_FN "config.xml"
+#define MODEL_DIR "models"
+
 struct videoData {
     int width, height, bpp;
 	float frustum_start, frustum_end, frustum_x, frustum_y;

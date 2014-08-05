@@ -6,9 +6,9 @@
 #include "types.hpp"
 #include "loaderMD2.hpp"
 
-class shapeFactory: public factory {
+class shapeFactory: public factory, public singleton<shapeFactory> {
 protected:
-	void * actualLoad(string fn);
+	virtual void * actualLoad(string fn);
 public:
 	 
 };

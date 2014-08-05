@@ -21,6 +21,8 @@ class rendererGL : public renderer {
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
     virtual void assignTexture(texture *t);
+	virtual void begin();
+	virtual void end();
    
     public:
      virtual void setupTexture(texture *t);    
