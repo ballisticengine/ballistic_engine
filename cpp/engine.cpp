@@ -9,9 +9,9 @@ void engine::prepare() {
     cout << "World\n";
     world *w = (world *) world::getInstance();
 	string start_lvl_dir=string(CONFIG_DIR)+string(DS)+string(LVL_DIR),
-		start_lvl=start_lvl_dir+DS+config::getInstance()->getStart()+DS+"level.xml";
+		start_lvl=start_lvl_dir+DS+config::getInstance()->getStart();
 	cout << start_lvl << endl;
-	w->parseXml(start_lvl);  //some error in XML hence problem
+	w->parseXml(start_lvl);  
 	
     rendererGL *r = new rendererGL();
 

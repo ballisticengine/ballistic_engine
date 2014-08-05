@@ -1,5 +1,7 @@
 #include <map>
+#include <vector>
 #include <string>
+#include <iostream>
 using namespace std;
 #include "singleton.hpp"
 
@@ -7,14 +9,16 @@ using namespace std;
 Fabryka abstrakcyjna - zwraca pliki, jeœli nie istniej¹ - ³aduje
 */
 
-template <typename T, typename S>
-class factory : public singleton<S>  {
+
+class factory : public singleton<factory>  {
 protected:
-	map <string,T *> items;
-	virtual T * actualLoad(string fn) {
+	map <string,void *> items;
+	vector <void *> item_ptr;
+	virtual void * actualLoad(string fn) {
 	 return 0;
 	}
 public:
+	 virtual ~factory();
+	 virtual void * get(string fn);
 	
-	 T * get(string fn); //potem w dzieciach mo¿na tu prze³adowaæ na np. shape * get
 };

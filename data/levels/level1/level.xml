@@ -10,7 +10,7 @@
         </jump_point>
     </config>
     <models>
-        <model name="test">
+        <model>
             <file>test.md2</file>
             <scale>1.0</scale>
         </model>
@@ -19,10 +19,15 @@
         <entity type="object">
             <model>test</model>
             <location>
-                <x>0.0</x>
+                <x>1.0</x>
                 <y>0.0</y>
                 <z>0.0</z>
             </location>
+            <facing>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </facing>
         </entity>
     </entities>
 </world>

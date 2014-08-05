@@ -131,3 +131,11 @@ vector <triangle *> shape::getTris() {
 shape::~shape() {
 
 }
+
+void shape::setScale(e_loc scale) {
+	this->scale=scale;
+}
+
+e_loc shape::getScale() {
+ return scale;
+}

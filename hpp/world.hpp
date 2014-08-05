@@ -11,10 +11,12 @@
 using namespace std;
 using namespace boost::property_tree;
 #include "entity.hpp"
+#include "objectEntity.hpp";
 #include "singleton.hpp"
 #include "skybox.hpp"
 #include "config.hpp"
 #include "shapeFactory.hpp"
+
 
 
 typedef vector <entity *> ent_list;
@@ -24,11 +26,11 @@ protected:
     ent_list entities;
     skybox *sky;
     public:
-        
+        ~world();
         ent_list getEntities();
         skybox * getSkybox();
         void makeTestWorld();
-        bool parseXml(const string &fn);
+        bool parseXml(string &fn);
         void prepare();
 };
 

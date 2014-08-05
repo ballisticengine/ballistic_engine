@@ -42,6 +42,7 @@ class shape {
     /*unsigned int n_tris;
     triangle * tris;
      * */
+	e_loc scale;
     vector <vertex *> vertices;
     vector <triangle *> triangles;
 public:
@@ -49,7 +50,8 @@ public:
     vector <triangle *> getTris();
     vert_list getVertices();
     void addVertices(vertex *vs,int num_tris);
-    
+    void setScale(e_loc scale);
+	e_loc getScale();
     /*
      Dodaje trójkąt do bryły przyporządkowując wieszchołki wspólne
      */
