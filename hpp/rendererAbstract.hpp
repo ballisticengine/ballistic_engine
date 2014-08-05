@@ -27,6 +27,7 @@ protected:
     virtual void renderSkybox(skybox *sky) = 0;
 	virtual void begin()=0;
 	virtual void end()=0;
+
 	virtual void renderAllEntities();
     virtual void assignTexture(texture *t) {
     };
@@ -43,8 +44,13 @@ public:
     virtual void setupTexture(texture *t) {
     }
 
-    virtual void translate(float x, float y, float z);
-    virtual void rotate(float x);
+    
+	virtual void translate(e_loc x, e_loc y, e_loc z)=0;
+	virtual void translate(coords c);
+	
+	virtual void rotate(e_loc x,e_loc y,e_loc z,e_loc d)=0;
+	//virtual void locate(e_loc x,e_loc y,e_loc z);
+	//virtual void face(e_loc x,e_loc y,e_loc z);
     virtual ~renderer();
     void operator()();
     virtual void render() = 0;

@@ -102,3 +102,11 @@ void rendererGL::setupTexture(texture *t) {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
 }
+
+void rendererGL::translate(float x, float y, float z) {
+ glTranslatef(x,y,z);
+}
+
+void rendererGL::rotate(float x,float y,float z,float d) {
+ glRotatef(d,x,y,z);
+}

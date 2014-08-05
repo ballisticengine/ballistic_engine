@@ -19,9 +19,9 @@
         <entity type="object">
             <model>test.md2</model>
             <location>
-                <x>1.0</x>
+                <x>-200.0</x>
                 <y>0.0</y>
-                <z>0.0</z>
+                <z>50.0</z>
             </location>
             <facing>
                 <x>0.0</x>

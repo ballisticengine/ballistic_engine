@@ -29,11 +29,16 @@ void renderer::init(videoData vd) {
 
 }
 
+ void  renderer::translate(coords c) {
+	 this->translate(c.x,c.y,c.z);
+ }
+
 void renderer::renderAllEntities() {
 	obj_list ents=w->getModels();
 	for(int i=0; i<ents.size(); i++) {
 		
-		
+		coords c=ents[i]->getCoords();
+		this->translate(c.x,c.y,c.z);
 		this->renderShape(ents[i]->getModel());
 		
 	}
@@ -74,12 +79,3 @@ void renderer::operator()() {
     }
 }
 
-void renderer::translate(float x, float y, float z) {
-    gx=x;
-    gy=y;
-    gz=z;
-}
-
-void renderer::rotate(float x) {
-    gr=x;
-}

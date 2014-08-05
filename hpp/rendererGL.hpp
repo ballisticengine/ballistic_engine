@@ -23,6 +23,8 @@ class rendererGL : public renderer {
     virtual void assignTexture(texture *t);
 	virtual void begin();
 	virtual void end();
+	virtual void translate(e_loc x, e_loc y, e_loc z);
+    virtual void rotate(e_loc x,e_loc y,e_loc z,e_loc d);
    
     public:
      virtual void setupTexture(texture *t);    
