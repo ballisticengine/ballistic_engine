@@ -9,6 +9,14 @@ renderer::~renderer() {
 
 }
 
+void renderer::setupTextures() {
+	textureFactory *tf=textureFactory::getInstance();
+	vector<void *> ts=tf->getAll();
+	for(int i=0; i<ts.size(); i++) {
+		this->setupTexture((texture *)ts[i]);
+	}
+}
+
 void renderer::init(videoData vd) {
 	config *c=config::getInstance();
 	frustum_start = c->getVD()->frustum_start;
@@ -26,6 +34,7 @@ void renderer::init(videoData vd) {
     gz=0;
     gr=0;
      this->specificInit();
+	 this->setupTextures();
 
 }
 
@@ -45,7 +54,9 @@ void renderer::renderAllEntities() {
 	for(int i=0; i<ents.size(); i++) {
 		
 		coords c=ents[i]->getCoords();
+		
 		this->translate(c.x,c.y,c.z);
+		this->assignTexture(ents[i]->getTexture());
 		this->renderShape(ents[i]->getModel());
 		
 	}

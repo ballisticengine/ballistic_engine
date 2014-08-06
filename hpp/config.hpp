@@ -17,6 +17,7 @@ using namespace boost::property_tree;
 #define DS "/"
 #define CONFIG_FN "config.xml"
 #define MODEL_DIR "models"
+#define TEX_DIR "textures"
 
 struct videoData {
     int width, height, bpp;

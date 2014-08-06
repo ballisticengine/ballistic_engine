@@ -11,6 +11,7 @@ using namespace std;
 #include "skybox.hpp"
 #include "world.hpp"
 #include "config.hpp"
+#include "textureFactory.hpp"
 
 
 typedef void (*flushf)();
@@ -46,6 +47,8 @@ public:
 
     virtual void setupTexture(texture *t) {
     }
+
+	virtual void setupTextures();
 
     
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z)=0;

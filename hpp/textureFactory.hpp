@@ -2,11 +2,12 @@
 #define TEXTUREFACTORY_H
 
 #include "factory.hpp"
+#include "texture.hpp"
 
-class textureFactory : public factory<texture> {
+class textureFactory :  public factory, public singleton<textureFactory> {
 protected:
-		texture * actualLoad(string fn) {
-		}
+		virtual void * actualLoad(string fn);
+		
 };
 
 #endif

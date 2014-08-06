@@ -1,3 +1,5 @@
+#ifndef FACTORY_H
+#define FACTORY_H
 #include <map>
 #include <vector>
 #include <string>
@@ -18,5 +20,8 @@ protected:
 public:
 	 virtual ~factory();
 	 virtual void * get(string fn);
+	 virtual vector <void *> getAll();
 	
 };
+
+#endif

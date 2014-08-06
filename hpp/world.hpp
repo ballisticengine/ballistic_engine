@@ -17,6 +17,7 @@ using namespace boost::property_tree;
 #include "skybox.hpp"
 #include "config.hpp"
 #include "shapeFactory.hpp"
+#include "textureFactory.hpp"
 
 
 

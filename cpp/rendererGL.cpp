@@ -22,22 +22,16 @@ void rendererGL::render() {
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    //glDisable(GL_DEPTH_TEST);
-	//glTranslatef(0, 0, -frustum_start*5);
     glColor3f(1, 0, 0);
 
-    glEnable(GL_DEPTH_TEST);
-    
     glTranslatef(gx,gy,gz);
     glRotatef(gr,0,1,0);
     
     
-    this->assignTexture(qt);
    
-	 glTranslatef(0,0,-500);
-   /*glBegin(GL_TRIANGLES); 
-    this->renderShape(test);
-    glEnd();*/
+   
+	 glTranslatef(0,0,0);
+   
   
 	this->renderAllEntities();
 
@@ -61,17 +55,8 @@ void rendererGL::specificInit() {
 
 
 
-    cout << "SI";
-    tt = new texture("data/skybox.bmp");
-    tt->load();
-    this->setupTexture(tt);
-    qt=new texture("data/car.bmp");
-    qt->load();
-    this->setupTexture(qt);
-  
-    loaderMD2 *loader=loaderMD2::getInstance();
-    test=new shape();
-    loader->loadMD2("data/test.md2",test);
+   
+   
 
 }
 

@@ -9,23 +9,17 @@
             <z>0.0</z>
         </jump_point>
     </config>
-    <models>
-        <model>
-            <file>test.md2</file>
-            <scale>1.0</scale><!-- TODO scale override in code for md2 from here -->
-        </model>
-        <model>
-            <file>lvl.md2</file>
-            <scale>1.0</scale>
-        </model>
-    </models>
     <entities>
         <entity type="object">
-            <model>test.md2</model>
+            <model>
+                <file>test.md2</file>
+                <texture>car.bmp</texture>
+                <scale>1</scale>
+            </model>
             <location>
-                <x>-200.0</x>
+                <x>0.0</x>
                 <y>0.0</y>
-                <z>50.0</z>
+                <z>-500.0</z>
             </location>
             <facing>
                 <x>0.0</x>
@@ -33,18 +27,6 @@
                 <z>0.0</z>
             </facing>
         </entity>
-        <entity type="object">
-            <model>lvl.md2</model>
-            <location>
-                <x>0.0</x>
-                <y>-90.0</y>
-                <z>0.0</z>
-            </location>
-            <facing>
-                <x>0.0</x>
-                <y>0.0</y>
-                <z>0.0</z>
-            </facing>
-        </entity>
+        
     </entities>
 </world>
