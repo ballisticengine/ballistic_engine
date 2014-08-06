@@ -9,7 +9,7 @@
             <z>0.0</z>
         </jump_point>
     </config>
-    <entities>
+    <tmp>
         <entity type="object">
             <model>
                 <file>test.md2</file>
@@ -19,7 +19,7 @@
             <location>
                 <x>0.0</x>
                 <y>0.0</y>
-                <z>-500.0</z>
+                <z>-1.0</z>
             </location>
             <facing>
                 <x>0.0</x>
@@ -27,6 +27,25 @@
                 <z>0.0</z>
             </facing>
         </entity>
+    </tmp>
+    <entities>
         
+        <entity type="object">
+            <model>
+                <file>tris.md2</file>
+                <texture>hipek.bmp</texture>
+                <scale>1</scale>
+            </model>
+            <location>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-52.0</z>
+            </location>
+            <facing>
+                <x>10.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </facing>
+        </entity>
     </entities>
 </world>

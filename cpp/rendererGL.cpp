@@ -21,17 +21,10 @@ void rendererGL::render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glColor3f(1, 0, 0);
+   
+	this->resetTranslation();
 
-    glTranslatef(gx,gy,gz);
-    glRotatef(gr,0,1,0);
     
-    
-   
-   
-	 glTranslatef(0,0,0);
-   
   
 	this->renderAllEntities();
 
@@ -44,8 +37,8 @@ void rendererGL::specificInit() {
 	glViewport(0, 0,config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-   // glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
-    gluPerspective(90,1,1,5000);
+    glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
+    //gluPerspective(90,1,1,5000);
 	glCullFace(GL_FRONT);
     glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
@@ -96,4 +89,19 @@ void rendererGL::translateSpecific(float x, float y, float z) {
 
 void rendererGL::rotate(float x,float y,float z,float d) {
  glRotatef(d,x,y,z);
+}
+
+void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z) {
+	this->rotateSpecific(1,0,0,x);
+	this->rotateSpecific(0,1,0,y);
+	this->rotateSpecific(0,0,1,z);
+}
+
+void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d) {
+ glRotatef(d,x,y,z);
+}
+
+void rendererGL::resetTranslation() {
+ glLoadIdentity();
+ glTranslatef(0,0,-frustum_start);
 }

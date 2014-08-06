@@ -55,7 +55,7 @@ void renderer::renderAllEntities() {
 		
 		coords c=ents[i]->getCoords();
 		
-		this->translate(c.x,c.y,c.z);
+		this->locate(c.x,c.y,c.z);
 		this->assignTexture(ents[i]->getTexture());
 		this->renderShape(ents[i]->getModel());
 		
@@ -97,3 +97,7 @@ void renderer::operator()() {
     }
 }
 
+void renderer::locate(e_loc x,e_loc y,e_loc z) {
+	this->resetTranslation();
+	this->translate(x,y,z);
+}
