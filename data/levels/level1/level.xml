@@ -15,7 +15,7 @@
             <scale>1.0</scale><!-- TODO scale override in code for md2 from here -->
         </model>
         <model>
-            <file>x.md2</file>
+            <file>lvl.md2</file>
             <scale>1.0</scale>
         </model>
     </models>
@@ -34,11 +34,11 @@
             </facing>
         </entity>
         <entity type="object">
-            <model>x.md2</model>
+            <model>lvl.md2</model>
             <location>
-                <x>200.0</x>
-                <y>0.0</y>
-                <z>-20.0</z>
+                <x>0.0</x>
+                <y>-90.0</y>
+                <z>0.0</z>
             </location>
             <facing>
                 <x>0.0</x>

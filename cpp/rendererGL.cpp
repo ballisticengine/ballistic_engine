@@ -1,5 +1,6 @@
 #include "rendererGL.hpp"
 #include "types.hpp"
+#pragma comment(lib, "glu32.lib") 
 
 void rendererGL::renderVertex(vertex *v) {
     glTexCoord2f(v->u, v->v);
@@ -21,8 +22,8 @@ void rendererGL::render() {
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glDisable(GL_DEPTH_TEST);
-    glTranslatef(0, 0, -frustum_start*5);
+    //glDisable(GL_DEPTH_TEST);
+	//glTranslatef(0, 0, -frustum_start*5);
     glColor3f(1, 0, 0);
 
     glEnable(GL_DEPTH_TEST);
@@ -49,8 +50,9 @@ void rendererGL::specificInit() {
 	glViewport(0, 0,config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
-    glCullFace(GL_FRONT);
+   // glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
+    gluPerspective(90,1,1,5000);
+	glCullFace(GL_FRONT);
     glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
