@@ -21,9 +21,9 @@ using namespace std;
 class loaderMD2 : public singleton<loaderMD2>{
 protected:
 	void md2ToShape(md2file *md2,shape *s);
-	
+	e_loc scale;
 public:
-    bool loadMD2(string fn,shape *s);
+    bool loadMD2(string fn,shape *s,e_loc scale=1);
 };
 
 

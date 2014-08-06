@@ -103,7 +103,7 @@ void rendererGL::setupTexture(texture *t) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
 }
 
-void rendererGL::translate(float x, float y, float z) {
+void rendererGL::translateSpecific(float x, float y, float z) {
  glTranslatef(x,y,z);
 }
 

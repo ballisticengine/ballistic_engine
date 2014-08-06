@@ -21,8 +21,11 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
 
             for (int n = 0; n < 3; n++) {
                 scaled[n] = (float) md2v.v[n] * scale[n]; //+translate[n];
-            }
-            u = (float) md2->st[iv].s / (float) md2->header.skinwidth;
+				//cout << "SC: " << this->scale;
+				scaled[n]*=this->scale;
+			}
+            
+			u = (float) md2->st[iv].s / (float) md2->header.skinwidth;
             v = (float) md2->st[iv].t / (float) md2->header.skinheight;
             vs_tmp[vi] = new vertex(scaled[0], scaled[1], scaled[2], u, v);
             // cout << scaled[0] << "," << scaled[1] << "," << scaled[2] << endl;
@@ -36,8 +39,9 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
 
 }
 
-bool loaderMD2::loadMD2(string fn, shape *s) {
-    FILE *f;
+bool loaderMD2::loadMD2(string fn, shape *s,e_loc scale) {
+	this->scale=scale;
+	FILE *f;
     f = fopen(fn.c_str(), "rb");
     if (!f) {
         return false;

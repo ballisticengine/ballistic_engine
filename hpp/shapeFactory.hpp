@@ -9,7 +9,10 @@
 class shapeFactory: public factory, public singleton<shapeFactory> {
 protected:
 	virtual void * actualLoad(string fn);
+	e_loc scale;
 public:
+	virtual void setScale(e_loc scale);
+	shapeFactory();
 	 
 };
 

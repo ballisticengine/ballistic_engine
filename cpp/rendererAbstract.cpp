@@ -20,7 +20,7 @@ void renderer::init(videoData vd) {
     skybox *sky = this->w->getSkybox();
 
     sky->makeShape(frustum_x, frustum_y);
-   
+    cx=cy=cz=0;
     gx=0;
     gy=0;
     gz=0;
@@ -28,6 +28,13 @@ void renderer::init(videoData vd) {
      this->specificInit();
 
 }
+
+ void renderer::translate(e_loc x, e_loc y, e_loc z) {
+	 cx+=x;
+	 cy+=y;
+	 cz+=z;
+	 this->translateSpecific(x,y,z);
+ }
 
  void  renderer::translate(coords c) {
 	 this->translate(c.x,c.y,c.z);

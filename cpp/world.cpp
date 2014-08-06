@@ -32,6 +32,7 @@ bool world::parseXml(string &fn) {
    BOOST_FOREACH(const ptree::value_type &v, models) {
 	   string mfn=wd+string(DS)+v.second.get<string>("file");
 	   e_loc sc=v.second.get<e_loc>("scale");
+	   shapef->setScale(sc);
 	   shapef->get(mfn);
 	   
 	   cout << "MODEL: " <<  mfn << ", " << "scale: " << sc << endl;
