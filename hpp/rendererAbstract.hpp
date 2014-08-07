@@ -33,9 +33,8 @@ protected:
     virtual void assignTexture(texture *t) {
     };
     
-	float 
-		cx,cy,cz, //kursory transformacji
-		gx,gy,gz,gr; //globalne transformacje 
+		coords cursor ;
+		e_loc gx,gy,gz,gr; //globalne transformacje 
 public:
     renderer();
     void setFlush(flushf flush_callback);
@@ -54,13 +53,14 @@ public:
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z)=0;
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z)=0;
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d)=0;
+	virtual void resetSpecific()=0;
 
 	virtual void translate(e_loc x, e_loc y, e_loc z);
 	virtual void translate(coords c);
+	virtual void rotate(e_loc x,e_loc y,e_loc z,e_loc d);
 	
-	virtual void rotate(e_loc x,e_loc y,e_loc z,e_loc d)=0;
 	virtual void locate(e_loc x,e_loc y,e_loc z);
-	virtual void resetTranslation()=0;
+	virtual void resetTranslation();
 	virtual void face(e_loc x,e_loc y,e_loc z);
 	//todo: locate_delta rotate_delta
     virtual ~renderer();

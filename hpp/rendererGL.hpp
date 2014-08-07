@@ -24,7 +24,7 @@ class rendererGL : public renderer {
 	virtual void begin();
 	virtual void end();
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z);
-    virtual void rotate(e_loc x,e_loc y,e_loc z,e_loc d);
+ 
     virtual void rotateSpecific(e_loc x,e_loc y,e_loc z);
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d);
 	virtual void resetTranslation();

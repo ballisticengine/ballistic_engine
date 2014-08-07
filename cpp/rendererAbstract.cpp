@@ -28,7 +28,12 @@ void renderer::init(videoData vd) {
     skybox *sky = this->w->getSkybox();
 
     sky->makeShape(frustum_x, frustum_y);
-    cx=cy=cz=0;
+	cursor.x=0;
+	cursor.y=0;
+	cursor.z=0;
+	cursor.rx=0;
+	cursor.ry=0;
+	cursor.rz=0;
     gx=0;
     gy=0;
     gz=0;
@@ -39,9 +44,9 @@ void renderer::init(videoData vd) {
 }
 
  void renderer::translate(e_loc x, e_loc y, e_loc z) {
-	 cx+=x;
-	 cy+=y;
-	 cz+=z;
+	 cursor.x+=x;
+	 cursor.y+=y;
+	 cursor.z+=z;
 	 this->translateSpecific(x,y,z);
  }
 
@@ -49,13 +54,21 @@ void renderer::init(videoData vd) {
 	 this->translate(c.x,c.y,c.z);
  }
 
+ void renderer::rotate(e_loc x,e_loc y,e_loc z,e_loc d) {
+  cursor.rx+=x*d;
+  cursor.ry+=y*d;
+  cursor.rz+=z*d;
+  this->rotateSpecific(x,y,z,d);
+ }
+
 void renderer::renderAllEntities() {
 	obj_list ents=w->getModels();
 	for(int i=0; i<ents.size(); i++) {
 		
 		coords c=ents[i]->getCoords();
-		
+		//this->face(c.rx,c.ry,c.rz);
 		this->locate(c.x,c.y,c.z);
+		
 		this->assignTexture(ents[i]->getTexture());
 		this->renderShape(ents[i]->getModel());
 		
@@ -98,6 +111,10 @@ void renderer::operator()() {
 }
 
 void renderer::locate(e_loc x,e_loc y,e_loc z) {
-	this->resetTranslation();
+	//this->resetTranslation();
 	this->translate(x,y,z);
+}
+
+void renderer::face(e_loc x,e_loc y,e_loc z) {
+	this->rotateSpecific(x,y,z);
 }

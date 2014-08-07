@@ -87,9 +87,7 @@ void rendererGL::translateSpecific(float x, float y, float z) {
  glTranslatef(x,y,z);
 }
 
-void rendererGL::rotate(float x,float y,float z,float d) {
- glRotatef(d,x,y,z);
-}
+
 
 void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z) {
 	this->rotateSpecific(1,0,0,x);
@@ -102,6 +100,6 @@ void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d) {
 }
 
 void rendererGL::resetTranslation() {
- glLoadIdentity();
+ //glLoadIdentity();
  glTranslatef(0,0,-frustum_start);
 }
