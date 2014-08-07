@@ -125,7 +125,7 @@ void renderer::reset() {
 	this->resetSpecific();
 	cursor.x=0;
 	cursor.y=0;
-	cursor.z=0;
+	cursor.z=0; //coœ nie dzia³a z frustum_start zmienionym
 	cursor.rx=0;
 	cursor.ry=0;
 	cursor.rz=0;
