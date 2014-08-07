@@ -22,7 +22,7 @@ void rendererGL::render() {
 
     glMatrixMode(GL_MODELVIEW);
    
-	this->resetTranslation();
+	this->reset();
 
     
   
@@ -99,7 +99,8 @@ void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d) {
  glRotatef(d,x,y,z);
 }
 
-void rendererGL::resetTranslation() {
- //glLoadIdentity();
+void rendererGL::resetSpecific() {
+ glLoadIdentity();
  glTranslatef(0,0,-frustum_start);
 }
+

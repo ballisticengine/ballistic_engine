@@ -27,8 +27,9 @@ class rendererGL : public renderer {
  
     virtual void rotateSpecific(e_loc x,e_loc y,e_loc z);
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d);
-	virtual void resetTranslation();
-    public:
+	
+	virtual void resetSpecific() ;
+public:
      virtual void setupTexture(texture *t);    
     virtual void render();
 };
