@@ -38,7 +38,7 @@ void sdlIO::eventLoop() {
     }
 }
 
- void sdlIO::operator()() {
+ void sdlIO::operator()() { 
 	 this->eventLoop();
  }
 
