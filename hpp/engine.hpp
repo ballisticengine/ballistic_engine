@@ -9,6 +9,7 @@
 #define	ENGINE_HPP
 
 #include <iostream>
+#include <boost/thread/thread.hpp>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ using namespace std;
 
 class engine : public singleton<engine> {
     sdlIO *io;
+	rendererGL *r;
     public:
         void prepare();
         void start();

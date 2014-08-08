@@ -1,7 +1,7 @@
 <config>
     <screen>
-        <resx>800</resx>
-        <resy>600</resy>
+        <resx>640</resx>
+        <resy>480</resy>
         <fullscreen>0</fullscreen>
         <frustum_start>2</frustum_start>
         <frustum_end>5000</frustum_end>

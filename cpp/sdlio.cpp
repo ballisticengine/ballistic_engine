@@ -9,24 +9,17 @@ sdlIO::sdlIO() {
 void sdlIO::initWindow(videoData vd, renderer *r) {
    // SDL_Init(SDL_INIT_EVERYTHING);
 	 SDL_Init(SDL_INIT_VIDEO);
-	 SDL_CreateWindowAndRenderer(config::getInstance()->getVD()->width, config::getInstance()->getVD()->height, SDL_WINDOW_OPENGL, &sdlIO::window, &sdlIO::displayRenderer);
-	/*sdlIO::window = SDL_CreateWindow("My Game Window",
-            SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED,
-			vd.width, vd.height,
-            SDL_WINDOW_OPENGL);*/
+	 SDL_CreateWindowAndRenderer(vd.width, vd.height, SDL_WINDOW_OPENGL, &sdlIO::window, &sdlIO::displayRenderer);
     this->screen = SDL_GetWindowSurface(sdlIO::window);
 	SDL_GLContext context;
-context = SDL_GL_CreateContext(window);
-    this->renderer_i = (rendererGL *) r;
-    this->renderer_i->init(vd);
-    this->renderer_i->setFlush(sdlIO::flush);
-
+	context = SDL_GL_CreateContext(window);
+	
+	renderer_i=(rendererGL*)r;
 }
 
 void sdlIO::flush() {
- SDL_GL_SwapWindow(sdlIO::window);
-  //SDL_RenderPresent(displayRenderer);
+ SDL_GL_SwapWindow(sdlIO::window); 
+ //SDL_RenderPresent(displayRenderer);
 }
 
 void sdlIO::eventLoop() {
@@ -34,10 +27,12 @@ void sdlIO::eventLoop() {
     SDL_Event event;
     float rot = 0, tr = 0;
     //SDL_EnableKeyRepeat(300, 30);
-    while (!this->exit) {
+   	boost::thread rt(boost::ref(*renderer_i));
+	
+	while (!this->exit) {
 
-
-        while (SDL_PollEvent(& event)) {
+		
+    /*    while (SDL_PollEvent(& event)) {
             if (event.type == SDL_QUIT) {
                 this->exit = true;
             }
@@ -56,12 +51,16 @@ void sdlIO::eventLoop() {
                 }
               
             }
-
-
-            this->renderer_i->render();
-        }
+			
+        }*/
+		//renderer_i->render();
     }
 }
+
+ void sdlIO::operator()() {
+  while(1) {
+  }
+ }
 
 sdlIO::~sdlIO() {
     SDL_Quit();

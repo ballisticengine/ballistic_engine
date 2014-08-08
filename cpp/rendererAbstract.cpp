@@ -100,8 +100,10 @@ void renderer::renderShape(shape *s) {
 }
 
 void renderer::operator()() {
-    while (1) {
+    while (true) {
         this->render();
+		cout << "x";
+		cout.flush();
     }
 }
 

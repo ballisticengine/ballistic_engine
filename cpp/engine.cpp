@@ -13,23 +13,28 @@ void engine::prepare() {
 	cout << start_lvl << endl;
 	w->parseXml(start_lvl);  
 	
-    rendererGL *r = new rendererGL();
-
-      skybox *s=w->getSkybox();
-     texture *t=s->getTexture();
-
-    videoData vd;
-    vd.width = 640;
-    vd.height = 480;
-    vd.bpp = 32;
-    // 
+	videoData vd=*config::getInstance()->getVD();	
+    
+	r = new rendererGL();
+     
     cout << "IO\n";
-    io = new sdlIO(); //(sdlIO *)sdlIO::getInstance();
+    
+	
+	io = new sdlIO(); 
     io->initWindow(vd, r);
-
+  
+	r->init(vd);
+    r->setFlush(sdlIO::flush);
 
 }
 
 void engine::start() {
-    io->eventLoop();
+    
+	//boost::thread it(boost::ref(*io));
+
+	
+	//it.join();
+	io->eventLoop();
+	//rt.join();
+	//rt.join();
 }
