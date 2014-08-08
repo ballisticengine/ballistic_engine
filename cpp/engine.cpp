@@ -21,20 +21,21 @@ void engine::prepare() {
     
 	
 	io = new sdlIO(); 
-    io->initWindow(vd, r);
-  
-	r->init(vd);
-    r->setFlush(sdlIO::flush);
+   
+	r->setInitWindow(sdlIO::initWindow);
+	r->setFlush(sdlIO::flush);
+	
+	
 
 }
 
 void engine::start() {
     
-	//boost::thread it(boost::ref(*io));
-
-	
+	boost::thread rt(boost::ref(*r));
+	boost::thread it(boost::ref(*io));
+	it.join();
 	//it.join();
-	io->eventLoop();
+	
 	//rt.join();
 	//rt.join();
 }

@@ -17,7 +17,8 @@ void renderer::setupTextures() {
 	}
 }
 
-void renderer::init(videoData vd) {
+void renderer::init() {
+	this->init_callback();
 	config *c=config::getInstance();
 	frustum_start = c->getVD()->frustum_start;
 	frustum_end = c->getVD()->frustum_end;
@@ -74,6 +75,10 @@ void renderer::setFlush(flushf flush_callback) {
     this->flush_callback = flush_callback;
 }
 
+void renderer::setInitWindow(flushf init_callback) {
+	this->init_callback=init_callback;
+}
+
 void renderer::renderPShape(shape *s) {
     vert_list verts = s->getVertices();
    
@@ -100,10 +105,10 @@ void renderer::renderShape(shape *s) {
 }
 
 void renderer::operator()() {
-    while (true) {
+    this->init();
+	while (true) {
         this->render();
-		cout << "x";
-		cout.flush();
+		
     }
 }
 
