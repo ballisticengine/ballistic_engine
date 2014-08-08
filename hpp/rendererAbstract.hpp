@@ -16,7 +16,7 @@ using namespace std;
 
 typedef void (*flushf)();
 
-class renderer  {
+class renderer : public singleton<renderer> {
 protected:
     videoData vd;
     float frustum_start, frustum_end, frustum_x, frustum_y; 
@@ -66,7 +66,7 @@ public:
 	virtual void face(e_loc x,e_loc y,e_loc z);
 	//todo: locate_delta rotate_delta
     virtual ~renderer();
-    virtual void operator()();
+    void operator()();
     virtual void render() = 0;
 };
 

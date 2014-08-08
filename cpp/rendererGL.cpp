@@ -33,7 +33,7 @@ void rendererGL::render() {
 }
 
 void rendererGL::specificInit() {
-	//cout << config::getInstance()->getVD()->width;
+
 	glViewport(0, 0,config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
