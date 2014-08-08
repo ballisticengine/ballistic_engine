@@ -33,6 +33,9 @@ context = SDL_GL_CreateContext(window);
     this->renderer_i->init(vd);
     this->renderer_i->setFlush(sdlIO::flush);
 
+<<<<<<< HEAD
+>>>>>>> parent of 5385397... before refactor
+=======
 >>>>>>> parent of 5385397... before refactor
 }
 
@@ -47,19 +50,26 @@ void sdlIO::eventLoop() {
     float rot = 0, tr = 0;
     //SDL_EnableKeyRepeat(300, 30);
 <<<<<<< HEAD
+<<<<<<< HEAD
    	
 	
 	while (!engineState::getInstance()->exit()) {
 		/*while (SDL_PollEvent(& event)) {
 =======
+=======
+>>>>>>> parent of 5385397... before refactor
     while (!this->exit) {
 
 
         while (SDL_PollEvent(& event)) {
+<<<<<<< HEAD
+>>>>>>> parent of 5385397... before refactor
+=======
 >>>>>>> parent of 5385397... before refactor
             if (event.type == SDL_QUIT) {
 				engineState::getInstance()->setExit(true);
             }
+<<<<<<< HEAD
 <<<<<<< HEAD
 	   }*/
     }
@@ -70,6 +80,30 @@ void sdlIO::eventLoop() {
  }
 
 =======
+
+
+            this->renderer_i->render();
+        }
+    }
+}
+
+>>>>>>> parent of 5385397... before refactor
+=======
+            if (event.type == SDL_KEYDOWN) {
+                if (event.key.keysym.sym == SDLK_LEFT) {
+                    rot++;
+                }
+                if (event.key.keysym.sym == SDLK_RIGHT) {
+                    rot--;
+                }
+                if (event.key.keysym.sym == SDLK_UP) {
+                    tr += 1;
+                }
+                if (event.key.keysym.sym == SDLK_DOWN) {
+                    tr -= 1;
+                }
+              
+            }
 
 
             this->renderer_i->render();

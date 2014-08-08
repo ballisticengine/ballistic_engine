@@ -25,6 +25,7 @@ void engine::prepare() {
     // 
     cout << "IO\n";
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 	
 	io = new sdlIO(); 
@@ -38,10 +39,16 @@ void engine::prepare() {
     io->initWindow(vd, r);
 
 >>>>>>> parent of 5385397... before refactor
+=======
+    io = new sdlIO(); //(sdlIO *)sdlIO::getInstance();
+    io->initWindow(vd, r);
+
+>>>>>>> parent of 5385397... before refactor
 
 }
 
 void engine::start() {
+<<<<<<< HEAD
 <<<<<<< HEAD
     
 	boost::thread rt(boost::ref(*r));
@@ -51,6 +58,9 @@ void engine::start() {
 	
 	//rt.join();
 	//rt.join();
+=======
+    io->eventLoop();
+>>>>>>> parent of 5385397... before refactor
 =======
     io->eventLoop();
 >>>>>>> parent of 5385397... before refactor

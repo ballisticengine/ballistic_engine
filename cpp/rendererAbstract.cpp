@@ -106,10 +106,15 @@ void renderer::renderShape(shape *s) {
 
 void renderer::operator()() {
 <<<<<<< HEAD
+<<<<<<< HEAD
     this->init();
 	while (true) {
         this->render();
 		
+=======
+    while (1) {
+        this->render();
+>>>>>>> parent of 5385397... before refactor
 =======
     while (1) {
         this->render();
