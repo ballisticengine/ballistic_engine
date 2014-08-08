@@ -20,7 +20,7 @@ class renderer : public singleton<renderer> {
 protected:
     videoData vd;
     float frustum_start, frustum_end, frustum_x, frustum_y; 
-    flushf flush_callback,init_callback;
+    flushf flush_callback;
     world *w;
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
@@ -39,9 +39,8 @@ protected:
 		e_loc gx,gy,gz,gr; //globalne transformacje 
 public:
     renderer();
-    virtual void setFlush(flushf flush_callback);
-	virtual void setInitWindow(flushf init_callback);
-    void init();
+    void setFlush(flushf flush_callback);
+    void init(videoData vd);
 
     virtual void specificInit() {
 

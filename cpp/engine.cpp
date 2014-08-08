@@ -13,55 +13,27 @@ void engine::prepare() {
 	cout << start_lvl << endl;
 	w->parseXml(start_lvl);  
 	
-    rendererGL *r = new rendererGL();
-
-      skybox *s=w->getSkybox();
-     texture *t=s->getTexture();
-
-    videoData vd;
-    vd.width = 640;
-    vd.height = 480;
-    vd.bpp = 32;
-    // 
+	videoData vd=*config::getInstance()->getVD();	
+    
+	r = (rendererGL *) new rendererGL();
+     
     cout << "IO\n";
-<<<<<<< HEAD
-<<<<<<< HEAD
     
 	
 	io = new sdlIO(); 
-   
-	r->setInitWindow(sdlIO::initWindow);
+	io->initWindow();
+	//r->setInitWindow(sdlIO::initWindow);
 	r->setFlush(sdlIO::flush);
 	
 	
-=======
-    io = new sdlIO(); //(sdlIO *)sdlIO::getInstance();
-    io->initWindow(vd, r);
-
->>>>>>> parent of 5385397... before refactor
-=======
-    io = new sdlIO(); //(sdlIO *)sdlIO::getInstance();
-    io->initWindow(vd, r);
-
->>>>>>> parent of 5385397... before refactor
 
 }
 
 void engine::start() {
-<<<<<<< HEAD
-<<<<<<< HEAD
     
-	boost::thread rt(boost::ref(*r));
-	boost::thread it(boost::ref(*io));
-	it.join();
+	
 	//it.join();
 	
 	//rt.join();
 	//rt.join();
-=======
-    io->eventLoop();
->>>>>>> parent of 5385397... before refactor
-=======
-    io->eventLoop();
->>>>>>> parent of 5385397... before refactor
 }

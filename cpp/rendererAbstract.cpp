@@ -17,8 +17,7 @@ void renderer::setupTextures() {
 	}
 }
 
-void renderer::init() {
-	this->init_callback();
+void renderer::init(videoData vd) {
 	config *c=config::getInstance();
 	frustum_start = c->getVD()->frustum_start;
 	frustum_end = c->getVD()->frustum_end;
@@ -75,10 +74,6 @@ void renderer::setFlush(flushf flush_callback) {
     this->flush_callback = flush_callback;
 }
 
-void renderer::setInitWindow(flushf init_callback) {
-	this->init_callback=init_callback;
-}
-
 void renderer::renderPShape(shape *s) {
     vert_list verts = s->getVertices();
    
@@ -104,23 +99,6 @@ void renderer::renderShape(shape *s) {
 	this->end();
 }
 
-void renderer::operator()() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this->init();
-	while (true) {
-        this->render();
-		
-=======
-    while (1) {
-        this->render();
->>>>>>> parent of 5385397... before refactor
-=======
-    while (1) {
-        this->render();
->>>>>>> parent of 5385397... before refactor
-    }
-}
 
 void renderer::locate(e_loc x,e_loc y,e_loc z) {
 	//this->face(-cursor.rx,-cursor.ry,-cursor.rz);
