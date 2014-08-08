@@ -7,6 +7,10 @@ sdlIO::sdlIO() {
    
 }
 
+void sdlIO::setRenderer(renderer *r) {
+ this->r=r;
+}
+
 void sdlIO::initWindow() {
    SDL_Init(SDL_INIT_EVERYTHING);
 	// SDL_Init(SDL_INIT_VIDEO);
@@ -30,17 +34,17 @@ void sdlIO::eventLoop() {
    	
 	
 	while (!engineState::getInstance()->exit()) {
-		/*while (SDL_PollEvent(& event)) {
+		while (SDL_PollEvent(& event)) {
             if (event.type == SDL_QUIT) {
 				engineState::getInstance()->setExit(true);
             }
-	   }*/
+
+	   }
+		r->render();
     }
 }
 
- void sdlIO::operator()() { 
-	 this->eventLoop();
- }
+
 
 sdlIO::~sdlIO() {
     SDL_Quit();

@@ -13,11 +13,12 @@ private:
     static SDL_Surface *screen;
     static SDL_Renderer* displayRenderer;
 	static SDL_Window *window;
+	renderer *r;
 public:
     static void flush();
-    static void initWindow();
+    void setRenderer(renderer *r);
+	static void initWindow();
     void eventLoop();
-	virtual void operator()();
     sdlIO();
     ~sdlIO();
 };

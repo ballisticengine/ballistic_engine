@@ -18,7 +18,7 @@ void renderer::setupTextures() {
 }
 
 void renderer::init() {
-	this->init_callback();
+	
 	config *c=config::getInstance();
 	frustum_start = c->getVD()->frustum_start;
 	frustum_end = c->getVD()->frustum_end;
@@ -73,10 +73,6 @@ void renderer::renderAllEntities() {
 
 void renderer::setFlush(flushf flush_callback) {
     this->flush_callback = flush_callback;
-}
-
-void renderer::setInitWindow(flushf init_callback) {
-	this->init_callback=init_callback;
 }
 
 void renderer::renderPShape(shape *s) {

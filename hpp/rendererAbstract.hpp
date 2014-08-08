@@ -20,7 +20,7 @@ class renderer  {
 protected:
     videoData vd;
     float frustum_start, frustum_end, frustum_x, frustum_y; 
-    flushf flush_callback,init_callback;
+    flushf flush_callback;
     world *w;
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
@@ -40,7 +40,7 @@ protected:
 public:
     renderer();
     virtual void setFlush(flushf flush_callback);
-	virtual void setInitWindow(flushf init_callback);
+
     void init();
 
     virtual void specificInit() {

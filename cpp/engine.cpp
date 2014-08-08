@@ -22,20 +22,16 @@ void engine::prepare() {
 	
 	io = new sdlIO(); 
    
-	r->setInitWindow(sdlIO::initWindow);
+	io->initWindow();
+	io->setRenderer(r);
+	r->init();
 	r->setFlush(sdlIO::flush);
+
 	
 	
 
 }
 
 void engine::start() {
-    
-	boost::thread rt(boost::ref(*r));
-	boost::thread it(boost::ref(*io));
-	it.join();
-	//it.join();
-	
-	//rt.join();
-	//rt.join();
+	io->eventLoop();
 }
