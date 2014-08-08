@@ -53,7 +53,7 @@ public:
 
     
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z)=0;
-	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z)=0;
+	//virtual void rotateSpecific(e_loc x,e_loc y,e_loc z)=0;
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d)=0;
 	
 	virtual void translate(e_loc x, e_loc y, e_loc z);

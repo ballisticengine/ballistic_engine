@@ -61,9 +61,9 @@ void renderer::renderAllEntities() {
 	for(int i=0; i<ents.size(); i++) {
 		
 		coords c=ents[i]->getCoords();
-		this->face(c.rx,c.ry,c.rz);
+		this->reset(); // do origin
 		this->locate(c.x,c.y,c.z);
-		
+		this->face(c.rx,c.ry,c.rz);
 		this->assignTexture(ents[i]->getTexture());
 		this->renderShape(ents[i]->getModel());
 		
@@ -106,19 +106,26 @@ void renderer::operator()() {
 }
 
 void renderer::locate(e_loc x,e_loc y,e_loc z) {
-
+	//this->face(-cursor.rx,-cursor.ry,-cursor.rz);
+	/*cout << cursor.x << ", " << cursor.y << ", " << cursor.rx << ", " << cursor.ry << ", " << cursor.rz << endl;
 	x-=cursor.x;
 	y-=cursor.y;
 	z-=cursor.z;
-	
+	*/
 	this->translate(x,y,z);
 }
 
 void renderer::face(e_loc x,e_loc y,e_loc z) { //tu Ÿle, bo powinien mno¿yæ, wywaliæ rotateSpecific(x,y,z) zostawiæ to z x,y,z,d
+	/*static int i=0;
 	x-=cursor.rx;
 	y-=cursor.ry;
 	z-=cursor.rz;
-	this->rotateSpecific(x,y,z);
+	//cout << i++ << ": " <<cursor.rx << ", " << x << endl;*/
+	this->rotate(1,0,0,x);
+	this->rotate(0,1,0,y);
+	this->rotate(0,0,1,z);
+
+	
 }
 
 void renderer::reset() {

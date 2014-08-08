@@ -89,11 +89,11 @@ void rendererGL::translateSpecific(float x, float y, float z) {
 
 
 
-void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z) {
+/*void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z) {
 	this->rotateSpecific(1,0,0,x);
 	this->rotateSpecific(0,1,0,y);
 	this->rotateSpecific(0,0,1,z);
-}
+}*/
 
 void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d) {
  glRotatef(d,x,y,z);
