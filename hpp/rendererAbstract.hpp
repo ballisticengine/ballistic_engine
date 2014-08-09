@@ -12,6 +12,7 @@ using namespace std;
 #include "world.hpp"
 #include "config.hpp"
 #include "textureFactory.hpp"
+#include "camera.hpp"
 
 
 typedef void (*flushf)();
@@ -20,7 +21,8 @@ class renderer  {
 protected:
     videoData vd;
     float frustum_start, frustum_end, frustum_x, frustum_y; 
-    flushf flush_callback;
+    camera *active_camera;
+	flushf flush_callback;
     world *w;
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
@@ -54,7 +56,6 @@ public:
 
     
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z)=0;
-	//virtual void rotateSpecific(e_loc x,e_loc y,e_loc z)=0;
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d)=0;
 	
 	virtual void translate(e_loc x, e_loc y, e_loc z);
@@ -68,6 +69,8 @@ public:
     virtual ~renderer();
     virtual void operator()();
     virtual void render() = 0;
+	virtual void setCamera(camera *c);
+	virtual void positionCamera();
 };
 
 

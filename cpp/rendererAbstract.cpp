@@ -140,3 +140,15 @@ void renderer::reset() {
 	cursor.ry=0;
 	cursor.rz=0;
 }
+
+ void renderer::setCamera(camera *c) { //to przenieœæ do world
+	 this->active_camera=c;
+ }
+
+ void renderer::positionCamera() {
+	 coords c=active_camera->getCoords();
+	 translate(c.x,c.y,c.z);
+	 rotate(1,0,0,c.rx);
+	 rotate(0,1,0,c.ry);
+	 rotate(0,0,1,c.rz);
+ }

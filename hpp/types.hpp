@@ -17,7 +17,7 @@ struct coords {
 
 struct frustumSizes {
  e_loc x,y,znear,zfar;
-}
+};
 
 class triangle;
 typedef vector <triangle *> tris_list;

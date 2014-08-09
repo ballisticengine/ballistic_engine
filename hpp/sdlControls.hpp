@@ -8,6 +8,6 @@
 
 class sdlControls : public singleton<sdlControls> {
 	
-}
+};
 
 #endif

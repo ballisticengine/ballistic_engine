@@ -3,11 +3,18 @@
 
 #include "types.hpp"
 #include "entity.hpp"
+#include "config.hpp"
 
 class camera : public entity {
 protected:
-	frustum_sizes frustum;
+	frustumSizes frustum;
+public:
+	camera();
+	camera(frustumSizes frustum);
+	void setFrustum(frustumSizes frustum);
+	frustumSizes getFrustum();
 
-}
+
+};
 
 #endif
