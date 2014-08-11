@@ -9,7 +9,7 @@ using namespace std;
 
 #include "engineState.hpp"
 #include "singleton.hpp"
-
+#include "world.hpp"
 
 
 class sdlControls : public singleton<sdlControls> {
