@@ -54,16 +54,25 @@ bool world::parseXml(string &fn) {
    ptree& world_jp=pt.get_child("world.config.jump_point");
    e_loc jx=world_jp.get<e_loc>("x"),
 	   jy=world_jp.get<e_loc>("y"),
-	   jz=world_jp.get<e_loc>("z");
+	   jz=world_jp.get<e_loc>("z"),
+	   rx=world_jp.get<e_loc>("rx"),
+	   ry=world_jp.get<e_loc>("ry"),
+	   rz=world_jp.get<e_loc>("rz");
    default_camera.locate(jx,jy,jz);
+   default_camera.face(rx,ry,rz);
   return true;
 }
 
 void world::prepare() {
+	
 }
 
 world::~world() {
 	for(int i=0; i<this->entities.size(); i++) {
 	// delete entities[i];
 	}
+}
+
+camera *world::getCurrentCamera() {
+ return &this->default_camera;
 }

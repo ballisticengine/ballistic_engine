@@ -17,12 +17,14 @@ using namespace std;
 #include "world.hpp"
 #include "rendererGL.hpp"
 #include "sdlio.hpp"
+#include "sdlControls.hpp"
 #include "config.hpp"
 
 
 class engine : public singleton<engine> {
     sdlIO *io;
 	rendererGL *r;
+	
     public:
         void prepare();
         void start();

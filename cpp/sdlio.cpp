@@ -32,7 +32,7 @@ void sdlIO::eventLoop() {
     float rot = 0, tr = 0;
     //SDL_EnableKeyRepeat(300, 30);
    	
-	
+	boost::thread(boost::ref(this->ctrl));
 	while (!engineState::getInstance()->exit()) {
 		while (SDL_PollEvent(& event)) {
             if (event.type == SDL_QUIT) {

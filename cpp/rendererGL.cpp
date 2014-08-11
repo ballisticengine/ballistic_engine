@@ -23,7 +23,7 @@ void rendererGL::render() {
     glMatrixMode(GL_MODELVIEW);
    
 	this->reset();
-
+	this->positionCamera();
     
   
 	this->renderAllEntities();

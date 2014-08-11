@@ -22,6 +22,7 @@ using namespace boost::property_tree;
 
 
 
+
 typedef vector <entity *> ent_list;
 typedef vector <objectEntity *> obj_list;
 
@@ -36,6 +37,7 @@ protected:
         ent_list getEntities();
 		obj_list getModels();
         skybox * getSkybox();
+		camera *getCurrentCamera();
         void makeTestWorld();
         bool parseXml(string &fn);
         void prepare();

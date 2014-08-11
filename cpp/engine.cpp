@@ -25,7 +25,9 @@ void engine::prepare() {
 	io->initWindow();
 	io->setRenderer(r);
 	r->init();
+	r->setCamera(w->getCurrentCamera());
 	r->setFlush(sdlIO::flush);
+	
 
 	
 	
@@ -34,4 +36,5 @@ void engine::prepare() {
 
 void engine::start() {
 	io->eventLoop();
+	
 }

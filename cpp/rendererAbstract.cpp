@@ -62,7 +62,7 @@ void renderer::renderAllEntities() {
 	for(int i=0; i<ents.size(); i++) {
 		
 		coords c=ents[i]->getCoords();
-		this->reset(); // do origin
+		//this->reset(); // do origin // zast¹piæ dodawaniem, bo kamera nie dzia³a
 		this->locate(c.x,c.y,c.z);
 		this->face(c.rx,c.ry,c.rz);
 		this->assignTexture(ents[i]->getTexture());

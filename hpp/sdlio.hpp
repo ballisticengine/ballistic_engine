@@ -7,12 +7,14 @@
 #include "rendererGL.hpp"
 #include "singleton.hpp"
 #include "engineState.hpp"
+#include "sdlControls.hpp"
 
 class sdlIO  :  public singleton<sdlIO> {
 private:
     static SDL_Surface *screen;
     static SDL_Renderer* displayRenderer;
 	static SDL_Window *window;
+	sdlControls ctrl;
 	renderer *r;
 public:
     static void flush();

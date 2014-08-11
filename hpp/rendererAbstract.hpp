@@ -1,7 +1,7 @@
 #ifndef RENDERERABSTRACT_HPP
 #define	RENDERERABSTRACT_HPP
 
-#include <iostream> 
+#include <iostream>
 
 using namespace std;
 
@@ -9,11 +9,10 @@ using namespace std;
 #include "types.hpp"
 #include "texture.hpp"
 #include "skybox.hpp"
-#include "world.hpp" //TODO: przenieœæ logikê z renderer do world
+#include "world.hpp" //TODO: przenieœæ logikê do world
 #include "config.hpp"
 #include "textureFactory.hpp"
 #include "camera.hpp"
-
 
 typedef void (*flushf)();
 
@@ -23,7 +22,7 @@ protected:
     float frustum_start, frustum_end, frustum_x, frustum_y; 
     camera *active_camera;
 	flushf flush_callback;
-    world *w; 
+    world *w;
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
     virtual void renderVertex(vertex *v) = 0;
