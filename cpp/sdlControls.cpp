@@ -23,8 +23,8 @@ void sdlControls::operator()() {
 	 if(state[SDL_SCANCODE_DOWN]) {
 	 	 c->translate(0,0,-step);
 	 }
-	 c->rotate(0,x,0);
-	 cout << x << endl;
+	 c->rotate(0,(e_loc)x/2,0);
+	 
 	SDL_Delay(100);
 	}
 	

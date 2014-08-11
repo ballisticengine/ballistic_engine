@@ -37,8 +37,8 @@ void rendererGL::specificInit() {
 	glViewport(0, 0,config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
-    //gluPerspective(90,1,1,5000);
+    //glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
+    gluPerspective(90,1,1,5000);
 	glCullFace(GL_FRONT);
     glFrontFace(GL_CCW);
     glEnable(GL_CULL_FACE);
