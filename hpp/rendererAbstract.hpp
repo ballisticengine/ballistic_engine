@@ -23,7 +23,7 @@ protected:
     float frustum_start, frustum_end, frustum_x, frustum_y; 
     camera *active_camera;
 	flushf flush_callback;
-    world *w;
+    world *w; 
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
     virtual void renderVertex(vertex *v) = 0;
