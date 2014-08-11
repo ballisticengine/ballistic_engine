@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class rendererGL : public renderer {
+class rendererGL : public renderer,public singleton<rendererGL> {
     protected:
     map<texture *,GLuint> textures_ids;
     virtual void renderVertex(vertex *v);

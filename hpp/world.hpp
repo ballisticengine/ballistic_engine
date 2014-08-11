@@ -12,7 +12,8 @@
 using namespace std;
 using namespace boost::property_tree;
 #include "entity.hpp"
-#include "objectEntity.hpp";
+#include "objectEntity.hpp"
+#include "camera.hpp"
 #include "singleton.hpp"
 #include "skybox.hpp"
 #include "config.hpp"
@@ -29,6 +30,7 @@ protected:
     ent_list entities;
 	obj_list models;
     skybox *sky;
+	camera default_camera;
     public:
         ~world();
         ent_list getEntities();

@@ -15,8 +15,8 @@ void engine::prepare() {
 	
 	videoData vd=*config::getInstance()->getVD();	
     
-	r = new rendererGL();
-     
+	
+	r=rendererGL::getInstance(); 
     cout << "IO\n";
     
 	

@@ -9,7 +9,7 @@ using namespace std;
 #include "types.hpp"
 #include "texture.hpp"
 #include "skybox.hpp"
-#include "world.hpp"
+#include "world.hpp" //TODO: przenieœæ logikê z renderer do world
 #include "config.hpp"
 #include "textureFactory.hpp"
 #include "camera.hpp"

@@ -28,17 +28,7 @@ bool world::parseXml(string &fn) {
     string skyfn= pt.get<string>("world.config.skybox");
    cout << "}"<<skyfn << "}" << endl;
    this->sky = new skybox("data/"+skyfn);
-   /*cout << "Loading models...\n";
-   ptree& models = pt.get_child("world.models");
-   BOOST_FOREACH(const ptree::value_type &v, models) {
-	   string mfn=wd+string(DS)+v.second.get<string>("file");
-	   e_loc sc=v.second.get<e_loc>("scale");
-	   shapef->setScale(sc);
-	   shapef->get(mfn);
-	   
-	   cout << "MODEL: " <<  mfn << ", " << "scale: " << sc << endl;
-
-   } */
+   
    ptree& entities = pt.get_child("world.entities");
    BOOST_FOREACH(const ptree::value_type &v, entities) {
 	   e_loc x=v.second.get<float>("location.x"),y=v.second.get<float>("location.y"),
@@ -61,7 +51,15 @@ bool world::parseXml(string &fn) {
 	   this->entities.push_back((entity *)oe);
 	   this->models.push_back(oe);
    }
+   ptree& world_jp=pt.get_child("world.config.jump_point");
+   e_loc jx=world_jp.get<e_loc>("x"),
+	   jy=world_jp.get<e_loc>("y"),
+	   jz=world_jp.get<e_loc>("z");
+   default_camera.locate(jx,jy,jz);
   return true;
+}
+
+void world::prepare() {
 }
 
 world::~world() {
