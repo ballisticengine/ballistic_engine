@@ -36,7 +36,7 @@ for o in objects:
 """
 root=ET.Element('level')
 rooms=ET.SubElement(root,'rooms')
-room=ET.SubElement(rooms,'room')
+room=ET.SubElement(rooms,'shape')
 texture=ET.SubElement(room,'texture')
 name=ET.SubElement(room,'name')
 geom=ET.SubElement(room,'geom')
@@ -58,9 +58,9 @@ for f in active.data.polygons:
         z=ET.SubElement(vertex,'z')
         u=ET.SubElement(vertex,'u')
         v=ET.SubElement(vertex,'v')
-        x.text=str(active.data.vertices[idx].co[0])
-        y.text=str(active.data.vertices[idx].co[1])
-        z.text=str(active.data.vertices[idx].co[2])
+        x.text=str(active.data.vertices[idx].co[0]*40)
+        y.text=str(active.data.vertices[idx].co[1]*40)
+        z.text=str(active.data.vertices[idx].co[2]*40)
         for j,ul in enumerate(active.data.uv_layers):
             u.text=str(ul.data[idx].uv[0])
             v.text=str(ul.data[idx].uv[1])
