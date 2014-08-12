@@ -10,6 +10,7 @@ using namespace std;
 #include "engineState.hpp"
 #include "singleton.hpp"
 #include "world.hpp"
+#include "config.hpp"
 
 
 class sdlControls : public singleton<sdlControls> {
