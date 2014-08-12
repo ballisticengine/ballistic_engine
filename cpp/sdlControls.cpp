@@ -5,7 +5,7 @@ void sdlControls::operator()() {
 	e_loc step=1;
 	
 	int x,y,winw=config::getInstance()->getVD()->width/2,winh=config::getInstance()->getVD()->height/2;
-SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 	while(!engineState::getInstance()->exit()) {
 	 const Uint8 *state = SDL_GetKeyboardState(NULL);
 	 SDL_GetRelativeMouseState(&x,&y);
@@ -25,8 +25,9 @@ SDL_SetRelativeMouseMode(SDL_TRUE);
 	 	 c->translate(0,0,-step);
 	 }
 	 c->rotate(0,(e_loc)x/2,0);
+	 c->rotate((e_loc)y/2,0,0);
 	
-	SDL_Delay(10);
+	 SDL_Delay(10);
 	}
 	
 }
