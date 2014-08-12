@@ -18,8 +18,6 @@
 </level>
 """
 
-
-
 import bpy
 from bpy import context
 import xml.etree.ElementTree as ET
@@ -39,9 +37,17 @@ for o in objects:
 root=ET.Element('level')
 rooms=ET.SubElement(root,'rooms')
 room=ET.SubElement(rooms,'room')
+texture=ET.SubElement(room,'texture')
+name=ET.SubElement(room,'name')
 geom=ET.SubElement(room,'geom')
 
-print (active.data.name)
+name.text=active.data.name
+
+for t in active.data.uv_textures.active.data:
+   if t.image:
+        img = t.image.name
+
+texture.text=img
 
 for f in active.data.polygons:
     face=ET.SubElement(geom,'face')
