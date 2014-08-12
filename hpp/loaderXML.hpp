@@ -11,10 +11,10 @@ using namespace std;
 class loaderXML : public singleton<loaderXML> {
 protected:
  string xml;
- bool loadFile(string fn);
- bool toShape();
+ //bool loadFile(string fn);
+ shape * toShape();
 public:
-	loadXMLStr(string xml,shape *s);
-	loadXMLFile(string fn,shape *s);
+	bool loadXMLStr(string xml,shape *s);
+	//loadXMLFile(string fn,shape *s); //TODO
 };
 #endif
