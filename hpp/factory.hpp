@@ -17,6 +17,7 @@ protected:
 	map <string,void *> items;
 	vector <void *> item_ptr;
 	virtual void * actualLoad(string fn)=0;
+	static string getExt(string fn);
 public:
 	 virtual ~factory();
 	 virtual void * get(string fn);

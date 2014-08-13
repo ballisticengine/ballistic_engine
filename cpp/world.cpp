@@ -60,6 +60,47 @@ bool world::parseXml(string &fn) {
 	   rz=world_jp.get<e_loc>("rz");
    default_camera.locate(jx,jy,jz);
    default_camera.face(rx,ry,rz);
+   string gfn=wd+DS+"geometry.xml";
+   //cout << "GEOM FN: " << gfn << endl;
+   //this->parseGeom(gfn);
+
+   /* Geometria poziomu */
+  ptree gpt;
+  read_xml(gfn, gpt, boost::property_tree::xml_parser::trim_whitespace);
+  ptree &rooms=gpt.get_child("level");
+ 
+   
+  BOOST_FOREACH(const ptree::value_type &room, rooms) {
+	  XMLShapeInfo xsi=shapef->getXML((ptree)room.second);
+	  roomEntity *roomE=new roomEntity();
+	  string ttfn=wd+DS+TEX_DIR+DS+xsi.tex_fn;
+	  roomE->setModel(xsi.s);
+	  cout << "T: " << xsi.tex_fn << endl;
+	  texture *tex=(texture *)texf->get(ttfn);
+	  roomE->setTexture(tex);
+	   this->entities.push_back((entity *)roomE);
+	   this->models.push_back((objectEntity *)roomE);
+	  
+  }
+   
+   return true;
+}
+
+bool world::parseGeom(string fn) {
+  shapeFactory *sf=shapeFactory::getInstance();
+  textureFactory *texf=(textureFactory *)textureFactory::getInstance();
+  ptree pt;
+  read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
+  ptree &rooms=pt.get_child("level");
+  
+  BOOST_FOREACH(const ptree::value_type &room, rooms) {
+	  XMLShapeInfo xsi=sf->getXML((ptree)room.second);
+	  roomEntity *roomE=new roomEntity();
+	  roomE->setModel(xsi.s);
+	  
+	  //texture *tex=(texture *)texf->get(tfn);
+	  //roomE->setTexture();
+  }
   return true;
 }
 

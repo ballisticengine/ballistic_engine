@@ -48,9 +48,7 @@
                 <z>0.0</z>
             </facing>
         </entity>
-    </tmp>
-    <entities>
-        <entity type="object">
+     <entity type="object">
             <model>
                 <file>test.md2</file>
                 <texture>car.bmp</texture>
@@ -86,6 +84,9 @@
                 <z>0.0</z>
             </facing>
         </entity>
+    </tmp>
+    <entities>
+       
         
     </entities>
 </world>

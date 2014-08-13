@@ -18,3 +18,9 @@ factory::~factory() {
 vector <void *> factory::getAll() {
 	return this->item_ptr;
 }
+
+string factory::getExt(string fn) {
+	size_t dotpos=fn.find_last_of(".");
+	string ext=fn.substr(dotpos+1,fn.size());
+	return ext;
+}

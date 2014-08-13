@@ -57,14 +57,15 @@ void renderer::init() {
   this->rotateSpecific(x,y,z,d);
  }
 
-void renderer::renderAllEntities() {
+void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transformuje
 	obj_list ents=w->getModels();
+	//cout << ents.size() << endl;
 	for(int i=0; i<ents.size(); i++) {
 		
 		coords c=ents[i]->getCoords();
 		//this->reset(); // do origin // zast¹piæ dodawaniem, bo kamera nie dzia³a, no albo ustawiaæ kamerê przy ka¿dym resecie
-		this->locate(c.x,c.y,c.z);
-		this->face(c.rx,c.ry,c.rz);
+		//this->locate(c.x,c.y,c.z);
+		//this->face(c.rx,c.ry,c.rz);
 		this->assignTexture(ents[i]->getTexture());
 		this->renderShape(ents[i]->getModel());
 		
@@ -89,12 +90,13 @@ void renderer::renderShape(shape *s) {
     tris_list tris;
   
 	tris = s->getTris();
-
+	//cout << tris.size() << endl;
     this->begin();
 	for (int i = 0; i < tris.size(); i++) {
        
 		for (int n = 0; n < 3; n++) {
             this->renderVertex(tris[i]->v[n]);
+			//cout << tris[i]->v[n]->x;
         }
     }
 	this->end();
