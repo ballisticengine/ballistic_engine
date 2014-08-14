@@ -10,8 +10,10 @@ using namespace boost::property_tree;
 
 #include "factory.hpp"
 #include "types.hpp"
+#include "facetexShape.hpp"
 #include "loaderMD2.hpp"
 #include "loaderXML.hpp"
+
 
 #define GEOM_MEM_EXT "[geom]"
 #define MD2_EXT "md2"

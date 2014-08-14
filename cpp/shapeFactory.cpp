@@ -2,7 +2,7 @@
 
 void * shapeFactory::actualLoad(string fn) {
   string ext=factory::getExt(fn);
-  shape *s=new shape();
+  faceTexShape *s=new faceTexShape();
   if(ext==MD2_EXT) {
   loaderMD2 *loader=loaderMD2::getInstance();
   
@@ -37,6 +37,6 @@ XMLShapeInfo shapeFactory::getXML(ptree &shp) {
 	name=name+"."+GEOM_MEM_EXT;
 	XMLShapeInfo xmlsi;
 	xmlsi.s=(shape *)this->get(name);
-	xmlsi.tex_fn=loader->getTexFN(shp);
+	
 	return xmlsi;
 }

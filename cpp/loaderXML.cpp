@@ -1,6 +1,6 @@
 #include "loaderXML.hpp"
 
-void loaderXML::toShape(ptree &geom,shape *s) {
+void loaderXML::toShape(ptree &geom,faceTexShape *s) {
  
   triangle *vt;
   BOOST_FOREACH(const ptree::value_type &f, geom) {
@@ -18,13 +18,13 @@ void loaderXML::toShape(ptree &geom,shape *s) {
 	    vs_tmp[i] = new vertex(x,y,z, u, v);
 	   i++;
    }
-   vt = new triangle(vs_tmp[0], vs_tmp[1], vs_tmp[2]);
+   vt = new texTriangle(vs_tmp[0], vs_tmp[1], vs_tmp[2]);
         s->addTriangle(vt);
   }
   
  }
 
- string loaderXML::loadXML(ptree &tree,shape *s) {
+ string loaderXML::loadXML(ptree &tree,faceTexShape *s) {
 	 ptree & geom=tree.get_child("shape.geom");
 
 	 string name=this->getName(tree);
@@ -37,7 +37,3 @@ void loaderXML::toShape(ptree &geom,shape *s) {
 	 return name;
  }
 
-string loaderXML::getTexFN(ptree &tree) {
-  string texfn=tree.get<string>("shape.texture");
-  return texfn;
- }

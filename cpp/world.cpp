@@ -73,11 +73,11 @@ bool world::parseXml(string &fn) {
   BOOST_FOREACH(const ptree::value_type &room, rooms) {
 	  XMLShapeInfo xsi=shapef->getXML((ptree)room.second);
 	  roomEntity *roomE=new roomEntity();
-	  string ttfn=wd+DS+TEX_DIR+DS+xsi.tex_fn;
+	
 	  roomE->setModel(xsi.s);
 	  cout << "T: " << xsi.tex_fn << endl;
-	  texture *tex=(texture *)texf->get(ttfn);
-	  roomE->setTexture(tex);
+	
+	  //roomE->setTexture(tex);
 	   this->entities.push_back((entity *)roomE);
 	   this->models.push_back((objectEntity *)roomE);
 	  

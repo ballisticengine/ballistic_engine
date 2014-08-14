@@ -17,7 +17,7 @@ from bpy_extras.io_utils import (ImportHelper,
                                  )
 
 import xml.etree.ElementTree as ET
-
+import math
 
 
 #HELPER START
@@ -57,9 +57,14 @@ def shapeExport(model,scale=1):
                 x.text=str(model.data.vertices[idx].co[0]*scale)
                 y.text=str(model.data.vertices[idx].co[1]*scale)
                 z.text=str(model.data.vertices[idx].co[2]*scale)
-            for j,ul in enumerate(model.data.uv_layers):
-                u.text=str(ul.data[idx].uv[0])
-                v.text=str(ul.data[idx].uv[1]) #TODO: nie wszędzie jest uv
+                for j,ul in enumerate(model.data.uv_layers):
+                    #Tymczasowo takie coś
+                    uu=ul.data[idx].uv[0]
+                    vv=ul.data[idx].uv[1]
+                    print (uu)
+                    print (vv)
+                    u.text=str(uu)
+                    v.text=str(vv)
             i+=1
         return shape
 

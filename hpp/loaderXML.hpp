@@ -14,17 +14,16 @@ using namespace boost::property_tree;
 
 #include "singleton.hpp"
 #include "types.hpp"
+#include "facetexShape.hpp"
 
 
 class loaderXML : public singleton<loaderXML> {
 protected:
- 
  //bool loadFile(string fn);
- void toShape(ptree &geom,shape *s);
+ void toShape(ptree &geom,faceTexShape *s);
 public:
-	string loadXML(ptree &tree,shape *s);
+	string loadXML(ptree &tree,faceTexShape *s);
 	string getName(ptree &tree);
-	string getTexFN(ptree &tree);
 	//loadXML(string fn,shape *s); //TODO
 };
 #endif
