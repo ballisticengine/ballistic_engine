@@ -29,6 +29,7 @@ def determineTexture(model):
     for t in model.data.uv_textures.active.data:
      if t.image:
         img = t.image.name
+        print (img)
     return img
 
 def shapeExport(model,scale=1):
@@ -39,7 +40,11 @@ def shapeExport(model,scale=1):
         geom=ET.SubElement(shape,'geom')
         name.text=model.data.name
         texture.text=determineTexture(model)
+        i=0
         for f in model.data.polygons:
+            #test=texture.text=determineTexture(f)
+            print (f)
+            print (model.data.uv_textures.active.data[i].image.name)
             face=ET.SubElement(geom,'face')
             for idx in f.vertices:
                 vertex=ET.SubElement(face,'vertex')
@@ -54,6 +59,7 @@ def shapeExport(model,scale=1):
             for j,ul in enumerate(model.data.uv_layers):
                 u.text=str(ul.data[idx].uv[0])
                 v.text=str(ul.data[idx].uv[1])
+            i+=1
         return shape
 
 #HELPER END
