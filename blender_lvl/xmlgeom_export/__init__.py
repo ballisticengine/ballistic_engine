@@ -87,7 +87,11 @@ class ExportXML(bpy.types.Operator,ExportHelper):
 
     def execute(self, context):
         shape=shapeExport(context.active_object,1.0)
-        tree = ET.ElementTree(shape)
+        room=ET.Element('room')
+        room.append(shape)
+        level=ET.Element('level')
+        level.append(room)
+        tree = ET.ElementTree(level)
         keywords = self.as_keywords()
         f=open(self.filepath,"wb")
         print (self.filepath)

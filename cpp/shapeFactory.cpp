@@ -36,7 +36,7 @@ XMLShapeInfo shapeFactory::getXML(ptree &shp) {
 	this->shp=&shp;
 	name=name+"."+GEOM_MEM_EXT;
 	XMLShapeInfo xmlsi;
-	xmlsi.s=(shape *)this->get(name);
+	//xmlsi.s=(shape *)this->get(name);
 	
 	return xmlsi;
 }

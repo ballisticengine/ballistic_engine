@@ -71,15 +71,16 @@ bool world::parseXml(string &fn) {
  
    
   BOOST_FOREACH(const ptree::value_type &room, rooms) {
+	  cout << room.first.c_str() << endl;
 	  XMLShapeInfo xsi=shapef->getXML((ptree)room.second);
-	  roomEntity *roomE=new roomEntity();
+	 // roomEntity *roomE=new roomEntity();
 	
-	  roomE->setModel(xsi.s);
-	  cout << "T: " << xsi.tex_fn << endl;
+	 // roomE->setModel(xsi.s);
+	  //cout << "T: " << xsi.tex_fn << endl;
 	
 	  //roomE->setTexture(tex);
-	   this->entities.push_back((entity *)roomE);
-	   this->models.push_back((objectEntity *)roomE);
+	  // this->entities.push_back((entity *)roomE);
+	 //  this->models.push_back((objectEntity *)roomE);
 	  
   }
    
