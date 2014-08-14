@@ -11,11 +11,15 @@ bl_info = {
 
 import bpy
 from bpy.props import StringProperty, FloatProperty, BoolProperty, EnumProperty
+from bpy_extras.io_utils import (ImportHelper,
+                                 ExportHelper,
+                                 axis_conversion,
+                                 )
 
-import export_helper
+import export_helper as exp
 
 
-class ExportXML(bpy.types.Operator):
+class ExportXML(bpy.types.Operator,ExportHelper):
     bl_idname = "export_scene.xml_geom"
     bl_label = 'Export to XML Geometry'
     filename_ext = ".xml"
@@ -27,4 +31,23 @@ class ExportXML(bpy.types.Operator):
             )
 
     def execute(self, context):
-        pass
+        exp.shapeExport(context.active_object,1.0)
+        return {'FINISHED'}
+
+
+def menu_func_export(self, context):
+    self.layout.operator(ExportXML.bl_idname, text="XML Geomerty (.xml)")
+
+
+
+def register():
+    bpy.utils.register_module(__name__)
+    bpy.types.INFO_MT_file_export.append(menu_func_export)
+
+
+def unregister():
+    bpy.utils.unregister_module(__name__)
+    bpy.types.INFO_MT_file_export.remove(menu_func_export)
+
+if __name__ == "__main__":
+    register()

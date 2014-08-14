@@ -2,9 +2,6 @@ import bpy
 from bpy import context
 import xml.etree.ElementTree as ET
 
-bpy.ops.object.mode_set(mode='OBJECT')
-
-
 
 bpy.ops.object.mode_set(mode='OBJECT')
 
