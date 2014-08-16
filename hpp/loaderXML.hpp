@@ -6,6 +6,7 @@
 #include <boost/foreach.hpp>
 
 #include <string>
+#include <iostream>
 
 
 
@@ -15,6 +16,7 @@ using namespace boost::property_tree;
 #include "singleton.hpp"
 #include "types.hpp"
 #include "facetexShape.hpp"
+#include "textureFactory.hpp"
 
 
 class loaderXML : public singleton<loaderXML> {

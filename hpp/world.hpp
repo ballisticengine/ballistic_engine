@@ -35,7 +35,7 @@ protected:
 	rooms_list rooms;
     skybox *sky;
 	camera default_camera;
-    bool parseGeom(string fn);
+   
 public:
         ~world();
         ent_list getEntities();

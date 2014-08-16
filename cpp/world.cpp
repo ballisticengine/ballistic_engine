@@ -72,7 +72,8 @@ bool world::parseXml(string &fn) {
    
   BOOST_FOREACH(const ptree::value_type &room, rooms) {
 	  cout << room.first.c_str() << endl;
-	  XMLShapeInfo xsi=shapef->getXML((ptree)room.second);
+	//  room.second.get_child("shape");
+	    faceTexShape *fs=shapef->getXML((ptree)room.second);
 	 // roomEntity *roomE=new roomEntity();
 	
 	 // roomE->setModel(xsi.s);
@@ -87,23 +88,6 @@ bool world::parseXml(string &fn) {
    return true;
 }
 
-bool world::parseGeom(string fn) {
-  shapeFactory *sf=shapeFactory::getInstance();
-  textureFactory *texf=(textureFactory *)textureFactory::getInstance();
-  ptree pt;
-  read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
-  ptree &rooms=pt.get_child("level");
-  
-  BOOST_FOREACH(const ptree::value_type &room, rooms) {
-	  XMLShapeInfo xsi=sf->getXML((ptree)room.second);
-	  roomEntity *roomE=new roomEntity();
-	  roomE->setModel(xsi.s);
-	  
-	  //texture *tex=(texture *)texf->get(tfn);
-	  //roomE->setTexture();
-  }
-  return true;
-}
 
 void world::prepare() {
 	

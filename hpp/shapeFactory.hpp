@@ -19,20 +19,17 @@ using namespace boost::property_tree;
 #define MD2_EXT "md2"
 
 
-struct XMLShapeInfo {
- shape *s;
- string tex_fn;
-};
+
 
 
 class shapeFactory: public factory, public singleton<shapeFactory> {
 protected:
-	virtual void * actualLoad(string fn); //tu dodaæ ³adowanie po xml i funkcja w factory do rozpoznawania ext.
+	virtual void * actualLoad(string fn);
 	e_loc scale;
 	ptree *shp;
 public:
 	virtual void setScale(e_loc scale);
-	virtual XMLShapeInfo getXML(ptree &shp);
+	virtual faceTexShape * getXML(ptree &shp);
 	shapeFactory();
 	 
 };

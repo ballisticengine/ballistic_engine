@@ -45,10 +45,11 @@ def shapeExport(model,scale=1):
             texfn=model.data.uv_textures.active.data[i].image.name
             print (texfn)
             face=ET.SubElement(geom,'face')
+            vertices=ET.SubElement(face,'vertices')
             texture=ET.SubElement(face,'texture')
             texture.text=texfn
             for idx in f.vertices:
-                vertex=ET.SubElement(face,'vertex')
+                vertex=ET.SubElement(vertices,'vertex')
                 x=ET.SubElement(vertex,'x')
                 y=ET.SubElement(vertex,'y')
                 z=ET.SubElement(vertex,'z')

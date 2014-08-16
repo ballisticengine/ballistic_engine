@@ -12,7 +12,8 @@ void * shapeFactory::actualLoad(string fn) {
   } 
   else if(ext==GEOM_MEM_EXT) {
 	 loaderXML *loader=loaderXML::getInstance();
-	loader->loadXML(*shp,s);
+	//write_xml(std::cout, *shp);
+	 loader->loadXML(*shp,s);
 	return (void *)s;
   }
   else {
@@ -30,13 +31,15 @@ shapeFactory::shapeFactory() {
  scale=1;
 }
 
-XMLShapeInfo shapeFactory::getXML(ptree &shp) {
+faceTexShape * shapeFactory::getXML(ptree &shp) {
 	loaderXML *loader=loaderXML::getInstance();
+	
 	string name=loader->getName(shp);
+	
 	this->shp=&shp;
 	name=name+"."+GEOM_MEM_EXT;
-	XMLShapeInfo xmlsi;
-	//xmlsi.s=(shape *)this->get(name);
 	
-	return xmlsi;
+	faceTexShape *s=(faceTexShape *)this->get(name);
+	
+	return 0;
 }
