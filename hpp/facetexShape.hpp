@@ -9,9 +9,13 @@ Reprezentuje kszta³t z teksturami przypisanymi do wielok¹tów
 #include "texture.hpp"
 
 class texTriangle : public triangle {
-public:
+protected:
 		texture *tex;
+public:
+	
 		texTriangle(vertex *a,vertex *b,vertex *c);
+		void setTexture(texture *tex);
+		texture * getTexture();
 };
 
 

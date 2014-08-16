@@ -26,7 +26,7 @@ typedef vector <triangle *> tris_list;
 class vertex {
 public:
     e_loc x, y, z,u,v;
-    bool operator==(vertex &v);
+    virtual bool operator==(vertex &v);
     vertex();
     vertex(e_loc x,e_loc y,e_loc z);
     vertex(e_loc x,e_loc y,e_loc z,e_loc u,e_loc v);
@@ -34,9 +34,11 @@ public:
 };
 typedef vector <vertex *> vert_list;
 class triangle {
+protected:
+	//virtual void setVerts(vertex *a,vertex *b,vertex *c);
 public:
     vertex *v[3];
-    bool operator==(triangle &t);
+    virtual bool operator==(triangle &t);
     triangle();
     triangle(vertex *a,vertex *b,vertex *c);
     triangle(vertex v[3]);
@@ -51,26 +53,26 @@ class shape {
     vector <triangle *> triangles;
 public:
     bool operator==(shape &s);
-    vector <triangle *> getTris();
-    vert_list getVertices();
-    void addVertices(vertex *vs,int num_tris);
+    virtual vector <triangle *> getTris();
+    virtual vert_list getVertices();
+    virtual void addVertices(vertex *vs,int num_tris);
     void setScale(e_loc scale);
-	e_loc getScale();
+	virtual e_loc getScale();
     /*
      Dodaje trójkąt do bryły przyporządkowując wieszchołki wspólne
      */
-    triangle * addTriangle(triangle *t);
-    triangle * addTriangle(vertex v[3]);
+    virtual triangle * addTriangle(triangle *t);
+    virtual triangle * addTriangle(vertex v[3]);
     /*
      Dodaje wierchołek, jeśli nie istnieje i zwraca wskaźnik do niego. Jeśli już istnieje zwraca wskaźnik
      */
-    vertex * addVertex(vertex *v);
-    vertex * addVertex(e_loc x,e_loc y,e_loc z);
+    virtual vertex * addVertex(vertex *v);
+    virtual vertex * addVertex(e_loc x,e_loc y,e_loc z);
     /*
      Szuka identycznego wieszchołka i zwraca go
      */
-    vertex * findVertex(vertex *v);
-    ~shape();
+    virtual vertex * findVertex(vertex *v);
+     ~shape();
 };
 
 

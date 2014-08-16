@@ -7,6 +7,7 @@ using namespace std;
 
 #include "singleton.hpp"
 #include "types.hpp"
+#include "facetexShape.hpp"
 #include "texture.hpp"
 #include "skybox.hpp"
 #include "world.hpp" //TODO: przenieœæ logikê do world
@@ -25,12 +26,16 @@ protected:
     world *w;
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
+	virtual void renderFaceTexShape(faceTexShape *s);
     virtual void renderVertex(vertex *v) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
 	virtual void begin()=0;
 	virtual void end()=0;
 
 	virtual void renderAllEntities();
+	virtual void renderAllRooms();
+	
+
     virtual void assignTexture(texture *t) {
     };
 	virtual void resetSpecific()=0;

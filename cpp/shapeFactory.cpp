@@ -41,5 +41,5 @@ faceTexShape * shapeFactory::getXML(ptree &shp) {
 	
 	faceTexShape *s=(faceTexShape *)this->get(name);
 	
-	return 0;
+	return s;
 }

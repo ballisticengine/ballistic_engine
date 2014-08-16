@@ -1,28 +1,29 @@
 #include "loaderXML.hpp"
 
 void loaderXML::toShape(ptree &geom,faceTexShape *s) {
-  triangle *vt;
+  texTriangle *vt;
+  
   BOOST_FOREACH(const ptree::value_type &f, geom) {
-   cout << "FACE" << endl;
+   //cout << "FACE" << endl;
     vertex * vs_tmp[3];
 	int i=0;
 	ptree verts=f.second.get_child("vertices");
    BOOST_FOREACH(const ptree::value_type &vx, verts) {
-	   cout << vx.first.c_str() << endl;
-	
-	   cout << " VERTEX" << endl;
+	  //cout << " VERTEX" << endl;
 	   e_loc 
 		   x=vx.second.get<e_loc>("x")
 		   ,y=vx.second.get<e_loc>("y")
 		   ,z=vx.second.get<e_loc>("z")
 		   ,u=vx.second.get<e_loc>("u")
 		   ,v=vx.second.get<e_loc>("v");
-	   cout << x << " " << y << " " << z << endl; 
+	   //cout << x << " " << y << " " << z << endl; 
 	   vs_tmp[i] = new vertex(x,y,z, u, v);
 	   i++;
    }
+   texture *t=(texture *)textureFactory::getInstance()->get(f.second.get<string>("texture"));
    vt = new texTriangle(vs_tmp[0], vs_tmp[1], vs_tmp[2]);
-        s->addTriangle(vt);
+   vt->setTexture(t);   
+   s->addTriangle(vt);
   }
   
  }

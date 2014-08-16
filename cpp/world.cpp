@@ -12,6 +12,10 @@ obj_list world::getModels() {
 	return this->models;
 }
 
+rooms_list world::getRooms() {
+	return this->rooms;
+}
+
 void world::makeTestWorld() {
     this->sky = new skybox("skybox.bmp");
 }
@@ -21,6 +25,7 @@ bool world::parseXml(string &fn) {
 	fn=fn+string(DS)+string("level.xml");
 	shapeFactory *shapef=(shapeFactory *)shapeFactory::getInstance();
 	textureFactory *texf=(textureFactory *)textureFactory::getInstance();
+	texf->setWD(wd+DS+TEX_DIR);
 	cout << "FN: " << fn << endl;
 	using boost::property_tree::ptree;
     ptree pt;
@@ -35,7 +40,7 @@ bool world::parseXml(string &fn) {
 		   z=v.second.get<float>("location.z"),rx=v.second.get<float>("facing.x"),
 		   ry=v.second.get<float>("facing.y"),rz=v.second.get<float>("facing.z");
 	   string mfn=wd+DS+MODEL_DIR+DS+v.second.get<string>("model.file"),
-		   tfn=wd+DS+TEX_DIR+DS+v.second.get<string>("model.texture");
+		   tfn=v.second.get<string>("model.texture");
 	   e_loc sc=v.second.get<e_loc>("model.scale");
 	   shapef->setScale(sc);
 	   objectEntity *oe=new objectEntity();
@@ -73,15 +78,16 @@ bool world::parseXml(string &fn) {
   BOOST_FOREACH(const ptree::value_type &room, rooms) {
 	  cout << room.first.c_str() << endl;
 	//  room.second.get_child("shape");
-	    faceTexShape *fs=shapef->getXML((ptree)room.second);
-	 // roomEntity *roomE=new roomEntity();
-	
-	 // roomE->setModel(xsi.s);
+	  faceTexShape *fs=shapef->getXML((ptree)room.second);
+	  roomEntity *roomE=new roomEntity();
+	  
+	  roomE->setModel(fs);
 	  //cout << "T: " << xsi.tex_fn << endl;
 	
 	  //roomE->setTexture(tex);
-	  // this->entities.push_back((entity *)roomE);
-	 //  this->models.push_back((objectEntity *)roomE);
+	   this->entities.push_back((entity *)roomE);
+	   //this->models.push_back((objectEntity *)roomE);
+	   this->rooms.push_back(roomE);
 	  
   }
    
@@ -102,3 +108,4 @@ world::~world() {
 camera *world::getCurrentCamera() {
  return &this->default_camera;
 }
+

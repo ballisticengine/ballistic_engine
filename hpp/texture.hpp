@@ -29,6 +29,7 @@ public:
     void * getPixels();
     int getWidth();
     int getHeight();
+	string getFilename();
     
 };
 

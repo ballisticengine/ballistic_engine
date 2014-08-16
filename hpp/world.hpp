@@ -40,6 +40,7 @@ public:
         ~world();
         ent_list getEntities();
 		obj_list getModels();
+		rooms_list getRooms();
         skybox * getSkybox();
 		camera *getCurrentCamera();
         void makeTestWorld();

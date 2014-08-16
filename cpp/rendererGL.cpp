@@ -17,16 +17,16 @@ void rendererGL::end() {
 
 void rendererGL::render() {
 
-    glClearColor(1, 1, 1, 1);
+    glClearColor(0.5, 0.5, 0.5, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
    
 	this->reset();
 	this->positionCamera();
-    
-  
-	this->renderAllEntities();
+   // glColor3f(1,0,0);
+	this->renderAllRooms();
+	//this->renderAllEntities();
 
     glFlush();
     this->flush_callback();

@@ -72,6 +72,31 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 	}
 }
 
+void renderer::renderAllRooms() {
+	rooms_list rooms=w->getRooms();
+	for(int i=0; i<rooms.size(); i++) {
+		this->renderFaceTexShape((faceTexShape *)rooms[i]->getModel());
+	}
+}
+
+void renderer::renderFaceTexShape(faceTexShape *s) {
+    tris_list tris;
+  
+	tris = s->getTris();
+	
+    
+	for (int i = 0; i < tris.size(); i++) {
+        texTriangle *t=(texTriangle *)tris[i];
+		this->assignTexture(t->getTexture());
+		this->begin();
+		for (int n = 0; n < 3; n++) {
+            this->renderVertex(tris[i]->v[n]);
+        }
+		this->end();
+    }
+	
+}
+
 void renderer::setFlush(flushf flush_callback) {
     this->flush_callback = flush_callback;
 }
@@ -96,7 +121,7 @@ void renderer::renderShape(shape *s) {
        
 		for (int n = 0; n < 3; n++) {
             this->renderVertex(tris[i]->v[n]);
-			//cout << tris[i]->v[n]->x;
+			//cout << tris[i]->v[n]->x << endl;
         }
     }
 	this->end();

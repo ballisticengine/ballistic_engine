@@ -2,7 +2,7 @@
 
 void * factory::get(string fn) {
 	if(items.find(fn)==items.end()) {
-	  items[fn]=this->actualLoad(fn);
+	  items[fn]=this->actualLoad(wd+DS+fn);
 	  item_ptr.push_back(items[fn]);
 	}
  return items[fn];
@@ -24,3 +24,11 @@ string factory::getExt(string fn) {
 	string ext=fn.substr(dotpos+1,fn.size());
 	return ext;
 }
+
+ factory::factory() {
+  wd=".";
+ }
+
+ void factory::setWD(string wd) {
+  this->wd=wd;
+ }

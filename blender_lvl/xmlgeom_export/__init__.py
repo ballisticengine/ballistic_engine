@@ -87,7 +87,7 @@ class ExportXML(bpy.types.Operator,ExportHelper):
             )
 
     def execute(self, context):
-        shape=shapeExport(context.active_object,1.0)
+        shape=shapeExport(context.active_object,self.scale)
         room=ET.Element('room')
         room.append(shape)
         level=ET.Element('level')

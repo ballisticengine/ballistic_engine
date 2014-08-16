@@ -29,3 +29,7 @@ int texture::getWidth() {
 int texture::getHeight() {
     return surf->h;
 }
+
+string texture::getFilename() {
+	return string(this->filename);
+}
