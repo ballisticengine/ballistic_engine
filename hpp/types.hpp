@@ -8,7 +8,7 @@
 
 using namespace std;
 
-typedef float e_loc;
+typedef double e_loc;
 
 
 struct coords {

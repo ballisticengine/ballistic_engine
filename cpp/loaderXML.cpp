@@ -16,7 +16,7 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 		   ,z=vx.second.get<e_loc>("z")
 		   ,u=vx.second.get<e_loc>("u")
 		   ,v=vx.second.get<e_loc>("v");
-	   //cout << x << " " << y << " " << z << endl; 
+	   cout << x << " " << y << " " << z << " " << u << " " << v << endl; 
 	   vs_tmp[i] = new vertex(x,y,z, u, v);
 	   i++;
    }

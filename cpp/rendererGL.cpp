@@ -3,8 +3,8 @@
 #pragma comment(lib, "glu32.lib") 
 
 void rendererGL::renderVertex(vertex *v) {
-    glTexCoord2f(v->u, v->v);
-    glVertex3f(v->x, v->y, v->z);
+    glTexCoord2d(v->u, v->v);
+    glVertex3d(v->x, v->y, v->z);
 }
 
 void rendererGL::begin() {
@@ -83,7 +83,7 @@ void rendererGL::setupTexture(texture *t) {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
 }
 
-void rendererGL::translateSpecific(float x, float y, float z) {
+void rendererGL::translateSpecific(e_loc x, e_loc y, e_loc z) {
  glTranslatef(x,y,z);
 }
 
