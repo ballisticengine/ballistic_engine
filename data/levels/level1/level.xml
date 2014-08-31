@@ -31,23 +31,7 @@
                 <z>0.0</z>
             </facing>
         </entity>
-    <entity type="object">
-            <model>
-                <file>test.md2</file>
-                <texture>car.bmp</texture>
-                <scale>1</scale>
-            </model>
-            <location>
-                <x>0.0</x>
-                <y>0.0</y>
-                <z>-200.0</z>
-            </location>
-            <facing>
-                <x>-90.0</x>
-                <y>0.0</y>
-                <z>0.0</z>
-            </facing>
-        </entity>
+
      <entity type="object">
             <model>
                 <file>test.md2</file>
@@ -67,16 +51,19 @@
         </entity>
         
         
-        <entity type="object">
+        
+    </tmp>
+    <entities>
+           <entity type="object">
             <model>
-                <file>hipek.md2</file>
-                <texture>brick.bmp</texture>
-                <scale>1</scale>
+                <file>test.md2</file>
+                <texture>car.bmp</texture>
+                <scale>0.005</scale>
             </model>
             <location>
-                <x>200.0</x>
+                <x>1.0</x>
                 <y>0.0</y>
-                <z>-70.0</z>
+                <z>0.0</z>
             </location>
             <facing>
                 <x>-90.0</x>
@@ -84,9 +71,22 @@
                 <z>0.0</z>
             </facing>
         </entity>
-    </tmp>
-    <entities>
-       
-        
+        <entity type="object">
+            <model>
+                <file>hipek.md2</file>
+                <texture>brick.bmp</texture>
+                <scale>0.01</scale>
+            </model>
+            <location>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </location>
+            <facing>
+                <x>-90.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </facing>
+        </entity>
     </entities>
 </world>

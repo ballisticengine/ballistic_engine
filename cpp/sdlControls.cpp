@@ -2,7 +2,7 @@
 
 void sdlControls::operator()() {
 	camera *c=world::getInstance()->getCurrentCamera();
-	e_loc step=1;
+	e_loc step=0.1;
 	
 	int x,y,winw=config::getInstance()->getVD()->width/2,winh=config::getInstance()->getVD()->height/2;
 	SDL_SetRelativeMouseMode(SDL_TRUE);

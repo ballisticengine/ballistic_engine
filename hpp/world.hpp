@@ -8,6 +8,7 @@
 #include <boost/foreach.hpp>
 #include <iostream>
 #include <string>
+#include <ctime>
 
 using namespace std;
 using namespace boost::property_tree;
@@ -20,8 +21,8 @@ using namespace boost::property_tree;
 #include "config.hpp"
 #include "shapeFactory.hpp"
 #include "textureFactory.hpp"
-
-
+#include "engineState.hpp"
+#include "mathTypes.hpp"
 
 
 typedef vector <entity *> ent_list;
@@ -35,7 +36,8 @@ protected:
 	rooms_list rooms;
     skybox *sky;
 	camera default_camera;
-   
+   void moveEntities();
+   clock_t last_tick;
 public:
         ~world();
         ent_list getEntities();
@@ -46,6 +48,7 @@ public:
         void makeTestWorld();
         bool parseXml(string &fn);
         void prepare();
+		void operator()();
 };
 
 #endif	/* WORLD_HPP */

@@ -63,9 +63,10 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 	for(int i=0; i<ents.size(); i++) {
 		
 		coords c=ents[i]->getCoords();
-		//this->reset(); // do origin // zast¹piæ dodawaniem, bo kamera nie dzia³a, no albo ustawiaæ kamerê przy ka¿dym resecie
-		//this->locate(c.x,c.y,c.z);
-		//this->face(c.rx,c.ry,c.rz);
+		this->reset();
+		this->positionCamera();
+		this->locate(c.x,c.y,c.z);
+		this->face(c.rx,c.ry,c.rz);
 		this->assignTexture(ents[i]->getTexture());
 		this->renderShape(ents[i]->getModel());
 		

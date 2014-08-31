@@ -27,7 +27,7 @@ void engine::prepare() {
 	r->init();
 	r->setCamera(w->getCurrentCamera());
 	r->setFlush(sdlIO::flush);
-	
+	boost::thread(boost::ref(*w));
 
 	
 	

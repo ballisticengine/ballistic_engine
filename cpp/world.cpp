@@ -109,3 +109,19 @@ camera *world::getCurrentCamera() {
  return &this->default_camera;
 }
 
+void world::moveEntities() {
+	for(int i=0; i<this->entities.size(); i++) {
+	   entity *e=entities[i];
+		MathTypes::vector velocity=e->getVelocity();
+		
+
+	}
+}
+
+void world::operator()() {
+ last_tick=clock();
+	while(!engineState::getInstance()->exit()) {
+	 this->moveEntities(); 
+	 last_tick=clock()-last_tick;
+ }
+}
