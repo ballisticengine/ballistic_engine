@@ -1,6 +1,10 @@
 #ifndef ENTITY_HPP
 #define	ENTITY_HPP
 
+#include <vector>
+
+using namespace std;
+
 #include "types.hpp"
 
 
@@ -20,6 +24,7 @@ public:
 
 };
 
+typedef vector<entity *> entity_list;
 
 #endif	/* ENTITY_HPP */
 

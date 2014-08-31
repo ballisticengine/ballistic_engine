@@ -46,8 +46,7 @@ def shapeExport(model,scale=1):
         #texture.text=determineTexture(model)
         i=0
 
-        uv_act = model.data.uv_layers.active
-        uv_layer = uv_act.data if uv_act is not None else EmptyUV()
+
 
         verts = model.data.vertices
         loop_vert = {l.index: l.vertex_index for l in model.data.loops}
@@ -55,7 +54,8 @@ def shapeExport(model,scale=1):
         model=model.to_mesh(scene, True, 'PREVIEW', calc_tessface=False)
         for f in model.polygons:
             texfn=model.uv_textures.active.data[f.index].image.name
-
+            uv_act = model.uv_layers.active
+            uv_layer = uv_act.data if uv_act is not None else EmptyUV()
             print (texfn)
             face=ET.SubElement(geom,'face')
             vertices=ET.SubElement(face,'vertices')
@@ -75,31 +75,6 @@ def shapeExport(model,scale=1):
                z.text=str(coords[2]*scale)
                u.text=str(uv[0])
                v.text=str(uv[1])
-
-            """for idx in f.vertices:
-
-                vertex=ET.SubElement(vertices,'vertex')
-                x=ET.SubElement(vertex,'x')
-                y=ET.SubElement(vertex,'y')
-                z=ET.SubElement(vertex,'z')
-                u=ET.SubElement(vertex,'u')
-                v=ET.SubElement(vertex,'v')
-                x.text=str(model.vertices[idx].co[0]*scale)
-                y.text=str(model.vertices[idx].co[1]*scale)
-                z.text=str(model.vertices[idx].co[2]*scale)
-                #model.tessface_uv_textures.active.data[0].uv1
-                uu=model.uv_layers[0].data[idx].uv[0]
-                vv=model.uv_layers[0].data[idx].uv[1]
-                u.text=str(uu)
-                v.text=str(vv)
-                # print (len(f.uv_textures.data))
-                #uu=f.uv_textures[0].data[idx].uv[0]
-                #vv=f.uv_textures[0].data[idx].uv[1]
-                #u.text=str(uu)
-                #v.text=str(vv)
-
-
-                """
             i+=1
         return shape
 
