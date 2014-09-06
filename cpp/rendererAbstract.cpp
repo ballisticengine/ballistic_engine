@@ -76,6 +76,7 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 void renderer::renderAllRooms() {
 	rooms_list rooms=w->getRooms();
 	for(int i=0; i<rooms.size(); i++) {
+		
 		this->renderFaceTexShape((faceTexShape *)rooms[i]->getModel());
 	}
 }
@@ -176,7 +177,9 @@ void renderer::reset() {
  void renderer::positionCamera() {
 	 coords c=active_camera->getCoords();
 	 translate(c.x,c.y,c.z);
+	
 	 rotate(1,0,0,c.rx);
 	 rotate(0,1,0,c.ry);
 	 rotate(0,0,1,c.rz);
+	 
  }

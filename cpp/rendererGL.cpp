@@ -27,6 +27,12 @@ void rendererGL::render() {
    // glColor3f(1,0,0);
 	glRotatef(-90,1,0,0);
 	this->renderAllRooms();
+	
+	this->reset();
+	this->positionCamera();
+   
+	glRotatef(-90,1,0,0);
+	
 	this->renderAllEntities();
 
     glFlush();
