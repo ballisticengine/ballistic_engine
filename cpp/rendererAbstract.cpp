@@ -176,10 +176,8 @@ void renderer::reset() {
 
  void renderer::positionCamera() {
 	 coords c=active_camera->getCoords();
-	 translate(c.x,c.y,c.z);
-	
 	 rotate(1,0,0,c.rx);
 	 rotate(0,1,0,c.ry);
 	 rotate(0,0,1,c.rz);
-	 
+	 translate(c.x,c.y,c.z);
  }

@@ -52,12 +52,6 @@ void rendererGL::specificInit() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-
-
-   
-   
-
 }
 
 void rendererGL::renderSkybox(skybox *sky) {

@@ -10,6 +10,15 @@ using namespace std;
 
 typedef double e_loc;
 
+class colorRGB {
+public:
+	e_loc r,g,b;
+}
+
+class colorRGBA {
+public:
+	e_loc a;
+}
 
 struct coords {
  e_loc x,y,z,rx,ry,rz;
