@@ -10,7 +10,7 @@ void sdlControls::operator()() {
 	e_loc step=0.1,rstep=1;
 	static e_loc rotx=0;
 	static e_loc z=0;
-	e_loc xx;
+	e_loc xx; 
 	int x,y,winw=config::getInstance()->getVD()->width/2,winh=config::getInstance()->getVD()->height/2;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	while(!engineState::getInstance()->exit()) {
