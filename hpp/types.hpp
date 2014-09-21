@@ -1,3 +1,7 @@
+/**
+* Zestaw klas definujący podstawowe typy używane przez silnik, nie uwzględnia struktur matematycznych (wektory,macierze), które
+* obsugiwane są w klasach zawartych w mathTypes.hpp
+*/
 
 #ifndef TYPES_HPP
 #define	TYPES_HPP
@@ -10,15 +14,21 @@ using namespace std;
 
 typedef double e_loc;
 
+/**
+* Pomocnicza klasa reprezentująca kolor RGB
+*/
 class colorRGB {
 public:
 	e_loc r,g,b;
-}
+};
 
-class colorRGBA {
+/**
+* Rozszerzenie colorRGB o kanał Alpha
+*/
+class colorRGBA : public colorRGB {
 public:
 	e_loc a;
-}
+};
 
 struct coords {
  e_loc x,y,z,rx,ry,rz;
@@ -41,6 +51,7 @@ public:
     vertex(e_loc x,e_loc y,e_loc z,e_loc u,e_loc v);
     
 };
+
 typedef vector <vertex *> vert_list;
 class triangle {
 protected:

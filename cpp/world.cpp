@@ -111,7 +111,12 @@ bool world::parseXml(string &fn) {
 				this->entities.push_back((entity *)oe);
 				this->models.push_back(oe);
 		   } else if(type=="light") {
-			 cout << "Light coming up!\n";	
+			 cout << "Light " << x << ", " << y << ", " << z << endl ;	
+			 PointLight *l=new PointLight();
+			 l->locate(x,y,z);
+			 l->face(rx,ry,rz);
+			 //this->entities.push_back((entity *)l);
+			 //this->lights.push_back((light *)l);
 		   }
 
 	   }
@@ -121,6 +126,9 @@ bool world::parseXml(string &fn) {
    return true;
 }
 
+lights_list world::getLights() {
+	return this->lights;
+}
 
 void world::prepare() {
 	

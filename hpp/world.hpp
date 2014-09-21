@@ -23,17 +23,20 @@ using namespace boost::property_tree;
 #include "textureFactory.hpp"
 #include "engineState.hpp"
 #include "mathTypes.hpp"
-
+#include "light.hpp"
+#include "pointlight.hpp"
 
 typedef vector <entity *> ent_list;
 typedef vector <objectEntity *> obj_list;
 typedef vector <roomEntity *> rooms_list;
+typedef vector <light *> lights_list;
 
 class world : public singleton<world> {
 protected:
     ent_list entities;
 	obj_list models;
 	rooms_list rooms;
+	lights_list lights;
     skybox *sky;
 	camera default_camera;
    void moveEntities();
@@ -43,6 +46,7 @@ public:
         ent_list getEntities();
 		obj_list getModels();
 		rooms_list getRooms();
+		lights_list getLights();
         skybox * getSkybox();
 		camera *getCurrentCamera();
         void makeTestWorld();
