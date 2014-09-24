@@ -15,16 +15,45 @@ void rendererGL::end() {
  glEnd();
 }
 
+void rendererGL::lightSpecific(light *l) {
+	
+	this->reset();
+		this->positionCamera();
+
+  coords c=l->getCoords();
+  this->translate(c.x,c.y,c.z);
+  //cout << c.x << ", " << c.y << ", " << c.z << endl;
+  if(!engineState::getInstance()->light) {
+	
+    glDisable( GL_LIGHTING );
+	  glDisable(GL_TEXTURE_2D);
+	glColor3f(0,1,0);
+	//gluSphere(lightbulb,2.0f,32,32); 
+	glEnable(GL_TEXTURE_2D);
+  } else {
+   
+
+  }
+}
+
+rendererGL::rendererGL() {
+
+}
+
 void rendererGL::render() {
 
-    glClearColor(0.5, 0.5, 0.5, 1);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClearColor(0.5, 0.5, 0.5, 1);
+    glClear( GL_DEPTH_BUFFER_BIT );
 
     glMatrixMode(GL_MODELVIEW);
    
+	renderSkybox(w->getSkybox());
+	this->positionLights();
+	
 	this->reset();
+	
 	this->positionCamera();
-   // glColor3f(1,0,0);
+
 	glRotatef(-90,1,0,0);
 	this->renderAllRooms();
 	
@@ -52,13 +81,26 @@ void rendererGL::specificInit() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	
+    glEnable( GL_LIGHTING );
+	this->setupTexture(w->getSkybox()->getTexture());
+	
+lightbulb=gluNewQuadric();          
+gluQuadricNormals(lightbulb, GLU_SMOOTH);  
+gluQuadricTexture(lightbulb, GL_TRUE);
 }
 
 void rendererGL::renderSkybox(skybox *sky) {
-    glBegin(GL_QUADS);
+    this->reset();
+
+	glDisable(GL_DEPTH_TEST);
+	this->translate(0,0,-18);
+	this->assignTexture(sky->getTexture());
+	glBegin(GL_QUADS);
     this->renderPShape(sky->getShape());
 
     glEnd();
+	glEnable(GL_DEPTH_TEST);
 }
 
 void rendererGL::assignTexture(texture *t) {
@@ -105,3 +147,6 @@ void rendererGL::resetSpecific() {
  glTranslatef(0,0,-frustum_start);
 }
 
+ void rendererGL::positionCameraSpecific() {
+  glRotatef(-90,1,0,0);
+ }

@@ -16,7 +16,7 @@ class rendererGL : public renderer,public singleton<rendererGL> {
     virtual void renderVertex(vertex *v);
     texture *tt,*qt;
     shape *test;
-    GLUquadricObj *q1,*q2;   
+    GLUquadricObj *lightbulb;   
     
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
@@ -24,13 +24,15 @@ class rendererGL : public renderer,public singleton<rendererGL> {
 	virtual void begin();
 	virtual void end();
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z);
- 
+	virtual void lightSpecific(light *l);
     //virtual void rotateSpecific(e_loc x,e_loc y,e_loc z);
+	virtual void positionCameraSpecific();
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d);
 	
 	virtual void resetSpecific() ;
 public:
-     virtual void setupTexture(texture *t);    
+    rendererGL();
+	virtual void setupTexture(texture *t);    
     virtual void render();
 };
 

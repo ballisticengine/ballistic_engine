@@ -2,6 +2,7 @@
 #define SDLCTRL_H
 
 #include <iostream>
+
 #include <SDL/SDL.h>
 #include <boost/thread/thread.hpp>
 #include <cmath>

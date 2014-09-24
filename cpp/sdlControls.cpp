@@ -28,7 +28,7 @@ void sdlControls::operator()() {
 	 rotx+=x;
 	 //rotx+=x;
 	 rotx=normalizeRotation(rotx);
-	 cout << rotx << ", " << x << endl;
+	 //cout << rotx << ", " << x << endl;
 	 if(state[SDL_SCANCODE_RIGHT]) {
 		 //c->translate(-step,0,0);
 		 c->translate(-cos(deg2rad(rotx))*step,0,-sin(deg2rad(rotx))*step);
@@ -47,6 +47,11 @@ void sdlControls::operator()() {
 	 	
 		 c->translate(sin(deg2rad(rotx))*step,0,-cos(deg2rad(rotx))*step);
 		 //c->translate(0,0,-step);
+	 }
+
+	 if(state[SDL_SCANCODE_U]) {
+		
+		 engineState::getInstance()->light=!engineState::getInstance()->light;
 	 }
 	
 	 c->rotate(0,(e_loc)xx,0);

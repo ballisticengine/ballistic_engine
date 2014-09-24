@@ -9,6 +9,14 @@ renderer::~renderer() {
 
 }
 
+void renderer::positionLights() {
+ lights_list lights=this->w->getLights();
+ //cout << "Lights" << lights.size() << endl;
+ for(int i=0; i<lights.size(); i++) {
+  this->lightSpecific(lights[i]);
+ }
+}
+
 void renderer::setupTextures() {
 	textureFactory *tf=textureFactory::getInstance();
 	vector<void *> ts=tf->getAll();
@@ -174,10 +182,15 @@ void renderer::reset() {
 	 this->active_camera=c;
  }
 
+ void renderer::positionCameraSpecific() {
+	
+ }
+
  void renderer::positionCamera() {
 	 coords c=active_camera->getCoords();
 	 rotate(1,0,0,c.rx);
 	 rotate(0,1,0,c.ry);
 	 rotate(0,0,1,c.rz);
 	 translate(c.x,c.y,c.z);
+	 //this->positionCameraSpecific();
  }

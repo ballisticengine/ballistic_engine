@@ -32,30 +32,10 @@ bool world::parseXml(string &fn) {
     read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
     string skyfn= pt.get<string>("world.config.skybox");
    cout << "}"<<skyfn << "}" << endl;
-   this->sky = new skybox("data/"+skyfn);
+   this->sky = new skybox(wd+DS+"textures"+DS+skyfn);
    
    ptree& entities = pt.get_child("world.entities");
-   /*BOOST_FOREACH(const ptree::value_type &v, entities) {
-	   e_loc x=v.second.get<float>("location.x"),y=v.second.get<float>("location.y"),
-		   z=v.second.get<float>("location.z"),rx=v.second.get<float>("facing.x"),
-		   ry=v.second.get<float>("facing.y"),rz=v.second.get<float>("facing.z");
-	   string mfn=wd+DS+MODEL_DIR+DS+v.second.get<string>("model.file"),
-		   tfn=v.second.get<string>("model.texture");
-	   e_loc sc=v.second.get<e_loc>("model.scale");
-	   shapef->setScale(sc);
-	   objectEntity *oe=new objectEntity();
-	   shape *shp;
-	   
-	  // cout << x << ", " << y << ", " << z << endl;
-	   shp=(shape *)shapef->get(mfn);
-	   texture *tex=(texture *)texf->get(tfn);
-	   oe->setModel(shp);
-	   oe->setTexture(tex);
-	   oe->locate(x,y,z);
-	   oe->face(rx,ry,rz);
-	   this->entities.push_back((entity *)oe);
-	   this->models.push_back(oe);
-   }*/
+  
    ptree& world_jp=pt.get_child("world.config.jump_point");
    e_loc jx=world_jp.get<e_loc>("x"),
 	   jy=world_jp.get<e_loc>("y"),
@@ -115,8 +95,8 @@ bool world::parseXml(string &fn) {
 			 PointLight *l=new PointLight();
 			 l->locate(x,y,z);
 			 l->face(rx,ry,rz);
-			 //this->entities.push_back((entity *)l);
-			 //this->lights.push_back((light *)l);
+			 this->entities.push_back((entity *)l);
+			 this->lights.push_back((light *)l);
 		   }
 
 	   }
@@ -145,18 +125,35 @@ camera *world::getCurrentCamera() {
 }
 
 void world::moveEntities() {
-	for(int i=0; i<this->entities.size(); i++) {
-	   entity *e=entities[i];
+	e_loc x=0,lt;
+	for(int i=0; i<this->models.size(); i++) {
+	   objectEntity *e=models[i];
 		MathTypes::vector velocity=e->getVelocity();
-		
+		lt=last_tick;
+		x=velocity.x*lt/1000;
+		//cout << x << endl;
+		//e->translate(x,0,0);
+		//cout << velocity.x << ", " << velocity.y << ", " << velocity.z << endl;
 
 	}
 }
 
 void world::operator()() {
- last_tick=clock();
-	while(!engineState::getInstance()->exit()) {
-	 this->moveEntities(); 
-	 last_tick=clock()-last_tick;
+ Uint32 lt=SDL_GetTicks();
+ cout << last_tick << endl;
+Uint32 i=0;	
+ while(!engineState::getInstance()->exit()) {
+	 // lt=SDL_GetTicks()-lt;
+	
+	 //cout << lt << ", " <<  SDL_GetTicks() << endl;
+	  
+	// this->moveEntities(); 
+	
+	i++;
+	if(i>2000) {
+	 break;
+	}
  }
+ lt=SDL_GetTicks()-lt;
+ cout << lt << endl;
 }

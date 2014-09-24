@@ -9,7 +9,7 @@ namespace MathTypes {
 class vector {
 public:
 	e_loc x,y,z;
-	
+	vector();
 
 };
 

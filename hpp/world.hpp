@@ -3,6 +3,7 @@
 #ifndef WORLD_HPP
 #define	WORLD_HPP
 
+#include <SDL\SDL.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
@@ -40,7 +41,7 @@ protected:
     skybox *sky;
 	camera default_camera;
    void moveEntities();
-   clock_t last_tick;
+   Uint32 last_tick;
 public:
         ~world();
         ent_list getEntities();

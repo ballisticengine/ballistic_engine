@@ -17,6 +17,7 @@ protected:
     e_loc x,y,z,rx,ry,rz;
 	MathTypes::vector velocity;
 public:
+	entity();
 	coords getCoords();
 	void translate(e_loc x,e_loc y,e_loc z);
 	void rotate(e_loc x,e_loc y, e_loc z);

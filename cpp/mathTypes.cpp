@@ -10,3 +10,12 @@ e_loc normalizeRotation(e_loc r) {
 	}
 	return r;
 }
+
+
+namespace MathTypes {
+
+vector::vector() {
+ x=y=z=0;
+}
+
+}

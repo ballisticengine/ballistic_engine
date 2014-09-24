@@ -43,3 +43,9 @@ MathTypes::vector entity::getVelocity() {
 void entity::setVelocity(MathTypes::vector velocity) {
 	this->velocity=velocity;
 }
+
+entity::entity() {
+ velocity.y=velocity.z=0;
+ velocity.x=1;
+
+}
