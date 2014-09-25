@@ -15,6 +15,7 @@ using namespace std;
 #include "textureFactory.hpp"
 #include "camera.hpp"
 #include "light.hpp"
+#include "terrainMap.hpp"
 
 typedef void (*flushf)();
 
@@ -30,6 +31,7 @@ protected:
 	virtual void renderFaceTexShape(faceTexShape *s);
     virtual void renderVertex(vertex *v) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
+	
 	virtual void begin()=0;
 	virtual void end()=0;
 
@@ -42,6 +44,9 @@ protected:
     };
 	virtual void resetSpecific()=0;
 	virtual void lightSpecific(light *l)=0;
+
+	//virtual void renderTerrain();
+	virtual void renderTerrainSpecific()=0;
     
 		coords cursor ;
 		e_loc gx,gy,gz,gr; //globalne transformacje 

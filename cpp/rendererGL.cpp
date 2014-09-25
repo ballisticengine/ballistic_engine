@@ -40,6 +40,22 @@ rendererGL::rendererGL() {
 
 }
 
+void rendererGL::renderTerrainSpecific() {
+	TerrainMap *tm=w->getTerrain();
+	shape *s=tm->getQuads();
+	vert_list verts;
+	//cout << "QC " << tm->getQuadCount() << endl;
+	for(int i=0; i<tm->getQuadCount(); i++) {
+		 glBegin(GL_QUADS);
+		 verts=s[i].getVertices();
+		 //cout << "VS " << verts.size() << endl;
+		 for(int v=0; v<verts.size(); v++) {
+			 glVertex3f(verts[v]->x,verts[v]->y,verts[v]->z);
+		 }
+		 glEnd();
+	}
+}
+
 void rendererGL::render() {
 
     //glClearColor(0.5, 0.5, 0.5, 1);
@@ -48,22 +64,25 @@ void rendererGL::render() {
     glMatrixMode(GL_MODELVIEW);
    
 	renderSkybox(w->getSkybox());
-	this->positionLights();
+	//this->positionLights();
 	
 	this->reset();
 	
 	this->positionCamera();
 
-	glRotatef(-90,1,0,0);
-	this->renderAllRooms();
 	
+	glRotatef(-90,1,0,0);
+	glTranslatef(0,-5,0);
+	this->renderTerrainSpecific();
+	/*	this->renderAllRooms();
+	*/
 	this->reset();
 	this->positionCamera();
    
 	glRotatef(-90,1,0,0);
 	
 	this->renderAllEntities();
-
+	
     glFlush();
     this->flush_callback();
 }

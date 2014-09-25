@@ -20,6 +20,10 @@ void world::makeTestWorld() {
     this->sky = new skybox("skybox.bmp");
 }
 
+TerrainMap * world::getTerrain() {
+ return this->tm;
+}
+
 bool world::parseXml(string &fn) {
 	string wd=fn;
 	fn=fn+string(DS)+string("level.xml");
@@ -34,6 +38,9 @@ bool world::parseXml(string &fn) {
    cout << "}"<<skyfn << "}" << endl;
    this->sky = new skybox(wd+DS+"textures"+DS+skyfn);
    
+   string tm_tex=pt.get<string>("world.config.terrain.map");
+   tm=new TerrainMap(tm_tex,tm_tex);
+
    ptree& entities = pt.get_child("world.entities");
   
    ptree& world_jp=pt.get_child("world.config.jump_point");

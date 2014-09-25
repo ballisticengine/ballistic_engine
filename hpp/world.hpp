@@ -26,6 +26,7 @@ using namespace boost::property_tree;
 #include "mathTypes.hpp"
 #include "light.hpp"
 #include "pointlight.hpp"
+#include "terrainMap.hpp"
 
 typedef vector <entity *> ent_list;
 typedef vector <objectEntity *> obj_list;
@@ -42,6 +43,7 @@ protected:
 	camera default_camera;
    void moveEntities();
    Uint32 last_tick;
+   TerrainMap *tm;
 public:
         ~world();
         ent_list getEntities();
@@ -54,6 +56,7 @@ public:
         bool parseXml(string &fn);
         void prepare();
 		void operator()();
+		TerrainMap * getTerrain();
 };
 
 #endif	/* WORLD_HPP */

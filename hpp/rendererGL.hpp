@@ -30,6 +30,8 @@ class rendererGL : public renderer,public singleton<rendererGL> {
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d);
 	
 	virtual void resetSpecific() ;
+
+	virtual void renderTerrainSpecific();
 public:
     rendererGL();
 	virtual void setupTexture(texture *t);    
