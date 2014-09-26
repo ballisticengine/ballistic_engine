@@ -31,7 +31,7 @@ protected:
 	virtual void renderFaceTexShape(faceTexShape *s);
     virtual void renderVertex(vertex *v) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
-	
+	virtual void beginQuads()=0;
 	virtual void begin()=0;
 	virtual void end()=0;
 

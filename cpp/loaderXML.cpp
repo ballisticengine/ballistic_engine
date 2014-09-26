@@ -1,11 +1,11 @@
 #include "loaderXML.hpp"
 
 void loaderXML::toShape(ptree &geom,faceTexShape *s) {
-  texTriangle *vt;
+  texPoly *vt;
   
   BOOST_FOREACH(const ptree::value_type &f, geom) {
    //cout << "FACE" << endl;
-    vertex * vs_tmp[3];
+    vert_list vs_tmp;
 	int i=0;
 	ptree verts=f.second.get_child("vertices");
    BOOST_FOREACH(const ptree::value_type &vx, verts) {
@@ -17,13 +17,13 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 		   ,u=vx.second.get<e_loc>("u")
 		   ,v=vx.second.get<e_loc>("v");
 	   //cout << x << " " << y << " " << z << " " << u << " " << v << endl; 
-	   vs_tmp[i] = new vertex(x,y,z, u, v);
+	   vs_tmp.push_back(new vertex(x,y,z, u, v));
 	   i++;
    }
    texture *t=(texture *)textureFactory::getInstance()->get(f.second.get<string>("texture"));
-   vt = new texTriangle(vs_tmp[0], vs_tmp[1], vs_tmp[2]);
+   vt = new texPoly(vs_tmp);
    vt->setTexture(t);   
-   s->addTriangle(vt);
+   s->addPoly(vt);
   }
   
  }

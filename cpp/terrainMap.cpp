@@ -8,38 +8,71 @@ void TerrainMap::mapTerrain() {
 	
 	
 	
-	int
-		
-		m_width=ceil((e_loc)width/20),
-		m_height=ceil((e_loc)height/20);
-	
-	quads=new shape[m_width*m_height];
+	int m_width=5,m_height=5;
+	e_loc x,y,z,step=0.1; //*m_height;
 	qc=m_width*m_height;
+	qc=qc*(qc/step);
+	
+	quads=new shape[qc];
+	vector <vertex *> vs;
+	
 	w=m_width;
 	h=m_height;
 	cout << "MH: " << m_height << endl;
-	e_loc x,y,z,step_x=1,step_y=step_x;//*m_height;
+	
 	x=y=z=0;
-	int l=0;
-	for(int i=0; i<m_height; i++) {
+	int vi=0,pi=0;
+	for(e_loc i=0; i<m_height; i+=step) {
 	 x=0;
-		for(int n=0; n<m_width; n++) {
-		 vertex *v1=new vertex(x,y,z),
-				*v2=new vertex(x+step_x,y,z),
-				*v3=new vertex(x,y+step_y,z),
-				*v4=new vertex(x+step_x,y+step_y,z)
+		for(e_loc n=0; n<m_width; n+=step) {
+			
+			vertex *v1=new vertex(n,i,0),
+				*v2=new vertex(n+step,i,0),
+				*v3=new vertex(n,i+step,0),
+				*v4=new vertex(n+step,i+step,0)
 			 ;
-		 quads[l].addVertex(v2);
-		 quads[l].addVertex(v1);
-		 
-		 quads[l].addVertex(v3);
-		 quads[l].addVertex(v4);
-		l++;
-		 x+=step_x;
+			 quads[vi].addVertex(v1);
+		  quads[vi].addVertex(v2);
+		 quads[vi].addVertex(v4);
+		 quads[vi].addVertex(v3);
+		  
+		
+		 vs.push_back(v1);
+		 vs.push_back(v2);
+		 vs.push_back(v3);
+		 vs.push_back(v4);
+		
+		vi++;
+		
+		
 		
 	 }
-	 y+=step_y;
+	
 	}
+
+	int zi;
+	vi=0;
+	/*cout << "VS: " << vs.size() << endl;
+	for(e_loc i=0; i<m_height; i+=step) {
+	 for(e_loc n=0; n<m_width; n+=step) { 
+		 zi=pixels[pi];
+		 cout << zi << endl;
+		 vs[vi]->z=zi/128;
+		 
+		 pi+=4;
+		 
+		 vi++;
+		}
+	}*/
+	int wf=ceil((e_loc)width/m_width),hf=ceil((e_loc)height/m_height);
+	//cout << wf << ", " << hf << endl;
+	for(int y=0; y<height; y+=hf) {
+		 for(x=0; x<width; x+=wf) {
+		  cout << x << ", " << y << endl;
+		  
+		 }
+	}
+	
 }
 
 TerrainMap::TerrainMap(string terrain_texture,string surface_texture) {

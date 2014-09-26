@@ -29,6 +29,24 @@ vertex::vertex(e_loc x, e_loc y, e_loc z, e_loc u, e_loc v) {
     this->v = v;
 }
 
+/*welokąty*/
+
+poly::poly() {
+}
+
+poly::poly(vert_list vs) {
+ this->v=vs;
+}
+
+bool poly::operator==(poly &p) {
+	for (int i = 0; i < v.size(); i++) {
+        if (!(p.v[i] == this->v[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 /* trójkąty */
 
 triangle::triangle() {
@@ -39,17 +57,18 @@ triangle::triangle(vertex *a, vertex *b, vertex *c) {
     this->v[0] = a;
     this->v[1] = b;
     this->v[2] = c;
+
 }
 
 triangle::triangle(vertex v[3]) {
     for (int i = 0; i < 3; i++) {
-        this->v[i] = &v[i];
+		this->v[i]=&v[i];
     }
 }
 
-bool triangle::operator==(triangle &t) {
-    for (int i = 0; i < 3; i++) {
-        if (!(t.v[i] == this->v[i])) {
+bool triangle::operator==(triangle &p) {
+	for (int i = 0; i < 3; i++) {
+        if (!(p.v[i] == this->v[i])) {
             return false;
         }
     }
@@ -62,7 +81,7 @@ bool shape::operator==(shape &s) {
     if (s.triangles.size() != this->triangles.size()) {
         return false;
     }
-    for (int i; i < triangles.size(); i++) {
+    for (int i=0; i < triangles.size(); i++) {
         if (!(*(s.triangles[i]) == *(this->triangles[i]))) {
             return false;
         }
@@ -138,4 +157,12 @@ void shape::setScale(e_loc scale) {
 
 e_loc shape::getScale() {
  return scale;
+}
+
+vector <poly *> shape::getPolys() {
+	return this->polys;
+}
+
+void shape::addPoly(poly *p) {
+	this->polys.push_back(p);
 }

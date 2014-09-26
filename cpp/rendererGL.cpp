@@ -11,6 +11,10 @@ void rendererGL::begin() {
  glBegin(GL_TRIANGLES); 
 }
 
+void rendererGL::beginQuads() {
+ glBegin(GL_QUADS);
+}
+
 void rendererGL::end() {
  glEnd();
 }
@@ -45,15 +49,20 @@ void rendererGL::renderTerrainSpecific() {
 	shape *s=tm->getQuads();
 	vert_list verts;
 	//cout << "QC " << tm->getQuadCount() << endl;
+	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	this->assignTexture(w->getTerrain()->getTexture());
+	 glBegin(GL_TRIANGLE_STRIP);
 	for(int i=0; i<tm->getQuadCount(); i++) {
-		 glBegin(GL_QUADS);
+		
 		 verts=s[i].getVertices();
 		 //cout << "VS " << verts.size() << endl;
 		 for(int v=0; v<verts.size(); v++) {
 			 glVertex3f(verts[v]->x,verts[v]->y,verts[v]->z);
 		 }
-		 glEnd();
+		
 	}
+	 glEnd();
+	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
 
 void rendererGL::render() {
@@ -72,10 +81,10 @@ void rendererGL::render() {
 
 	
 	glRotatef(-90,1,0,0);
-	glTranslatef(0,-5,0);
-	this->renderTerrainSpecific();
-	/*	this->renderAllRooms();
-	*/
+	//glTranslatef(0,-5,0);
+	//this->renderTerrainSpecific();
+		this->renderAllRooms();
+	
 	this->reset();
 	this->positionCamera();
    
@@ -103,6 +112,7 @@ void rendererGL::specificInit() {
 	
     glEnable( GL_LIGHTING );
 	this->setupTexture(w->getSkybox()->getTexture());
+	this->setupTexture(w->getTerrain()->getTexture());
 	
 lightbulb=gluNewQuadric();          
 gluQuadricNormals(lightbulb, GLU_SMOOTH);  

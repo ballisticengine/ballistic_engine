@@ -22,6 +22,7 @@ class rendererGL : public renderer,public singleton<rendererGL> {
     virtual void renderSkybox(skybox *sky);
     virtual void assignTexture(texture *t);
 	virtual void begin();
+	virtual void beginQuads();
 	virtual void end();
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z);
 	virtual void lightSpecific(light *l);

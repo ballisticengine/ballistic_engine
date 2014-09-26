@@ -53,16 +53,30 @@ public:
 };
 
 typedef vector <vertex *> vert_list;
+
+class poly {
+public:
+	vert_list v;
+	virtual bool operator==(poly &p);
+	poly();
+	poly(vert_list vs);
+};
+
+typedef vector <poly *> poly_list;
+
+//TODO: dziedziczyć po poly
 class triangle {
 protected:
 	//virtual void setVerts(vertex *a,vertex *b,vertex *c);
 public:
     vertex *v[3];
-    virtual bool operator==(triangle &t);
-    triangle();
+	triangle();
     triangle(vertex *a,vertex *b,vertex *c);
     triangle(vertex v[3]);
+	bool triangle::operator==(triangle &t);
 };
+
+
 
 class shape {
     /*unsigned int n_tris;
@@ -71,10 +85,13 @@ class shape {
 	e_loc scale;
     vector <vertex *> vertices;
     vector <triangle *> triangles;
+	vector <poly *> polys;
 public:
     bool operator==(shape &s);
     virtual vector <triangle *> getTris();
     virtual vert_list getVertices();
+	virtual vector <poly *> getPolys();
+	virtual void addPoly(poly *p);
     virtual void addVertices(vertex *vs,int num_tris);
     void setScale(e_loc scale);
 	virtual e_loc getScale();

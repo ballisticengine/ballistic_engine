@@ -6,10 +6,13 @@ texTriangle::texTriangle(vertex *a,vertex *b,vertex *c) {
     this->v[2] = c;
 }
 
-void texTriangle::setTexture(texture *tex) {
+void texPolyGeneral::setTexture(texture *tex) {
  this->tex=tex;
 }
 
-texture * texTriangle::getTexture() {
+texture * texPolyGeneral::getTexture() {
  return this->tex;
+}
+texPoly::texPoly(vector<vertex *>vs) {
+ this->v=vs;
 }

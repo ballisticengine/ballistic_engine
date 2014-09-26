@@ -90,17 +90,17 @@ void renderer::renderAllRooms() {
 }
 
 void renderer::renderFaceTexShape(faceTexShape *s) {
-    tris_list tris;
+    poly_list polys;
   
-	tris = s->getTris();
+	polys = s->getPolys();
 	
     
-	for (int i = 0; i < tris.size(); i++) {
-        texTriangle *t=(texTriangle *)tris[i];
+	for (int i = 0; i < polys.size(); i++) {
+        texPoly *t=(texPoly *)polys[i];
 		this->assignTexture(t->getTexture());
-		this->begin();
-		for (int n = 0; n < 3; n++) {
-            this->renderVertex(tris[i]->v[n]);
+		this->beginQuads();
+		for (int n = 0; n < 4; n++) {
+            this->renderVertex(polys[i]->v[n]);
         }
 		this->end();
     }
