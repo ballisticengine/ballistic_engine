@@ -20,6 +20,7 @@ public:
 	entity();
 	coords getCoords();
 	void translate(e_loc x,e_loc y,e_loc z);
+	void translate(coords c);
 	void rotate(e_loc x,e_loc y, e_loc z);
 	void locate(e_loc x,e_loc y,e_loc z);
 	void face(e_loc x,e_loc y,e_loc z);

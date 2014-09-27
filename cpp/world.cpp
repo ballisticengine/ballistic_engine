@@ -50,8 +50,10 @@ bool world::parseXml(string &fn) {
 	   rx=world_jp.get<e_loc>("rx"),
 	   ry=world_jp.get<e_loc>("ry"),
 	   rz=world_jp.get<e_loc>("rz");
-   default_camera.locate(jx,jy,jz);
-   default_camera.face(rx,ry,rz);
+   observer.locate(jx,jy,jz);
+   observer.face(rx,ry,rz);
+   observer.setCamera(&default_camera);
+   
    string gfn=wd+DS+"geometry.xml";
    //cout << "GEOM FN: " << gfn << endl;
    //this->parseGeom(gfn);
@@ -131,38 +133,37 @@ camera *world::getCurrentCamera() {
  return &this->default_camera;
 }
 
+void world::moveEntity(PhysicalEntity *e) {
+ time_int lt=time.getDiffR();
+  coords c=e->nextCoords(lt);
+e->translate(c);
+e->rotate(c.rx,c.ry,c.rz);
+}
+
 void world::moveEntities() {
 	e_loc x,y,z,lt;
 	x,y,z=0;
 	for(int i=0; i<this->models.size(); i++) {
 		objectEntity *e=models[i];
-		TrRot velocity=e->getVelocity();
-		lt=time.getDiffR();
-		
-		x=velocity.t.x*lt;
-		y=velocity.t.y*lt;
-		z=velocity.t.z*lt;
-		
-		e->translate(x,y,z);
-		
-
+		/*lt=time.getDiffR();
+		coords c=e->nextCoords(lt);
+		e->translate(c);*/
+		this->moveEntity((PhysicalEntity *)e);
 	}
+	this->moveEntity((PhysicalEntity *)&this->observer);
 }
 
 void world::operator()() {
- Uint32 lt=SDL_GetTicks();
+ 
  time.start();
-Uint32 i=0;	
+
  while(!engineState::getInstance()->exit()) {
-	 // lt=SDL_GetTicks()-lt;
-	
-	 //cout << lt << ", " <<  SDL_GetTicks() << endl;
-	  
 	 this->moveEntities(); 
-	
-	i++;
-	
  }
 
- cout << lt << endl;
 }
+
+ObserverEntity * world::getObserver() {
+	return &this->observer;
+}
+

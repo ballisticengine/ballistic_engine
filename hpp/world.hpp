@@ -28,6 +28,7 @@ using namespace boost::property_tree;
 #include "pointlight.hpp"
 #include "terrainMap.hpp"
 #include "timer.hpp"
+#include "observerEntity.hpp"
 
 typedef vector <entity *> ent_list;
 typedef vector <objectEntity *> obj_list;
@@ -42,9 +43,11 @@ protected:
 	lights_list lights;
     skybox *sky;
 	camera default_camera;
-   void moveEntities();
-   Timer time;
-   TerrainMap *tm;
+	ObserverEntity observer;
+    void moveEntity(PhysicalEntity *e);
+	void moveEntities();
+    Timer time;
+    TerrainMap *tm;
 public:
         ~world();
         ent_list getEntities();
@@ -57,6 +60,7 @@ public:
         bool parseXml(string &fn);
         void prepare();
 		void operator()();
+		ObserverEntity * getObserver();
 		TerrainMap * getTerrain();
 };
 

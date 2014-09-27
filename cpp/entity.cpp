@@ -36,8 +36,10 @@ void entity::face(e_loc x,e_loc y,e_loc z) {
  this->rz=z;
 }
 
-entity::entity() {
- velocity.x=velocity.y=velocity.z=0;
- 
+void entity::translate(coords c) {
+	this->translate(c.x,c.y,c.z);
+}
 
+entity::entity() {
+ 
 }

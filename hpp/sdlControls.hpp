@@ -15,6 +15,7 @@ using namespace std;
 #include "config.hpp"
 #include "types.hpp"
 #include "mathTypes.hpp"
+#include "observerEntity.hpp"
 
 #define PI 3.14159265
 
