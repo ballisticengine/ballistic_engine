@@ -36,16 +36,8 @@ void entity::face(e_loc x,e_loc y,e_loc z) {
  this->rz=z;
 }
 
-MathTypes::vector entity::getVelocity() {
-	return this->velocity;
-}
-
-void entity::setVelocity(MathTypes::vector velocity) {
-	this->velocity=velocity;
-}
-
 entity::entity() {
- velocity.y=velocity.z=0;
- velocity.x=1;
+ velocity.x=velocity.y=velocity.z=0;
+ 
 
 }

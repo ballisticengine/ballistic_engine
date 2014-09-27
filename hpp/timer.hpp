@@ -4,13 +4,19 @@
 
 #include <windows.h>
 
+typedef double time_int;
+
 class Timer {
 protected:
-	LARGE_INTEGER frequency;
-	LARGE_INTEGER start;
-    LARGE_INTEGER stop;
+	LARGE_INTEGER b,e,diff,frequency;
+	time_int ticksToSec(LARGE_INTEGER &ts);
 public:
 	Timer();
+	void start();
+	void stop();
+	time_int getDiff();
+	time_int getDiffR();
+
 };
 
 #endif

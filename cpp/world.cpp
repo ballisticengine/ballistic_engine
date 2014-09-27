@@ -132,35 +132,37 @@ camera *world::getCurrentCamera() {
 }
 
 void world::moveEntities() {
-	e_loc x=0,lt;
+	e_loc x,y,z,lt;
+	x,y,z=0;
 	for(int i=0; i<this->models.size(); i++) {
-	   objectEntity *e=models[i];
-		MathTypes::vector velocity=e->getVelocity();
-		lt=last_tick;
-		x=velocity.x*lt/1000;
-		//cout << x << endl;
-		//e->translate(x,0,0);
-		//cout << velocity.x << ", " << velocity.y << ", " << velocity.z << endl;
+		objectEntity *e=models[i];
+		TrRot velocity=e->getVelocity();
+		lt=time.getDiffR();
+		
+		x=velocity.t.x*lt;
+		y=velocity.t.y*lt;
+		z=velocity.t.z*lt;
+		
+		e->translate(x,y,z);
+		
 
 	}
 }
 
 void world::operator()() {
  Uint32 lt=SDL_GetTicks();
- cout << last_tick << endl;
+ time.start();
 Uint32 i=0;	
  while(!engineState::getInstance()->exit()) {
 	 // lt=SDL_GetTicks()-lt;
 	
 	 //cout << lt << ", " <<  SDL_GetTicks() << endl;
 	  
-	// this->moveEntities(); 
+	 this->moveEntities(); 
 	
 	i++;
-	if(i>2000) {
-	 break;
-	}
+	
  }
- lt=SDL_GetTicks()-lt;
+
  cout << lt << endl;
 }

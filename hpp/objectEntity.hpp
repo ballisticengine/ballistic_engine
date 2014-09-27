@@ -2,10 +2,11 @@
 #define OBJECT_ENTITY_H
 
 #include "entity.hpp"
+#include "physicalEntity.hpp"
 #include "texture.hpp"
 #include "types.hpp" 
 
-class objectEntity : public entity {
+class objectEntity : public PhysicalEntity {
 protected:
 	shape *model;
 	texture *tex;
