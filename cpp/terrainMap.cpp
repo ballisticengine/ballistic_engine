@@ -26,6 +26,7 @@ void TerrainMap::mapTerrain() {
 	 x=0;
 		for(e_loc n=0; n<m_width; n+=step) {
 			
+			e_loc zz=pixels[vi]/100;
 			vertex *v1=new vertex(n,i,0),
 				*v2=new vertex(n+step,i,0),
 				*v3=new vertex(n,i+step,0),
@@ -50,28 +51,7 @@ void TerrainMap::mapTerrain() {
 	
 	}
 
-	int zi;
-	vi=0;
-	/*cout << "VS: " << vs.size() << endl;
-	for(e_loc i=0; i<m_height; i+=step) {
-	 for(e_loc n=0; n<m_width; n+=step) { 
-		 zi=pixels[pi];
-		 cout << zi << endl;
-		 vs[vi]->z=zi/128;
-		 
-		 pi+=4;
-		 
-		 vi++;
-		}
-	}*/
-	int wf=ceil((e_loc)width/m_width),hf=ceil((e_loc)height/m_height);
-	//cout << wf << ", " << hf << endl;
-	for(int y=0; y<height; y+=hf) {
-		 for(x=0; x<width; x+=wf) {
-		  cout << x << ", " << y << endl;
-		  
-		 }
-	}
+	
 	
 }
 

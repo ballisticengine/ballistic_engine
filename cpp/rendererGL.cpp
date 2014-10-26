@@ -4,7 +4,8 @@
 
 void rendererGL::renderVertex(vertex *v) {
     glTexCoord2d(v->u, v->v);
-    glVertex3d(v->x, v->y, v->z);
+    
+	glVertex3d(v->x, v->y, v->z);
 }
 
 void rendererGL::begin() {
@@ -21,23 +22,28 @@ void rendererGL::end() {
 
 void rendererGL::lightSpecific(light *l) {
 	
-	this->reset();
-		this->positionCamera();
+	
 
   coords c=l->getCoords();
-  this->translate(c.x,c.y,c.z);
+  //this->translate(c.x,c.y,c.z);
   //cout << c.x << ", " << c.y << ", " << c.z << endl;
-  if(!engineState::getInstance()->light) {
-	
-    glDisable( GL_LIGHTING );
-	  glDisable(GL_TEXTURE_2D);
-	glColor3f(0,1,0);
-	//gluSphere(lightbulb,2.0f,32,32); 
-	glEnable(GL_TEXTURE_2D);
-  } else {
+	  glEnable(GL_LIGHTING);
+   glEnable(GL_LIGHT0);
+   GLfloat light_position[] = { c.x, c.y, c.z, 0.0 }; 
+	  
+   GLfloat ambientLight[] = { 0.2f, 0.2f, 0.2f, 1.0f }; 
+   GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
+   GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+   //glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight); 
+   glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight); glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
    
+   glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+   GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
+  // glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+   glEnable(GL_LIGHTING);
+   glEnable(GL_LIGHT0);
 
-  }
+  
 }
 
 rendererGL::rendererGL() {
@@ -51,7 +57,7 @@ void rendererGL::renderTerrainSpecific() {
 	//cout << "QC " << tm->getQuadCount() << endl;
 	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 	this->assignTexture(w->getTerrain()->getTexture());
-	 glBegin(GL_TRIANGLE_STRIP);
+	 glBegin(GL_QUADS);
 	for(int i=0; i<tm->getQuadCount(); i++) {
 		
 		 verts=s[i].getVertices();
@@ -72,24 +78,29 @@ void rendererGL::render() {
 
     glMatrixMode(GL_MODELVIEW);
    
-	renderSkybox(w->getSkybox());
-	//this->positionLights();
+	 this->positionLights();
+	//renderSkybox(w->getSkybox());
 	
+	
+
 	this->reset();
 	
 	this->positionCamera();
 
 	
 	glRotatef(-90,1,0,0);
+
 	//glTranslatef(0,-5,0);
 	//this->renderTerrainSpecific();
-		this->renderAllRooms();
+	 glFrontFace(GL_CW);
+	
+	this->renderAllRooms();
 	
 	this->reset();
 	this->positionCamera();
    
 	glRotatef(-90,1,0,0);
-	
+	 glFrontFace(GL_CCW);
 	this->renderAllEntities();
 	
     glFlush();
@@ -108,8 +119,9 @@ void rendererGL::specificInit() {
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
+	  glEnable( GL_NORMALIZE );
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	
+	glShadeModel(GL_SMOOTH);
     glEnable( GL_LIGHTING );
 	this->setupTexture(w->getSkybox()->getTexture());
 	this->setupTexture(w->getTerrain()->getTexture());
