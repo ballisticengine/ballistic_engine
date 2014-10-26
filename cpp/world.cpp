@@ -69,7 +69,7 @@ bool world::parseXml(string &fn) {
 	
 	  faceTexShape *fs=shapef->getXML((ptree)room.second);
 	  roomEntity *roomE=new roomEntity();
-	  
+	  fs->calculateNormals();
 	  roomE->setModel(fs);
 	  
 	   this->entities.push_back((entity *)roomE);

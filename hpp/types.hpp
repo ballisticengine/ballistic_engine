@@ -9,10 +9,11 @@
 #include <vector>
 #include <iostream>
 
+#include "mathTypes.hpp"
 
 using namespace std;
 
-typedef double e_loc;
+
 
 /**
 * Pomocnicza klasa reprezentująca kolor RGB
@@ -42,14 +43,15 @@ class triangle;
 typedef vector <triangle *> tris_list;
 
 
-class vertex {
+
+class vertex : public MathTypes::vector {
 public:
-    e_loc x, y, z,u,v;
-    virtual bool operator==(vertex &v);
+    e_loc u,v;
+     MathTypes::vector normal ;
+	virtual bool operator==(vertex &v);
     vertex();
     vertex(e_loc x,e_loc y,e_loc z);
     vertex(e_loc x,e_loc y,e_loc z,e_loc u,e_loc v);
-    
 };
 
 typedef vector <vertex *> vert_list;
@@ -91,6 +93,7 @@ public:
     virtual vector <triangle *> getTris();
     virtual vert_list getVertices();
 	virtual vector <poly *> getPolys();
+	virtual void calculateNormals();
 	virtual void addPoly(poly *p);
     virtual void addVertices(vertex *vs,int num_tris);
     void setScale(e_loc scale);

@@ -166,3 +166,9 @@ vector <poly *> shape::getPolys() {
 void shape::addPoly(poly *p) {
 	this->polys.push_back(p);
 }
+
+void shape::calculateNormals() {
+	for(int i=1; i<vertices.size(); i++) {
+		vertices[i]->normal=vertices[i]->unit().vproduct(vertices[i-1]->unit());
+	}
+}
