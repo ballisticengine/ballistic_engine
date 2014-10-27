@@ -47,6 +47,20 @@ bool poly::operator==(poly &p) {
     return true;
 }
 
+void poly::calculateNormals() {
+	
+	MathTypes::vector v1=v[0]->diff(*v[1]),v2=v[1]->diff(*v[2]);
+	v1.normalize();
+	v2.normalize();
+	MathTypes::vector cp=v1.crossProduct(&v2);
+	for(int i=0; i<v.size(); i++) {
+		
+		v[i]->normal=cp;
+		//v[i]->normal=v[i]->unit().vproduct(&v[i-1]->unit());
+		//verts[i]->normal.write();
+	}
+}
+
 /* trójkąty */
 
 triangle::triangle() {
@@ -165,10 +179,16 @@ vector <poly *> shape::getPolys() {
 
 void shape::addPoly(poly *p) {
 	this->polys.push_back(p);
+	for (int i=0; i<p->v.size(); i++) {
+		this->addVertex(p->v[i]);
+	}
 }
 
 void shape::calculateNormals() {
-	for(int i=1; i<vertices.size(); i++) {
-		vertices[i]->normal=vertices[i]->unit().vproduct(vertices[i-1]->unit());
+	vert_list verts=this->getVertices();
+	cout << "VSX: " << verts.size() << endl;
+	for(int i=1; i<verts.size(); i++) {
+		//verts[i]->normal=vertices[i]->unit().vproduct(&vertices[i-1]->unit());
+		//verts[i]->normal.write();
 	}
 }

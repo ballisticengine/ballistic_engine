@@ -14,7 +14,7 @@ void renderer::positionLights() {
  //cout << "Lights" << lights.size() << endl;
  for(int i=0; i<lights.size(); i++) {
   this->lightSpecific(lights[i]);
-  cout << "Light " << i << endl;
+ // cout << "Light " << i << endl;
  }
 }
 

@@ -18,18 +18,41 @@ vector::vector() {
  x=y=z=0;
 }
 
-vector  & vector::vproduct(const vector & b) {
+std::ostream & vector::operator<<(std::ostream & ostr) {
+	ostr << this->x << ", " << this->y << ", " << this->z;
+	return ostr;
+}
+
+void vector::write() {
+	std::cout << this->x << ", " << this->y << ", " << this->z << std::endl;
+}
+
+vector  & vector::crossProduct(const MathTypes::vector * b) {
 	//ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
-	vector v;
+	/*
+	vx = v1y * v2z - v1z * v2y
+		
+		vy = v1z * v2x - v1x * v2z
+		
+		vz = v1x * v2y - v1y * v2x
+	*/
+	vector a=*this,v=a;
 
-	v.x=x*b.z-z*b.y;
-	v.y=z*b.x-x*b.z;
-	v.z=x*b.y-y*b.x;
 
+	v.x=a.y*b->z-a.z*b->y;
+	v.y=a.z*b->x-a.x*b->z;
+	v.z=a.x*b->y-a.y*b->x;
+	
+	v.write();
 	return v;
 }
 
 vector & vector::unit() {
+	/*
+	nvx = vx / l
+		nvy = vy / l
+		nvz = vz / l
+	*/
 	vector v;
 	v=*this;
 	v.x=ifZero(v.x);
@@ -53,9 +76,32 @@ void vector::operator=(const vector &v) {
 e_loc vector::ifZero(e_loc value) {
  if(value>0) {
   return 1;
- } else {
-  return 0;
+ } else if(value<0) {
+	return -1;
  }
+  return 0;
+ 
+}
+vector & vector::diff(const MathTypes::vector & v) {
+	vector lv;
+	lv.x=x-v.x;
+	lv.y=y-v.y;
+	lv.z=y-v.z;
+	return lv;
+}
+
+e_loc vector::length() {
+	//vx*vx+vy*vy+vz*vz
+	e_loc length=(e_loc)sqrt(x*x+y*y+z*z);
+	return length;
+}
+
+vector & vector::normalize() {
+	vector v;
+	v.x/=length();
+	v.y/=length();
+	v.z/=length();
+	return v;
 }
 
 }

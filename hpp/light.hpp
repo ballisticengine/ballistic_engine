@@ -11,6 +11,23 @@
 #include "entity.hpp"
 #include "types.hpp"
 
+
+/*
+Wspólne w³aœciwoœci dla materia³ów i œwiate³
+*/
+class LightOrMaterial {
+protected:
+	colorRGBA ambient,diffuse,specular;
+public:
+	virtual colorRGBA getAmbient();
+	virtual colorRGBA getDiffuse();
+	virtual colorRGBA getSpecular();
+	virtual void setAmbient(const colorRGBA &color);
+	virtual void setDiffuse(const colorRGBA &color);
+	virtual void setSpecular(const colorRGBA &color);
+	virtual void setAllColors(const colorRGBA &color);
+};
+
 /* rodzaj œwiat³a zwracany przez funckjê light::getType() */
 enum LightType {
  POINTLIGHT,
@@ -21,18 +38,12 @@ enum LightType {
 /**
 * Abstrakcyjna klasa opisuj¹ca œwiat³o
 */
-class light : public entity {
+class light : public entity,public LightOrMaterial {
 protected:
 	colorRGBA ambient,diffuse,specular;
 
 public:
-	virtual colorRGBA getAmbient();
-	virtual colorRGBA getDiffuse();
-	virtual colorRGBA getSpecular();
-	virtual void setAmbient(const colorRGBA &color);
-	virtual void setDiffuse(const colorRGBA &color);
-	virtual void setSpecular(const colorRGBA &color);
-	virtual void setAllColors(const colorRGBA &color);
+	
 	virtual  LightType getType()=0;
 };
 

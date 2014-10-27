@@ -62,6 +62,7 @@ public:
 	virtual bool operator==(poly &p);
 	poly();
 	poly(vert_list vs);
+	virtual void calculateNormals();
 };
 
 typedef vector <poly *> poly_list;
@@ -79,7 +80,7 @@ public:
 };
 
 
-
+typedef vector <poly *> poly_list;
 class shape {
     /*unsigned int n_tris;
     triangle * tris;

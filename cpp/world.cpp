@@ -69,7 +69,10 @@ bool world::parseXml(string &fn) {
 	
 	  faceTexShape *fs=shapef->getXML((ptree)room.second);
 	  roomEntity *roomE=new roomEntity();
-	  fs->calculateNormals();
+	  poly_list polys=fs->getPolys();
+	  for(int i=0; i<polys.size(); i++) {
+		  polys[i]->calculateNormals();
+	  }
 	  roomE->setModel(fs);
 	  
 	   this->entities.push_back((entity *)roomE);
@@ -100,7 +103,7 @@ bool world::parseXml(string &fn) {
 				this->entities.push_back((entity *)oe);
 				this->models.push_back(oe);
 		   } else if(type=="light") {
-			 cout << "Light " << x << ", " << y << ", " << z << endl ;	
+			 //cout << "Light " << x << ", " << y << ", " << z << endl ;	
 			 PointLight *l=new PointLight();
 			 l->locate(x,y,z);
 			 l->face(rx,ry,rz);

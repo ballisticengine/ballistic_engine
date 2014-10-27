@@ -1,32 +1,32 @@
 #include "light.hpp"
 
 
-void light::setAmbient(const colorRGBA &color) {
+void LightOrMaterial::setAmbient(const colorRGBA &color) {
  this->ambient=color;
 }
 
-void light::setDiffuse(const colorRGBA &color) {
+void LightOrMaterial::setDiffuse(const colorRGBA &color) {
 this->diffuse=color;
 }
 
-void light::setSpecular(const colorRGBA &color) {
+void LightOrMaterial::setSpecular(const colorRGBA &color) {
 this->specular=color;
 }
 
-void light::setAllColors(const colorRGBA &color) {
+void LightOrMaterial::setAllColors(const colorRGBA &color) {
 	this->setAmbient(color);
 	this->setDiffuse(color);
 	this->setSpecular(color);
 }
 
-colorRGBA light::getAmbient() {
+colorRGBA LightOrMaterial::getAmbient() {
 	return this->ambient;
 }
 
-colorRGBA light::getDiffuse() {
+colorRGBA LightOrMaterial::getDiffuse() {
 	return this->diffuse;
 }
 
-colorRGBA light::getSpecular() {
+colorRGBA LightOrMaterial::getSpecular() {
 	return this->specular;
 }
