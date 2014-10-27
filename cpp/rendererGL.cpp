@@ -70,19 +70,20 @@ void rendererGL::lightSpecific(light *l) {
 	GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	GLfloat mat[]= {0.6, 0.6, 0.6, 1.0};
 	GLfloat shin=30;
-
+	glLightModelfv( GL_LIGHT_MODEL_AMBIENT, ambientLight );
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight); 
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight); 
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
 
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	/* glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0);  
+	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0);  
 	glEnable(GL_COLOR_MATERIAL)        ;
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE,mat);
     glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT,mat);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,mat);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shin);
-    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE) ;   */
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE) ;   
+	glColor3f(1,1,0);
 	GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
 	// glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 	
@@ -147,11 +148,13 @@ void rendererGL::specificInit() {
 	glFrontFace(GL_CCW);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
 	glEnable( GL_NORMALIZE );
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+	glColor3f(0,0,1);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); 
 	// glEnable( GL_LIGHTING );
 	//glEnable(GL_LIGHT0);
@@ -195,7 +198,7 @@ void rendererGL::setupTexture(texture *t) {
 		GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
 		GL_LINEAR);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	//for testing
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
