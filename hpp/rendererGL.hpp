@@ -3,21 +3,27 @@
 #include "windows.h"
 #include "rendererAbstract.hpp"
 #include "loaderMD2.hpp"
-
+#include "config.hpp"
+#include <glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <cstdlib>
+#include <cstdio>
+
 #include <map>
 
 using namespace std;
 
 class rendererGL : public renderer,public singleton<rendererGL> {
     protected:
-    map<texture *,GLuint> textures_ids;
+    char * loadText(string fn);
+	void addShader(string fn,int type);
+	map<texture *,GLuint> textures_ids;
     virtual void renderVertex(vertex *v);
     texture *tt,*qt;
     shape *test;
     GLUquadricObj *lightbulb;   
-    
+    GLhandleARB  light_shader_v,light_shader_f;
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
     virtual void assignTexture(texture *t);

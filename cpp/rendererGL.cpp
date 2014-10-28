@@ -62,8 +62,12 @@ void rendererGL::lightSpecific(light *l) {
 	//glRotatef(-90,1,0,0);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	GLfloat position[] = { c.x, c.y, c.z, 1.0f };
+	
 
+	this->translate(c.x,c.y,c.z);
+	glRotatef(-90,1,0,0);
+	GLfloat position[] = { 0, 0, 0, 1.0f };
+	//gluSphere(lightbulb,4,10,10);
 
 	GLfloat ambientLight[] = { 0, 0, 0, 1.0f }; 
 	GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
@@ -78,23 +82,15 @@ void rendererGL::lightSpecific(light *l) {
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
 	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0);  
 	glEnable(GL_COLOR_MATERIAL)        ;
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE,mat);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT,mat);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,mat);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shin);
-    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE) ;   
+   
 	glColor3f(1,1,0);
 	GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
 	// glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 	
-	this->reset();
-
-	this->positionCamera();
-
-	this->translate(c.x,c.y,c.z);
 	
-	//glRotatef(-90,1,0,0);
-	//gluSphere(lightbulb,4,10,10);
+	
+	
+	
 
 }
 
@@ -129,16 +125,21 @@ void rendererGL::render() {
 	this->positionCamera();
 
 	glRotatef(-90,1,0,0);
-	//glFrontFace(GL_CCW);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glFrontFace(GL_CCW);
 	
-	//this->renderAllEntities();
-
+	
+	this->renderAllEntities();
+	
 	glFlush();
 	this->flush_callback();
 }
 
 void rendererGL::specificInit() {
+	glewInit();
+	if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
+	 cout << "Shaders in place\n";
+	}
+
 	glViewport(0, 0,config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -166,12 +167,41 @@ void rendererGL::specificInit() {
 	lightbulb=gluNewQuadric();          
 	gluQuadricNormals(lightbulb, GLU_SMOOTH);  
 	gluQuadricTexture(lightbulb, GL_TRUE);
+	light_shader_v=glCreateShaderObjectARB( GL_VERTEX_SHADER_ARB);
+	char *vf=loadText("data/shaders/toon.vert");
+	char *ff=loadText("data/shaders/toon.frag");
+	
+}
+
+void rendererGL::addShader(string fn,int type) {
+ char *ff=loadText(fn);
+ GLhandleARB handle=glCreateShaderObjectARB( type);
+ const char * vv = ff;
+ glShaderSourceARB(handle, 1, &vv,NULL);
+ delete ff;
+ glCompileShaderARB(handle);
+ GLhandleARB p=glCreateProgramObjectARB();
+}
+
+char * rendererGL::loadText(string fn) {
+	char *ft;
+	FILE *f=fopen(fn.c_str(),"rb");
+	fseek(f,0,SEEK_END);
+	size_t size=ftell(f);
+	fseek(f,0,SEEK_SET);
+	ft=new char[size+2];
+	
+	fread(ft,1,size,f);
+	ft[size]=0;
+	fclose(f);
+	return ft;
 }
 
 void rendererGL::renderSkybox(skybox *sky) {
 	this->reset();
 
 	glDisable(GL_DEPTH_TEST);
+		glDisable(GL_LIGHTING);
 	this->translate(0,0,-18);
 	this->assignTexture(sky->getTexture());
 	glBegin(GL_QUADS);
@@ -179,6 +209,7 @@ void rendererGL::renderSkybox(skybox *sky) {
 
 	glEnd();
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
 }
 
 void rendererGL::assignTexture(texture *t) {
