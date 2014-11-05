@@ -17,7 +17,7 @@ using namespace std;
 class rendererGL : public renderer,public singleton<rendererGL> {
     protected:
     char * loadText(string fn);
-	void addShader(string fn,int type);
+	void addShader(string name);
 	map<texture *,GLuint> textures_ids;
     virtual void renderVertex(vertex *v);
     texture *tt,*qt;

@@ -167,19 +167,19 @@ void rendererGL::specificInit() {
 	lightbulb=gluNewQuadric();          
 	gluQuadricNormals(lightbulb, GLU_SMOOTH);  
 	gluQuadricTexture(lightbulb, GL_TRUE);
-	light_shader_v=glCreateShaderObjectARB( GL_VERTEX_SHADER_ARB);
-	char *vf=loadText("data/shaders/toon.vert");
-	char *ff=loadText("data/shaders/toon.frag");
+	//light_shader_v=glCreateShaderObjectARB( GL_VERTEX_SHADER_ARB);
+	//char *vf=loadText("data/shaders/toon.vert");
+	//char *ff=loadText("data/shaders/toon.frag");
 	
 }
 
-void rendererGL::addShader(string fn,int type) {
- char *ff=loadText(fn);
- GLhandleARB handle=glCreateShaderObjectARB( type);
+void rendererGL::addShader(string name) {
+ char *vf=loadText(SHADER_DIR+string(DS)+name+".vert"),*ff=loadText(SHADER_DIR+string(DS)+name+".frag");
+ GLhandleARB vhandle=glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
  const char * vv = ff;
- glShaderSourceARB(handle, 1, &vv,NULL);
+ glShaderSourceARB(vhandle, 1, &vv,NULL);
  delete ff;
- glCompileShaderARB(handle);
+ glCompileShaderARB(vhandle);
  GLhandleARB p=glCreateProgramObjectARB();
 }
 

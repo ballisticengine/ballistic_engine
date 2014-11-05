@@ -11,6 +11,14 @@
 #include <iostream>
 #include <boost/thread/thread.hpp>
 
+#define BOOST_PYTHON_STATIC_LIB 1
+
+#define BOOST_PYTHON_NO_LIB 1
+
+#include <boost/python.hpp>
+
+using namespace boost::python;
+
 using namespace std;
 
 #include "singleton.hpp"
@@ -20,14 +28,22 @@ using namespace std;
 #include "sdlControls.hpp"
 #include "config.hpp"
 
+#include "utils.hpp";
+
+#include "python.hpp"
+typedef boost::shared_ptr<world> world_ptr;
+
+
 
 class engine : public singleton<engine> {
     sdlIO *io;
 	rendererGL *r;
 	
     public:
-        void prepare();
+		void pythonInit();
+		void prepare();
         void start();
+		~engine();
 };
 
 #endif	/* ENGINE_HPP */

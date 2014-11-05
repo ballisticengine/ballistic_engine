@@ -23,6 +23,9 @@ void world::makeTestWorld() {
 TerrainMap * world::getTerrain() {
  return this->tm;
 }
+void world::test() {
+ cout << "Test world";
+}
 
 bool world::parseXml(string &fn) {
 	string wd=fn;

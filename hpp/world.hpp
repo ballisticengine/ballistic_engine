@@ -60,6 +60,7 @@ public:
         bool parseXml(string &fn);
         void prepare();
 		void operator()();
+		void test();
 		ObserverEntity * getObserver();
 		TerrainMap * getTerrain();
 };

@@ -4,3 +4,4 @@
 /ballistic.exe
 /ballistic
 *.o
+*.pyc

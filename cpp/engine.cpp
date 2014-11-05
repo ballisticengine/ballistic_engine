@@ -1,5 +1,43 @@
 #include "engine.hpp"
 
+typedef boost::shared_ptr<world> world_ptr;
+
+int add_five(int x) {
+  return x + 5;
+}
+
+BOOST_PYTHON_MODULE(Pointless)
+{
+    def("add_five", add_five);
+}
+
+typedef boost::shared_ptr<world> world_ptr;
+
+BOOST_PYTHON_MODULE(world)
+{
+    class_<world,world_ptr>("world")
+        //.def("test", &world::test)
+		
+    ;
+};
+
+
+void engine::pythonInit() {
+	PyScripting::getInstance()->loadManipulators();
+	//Py_Initialize();
+	// initPointless();
+	// initworld();
+
+	// char *pymain_module=Utils::loadText("python/__init__.py");
+//	 cout << pymain_module;
+	//PyRun_SimpleString(pymain_module);
+	
+
+  
+	//import("world_py");
+//PyRun_SimpleString("pyApi.world_callbacks.test()");
+}
+
 void engine::prepare() {
     cout << "Preparing..." << endl;
     
@@ -27,11 +65,18 @@ void engine::prepare() {
 	r->init();
 	r->setCamera(w->getCurrentCamera());
 	r->setFlush(sdlIO::flush);
+	
+	this->pythonInit();
+	
 	boost::thread(boost::ref(*w));
 
 	
 	
 
+}
+
+engine::~engine() {
+  
 }
 
 void engine::start() {
