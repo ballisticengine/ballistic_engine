@@ -6,7 +6,7 @@ class ManipulatorClass(object):
     def onEngineLoad(self):
         pass
 
-    def onEntityLoop(self):
+    def onEntityLoop(self,entity):
         pass
 
 

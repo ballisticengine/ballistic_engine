@@ -35,7 +35,7 @@ typedef vector <objectEntity *> obj_list;
 typedef vector <roomEntity *> rooms_list;
 typedef vector <light *> lights_list;
 
-class world : public singleton<world> {
+class world {
 protected:
     ent_list entities;
 	obj_list models;
@@ -49,7 +49,10 @@ protected:
     Timer time;
     TerrainMap *tm;
 public:
-        ~world();
+        
+	 static world *getInstance(); 
+	 static world & getRef();
+	~world();
         ent_list getEntities();
 		obj_list getModels();
 		rooms_list getRooms();

@@ -173,3 +173,12 @@ ObserverEntity * world::getObserver() {
 	return &this->observer;
 }
 
+ world * world::getInstance() {
+        static world i;
+        return &i;
+    
+    }	
+
+  world & world::getRef() {
+	  return *world::getInstance();
+  }

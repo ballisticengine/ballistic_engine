@@ -13,13 +13,7 @@ BOOST_PYTHON_MODULE(Pointless)
 
 typedef boost::shared_ptr<world> world_ptr;
 
-BOOST_PYTHON_MODULE(world)
-{
-    class_<world,world_ptr>("world")
-        //.def("test", &world::test)
-		
-    ;
-};
+
 
 
 void engine::pythonInit() {
