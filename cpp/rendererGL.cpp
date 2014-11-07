@@ -52,6 +52,7 @@ void rendererGL::renderTerrainSpecific() {
 }
 
 void rendererGL::lightSpecific(light *l) {
+	//return;
 	coords c=l->getCoords();
 	this->reset();
 
@@ -105,8 +106,13 @@ void rendererGL::render() {
 	glClear( GL_DEPTH_BUFFER_BIT );
 
 	glMatrixMode(GL_MODELVIEW);
-
-	glColor3f(1,0,0);
+	for(int i=0; i<shaders.size(); i++) {
+		glUseProgramObjectARB(shaders[i]);
+		//int param=-1;
+	//	glGetObjectParameterivARB(shaders[i], GL_OBJECT_LINK_STATUS_ARB, &param);
+		//cout << "Shad status" << param << endl;
+	}
+	glColor3f(1,1,1);
 	renderSkybox(w->getSkybox());
 	this->positionLights();
 	this->reset();
@@ -153,9 +159,9 @@ void rendererGL::specificInit() {
 	glEnable( GL_NORMALIZE );
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glShadeModel(GL_SMOOTH);
-	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-	glColor3f(0,0,1);
+	//glEnable(GL_COLOR_MATERIAL);
+	//glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
+	//glColor3f(0,0,1);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); 
 	// glEnable( GL_LIGHTING );
 	//glEnable(GL_LIGHT0);
@@ -170,17 +176,31 @@ void rendererGL::specificInit() {
 	//light_shader_v=glCreateShaderObjectARB( GL_VERTEX_SHADER_ARB);
 	//char *vf=loadText("data/shaders/toon.vert");
 	//char *ff=loadText("data/shaders/toon.frag");
+	addShader("toon");
 	
 }
 
 void rendererGL::addShader(string name) {
  char *vf=loadText(SHADER_DIR+string(DS)+name+".vert"),*ff=loadText(SHADER_DIR+string(DS)+name+".frag");
- GLhandleARB vhandle=glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
- const char * vv = ff;
- glShaderSourceARB(vhandle, 1, &vv,NULL);
- delete ff;
+ const char *vfc=vf,*ffc=ff;
+ GLhandleARB vhandle=glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB),
+	fhandle=glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
+ 
+ size_t vfs=strlen(vfc),ffs=strlen(ffc);
+ GLint * vs=(GLint*)&vfs,* fs=(GLint*)&ffs;
+ glShaderSourceARB(vhandle, 1, &vfc,0);
+ glShaderSourceARB(fhandle, 1, &ffc,0);
+ delete ff; delete vf;
  glCompileShaderARB(vhandle);
+ glCompileShaderARB(fhandle);
  GLhandleARB p=glCreateProgramObjectARB();
+ glAttachObjectARB(p,vhandle);
+	glAttachObjectARB(p,fhandle);
+	glLinkProgramARB(p);
+
+	
+	shaders.push_back(p);
+
 }
 
 char * rendererGL::loadText(string fn) {
@@ -201,7 +221,7 @@ void rendererGL::renderSkybox(skybox *sky) {
 	this->reset();
 
 	glDisable(GL_DEPTH_TEST);
-		glDisable(GL_LIGHTING);
+	//	glDisable(GL_LIGHTING);
 	this->translate(0,0,-18);
 	this->assignTexture(sky->getTexture());
 	glBegin(GL_QUADS);
@@ -209,7 +229,7 @@ void rendererGL::renderSkybox(skybox *sky) {
 
 	glEnd();
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
 }
 
 void rendererGL::assignTexture(texture *t) {

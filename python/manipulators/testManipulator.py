@@ -3,7 +3,7 @@ import ctypes
 import world
 class testManipulator(ManipulatorClass):
     def onSelfLoad(self):
-        wi=world.world.getInstance().getLights()
+        wi=world.world.getInstance().getModels()
         print dir(wi)
         for w in wi:
             w.getCoords()

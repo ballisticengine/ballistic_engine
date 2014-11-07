@@ -8,15 +8,20 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <cstdlib>
+#include <cstring>
 #include <cstdio>
 
 #include <map>
+#include <vector>
 
 using namespace std;
+
+typedef vector<GLhandleARB> shader_list;
 
 class rendererGL : public renderer,public singleton<rendererGL> {
     protected:
     char * loadText(string fn);
+	shader_list shaders;
 	void addShader(string name);
 	map<texture *,GLuint> textures_ids;
     virtual void renderVertex(vertex *v);

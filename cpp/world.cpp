@@ -4,6 +4,8 @@
 	
 }*/
 
+
+
 skybox * world::getSkybox() {
     return this->sky;
 }
@@ -23,6 +25,11 @@ void world::makeTestWorld() {
 TerrainMap * world::getTerrain() {
  return this->tm;
 }
+
+/*obj_reflist  world::getModelsRef() {
+ 
+}*/
+
 void world::test() {
  cout << "Test world";
 }

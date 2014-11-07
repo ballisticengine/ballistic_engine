@@ -1,20 +1,5 @@
 #include "python.hpp"
 
-
-/*
-bp::class_< std::vector< Line > >("LineVec")
-        .def("__len__", &std::vector< Line >::size)
-        .def("clear", &std::vector< Line >::clear)
-        .def("append", &vec_item< std::vector< Line > >::add, 
-              bp::with_custodian_and_ward<1, 2>()) // let container keep value
-        .def("__getitem__", &vec_item< std::vector< Line > >::get,
-             bp::return_value_policy<bp::copy_non_const_reference>())
-        .def("__setitem__", &vec_item< std::vector< Line > >::set,
-             bp::with_custodian_and_ward<1,2>()) // to let container keep value
-        .def("__delitem__", &vec_item< std::vector< Line > >::del)
-        .def("__iter__", bp::iterator< std::vector< Line > >())
-    ;
-*/
 namespace bp = boost::python;
 struct NullDeleter
 {
@@ -29,8 +14,25 @@ shared_ptr<world> getSharedInstance()
 typedef boost::shared_ptr<world> world_ptr;
 BOOST_PYTHON_MODULE(world)
 {
+	class_<entity>("entity")
+		.def("getCoords",&entity::getCoords);
+
+
+	
+
+	class_<PhysicalEntity,bases<entity> >("PhysicalEntity");
+	
+	
+
+	class_<objectEntity,bases<PhysicalEntity> >("objectEntity");
+
+	class_<obj_list>("obj_list")
+		 .def(vector_indexing_suite<obj_list>() );
+
+	
 	class_<lights_list>("lights_list")
         .def(vector_indexing_suite<lights_list>() );
+
   
 	
 	class_<world,shared_ptr<world>,boost::noncopyable>("world",no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
@@ -47,6 +49,8 @@ BOOST_PYTHON_MODULE(world)
 
 	
 };
+
+
 
 PyManipulator::PyManipulator(string file) {
 

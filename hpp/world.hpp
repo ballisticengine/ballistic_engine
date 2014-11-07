@@ -34,6 +34,7 @@ typedef vector <entity *> ent_list;
 typedef vector <objectEntity *> obj_list;
 typedef vector <roomEntity *> rooms_list;
 typedef vector <light *> lights_list;
+typedef vector <objectEntity> obj_reflist;
 
 class world {
 protected:
@@ -55,6 +56,7 @@ public:
 	~world();
         ent_list getEntities();
 		obj_list getModels();
+		//obj_reflist getModelsRef();
 		rooms_list getRooms();
 		lights_list getLights();
         skybox * getSkybox();
