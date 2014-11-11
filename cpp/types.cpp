@@ -49,16 +49,26 @@ bool poly::operator==(poly &p) {
 
 void poly::calculateNormals() {
 	
+	/*
 	MathTypes::vector v1=v[0]->diff(*v[1]),v2=v[1]->diff(*v[2]);
 	v1.normalize();
 	v2.normalize();
 	MathTypes::vector cp=v1.crossProduct(&v2);
+	*/
 	for(int i=2; i<v.size(); i++) {
-		MathTypes::vector v1=v[i-2]->diff(*v[i-1]),
-			v2=v[i-1]->diff(*v[i]);
+		MathTypes::vector 
+			v1=v[i-2]->diff(*v[i-1]),
+			v2=v[i-1]->diff(*v[i]),
+			v3=v[i-1]->diff(*v[i-2])
+			;
 		v1.normalize();
 		v2.normalize();
-		MathTypes::vector cp1=v1.crossProduct(&v2),cp2=v2.crossProduct(&v1);
+		v3.normalize();
+		MathTypes::vector 
+			cp1=v1.crossProduct(&v2),
+			cp2=v2.crossProduct(&v1),
+			cp3=v3.crossProduct(&v2)
+			;
 		v[i]->normal=cp1;
 		v[i-1]->normal=cp2;
 		v[i-2]->normal=cp1;

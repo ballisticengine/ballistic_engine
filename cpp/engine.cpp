@@ -2,7 +2,7 @@
 
 
 void engine::pythonInit() {
-	//PyScripting::getInstance()->loadManipulators();
+	PyScripting::getInstance()->loadManipulators();
 	
 }
 

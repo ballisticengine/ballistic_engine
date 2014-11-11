@@ -6,7 +6,8 @@ class testManipulator(ManipulatorClass):
         wi=world.world.getInstance().getModels()
         print dir(wi)
         for w in wi:
-            w.getCoords()
+            ##w.getCoords()
+            pass
 
 
         print "test manipulator self load signal"

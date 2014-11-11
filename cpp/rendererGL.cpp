@@ -168,12 +168,7 @@ void rendererGL::specificInit() {
 		string sn=shad.second.get_value<string>();
 		cout << "Adding shader: " << sn << endl;
 		addShader(sn);
-	}
-	//light_shader_v=glCreateShaderObjectARB( GL_VERTEX_SHADER_ARB);
-	//char *vf=loadText("data/shaders/toon.vert");
-	//char *ff=loadText("data/shaders/toon.frag");
-	//addShader("toon");
-	
+	}	
 }
 
 void rendererGL::addShader(string name) {

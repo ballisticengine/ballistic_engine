@@ -37,6 +37,7 @@ class PyManipulator {
 protected:
 	char *code;
 	string filename,classname,iname;
+	object module,instance;
 public:
   PyManipulator(string file);
   void signal(string name,void *params);

@@ -64,7 +64,8 @@ PyManipulator::PyManipulator(string file) {
 
  cout << "INIT: " << codeinit << endl;
  PyRun_SimpleString(codeinit.c_str());
- 
+ module = import("__main__");
+ instance=module.attr(iname.c_str());
  cout << "Loaded python script " << filename << endl;
 }
 
