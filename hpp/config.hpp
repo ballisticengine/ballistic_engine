@@ -20,13 +20,15 @@ using namespace boost::property_tree;
 #define MODEL_DIR "models"
 #define TEX_DIR "textures"
 
+using boost::property_tree::ptree;
+
 struct videoData {
     int width, height, bpp;
 	float frustum_start, frustum_end, frustum_x, frustum_y;
-
 };
-class config : public singleton<config> {
 
+class config : public singleton<config> {
+	ptree pt;
 	videoData vd;
 	string start_level;
 
@@ -34,6 +36,8 @@ public:
     config();
 	videoData * getVD();
 	string & getStart();
+	const ptree & getPtree();
+	ptree & getNode(string node);
 	 
 };
 

@@ -10,11 +10,15 @@
 #include <cstdlib>
 #include <cstring>
 #include <cstdio>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include <boost/foreach.hpp>
 
 #include <map>
 #include <vector>
 
 using namespace std;
+using boost::property_tree::ptree;
 
 typedef vector<GLhandleARB> shader_list;
 

@@ -39,8 +39,8 @@ struct frustumSizes {
  e_loc x,y,znear,zfar;
 };
 
-class triangle;
-typedef vector <triangle *> tris_list;
+//class triangle;
+
 
 
 
@@ -67,24 +67,19 @@ public:
 
 typedef vector <poly *> poly_list;
 
-//TODO: dziedziczyć po poly
-class triangle {
-protected:
-	//virtual void setVerts(vertex *a,vertex *b,vertex *c);
+class triangle : public poly {
 public:
-    vertex *v[3];
 	triangle();
-    triangle(vertex *a,vertex *b,vertex *c);
-    triangle(vertex v[3]);
-	bool triangle::operator==(triangle &t);
+	triangle(vertex *a,vertex *b,vertex *c);
+    triangle(vertex vs[3]);
+
 };
 
 
+typedef vector <triangle *> tris_list;
+
 typedef vector <poly *> poly_list;
 class shape {
-    /*unsigned int n_tris;
-    triangle * tris;
-     * */
 	e_loc scale;
     vector <vertex *> vertices;
     vector <triangle *> triangles;

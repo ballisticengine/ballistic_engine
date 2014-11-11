@@ -80,9 +80,10 @@ bool world::parseXml(string &fn) {
 	  faceTexShape *fs=shapef->getXML((ptree)room.second);
 	  roomEntity *roomE=new roomEntity();
 	  poly_list polys=fs->getPolys();
-	  for(int i=0; i<polys.size(); i++) {
+	  /*for(int i=0; i<polys.size(); i++) {
 		  polys[i]->calculateNormals();
-	  }
+	  }*/
+	  fs->calculateNormals();
 	  roomE->setModel(fs);
 	  
 	   this->entities.push_back((entity *)roomE);
@@ -104,7 +105,7 @@ bool world::parseXml(string &fn) {
 				shape *shp=(shape *)shapef->get(mfn);
 				texture *tex=(texture *)texf->get(tfn);
 				objectEntity *oe=new objectEntity();
-				
+				shp->calculateNormals(); 
 				oe->setModel(shp);
 				oe->setTexture(tex);
 				oe->locate(x,y,z);

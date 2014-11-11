@@ -43,7 +43,7 @@ vector  & vector::crossProduct(const MathTypes::vector * b) {
 	v.y=a.z*b->x-a.x*b->z;
 	v.z=a.x*b->y-a.y*b->x;
 	
-	v.write();
+	//v.write();
 	return v;
 }
 

@@ -53,41 +53,39 @@ void poly::calculateNormals() {
 	v1.normalize();
 	v2.normalize();
 	MathTypes::vector cp=v1.crossProduct(&v2);
-	for(int i=0; i<v.size(); i++) {
-		
-		v[i]->normal=cp;
-		//v[i]->normal=v[i]->unit().vproduct(&v[i-1]->unit());
+	for(int i=2; i<v.size(); i++) {
+		MathTypes::vector v1=v[i-2]->diff(*v[i-1]),
+			v2=v[i-1]->diff(*v[i]);
+		v1.normalize();
+		v2.normalize();
+		MathTypes::vector cp1=v1.crossProduct(&v2),cp2=v2.crossProduct(&v1);
+		v[i]->normal=cp1;
+		v[i-1]->normal=cp2;
+		v[i-2]->normal=cp1;
 		//verts[i]->normal.write();
 	}
 }
 
-/* trójkąty */
+
+/* nowe trójkąty */
 
 triangle::triangle() {
-
 }
 
-triangle::triangle(vertex *a, vertex *b, vertex *c) {
-    this->v[0] = a;
-    this->v[1] = b;
-    this->v[2] = c;
-
+triangle::triangle(vertex *a,vertex *b,vertex *c) {
+	v.push_back(a);
+	v.push_back(b);
+	v.push_back(c);
 }
 
-triangle::triangle(vertex v[3]) {
-    for (int i = 0; i < 3; i++) {
-		this->v[i]=&v[i];
-    }
+
+triangle::triangle(vertex vs[3]) {
+	v.push_back(&vs[0]);
+	v.push_back(&vs[1]);
+	v.push_back(&vs[2]);
 }
 
-bool triangle::operator==(triangle &p) {
-	for (int i = 0; i < 3; i++) {
-        if (!(p.v[i] == this->v[i])) {
-            return false;
-        }
-    }
-    return true;
-}
+
 
 /* kształty */
 
@@ -107,6 +105,7 @@ triangle * shape::addTriangle(triangle *t) {
     for (int i = 0; i < 3; i++) {
         this->addVertex(t->v[i]);
         triangles.push_back(t);
+		polys.push_back(t);
     }
 	return t;
 }
@@ -157,7 +156,6 @@ vert_list shape::getVertices() {
 }
 
 vector <triangle *> shape::getTris() {
-    //    cout << vertices.size() << endl;
     return this->triangles;
 }
 
@@ -186,9 +184,8 @@ void shape::addPoly(poly *p) {
 
 void shape::calculateNormals() {
 	vert_list verts=this->getVertices();
-	cout << "VSX: " << verts.size() << endl;
-	for(int i=1; i<verts.size(); i++) {
-		//verts[i]->normal=vertices[i]->unit().vproduct(&vertices[i-1]->unit());
-		//verts[i]->normal.write();
+	poly_list pl=getPolys();
+	for(int i=0; i<pl.size(); i++) {
+		pl[i]->calculateNormals();
 	}
 }

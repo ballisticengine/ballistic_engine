@@ -3,18 +3,8 @@
 #pragma comment(lib, "glu32.lib") 
 
 void rendererGL::renderVertex(vertex *v) {
-	static int shown=0;
 	glTexCoord2d(v->u, v->v);
 	glNormal3d(v->normal.x,v->normal.y,v->normal.z);
-	if(0) { //shown<100
-	cout << "V: ";
-	v->write();
-	cout << "N : ";
-	v->normal.write(); 
-	shown++;
-	}
-	
-	
 	glVertex3d(v->x, v->y, v->z);
 }
 
@@ -173,10 +163,16 @@ void rendererGL::specificInit() {
 	lightbulb=gluNewQuadric();          
 	gluQuadricNormals(lightbulb, GLU_SMOOTH);  
 	gluQuadricTexture(lightbulb, GL_TRUE);
+	ptree & shaders=config::getInstance()->getNode("config.screen.shaders");
+	BOOST_FOREACH(const ptree::value_type &shad, shaders) {
+		string sn=shad.second.get_value<string>();
+		cout << "Adding shader: " << sn << endl;
+		addShader(sn);
+	}
 	//light_shader_v=glCreateShaderObjectARB( GL_VERTEX_SHADER_ARB);
 	//char *vf=loadText("data/shaders/toon.vert");
 	//char *ff=loadText("data/shaders/toon.frag");
-	addShader("toon");
+	//addShader("toon");
 	
 }
 
