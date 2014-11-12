@@ -1,53 +1,54 @@
 #include "python.hpp"
 
-namespace bp = boost::python;
+
 struct NullDeleter
 {
-  void operator()(const void*){}
+	void operator()(const void*){}
 };
 
 shared_ptr<world> getSharedInstance()
 {
-  return shared_ptr<world>( world::getInstance(),NullDeleter() );
+	return shared_ptr<world>( world::getInstance(),NullDeleter() );
 }
 
 typedef boost::shared_ptr<world> world_ptr;
 BOOST_PYTHON_MODULE(world)
 {
-	class_<entity>("entity")
-		.def("getCoords",&entity::getCoords);
+
+	bp::class_<coords,coords *>("coords")
+		.def_readwrite("x", &coords::x)
+		.def_readwrite("y", &coords::y)
+		.def_readwrite("z", &coords::z)
+		;
+
+	bp::class_<entity,entity *>("entity")
+		.def("getCoords",&entity::getCoords)
+		.def("locate",&entity::locate)
+		;
+
+	bp::class_<PhysicalEntity,PhysicalEntity*,bp::bases<entity> >("PhysicalEntity");
 
 
-	
+	bp::class_<objectEntity,objectEntity*,bp::bases<PhysicalEntity> >("objectEntity");
 
-	class_<PhysicalEntity,bases<entity> >("PhysicalEntity");
-	
-	
+	bp::class_<obj_list>("obj_list")
+		.def(bp::vector_indexing_suite<obj_list>() );
 
-	class_<objectEntity,bases<PhysicalEntity> >("objectEntity");
 
-	class_<obj_list>("obj_list")
-		 .def(vector_indexing_suite<obj_list>() );
+	bp::class_<lights_list>("lights_list")
+		.def(bp::vector_indexing_suite<lights_list>() );
 
-	
-	class_<lights_list>("lights_list")
-        .def(vector_indexing_suite<lights_list>() );
 
-  
-	
-	class_<world,shared_ptr<world>,boost::noncopyable>("world",no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
-        .def("getInstance",&getSharedInstance )
+
+	bp::class_<world,shared_ptr<world>,boost::noncopyable>("world",bp::no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
+		.def("getInstance",&getSharedInstance )
 		.staticmethod("getInstance")
 		.def("getLights", &world::getLights)
-		.def("getModels", &world::getModels)
+		.def("getModels", &world::getModels )		
 
-		//.def("getInstance",&world::getInstance)
-		
-		
-		
-    ;
+		;
 
-	
+
 };
 
 
@@ -55,32 +56,44 @@ BOOST_PYTHON_MODULE(world)
 PyManipulator::PyManipulator(string file) {
 
 	code=Utils::loadText(file);
- filename=boost::filesystem::basename(file);
- PyRun_SimpleString(code);
- boost::filesystem::path p(filename);
- classname=p.stem().string();
- iname=classname+"_instance";
- string codeinit=iname+"="+classname+"()";
+	filename=boost::filesystem::basename(file);
+	PyRun_SimpleString(code);
+	boost::filesystem::path p(filename);
+	classname=p.stem().string();
+	iname=classname+"_instance";
+	string codeinit=iname+"="+classname+"()";
 
- cout << "INIT: " << codeinit << endl;
- PyRun_SimpleString(codeinit.c_str());
- module = import("__main__");
- instance=module.attr(iname.c_str());
- cout << "Loaded python script " << filename << endl;
+	cout << "INIT: " << codeinit << endl;
+	PyRun_SimpleString(codeinit.c_str());
+	module = bp::import("__main__");
+	instance=module.attr(iname.c_str());
+	cout << "Loaded python script " << filename << endl;
 }
 
-void PyManipulator::signal(string name,void *params) {
-	string sigcode;
-	
-		sigcode=iname+".on"+name+"()";
 
-	
-//cout << "Signal " << sigcode << endl;
-	PyRun_SimpleString(sigcode.c_str());
+
+void PyManipulator::signal(string name,void *params) {
+	Py_BEGIN_ALLOW_THREADS
+		PyLocker::getInstance()->lock();
+	string signame="on"+name;
+	bp::object f=bp::extract<bp::object>(instance.attr(signame.c_str()));
+	world *w=world::getInstance();
+	if(name=="Init") {
+		f(boost::ref(*w));
+	} else {
+		f();
+	}
+
+	//sigcode=iname+".on"+name+"()";
+	PyLocker::getInstance()->unlock();
+	Py_END_ALLOW_THREADS
+
+		//cout << "Signal " << sigcode << endl;
+		//PyRun_SimpleString(sigcode.c_str());
 }
 
 PyManipulator::~PyManipulator() {
- delete code;
+	delete code;
 }
 
 
@@ -97,12 +110,14 @@ void PyScripting::loadManipulators() {
 		}
 	}
 
+	broadcast("Init",0);
 	broadcast("SelfLoad",0);
 }
 
 PyScripting::PyScripting() {
 	Py_Initialize();
-	 initworld();
+	PyEval_InitThreads(); 
+	initworld();
 }
 
 PyScripting::~PyScripting() {
@@ -114,4 +129,13 @@ void PyScripting::broadcast(string name,void *params) {
 	for(int i=0; i<manipulators.size(); i++) {
 		manipulators[i]->signal(name,params);
 	}
+}
+
+
+void PyLocker::lock() {
+	state = PyGILState_Ensure();
+}
+
+void PyLocker::unlock() {
+	PyGILState_Release(state);
 }

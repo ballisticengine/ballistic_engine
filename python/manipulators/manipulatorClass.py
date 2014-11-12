@@ -1,5 +1,9 @@
 class ManipulatorClass(object):
 
+    def onInit(self,world):
+        print "init"
+        self.world=world
+
     def onSelfLoad(self):
         pass
 

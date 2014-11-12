@@ -3,11 +3,13 @@ import ctypes
 import world
 class testManipulator(ManipulatorClass):
     def onSelfLoad(self):
-        wi=world.world.getInstance().getModels()
-        print dir(wi)
-        for w in wi:
-            ##w.getCoords()
-            pass
+        print "World"
+        models=self.world.getModels()
+        for m in models:
+            print "x: ",m.getCoords().x
+            #m.locate(100,0,0)
+            #print m.getCoords()
+        #    pass
 
 
         print "test manipulator self load signal"

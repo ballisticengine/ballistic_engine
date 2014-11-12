@@ -16,7 +16,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/smart_ptr/make_shared_array.hpp>
 
-using namespace boost::python;
+namespace bp=boost::python;
 
 #include "singleton.hpp"
 #include "config.hpp"
@@ -31,13 +31,18 @@ using namespace boost::python;
 using namespace std;
 
 
-
+class PyLocker : public singleton<PyLocker>{
+	 PyGILState_STATE state;
+public:
+	void lock();
+	void unlock();
+};
 
 class PyManipulator {
 protected:
 	char *code;
 	string filename,classname,iname;
-	object module,instance;
+	bp::object module,instance;
 public:
   PyManipulator(string file);
   void signal(string name,void *params);
@@ -53,6 +58,7 @@ protected:
 public:
 	PyScripting();
 	void broadcast(string name,void *params);
+	void broadcastInit();
 	~PyScripting();
 	void loadManipulators();
 };
