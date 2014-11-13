@@ -1,10 +1,16 @@
 #ifndef RENDERERGL_HPP
 #define	RENDERERGL_HPP
+#ifdef _WIN32
 #include "windows.h"
+#endif
 #include "rendererAbstract.hpp"
 #include "loaderMD2.hpp"
 #include "config.hpp"
+#ifdef _WIN32
 #include <glew.h>
+#else 
+#include <GL/glew.h>
+#endif
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <cstdlib>

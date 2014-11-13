@@ -33,6 +33,34 @@ time_int Timer::ticksToSec(LARGE_INTEGER &ts) {
 
 #else 
 
+Timer::Timer() {
+	QueryPerformanceFrequency( &frequency );
+	 b.QuadPart=0;
+     e.QuadPart=0; 
+}
 
+void Timer::start() {
+	gettimeofday(&b) ;;
+}
+
+void Timer::stop() {
+	gettimeofday(&e) ;;
+}
+
+time_int Timer::getDiff() {
+	diff=e.tv_usec-b.tv_usec;
+	return this->ticksToSec(diff);
+}
+
+time_int Timer::getDiffR() {
+	this->stop();
+	time_int r=this->getDiff();
+	this->start();
+	return r;
+}
+
+time_int Timer::ticksToSec(time_int &ts) {
+    return diff*1000*1000;
+}
 
 #endif

@@ -27,7 +27,7 @@ public:
 class Timer {
 protected:
 	timeval b,e,diff,frequency;
-	time_int ticksToSec(timeval &ts);
+	time_int ticksToSec(time_int &ts);
 public:
 	Timer();
 	void start();
