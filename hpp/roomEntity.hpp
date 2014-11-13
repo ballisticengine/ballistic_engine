@@ -4,6 +4,11 @@
 #include "objectEntity.hpp"
 
 class roomEntity : public objectEntity {
+protected:
+	shape *bounding;
+public:
+	roomEntity();
+	virtual shape *getBoundingShape();
 };
 
 #endif

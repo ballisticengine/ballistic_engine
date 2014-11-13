@@ -43,3 +43,13 @@ void entity::translate(coords c) {
 entity::entity() {
  
 }
+
+bool entity::collides(entity *e,MathTypes::vector offset) {
+	if(!this->getBoundingShape()) {
+	 return false;
+	}
+}
+
+shape * entity::getBoundingShape() {
+ return NULL;
+}

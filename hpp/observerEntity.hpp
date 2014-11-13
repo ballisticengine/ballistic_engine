@@ -9,9 +9,12 @@
 class ObserverEntity : public PhysicalEntity {
 protected:
 	camera *cam;
+	shape *bounding;
 public:
+	ObserverEntity();
 	virtual void setCamera(camera *c);
 	virtual camera *getCamera();
+	virtual shape *getBoundingShape();
 
 
 };

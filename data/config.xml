@@ -8,7 +8,8 @@
         <frustum_width>20</frustum_width>
         <frustum_height>20</frustum_height>
         <shaders>
-            
+
+           
         </shaders>
     </screen>
     <game>

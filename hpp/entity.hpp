@@ -19,6 +19,18 @@ protected:
 public:
 	entity();
 	coords getCoords();
+	
+	/*
+	Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
+	*/
+	virtual bool collides(entity *e,MathTypes::vector offset);
+	
+	/*
+	 Zwraca bryłę otaczającą. Dla świateł, czy abstrakcji zawsze null. 
+	 Dla pokojów - je same, dla obiektów wyliczoną bryłę otaczającą. Dla obserwatora pukt w przestrzeni.
+	*/
+	virtual shape *getBoundingShape();
+
 	void translate(e_loc x,e_loc y,e_loc z);
 	void translate(coords c);
 	void rotate(e_loc x,e_loc y, e_loc z);

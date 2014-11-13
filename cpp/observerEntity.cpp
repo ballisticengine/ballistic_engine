@@ -9,3 +9,13 @@ camera * ObserverEntity::getCamera() {
  cam->face(rx,ry,rz);
 	return this->cam;
 }
+
+shape *ObserverEntity::getBoundingShape() {
+	return this->bounding;
+}
+
+ObserverEntity::ObserverEntity() {
+
+	shape * bounding=new shape();
+	bounding->addVertex(new vertex(0,0,0));
+}
