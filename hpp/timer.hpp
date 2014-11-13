@@ -2,9 +2,11 @@
 #define TIMER_H
 
 
+typedef double time_int;
+#ifdef _WIN32
 #include <windows.h>
 
-typedef double time_int;
+
 
 class Timer {
 protected:
@@ -19,4 +21,20 @@ public:
 
 };
 
+#else
+#include <sys/time.h>
+
+class Timer {
+protected:
+	timeval b,e,diff,frequency;
+	time_int ticksToSec(timeval &ts);
+public:
+	Timer();
+	void start();
+	void stop();
+	time_int getDiff();
+	time_int getDiffR();
+
+};
+#endif
 #endif

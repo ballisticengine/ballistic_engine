@@ -3,7 +3,7 @@
 #ifndef WORLD_HPP
 #define	WORLD_HPP
 
-#include <SDL\SDL.h>
+#include <SDL/SDL.h>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>

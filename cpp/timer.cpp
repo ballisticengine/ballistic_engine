@@ -1,4 +1,5 @@
 #include "timer.hpp"
+#ifdef _WIN32
 
 Timer::Timer() {
 	QueryPerformanceFrequency( &frequency );
@@ -29,3 +30,9 @@ time_int Timer::getDiffR() {
 time_int Timer::ticksToSec(LARGE_INTEGER &ts) {
 	return ((double)ts.QuadPart /(double)frequency.QuadPart) ;
 }
+
+#else 
+
+
+
+#endif
