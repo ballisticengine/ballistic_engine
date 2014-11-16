@@ -23,7 +23,7 @@ public:
 	/*
 	Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
 	*/
-	virtual bool collides(entity *e,MathTypes::vector offset);
+	virtual bool collides(entity *e,coords offset);
 	
 	/*
 	 Zwraca bryłę otaczającą. Dla świateł, czy abstrakcji zawsze null. 

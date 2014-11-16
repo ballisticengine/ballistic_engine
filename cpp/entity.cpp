@@ -44,10 +44,11 @@ entity::entity() {
  
 }
 
-bool entity::collides(entity *e,MathTypes::vector offset) {
+bool entity::collides(entity *e,coords offset) {
 	if(!this->getBoundingShape()) {
 	 return false;
-	}
+	} 
+	return false;
 }
 
 shape * entity::getBoundingShape() {

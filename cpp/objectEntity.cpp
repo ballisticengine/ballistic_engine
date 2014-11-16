@@ -15,3 +15,7 @@ void objectEntity::setTexture(texture *tex) {
 texture *objectEntity::getTexture() {
  return this->tex;
 }
+
+shape *objectEntity::getBoundingShape() {
+	return this->bounding;
+}

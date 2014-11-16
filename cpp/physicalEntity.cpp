@@ -47,3 +47,8 @@ TrRot PhysicalEntity::getVelocity() {
 	
 	return this->velocity;
 }
+
+void PhysicalEntity::printVelocity() {
+ cout << "T: " << velocity.t.x << ", " << velocity.t.y << ", " << velocity.t.z << endl;
+ cout << "R: " << velocity.r.x << ", " << velocity.r.y << ", " << velocity.r.z << endl;
+}

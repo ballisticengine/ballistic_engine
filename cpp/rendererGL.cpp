@@ -51,8 +51,8 @@ void rendererGL::lightSpecific(light *l) {
 	//this->translate(c.x,c.y,c.z);
 	
 	//glRotatef(-90,1,0,0);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
+	//glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHT0);
 	
 
 	this->translate(c.x,c.y,c.z);
@@ -104,7 +104,7 @@ void rendererGL::render() {
 	}
 	glColor3f(1,1,1);
 	renderSkybox(w->getSkybox());
-	this->positionLights();
+	//this->positionLights();
 	this->reset();
 
 	this->positionCamera();

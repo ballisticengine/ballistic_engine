@@ -23,6 +23,7 @@ public:
 	void setVelocity(TrRot velocity);
 	//void resetT();
 	TrRot getVelocity();
+	void printVelocity();
 	
 
 };

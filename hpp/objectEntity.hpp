@@ -8,13 +8,14 @@
 
 class objectEntity : public PhysicalEntity {
 protected:
-	shape *model;
+	shape *model,*bounding;
 	texture *tex;
 public:
 	virtual shape * getModel();
 	virtual texture *getTexture();
 	virtual void setModel(shape *model);
 	virtual void setTexture(texture *tex);
+	virtual shape *getBoundingShape();
 
 };
 

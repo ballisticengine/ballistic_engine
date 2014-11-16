@@ -188,8 +188,8 @@ void renderer::reset() {
  }
 
  void renderer::positionCamera() {
-	 coords c=active_camera->getCoords();
-	 //coords c=w->getObserver()->getCoords();
+	// coords c=active_camera->getCoords();
+	 coords c=w->getObserver()->getCoords();
 	 rotate(1,0,0,c.rx);
 	 rotate(0,1,0,c.ry);
 	 rotate(0,0,1,c.rz);
