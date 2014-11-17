@@ -16,6 +16,7 @@ using namespace std;
 #include "camera.hpp"
 #include "light.hpp"
 #include "terrainMap.hpp"
+#include "material.hpp"
 
 typedef void (*flushf)();
 
@@ -40,8 +41,8 @@ protected:
 	
 	virtual void positionCameraSpecific();
 
-    virtual void assignTexture(texture *t) {
-    };
+    virtual void assignTexture(texture *t)=0;
+	virtual void assignMaterial(Material *m)=0;
 	virtual void resetSpecific()=0;
 	virtual void lightSpecific(light *l)=0;
 

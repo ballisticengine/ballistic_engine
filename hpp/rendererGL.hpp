@@ -1,5 +1,5 @@
-#ifndef RENDERERGL_HPP
-#define	RENDERERGL_HPP
+#ifndef RendererGL_HPP
+#define	RendererGL_HPP
 #ifdef _WIN32
 #include "windows.h"
 #endif
@@ -28,7 +28,7 @@ using boost::property_tree::ptree;
 
 typedef vector<GLhandleARB> shader_list;
 
-class rendererGL : public renderer,public singleton<rendererGL> {
+class RendererGL : public renderer,public singleton<RendererGL> {
     protected:
     char * loadText(string fn);
 	shader_list shaders;
@@ -42,6 +42,7 @@ class rendererGL : public renderer,public singleton<rendererGL> {
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
     virtual void assignTexture(texture *t);
+	virtual void assignMaterial(Material *m);
 	virtual void begin();
 	virtual void beginQuads();
 	virtual void end();
@@ -55,10 +56,10 @@ class rendererGL : public renderer,public singleton<rendererGL> {
 
 	virtual void renderTerrainSpecific();
 public:
-    rendererGL();
+    RendererGL();
 	virtual void setupTexture(texture *t);    
     virtual void render();
 };
 
-#endif	/* RENDERERGL_HPP */
+#endif	/* RendererGL_HPP */
 

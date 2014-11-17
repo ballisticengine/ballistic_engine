@@ -7,13 +7,13 @@ Reprezentuje kszta³t z teksturami przypisanymi do wielok¹tów
 
 #include "types.hpp"
 #include "texture.hpp"
+#include "material.hpp"
+#include "materiable.hpp"
 
-class texPolyGeneral {
-protected:
-		texture *tex;
+class texPolyGeneral : public Materiable {
+
 public:
-	void setTexture(texture *tex);
-	texture * getTexture();
+	
 };
 
 class texTriangle : public triangle,public texPolyGeneral {

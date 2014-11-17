@@ -5,16 +5,21 @@
 #include "physicalEntity.hpp"
 #include "texture.hpp"
 #include "types.hpp" 
+#include "material.hpp"
 
-class objectEntity : public PhysicalEntity {
+class ObjectEntity : public PhysicalEntity,public Texturable {
 protected:
 	shape *model,*bounding;
 	texture *tex;
+	Material *mat;
 public:
 	virtual shape * getModel();
-	virtual texture *getTexture();
+	
+	
 	virtual void setModel(shape *model);
-	virtual void setTexture(texture *tex);
+	
+	virtual Material *getMaterial();
+	virtual void setMaterial(Material *mat);
 	virtual shape *getBoundingShape();
 
 };

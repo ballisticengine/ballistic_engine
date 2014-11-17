@@ -1,21 +1,21 @@
-#include "objectEntity.hpp"
+#include "ObjectEntity.hpp"
 
-shape * objectEntity::getModel() {
+shape * ObjectEntity::getModel() {
 	return model;  
 }
 
-void objectEntity::setModel(shape *model) {
+void ObjectEntity::setModel(shape *model) {
 	this->model=model;
 }
 
-void objectEntity::setTexture(texture *tex) {
- this->tex=tex;
-}
 
-texture *objectEntity::getTexture() {
- return this->tex;
-}
-
-shape *objectEntity::getBoundingShape() {
+shape *ObjectEntity::getBoundingShape() {
 	return this->bounding;
+}
+
+Material *ObjectEntity::getMaterial() {
+ return this->mat;
+}
+void ObjectEntity::setMaterial(Material *mat) {
+ this->mat=mat;
 }

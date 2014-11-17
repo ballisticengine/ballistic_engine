@@ -17,6 +17,7 @@ using namespace boost::property_tree;
 #include "types.hpp"
 #include "facetexShape.hpp"
 #include "textureFactory.hpp"
+#include "material.hpp"
 
 
 class loaderXML : public singleton<loaderXML> {

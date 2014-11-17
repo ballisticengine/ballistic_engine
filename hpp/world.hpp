@@ -14,7 +14,7 @@
 using namespace std;
 using namespace boost::property_tree;
 #include "entity.hpp"
-#include "objectEntity.hpp"
+#include "ObjectEntity.hpp"
 #include "roomEntity.hpp"
 #include "camera.hpp"
 #include "singleton.hpp"
@@ -29,12 +29,13 @@ using namespace boost::property_tree;
 #include "terrainMap.hpp"
 #include "timer.hpp"
 #include "observerEntity.hpp"
+#include "material.hpp"
 
 typedef vector <entity *> ent_list;
-typedef vector <objectEntity *> obj_list;
+typedef vector <ObjectEntity *> obj_list;
 typedef vector <roomEntity *> rooms_list;
 typedef vector <light *> lights_list;
-typedef vector <objectEntity> obj_reflist;
+typedef vector <ObjectEntity> obj_reflist;
 
 class world {
 protected:
@@ -45,7 +46,7 @@ protected:
     skybox *sky;
 	camera default_camera;
 	ObserverEntity observer;
-    void moveEntity(PhysicalEntity *e);
+    void moveEntity(PhysicalEntity *e,bool skip_collision);
 	void moveEntities();
     Timer time;
     TerrainMap *tm;

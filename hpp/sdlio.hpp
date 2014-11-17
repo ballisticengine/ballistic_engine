@@ -4,7 +4,7 @@
 #include <SDL/SDL.h>
 #include <boost/thread/thread.hpp>
 #include "rendererAbstract.hpp"
-#include "rendererGL.hpp"
+#include "RendererGL.hpp"
 #include "singleton.hpp"
 #include "engineState.hpp"
 #include "sdlControls.hpp"

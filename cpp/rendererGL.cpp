@@ -1,26 +1,26 @@
-#include "rendererGL.hpp"
+#include "RendererGL.hpp"
 #include "types.hpp"
 #pragma comment(lib, "glu32.lib") 
 
-void rendererGL::renderVertex(vertex *v) {
+void RendererGL::renderVertex(vertex *v) {
 	glTexCoord2d(v->u, v->v);
 	glNormal3d(v->normal.x,v->normal.y,v->normal.z);
 	glVertex3d(v->x, v->y, v->z);
 }
 
-void rendererGL::begin() {
+void RendererGL::begin() {
 	glBegin(GL_TRIANGLES); 
 }
 
-void rendererGL::beginQuads() {
+void RendererGL::beginQuads() {
 	glBegin(GL_QUADS);
 }
 
-void rendererGL::end() {
+void RendererGL::end() {
 	glEnd();
 }
 
-void rendererGL::renderTerrainSpecific() {
+void RendererGL::renderTerrainSpecific() {
 	TerrainMap *tm=w->getTerrain();
 	shape *s=tm->getQuads();
 	vert_list verts;
@@ -41,7 +41,7 @@ void rendererGL::renderTerrainSpecific() {
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 }
 
-void rendererGL::lightSpecific(light *l) {
+void RendererGL::lightSpecific(light *l) {
 	//return;
 	coords c=l->getCoords();
 	this->reset();
@@ -85,13 +85,13 @@ void rendererGL::lightSpecific(light *l) {
 
 }
 
-rendererGL::rendererGL() {
+RendererGL::RendererGL() {
 
 }
 
 
 
-void rendererGL::render() {
+void RendererGL::render() {
 
 	glClear( GL_DEPTH_BUFFER_BIT );
 
@@ -130,7 +130,7 @@ void rendererGL::render() {
 	this->flush_callback();
 }
 
-void rendererGL::specificInit() {
+void RendererGL::specificInit() {
 	glewInit();
 	if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
 	 cout << "Shaders in place\n";
@@ -171,7 +171,7 @@ void rendererGL::specificInit() {
 	}	
 }
 
-void rendererGL::addShader(string name) {
+void RendererGL::addShader(string name) {
  char *vf=loadText(SHADER_DIR+string(DS)+name+".vert"),*ff=loadText(SHADER_DIR+string(DS)+name+".frag");
  const char *vfc=vf,*ffc=ff;
  GLhandleARB vhandle=glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB),
@@ -194,7 +194,7 @@ void rendererGL::addShader(string name) {
 
 }
 
-char * rendererGL::loadText(string fn) {
+char * RendererGL::loadText(string fn) {
 	char *ft;
 	FILE *f=fopen(fn.c_str(),"rb");
 	fseek(f,0,SEEK_END);
@@ -208,7 +208,7 @@ char * rendererGL::loadText(string fn) {
 	return ft;
 }
 
-void rendererGL::renderSkybox(skybox *sky) {
+void RendererGL::renderSkybox(skybox *sky) {
 	this->reset();
 
 	glDisable(GL_DEPTH_TEST);
@@ -223,13 +223,17 @@ void rendererGL::renderSkybox(skybox *sky) {
 	//glEnable(GL_LIGHTING);
 }
 
-void rendererGL::assignTexture(texture *t) {
+void RendererGL::assignTexture(texture *t) {
 	GLuint tex_id;
 	tex_id = this->textures_ids[t];
 	glBindTexture(GL_TEXTURE_2D, tex_id);
 }
 
-void rendererGL::setupTexture(texture *t) {
+void RendererGL::assignMaterial(Material *m) {
+	this->setupTexture(m->getTexture());
+}
+
+void RendererGL::setupTexture(texture *t) {
 
 	GLuint tex_id;
 
@@ -246,27 +250,27 @@ void rendererGL::setupTexture(texture *t) {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
 }
 
-void rendererGL::translateSpecific(e_loc x, e_loc y, e_loc z) {
-	glTranslatef(x,y,z);
+void RendererGL::translateSpecific(e_loc x, e_loc y, e_loc z) {
+	glTranslated(x,y,z);
 }
 
 
 
-/*void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z) {
+/*void RendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z) {
 this->rotateSpecific(1,0,0,x);
 this->rotateSpecific(0,1,0,y);
 this->rotateSpecific(0,0,1,z);
 }*/
 
-void rendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d) {
+void RendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d) {
 	glRotatef(d,x,y,z);
 }
 
-void rendererGL::resetSpecific() {
+void RendererGL::resetSpecific() {
 	glLoadIdentity();
 	glTranslatef(0,0,-frustum_start);
 }
 
-void rendererGL::positionCameraSpecific() {
+void RendererGL::positionCameraSpecific() {
 	glRotatef(-90,1,0,0);
 }

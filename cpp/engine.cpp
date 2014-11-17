@@ -22,7 +22,7 @@ void engine::prepare() {
 	videoData vd=*config::getInstance()->getVD();	
     
 	
-	r=rendererGL::getInstance(); 
+	r=RendererGL::getInstance(); 
     cout << "IO\n";
     
 	

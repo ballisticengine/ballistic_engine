@@ -8,7 +8,6 @@ void * shapeFactory::actualLoad(string fn) {
   
   loader->loadMD2(fn,s,this->scale);
   //this->scale=1; //skalowanie jest jednorazowe
-  cout << "SSS: " << s->getTris().size() << ", " << fn << endl;
   } 
   else if(ext==GEOM_MEM_EXT) {
 	 loaderXML *loader=loaderXML::getInstance();

@@ -104,10 +104,13 @@ bool world::parseXml(string &fn) {
 				shapef->setScale(sc);
 				shape *shp=(shape *)shapef->get(mfn);
 				texture *tex=(texture *)texf->get(tfn);
-				objectEntity *oe=new objectEntity();
+				Material *mat=new Material();
+				mat->setTexture(tex);
+				ObjectEntity *oe=new ObjectEntity();
 				shp->calculateNormals(); 
 				oe->setModel(shp);
-				oe->setTexture(tex);
+				oe->setMaterial(mat);
+				
 				oe->locate(x,y,z);
 				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
 				//oe->face(rx,ry,rz);
@@ -147,24 +150,33 @@ camera *world::getCurrentCamera() {
  return &this->default_camera;
 }
 
-void world::moveEntity(PhysicalEntity *e) {
- time_int lt=time.getDiffR();
+void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
+  time_int lt=time.getDiffR();
   coords c=e->nextCoords(lt);
-e->translate(c);
-e->rotate(c.rx,c.ry,c.rz);
+  
+  rooms_list rl=this->getRooms();
+
+
+  /* Kolizje z pomieszczeniami */
+  for(int i=0; i<rl.size(); i++) {
+		//bool cl=rl[i]->collides(e,c);
+		//cout << cl << endl;
+  }
+  e->translate(c);
+  e->rotate(c.rx,c.ry,c.rz);
 }
 
 void world::moveEntities() {
 	e_loc x,y,z,lt;
 	x,y,z=0;
 	for(int i=0; i<this->models.size(); i++) {
-		objectEntity *e=models[i];
+		ObjectEntity *e=models[i];
 		/*lt=time.getDiffR();
 		coords c=e->nextCoords(lt);
 		e->translate(c);*/
-		this->moveEntity((PhysicalEntity *)e);
+		//this->moveEntity((PhysicalEntity *)e,false);
 	}
-	this->moveEntity((PhysicalEntity *)&this->observer);
+	this->moveEntity((PhysicalEntity *)&this->observer,false);
 }
 
 void world::operator()() {

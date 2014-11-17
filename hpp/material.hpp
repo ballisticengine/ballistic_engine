@@ -3,15 +3,21 @@
 
 #include "light.hpp"
 #include "types.hpp"
+#include "texture.hpp"
+#include "texturable.hpp"
 
-class Material : public LightOrMaterial {
+
+class Material : public Texturable,public LightOrMaterial {
 protected:
 	colorRGBA emission,shininess;
+	texture *tex;
 public:
+	Material();
 	void setEmission(colorRGBA e);
 	void setShininess(colorRGBA s);
 	colorRGBA getEmission();
 	colorRGBA getShininess();
+
 };
 
 /*

@@ -44,11 +44,23 @@ entity::entity() {
  
 }
 
+/*Note offset to w³aœciwie nowa pozycja, a nie przemieszczenie */
+
 bool entity::collides(entity *e,coords offset) {
+	//cout << "C";
+	//cout << this->getBoundingShape() ;
 	if(!this->getBoundingShape()) {
 	 return false;
 	} 
-	return false;
+	shape *target_bs=e->getBoundingShape();
+	poly_list target_ps=target_bs->getPolys(),
+		src_ps=this->getBoundingShape()->getPolys();
+	for(int i=0; i<src_ps.size(); i++) {
+		
+		for(int n=0; n<target_ps.size(); n++) {
+			
+		}
+	}
 }
 
 shape * entity::getBoundingShape() {

@@ -29,7 +29,7 @@ BOOST_PYTHON_MODULE(world)
 	bp::class_<PhysicalEntity,PhysicalEntity*,bp::bases<entity> >("PhysicalEntity");
 
 
-	bp::class_<objectEntity,objectEntity*,bp::bases<PhysicalEntity> >("objectEntity");
+	bp::class_<ObjectEntity,ObjectEntity*,bp::bases<PhysicalEntity> >("ObjectEntity");
 
 	bp::class_<obj_list>("obj_list")
 		.def(bp::vector_indexing_suite<obj_list>() );

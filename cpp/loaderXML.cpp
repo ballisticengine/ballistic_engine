@@ -22,7 +22,9 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
    }
    texture *t=(texture *)textureFactory::getInstance()->get(f.second.get<string>("texture"));
    vt = new texPoly(vs_tmp);
-   vt->setTexture(t);   
+   Material * mt=new Material();
+   mt->setTexture(t);
+   vt->setMaterial(mt);   
    s->addPoly(vt);
   }
   

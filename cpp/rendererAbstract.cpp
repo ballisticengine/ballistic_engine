@@ -76,7 +76,10 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 		this->positionCamera();
 		this->locate(c.x,c.y,c.z);
 		this->face(c.rx,c.ry,c.rz);
-		this->assignTexture(ents[i]->getTexture());
+		
+		this->assignMaterial(ents[i]->getMaterial());
+		
+		
 		this->renderShape(ents[i]->getModel());
 		
 	}
@@ -98,7 +101,7 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
     
 	for (int i = 0; i < polys.size(); i++) {
         texPoly *t=(texPoly *)polys[i];
-		this->assignTexture(t->getTexture());
+		this->assignMaterial(t->getMaterial());
 		this->beginQuads();
 		for (int n = 0; n < 4; n++) {
             this->renderVertex(polys[i]->v[n]);

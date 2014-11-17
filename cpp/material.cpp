@@ -15,3 +15,8 @@ colorRGBA Material::getEmission() {
 colorRGBA Material::getShininess() {
 	return this->shininess;
 }
+
+
+
+Material::Material() {
+}

@@ -23,21 +23,22 @@ using namespace std;
 
 #include "singleton.hpp"
 #include "world.hpp"
-#include "rendererGL.hpp"
+#include "RendererGL.hpp"
 #include "sdlio.hpp"
 #include "sdlControls.hpp"
 #include "config.hpp"
 
-#include "utils.hpp";
+#include "utils.hpp"
 
 #include "python.hpp"
+
 typedef boost::shared_ptr<world> world_ptr;
 
 
 
 class engine : public singleton<engine> {
     sdlIO *io;
-	rendererGL *r;
+	RendererGL *r;
 	
     public:
 		void pythonInit();
