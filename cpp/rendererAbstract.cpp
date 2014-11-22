@@ -101,10 +101,10 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
     
 	for (int i = 0; i < polys.size(); i++) {
         texPoly *t=(texPoly *)polys[i];
-		this->assignMaterial(t->getMaterial());
+		this->assignTexture(t->getTexture());
 		this->beginQuads();
 		for (int n = 0; n < 4; n++) {
-            this->renderVertex(polys[i]->v[n]);
+			this->renderVertex(polys[i]->v[n],polys[i]->uvs[n]);
         }
 		this->end();
     }
@@ -117,24 +117,24 @@ void renderer::setFlush(flushf flush_callback) {
 
 void renderer::renderPShape(shape *s) {
     vert_list verts = s->getVertices();
-   
+	uv_list uvs=s->getUvs();
 	this->begin();
 	for (int i = 0; i < verts.size(); i++) {
-        this->renderVertex(verts[i]);
+        this->renderVertex(verts[i],uvs[i]);
     }
 	this->end();
 }
 
 void renderer::renderShape(shape *s) {
-    tris_list tris;
+    poly_list tris;
   
-	tris = s->getTris();
+	tris = s->getPolys();
 	//cout << tris.size() << endl;
     this->begin();
 	for (int i = 0; i < tris.size(); i++) {
        
 		for (int n = 0; n < 3; n++) {
-            this->renderVertex(tris[i]->v[n]);
+			this->renderVertex(tris[i]->v[n],tris[i]->uvs[n]);
 			//cout << tris[i]->v[n]->x << endl;
         }
     }

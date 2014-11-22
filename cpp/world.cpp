@@ -83,7 +83,7 @@ bool world::parseXml(string &fn) {
 	  /*for(int i=0; i<polys.size(); i++) {
 		  polys[i]->calculateNormals();
 	  }*/
-	  fs->calculateNormals();
+	 // fs->calculateNormals();
 	  roomE->setModel(fs);
 	  
 	   this->entities.push_back((entity *)roomE);
@@ -120,7 +120,7 @@ bool world::parseXml(string &fn) {
 			 //cout << "Light " << x << ", " << y << ", " << z << endl ;	
 			 PointLight *l=new PointLight();
 			 l->locate(x,y,z);
-			 l->face(rx,ry,rz);
+			 //l->face(rx,ry,rz);
 			 this->entities.push_back((entity *)l);
 			 this->lights.push_back((light *)l);
 		   }

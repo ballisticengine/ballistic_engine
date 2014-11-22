@@ -30,11 +30,13 @@ typedef vector<GLhandleARB> shader_list;
 
 class RendererGL : public renderer,public singleton<RendererGL> {
     protected:
-    char * loadText(string fn);
+    map <int,GLint> light_numbers;
+	int light_counter;
+	char * loadText(string fn);
 	shader_list shaders;
 	void addShader(string name);
 	map<texture *,GLuint> textures_ids;
-    virtual void renderVertex(vertex *v);
+    virtual void renderVertex(vertex *v,uv *uvs);
     texture *tt,*qt;
     shape *test;
     GLUquadricObj *lightbulb;   

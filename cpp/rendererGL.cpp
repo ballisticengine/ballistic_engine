@@ -2,9 +2,11 @@
 #include "types.hpp"
 #pragma comment(lib, "glu32.lib") 
 
-void RendererGL::renderVertex(vertex *v) {
-	glTexCoord2d(v->u, v->v);
+void RendererGL::renderVertex(vertex *v,uv *uvs) {
 	glNormal3d(v->normal.x,v->normal.y,v->normal.z);
+	if(uvs) {
+		glTexCoord2d(uvs->u, uvs->v);
+	}
 	glVertex3d(v->x, v->y, v->z);
 }
 
@@ -24,14 +26,13 @@ void RendererGL::renderTerrainSpecific() {
 	TerrainMap *tm=w->getTerrain();
 	shape *s=tm->getQuads();
 	vert_list verts;
-	//cout << "QC " << tm->getQuadCount() << endl;
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+
 	this->assignTexture(w->getTerrain()->getTexture());
 	glBegin(GL_QUADS);
 	for(int i=0; i<tm->getQuadCount(); i++) {
 
 		verts=s[i].getVertices();
-		//cout << "VS " << verts.size() << endl;
+
 		for(int v=0; v<verts.size(); v++) {
 			glVertex3f(verts[v]->x,verts[v]->y,verts[v]->z);
 		}
@@ -42,35 +43,41 @@ void RendererGL::renderTerrainSpecific() {
 }
 
 void RendererGL::lightSpecific(light *l) {
-	//return;
-	coords c=l->getCoords();
+	if (light_counter>7) {
+	 cout << "Too much lights" << endl;
+	 return;
+	}
+
+	
+	
+	coords lc=l->getCoords();
 	this->reset();
 
 	this->positionCamera();
 
-	//this->translate(c.x,c.y,c.z);
+	//glRotatef(-90,1,0,0);
+	
+
+	this->translate(lc.x,lc.y,lc.z);
 	
 	//glRotatef(-90,1,0,0);
-	//glEnable(GL_LIGHTING);
-	//glEnable(GL_LIGHT0);
-	
-
-	this->translate(c.x,c.y,c.z);
-	glRotatef(-90,1,0,0);
 	GLfloat position[] = { 0, 0, 0, 1.0f };
-	//gluSphere(lightbulb,4,10,10);
+	//glDisable(GL_LIGHTING);
 
+	gluSphere(lightbulb,0.5,10,10);
+	
+	glEnable(light_numbers[light_counter]);
 	GLfloat ambientLight[] = { 0, 0, 0, 1.0f }; 
 	GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
 	GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	GLfloat mat[]= {0.6, 0.6, 0.6, 1.0};
 	GLfloat shin=30;
 	glLightModelfv( GL_LIGHT_MODEL_AMBIENT, ambientLight );
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight); 
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight); 
-	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
+	glLightfv(light_numbers[light_counter], GL_AMBIENT, ambientLight); 
+	glLightfv(light_numbers[light_counter], GL_DIFFUSE, diffuseLight); 
+	glLightfv(light_numbers[light_counter], GL_SPECULAR, specularLight);
 
-	glLightfv(GL_LIGHT0, GL_POSITION, position);
+	glLightfv(light_numbers[light_counter], GL_POSITION, position);
 	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0);  
 	glEnable(GL_COLOR_MATERIAL)        ;
    
@@ -78,7 +85,7 @@ void RendererGL::lightSpecific(light *l) {
 	GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
 	// glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 	
-	
+	light_counter++;
 	
 	
 	
@@ -86,7 +93,14 @@ void RendererGL::lightSpecific(light *l) {
 }
 
 RendererGL::RendererGL() {
-
+	light_numbers[0]=GL_LIGHT0;
+	light_numbers[1]=GL_LIGHT1;
+	light_numbers[2]=GL_LIGHT2;
+	light_numbers[3]=GL_LIGHT3;
+	light_numbers[4]=GL_LIGHT4;
+	light_numbers[5]=GL_LIGHT5;
+	light_numbers[6]=GL_LIGHT6;
+	light_numbers[7]=GL_LIGHT7;
 }
 
 
@@ -94,7 +108,7 @@ RendererGL::RendererGL() {
 void RendererGL::render() {
 
 	glClear( GL_DEPTH_BUFFER_BIT );
-
+	light_counter=0;
 	glMatrixMode(GL_MODELVIEW);
 	for(int i=0; i<shaders.size(); i++) {
 		glUseProgramObjectARB(shaders[i]);
@@ -104,7 +118,7 @@ void RendererGL::render() {
 	}
 	glColor3f(1,1,1);
 	renderSkybox(w->getSkybox());
-	//this->positionLights();
+	this->positionLights();
 	this->reset();
 
 	this->positionCamera();
@@ -148,10 +162,9 @@ void RendererGL::specificInit() {
 	glEnable(GL_TEXTURE_2D);
 	glEnable( GL_NORMALIZE );
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glEnable(GL_LIGHTING);
 	glShadeModel(GL_SMOOTH);
-	//glEnable(GL_COLOR_MATERIAL);
-	//glColorMaterial(GL_FRONT,GL_AMBIENT_AND_DIFFUSE);
-	//glColor3f(0,0,1);
+
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); 
 	// glEnable( GL_LIGHTING );
 	//glEnable(GL_LIGHT0);
@@ -212,7 +225,7 @@ void RendererGL::renderSkybox(skybox *sky) {
 	this->reset();
 
 	glDisable(GL_DEPTH_TEST);
-	//	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHTING);
 	this->translate(0,0,-18);
 	this->assignTexture(sky->getTexture());
 	glBegin(GL_QUADS);
@@ -220,7 +233,7 @@ void RendererGL::renderSkybox(skybox *sky) {
 
 	glEnd();
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 }
 
 void RendererGL::assignTexture(texture *t) {

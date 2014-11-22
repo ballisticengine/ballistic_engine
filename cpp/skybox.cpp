@@ -22,10 +22,10 @@ texture *skybox::getTexture() {
 void skybox::makeShape(float x,float y) {
 
     box=new shape();
-    box->addVertex(new vertex(x,-y,0,1,1));
-    box->addVertex(new vertex(-x,-y,0,0,1));
-    box->addVertex(new vertex(-x,y,0,0,0));
-    box->addVertex(new vertex(x,y,0,1,0));
+    box->addVertex(new vertex(x,-y,0),new uv(1,1));
+    box->addVertex(new vertex(-x,-y,0),new uv(0,1));
+	box->addVertex(new vertex(-x,y,0),new uv(0,0));
+	box->addVertex(new vertex(x,y,0),new uv(1,0));
 }
 
 shape * skybox::getShape() {

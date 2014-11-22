@@ -1,5 +1,15 @@
 #include "types.hpp"
 
+uv::uv(e_loc u,e_loc v) {
+	this->u=u;
+	this->v=v;
+}
+
+uv::uv() {
+	u=0;
+	v=0;
+}
+
 /* operacje na wieszchołkach */
 
 bool vertex::operator==(vertex &v) {
@@ -10,24 +20,20 @@ bool vertex::operator==(vertex &v) {
 }
 
 vertex::vertex() {
-    x = 0;
+    has_normal=false;
+	x = 0;
     y = 0;
     z = 0;
 }
 
 vertex::vertex(e_loc x, e_loc y, e_loc z) {
-    this->x = x;
+    has_normal=false;
+	this->x = x;
     this->y = y;
     this->z = z;
 }
 
-vertex::vertex(e_loc x, e_loc y, e_loc z, e_loc u, e_loc v) {
-    this->x = x;
-    this->y = y;
-    this->z = z;
-    this->u = u;
-    this->v = v;
-}
+
 
 /*welokąty*/
 
@@ -48,33 +54,57 @@ bool poly::operator==(poly &p) {
 }
 
 void poly::calculateNormals() {
+	MathTypes::vector va,vb,cp;
+	va=v[0]->diff(*v[2]);
+	vb=v[1]->diff(*v[2]);
+		cp=va.crossProduct(&vb);
+		cp=cp.normalize();
+		v[0]->normal=cp;
+		v[0]->has_normal=true;
 	
-	/*
-	MathTypes::vector v1=v[0]->diff(*v[1]),v2=v[1]->diff(*v[2]);
-	v1.normalize();
-	v2.normalize();
-	MathTypes::vector cp=v1.crossProduct(&v2);
-	*/
-	for(int i=2; i<v.size(); i++) {
-		MathTypes::vector 
-			v1=v[i-2]->diff(*v[i-1]),
-			v2=v[i-1]->diff(*v[i]),
-			v3=v[i-1]->diff(*v[i-2])
-			;
-		v1.normalize();
-		v2.normalize();
-		v3.normalize();
-		MathTypes::vector 
-			cp1=v1.crossProduct(&v2),
-			cp2=v2.crossProduct(&v1),
-			cp3=v3.crossProduct(&v2)
-			;
-		v[i]->normal=cp1;
-		v[i-1]->normal=cp2;
-		v[i-2]->normal=cp1;
-		//verts[i]->normal.write();
+	for(int i=0; i<v.size(); i++) {
+		v[i]->normal=cp;
+		v[i]->has_normal=true;
 	}
+
+	/*for(int i=2; i<v.size(); i++) {
+		va=v[i-2]->diff(*v[i]);
+		vb=v[i-1]->diff(*v[i]);
+		cp=va.crossProduct(&vb);
+		v[i]->normal=cp;
+		v[i]->has_normal=true;
+	}*/
+	return;
+	/*
+	static int cnt=0;
+
+	MathTypes::vector va,vb,cp;//-v[0];
+
+	
+	va=v[0]->diff(*v[2]);
+	vb=v[1]->diff(*v[2]);
+		cp=va.crossProduct(&vb);
+
+
+	
+	
+	cp=cp.normalize();
+	v[0]->normal=cp;
+	v[1]->normal=cp;
+	v[2]->normal=cp;
+	v[0]->has_normal=true;
+	v[1]->has_normal=true;
+	v[2]->has_normal=true;
+	//cout << "tVS: " << v.size() << ", " << cnt << endl;
+	cnt++;
+	return;
+	*/
 }
+
+
+	
+
+
 
 
 /* nowe trójkąty */
@@ -111,23 +141,14 @@ bool shape::operator==(shape &s) {
     return true;
 }
 
-triangle * shape::addTriangle(triangle *t) {
-    for (int i = 0; i < 3; i++) {
-        this->addVertex(t->v[i]);
-        triangles.push_back(t);
-		polys.push_back(t);
-    }
-	return t;
-}
-
-triangle * shape::addTriangle(vertex v[3]) {
-    triangle *t = new triangle(v);
-    return this->addTriangle(t);
-
+vertex * shape::addVertex(vertex *v,uv *uvs) {
+	
+	this->uvs.push_back(uvs);
+	return this->addVertex(v);
 }
 
 vertex * shape::addVertex(vertex *v) {
-    if (vertices.size() != 0) { //
+    if (vertices.size() != 0) { 
         vertex *f = findVertex(v);
         if (f) {
             return f;
@@ -147,7 +168,8 @@ vertex * shape::addVertex(e_loc x, e_loc y, e_loc z) {
 }
 
 vertex * shape::findVertex(vertex *v) {
-    for (int i = 0; i < vertices.size(); i++) {
+    //return 0;
+	for (int i = 0; i < vertices.size(); i++) {
         if (*vertices[i] == *v) {
             return vertices[i];
         }
@@ -181,6 +203,10 @@ e_loc shape::getScale() {
  return scale;
 }
 
+uv_list shape::getUvs() {
+ return uvs;
+}
+
 vector <poly *> shape::getPolys() {
 	return this->polys;
 }
@@ -188,7 +214,7 @@ vector <poly *> shape::getPolys() {
 void shape::addPoly(poly *p) {
 	this->polys.push_back(p);
 	for (int i=0; i<p->v.size(); i++) {
-		this->addVertex(p->v[i]);
+		p->v[i]=this->addVertex(p->v[i]);
 	}
 }
 
@@ -197,5 +223,10 @@ void shape::calculateNormals() {
 	poly_list pl=getPolys();
 	for(int i=0; i<pl.size(); i++) {
 		pl[i]->calculateNormals();
+	}
+
+	for(int i=0; i<verts.size(); i++) {
+		if(!verts[i]->has_normal)
+			cout << "No normal for << " << i << "\n";
 	}
 }

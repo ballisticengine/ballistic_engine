@@ -41,23 +41,30 @@ struct frustumSizes {
 
 //class triangle;
 
+class uv {
+public:
+	uv(e_loc u,e_loc v);
+	uv();
+	e_loc u,v;
+};
 
+typedef vector<uv *> uv_list;
 
 
 class vertex : public MathTypes::vector {
 public:
-    e_loc u,v;
      MathTypes::vector normal ;
+	 bool has_normal;
 	virtual bool operator==(vertex &v);
     vertex();
     vertex(e_loc x,e_loc y,e_loc z);
-    vertex(e_loc x,e_loc y,e_loc z,e_loc u,e_loc v);
 };
 
 typedef vector <vertex *> vert_list;
 
 class poly {
 public:
+	vector<uv *> uvs;
 	vert_list v;
 	virtual bool operator==(poly &p);
 	poly();
@@ -72,6 +79,7 @@ public:
 	triangle();
 	triangle(vertex *a,vertex *b,vertex *c);
     triangle(vertex vs[3]);
+	
 
 };
 
@@ -84,25 +92,25 @@ class shape {
     vector <vertex *> vertices;
     vector <triangle *> triangles;
 	vector <poly *> polys;
+	uv_list uvs;
+	
 public:
     bool operator==(shape &s);
     virtual vector <triangle *> getTris();
     virtual vert_list getVertices();
 	virtual vector <poly *> getPolys();
+	virtual uv_list getUvs();
 	virtual void calculateNormals();
 	virtual void addPoly(poly *p);
     virtual void addVertices(vertex *vs,int num_tris);
     void setScale(e_loc scale);
 	virtual e_loc getScale();
-    /*
-     Dodaje trójkąt do bryły przyporządkowując wieszchołki wspólne
-     */
-    virtual triangle * addTriangle(triangle *t);
-    virtual triangle * addTriangle(vertex v[3]);
+ 
     /*
      Dodaje wierchołek, jeśli nie istnieje i zwraca wskaźnik do niego. Jeśli już istnieje zwraca wskaźnik
      */
     virtual vertex * addVertex(vertex *v);
+	virtual vertex * addVertex(vertex *v,uv *uvs);
     virtual vertex * addVertex(e_loc x,e_loc y,e_loc z);
     /*
      Szuka identycznego wieszchołka i zwraca go

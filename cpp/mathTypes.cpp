@@ -30,11 +30,9 @@ void vector::write() {
 vector  & vector::crossProduct(const MathTypes::vector * b) {
 	//ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
 	/*
-	vx = v1y * v2z - v1z * v2y
-		
-		vy = v1z * v2x - v1x * v2z
-		
-		vz = v1x * v2y - v1y * v2x
+	 n[0]=va[1]*vb[2] - va[2]*vb[1];
+ n[1]=va[2]*vb[0] - va[0]*vb[2];
+ n[2]=va[0]*vb[1] - va[1]*vb[0];
 	*/
 	vector a=*this,v=a;
 
@@ -97,7 +95,7 @@ e_loc vector::length() {
 }
 
 vector & vector::normalize() {
-	vector v;
+	vector v=*this;
 	v.x/=length();
 	v.y/=length();
 	v.z/=length();

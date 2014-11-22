@@ -3,6 +3,7 @@
 void loaderMD2::md2ToShape(md2file *md2, shape *s) {
     int i, iv;
     vertex * vs_tmp[3], *vp;
+	uv *utmp[3];
     triangle *vt;
     for (int t = 0; t < md2->header.num_tris; t++) {
 
@@ -27,13 +28,22 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
             
 			u = (float) md2->st[iv].s / (float) md2->header.skinwidth;
             v = (float) md2->st[iv].t / (float) md2->header.skinheight;
-            vs_tmp[vi] = new vertex(scaled[0], scaled[1], scaled[2], u, v);
+            utmp[vi]=new uv();
+			utmp[vi]->u=u;
+			utmp[vi]->v=v;
+			vs_tmp[vi] = new vertex(scaled[0], scaled[1], scaled[2]);
             // cout << scaled[0] << "," << scaled[1] << "," << scaled[2] << endl;
 
         }
         vt = new triangle(vs_tmp[0], vs_tmp[1], vs_tmp[2]);
-        s->addTriangle(vt);
-
+		for(i=0; i<vt->v.size(); i++) {
+			vt->uvs.push_back(utmp[i]);
+			}
+		
+		//vt->calculateNormals();
+		
+		s->addPoly(vt);
+		
     }
 
 
