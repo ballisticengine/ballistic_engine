@@ -97,13 +97,17 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
     poly_list polys;
   
 	polys = s->getPolys();
-	
-    
+
 	for (int i = 0; i < polys.size(); i++) {
         texPoly *t=(texPoly *)polys[i];
-		this->assignTexture(t->getTexture());
-		this->beginQuads();
-		for (int n = 0; n < 4; n++) {
+		
+		if(t->getTexture()) {
+			this->assignTexture(t->getTexture());
+			//this->assignMaterial(t->getMaterial());	
+		}
+		int count=s->getPolyCount();
+		this->beginHinted(s);
+		for (int n = 0; n < count; n++) {
 			this->renderVertex(polys[i]->v[n],polys[i]->uvs[n]);
         }
 		this->end();
@@ -127,15 +131,12 @@ void renderer::renderPShape(shape *s) {
 
 void renderer::renderShape(shape *s) {
     poly_list tris;
-  
 	tris = s->getPolys();
-	//cout << tris.size() << endl;
     this->begin();
 	for (int i = 0; i < tris.size(); i++) {
        
 		for (int n = 0; n < 3; n++) {
 			this->renderVertex(tris[i]->v[n],tris[i]->uvs[n]);
-			//cout << tris[i]->v[n]->x << endl;
         }
     }
 	this->end();

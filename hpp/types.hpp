@@ -93,10 +93,14 @@ class shape {
     vector <triangle *> triangles;
 	vector <poly *> polys;
 	uv_list uvs;
+	void *renderer_hint;
 	
 public:
-    bool operator==(shape &s);
-    virtual vector <triangle *> getTris();
+    virtual void setRendererHint(void *hint);
+	virtual void * getRendererHint();
+	bool operator==(shape &s);
+    virtual int getPolyCount();
+	virtual vector <triangle *> getTris();
     virtual vert_list getVertices();
 	virtual vector <poly *> getPolys();
 	virtual uv_list getUvs();

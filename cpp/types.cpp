@@ -230,3 +230,17 @@ void shape::calculateNormals() {
 			cout << "No normal for << " << i << "\n";
 	}
 }
+
+void shape::setRendererHint(void *hint) {
+	this->renderer_hint=hint;
+}
+
+void * shape::getRendererHint() {
+	return this->renderer_hint;
+}
+
+ int shape::getPolyCount() {
+	poly_list p=getPolys();
+	int count=p[0]->v.size();
+	return count;
+ }

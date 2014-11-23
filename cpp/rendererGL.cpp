@@ -18,9 +18,16 @@ void RendererGL::beginQuads() {
 	glBegin(GL_QUADS);
 }
 
+void RendererGL::beginHinted(shape *s) {
+	int count=s->getPolyCount();
+	glBegin(count_names[count]);
+}
+
 void RendererGL::end() {
 	glEnd();
 }
+
+
 
 void RendererGL::renderTerrainSpecific() {
 	TerrainMap *tm=w->getTerrain();
@@ -101,6 +108,8 @@ RendererGL::RendererGL() {
 	light_numbers[5]=GL_LIGHT5;
 	light_numbers[6]=GL_LIGHT6;
 	light_numbers[7]=GL_LIGHT7;
+	count_names[3]=GL_TRIANGLES;
+	count_names[4]=GL_QUADS;
 }
 
 

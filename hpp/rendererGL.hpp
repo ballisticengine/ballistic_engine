@@ -30,7 +30,7 @@ typedef vector<GLhandleARB> shader_list;
 
 class RendererGL : public renderer,public singleton<RendererGL> {
     protected:
-    map <int,GLint> light_numbers;
+    map <int,GLint> light_numbers,count_names;
 	int light_counter;
 	char * loadText(string fn);
 	shader_list shaders;
@@ -48,6 +48,7 @@ class RendererGL : public renderer,public singleton<RendererGL> {
 	virtual void begin();
 	virtual void beginQuads();
 	virtual void end();
+	virtual void beginHinted(shape *s);
 	virtual void translateSpecific(e_loc x,e_loc y,e_loc z);
 	virtual void lightSpecific(light *l);
     //virtual void rotateSpecific(e_loc x,e_loc y,e_loc z);

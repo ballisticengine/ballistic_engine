@@ -33,14 +33,21 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 	   
 	   i++;
    }
-   texture *t=(texture *)textureFactory::getInstance()->get(f.second.get<string>("texture"));
-   vt = new texPoly(vs_tmp);
    Material * mt=new Material();
+    vt = new texPoly(vs_tmp);
+   try {
+   string texname=f.second.get<string>("texture");
+   texture *t=(texture *)textureFactory::getInstance()->get(texname);
+  
+   
 	mt->setTexture(t);
    
 	vt->setTexture(t);
 	vt->setMaterial(mt);
-   
+   } catch(std::exception e) {
+	   vt->setTexture(0);
+	   vt->setMaterial(0);
+   } 
 	vt->uvs=uv_tmp;
    s->addPoly(vt);
   }
