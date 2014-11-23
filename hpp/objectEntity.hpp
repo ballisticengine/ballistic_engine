@@ -6,17 +6,19 @@
 #include "texture.hpp"
 #include "types.hpp" 
 #include "material.hpp"
+#include "facetexShape.hpp"
 
 class ObjectEntity : public PhysicalEntity,public Texturable {
 protected:
-	shape *model,*bounding;
+	faceTexShape *model;
+	shape *bounding;
 	texture *tex;
 	Material *mat;
 public:
-	virtual shape * getModel();
+	virtual faceTexShape * getModel();
 	
 	
-	virtual void setModel(shape *model);
+	virtual void setModel(faceTexShape *model);
 	
 	virtual Material *getMaterial();
 	virtual void setMaterial(Material *mat);

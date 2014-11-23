@@ -17,6 +17,7 @@ using namespace boost::property_tree;
 
 #define GEOM_MEM_EXT "[geom]"
 #define MD2_EXT "md2"
+#define XML_EXT "xml"
 
 
 

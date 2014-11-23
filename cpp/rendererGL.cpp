@@ -62,7 +62,7 @@ void RendererGL::lightSpecific(light *l) {
 
 	this->positionCamera();
 
-	//glRotatef(-90,1,0,0);
+	glRotatef(-90,1,0,0);
 	
 
 	this->translate(lc.x,lc.y,lc.z);
@@ -71,24 +71,26 @@ void RendererGL::lightSpecific(light *l) {
 	GLfloat position[] = { 0, 0, 0, 1.0f };
 	//glDisable(GL_LIGHTING);
 
-	gluSphere(lightbulb,0.5,10,10);
+	//gluSphere(lightbulb,0.5,10,10);
 	
 	glEnable(light_numbers[light_counter]);
 	GLfloat ambientLight[] = { 0, 0, 0, 1.0f }; 
 	GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
 	GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
-	GLfloat mat[]= {0.6, 0.6, 0.6, 1.0};
+	colorRGBA c=l->getDiffuse();
+	GLfloat intensity[]={c.r,c.g,c.b,c.a};
+	
 	GLfloat shin=30;
 	glLightModelfv( GL_LIGHT_MODEL_AMBIENT, ambientLight );
 	glLightfv(light_numbers[light_counter], GL_AMBIENT, ambientLight); 
-	glLightfv(light_numbers[light_counter], GL_DIFFUSE, diffuseLight); 
-	glLightfv(light_numbers[light_counter], GL_SPECULAR, specularLight);
+	glLightfv(light_numbers[light_counter], GL_DIFFUSE, intensity); 
+	glLightfv(light_numbers[light_counter], GL_SPECULAR, intensity);
 
 	glLightfv(light_numbers[light_counter], GL_POSITION, position);
-	//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 0);  
+	 
 	glEnable(GL_COLOR_MATERIAL)        ;
    
-	glColor3f(1,1,0);
+	//glColor3f(1,1,0);
 	GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
 	// glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 	
@@ -115,8 +117,8 @@ RendererGL::RendererGL() {
 
 
 void RendererGL::render() {
-
-	glClear( GL_DEPTH_BUFFER_BIT );
+	glClearColor(1,1,1,1);
+	glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	light_counter=0;
 	glMatrixMode(GL_MODELVIEW);
 	for(int i=0; i<shaders.size(); i++) {
@@ -125,8 +127,8 @@ void RendererGL::render() {
 	//	glGetObjectParameterivARB(shaders[i], GL_OBJECT_LINK_STATUS_ARB, &param);
 		//cout << "Shad status" << param << endl;
 	}
-	glColor3f(1,1,1);
-	renderSkybox(w->getSkybox());
+	
+	//renderSkybox(w->getSkybox());
 	this->positionLights();
 	this->reset();
 
@@ -144,7 +146,8 @@ void RendererGL::render() {
 	this->positionCamera();
 
 	glRotatef(-90,1,0,0);
-	glFrontFace(GL_CCW);
+	//glFrontFace(GL_CCW);
+	
 	
 	
 	this->renderAllEntities();
@@ -252,7 +255,28 @@ void RendererGL::assignTexture(texture *t) {
 }
 
 void RendererGL::assignMaterial(Material *m) {
-	this->setupTexture(m->getTexture());
+	colorRGBA specular=m->getSpecular(),
+		diffuse=m->getDiffuse()
+		;
+	e_loc shining=m->getShininess(),emit=m->getEmission()
+		;
+
+	//cout << diffuse.r << ", " << diffuse.g << ", " << diffuse.b << ", " << diffuse.a << endl;
+	 GLfloat diff[]={diffuse.r,diffuse.g,diffuse.b,diffuse.a};
+	 GLfloat spec[]={specular.r,specular.g,specular.b,specular.a};
+	 GLfloat emi[]={emit,emit,emit,1};
+	 glMaterialfv( GL_FRONT_AND_BACK, GL_DIFFUSE, diff );
+	 glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, spec );
+	 glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, shining );
+	  glMaterialfv( GL_FRONT_AND_BACK, GL_EMISSION, emi );
+
+	/*
+glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT, &(m_Ambient.r) );
+        glMaterialfv( GL_FRONT_AND_BACK, GL_DIFFUSE, &(m_Diffuse.r) );
+        glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, &(m_Specular.r) );
+        glMaterialfv( GL_FRONT_AND_BACK, GL_EMISSION, &(m_Emission.r) );
+        glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, m_Shininess );
+*/
 }
 
 void RendererGL::setupTexture(texture *t) {

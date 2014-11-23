@@ -8,7 +8,10 @@ void * shapeFactory::actualLoad(string fn) {
   
   loader->loadMD2(fn,s,this->scale);
   //this->scale=1; //skalowanie jest jednorazowe
-  } 
+  } else if (ext==XML_EXT) {
+	 loaderXML *loader=loaderXML::getInstance();
+	 loader->load(fn,s);
+  }
   else if(ext==GEOM_MEM_EXT) {
 	 loaderXML *loader=loaderXML::getInstance();
 	//write_xml(std::cout, *shp);

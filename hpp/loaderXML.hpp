@@ -18,7 +18,7 @@ using namespace boost::property_tree;
 #include "facetexShape.hpp"
 #include "textureFactory.hpp"
 #include "material.hpp"
-
+#include "utils.hpp"
 
 class loaderXML : public singleton<loaderXML> {
 protected:
@@ -26,6 +26,7 @@ protected:
  void toShape(ptree &geom,faceTexShape *s);
 public:
 	string loadXML(ptree &tree,faceTexShape *s);
+	bool load(string fn, faceTexShape *s);
 	string getName(ptree &tree);
 	//loadXML(string fn,shape *s); //TODO
 };

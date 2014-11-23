@@ -7,25 +7,20 @@
 #include "texturable.hpp"
 
 
-class Material : public Texturable,public LightOrMaterial {
+class Material : public LightOrMaterial {
 protected:
-	colorRGBA emission,shininess;
+	//colorRGBA emission,shininess;
+	e_loc emission,shininess;
 	texture *tex;
 public:
 	Material();
-	void setEmission(colorRGBA e);
-	void setShininess(colorRGBA s);
-	colorRGBA getEmission();
-	colorRGBA getShininess();
+	void setEmission(e_loc e);
+	void setShininess(e_loc s);
+	e_loc getEmission();
+	e_loc getShininess();
 
 };
 
-/*
-glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT, &(m_Ambient.r) );
-        glMaterialfv( GL_FRONT_AND_BACK, GL_DIFFUSE, &(m_Diffuse.r) );
-        glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, &(m_Specular.r) );
-        glMaterialfv( GL_FRONT_AND_BACK, GL_EMISSION, &(m_Emission.r) );
-        glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, m_Shininess );
-*/
+
 
 #endif

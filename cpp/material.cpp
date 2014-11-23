@@ -1,18 +1,18 @@
 #include "material.hpp"
 
-void Material::setEmission(colorRGBA e) {
+void Material::setEmission(e_loc e) {
 	this->emission=e;
 }
 
-void Material::setShininess(colorRGBA s) {
+void Material::setShininess(e_loc s) {
 	this->shininess=s;
 }
 
-colorRGBA Material::getEmission() {
+e_loc Material::getEmission() {
 	return this->emission;
 }
 
-colorRGBA Material::getShininess() {
+e_loc Material::getShininess() {
 	return this->shininess;
 }
 

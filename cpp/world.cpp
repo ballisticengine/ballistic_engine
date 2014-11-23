@@ -102,15 +102,17 @@ bool world::parseXml(string &fn) {
 					 tfn=entobj.second.get<string>("texture");
 				e_loc sc=entobj.second.get<e_loc>("scale");
 				shapef->setScale(sc);
-				shape *shp=(shape *)shapef->get(mfn);
+				faceTexShape *shp=(faceTexShape *)shapef->get(mfn);
 				texture *tex=(texture *)texf->get(tfn);
+				cout << "TFN: " << tfn << endl;
 				Material *mat=new Material();
-				mat->setTexture(tex);
+				
+
 				ObjectEntity *oe=new ObjectEntity();
 				shp->calculateNormals(); 
 				oe->setModel(shp);
 				oe->setMaterial(mat);
-				
+				oe->setTexture(tex);
 				oe->locate(x,y,z);
 				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
 				//oe->face(rx,ry,rz);
@@ -120,6 +122,14 @@ bool world::parseXml(string &fn) {
 			 //cout << "Light " << x << ", " << y << ", " << z << endl ;	
 			 PointLight *l=new PointLight();
 			 l->locate(x,y,z);
+			 
+			 colorRGBA color;
+			 color.r=entobj.second.get<float>("r");
+			 color.g=entobj.second.get<float>("g");
+				color.b=entobj.second.get<float>("b");
+				color.a=1.0f;
+
+			 l->setAllColors(color);
 			 //l->face(rx,ry,rz);
 			 this->entities.push_back((entity *)l);
 			 this->lights.push_back((light *)l);

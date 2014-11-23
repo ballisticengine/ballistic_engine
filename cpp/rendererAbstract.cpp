@@ -69,6 +69,7 @@ void renderer::init() {
 void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transformuje
 	obj_list ents=w->getModels();
 	//cout << ents.size() << endl;
+	
 	for(int i=0; i<ents.size(); i++) {
 		
 		coords c=ents[i]->getCoords();
@@ -77,10 +78,10 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 		this->locate(c.x,c.y,c.z);
 		this->face(c.rx,c.ry,c.rz);
 		
-		this->assignMaterial(ents[i]->getMaterial());
+		//this->assignMaterial(ents[i]->getMaterial());
 		
 		
-		this->renderShape(ents[i]->getModel());
+		this->renderFaceTexShape(ents[i]->getModel());
 		
 	}
 }
@@ -103,7 +104,10 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
 		
 		if(t->getTexture()) {
 			this->assignTexture(t->getTexture());
-			//this->assignMaterial(t->getMaterial());	
+			
+		}
+		if(t->getMaterial()) {
+			this->assignMaterial(t->getMaterial());	
 		}
 		int count=s->getPolyCount();
 		this->beginHinted(s);
