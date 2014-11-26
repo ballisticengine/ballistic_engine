@@ -19,3 +19,6 @@ Material *ObjectEntity::getMaterial() {
 void ObjectEntity::setMaterial(Material *mat) {
  this->mat=mat;
 }
+
+void ObjectEntity::calcBoundingCube() {
+}

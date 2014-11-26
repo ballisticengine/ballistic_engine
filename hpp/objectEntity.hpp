@@ -19,7 +19,7 @@ public:
 	
 	
 	virtual void setModel(faceTexShape *model);
-	
+	virtual void calcBoundingCube();
 	virtual Material *getMaterial();
 	virtual void setMaterial(Material *mat);
 	virtual shape *getBoundingShape();
