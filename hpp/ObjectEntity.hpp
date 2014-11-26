@@ -7,6 +7,7 @@
 #include "types.hpp" 
 #include "material.hpp"
 #include "facetexShape.hpp"
+#include "boundingCube.hpp"
 
 class ObjectEntity : public PhysicalEntity,public Texturable {
 protected:

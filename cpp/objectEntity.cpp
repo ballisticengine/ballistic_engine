@@ -21,4 +21,8 @@ void ObjectEntity::setMaterial(Material *mat) {
 }
 
 void ObjectEntity::calcBoundingCube() {
+	
+	
+
 }
+

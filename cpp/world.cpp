@@ -115,6 +115,7 @@ bool world::parseXml(string &fn) {
 				oe->setTexture(tex);
 				oe->locate(x,y,z);
 				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
+				oe->calcBoundingCube();
 				//oe->face(rx,ry,rz);
 				this->entities.push_back((entity *)oe);
 				this->models.push_back(oe);
