@@ -62,7 +62,7 @@ void RendererGL::lightSpecific(light *l) {
 
 	this->positionCamera();
 
-	glRotatef(-90,1,0,0);
+	//glRotatef(-90,1,0,0);
 	
 
 	this->translate(lc.x,lc.y,lc.z);
@@ -135,7 +135,7 @@ void RendererGL::render() {
 	this->positionCamera();
 
 
-	glRotatef(-90,1,0,0);
+	//glRotatef(-90,1,0,0);
 
 
 	glFrontFace(GL_CW);
@@ -145,7 +145,7 @@ void RendererGL::render() {
 	this->reset();
 	this->positionCamera();
 
-	glRotatef(-90,1,0,0);
+	//glRotatef(-90,1,0,0);
 	//glFrontFace(GL_CCW);
 	
 	
@@ -321,7 +321,7 @@ void RendererGL::resetSpecific() {
 }
 
 void RendererGL::positionCameraSpecific() {
-	glRotatef(-90,1,0,0);
+	//glRotatef(-90,1,0,0);
 }
 
 void RendererGL::drawBoundingBox(BoundingCube *bound) {

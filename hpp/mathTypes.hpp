@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 
+
+
 typedef double e_loc;
 
 namespace MathTypes {

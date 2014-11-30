@@ -44,7 +44,7 @@ entity::entity() {
  
 }
 
-/*Note offset to w³aœciwie nowa pozycja, a nie przemieszczenie */
+/* offset to w³aœciwie nowa pozycja, a nie przemieszczenie */
 
 bool entity::collides(entity *e)//,coords offset) 
 
@@ -59,19 +59,19 @@ bool entity::collides(entity *e)//,coords offset)
 	coords ac=this->getCoords(),bc=e->getCoords();
 
 	e_loc 
-		  amax_x=a->max_x+ac.x,
-		  amin_x=a->min_x+ac.x,
-		  amax_y=a->max_y+ac.y,
-		  amin_y=a->min_y+ac.y,
-		  amax_z=a->max_z+ac.z,
-		  amin_z=a->min_z+ac.z,
+		  amax_x=a->max.x+ac.x,
+		  amin_x=a->min.x+ac.x,
+		  amax_y=a->max.y+ac.y,
+		  amin_y=a->min.y+ac.y,
+		  amax_z=a->max.z+ac.z,
+		  amin_z=a->min.z+ac.z,
 		  
-		  bmax_x=-(b->min_x+bc.x),
-		  bmin_x=-(b->max_x+bc.x),
-		  bmax_y=b->max_y+bc.y,
-		  bmin_y=b->min_y+bc.y,
-		  bmax_z=-(b->min_z+bc.z),
-		  bmin_z=-(b->max_z+bc.z)
+		  bmax_x=-(b->min.x+bc.x),
+		  bmin_x=-(b->max.x+bc.x),
+		  bmax_y=b->max.y+bc.y,
+		  bmin_y=b->min.y+bc.y,
+		  bmax_z=-(b->min.z+bc.z),
+		  bmin_z=-(b->max.z+bc.z)
 		
 		  ;
 

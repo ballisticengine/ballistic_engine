@@ -103,7 +103,8 @@ vector & vector::normalize() {
 }
 
 e_loc vector::dotProduct(const MathTypes::vector * b) {
-	e_loc dp=x*b->x+y*b->y*z*b->z;
+	e_loc dp=x*b->x+y*b->y+z*b->z;
+	//std::cout <<  << "*" << std::endl;
 	return dp;
 }
 
@@ -125,6 +126,7 @@ vector & vector::operator-(const vector &b) {
 
 vector & vector::operator/(const e_loc val) {
  vector v;
+ 
  v.x=this->x/val;
  v.y=this->y/val;
  v.z=this->z/val;

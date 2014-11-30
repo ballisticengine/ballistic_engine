@@ -2,6 +2,9 @@
 #define ROOM_ENTITY_H
 
 #include "ObjectEntity.hpp"
+#include <cmath>
+
+using namespace std;
 
 class roomEntity : public ObjectEntity {
 protected:

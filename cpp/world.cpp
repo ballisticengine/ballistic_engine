@@ -185,7 +185,7 @@ void world::moveEntities() {
 	for(int i=0; i<rl.size(); i++) {
 		bool col=rl[i]->collides(this->getObserver());
 		if(col) {
-		 cout << "World collision" << endl;
+		// cout << "World collision" << endl;
 		}
 	}
 
