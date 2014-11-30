@@ -102,4 +102,41 @@ vector & vector::normalize() {
 	return v;
 }
 
+e_loc vector::dotProduct(const MathTypes::vector * b) {
+	e_loc dp=x*b->x+y*b->y*z*b->z;
+	return dp;
+}
+
+vector & vector::operator+(const vector &b) {
+	vector v;
+	v.x=this->x+b.x;
+	v.y=this->y+b.y;
+	v.z=this->z+b.z;
+	return v;
+}
+
+vector & vector::operator-(const vector &b) {
+	vector v;
+	v.x=this->x-b.x;
+	v.y=this->y-b.y;
+	v.z=this->z-b.z;
+	return v;
+}
+
+vector & vector::operator/(const e_loc val) {
+ vector v;
+ v.x=this->x/val;
+ v.y=this->y/val;
+ v.z=this->z/val;
+ return v;
+}
+
+vector & vector::operator/(const vector &b) {
+ vector v;
+ v.x=this->x/b.x;
+ v.y=this->y/b.y;
+ v.z=this->z/b.z;
+ return v;
+}
+
 }

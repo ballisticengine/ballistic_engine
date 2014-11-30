@@ -2,6 +2,7 @@
 #define BOUNDING_CUBE_H
 
 #include "types.hpp"
+#include "mathTypes.hpp"
 
 class BoundingCube {
 protected:
@@ -9,11 +10,14 @@ protected:
 public:
 	BoundingCube();
 	BoundingCube(shape *s);
+	BoundingCube(e_loc width,e_loc height,e_loc depth);
 	void calculate(shape *s);
+	void print();
 	e_loc getWidth();
 	e_loc getHeight();
 	e_loc getDepth();
 	e_loc max_x,min_x,max_y,min_y,max_z,min_z;
+	//MathTypes::vector max,min;
 
 
 };

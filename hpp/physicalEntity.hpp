@@ -17,10 +17,8 @@ class PhysicalEntity : public entity {
 protected:
 	TrRot velocity,acceleration;
 	void setIfNotZero(e_loc &a,e_loc &b);
-	shape *bounding;
 public:
 	PhysicalEntity();
-	virtual shape *getBoundingShape();
 	coords nextCoords(time_int diff);
 	void changeVelocity(TrRot velocity);
 	void setVelocity(TrRot velocity);

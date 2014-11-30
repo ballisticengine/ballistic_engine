@@ -2,6 +2,7 @@
 
 void ObserverEntity::setCamera(camera *c) {
 	this->cam=c;
+	
 }
 
 camera * ObserverEntity::getCamera() {
@@ -13,6 +14,5 @@ camera * ObserverEntity::getCamera() {
 
 
 ObserverEntity::ObserverEntity() {
-
-	
+	this->bounding_box=new BoundingCube(5,5,5);
 }

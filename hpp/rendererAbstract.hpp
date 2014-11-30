@@ -17,6 +17,7 @@ using namespace std;
 #include "light.hpp"
 #include "terrainMap.hpp"
 #include "material.hpp"
+#include "boundingCube.hpp"
 
 typedef void (*flushf)();
 
@@ -46,6 +47,7 @@ protected:
 	virtual void assignMaterial(Material *m)=0;
 	virtual void resetSpecific()=0;
 	virtual void lightSpecific(light *l)=0;
+	virtual void drawBoundingBox(BoundingCube *bound)=0;
 
 	//virtual void renderTerrain();
 	virtual void renderTerrainSpecific()=0;

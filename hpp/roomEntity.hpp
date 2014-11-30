@@ -8,7 +8,7 @@ protected:
 	shape *bounding;
 public:
 	roomEntity();
-	virtual bool collides(entity *e,coords offset);
+	virtual bool collides(entity *e);
 	virtual shape *getBoundingShape();
 };
 

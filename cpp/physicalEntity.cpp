@@ -53,14 +53,7 @@ void PhysicalEntity::printVelocity() {
  cout << "R: " << velocity.r.x << ", " << velocity.r.y << ", " << velocity.r.z << endl;
 }
 
-shape *PhysicalEntity::getBoundingShape() {
-	return this->bounding;
-}
-PhysicalEntity::PhysicalEntity() {
 
-	bounding=new shape();
+PhysicalEntity::PhysicalEntity() {	
 	
-	poly *p=new poly();
-	p->v.push_back(new vertex(0,0,0));
-	bounding->addPoly(p);
 }

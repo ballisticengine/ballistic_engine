@@ -35,40 +35,51 @@ typedef vector <entity *> ent_list;
 typedef vector <ObjectEntity *> obj_list;
 typedef vector <roomEntity *> rooms_list;
 typedef vector <light *> lights_list;
-typedef vector <ObjectEntity> obj_reflist;
+typedef vector <PhysicalEntity *> phys_list;
 
 class world {
 protected:
-    ent_list entities;
+	
+	ent_list entities;
+	phys_list phys_entities;
 	obj_list models;
 	rooms_list rooms;
 	lights_list lights;
-    skybox *sky;
+	
+
+	skybox *sky;
 	camera default_camera;
 	ObserverEntity observer;
-    void moveEntity(PhysicalEntity *e,bool skip_collision);
+	void moveEntity(PhysicalEntity *e,bool skip_collision);
 	void moveEntities();
-    Timer time;
-    TerrainMap *tm;
+	Timer time;
+	TerrainMap *tm;
 public:
-        
-	 static world *getInstance(); 
-	 static world & getRef();
+
+	static world *getInstance(); 
+	static world & getRef();
 	~world();
-        ent_list getEntities();
-		obj_list getModels();
-		//obj_reflist getModelsRef();
-		rooms_list getRooms();
-		lights_list getLights();
-        skybox * getSkybox();
-		camera *getCurrentCamera();
-        void makeTestWorld();
-        bool parseXml(string &fn);
-        void prepare();
-		void operator()();
-		void test();
-		ObserverEntity * getObserver();
-		TerrainMap * getTerrain();
+	ent_list getEntities();
+	obj_list getModels();
+	//obj_reflist getModelsRef();
+	rooms_list getRooms();
+	lights_list getLights();
+	skybox * getSkybox();
+	camera *getCurrentCamera();
+	void makeTestWorld();
+	bool parseXml(string &fn);
+	void prepare();
+	void operator()();
+	void test();
+	ObserverEntity * getObserver();
+	TerrainMap * getTerrain();
+
+	void addEntity(entity *e);
+	void addPhysicalEntity(PhysicalEntity *e);
+	void addObjectEntity(ObjectEntity *e);
+	void addLightEntity(light *e);
+	void addRoomEntity(roomEntity *e);
+
 };
 
 #endif	/* WORLD_HPP */

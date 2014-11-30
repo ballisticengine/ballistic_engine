@@ -13,6 +13,7 @@
 #endif
 #include <GL/gl.h>
 #include <GL/glu.h>
+
 #include <cstdlib>
 #include <cstring>
 #include <cstdio>
@@ -39,7 +40,7 @@ class RendererGL : public renderer,public singleton<RendererGL> {
     virtual void renderVertex(vertex *v,uv *uvs);
     texture *tt,*qt;
     shape *test;
-    GLUquadricObj *lightbulb;   
+    GLUquadricObj *lightbulb,*bounding_box_q;   
     GLhandleARB  light_shader_v,light_shader_f;
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
@@ -55,7 +56,11 @@ class RendererGL : public renderer,public singleton<RendererGL> {
 	virtual void positionCameraSpecific();
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d);
 	
+	virtual void drawBoundingBox(BoundingCube *bound);
+
 	virtual void resetSpecific() ;
+
+	virtual void drawBox(e_loc width,e_loc height,e_loc depth);
 
 	virtual void renderTerrainSpecific();
 public:

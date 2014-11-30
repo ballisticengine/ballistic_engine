@@ -5,15 +5,28 @@ BoundingCube::BoundingCube() {
 }
 
 BoundingCube::BoundingCube(shape *s) {
+	cout << "calc";
 	this->calculate(s);
+}
+
+BoundingCube::BoundingCube(e_loc width,e_loc height,e_loc depth) {
+	this->width=width;
+	this->height=height;
+	this->depth=depth;
+	max_x=width/2;
+	min_x=-width/2;
+	max_y=height/2;
+	min_y=-height/2;
+	max_z=depth/2;
+	min_z=-depth/2;
 }
 
 void BoundingCube::calculate(shape *s) {
 vert_list vs=s->getVertices();
-	e_loc max_x,min_x,max_y,min_y,max_z,min_z;
+	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
 	max_x=min_x=max_y=min_y=max_z=min_z=0;
+	
 	for (unsigned int i=0; i<vs.size(); i++) {
-		
 		if (vs[i]->x > max_x) {
 			max_x=vs[i]->x;
 		}
@@ -58,3 +71,6 @@ e_loc BoundingCube::getDepth() {
 	return this->depth;
 }
 
+void BoundingCube::print() {
+// cout << "Max x " << max_x << "|" << "Min y " << min_y << 
+}

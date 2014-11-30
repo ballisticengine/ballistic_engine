@@ -185,9 +185,12 @@ void RendererGL::specificInit() {
 	this->setupTexture(w->getSkybox()->getTexture());
 	this->setupTexture(w->getTerrain()->getTexture());
 
-	lightbulb=gluNewQuadric();          
+	lightbulb=gluNewQuadric();   
+	bounding_box_q=gluNewQuadric();
 	gluQuadricNormals(lightbulb, GLU_SMOOTH);  
 	gluQuadricTexture(lightbulb, GL_TRUE);
+	gluQuadricNormals(bounding_box_q, GLU_SMOOTH);  
+	gluQuadricTexture(bounding_box_q, GL_TRUE);
 	ptree & shaders=config::getInstance()->getNode("config.screen.shaders");
 	BOOST_FOREACH(const ptree::value_type &shad, shaders) {
 		string sn=shad.second.get_value<string>();
@@ -319,4 +322,16 @@ void RendererGL::resetSpecific() {
 
 void RendererGL::positionCameraSpecific() {
 	glRotatef(-90,1,0,0);
+}
+
+void RendererGL::drawBoundingBox(BoundingCube *bound) {
+	//drawBox(bound->getWidth(),bound->getHeight(),bound->getDepth());
+}
+
+void RendererGL::drawBox(e_loc width,e_loc height,e_loc depth) {
+	e_loc xx=width/2,yy=height/2,zz=depth/2;
+	glBindTexture(GL_TEXTURE_2D,0);
+	glColor3f(0,1,0);
+	
+	
 }

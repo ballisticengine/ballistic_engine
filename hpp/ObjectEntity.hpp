@@ -12,7 +12,7 @@
 class ObjectEntity : public PhysicalEntity,public Texturable {
 protected:
 	faceTexShape *model;
-	shape *bounding;
+	
 	texture *tex;
 	Material *mat;
 public:
@@ -20,10 +20,11 @@ public:
 	
 	
 	virtual void setModel(faceTexShape *model);
-	virtual void calcBoundingCube();
+	
 	virtual Material *getMaterial();
 	virtual void setMaterial(Material *mat);
-	virtual shape *getBoundingShape();
+	
+	
 
 };
 

@@ -9,9 +9,6 @@ void ObjectEntity::setModel(faceTexShape *model) {
 }
 
 
-shape *ObjectEntity::getBoundingShape() {
-	return this->bounding;
-}
 
 Material *ObjectEntity::getMaterial() {
  return this->mat;
@@ -20,9 +17,6 @@ void ObjectEntity::setMaterial(Material *mat) {
  this->mat=mat;
 }
 
-void ObjectEntity::calcBoundingCube() {
-	
-	
 
-}
+
 
