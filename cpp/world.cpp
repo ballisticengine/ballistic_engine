@@ -182,28 +182,23 @@ void world::moveEntities() {
 	obj_list objs=this->getModels();
 
 
-	//cout << this->getObserver()->getBoundingBox() << endl;
-	coords ocr=this->getObserver()->getCoords(),icr;
-	//cout << ocr.x << ", " << ocr.y << ", " << ocr.z << endl;
-
-	/*for(int i=0; i<objs.size(); i++) {
-		bool cl=objs[i]->collides(this->getObserver());
+	ObserverEntity *o=&this->observer;
+	BoundingCube *obc=o->getBoundingBox();
+	for(int i=0; i<objs.size(); i++) {
+		bool cl=objs[i]->collides(obc);
 		if(cl) {
 		 cout << "Collision" << endl; 
 		}
-		icr=objs[i]->getCoords();
-		//cout << icr.x << ", " << icr.y << ", " << icr.z << endl;
-		//cout << i << ": " << cl << endl;
-	}*/
+	}
 
 	rooms_list rl=this->getRooms();
 
 	static unsigned int th=0;
 	for(int i=0; i<rl.size(); i++) {
-		ObserverEntity *o=&this->observer;
+		
 		//coords c=o->getCoords();
 		//cout << c.translation.x << ", " << c.translation.y << ", " << c.translation.z << endl;
-		bool col=rl[i]->collides(o->getBoundingBox());
+		bool col=rl[i]->collides(obc);
 		if(col) {
 		 cout << "World collision ("<< i << "), " << th << "th" << endl;
 		 th++;

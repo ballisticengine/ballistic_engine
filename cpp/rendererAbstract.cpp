@@ -80,7 +80,7 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 		
 		//this->assignMaterial(ents[i]->getMaterial());
 		
-		//this->drawBoundingBox(ents[i]->getBoundingBox());
+		this->drawBoundingBox(ents[i]->getBoundingBox());
 		this->renderFaceTexShape(ents[i]->getModel());
 		//this->drawBoundingBox(ents[i]->getBoundingBox());
 		
