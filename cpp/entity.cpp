@@ -3,12 +3,12 @@
 
 coords entity::getCoords() {
 	coords c;
-	c.x=x;
-	c.y=y;
-	c.z=z;
-	c.rx=rx;
-	c.ry=ry;
-	c.rz=rz;
+	c.translation.x=x;
+	c.translation.y=y;
+	c.translation.z=z;
+	c.rotation.x=rx;
+	c.rotation.y=ry;
+	c.rotation.z=rz;
 	return c;
 }
 
@@ -16,6 +16,14 @@ void entity::translate(e_loc x,e_loc y,e_loc z) {
  this->x+=x;
  this->y+=y;
  this->z+=z;
+ if(this->bounding_box) {
+	 this->bounding_box->max.x+=x;
+	 this->bounding_box->max.y+=y;
+	 this->bounding_box->max.z+=z;
+	 this->bounding_box->min.x+=x;
+	 this->bounding_box->min.y+=y;
+	 this->bounding_box->min.z+=z;
+ }
 }
 
 void entity::rotate(e_loc x,e_loc y, e_loc z) {
@@ -37,7 +45,7 @@ void entity::face(e_loc x,e_loc y,e_loc z) {
 }
 
 void entity::translate(coords c) {
-	this->translate(c.x,c.y,c.z);
+	this->translate(c.translation.x,c.translation.y,c.translation.z);
 }
 
 entity::entity() {
@@ -50,48 +58,29 @@ bool entity::collides(entity *e)//,coords offset)
 
 {
 	
-	//if(!this->getBoundingBox() || e->getBoundingBox()) {
-	 //cout << "nope";
-	//	return false;
-	//} 
-
+	
 	BoundingCube *a=this->getBoundingBox(),*b=e->getBoundingBox();
 	coords ac=this->getCoords(),bc=e->getCoords();
 
-	e_loc 
-		  amax_x=a->max.x+ac.x,
-		  amin_x=a->min.x+ac.x,
-		  amax_y=a->max.y+ac.y,
-		  amin_y=a->min.y+ac.y,
-		  amax_z=a->max.z+ac.z,
-		  amin_z=a->min.z+ac.z,
-		  
-		  bmax_x=-(b->min.x+bc.x),
-		  bmin_x=-(b->max.x+bc.x),
-		  bmax_y=b->max.y+bc.y,
-		  bmin_y=b->min.y+bc.y,
-		  bmax_z=-(b->min.z+bc.z),
-		  bmin_z=-(b->max.z+bc.z)
-		
-		  ;
-
+	MathTypes::vector amax,amin,bmax,bmin;
 	
-	//static unsigned int ii=0;
-	//cout << amax_x << ", " << amin_x << ", " << amax_y << ", " << amin_y << ", " << amax_z << ", " << amin_z << endl;
-//	cout << bmax_x << ", " << bmin_x << ", " << bmax_y << ", " << bmin_y << ", " << bmax_z << ", " << bmin_z << endl;
-//	cout << "------------------" << endl;
-//	if(ii==1000) {
-//		while(1) {}
-//	}
-	//ii++;
+	
+
+	amax=a->max;//+ac.translation;
+	amin=a->min;//+ac.translation;
+	bmax=b->max;//+bc.translation;
+	bmin=b->min;//+bc.translation;
+	
+	b->max.write();
+	//cout << bc.translation.x << ", " << bc.translation.y << ", " << bc.translation.z << endl;
 
 	bool collide=(
-		amax_x > bmin_x && 
-		 amin_x < bmax_x &&
-		amax_y > bmin_y &&
-		 amin_y < bmax_y &&
-		 amax_z > bmin_z &&
-		amin_z < bmax_z
+		amax.x > bmin.x && 
+		 amin.x < bmax.x &&
+		amax.y > bmin.y &&
+		 amin.y < bmax.y &&
+		 amax.z > bmin.z &&
+		amin.z < bmax.z
 		);
 
 

@@ -5,33 +5,13 @@ BoundingCube::BoundingCube() {
 }
 
 BoundingCube::BoundingCube(shape *s) {
-	this->calculate(s);
+	this->calculate(s->getVertices());
 }
 
-
-/*
-int AabbToPlaneCollision(const Plane& plane, const AABB& aabb)
-{
-    // Get the Extense vector
-    Vector3 E = (aabb.max - aabb.min)/2.0f;
-    
-    // Get the center of the Box
-    Vector3 center = aabb.min + E;
- 
-    Vector3 N = plane.normal;
- 
-    // Dot Product between the plane normal and the center of the Axis Aligned Box
-    // using absolute values
-    float fRadius = abs(N.x*E.x) + abs(N.y*E.y) + abs(N.z*E.z);
- 
-    Sphere sphere;
-    sphere.m_Center = center;
-    sphere.m_Radius = fRadius;
- 
-    return SphereToPlaneCollision( plane,sphere );
+BoundingCube::BoundingCube(poly *p) {
+	this->calculate(p->v);
 }
 
-*/
 
 e_loc BoundingCube::toSphereRadius() {
 	MathTypes::vector E=(max-min)/2.0f;	
@@ -52,37 +32,46 @@ BoundingCube::BoundingCube(e_loc width,e_loc height,e_loc depth) {
 	min.z=-depth/2;
 }
 
-void BoundingCube::calculate(shape *s) {
-vert_list vs=s->getVertices();
+BoundingCube::BoundingCube(e_loc minx,e_loc miny,e_loc minz,e_loc maxx,e_loc maxy,e_loc maxz) {
+ min.x=minx;
+ min.y=miny;
+ min.z=minz;
+ max.x=maxx;
+ max.y=maxy;
+ max.z=maxz;
+}
+
+void BoundingCube::calculate(vert_list s) {
+//vert_list vs=s->getVertices();
 	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
 	max.x=min.x=max.y=min.y=max.z=min.z=0;
 	
-	for (unsigned int i=0; i<vs.size(); i++) {
-		if (vs[i]->x > max.x) {
-			max.x=vs[i]->x;
+	for (unsigned int i=0; i<s.size(); i++) {
+		if (s[i]->x > max.x) {
+			max.x=s[i]->x;
 		}
 
-		if(vs[i]->x < min.x) {
-		 min.x=vs[i]->x;
+		if(s[i]->x < min.x) {
+		 min.x=s[i]->x;
 		}
 
-		if (vs[i]->y > max.y) {
-			max.y=vs[i]->y;
+		if (s[i]->y > max.y) {
+			max.y=s[i]->y;
 		}
 
-		if(vs[i]->y < min.y) {
-		 min.y=vs[i]->y;
+		if(s[i]->y < min.y) {
+		 min.y=s[i]->y;
 		}
 
-		if (vs[i]->z > max.z) {
-			max.z=vs[i]->z;
+		if (s[i]->z > max.z) {
+			max.z=s[i]->z;
 		}
 
-		if(vs[i]->z < min.z) {
-		 min.z=vs[i]->z;
+		if(s[i]->z < min.z) {
+		 min.z=s[i]->z;
 		}
 
-		cout << vs[i]->x << ", ";
+		cout << s[i]->x << ", ";
 	}
 
 	this->width=max.x-min.x;

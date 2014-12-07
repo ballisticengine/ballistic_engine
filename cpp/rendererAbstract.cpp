@@ -49,20 +49,20 @@ void renderer::init() {
 }
 
  void renderer::translate(e_loc x, e_loc y, e_loc z) {
-	 cursor.x+=x;
-	 cursor.y+=y;
-	 cursor.z+=z;
+	 cursor.translation.x+=x;
+	 cursor.translation.y+=y;
+	 cursor.translation.z+=z;
 	 this->translateSpecific(x,y,z);
  }
 
  void  renderer::translate(coords c) {
-	 this->translate(c.x,c.y,c.z);
+	 this->translate(c.translation.x,c.translation.y,c.translation.z);
  }
 
  void renderer::rotate(e_loc x,e_loc y,e_loc z,e_loc d) {
-  cursor.rx+=x*d;
-  cursor.ry+=y*d;
-  cursor.rz+=z*d;
+  cursor.rotation.x+=x*d;
+  cursor.rotation.y+=y*d;
+  cursor.rotation.z+=z*d;
   this->rotateSpecific(x,y,z,d);
  }
 
@@ -75,13 +75,14 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 		coords c=ents[i]->getCoords();
 		this->reset();
 		this->positionCamera();
-		this->locate(c.x,c.y,c.z);
-		this->face(c.rx,c.ry,c.rz);
+		this->locate(c.translation.x,c.translation.y,c.translation.z);
+		this->face(c.rotation.x,c.rotation.y,c.rotation.z);
 		
 		//this->assignMaterial(ents[i]->getMaterial());
 		
 		//this->drawBoundingBox(ents[i]->getBoundingBox());
 		this->renderFaceTexShape(ents[i]->getModel());
+		this->drawBoundingBox(ents[i]->getBoundingBox());
 		
 	}
 }
@@ -91,6 +92,7 @@ void renderer::renderAllRooms() {
 	for(int i=0; i<rooms.size(); i++) {
 		
 		this->renderFaceTexShape((faceTexShape *)rooms[i]->getModel());
+		this->drawBoundingBox(rooms[i]->getBoundingBox());
 	}
 }
 
@@ -179,12 +181,12 @@ void renderer::face(e_loc x,e_loc y,e_loc z) { //tu Ÿle, bo powinien mno¿yæ, wyw
 
 void renderer::reset() {
 	this->resetSpecific();
-	cursor.x=0;
-	cursor.y=0;
-	cursor.z=0; //coœ nie dzia³a z frustum_start zmienionym
-	cursor.rx=0;
-	cursor.ry=0;
-	cursor.rz=0;
+	cursor.translation.x=0;
+	cursor.translation.y=0;
+	cursor.translation.z=0; //coœ nie dzia³a z frustum_start zmienionym
+	cursor.rotation.x=0;
+	cursor.rotation.y=0;
+	cursor.rotation.z=0;
 }
 
  void renderer::setCamera(camera *c) { //to przenieœæ do world
@@ -198,9 +200,9 @@ void renderer::reset() {
  void renderer::positionCamera() {
 	// coords c=active_camera->getCoords();
 	 coords c=w->getObserver()->getCoords();
-	 rotate(1,0,0,c.rx);
-	 rotate(0,1,0,c.ry);
-	 rotate(0,0,1,c.rz);
-	 translate(c.x,c.y,c.z);
+	 rotate(1,0,0,c.rotation.x);
+	 rotate(0,1,0,c.rotation.y);
+	 rotate(0,0,1,c.rotation.z);
+	 translate(c.translation.x,c.translation.y,c.translation.z);
 	 //this->positionCameraSpecific();
  }

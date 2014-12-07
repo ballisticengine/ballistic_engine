@@ -70,6 +70,7 @@ bool world::parseXml(string &fn) {
 		faceTexShape *fs=shapef->getXML((ptree)room.second);
 		roomEntity *roomE=new roomEntity();
 		poly_list polys=fs->getPolys();
+		
 		roomE->setModel(fs);
 		this->addRoomEntity(roomE);
 		ptree &room_ents=(ptree)room.second.get_child("entities");
@@ -109,6 +110,20 @@ bool world::parseXml(string &fn) {
 
 				l->setAllColors(color);
 				this->addLightEntity(l);
+			} else if (type=="bounding") {
+				
+				e_loc 
+					minx=entobj.second.get<float>("min.x"),
+					miny=entobj.second.get<float>("min.y"),
+					minz=entobj.second.get<float>("min.z"),
+					maxx=entobj.second.get<float>("max.x"),
+					maxy=entobj.second.get<float>("max.y"),
+					maxz=entobj.second.get<float>("max.z")
+					;
+				cout << "Found bounding\n";
+				cout << minx << ", " << miny << ", " << minz << ", " << maxx << ", " << maxy << ", " << maxz << endl;
+				BoundingCube *bc=new BoundingCube(minx,miny,minz,maxx,maxy,maxz);
+				roomE->setBoundingBox(bc);
 			}
 
 		}
@@ -149,7 +164,7 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 		//	cout << i << ": " << cl << endl;
 	}
 	e->translate(c);
-	e->rotate(c.rx,c.ry,c.rz);
+	e->rotate(c.rotation.x,c.rotation.x,c.rotation.z);
 }
 
 void world::moveEntities() {
@@ -170,7 +185,7 @@ void world::moveEntities() {
 	coords ocr=this->getObserver()->getCoords(),icr;
 	//cout << ocr.x << ", " << ocr.y << ", " << ocr.z << endl;
 
-	for(int i=0; i<objs.size(); i++) {
+	/*for(int i=0; i<objs.size(); i++) {
 		bool cl=objs[i]->collides(this->getObserver());
 		if(cl) {
 		 cout << "Collision" << endl; 
@@ -178,14 +193,19 @@ void world::moveEntities() {
 		icr=objs[i]->getCoords();
 		//cout << icr.x << ", " << icr.y << ", " << icr.z << endl;
 		//cout << i << ": " << cl << endl;
-	}
+	}*/
 
 	rooms_list rl=this->getRooms();
 
+	static unsigned int th=0;
 	for(int i=0; i<rl.size(); i++) {
-		bool col=rl[i]->collides(this->getObserver());
+		ObserverEntity *o=&this->observer;
+		coords c=o->getCoords();
+		//cout << c.translation.x << ", " << c.translation.y << ", " << c.translation.z << endl;
+		bool col=rl[i]->collides(o);
 		if(col) {
-		// cout << "World collision" << endl;
+		 cout << "World collision ("<< i << "), " << th << "th" << endl;
+		 th++;
 		}
 	}
 

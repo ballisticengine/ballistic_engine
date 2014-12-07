@@ -11,7 +11,7 @@ protected:
 	shape *bounding;
 public:
 	roomEntity();
-	virtual bool collides(entity *e);
+	
 	virtual shape *getBoundingShape();
 };
 

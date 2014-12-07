@@ -10,12 +10,12 @@ TrRot::TrRot() {
 
 coords PhysicalEntity::nextCoords(time_int diff) {
  coords c;
- c.x=velocity.t.x*diff;
- c.y=velocity.t.y*diff;
- c.z=velocity.t.z*diff;
- c.rx=velocity.r.x*diff;
- c.ry=velocity.r.y*diff;
- c.rz=velocity.r.z*diff;
+ c.translation.x=velocity.t.x*diff;
+ c.translation.y=velocity.t.y*diff;
+ c.translation.z=velocity.t.z*diff;
+ c.rotation.x=velocity.r.x*diff;
+ c.rotation.y=velocity.r.y*diff;
+ c.rotation.z=velocity.r.z*diff;
  return c;
 }
 

@@ -14,5 +14,5 @@ camera * ObserverEntity::getCamera() {
 
 
 ObserverEntity::ObserverEntity() {
-	this->bounding_box=new BoundingCube(2,2,2);
+	this->bounding_box=new BoundingCube(5,5,5);
 }

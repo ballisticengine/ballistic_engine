@@ -65,7 +65,7 @@ void RendererGL::lightSpecific(light *l) {
 	//glRotatef(-90,1,0,0);
 	
 
-	this->translate(lc.x,lc.y,lc.z);
+	this->translate(lc.translation.x,lc.translation.y,lc.translation.z);
 	
 	//glRotatef(-90,1,0,0);
 	GLfloat position[] = { 0, 0, 0, 1.0f };
@@ -326,12 +326,61 @@ void RendererGL::positionCameraSpecific() {
 
 void RendererGL::drawBoundingBox(BoundingCube *bound) {
 	//drawBox(bound->getWidth(),bound->getHeight(),bound->getDepth());
+	this->reset();
+		this->positionCamera();
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_LIGHTING);
+	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	glDisable(GL_CULL_FACE);
+	glColor3f(0,1,0);
+	e_loc maxx=bound->max.x,maxy=bound->max.y,maxz=bound->max.z,
+			minx=bound->min.x,miny=bound->min.y,minz=bound->min.z;
+		;
+	glBegin(GL_QUADS);
+	  glVertex3d(-minx,-maxy,-maxz);
+	  glVertex3d(-maxx,-maxy,-maxz);
+	  glVertex3d(-maxx,-miny,-maxz);
+	  glVertex3d(-minx,-miny,-maxz);
+	  
+	  glVertex3d(-minx,-miny,-minz);
+	  glVertex3d(-maxx,-miny,-minz);
+	  glVertex3d(-maxx,-maxy,-minz);
+	  glVertex3d(-minx,-maxy,-minz);
+
+	  glVertex3d(-minx,-miny,-minz);
+	  glVertex3d(-minx,-maxy,-minz);
+	  glVertex3d(-minx,-maxy,-maxz);
+	  glVertex3d(-minx,-miny,-maxz);
+	  
+	  
+		glVertex3d(-maxx,-miny,-maxz);
+	  glVertex3d(-maxx,-maxy,-maxz);
+		glVertex3d(-maxx,-maxy,-minz);
+	  glVertex3d(-maxx,-miny,-minz);
+	  
+
+	  glVertex3d(-minx,-miny,-minz);
+	  glVertex3d(-minx,-miny,-maxz);
+		glVertex3d(-maxx,-miny,-maxz);
+	  glVertex3d(-maxx,-miny,-minz);
+
+	  
+	  glVertex3d(-maxx,-maxy,-minz);
+	  glVertex3d(-maxx,-maxy,-maxz);
+	  glVertex3d(-minx,-maxy,-maxz);
+	  glVertex3d(-minx,-maxy,-minz);
+	
+	  glEnd();
+	  glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+	  glEnable(GL_TEXTURE_2D);
+	  glEnable(GL_LIGHTING);
+	  	glEnable(GL_CULL_FACE);
 }
 
 void RendererGL::drawBox(e_loc width,e_loc height,e_loc depth) {
 	e_loc xx=width/2,yy=height/2,zz=depth/2;
-	glBindTexture(GL_TEXTURE_2D,0);
-	glColor3f(0,1,0);
+	
+	
 	
 	
 }

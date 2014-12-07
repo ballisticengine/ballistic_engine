@@ -15,12 +15,12 @@ typedef boost::shared_ptr<world> world_ptr;
 BOOST_PYTHON_MODULE(world)
 {
 
-	bp::class_<coords,coords *>("coords")
+	/*bp::class_<coords,coords *>("coords")
 		.def_readwrite("x", &coords::x)
 		.def_readwrite("y", &coords::y)
 		.def_readwrite("z", &coords::z)
 		;
-
+		*/
 	bp::class_<entity,entity *>("entity")
 		.def("getCoords",&entity::getCoords)
 		.def("locate",&entity::locate)

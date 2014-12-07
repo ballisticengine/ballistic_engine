@@ -67,38 +67,9 @@ void poly::calculateNormals() {
 		v[i]->has_normal=true;
 	}
 
-	/*for(int i=2; i<v.size(); i++) {
-		va=v[i-2]->diff(*v[i]);
-		vb=v[i-1]->diff(*v[i]);
-		cp=va.crossProduct(&vb);
-		v[i]->normal=cp;
-		v[i]->has_normal=true;
-	}*/
+
 	return;
-	/*
-	static int cnt=0;
-
-	MathTypes::vector va,vb,cp;//-v[0];
-
 	
-	va=v[0]->diff(*v[2]);
-	vb=v[1]->diff(*v[2]);
-		cp=va.crossProduct(&vb);
-
-
-	
-	
-	cp=cp.normalize();
-	v[0]->normal=cp;
-	v[1]->normal=cp;
-	v[2]->normal=cp;
-	v[0]->has_normal=true;
-	v[1]->has_normal=true;
-	v[2]->has_normal=true;
-	//cout << "tVS: " << v.size() << ", " << cnt << endl;
-	cnt++;
-	return;
-	*/
 }
 
 
@@ -213,9 +184,13 @@ vector <poly *> shape::getPolys() {
 
 void shape::addPoly(poly *p) {
 	this->polys.push_back(p);
+	MathTypes::vector nsum;
 	for (int i=0; i<p->v.size(); i++) {
 		p->v[i]=this->addVertex(p->v[i]);
+		nsum=nsum+p->v[i]->normal;
 	}
+	nsum=nsum/p->v.size();
+	p->normal=nsum;
 }
 
 void shape::calculateNormals() {

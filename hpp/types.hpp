@@ -32,7 +32,8 @@ public:
 };
 
 struct coords {
- e_loc x,y,z,rx,ry,rz;
+	MathTypes::vector translation,rotation;
+	//e_loc x,y,z,rx,ry,rz;
 };
 
 struct frustumSizes {
@@ -65,6 +66,8 @@ typedef vector <vertex *> vert_list;
 class poly {
 public:
 	vector<uv *> uvs;
+	MathTypes::vector normal;
+	
 	vert_list v;
 	virtual bool operator==(poly &p);
 	poly();
