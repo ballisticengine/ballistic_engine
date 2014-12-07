@@ -82,17 +82,19 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 		
 		//this->drawBoundingBox(ents[i]->getBoundingBox());
 		this->renderFaceTexShape(ents[i]->getModel());
-		this->drawBoundingBox(ents[i]->getBoundingBox());
+		//this->drawBoundingBox(ents[i]->getBoundingBox());
 		
 	}
 }
 
 void renderer::renderAllRooms() {
 	rooms_list rooms=w->getRooms();
-	for(int i=0; i<rooms.size(); i++) {
+	for(size_t i=0; i<rooms.size(); i++) {
 		
 		this->renderFaceTexShape((faceTexShape *)rooms[i]->getModel());
-		this->drawBoundingBox(rooms[i]->getBoundingBox());
+		for(size_t n=0; n<rooms[i]->boundings.size(); n++) {
+			this->drawBoundingBox(rooms[i]->boundings[n]);
+		}
 	}
 }
 

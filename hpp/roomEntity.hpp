@@ -8,11 +8,11 @@ using namespace std;
 
 class roomEntity : public ObjectEntity {
 protected:
-	shape *bounding;
-public:
-	roomEntity();
 	
-	virtual shape *getBoundingShape();
+public:
+	bounding_list boundings;
+	roomEntity();
+	virtual bool collides(BoundingCube *bound);
 };
 
 #endif

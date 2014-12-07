@@ -13,6 +13,8 @@ using namespace std;
  Abstrakcyjna klasa opisująca wszystkie obiekty na mapie
  */
 
+bool collisionTest(BoundingCube *a,BoundingCube *b,e_loc factor=1);
+
 class entity {
 protected:
     e_loc x,y,z,rx,ry,rz;
@@ -25,7 +27,7 @@ public:
 	/*
 	Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
 	*/
-	virtual bool collides(entity *e);//,coords offset);
+	virtual bool collides(BoundingCube *bound);//,coords offset);
 	
 
 

@@ -3,6 +3,8 @@
 
 #include "types.hpp"
 #include "mathTypes.hpp"
+#include "vector"
+
 
 class BoundingCube {
 protected:
@@ -24,5 +26,7 @@ public:
 
 
 };
+
+typedef vector<BoundingCube *> bounding_list;
 
 #endif

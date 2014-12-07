@@ -123,7 +123,8 @@ bool world::parseXml(string &fn) {
 				cout << "Found bounding\n";
 				cout << minx << ", " << miny << ", " << minz << ", " << maxx << ", " << maxy << ", " << maxz << endl;
 				BoundingCube *bc=new BoundingCube(minx,miny,minz,maxx,maxy,maxz);
-				roomE->setBoundingBox(bc);
+				roomE->boundings.push_back(bc);
+				//roomE->setBoundingBox(bc);
 			}
 
 		}
@@ -200,9 +201,9 @@ void world::moveEntities() {
 	static unsigned int th=0;
 	for(int i=0; i<rl.size(); i++) {
 		ObserverEntity *o=&this->observer;
-		coords c=o->getCoords();
+		//coords c=o->getCoords();
 		//cout << c.translation.x << ", " << c.translation.y << ", " << c.translation.z << endl;
-		bool col=rl[i]->collides(o);
+		bool col=rl[i]->collides(o->getBoundingBox());
 		if(col) {
 		 cout << "World collision ("<< i << "), " << th << "th" << endl;
 		 th++;

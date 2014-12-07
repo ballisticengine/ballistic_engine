@@ -54,38 +54,12 @@ entity::entity() {
 
 /* offset to w³aœciwie nowa pozycja, a nie przemieszczenie */
 
-bool entity::collides(entity *e)//,coords offset) 
+bool entity::collides(BoundingCube *bound)//,coords offset) 
 
 {
 	
+	return collisionTest(this->bounding_box,bound);
 	
-	BoundingCube *a=this->getBoundingBox(),*b=e->getBoundingBox();
-	coords ac=this->getCoords(),bc=e->getCoords();
-
-	MathTypes::vector amax,amin,bmax,bmin;
-	
-	
-
-	amax=a->max;//+ac.translation;
-	amin=a->min;//+ac.translation;
-	bmax=b->max;//+bc.translation;
-	bmin=b->min;//+bc.translation;
-	
-	b->max.write();
-	//cout << bc.translation.x << ", " << bc.translation.y << ", " << bc.translation.z << endl;
-
-	bool collide=(
-		amax.x > bmin.x && 
-		 amin.x < bmax.x &&
-		amax.y > bmin.y &&
-		 amin.y < bmax.y &&
-		 amax.z > bmin.z &&
-		amin.z < bmax.z
-		);
-
-
-
-	return collide;
 }
 
 void entity::setBoundingBox(BoundingCube *box) {
@@ -98,4 +72,33 @@ BoundingCube * entity::getBoundingBox() {
 
 void entity::makeBoundingBox() {
 	///
+}
+
+bool collisionTest(BoundingCube *a,BoundingCube *b,e_loc factor) {
+
+	
+
+	MathTypes::vector amax,amin,bmax,bmin;
+	
+	
+
+	amax=a->max;//+ac.translation;
+	amin=a->min;//+ac.translation;
+	bmax=b->max;//+bc.translation;
+	bmin=b->min;//+bc.translation;
+	
+	
+
+	bool collide=(
+		amax.x*factor > bmin.x*factor && 
+		 amin.x*factor < bmax.x*factor &&
+		amax.y*factor > bmin.y*factor &&
+		 amin.y*factor < bmax.y*factor &&
+		 amax.z*factor > bmin.z*factor &&
+		amin.z*factor < bmax.z*factor
+		);
+
+
+
+	return collide;
 }
