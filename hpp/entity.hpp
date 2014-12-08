@@ -13,7 +13,7 @@ using namespace std;
  Abstrakcyjna klasa opisująca wszystkie obiekty na mapie
  */
 
-bool collisionTest(BoundingCube *a,BoundingCube *b,e_loc factor=1);
+MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset);
 
 class entity {
 protected:
@@ -27,7 +27,7 @@ public:
 	/*
 	Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
 	*/
-	virtual bool collides(BoundingCube *bound);//,coords offset);
+	virtual MathTypes::vector collides(BoundingCube *bound,coords offset);
 	
 
 

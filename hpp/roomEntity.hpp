@@ -12,7 +12,7 @@ protected:
 public:
 	bounding_list boundings;
 	roomEntity();
-	virtual bool collides(BoundingCube *bound);
+	virtual MathTypes::vector collides(BoundingCube *bound,coords offset);
 };
 
 #endif

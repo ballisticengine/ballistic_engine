@@ -141,4 +141,12 @@ vector & vector::operator/(const vector &b) {
  return v;
 }
 
+vector & vector::operator*(const vector &b) {
+ vector v;
+ v.x=x*b.x;
+ v.y=y*b.y;
+ v.z=z*b.z;
+ return v;
+}
+
 }

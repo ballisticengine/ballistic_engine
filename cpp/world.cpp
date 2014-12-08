@@ -154,57 +154,52 @@ camera *world::getCurrentCamera() {
 
 void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	time_int lt=time.getDiffR();
-	coords c=e->nextCoords(lt);
+	coords c=e->nextCoords(lt),x;
+	x.translation=c.translation-e->getCoords().translation;
 
 	rooms_list rl=this->getRooms();
 	obj_list objs=this->getModels();
-
-	/* Kolizje z pomieszczeniami */
+	BoundingCube *obc=this->observer.getBoundingBox();
+	MathTypes::vector cvec;
+	
+	
+	/*
+	 Kolizje z obiektami
+	*/
+	//c.translation.write();
 	for(int i=0; i<objs.size(); i++) {
-		//bool cl=objs[i]->collides(e,c);
-		//	cout << i << ": " << cl << endl;
+		cvec=objs[i]->collides(obc,c);
+		cvec.write();
 	}
+	
+	/*
+	Kolizje z poziomem
+	*/
+	//for(int i=0; i<rl.size(); i++) {
+
+		//cvec=cvec*rl[i]->collides(obc,c);
+		
+	//}
+
+	
 	e->translate(c);
 	e->rotate(c.rotation.x,c.rotation.x,c.rotation.z);
+
+
 }
 
 void world::moveEntities() {
 	e_loc x,y,z,lt;
 	x,y,z=0;
-	for(int i=0; i<this->models.size(); i++) {
+	lt=time.getDiffR();
+	/*for(int i=0; i<this->models.size(); i++) {
 		ObjectEntity *e=models[i];
-		lt=time.getDiffR();
-		coords c=e->nextCoords(lt);
-		e->translate(c);
-		this->moveEntity((PhysicalEntity *)e,false);
-	}
-
-	obj_list objs=this->getModels();
-
-
-	ObserverEntity *o=&this->observer;
-	BoundingCube *obc=o->getBoundingBox();
-	for(int i=0; i<objs.size(); i++) {
-		bool cl=objs[i]->collides(obc);
-		if(cl) {
-		 cout << "Collision" << endl; 
-		}
-	}
-
-	rooms_list rl=this->getRooms();
-
-	static unsigned int th=0;
-	for(int i=0; i<rl.size(); i++) {
 		
-		//coords c=o->getCoords();
-		//cout << c.translation.x << ", " << c.translation.y << ", " << c.translation.z << endl;
-		bool col=rl[i]->collides(obc);
-		if(col) {
-		 cout << "World collision ("<< i << "), " << th << "th" << endl;
-		 th++;
-		}
-	}
+		
+		this->moveEntity((PhysicalEntity *)e,false);
+	}*/
 
+	
 	this->moveEntity((PhysicalEntity *)&this->observer,false);
 }
 

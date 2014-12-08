@@ -32,6 +32,7 @@ public:
 	vector & operator-(const vector &b);
 	vector & operator/(const e_loc val);
 	vector & operator/(const vector &b);
+	vector & operator*(const vector &b);
 	//ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
 
 };
