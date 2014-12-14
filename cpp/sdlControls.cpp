@@ -8,7 +8,7 @@ e_loc deg2rad(e_loc deg) {
 void sdlControls::operator()() {
 	camera *c=world::getInstance()->getCurrentCamera();
 	ObserverEntity *o=world::getInstance()->getObserver();
-	e_loc step=0.09,rstep=10,vstep=100000;
+	e_loc step=0.09,rstep=10,vstep=100;
 	static e_loc rotx=0;
 	static e_loc z=0;
 	e_loc xx; 
@@ -56,7 +56,7 @@ void sdlControls::operator()() {
 	 o->rotate(0,(e_loc)xx,0);
 	 o->rotate((e_loc)y,0,0);
 	
-	 SDL_Delay(10);
+	 //SDL_Delay(10);
 	}
 	
 }

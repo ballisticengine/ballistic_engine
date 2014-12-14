@@ -6,10 +6,12 @@ BoundingCube::BoundingCube() {
 
 BoundingCube::BoundingCube(shape *s) {
 	this->calculate(s->getVertices());
+	calculateSizes();
 }
 
 BoundingCube::BoundingCube(poly *p) {
 	this->calculate(p->v);
+	calculateSizes();
 }
 
 
@@ -39,6 +41,13 @@ BoundingCube::BoundingCube(e_loc minx,e_loc miny,e_loc minz,e_loc maxx,e_loc max
  max.x=maxx;
  max.y=maxy;
  max.z=maxz;
+ calculateSizes();
+}
+
+void BoundingCube::calculateSizes() {
+	this->width=max.x-min.x;
+	this->height=max.y-min.y;
+	this->depth=max.z-min.z;
 }
 
 void BoundingCube::calculate(vert_list s) {
@@ -74,9 +83,7 @@ void BoundingCube::calculate(vert_list s) {
 		cout << s[i]->x << ", ";
 	}
 
-	this->width=max.x-min.x;
-	this->height=max.y-min.y;
-	this->depth=max.z-min.z;
+	
 }
 
 e_loc BoundingCube::getWidth() {

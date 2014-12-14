@@ -40,6 +40,7 @@ void entity::locate(e_loc x,e_loc y,e_loc z) {
  this->y=y;
  this->z=z;
 
+
 }
 
 void entity::face(e_loc x,e_loc y,e_loc z) {
@@ -68,6 +69,13 @@ MathTypes::vector entity::collides(BoundingCube *bound,coords offset)
 
 void entity::setBoundingBox(BoundingCube *box) {
 	this->bounding_box=box;
+	bounding_box->max.x-=x;
+	bounding_box->max.y-=y;
+	bounding_box->max.z-=z;
+	
+	bounding_box->min.x-=x;
+	bounding_box->min.y-=y;
+	bounding_box->min.z-=z;
 }
 
 BoundingCube * entity::getBoundingBox() {
@@ -80,10 +88,10 @@ void entity::makeBoundingBox() {
 
 bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
 	MathTypes::vector amax,amin,bmax,bmin;
-	amax=a->max-offset;
-	amin=a->min-offset;
-	bmax=b->max-offset;
-	bmin=b->min-offset;
+	amax=a->max+offset;
+	amin=a->min+offset;
+	bmax=b->max+offset;
+	bmin=b->min+offset;
 	
 	//offset.write();
 
@@ -112,16 +120,73 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 
 	res.x=res.y=res.z=0;
 
-	if(hitTest(a,b,offsetx)) {
-	 res.x=1;
+	bool col=hitTest(a,b,offset.translation);
+	
+	
+
+	/*
+	
+	 return oldBoxRight < otherObj.Left && // was not colliding
+           boxRight >= otherObj.Left;
+	*/
+
+
+	e_loc 
+		
+		aright=a->max.x+a->width,//+offset.translation.x,
+		aleft=a->min.x,//+offset.translation.x
+		afront=a->min.z,
+		aback=a->max.z+a->depth,
+		
+		bleft=b->min.x,
+		bright=b->max.x+b->width,
+		bfront=b->min.z,
+		bback=b->max.z+b->depth,
+		halfw=a->width/2+b->width/2,
+		halfh=a->height/2+b->height/2,
+	halfd=a->depth/2+b->depth/2;
+	
+
+	MathTypes::vector am,bm;
+	//cout << "D" << a->width << endl;
+	am.x=a->min.x+a->width/2;
+	am.y=a->min.y+a->height/2;
+	am.z=a->min.z+a->depth/2;
+
+	bm.x=b->min.x+b->width/2;
+	bm.y=b->min.y+b->height/2;
+	bm.z=b->min.z+b->depth/2;
+	e_loc xAxis=abs(bm.x-am.x),
+		zAxis=abs(bm.z-am.z),
+		yAxis=abs(bm.y-am.y),
+		xdif=xAxis-halfw,
+		zdif=zAxis-halfd,
+		ox=abs(xdif),
+		oz=abs(zdif),
+		oy=abs(yAxis-halfh)
+		;
+
+	//cout << bleft << ", " << aleft << "|" << bright << ", " << bleft << endl;
+	if(!col) {
+	 return res;
+	}
+	
+	if(ox>oz) {
+	 res.x=xdif; //tu dodaæ stronê (prawa/lewa)
 	}
 
-	if(hitTest(a,b,offsety)) {
-	 res.y=1;
+
+	
+
+
+	if(0) { //todo
+	 res.y=1;//am.y-bm.y;
 	}
 
-	if(hitTest(a,b,offsetz)) {
-	 res.z=1;
+	if(oz>ox) {
+	 res.z=zdif;//am.z-bm.z;
 	}
+
+	res.write();
 	return res;
 }

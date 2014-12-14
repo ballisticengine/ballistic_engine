@@ -93,8 +93,10 @@ bool world::parseXml(string &fn) {
 				oe->setMaterial(mat);
 				oe->setTexture(tex);
 				oe->locate(x,y,z);
-				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
 				oe->setBoundingBox(new BoundingCube(oe->getModel()));
+				
+				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
+				
 				//oe->face(rx,ry,rz);
 				this->addObjectEntity(oe);
 			} else if(type=="light") {
@@ -155,6 +157,7 @@ camera *world::getCurrentCamera() {
 void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	time_int lt=time.getDiffR();
 	coords c=e->nextCoords(lt),x;
+	//c.translation.write();
 	x.translation=c.translation-e->getCoords().translation;
 
 	rooms_list rl=this->getRooms();
@@ -169,7 +172,20 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	//c.translation.write();
 	for(int i=0; i<objs.size(); i++) {
 		cvec=objs[i]->collides(obc,c);
-		cvec.write();
+		if(cvec.x) {
+			//cout << "Cx" << endl;
+			//c.translation.x=cvec.x;//-c.translation.z;
+		}
+
+		if(cvec.z) {
+			cout << cvec.x << endl;
+			if(cvec.z<0) {
+			c.translation.x=cvec.x-0.0001;
+			} else if(cvec.z>0) {
+			c.translation.x=cvec.x+0.0001;
+			}
+		}
+		
 	}
 	
 	/*

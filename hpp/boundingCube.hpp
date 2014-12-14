@@ -8,13 +8,15 @@
 
 class BoundingCube {
 protected:
-	e_loc width,height,depth;
+	
 public:
+	e_loc width,height,depth;
 	BoundingCube();
 	BoundingCube(shape *s);
 	BoundingCube(poly *p);
 	BoundingCube(e_loc width,e_loc height,e_loc depth);
 	BoundingCube(e_loc minx,e_loc miny,e_loc minz,e_loc maxx,e_loc maxy,e_loc maxz);
+	void calculateSizes();
 	void calculate(vert_list s);
 	e_loc toSphereRadius();
 	void print();
