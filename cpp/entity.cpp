@@ -166,22 +166,14 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 		oy=abs(yAxis-halfh)
 		;
 
-	//cout << bleft << ", " << aleft << "|" << bright << ", " << bleft << endl;
+	
 	if(!col) {
 	 return res;
 	}
 	
 	if(ox>oz) {
-	 res.x=bm.z-am.z; //tu dodaæ stronê (prawa/lewa)
+	 res.x=bm.z-am.z; 
 	}
-
-	if(ox>oy) {
-		res.x=1;
-	}
-
-
-	
-
 
 	if(0) { //todo
 	 res.y=1;//am.y-bm.y;

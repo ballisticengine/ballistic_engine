@@ -170,7 +170,7 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	 Kolizje z obiektami
 	*/
 	//c.translation.write();
-	for(int i=0; i<objs.size(); i++) {
+	/*for(int i=0; i<objs.size(); i++) {
 		cvec=objs[i]->collides(obc,c);
 		if(cvec.x) {
 			if(cvec.x<0) {
@@ -189,16 +189,16 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 			}
 		}
 		
-	}
+	}*/
 	
 	/*
 	Kolizje z poziomem
 	*/
-	//for(int i=0; i<rl.size(); i++) {
+	for(int i=0; i<rl.size(); i++) {
 
-		//cvec=cvec*rl[i]->collides(obc,c);
-		
-	//}
+		cvec=cvec*rl[i]->collides(obc,c);
+		//cvec.write();
+	}
 
 	
 	e->translate(c);
