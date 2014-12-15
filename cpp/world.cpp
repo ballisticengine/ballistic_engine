@@ -173,12 +173,15 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	for(int i=0; i<objs.size(); i++) {
 		cvec=objs[i]->collides(obc,c);
 		if(cvec.x) {
-			//cout << "Cx" << endl;
-			//c.translation.x=cvec.x;//-c.translation.z;
+			if(cvec.x<0) {
+			c.translation.z=cvec.z-0.0001;
+			} else if(cvec.x>0) {
+			c.translation.z=cvec.z+0.0001;
+			}
 		}
 
 		if(cvec.z) {
-			cout << cvec.x << endl;
+			//cout << cvec.x << endl;
 			if(cvec.z<0) {
 			c.translation.x=cvec.x-0.0001;
 			} else if(cvec.z>0) {

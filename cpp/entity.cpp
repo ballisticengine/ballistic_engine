@@ -172,7 +172,11 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 	}
 	
 	if(ox>oz) {
-	 res.x=xdif; //tu dodaæ stronê (prawa/lewa)
+	 res.x=bm.z-am.z; //tu dodaæ stronê (prawa/lewa)
+	}
+
+	if(ox>oy) {
+		res.x=1;
 	}
 
 
@@ -182,11 +186,11 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 	if(0) { //todo
 	 res.y=1;//am.y-bm.y;
 	}
-
+	
 	if(oz>ox) {
-	 res.z=zdif;//am.z-bm.z;
+	 res.z=bm.x-am.x;//am.z-bm.z;
 	}
 
-	res.write();
+	//res.write();
 	return res;
 }
