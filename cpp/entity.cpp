@@ -86,6 +86,14 @@ void entity::makeBoundingBox() {
 	///
 }
 
+BoundingCube offsetBounding(BoundingCube *bc,coords offset) {
+	BoundingCube bcr;
+	bcr=*bc;
+	bcr.max=bcr.max+offset.translation;
+	bcr.min=bcr.min+offset.translation;
+	return bcr;
+}
+
 bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
 	MathTypes::vector amax,amin,bmax,bmin;
 	amax=a->max+offset;

@@ -13,6 +13,8 @@ using namespace std;
  Abstrakcyjna klasa opisująca wszystkie obiekty na mapie
  */
 
+
+BoundingCube offsetBounding(BoundingCube *bc,coords offset);
 MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset);
 bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset);
 
