@@ -170,7 +170,7 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	 Kolizje z obiektami
 	*/
 	//c.translation.write();
-	/*for(int i=0; i<objs.size(); i++) {
+	for(int i=0; i<objs.size(); i++) {
 		cvec=objs[i]->collides(obc,c);
 		if(cvec.x) {
 			if(cvec.x<0) {
@@ -188,8 +188,8 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 			c.translation.x=cvec.x+0.0001;
 			}
 		}
-		
-	}*/
+	
+	}
 	
 	/*
 	Kolizje z poziomem
@@ -200,17 +200,17 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 		
 		if(cvec.x) {
 			if(cvec.x<0) {
-			c.translation.z=cvec.x-0.0001;
+			c.translation.z=cvec.x;-0.0001;
 			} else if(cvec.x>0) {
-			c.translation.z=cvec.x+0.0001;
+			c.translation.z=cvec.x;+0.0001;
 			}
 		}
 
 		if(cvec.z) {
 			if(cvec.z<0) {
-			c.translation.x=cvec.z-0.0001;
+			c.translation.x=cvec.z;-0.0001;
 			} else if(cvec.z>0) {
-			c.translation.x=cvec.z+0.0001;
+			c.translation.x=cvec.z;+0.0001;
 			}
 		}
 	}
