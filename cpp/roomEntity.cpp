@@ -46,16 +46,16 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 			if(ox>oz) {
 				e_loc dif=am.z-bm.z;
 				if(dif>0)
-					cvec.x=bound->width/2;
-				else cvec.x=-bound->width/2;
+					cvec.x=0.01;//bound->width/10;
+				else cvec.x=-0.01;//-bound->width/10;
 			}
-			if(oz>ox) {
+			else if(oz>ox) {
 			e_loc dif=am.x-bm.x;
 
 			if(dif>0) 
-			 cvec.z=bound->depth/2;
+			 cvec.z=0.01;//bound->depth/4;
 			else
-				cvec.z=-bound->depth/2;
+				cvec.z=-0.01;//-bound->depth/4;
 			
 			}
 			out_count++;
