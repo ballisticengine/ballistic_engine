@@ -133,8 +133,8 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 
 	e_loc 
 		
-		aright=a->max.x+a->width,//+offset.translation.x,
-		aleft=a->min.x,//+offset.translation.x
+		aright=a->max.x+a->width,
+		aleft=a->min.x,
 		afront=a->min.z,
 		aback=a->max.z+a->depth,
 		
