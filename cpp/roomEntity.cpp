@@ -60,8 +60,8 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 			out_count++;
 		}
 	}
-	//cout << in_count << ", " << out_count << endl;
-	if(out_count==1) {
+	cout << in_count << ", " << out_count << endl;
+	if(in_count==0) {
 		//cvec.write();
 		return cvec;
 	}

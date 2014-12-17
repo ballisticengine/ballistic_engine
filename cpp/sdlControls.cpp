@@ -8,7 +8,7 @@ e_loc deg2rad(e_loc deg) {
 void sdlControls::operator()() {
 	camera *c=world::getInstance()->getCurrentCamera();
 	ObserverEntity *o=world::getInstance()->getObserver();
-	e_loc step=0.09,rstep=10,vstep=1000;
+	e_loc step=0.09,rstep=10,vstep=100000;
 	static e_loc rotx=0;
 	static e_loc z=0;
 	e_loc xx; 
