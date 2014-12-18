@@ -2,7 +2,7 @@
 #include "types.hpp"
 
 renderer::renderer() {
-
+	state=engineState::getInstance();
 }
 
 renderer::~renderer() {
@@ -82,7 +82,9 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 		
 		//this->drawBoundingBox(ents[i]->getBoundingBox());
 		this->renderFaceTexShape(ents[i]->getModel());
-		this->drawBoundingBox(ents[i]->getBoundingBox());
+		if(state->debug_visual) {
+			this->drawBoundingBox(ents[i]->getBoundingBox());
+		}
 		
 	}
 }
@@ -92,8 +94,10 @@ void renderer::renderAllRooms() {
 	for(size_t i=0; i<rooms.size(); i++) {
 		
 		this->renderFaceTexShape((faceTexShape *)rooms[i]->getModel());
-		for(size_t n=0; n<rooms[i]->boundings.size(); n++) {
-			this->drawBoundingBox(rooms[i]->boundings[n]);
+		if(state->debug_visual) {
+			for(size_t n=0; n<rooms[i]->boundings.size(); n++) {
+				this->drawBoundingBox(rooms[i]->boundings[n]);
+			}
 		}
 	}
 }

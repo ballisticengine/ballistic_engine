@@ -23,7 +23,8 @@ typedef void (*flushf)();
 
 class renderer  {
 protected:
-    videoData vd;
+    engineState *state;
+	videoData vd;
     float frustum_start, frustum_end, frustum_x, frustum_y; 
     camera *active_camera;
 	flushf flush_callback;

@@ -3,6 +3,7 @@
 
 #include "singleton.hpp"
 #include <map>
+#include <iostream>
 
 using namespace std;
 
@@ -10,7 +11,9 @@ class engineState : public singleton<engineState> {
 protected:
 	bool global_exit;
 	map<char *,void *> settings;
+	
 public:
+	bool debug_visual,lighting,noclip;
 	void set(char * key,void *setting);
 	void * get(char * key);
 	void * toggle(char *key);

@@ -42,12 +42,11 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 					oz=abs(zdif),
 					oy=abs(yAxis-halfh)
 				;
-			//cout << "WIDTH: " << bound->width << ", ;
 			if(ox>oz) {
 				e_loc dif=am.z-bm.z;
 				if(dif>0)
-					cvec.x=0.01;//bound->width/10;
-				else cvec.x=-0.01;//-bound->width/10;
+					cvec.x=0.01;
+				else cvec.x=-0.01;
 			}
 			else if(oz>ox) {
 			e_loc dif=am.x-bm.x;
@@ -61,9 +60,8 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 			out_count++;
 		}
 	}
-	//cout << in_count << ", " << out_count << endl;
+	
 	if(in_count==0) {
-		cvec.write();
 		return cvec;
 	}
 	

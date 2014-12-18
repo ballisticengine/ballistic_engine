@@ -121,14 +121,14 @@ void RendererGL::render() {
 	glClear( GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	light_counter=0;
 	glMatrixMode(GL_MODELVIEW);
-	for(int i=0; i<shaders.size(); i++) {
+	/*for(int i=0; i<shaders.size(); i++) {
 		glUseProgramObjectARB(shaders[i]);
 		//int param=-1;
 	//	glGetObjectParameterivARB(shaders[i], GL_OBJECT_LINK_STATUS_ARB, &param);
 		//cout << "Shad status" << param << endl;
-	}
+	}*/
 	
-	//renderSkybox(w->getSkybox());
+	renderSkybox(w->getSkybox());
 	this->positionLights();
 	this->reset();
 
@@ -238,7 +238,7 @@ char * RendererGL::loadText(string fn) {
 
 void RendererGL::renderSkybox(skybox *sky) {
 	this->reset();
-
+	glFrontFace(GL_CCW);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_LIGHTING);
 	this->translate(0,0,-18);
@@ -375,6 +375,7 @@ void RendererGL::drawBoundingBox(BoundingCube *bound) {
 	  glEnable(GL_TEXTURE_2D);
 	  glEnable(GL_LIGHTING);
 	  	glEnable(GL_CULL_FACE);
+		glColor3f(1,1,1);
 }
 
 void RendererGL::drawBox(e_loc width,e_loc height,e_loc depth) {

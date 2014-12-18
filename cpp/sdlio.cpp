@@ -38,6 +38,31 @@ void sdlIO::eventLoop() {
             if (event.type == SDL_QUIT) {
 				engineState::getInstance()->setExit(true);
             }
+			if (event.type==SDL_KEYDOWN) {
+				 switch (event.key.keysym.sym) {
+					case SDLK_F1:
+						//wireframes
+						engineState::getInstance()->debug_visual=!engineState::getInstance()->debug_visual;
+						break;
+				 
+					case SDLK_F2:
+						//ligthing
+						engineState::getInstance()->lighting=!engineState::getInstance()->lighting;
+						break;
+					
+					case SDLK_F3:
+						engineState::getInstance()->noclip=!engineState::getInstance()->noclip;
+						break;
+
+					case SDLK_f:
+						//fullscreen
+						break;
+
+					case SDLK_ESCAPE:
+						engineState::getInstance()->setExit(true);
+						break;
+				 }
+			}
 
 	   }
 		r->render();

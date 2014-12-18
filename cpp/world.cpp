@@ -165,7 +165,7 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	BoundingCube *obc=this->observer.getBoundingBox();
 	MathTypes::vector cvec;
 	
-	
+	if(!engineState::getInstance()->noclip) {
 	/*
 	 Kolizje z obiektami
 	*/
@@ -214,7 +214,7 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 			}
 		}
 	}
-
+	}
 	
 	e->translate(c);
 	e->rotate(c.rotation.x,c.rotation.x,c.rotation.z);
