@@ -8,6 +8,7 @@
 #include "singleton.hpp"
 #include "engineState.hpp"
 #include "sdlControls.hpp"
+#include "world.hpp"
 
 class sdlIO  :  public singleton<sdlIO> {
 private:
@@ -16,6 +17,7 @@ private:
 	static SDL_Window *window;
 	sdlControls ctrl;
 	renderer *r;
+	world *w;
 public:
     static void flush();
     void setRenderer(renderer *r);

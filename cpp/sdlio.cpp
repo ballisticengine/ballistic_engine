@@ -4,7 +4,7 @@ SDL_Renderer *sdlIO::displayRenderer=0;
 SDL_Surface *sdlIO::screen=0;
 
 sdlIO::sdlIO() {
-   
+	w=world::getInstance();
 }
 
 void sdlIO::setRenderer(renderer *r) {
@@ -33,6 +33,7 @@ void sdlIO::eventLoop() {
     //SDL_EnableKeyRepeat(300, 30);
    	
 	boost::thread(boost::ref(this->ctrl));
+	TrRot vel;
 	while (!engineState::getInstance()->exit()) {
 		while (SDL_PollEvent(& event)) {
             if (event.type == SDL_QUIT) {
@@ -56,6 +57,18 @@ void sdlIO::eventLoop() {
 
 					case SDLK_f:
 						//fullscreen
+						break;
+					
+					case SDLK_w:
+						
+						//w->getObserver()->translate(0,-1,0);
+						break;
+
+					case SDLK_s:
+						
+						
+						vel.t.y=1;
+						//w->getObserver()->setVelocity(vel);
 						break;
 
 					case SDLK_ESCAPE:

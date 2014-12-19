@@ -29,6 +29,13 @@ void sdlControls::operator()() {
 	//o->printVelocity();
 	vel.reset();
 	 
+	 if(state[SDL_SCANCODE_W]) {
+		vel.t.y=-vstep;
+	 } 
+	
+	if(state[SDL_SCANCODE_S]) {
+		vel.t.y=vstep;
+	 }
 
 	 if(state[SDL_SCANCODE_RIGHT]) {
 		 vel.t.x+=-cos(deg2rad(rotx))*vstep;

@@ -14,7 +14,7 @@
     </screen>
     <game>
         <start_level>
-            level2
+            level1
         </start_level>
     </game>
 </config>

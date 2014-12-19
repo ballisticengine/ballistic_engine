@@ -62,7 +62,22 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 					oz=abs(zdif),
 					oy=abs(yAxis-halfh)
 				;
-			if(ox>oz) {
+
+			if(bound_current.min.y>=bound->min.y) {
+				
+				//cvec.x=cvec.z=0;
+				 cvec.y=0.01;
+				 cvec.write();
+				
+			}
+
+			else if(bound_current.max.y<=bound->max.y) {
+			
+				//cvec.x=cvec.z=0;
+				cvec.y=-0.01;
+				//cvec.write();
+			}
+			  if(ox>oz) {
 				e_loc dif=am.z-bm.z;
 				if(dif>0)
 					cvec.x=0.01;
@@ -76,7 +91,9 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 			else
 				cvec.z=-0.01;//-bound->depth/4;
 			
-			}
+			} 
+			
+			
 			out_count++;
 		}
 	}
