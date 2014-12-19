@@ -44,7 +44,7 @@ protected:
 	skybox *sky;
 	camera default_camera;
 	ObserverEntity observer;
-	void moveEntity(PhysicalEntity *e,bool skip_collision);
+	void moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision);
 	void moveEntities();
 	Timer time;
 	TerrainMap *tm;

@@ -157,15 +157,15 @@ roomEntity * world::getActiveRoom() {
  return this->rooms[0];
 }
 
-void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
-	time_int lt=time.getDiffR();
-	coords c=e->nextCoords(lt),x;
-	//c.translation.write();
+void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision) {
+	
+	coords c=e->nextCoords(time_diff),x;
 	x.translation=c.translation-e->getCoords().translation;
 
 	rooms_list rl=this->getRooms();
 	obj_list objs=this->getModels();
-	BoundingCube *obc=this->observer.getBoundingBox();
+	BoundingCube *obc=e->getBoundingBox();
+
 	MathTypes::vector cvec;
 	
 	if(!engineState::getInstance()->noclip) {
@@ -177,9 +177,9 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 		cvec=objs[i]->collides(obc,c);
 		if(cvec.x) {
 			if(cvec.x<0) {
-			c.translation.z=cvec.z-0.0001;
+			c.translation.z=cvec.z-COLLISION_BACK;
 			} else if(cvec.x>0) {
-			c.translation.z=cvec.z+0.0001;
+			c.translation.z=cvec.z+COLLISION_BACK;
 			}
 		}
 
@@ -207,7 +207,7 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	Kolizje z poziomem
 	*/
 	for(int i=0; i<rl.size(); i++) {
-		break;
+		//break;
 		cvec=rl[i]->collides(obc,c);
 		//cvec.write();
 		if(cvec.x) {
@@ -231,18 +231,19 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 }
 
 void world::moveEntities() {
-	e_loc x,y,z,lt;
+	e_loc x,y,z;
 	x,y,z=0;
-	lt=time.getDiffR();
-	/*for(int i=0; i<this->models.size(); i++) {
-		ObjectEntity *e=models[i];
+	obj_list things=this->getActiveRoom()->models;
+	time_int lt=time.getDiffR();
+	for(int i=0; i<things.size(); i++) {
+		
+		ObjectEntity *e=things[i];
 		
 		
-		this->moveEntity((PhysicalEntity *)e,false);
-	}*/
+		this->moveEntity((PhysicalEntity *)e,lt,false);
+	}
 
-	
-	this->moveEntity((PhysicalEntity *)&this->observer,false);
+	this->moveEntity((PhysicalEntity *)&this->observer,lt,false);
 }
 
 void world::operator()() {
