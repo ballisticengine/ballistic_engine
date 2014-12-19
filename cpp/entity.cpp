@@ -183,14 +183,16 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 	 res.x=bm.z-am.z; 
 	}
 
-	if(0) { //todo
-	 res.y=1;//am.y-bm.y;
-	}
+	
 	
 	if(oz>ox) {
 	 res.z=bm.x-am.x;//am.z-bm.z;
 	}
-
+	
+	if(b->min.y<a->min.y || b->max.y>a->max.y) { //todo
+	 res.y=am.y-bm.y;
+	 //res.write();
+	}
 	//res.write();
 	return res;
 }

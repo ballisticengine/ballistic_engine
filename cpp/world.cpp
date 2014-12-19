@@ -186,9 +186,18 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 		if(cvec.z) {
 			//cout << cvec.x << endl;
 			if(cvec.z<0) {
-			c.translation.x=cvec.x-0.0001;
+			c.translation.x=cvec.x-COLLISION_BACK;
 			} else if(cvec.z>0) {
-			c.translation.x=cvec.x+0.0001;
+			c.translation.x=cvec.x+COLLISION_BACK;
+			}
+		}
+
+		if(cvec.y) {
+			//cvec.write();
+			if(cvec.y<0) {
+			c.translation.y=+COLLISION_BACK;
+			} else {
+			c.translation.y=-COLLISION_BACK;
 			}
 		}
 	
@@ -198,7 +207,7 @@ void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
 	Kolizje z poziomem
 	*/
 	for(int i=0; i<rl.size(); i++) {
-
+		break;
 		cvec=rl[i]->collides(obc,c);
 		//cvec.write();
 		if(cvec.x) {
