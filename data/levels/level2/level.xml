@@ -16,6 +16,86 @@
             <rz>0.0</rz>
         </jump_point>
     </config>
+<<<<<<< HEAD
     
     
+=======
+    <tmp>
+        
+    <entity type="object">
+            <model>
+                <file>tris.md2</file>
+                <texture>hipek.bmp</texture>
+                <scale>1</scale>
+            </model>
+            <location>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>-60.0</z>
+            </location>
+            <facing>
+                <x>180.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </facing>
+        </entity>
+
+     <entity type="object">
+            <model>
+                <file>test.md2</file>
+                <texture>car.bmp</texture>
+                <scale>1</scale>
+            </model>
+            <location>
+                <x>-200.0</x>
+                <y>0.0</y>
+                <z>-270.0</z>
+            </location>
+            <facing>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </facing>
+        </entity>
+        
+        
+        
+    </tmp>
+    <entities>
+           <entity type="object">
+            <model>
+                <file>test.md2</file>
+                <texture>car.bmp</texture>
+                <scale>0.005</scale>
+            </model>
+            <location>
+                <x>1.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </location>
+            <facing>
+                <x>-90.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </facing>
+        </entity>
+        <entity type="object">
+            <model>
+                <file>hipek.md2</file>
+                <texture>brick.bmp</texture>
+                <scale>0.01</scale>
+            </model>
+            <location>
+                <x>0.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </location>
+            <facing>
+                <x>-90.0</x>
+                <y>0.0</y>
+                <z>0.0</z>
+            </facing>
+        </entity>
+    </entities>
+>>>>>>> geoments
 </world>

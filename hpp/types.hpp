@@ -96,10 +96,11 @@ class shape {
     vector <triangle *> triangles;
 	vector <poly *> polys;
 	uv_list uvs;
-	void *renderer_hint;
+	
 	
 public:
-    virtual void setRendererHint(void *hint);
+    void *renderer_hint;
+	virtual void setRendererHint(void *hint);
 	virtual void * getRendererHint();
 	bool operator==(shape &s);
     virtual int getPolyCount();

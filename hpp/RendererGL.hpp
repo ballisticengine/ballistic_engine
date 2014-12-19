@@ -29,6 +29,8 @@ using boost::property_tree::ptree;
 
 typedef vector<GLhandleARB> shader_list;
 
+
+
 class RendererGL : public renderer,public singleton<RendererGL> {
     protected:
     map <int,GLint> light_numbers,count_names;
@@ -63,6 +65,8 @@ class RendererGL : public renderer,public singleton<RendererGL> {
 	virtual void drawBox(e_loc width,e_loc height,e_loc depth);
 
 	virtual void renderTerrainSpecific();
+	//virtual void renderFaceTexShape(faceTexShape *s);
+	void setUpVbos();
 public:
     RendererGL();
 	virtual void setupTexture(texture *t);    

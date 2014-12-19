@@ -1,4 +1,4 @@
-#include "RendererGL.hpp"
+﻿#include "RendererGL.hpp"
 #include "types.hpp"
 #pragma comment(lib, "glu32.lib") 
 
@@ -70,6 +70,7 @@ void RendererGL::lightSpecific(light *l) {
 	
 	//glRotatef(-90,1,0,0);
 	GLfloat position[] = { 0, 0, 0, 1.0f };
+
 	//glDisable(GL_LIGHTING);
 	if (engineState::getInstance()->debug_visual) {
 		glDisable(GL_LIGHTING);
@@ -81,6 +82,7 @@ void RendererGL::lightSpecific(light *l) {
 	}
 	
 	
+
 	glEnable(light_numbers[light_counter]);
 	GLfloat ambientLight[] = { 0, 0, 0, 1.0f }; 
 	GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
@@ -95,17 +97,10 @@ void RendererGL::lightSpecific(light *l) {
 	glLightfv(light_numbers[light_counter], GL_SPECULAR, intensity);
 
 	glLightfv(light_numbers[light_counter], GL_POSITION, position);
-	 
-	glEnable(GL_COLOR_MATERIAL)        ;
-   
-	//glColor3f(1,1,0);
+
 	GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
-	// glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
 	
 	light_counter++;
-	
-	
-	
 
 }
 
@@ -148,11 +143,46 @@ void RendererGL::render() {
 
 	this->reset();
 	this->positionCamera();
-	
+
 	this->renderAllEntities();
 	
 	glFlush();
 	this->flush_callback();
+}
+
+
+/*void RendererGL::renderFaceTexShape(faceTexShape *s) {
+	if(s->renderer_hint) {
+	 
+	}
+}*/
+
+void RendererGL::setUpVbos() {
+	obj_list models=this->w->getModels();
+	GLuint *b;
+	float v[3];
+	size_t vc;
+	for(size_t i=0; i<models.size(); i++) {
+		b=new GLuint;
+		vc=0;
+		glGenBuffers(1,b);
+		models[i]->getModel()->renderer_hint=(void *)b;
+		glBindBuffer(GL_ARRAY_BUFFER, *b);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		poly_list ps=models[i]->getModel()->getPolys();
+		for(size_t n=0; n<ps.size(); n++) {
+			vert_list vs=ps[n]->v;
+			for(size_t w=0; w<vs.size(); w++) {
+				vs[w]->x;
+				v[0]=vs[w]->x;
+				v[1]=vs[w]->y;
+				v[2]=vs[w]->z;
+				glBufferSubData(GL_ARRAY_BUFFER,vc,3,v);
+				vc+=3;
+			}
+		}
+
+	}
 }
 
 void RendererGL::specificInit() {
@@ -179,10 +209,12 @@ void RendererGL::specificInit() {
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); 
 	// glEnable( GL_LIGHTING );
 	//glEnable(GL_LIGHT0);
-	// GLfloat global_ambient[] = { 0, 0, 0 }; 
-	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+	GLfloat global_ambient[] = { 0, 0, 0 }; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 	this->setupTexture(w->getSkybox()->getTexture());
+
 	//this->setupTexture(w->getTerrain()->getTexture());
+
 
 	lightbulb=gluNewQuadric();   
 	bounding_box_q=gluNewQuadric();
@@ -196,6 +228,7 @@ void RendererGL::specificInit() {
 		cout << "Adding shader: " << sn << endl;
 		addShader(sn);
 	}	
+	//this->setUpVbos();
 }
 
 void RendererGL::addShader(string name) {
@@ -272,13 +305,7 @@ void RendererGL::assignMaterial(Material *m) {
 	 glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, shining );
 	  glMaterialfv( GL_FRONT_AND_BACK, GL_EMISSION, emi );
 
-	/*
-glMaterialfv( GL_FRONT_AND_BACK, GL_AMBIENT, &(m_Ambient.r) );
-        glMaterialfv( GL_FRONT_AND_BACK, GL_DIFFUSE, &(m_Diffuse.r) );
-        glMaterialfv( GL_FRONT_AND_BACK, GL_SPECULAR, &(m_Specular.r) );
-        glMaterialfv( GL_FRONT_AND_BACK, GL_EMISSION, &(m_Emission.r) );
-        glMaterialf( GL_FRONT_AND_BACK, GL_SHININESS, m_Shininess );
-*/
+
 }
 
 void RendererGL::setupTexture(texture *t) {
@@ -288,14 +315,18 @@ void RendererGL::setupTexture(texture *t) {
 	glGenTextures(1, &tex_id);
 	this->textures_ids[t] = tex_id;
 	glBindTexture(GL_TEXTURE_2D, tex_id);
+	glTexStorage2D(GL_TEXTURE_2D, 8, GL_BGR_EXT, t->getWidth(), t->getHeight());
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
 		GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-		GL_LINEAR);
+		GL_LINEAR_MIPMAP_LINEAR);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	//for testing
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+	glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 void RendererGL::translateSpecific(e_loc x, e_loc y, e_loc z) {
@@ -303,12 +334,6 @@ void RendererGL::translateSpecific(e_loc x, e_loc y, e_loc z) {
 }
 
 
-
-/*void RendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z) {
-this->rotateSpecific(1,0,0,x);
-this->rotateSpecific(0,1,0,y);
-this->rotateSpecific(0,0,1,z);
-}*/
 
 void RendererGL::rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d) {
 	glRotatef(d,x,y,z);

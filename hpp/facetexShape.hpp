@@ -34,6 +34,8 @@ public:
 class faceTexShape : public shape {
 protected:
 	vector <texTriangle *> triangles;
+public:
+
 };
 
 #endif
