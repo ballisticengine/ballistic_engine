@@ -11,7 +11,7 @@ skybox * world::getSkybox() {
 }
 
 obj_list world::getModels() {
-	return this->models;
+	return this->getActiveRoom()->models;
 }
 
 rooms_list world::getRooms() {
@@ -98,7 +98,7 @@ bool world::parseXml(string &fn) {
 				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
 				
 				//oe->face(rx,ry,rz);
-				this->addObjectEntity(oe);
+				roomE->addObjectEntity(oe);
 			} else if(type=="light") {
 				//cout << "Light " << x << ", " << y << ", " << z << endl ;	
 				PointLight *l=new PointLight();
@@ -111,7 +111,7 @@ bool world::parseXml(string &fn) {
 				color.a=1.0f;
 
 				l->setAllColors(color);
-				this->addLightEntity(l);
+				roomE->addLightEntity(l);
 			} else if (type=="bounding") {
 				
 				e_loc 
@@ -137,7 +137,7 @@ bool world::parseXml(string &fn) {
 }
 
 lights_list world::getLights() {
-	return this->lights;
+	return this->getActiveRoom()->lights;
 }
 
 void world::prepare() {
@@ -145,13 +145,17 @@ void world::prepare() {
 }
 
 world::~world() {
-	for(int i=0; i<this->entities.size(); i++) {
+	/*for(int i=0; i<this->entities.size(); i++) {
 		// delete entities[i];
-	}
+	}*/
 }
 
 camera *world::getCurrentCamera() {
 	return &this->default_camera;
+}
+
+roomEntity * world::getActiveRoom() {
+ return this->rooms[0];
 }
 
 void world::moveEntity(PhysicalEntity *e,bool skip_collision) {
@@ -261,27 +265,9 @@ world & world::getRef() {
 	return *world::getInstance();
 }
 
-void world::addEntity(entity *e) {
-	this->entities.push_back(e);
-}
 
-void world::addPhysicalEntity(PhysicalEntity *e) {
-	this->phys_entities.push_back(e);
-	this->addEntity(e);
-}
-
-void world::addObjectEntity(ObjectEntity *e) {
-	this->models.push_back(e);
-
-	this->addPhysicalEntity(e);
-}
-
-void world::addLightEntity(light *e) {
-	this->lights.push_back(e);
-	this->addEntity(e);
-}
 
 void world::addRoomEntity(roomEntity *e) {
 	this->rooms.push_back(e);
-	this->addEntity(e);
+	//this->addEntity(e);
 }

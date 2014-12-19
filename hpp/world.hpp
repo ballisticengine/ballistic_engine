@@ -31,20 +31,14 @@ using namespace boost::property_tree;
 #include "observerEntity.hpp"
 #include "material.hpp"
 
-typedef vector <entity *> ent_list;
-typedef vector <ObjectEntity *> obj_list;
 typedef vector <roomEntity *> rooms_list;
-typedef vector <light *> lights_list;
-typedef vector <PhysicalEntity *> phys_list;
 
 class world {
 protected:
 	
-	ent_list entities;
-	phys_list phys_entities;
-	obj_list models;
+	
 	rooms_list rooms;
-	lights_list lights;
+	
 	
 
 	skybox *sky;
@@ -71,13 +65,11 @@ public:
 	void prepare();
 	void operator()();
 	void test();
+	roomEntity * getActiveRoom();
 	ObserverEntity * getObserver();
 	TerrainMap * getTerrain();
 
-	void addEntity(entity *e);
-	void addPhysicalEntity(PhysicalEntity *e);
-	void addObjectEntity(ObjectEntity *e);
-	void addLightEntity(light *e);
+	
 	void addRoomEntity(roomEntity *e);
 
 };

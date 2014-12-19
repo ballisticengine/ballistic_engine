@@ -5,6 +5,26 @@ roomEntity::roomEntity() {
 
 }
 
+void roomEntity::addEntity(entity *e) {
+	this->entities.push_back(e);
+}
+
+void roomEntity::addPhysicalEntity(PhysicalEntity *e) {
+	this->phys_entities.push_back(e);
+	this->addEntity(e);
+}
+
+void roomEntity::addObjectEntity(ObjectEntity *e) {
+	this->models.push_back(e);
+
+	this->addPhysicalEntity(e);
+}
+
+void roomEntity::addLightEntity(light *e) {
+	this->lights.push_back(e);
+	this->addEntity(e);
+}
+
 MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 
 	e_loc in_count,out_count;
