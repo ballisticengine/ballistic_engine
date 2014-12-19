@@ -50,6 +50,7 @@ void RendererGL::renderTerrainSpecific() {
 }
 
 void RendererGL::lightSpecific(light *l) {
+	
 	if (light_counter>7) {
 	 cout << "Too much lights" << endl;
 	 return;
@@ -70,8 +71,15 @@ void RendererGL::lightSpecific(light *l) {
 	//glRotatef(-90,1,0,0);
 	GLfloat position[] = { 0, 0, 0, 1.0f };
 	//glDisable(GL_LIGHTING);
-
-	//gluSphere(lightbulb,0.5,10,10);
+	if (engineState::getInstance()->debug_visual) {
+		glDisable(GL_LIGHTING);
+		glBindTexture(GL_TEXTURE_2D,0);
+		glColor3f(1,0,0);
+		gluSphere(lightbulb,0.5,10,10);	
+		glEnable(GL_LIGHTING);
+		glColor3f(1,1,1);
+	}
+	
 	
 	glEnable(light_numbers[light_counter]);
 	GLfloat ambientLight[] = { 0, 0, 0, 1.0f }; 
@@ -134,21 +142,12 @@ void RendererGL::render() {
 
 	this->positionCamera();
 
-
-	//glRotatef(-90,1,0,0);
-
-
 	glFrontFace(GL_CW);
 
 	this->renderAllRooms();
 
 	this->reset();
 	this->positionCamera();
-
-	//glRotatef(-90,1,0,0);
-	//glFrontFace(GL_CCW);
-	
-	
 	
 	this->renderAllEntities();
 	
@@ -168,7 +167,7 @@ void RendererGL::specificInit() {
 	//glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
 	gluPerspective(90,1,1,5000);
 	glCullFace(GL_FRONT);
-	glFrontFace(GL_CCW);
+	glFrontFace(GL_CW);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
