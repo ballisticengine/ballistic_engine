@@ -115,7 +115,7 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
 			
 		}
 		if(t->getMaterial()) {
-			this->assignMaterial(t->getMaterial());	
+			//this->assignMaterial(t->getMaterial());	
 		}
 		int count=s->getPolyCount();
 		this->beginHinted(s);
