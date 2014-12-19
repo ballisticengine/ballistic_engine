@@ -42,10 +42,9 @@ bool world::parseXml(string &fn) {
 	string skyfn= pt.get<string>("world.config.skybox");
 	this->sky = new skybox(wd+DS+"textures"+DS+skyfn);
 
-	string tm_tex=pt.get<string>("world.config.terrain.map");
-	tm=new TerrainMap(tm_tex,tm_tex);
-
-	ptree& entities = pt.get_child("world.entities");
+	//string tm_tex=pt.get<string>("world.config.terrain.map");
+	//tm=new TerrainMap(tm_tex,tm_tex);
+	//ptree& entities = pt.get_child("world.entities");
 
 	ptree& world_jp=pt.get_child("world.config.jump_point");
 	e_loc jx=world_jp.get<e_loc>("x"),

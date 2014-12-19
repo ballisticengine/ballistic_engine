@@ -1,0 +1,21 @@
+<world>
+    <config>
+        <skybox>
+            skybox.bmp
+        </skybox>
+        <terrain>
+            <map>terrain.bmp</map>
+            <texture></texture>
+        </terrain>
+        <jump_point>
+            <x>0.0</x>
+            <y>-2.0</y>
+            <z>0.0</z>
+            <rx>0.0</rx>
+            <ry>0.0</ry>
+            <rz>0.0</rz>
+        </jump_point>
+    </config>
+    
+    
+</world>

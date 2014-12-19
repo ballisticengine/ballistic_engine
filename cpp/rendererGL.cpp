@@ -183,7 +183,7 @@ void RendererGL::specificInit() {
 	// GLfloat global_ambient[] = { 0, 0, 0 }; 
 	//glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 	this->setupTexture(w->getSkybox()->getTexture());
-	this->setupTexture(w->getTerrain()->getTexture());
+	//this->setupTexture(w->getTerrain()->getTexture());
 
 	lightbulb=gluNewQuadric();   
 	bounding_box_q=gluNewQuadric();
