@@ -8,8 +8,8 @@
             <texture></texture>
         </terrain>
         <jump_point>
-            <x>0.0</x>
-            <y>-2.0</y>
+            <x>200.0</x>
+            <y>0.0</y>
             <z>0.0</z>
             <rx>0.0</rx>
             <ry>0.0</ry>

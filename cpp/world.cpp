@@ -53,9 +53,7 @@ bool world::parseXml(string &fn) {
 		rx=world_jp.get<e_loc>("rx"),
 		ry=world_jp.get<e_loc>("ry"),
 		rz=world_jp.get<e_loc>("rz");
-	observer.locate(jx,jy,jz);
-	observer.face(rx,ry,rz);
-	observer.setCamera(&default_camera);
+	
 
 	string gfn=wd+DS+"geometry.xml";
 
@@ -131,7 +129,9 @@ bool world::parseXml(string &fn) {
 		}
 
 	}
-
+	observer.locate(jx,jy,jz);
+	observer.face(rx,ry,rz);
+	observer.setCamera(&default_camera);
 	return true;
 }
 

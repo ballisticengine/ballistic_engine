@@ -24,6 +24,7 @@ protected:
     e_loc x,y,z,rx,ry,rz;
 	MathTypes::vector velocity;
 	BoundingCube *bounding_box;
+	void syncBounding();
 public:
 	entity();
 	coords getCoords();
