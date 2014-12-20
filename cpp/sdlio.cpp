@@ -5,6 +5,7 @@ SDL_Surface *sdlIO::screen=0;
 
 sdlIO::sdlIO() {
 	w=world::getInstance();
+	fullscreen=false;
 }
 
 void sdlIO::setRenderer(renderer *r) {
@@ -56,7 +57,12 @@ void sdlIO::eventLoop() {
 						break;
 
 					case SDLK_f:
-						//fullscreen
+						if(!fullscreen) {
+							SDL_SetWindowFullscreen(window,SDL_WINDOW_FULLSCREEN);
+						} else {
+							SDL_SetWindowFullscreen(window,0);
+						}
+						fullscreen=!fullscreen;
 						break;
 					
 					case SDLK_w:

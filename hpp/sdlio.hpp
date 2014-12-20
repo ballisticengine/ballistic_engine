@@ -18,6 +18,7 @@ private:
 	sdlControls ctrl;
 	renderer *r;
 	world *w;
+	bool fullscreen;
 public:
     static void flush();
     void setRenderer(renderer *r);
