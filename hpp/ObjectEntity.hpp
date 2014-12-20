@@ -13,7 +13,7 @@ class ObjectEntity : public PhysicalEntity,public Texturable {
 protected:
 	faceTexShape *model;
 	
-	texture *tex;
+	
 	Material *mat;
 public:
 	virtual faceTexShape * getModel();

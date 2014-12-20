@@ -41,7 +41,7 @@ protected:
 
 	virtual void renderAllEntities();
 	virtual void renderAllRooms();
-	
+	virtual void setAmbientLight(colorRGB *c)=0;
 	virtual void positionCameraSpecific();
 
     virtual void assignTexture(texture *t)=0;

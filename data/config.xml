@@ -1,4 +1,9 @@
 <config>
+    <tmp>
+        
+        <resx>1366</resx>
+        <resy>768</resy>
+    </tmp>
     <screen>
         <resx>640</resx>
         <resy>480</resy>

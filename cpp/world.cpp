@@ -68,6 +68,11 @@ bool world::parseXml(string &fn) {
 		roomEntity *roomE=new roomEntity();
 		poly_list polys=fs->getPolys();
 		
+			roomE->ambient_light.r=room.second.get<e_loc>("ambient_light.r"),
+			roomE->ambient_light.b=room.second.get<e_loc>("ambient_light.b"),
+			roomE->ambient_light.g=room.second.get<e_loc>("ambient_light.g")
+			;
+		cout << "Ambient light: " << roomE->ambient_light.r << ", " << roomE->ambient_light.g << ", " << roomE->ambient_light.b << endl;
 		roomE->setModel(fs);
 		this->addRoomEntity(roomE);
 		ptree &room_ents=(ptree)room.second.get_child("entities");

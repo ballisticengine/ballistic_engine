@@ -27,7 +27,10 @@ void RendererGL::end() {
 	glEnd();
 }
 
-
+void RendererGL::setAmbientLight(colorRGB *c) {
+	GLfloat global_ambient[] = { c->r, c->g, c->b }; 
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+}
 
 void RendererGL::renderTerrainSpecific() {
 	TerrainMap *tm=w->getTerrain();
@@ -205,12 +208,11 @@ void RendererGL::specificInit() {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glEnable(GL_LIGHTING);
 	glShadeModel(GL_SMOOTH);
-
+	
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); 
-	// glEnable( GL_LIGHTING );
+	//glEnable( GL_LIGHTING );
 	//glEnable(GL_LIGHT0);
-	GLfloat global_ambient[] = { 0, 0, 0 }; 
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+	this->setAmbientLight(&w->getActiveRoom()->ambient_light);
 	this->setupTexture(w->getSkybox()->getTexture());
 
 	//this->setupTexture(w->getTerrain()->getTexture());

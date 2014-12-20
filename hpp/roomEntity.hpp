@@ -21,7 +21,7 @@ public:
 	obj_list models;
 	lights_list lights;
 	bounding_list boundings;
-
+	colorRGBA ambient_light;
 	void addEntity(entity *e);
 	void addPhysicalEntity(PhysicalEntity *e);
 	void addObjectEntity(ObjectEntity *e);

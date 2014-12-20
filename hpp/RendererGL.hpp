@@ -57,7 +57,7 @@ class RendererGL : public renderer,public singleton<RendererGL> {
     //virtual void rotateSpecific(e_loc x,e_loc y,e_loc z);
 	virtual void positionCameraSpecific();
 	virtual void rotateSpecific(e_loc x,e_loc y,e_loc z,e_loc d);
-	
+	virtual void setAmbientLight(colorRGB *c);
 	virtual void drawBoundingBox(BoundingCube *bound);
 
 	virtual void resetSpecific() ;
