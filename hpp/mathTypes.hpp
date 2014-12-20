@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-
+#define PI 3.14159265
 
 typedef double e_loc;
 

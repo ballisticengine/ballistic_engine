@@ -8,7 +8,7 @@ e_loc deg2rad(e_loc deg) {
 void sdlControls::operator()() {
 	camera *c=world::getInstance()->getCurrentCamera();
 	ObserverEntity *o=world::getInstance()->getObserver();
-	e_loc step=0.09,rstep=0.1,vstep=10;
+	e_loc step=0.09,rstep=0.1,vstep=20;
 	static e_loc rotx=0;
 	static e_loc z=0;
 	e_loc xx; 
@@ -40,22 +40,26 @@ void sdlControls::operator()() {
 	 if(state[SDL_SCANCODE_RIGHT]) {
 		 vel.t.x+=-cos(deg2rad(rotx))*vstep;
 		 vel.t.z+=-sin(deg2rad(rotx))*vstep;
+		 o->bobHead();
 	 }
 	 
 	 if(state[SDL_SCANCODE_LEFT]) {
 		 vel.t.x+=cos(deg2rad(rotx))*vstep;
 		 vel.t.z+=sin(deg2rad(rotx))*vstep;
+		 o->bobHead();
 	 }
 
 	 if(state[SDL_SCANCODE_UP]) {
 		 
 		 vel.t.x+=-sin(deg2rad(rotx))*vstep;
 		 vel.t.z+=cos(deg2rad(rotx))*vstep;
+		 o->bobHead();
 	 }
 
 	 if(state[SDL_SCANCODE_DOWN]) {
 		 vel.t.x+=sin(deg2rad(rotx))*vstep;
 		 vel.t.z+=-cos(deg2rad(rotx))*vstep;
+		 o->bobHead();
 	 }
 
 	 

@@ -207,7 +207,7 @@ void renderer::reset() {
 
  void renderer::positionCamera() {
 	// coords c=active_camera->getCoords();
-	 coords c=w->getObserver()->getCoords();
+	 coords c=w->getObserver()->getCamera()->getCoords();
 	 rotate(1,0,0,c.rotation.x);
 	 rotate(0,1,0,c.rotation.y);
 	 rotate(0,0,1,c.rotation.z);
