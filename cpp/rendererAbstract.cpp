@@ -103,15 +103,16 @@ void renderer::renderAllRooms() {
 }
 
 void renderer::renderFaceTexShape(faceTexShape *s) {
-    poly_list polys;
+   
   
-	polys = s->getPolys();
+	size_t ** polys = s->faces;
+	size_t uvc=0;
 
-	for (int i = 0; i < polys.size(); i++) {
-        texPoly *t=(texPoly *)polys[i];
+	for (int i = 0; i < s->f_count; i++) {
+        //texPoly *t=(texPoly *)polys[i];
 		
-		if(t->getTexture()) {
-			this->assignTexture(t->getTexture());
+		if(s->textures[i]) {
+			this->assignTexture(s->textures[i]);
 			
 		}
 
@@ -119,10 +120,13 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
 		//	this->assignMaterial(t->getMaterial());	
 		//}
 
-		int count=s->getPolyCount();
+		//int count=s->getPolyCount();
 		this->beginHinted(s);
-		for (int n = 0; n < count; n++) {
-			this->renderVertex(polys[i]->v[n],polys[i]->uvs[n]);
+		for (int n = 0; n < s->v_per_poly; n++) {
+			
+			
+			this->renderVertex(&s->vertices[s->faces[i][n]],&s->normals[s->faces[i][n]],&s->uvs[uvc]);
+			uvc++;
         }
 		this->end();
     }
@@ -134,23 +138,22 @@ void renderer::setFlush(flushf flush_callback) {
 }
 
 void renderer::renderPShape(shape *s) {
-    vert_list verts = s->getVertices();
-	uv_list uvs=s->getUvs();
+    
 	this->begin();
-	for (int i = 0; i < verts.size(); i++) {
-        this->renderVertex(verts[i],uvs[i]);
+	for (int i = 0; i < s->v_count; i++) {
+		this->renderVertex(&s->vertices[i],0,&s->uvs[i]);
     }
 	this->end();
 }
 
 void renderer::renderShape(shape *s) {
-    poly_list tris;
-	tris = s->getPolys();
+    //poly_list tris;
+	//tris = s->getPolys();
     this->begin();
-	for (int i = 0; i < tris.size(); i++) {
+	for (int i = 0; i < s->f_count; i++) {
        
 		for (int n = 0; n < 3; n++) {
-			this->renderVertex(tris[i]->v[n],tris[i]->uvs[n]);
+			this->renderVertex(&s->vertices[s->faces[i][n]],&s->normals[s->faces[i][n]],&s->uvs[i]);
         }
     }
 	this->end();

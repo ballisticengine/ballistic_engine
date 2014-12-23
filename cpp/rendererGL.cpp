@@ -2,10 +2,12 @@
 #include "types.hpp"
 #pragma comment(lib, "glu32.lib") 
 
-void RendererGL::renderVertex(vertex *v,uv *uvs) {
-	glNormal3d(v->normal.x,v->normal.y,v->normal.z);
+void RendererGL::renderVertex(v_type *v,n_type *normal,uv *uvs)  {
+	if(normal) {
+	glNormal3d(normal->x,normal->y,normal->z);
+	}
 	if(uvs) {
-		glTexCoord2d(uvs->u, uvs->v);
+	 glTexCoord2d(uvs->u, uvs->v);
 	}
 	glVertex3d(v->x, v->y, v->z);
 }
@@ -19,7 +21,7 @@ void RendererGL::beginQuads() {
 }
 
 void RendererGL::beginHinted(shape *s) {
-	int count=s->getPolyCount();
+	int count=s->v_per_poly;
 	glBegin(count_names[count]);
 }
 
@@ -33,7 +35,7 @@ void RendererGL::setAmbientLight(colorRGB *c) {
 }
 
 void RendererGL::renderTerrainSpecific() {
-	TerrainMap *tm=w->getTerrain();
+	/*TerrainMap *tm=w->getTerrain();
 	shape *s=tm->getQuads();
 	vert_list verts;
 
@@ -50,6 +52,7 @@ void RendererGL::renderTerrainSpecific() {
 	}
 	glEnd();
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+	*/
 }
 
 void RendererGL::lightSpecific(light *l) {
@@ -102,9 +105,9 @@ void RendererGL::lightSpecific(light *l) {
 	glLightfv(light_numbers[light_counter], GL_POSITION, position);
 
 	GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
-	glLightf(light_numbers[light_counter], GL_CONSTANT_ATTENUATION, 2);
+	//glLightf(light_numbers[light_counter], GL_CONSTANT_ATTENUATION, 2);
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-	this->setAmbientLight(&w->getActiveRoom()->ambient_light);
+	//this->setAmbientLight(&w->getActiveRoom()->ambient_light);
 	light_counter++;
 
 }
@@ -125,6 +128,7 @@ RendererGL::RendererGL() {
 
 
 void RendererGL::render() {
+	
 	glClearColor(1,1,1,1);
 	glClear( GL_DEPTH_BUFFER_BIT );
 	light_counter=0;
@@ -143,9 +147,9 @@ void RendererGL::render() {
 	this->positionCamera();
 
 	glFrontFace(GL_CW);
-
+	
 	this->renderAllRooms();
-
+	
 	this->reset();
 	this->positionCamera();
 
@@ -163,7 +167,7 @@ void RendererGL::render() {
 }*/
 
 void RendererGL::setUpVbos() {
-	obj_list models=this->w->getModels();
+	/*obj_list models=this->w->getModels();
 	GLuint *b;
 	float v[3];
 	size_t vc;
@@ -187,7 +191,7 @@ void RendererGL::setUpVbos() {
 			}
 		}
 
-	}
+	}*/
 }
 
 void RendererGL::specificInit() {

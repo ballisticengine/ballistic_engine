@@ -9,6 +9,11 @@
 typedef double e_loc;
 
 namespace MathTypes {
+
+struct BasicVector {
+	e_loc x,y,z;
+};
+
 class vector {
 protected:
 	e_loc ifZero(e_loc value);
@@ -16,6 +21,7 @@ protected:
 public:
 	e_loc x,y,z;
 	vector(const vector &v);
+	vector(const BasicVector &v);
 	virtual void operator=(const vector &v);
 	
 	vector();

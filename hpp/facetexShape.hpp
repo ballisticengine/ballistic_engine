@@ -10,7 +10,7 @@ Reprezentuje kszta³t z teksturami przypisanymi do wielok¹tów
 #include "material.hpp"
 #include "materiable.hpp"
 
-class texPolyGeneral : public Materiable {
+/*class texPolyGeneral : public Materiable {
 
 public:
 	
@@ -28,12 +28,12 @@ public:
 class texPoly : public poly,public texPolyGeneral {
 public:
 	texPoly(vector<vertex *>vs);
-};
+	texPoly();
+};*/
 
 
 class faceTexShape : public shape {
-protected:
-	vector <texTriangle *> triangles;
+
 public:
 
 };

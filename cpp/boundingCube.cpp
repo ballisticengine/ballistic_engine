@@ -5,14 +5,10 @@ BoundingCube::BoundingCube() {
 }
 
 BoundingCube::BoundingCube(shape *s) {
-	this->calculate(s->getVertices());
+	this->calculate(s);
 	calculateSizes();
 }
 
-BoundingCube::BoundingCube(poly *p) {
-	this->calculate(p->v);
-	calculateSizes();
-}
 
 
 e_loc BoundingCube::toSphereRadius() {
@@ -50,37 +46,35 @@ void BoundingCube::calculateSizes() {
 	this->depth=max.z-min.z;
 }
 
-void BoundingCube::calculate(vert_list s) {
+void BoundingCube::calculate(shape * s) {
 //vert_list vs=s->getVertices();
 	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
 	max.x=min.x=max.y=min.y=max.z=min.z=0;
 	
-	for (unsigned int i=0; i<s.size(); i++) {
-		if (s[i]->x > max.x) {
-			max.x=s[i]->x;
+	for (unsigned int i=0; i<s->v_count; i++) {
+		if (s->vertices[i].x > max.x) {
+			max.x=s->vertices[i].x;
 		}
 
-		if(s[i]->x < min.x) {
-		 min.x=s[i]->x;
+		if(s->vertices[i].x < min.x) {
+		 min.x=s->vertices[i].x;
 		}
 
-		if (s[i]->y > max.y) {
-			max.y=s[i]->y;
+		if (s->vertices[i].y > max.y) {
+			max.y=s->vertices[i].y;
 		}
 
-		if(s[i]->y < min.y) {
-		 min.y=s[i]->y;
+		if(s->vertices[i].y < min.y) {
+		 min.y=s->vertices[i].y;
 		}
 
-		if (s[i]->z > max.z) {
-			max.z=s[i]->z;
+		if (s->vertices[i].z > max.z) {
+			max.z=s->vertices[i].z;
 		}
 
-		if(s[i]->z < min.z) {
-		 min.z=s[i]->z;
+		if(s->vertices[i].z < min.z) {
+		 min.z=s->vertices[i].z;
 		}
-
-		cout << s[i]->x << ", ";
 	}
 
 	

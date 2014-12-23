@@ -65,6 +65,12 @@ vector::vector(const vector &v) {
  z=v.z;
 }
 
+vector::vector(const BasicVector &v) {
+ x=v.x;
+ y=v.y;
+ z=v.z;
+}
+
 void vector::operator=(const vector &v) {
 	x=v.x;
 	y=v.y;

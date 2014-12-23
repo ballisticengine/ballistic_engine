@@ -11,31 +11,97 @@ bool loaderXML::load(string fn, faceTexShape *s) {
 }
 
 void loaderXML::toShape(ptree &geom,faceTexShape *s) {
-	texPoly *vt;
+
 	ptree 
 		verts=geom.get_child("vertices"),
-		faces=geom.get_child("faces")
+		faces=geom.get_child("faces"),
+		uvs=geom.get_child("uvs")
 		;
-	//write_xml(std::cout,verts);
+	size_t
+		v_count=geom.get<size_t>("counts.vertices"),
+		f_count=geom.get<size_t>("counts.faces"),
+		uv_count=geom.get<size_t>("counts.uvs"),
+		vpf=geom.get<size_t>("counts.v_p_f")
+		;
+	s->f_count=f_count;
+	s->v_count=v_count;
+	s->v_per_poly=vpf;
+	s->uv_count=uv_count;
+	s->vertices=new v_type[v_count];
+	s->normals=new n_type[v_count];
+	s->faces=new size_t*[f_count];
+	s->uvs=new uv[uv_count];
+	s->textures=new texture*[f_count];
+	int i;
+	
+	i=0;
 	BOOST_FOREACH(const ptree::value_type &vx,verts) {
-		//write_xml(std::cout,vx.second);
 		ptree 
 			coords=vx.second.get_child("coords"),
 			normal=vx.second.get_child("normal")
 			;
+		e_loc 
+			x=coords.get<e_loc>("x"),
+			y=coords.get<e_loc>("y"),
+			z=coords.get<e_loc>("z"),
+			nx=normal.get<e_loc>("x"),
+			ny=normal.get<e_loc>("y"),
+			nz=normal.get<e_loc>("z")
+			;
+		s->vertices[i].x=x;
+		s->vertices[i].y=y;
+		s->vertices[i].z=z;
+		s->normals[i].x=nx;
+		s->normals[i].y=ny;
+		s->normals[i].z=nz;
 		
+		MathTypes::vector norm;
 		
+		i++;
 	} 
 
+	/*i=0;
+	BOOST_FOREACH(const ptree::value_type &uv,uvs) {
+		s->uvs[i].u=uv.second.get<e_loc>("u");
+		s->uvs[i].u=uv.second.get<e_loc>("v");
+		i++;
+	}*/
+	
+	i=0;
+
+	int n=0,uvc=0;
+	BOOST_FOREACH(const ptree::value_type &face,faces) {
+		ptree f_verts=face.second.get_child("vertices");
+		s->faces[i]=new size_t[vpf];
+		try {
+			
+		string texname=face.second.get<string>("texture");
+				texture *t=(texture *)textureFactory::getInstance()->get(texname);
+				s->textures[i]=t;
+				cout << texname << endl;
+			} catch(std::exception e) {
+				s->textures[i]=0;
+			} 
+		n=0;
+		BOOST_FOREACH(const ptree::value_type &f_vx,f_verts) {
+			size_t index=f_vx.second.get<size_t>("i");
+			s->faces[i][n]=index;
+			ptree uv=f_vx.second.get_child("uv");
+			s->uvs[uvc].u=uv.get<e_loc>("u");
+			s->uvs[uvc].v=uv.get<e_loc>("v");
+			uvc++;
+			n++;
+
+		}
+		i++;
+	}
 	/*BOOST_FOREACH(const ptree::value_type &f, geom) {
 		cout << "FACE" << endl;
 		vert_list vs_tmp;
 		uv_list uv_tmp;
 		int i=0;
 		ptree verts=f.second.get_child("vertices");
-		cout << "vSSS";
 		BOOST_FOREACH(const ptree::value_type &vx, verts) {
-			cout << " VERTEX" << endl;
 			e_loc 
 				x=vx.second.get<e_loc>("x")
 				,y=vx.second.get<e_loc>("y")

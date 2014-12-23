@@ -39,7 +39,7 @@ class RendererGL : public renderer,public singleton<RendererGL> {
 	shader_list shaders;
 	void addShader(string name);
 	map<texture *,GLuint> textures_ids;
-    virtual void renderVertex(vertex *v,uv *uvs);
+    virtual void renderVertex(v_type *v,n_type *normal,uv *uvs) ;
     texture *tt,*qt;
     shape *test;
     GLUquadricObj *lightbulb,*bounding_box_q;   

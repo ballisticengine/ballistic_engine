@@ -20,7 +20,8 @@ protected:
     string filename;
     SDL_Surface *surf;
 public:
-    texture(string fn);
+    texture();
+	texture(string fn);
     virtual bool load();
     virtual void free();
     //todo: tać poniższe do renderera

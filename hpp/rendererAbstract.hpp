@@ -32,7 +32,7 @@ protected:
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
 	virtual void renderFaceTexShape(faceTexShape *s);
-    virtual void renderVertex(vertex *v,uv *uvs) = 0;
+	virtual void renderVertex(v_type *v,n_type *normal,uv *uvs) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
 	virtual void beginQuads()=0;
 	virtual void begin()=0;

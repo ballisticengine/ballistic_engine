@@ -4,6 +4,9 @@ texture::texture(string fn) {
     this->filename = fn;
 }
 
+texture::texture() {
+}
+
 bool texture::load() {
     cout << this->filename << endl;
     cout.flush();

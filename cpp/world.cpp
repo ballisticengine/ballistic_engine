@@ -66,7 +66,7 @@ bool world::parseXml(string &fn) {
 
 		faceTexShape *fs=shapef->getXML((ptree)room.second);
 		roomEntity *roomE=new roomEntity();
-		poly_list polys=fs->getPolys();
+		//poly_list polys=fs->getPolys();
 		
 			roomE->ambient_light.r=room.second.get<e_loc>("ambient_light.r"),
 			roomE->ambient_light.b=room.second.get<e_loc>("ambient_light.b"),

@@ -1,7 +1,7 @@
 #include "loaderMD2.hpp"
 
 void loaderMD2::md2ToShape(md2file *md2, shape *s) {
-    int i, iv;
+  /*  int i, iv;
     vertex * vs_tmp[3], *vp;
 	uv *utmp[3];
     triangle *vt;
@@ -44,7 +44,7 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
 		
 		s->addPoly(vt);
 		
-    }
+    }*/
 
 
 }
