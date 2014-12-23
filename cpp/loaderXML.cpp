@@ -12,15 +12,30 @@ bool loaderXML::load(string fn, faceTexShape *s) {
 
 void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 	texPoly *vt;
+	ptree 
+		verts=geom.get_child("vertices"),
+		faces=geom.get_child("faces")
+		;
+	//write_xml(std::cout,verts);
+	BOOST_FOREACH(const ptree::value_type &vx,verts) {
+		//write_xml(std::cout,vx.second);
+		ptree 
+			coords=vx.second.get_child("coords"),
+			normal=vx.second.get_child("normal")
+			;
+		
+		
+	} 
 
-	BOOST_FOREACH(const ptree::value_type &f, geom) {
-		//cout << "FACE" << endl;
+	/*BOOST_FOREACH(const ptree::value_type &f, geom) {
+		cout << "FACE" << endl;
 		vert_list vs_tmp;
 		uv_list uv_tmp;
 		int i=0;
 		ptree verts=f.second.get_child("vertices");
+		cout << "vSSS";
 		BOOST_FOREACH(const ptree::value_type &vx, verts) {
-			//cout << " VERTEX" << endl;
+			cout << " VERTEX" << endl;
 			e_loc 
 				x=vx.second.get<e_loc>("x")
 				,y=vx.second.get<e_loc>("y")
@@ -64,7 +79,6 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 			mt->setEmission(emission);
 
 			vt->setMaterial(mt);
-			cout << "------------------------R: " << endl ;
 		}catch(std::exception e) {
 			
 			vt->setMaterial(0);
@@ -79,7 +93,7 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 		} 
 		vt->uvs=uv_tmp;
 		s->addPoly(vt);
-	}
+	}*/
 
 }
 

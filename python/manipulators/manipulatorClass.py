@@ -4,6 +4,13 @@ class ManipulatorClass(object):
         print "init"
         self.world=world
 
+    def onEntityCollision(self,entity,data):
+        pass
+
+    def onLevelCollision(self,entity,data):
+        print "Collision"
+
+
     def onSelfLoad(self):
         pass
 

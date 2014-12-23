@@ -13,8 +13,9 @@ void * shapeFactory::actualLoad(string fn) {
 	 loader->load(fn,s);
   }
   else if(ext==GEOM_MEM_EXT) {
-	 loaderXML *loader=loaderXML::getInstance();
-	//write_xml(std::cout, *shp);
+	 cout << "GEOM";
+	  loaderXML *loader=loaderXML::getInstance();
+		//write_xml(std::cout, *shp);
 	 loader->loadXML(*shp,s);
 	return (void *)s;
   }

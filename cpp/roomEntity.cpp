@@ -34,7 +34,8 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 
 	//bound2.max=bound->min;
 	//bound2.min=bound->max;
-	MathTypes::vector cvec,cres,none,am,bm;
+	MathTypes::vector cvec,ctmp,cres,none,am,bm,dm;
+	e_loc smallest_dist=999999;
 	//cout << "D" << a->width << endl;
 
 	for(size_t i=0; i<boundings.size(); i++) {
@@ -64,32 +65,36 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 				;
 
 			if(bound_current.min.y>=bound->min.y) {
-				cvec.y=COLLISION_BACK;
+				ctmp.y=COLLISION_BACK;
 			}
 
 			else if(bound_current.max.y<=bound->max.y) {
-				cvec.y=-COLLISION_BACK;
+				ctmp.y=-COLLISION_BACK;
 			}
 			if(ox>oz) {
 				e_loc dif=am.z-bm.z;
 				if(dif>0) {
-					cvec.x=COLLISION_BACK;
+					ctmp.x=COLLISION_BACK;
 				} else {
-					cvec.x=-COLLISION_BACK;
+					ctmp.x=-COLLISION_BACK;
 				}
 			}
 			else if(oz>ox) {
 				e_loc dif=am.x-bm.x;
 
 				if(dif>0) {
-					cvec.z=COLLISION_BACK;
+					ctmp.z=COLLISION_BACK;
 				}
 				else {
-					cvec.z=-COLLISION_BACK;
+					ctmp.z=-COLLISION_BACK;
 				}
 			} 
 
-
+			dm=am-bm;
+			e_loc dist=dm.length();
+			//if (abs(dist)<smallest_dist) {
+			cvec=ctmp;
+			//}
 			out_count++;
 		}
 	}

@@ -102,7 +102,9 @@ void RendererGL::lightSpecific(light *l) {
 	glLightfv(light_numbers[light_counter], GL_POSITION, position);
 
 	GLfloat ambient[] = { 1.0f, 0.0f, 0.0f }; 
-	
+	glLightf(light_numbers[light_counter], GL_CONSTANT_ATTENUATION, 2);
+	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+	this->setAmbientLight(&w->getActiveRoom()->ambient_light);
 	light_counter++;
 
 }
@@ -212,7 +214,7 @@ void RendererGL::specificInit() {
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST); 
 	//glEnable( GL_LIGHTING );
 	//glEnable(GL_LIGHT0);
-	this->setAmbientLight(&w->getActiveRoom()->ambient_light);
+	
 	this->setupTexture(w->getSkybox()->getTexture());
 
 	//this->setupTexture(w->getTerrain()->getTexture());

@@ -45,6 +45,7 @@ public:
 	virtual void makeBoundingBox();
 	virtual void setBoundingBox(BoundingCube *box);
 	virtual BoundingCube * getBoundingBox();
+	string type_hint;
 };
 
 typedef vector<entity *> entity_list;
