@@ -23,7 +23,7 @@ public:
 	vector(const vector &v);
 	vector(const BasicVector &v);
 	virtual void operator=(const vector &v);
-	
+	BasicVector getBasicVector();
 	vector();
 	virtual vector & unit();
 	virtual vector & normalize();
@@ -39,6 +39,7 @@ public:
 	vector & operator/(const e_loc val);
 	vector & operator/(const vector &b);
 	vector & operator*(const vector &b);
+	vector & operator*(const double a);
 	//ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
 
 };

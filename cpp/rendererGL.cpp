@@ -90,14 +90,14 @@ void RendererGL::lightSpecific(light *l) {
 	
 
 	glEnable(light_numbers[light_counter]);
-	GLfloat ambientLight[] = { 0, 0, 0, 1.0f }; 
+	GLfloat ambientLight[] = { 0, 0, 0, 1.0f }; //??
 	GLfloat diffuseLight[] = { 0.8f, 0.8f, 0.8, 1.0f };
 	GLfloat specularLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
 	colorRGBA c=l->getDiffuse();
 	GLfloat intensity[]={c.r,c.g,c.b,c.a};
 	
 	GLfloat shin=30;
-	glLightModelfv( GL_LIGHT_MODEL_AMBIENT, ambientLight );
+	glLightModelfv( GL_LIGHT_MODEL_AMBIENT, ambientLight ); //??
 	glLightfv(light_numbers[light_counter], GL_AMBIENT, ambientLight); 
 	glLightfv(light_numbers[light_counter], GL_DIFFUSE, intensity); 
 	glLightfv(light_numbers[light_counter], GL_SPECULAR, intensity);

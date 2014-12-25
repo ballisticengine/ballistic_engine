@@ -23,7 +23,7 @@ using namespace boost::property_tree;
 class loaderXML : public singleton<loaderXML> {
 protected:
  //bool loadFile(string fn);
- void toShape(ptree &geom,faceTexShape *s);
+ void toShape(ptree &geom,ptree &shape,faceTexShape *s);
 public:
 	string loadXML(ptree &tree,faceTexShape *s);
 	bool load(string fn, faceTexShape *s);

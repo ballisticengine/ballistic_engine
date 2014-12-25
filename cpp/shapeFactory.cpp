@@ -1,5 +1,13 @@
 #include "shapeFactory.hpp"
 
+void shapeFactory::setAnimator(ModelAnimator *a) {
+	this->animator=a;
+}
+
+ModelAnimator * shapeFactory::getAnimator() {
+	return this->animator;
+}
+
 void * shapeFactory::actualLoad(string fn) {
   string ext=factory::getExt(fn);
   faceTexShape *s=new faceTexShape();
@@ -11,6 +19,8 @@ void * shapeFactory::actualLoad(string fn) {
   } else if (ext==XML_EXT) {
 	 loaderXML *loader=loaderXML::getInstance();
 	 loader->load(fn,s);
+	
+	 
   }
   else if(ext==GEOM_MEM_EXT) {
 	 cout << "GEOM";

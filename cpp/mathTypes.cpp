@@ -14,6 +14,14 @@ e_loc normalizeRotation(e_loc r) {
 
 namespace MathTypes {
 
+BasicVector vector::getBasicVector() {
+	BasicVector v;
+	v.x=x;
+	v.y=y;
+	v.z=z;
+	return v;
+}
+
 vector::vector() {
  x=y=z=0;
 }
@@ -153,6 +161,13 @@ vector & vector::operator*(const vector &b) {
  v.y=y*b.y;
  v.z=z*b.z;
  return v;
+}
+vector & vector::operator*(const double a) {
+	vector v;
+	v.x=x*a;
+	v.y=y*a;
+	v.z=z*a;
+	return v;
 }
 
 }

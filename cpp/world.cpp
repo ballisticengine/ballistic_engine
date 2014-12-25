@@ -65,7 +65,9 @@ bool world::parseXml(string &fn) {
 	BOOST_FOREACH(const ptree::value_type &room, rooms) {
 
 		faceTexShape *fs=shapef->getXML((ptree)room.second);
+		
 		roomEntity *roomE=new roomEntity();
+		shapef->setAnimator(&roomE->model_animator);
 		//poly_list polys=fs->getPolys();
 		
 			roomE->ambient_light.r=room.second.get<e_loc>("ambient_light.r"),
@@ -101,6 +103,9 @@ bool world::parseXml(string &fn) {
 				
 				//oe->face(rx,ry,rz);
 				roomE->addObjectEntity(oe);
+				if (shp->frame_count>0) {
+					roomE->model_animator.addShape(shp);
+				}
 			} else if(type=="light") {
 				//cout << "Light " << x << ", " << y << ", " << z << endl ;	
 				PointLight *l=new PointLight();
@@ -132,7 +137,7 @@ bool world::parseXml(string &fn) {
 			}
 
 		}
-
+		
 	}
 	observer.locate(jx,jy,jz);
 	observer.face(rx,ry,rz);
@@ -253,11 +258,14 @@ void world::moveEntities() {
 
 void world::operator()() {
 
+	this->getActiveRoom()->model_animator.start();
 	time.start();
+
 
 	while(!engineState::getInstance()->exit()) {
 		this->moveEntities(); 
 	}
+	this->getActiveRoom()->model_animator.stop();
 
 }
 

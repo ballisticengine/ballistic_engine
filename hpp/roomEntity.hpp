@@ -2,6 +2,7 @@
 #define ROOM_ENTITY_H
 
 #include "ObjectEntity.hpp"
+#include "modelAnimator.hpp"
 #include <cmath>
 
 using namespace std;
@@ -13,9 +14,9 @@ typedef vector <light *> lights_list;
 typedef vector <PhysicalEntity *> phys_list;
 
 class roomEntity : public ObjectEntity {
-protected:
-	
+
 public:
+	ModelAnimator model_animator;
 	ent_list entities;
 	phys_list phys_entities;
 	obj_list models;

@@ -6,11 +6,11 @@ bool loaderXML::load(string fn, faceTexShape *s) {
 	read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
 	ptree shp=pt.get_child("shape");
 	ptree geom=shp.get_child("geom");
-	this->toShape(geom,s);
+	this->toShape(geom,shp,s);
 	return true;
 }
 
-void loaderXML::toShape(ptree &geom,faceTexShape *s) {
+void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 
 	ptree 
 		verts=geom.get_child("vertices"),
@@ -23,6 +23,15 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 		uv_count=geom.get<size_t>("counts.uvs"),
 		vpf=geom.get<size_t>("counts.v_p_f")
 		;
+
+	
+	string type;
+	try {
+	type=shape.get<string>("type");
+	}catch(std::exception e) {
+				type="level";
+			} 
+	
 	s->f_count=f_count;
 	s->v_count=v_count;
 	s->v_per_poly=vpf;
@@ -32,6 +41,7 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 	s->faces=new size_t*[f_count];
 	s->uvs=new uv[uv_count];
 	s->textures=new texture*[f_count];
+	s->frame_count=0;
 	int i;
 	
 	i=0;
@@ -59,13 +69,6 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 		
 		i++;
 	} 
-
-	/*i=0;
-	BOOST_FOREACH(const ptree::value_type &uv,uvs) {
-		s->uvs[i].u=uv.second.get<e_loc>("u");
-		s->uvs[i].u=uv.second.get<e_loc>("v");
-		i++;
-	}*/
 	
 	i=0;
 
@@ -75,12 +78,12 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 		s->faces[i]=new size_t[vpf];
 		try {
 			
-		string texname=face.second.get<string>("texture");
-				texture *t=(texture *)textureFactory::getInstance()->get(texname);
-				s->textures[i]=t;
-				cout << texname << endl;
+		string texname=face.second.get<string>("texture");		
+		texture *t=(texture *)textureFactory::getInstance()->get(texname);
+				s->textures[i]=t; 
 			} catch(std::exception e) {
 				s->textures[i]=0;
+				
 			} 
 		n=0;
 		BOOST_FOREACH(const ptree::value_type &f_vx,f_verts) {
@@ -95,79 +98,48 @@ void loaderXML::toShape(ptree &geom,faceTexShape *s) {
 		}
 		i++;
 	}
-	/*BOOST_FOREACH(const ptree::value_type &f, geom) {
-		cout << "FACE" << endl;
-		vert_list vs_tmp;
-		uv_list uv_tmp;
-		int i=0;
-		ptree verts=f.second.get_child("vertices");
-		BOOST_FOREACH(const ptree::value_type &vx, verts) {
-			e_loc 
-				x=vx.second.get<e_loc>("x")
-				,y=vx.second.get<e_loc>("y")
-				,z=vx.second.get<e_loc>("z")
-				,u=vx.second.get<e_loc>("u")
-				,v=vx.second.get<e_loc>("v")
-				,nx=vx.second.get<e_loc>("nx")
-				,ny=vx.second.get<e_loc>("ny")
-				,nz=vx.second.get<e_loc>("nz")
-				;
-			//cout << x << " " << y << " " << z << " " << u << " " << v << endl; 
-			vertex *vv=new vertex(x,y,z);
-			MathTypes::vector norm;
-			norm.x=nx;
-			norm.y=ny;
-			norm.z=nz;
-			vv->normal=norm;
-			vs_tmp.push_back(vv);
-			uv_tmp.push_back(new uv(u,v));
+	
+	if(type=="animation") {
+		ptree frames=shape.get_child("frames");
+		size_t frame_count=shape.get<size_t>("frame_count");
+		s->frame_count=frame_count;
+		s->frames=new frame[frame_count];
+		s->frame_times=new e_loc[frame_count];
+		size_t frame_i=0,vert_i;
+		BOOST_FOREACH(const ptree::value_type &frame,frames) {
+			ptree frame_verts=frame.second.get_child("vertices");
+			s->frames[frame_i].verts=new v_type[v_count];
+			s->frames[frame_i].fnum=frame.second.get<e_loc>("fnum");
+			s->frames[frame_i].fval=frame.second.get<e_loc>("fval");
+			s->frame_times[frame_i]=frame.second.get<e_loc>("ftime");
+			vert_i=0;
+			BOOST_FOREACH(const ptree::value_type &vert,frame_verts) {
+				e_loc 
+					x=vert.second.get<e_loc>("x"),
+					y=vert.second.get<e_loc>("y"),
+					z=vert.second.get<e_loc>("z")
+					;
+				s->frames[frame_i].verts[vert_i].x=x;
+				s->frames[frame_i].verts[vert_i].y=y;
+				s->frames[frame_i].verts[vert_i].z=z;
+				vert_i++;
+				
+			}
+			frame_i++;
 
-			i++;
 		}
-		
-		vt = new texPoly(vs_tmp);
-		
-		try {
-			Material * mt=new Material();
-			ptree matx=f.second.get_child("material");
-			colorRGBA sc,dc;
-			sc.r=matx.get<float>("specular.r");
-			sc.g=matx.get<float>("specular.g");
-			sc.b=matx.get<float>("specular.b");
-			dc.r=matx.get<float>("diffuse.r");
-			dc.g=matx.get<float>("diffuse.g");
-			dc.b=matx.get<float>("diffuse.b");
-			e_loc emission=matx.get<float>("emit");
-			e_loc shining=matx.get<float>("shining");
-			mt->setSpecular(sc);
-			mt->setDiffuse(dc);
-			mt->setShininess(shining);
-			mt->setEmission(emission);
-
-			vt->setMaterial(mt);
-		}catch(std::exception e) {
-			
-			vt->setMaterial(0);
-		}
-		
-		try {
-			string texname=f.second.get<string>("texture");
-			texture *t=(texture *)textureFactory::getInstance()->get(texname);
-			vt->setTexture(t);
-		} catch(std::exception e) {
-			vt->setTexture(0);
-		} 
-		vt->uvs=uv_tmp;
-		s->addPoly(vt);
-	}*/
+	}
+	
 
 }
 
 string loaderXML::loadXML(ptree &tree,faceTexShape *s) {
-	ptree & geom=tree.get_child("shape.geom");
-
+	ptree & geom=tree.get_child("shape.geom"),
+		&shape=tree.get_child("shape")
+		;
+	
 	string name=this->getName(tree);
-	this->toShape(geom,s);
+	this->toShape(geom,shape,s);
 	return name;
 }
 
