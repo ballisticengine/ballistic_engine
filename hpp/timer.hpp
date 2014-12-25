@@ -2,7 +2,7 @@
 #define TIMER_H
 
 
-typedef double time_int;
+typedef long double time_int;
 #ifdef _WIN32
 #include <windows.h>
 
@@ -18,6 +18,7 @@ public:
 	void stop();
 	time_int getDiff();
 	time_int getDiffR();
+	time_int getDiffNR();
 
 };
 

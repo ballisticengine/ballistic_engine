@@ -148,7 +148,7 @@ void RendererGL::render() {
 
 	glFrontFace(GL_CW);
 	
-	this->renderAllRooms();
+	//this->renderAllRooms();
 	
 	this->reset();
 	this->positionCamera();

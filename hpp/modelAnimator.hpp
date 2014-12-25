@@ -13,8 +13,7 @@ struct ShapeState {
  size_t current_keyframe;
  e_loc interpol;
  v_type *current_vertices;
-
-
+ Timer start_time,end_time;
 };
 
 class ModelAnimator : public Animator {
