@@ -40,26 +40,26 @@ void sdlControls::operator()() {
 	 if(state[SDL_SCANCODE_RIGHT]) {
 		 vel.t.x+=-cos(deg2rad(rotx))*vstep;
 		 vel.t.z+=-sin(deg2rad(rotx))*vstep;
-		 o->bobHead();
+		// o->bobHead();
 	 }
 	 
 	 if(state[SDL_SCANCODE_LEFT]) {
 		 vel.t.x+=cos(deg2rad(rotx))*vstep;
 		 vel.t.z+=sin(deg2rad(rotx))*vstep;
-		 o->bobHead();
+		 //o->bobHead();
 	 }
 
 	 if(state[SDL_SCANCODE_UP]) {
 		 
 		 vel.t.x+=-sin(deg2rad(rotx))*vstep;
 		 vel.t.z+=cos(deg2rad(rotx))*vstep;
-		 o->bobHead();
+		 //o->bobHead();
 	 }
 
 	 if(state[SDL_SCANCODE_DOWN]) {
 		 vel.t.x+=sin(deg2rad(rotx))*vstep;
 		 vel.t.z+=-cos(deg2rad(rotx))*vstep;
-		 o->bobHead();
+		// o->bobHead();
 	 }
 
 	 

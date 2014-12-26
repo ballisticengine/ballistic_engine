@@ -125,73 +125,148 @@ RendererGL::RendererGL() {
 	count_names[4]=GL_QUADS;
 }
 
+void RendererGL::renderSprite(Sprite *sprite) {
+	this->assignTexture(sprite->tex);
+	
+	//glPushMatrix();
+	coords c=this->w->getObserver()->getCamera()->getCoords();
+	float mat[16];
 
+	glGetFloatv(GL_MODELVIEW_MATRIX,mat);
+	
 
+	for(size_t i=0; i<3; i++ ) 
+	for(size_t j=0; j<3; j++ ) {
+		if ( i==j )
+			mat[i*4+j] = 1.0;
+		else
+			mat[i*4+j] = 0.0;
+	}
+	glLoadMatrixf(mat);
+
+	glBegin(GL_QUADS);
+	//cout << sprite << endl;
+	for(size_t i=0; i<4; i++) {
+		glTexCoord2d(sprite->shape->uvs[i].u,sprite->shape->uvs[i].v);
+		glVertex3d(sprite->shape->vertices[i].x,sprite->shape->vertices[i].y,sprite->shape->vertices[i].z);
+		
+	}
+	glEnd();
+	
+	//glPopMatrix();
+}
 void RendererGL::render() {
 	
-	glClearColor(1,1,1,1);
+	//glClearColor(1,1,1,1);
 	glClear( GL_DEPTH_BUFFER_BIT );
 	light_counter=0;
 	glMatrixMode(GL_MODELVIEW);
-	/*for(int i=0; i<shaders.size(); i++) {
-		glUseProgramObjectARB(shaders[i]);
-		//int param=-1;
-	//	glGetObjectParameterivARB(shaders[i], GL_OBJECT_LINK_STATUS_ARB, &param);
-		//cout << "Shad status" << param << endl;
-	}*/
+	
 	
 	renderSkybox(w->getSkybox());
+	glFrontFace(GL_CW);
 	this->positionLights();
 	this->reset();
 
 	this->positionCamera();
+	//this->renderSprite(this->w->testsprite);
+	this->reset();
 
-	glFrontFace(GL_CW);
+	this->positionCamera();
 	
-	//this->renderAllRooms();
+	
+	
+	
+	
+	
+	this->renderAllRooms();
 	
 	this->reset();
 	this->positionCamera();
 
 	this->renderAllEntities();
-	
 	glFlush();
 	this->flush_callback();
+	
 }
 
 
-/*void RendererGL::renderFaceTexShape(faceTexShape *s) {
-	if(s->renderer_hint) {
-	 
+void RendererGL::renderFaceTexShape(faceTexShape *s) {
+
+	if(s->v_per_poly!=3) {
+	 cout << "No3" << endl;
+	 return;
 	}
-}*/
+
+	if(!s->renderer_hint) {
+		cout << "ERROR!" << endl;
+		return;
+	}
+	
+	GLHint *hint=(struct GLHint *)(s->renderer_hint);
+	cout << "Render" << ", " << hint->vertexid << ", " << ", " << hint->faceid << endl;
+	
+	glBindBufferARB(GL_ARRAY_BUFFER,hint->vertexid );  
+	glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_NORMAL_ARRAY);
+	//glEnableVertexAttribArray(0); 
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(v_type)*s->v_count, BUFFER_OFFSET(0)); 
+	            
+	glVertexPointer(3, GL_DOUBLE, 0, 0);               
+
+	glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER, hint->faceid);
+	glDrawElements(GL_TRIANGLES, s->f_count*s->v_per_poly, GL_UNSIGNED_INT, 0);
+
+glDisableClientState(GL_VERTEX_ARRAY);            // deactivate vertex array
+
+// bind with 0, so, switch back to normal pointer operation
+glBindBufferARB(GL_ARRAY_BUFFER, 0);
+glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+
+void RendererGL::setUpVbo(shape *s) {
+	Geom *g=new Geom[s->v_count];
+	GLuint *faces=new GLuint[s->f_count*s->v_per_poly];
+	int n=0;
+	for(size_t i=0; i<s->f_count; i++) {
+		for(size_t v=0; v<s->v_per_poly; v++) {
+			faces[n]=s->faces[i][v];
+			n++;
+		}
+	}
+
+	for(size_t i=0; i<s->v_count; i++) {
+		g[i].x=s->vertices[i].x; g[i].y=s->vertices[i].y; g[i].z=s->vertices[i].z;
+		//g[i].nx=s->normals[i].x; g[i].ny=s->normals[i].y; g[i].nz=s->normals[i].z;
+		//g[i].u=s->uvs[i].u; g[i].v=s->uvs[i].v; 
+	}
+	GLHint *hint=new GLHint();
+	GLuint vid;
+	glGenBuffers(1,&(hint->vertexid));
+	glGenBuffers(1,&(hint->faceid));
+	
+	//glEnableVertexAttribArray(0); 
+	glBindBuffer(GL_ARRAY_BUFFER, hint->vertexid);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	
+	glBufferData(GL_ARRAY_BUFFER, s->v_count*sizeof(Geom), g, GL_STATIC_DRAW);
+	
+	
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, hint->faceid);
+	
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, s->f_count*sizeof(GLuint)*s->v_per_poly, faces, GL_STATIC_DRAW);
+	s->renderer_hint=hint;
+}
 
 void RendererGL::setUpVbos() {
-	/*obj_list models=this->w->getModels();
-	GLuint *b;
-	float v[3];
-	size_t vc;
+	obj_list models=this->w->getActiveRoom()->models;
 	for(size_t i=0; i<models.size(); i++) {
-		b=new GLuint;
-		vc=0;
-		glGenBuffers(1,b);
-		models[i]->getModel()->renderer_hint=(void *)b;
-		glBindBuffer(GL_ARRAY_BUFFER, *b);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		poly_list ps=models[i]->getModel()->getPolys();
-		for(size_t n=0; n<ps.size(); n++) {
-			vert_list vs=ps[n]->v;
-			for(size_t w=0; w<vs.size(); w++) {
-				vs[w]->x;
-				v[0]=vs[w]->x;
-				v[1]=vs[w]->y;
-				v[2]=vs[w]->z;
-				glBufferSubData(GL_ARRAY_BUFFER,vc,3,v);
-				vc+=3;
-			}
-		}
+		setUpVbo(models[i]->getModel());		
 
-	}*/
+	}
+	setUpVbo(this->w->getActiveRoom()->getModel());
+	
 }
 
 void RendererGL::specificInit() {
@@ -236,7 +311,9 @@ void RendererGL::specificInit() {
 		cout << "Adding shader: " << sn << endl;
 		addShader(sn);
 	}	
-	//this->setUpVbos();
+
+	this->setupTexture(this->w->testsprite->tex);
+	this->setUpVbos();
 }
 
 void RendererGL::addShader(string name) {
@@ -355,6 +432,8 @@ void RendererGL::resetSpecific() {
 void RendererGL::positionCameraSpecific() {
 	//glRotatef(-90,1,0,0);
 }
+
+
 
 void RendererGL::drawBoundingBox(BoundingCube *bound) {
 	//drawBox(bound->getWidth(),bound->getHeight(),bound->getDepth());

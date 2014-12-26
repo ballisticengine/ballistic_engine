@@ -30,6 +30,7 @@ using namespace boost::property_tree;
 #include "timer.hpp"
 #include "observerEntity.hpp"
 #include "material.hpp"
+#include "sprite.hpp"
 
 typedef vector <roomEntity *> rooms_list;
 
@@ -49,7 +50,7 @@ protected:
 	Timer time;
 	TerrainMap *tm;
 public:
-
+	Sprite *testsprite;
 	static world *getInstance(); 
 	static world & getRef();
 	~world();

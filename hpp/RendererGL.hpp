@@ -29,11 +29,20 @@ using boost::property_tree::ptree;
 
 typedef vector<GLhandleARB> shader_list;
 
+#define BUFFER_OFFSET(i) ((void*)(i))
 
+struct GLHint {
+	GLuint vertexid,faceid;
+};
+
+struct Geom {
+ e_loc x,y,z;//,nx,ny,nz;//,u,v;
+};
 
 class RendererGL : public renderer,public singleton<RendererGL> {
     protected:
-    map <int,GLint> light_numbers,count_names;
+    GLuint v,f;
+		map <int,GLint> light_numbers,count_names;
 	int light_counter;
 	char * loadText(string fn);
 	shader_list shaders;
@@ -46,6 +55,7 @@ class RendererGL : public renderer,public singleton<RendererGL> {
     GLhandleARB  light_shader_v,light_shader_f;
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
+	virtual void renderSprite(Sprite *sprite);
     virtual void assignTexture(texture *t);
 	virtual void assignMaterial(Material *m);
 	virtual void begin();
@@ -67,6 +77,8 @@ class RendererGL : public renderer,public singleton<RendererGL> {
 	virtual void renderTerrainSpecific();
 	//virtual void renderFaceTexShape(faceTexShape *s);
 	void setUpVbos();
+	void setUpVbo(shape *s);
+	void renderFaceTexShape(faceTexShape *s);
 public:
     RendererGL();
 	virtual void setupTexture(texture *t);    

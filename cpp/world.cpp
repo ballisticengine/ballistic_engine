@@ -142,6 +142,9 @@ bool world::parseXml(string &fn) {
 	observer.locate(jx,jy,jz);
 	observer.face(rx,ry,rz);
 	observer.setCamera(&default_camera);
+	texf->setWD(COMMON_DIR);
+	texture *stex = (texture *)texf->get("car.bmp");
+	this->testsprite=new Sprite(stex);
 	return true;
 }
 
@@ -178,7 +181,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 
 	MathTypes::vector cvec;
 	
-	if(!engineState::getInstance()->noclip) {
+	if(0) {//!engineState::getInstance()->noclip
 	/*
 	 Kolizje z obiektami
 	*/

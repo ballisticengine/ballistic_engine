@@ -5,9 +5,9 @@
 
 
 class Texturable {
-protected:	
-	texture *tex;
+	
 public:
+	texture *tex;
 	virtual void setTexture(texture *tex);
 	virtual texture * getTexture();
 };

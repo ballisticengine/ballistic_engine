@@ -19,6 +19,7 @@ using namespace boost::property_tree;
 #define CONFIG_FN "config.xml"
 #define MODEL_DIR "models"
 #define TEX_DIR "textures"
+#define COMMON_DIR "data/common"
 
 using boost::property_tree::ptree;
 

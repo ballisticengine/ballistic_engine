@@ -18,6 +18,7 @@ using namespace std;
 #include "terrainMap.hpp"
 #include "material.hpp"
 #include "boundingCube.hpp"
+#include "sprite.hpp"
 
 typedef void (*flushf)();
 
@@ -34,6 +35,7 @@ protected:
 	virtual void renderFaceTexShape(faceTexShape *s);
 	virtual void renderVertex(v_type *v,n_type *normal,uv *uvs) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
+	virtual void renderSprite(Sprite *sprite)=0;
 	virtual void beginQuads()=0;
 	virtual void begin()=0;
 	virtual void end()=0;

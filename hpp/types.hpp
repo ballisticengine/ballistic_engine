@@ -53,33 +53,29 @@ struct frame {
 	v_type *verts;
 };
 
-class shape {
-	e_loc scale;
-	
-	
+class ShapeAbstract {
 public:
-    void *renderer_hint;
-	virtual void setRendererHint(void *hint);
-	virtual void * getRendererHint();
-	texture **textures;
+	
+	MathTypes::BasicVector *vertices,*normals;
+	uv *uvs;
+	unsigned int **faces;
 	size_t v_count,uv_count,f_count,v_per_poly;
+	virtual ~ShapeAbstract();
+};
+
+
+class shape : public ShapeAbstract {
+
+public:
+    shape();
+	texture **textures;
+	
 	size_t frame_count;
 	frame *frames;
 	e_loc *frame_times;
-	MathTypes::BasicVector *vertices,*normals;
-	uv *uvs;
-	size_t **faces;
-
-
-	virtual void setVertices(v_type *vs,size_t count);
-	/* Ilość normalnych = ilość wierchołków */
-	virtual void setNormals(n_type *normals);
-	virtual void setUvs(uv *uvs,size_t count);
-	virtual void calculateNormals();
+	void *renderer_hint;
 	
-    virtual void setScale(e_loc scale);
-	virtual e_loc getScale();
- 
+	virtual void calculateNormals();
     
      ~shape();
 };

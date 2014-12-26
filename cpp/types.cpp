@@ -1,32 +1,51 @@
 #include "types.hpp"
 
+/* ShapeAbstract */
+
+
+ShapeAbstract::~ShapeAbstract() {
+if(this->vertices) {
+		delete this->vertices;
+	}
+
+	if(this->normals) {
+		delete this->normals;
+
+	}
+
+	if(this->faces) {
+		delete this->faces;
+	}
+
+	if(this->uvs) {
+		delete this->uvs;
+	}
+}
+
+/* shape */
+
+ shape::shape() {
+ 
+	 this->renderer_hint=0;
+ }
 
 shape::~shape() {
+	if(this->textures) {
+		delete this->textures;
+	}
 
-}
-void shape::setVertices(v_type *vs,size_t count) {
-	this->vertices=vs;
-	this->v_count=count;
-}
+	if(this->frames) {
+		delete this->frames;
+	}
 
-void shape::setNormals(n_type *normals) {
-	this->normals=normals;
+	if(this->frame_times) {
+	 delete this->frame_times;
+	}
+
 	
-}
 
-
-void shape::setUvs(uv *uvs,size_t count) {
 
 }
-
-void shape::setScale(e_loc scale) {
-	this->scale=scale;
-}
-
-e_loc shape::getScale() {
- return scale;
-}
-
 
 void shape::calculateNormals() {
 	/*vert_list verts=this->getVertices();
@@ -41,11 +60,4 @@ void shape::calculateNormals() {
 	}*/
 }
 
-void shape::setRendererHint(void *hint) {
-	this->renderer_hint=hint;
-}
-
-void * shape::getRendererHint() {
-	return this->renderer_hint;
-}
 
