@@ -170,11 +170,14 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	
 	
 	coords c=e->nextCoords(time_diff),x;
-	
+	bool movement=true;
 	if((c.translation.x==0 && c.translation.y==0 && c.translation.z==0) && (c.rotation.x==0 && c.rotation.y==0 && c.rotation.z==0)) {
-	 return;
+	 movement=false;
 	}
 	
+	if(!movement) {
+	 return;
+	}
 
 
 	x.translation=c.translation-e->getCoords().translation;
@@ -221,6 +224,8 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		if(cvec.x || cvec.y || cvec.z) {
 			
 			PyScripting::getInstance()->broadcast("EntityCollision",(void *)e,(void *)objs[i],(void *)&cvec);
+		} else {
+			PyScripting::getInstance()->broadcast("EntityMovement",(void *)e);
 		}
 	}
 	
@@ -241,9 +246,13 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		if(cvec.y) {
 			c.translation.y=cvec.y;
 		}
+
+		if(cvec.x || cvec.y || cvec.z) {
+			PyScripting::getInstance()->broadcast("LevelCollision",(void *)e,(void *)rl[i]);
+		}
 	}
 	}
-	
+	//TODO: tutaj trzeba te¿ ustawiæ velocity bo dla tego siê mo¿e dupiæ
 	e->translate(c);
 	e->rotate(c.rotation.x,c.rotation.x,c.rotation.z);
 

@@ -14,3 +14,11 @@ class testManipulator(ManipulatorClass):
 
         print "test manipulator self load signal"
 
+    def onEntityCollision(self,entitya,entityb,cvec):
+        print entitya.name,"to",entityb.name
+        entityb.velocity.t.x=-entitya.velocity.t.x
+        entityb.velocity.t.y=-entitya.velocity.t.y
+        entityb.velocity.t.z=-entitya.velocity.t.z
+
+    def onLevelCollision(self,entity,room):
+        print "level collision"

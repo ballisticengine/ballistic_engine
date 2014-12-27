@@ -8,7 +8,7 @@ using namespace std;
 #include "types.hpp"
 #include "mathTypes.hpp"
 #include "boundingCube.hpp"
-#define COLLISION_BACK 0.0001;
+#define COLLISION_BACK 0.0001
 
 /*
  Abstrakcyjna klasa opisująca wszystkie obiekty na mapie

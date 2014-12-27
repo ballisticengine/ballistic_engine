@@ -13,14 +13,11 @@ class ManipulatorClass(object):
         pass
 
     def onEntityCollision(self,entitya,entityb,cvec):
-        print entitya.name,"to",entityb.name
-        entityb.velocity.t.x=-entitya.velocity.t.x
-        entityb.velocity.t.y=-entitya.velocity.t.y
-        entityb.velocity.t.z=-entitya.velocity.t.z
+        pass
         #cvec.write()
 
-    def onLevelCollision(self,entity,data):
-        print "Collision"
+    def onLevelCollision(self,entity,room):
+        print "world collision"
 
 
     def onSelfLoad(self):

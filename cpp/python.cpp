@@ -61,7 +61,6 @@ BOOST_PYTHON_MODULE(world)
 
 	bp::class_<roomEntity,roomEntity *,bp::bases<ObjectEntity> >("roomEntity")
 		.def_readwrite("models",&roomEntity::models)
-		.def_readwrite("model",&roomEntity::model)
 		;
 
 	bp::class_<lights_list>("lights_list")
@@ -116,8 +115,16 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		b=(PhysicalEntity *)paramB;
 		MathTypes::vector cvec=*(MathTypes::vector *)paramC;
 		f(boost::ref(*a),boost::ref(*b),boost::ref(cvec));
-	}
-	else {
+	} else if(name=="EntityMovement") {
+		PhysicalEntity *a;
+		a=(PhysicalEntity *)paramA;	
+		f(boost::ref(*a));
+	} else if(name=="LevelCollision") {
+		PhysicalEntity *a;
+		a=(PhysicalEntity *)paramA;	
+		roomEntity *r=(roomEntity *)paramB;
+		f(boost::ref(*a),boost::ref(*r));
+	} else {
 		f();
 	}
 
