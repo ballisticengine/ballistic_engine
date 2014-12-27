@@ -4,8 +4,14 @@ class ManipulatorClass(object):
         print "init"
         self.world=world
 
-    def onEntityCollision(self,entity,data):
+    def onEntityMovement(self,entity):
         pass
+
+    def onEntityCollision(self,entitya,entityb,cvec):
+        # print "Entity collision",entitya,entityb
+        velA=entitya.getVelocity()
+        velA.t.write()
+        #cvec.write()
 
     def onLevelCollision(self,entity,data):
         print "Collision"

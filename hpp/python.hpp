@@ -22,6 +22,7 @@ namespace bp=boost::python;
 #include "config.hpp"
 #include "utils.hpp"
 #include "entity.hpp"
+#include "physicalEntity.hpp"
 #include "types.hpp"
 #include "light.hpp"
 #include "mathTypes.hpp"
@@ -45,7 +46,7 @@ protected:
 	bp::object module,instance;
 public:
   PyManipulator(string file);
-  void signal(string name,void *params);
+  void signal(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);
   ~PyManipulator();
 };
 
@@ -57,7 +58,7 @@ protected:
 	man_list manipulators;
 public:
 	PyScripting();
-	void broadcast(string name,void *params);
+	void broadcast(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);
 	void broadcastInit();
 	~PyScripting();
 	void loadManipulators();

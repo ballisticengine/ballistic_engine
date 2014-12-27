@@ -12,14 +12,14 @@
 
 class ObjectEntity : public PhysicalEntity,public Texturable {
 protected:
-	faceTexShape *model;
+	
 	
 	
 	Material *mat;
 public:
 	virtual faceTexShape * getModel();
 	
-	
+	faceTexShape *model;
 	virtual void setModel(faceTexShape *model);
 	
 	virtual Material *getMaterial();

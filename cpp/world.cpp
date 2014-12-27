@@ -184,6 +184,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	size_t objs_size=objs.size();
 	for(int i=0; i<objs_size; i++) {
 		cvec=objs[i]->collides(obc,c);
+		
 		if(cvec.x) {
 			if(cvec.x<0) {
 			c.translation.z=cvec.z-COLLISION_BACK;
@@ -207,7 +208,10 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 			c.translation.y=-COLLISION_BACK;
 			}
 		}
-	
+		if(cvec.x || cvec.y || cvec.z) {
+			
+			PyScripting::getInstance()->broadcast("EntityCollision",(void *)e,(void *)objs[i],(void *)&cvec);
+		}
 	}
 	
 	/*

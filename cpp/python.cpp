@@ -15,25 +15,53 @@ typedef boost::shared_ptr<world> world_ptr;
 BOOST_PYTHON_MODULE(world)
 {
 
-	/*bp::class_<coords,coords *>("coords")
-		.def_readwrite("x", &coords::x)
-		.def_readwrite("y", &coords::y)
-		.def_readwrite("z", &coords::z)
+	bp::class_<MathTypes::vector,MathTypes::vector *>("Vector3d")
+		.def_readwrite("x",&MathTypes::vector::x)
+		.def_readwrite("y",&MathTypes::vector::y)
+		.def_readwrite("z",&MathTypes::vector::z)
+		.def("write",&MathTypes::vector::write)
 		;
-		*/
+
+	bp::class_<TrRot,TrRot *>("TrRot")
+		.def_readwrite("t",&TrRot::t)
+		.def_readwrite("r",&TrRot::r)
+		.def("reset",&TrRot::reset)
+		;
+
+	bp::class_<ShapeAbstract,ShapeAbstract *>("ShapeAbstract");
+	bp::class_<shape,shape *,bp::bases<ShapeAbstract> >("shape");
+
+
+
+
 	bp::class_<entity,entity *>("entity")
 		.def("getCoords",&entity::getCoords)
 		.def("locate",&entity::locate)
+		.def_readonly("name",&entity::name)
+		.def_readonly("type",&entity::type)
 		;
 
-	bp::class_<PhysicalEntity,PhysicalEntity*,bp::bases<entity> >("PhysicalEntity");
 
 
-	bp::class_<ObjectEntity,ObjectEntity*,bp::bases<PhysicalEntity> >("ObjectEntity");
+	bp::class_<PhysicalEntity,PhysicalEntity*,bp::bases<entity> >("PhysicalEntity")
+		.def("getVelocity",&PhysicalEntity::getVelocity)
+		.def("setVelocity",&PhysicalEntity::setVelocity)
+
+		;
+
+
+	bp::class_<ObjectEntity,ObjectEntity*,bp::bases<PhysicalEntity> >("ObjectEntity")
+		.def_readwrite("model",&ObjectEntity::model)
+		;
 
 	bp::class_<obj_list>("obj_list")
 		.def(bp::vector_indexing_suite<obj_list>() );
 
+
+	bp::class_<roomEntity,roomEntity *,bp::bases<ObjectEntity> >("roomEntity")
+		.def_readwrite("models",&roomEntity::models)
+		.def_readwrite("model",&roomEntity::model)
+		;
 
 	bp::class_<lights_list>("lights_list")
 		.def(bp::vector_indexing_suite<lights_list>() );
@@ -42,10 +70,10 @@ BOOST_PYTHON_MODULE(world)
 
 	bp::class_<world,shared_ptr<world>,boost::noncopyable>("world",bp::no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
 		.def("getInstance",&getSharedInstance )
+		.def_readonly("active_room", &world::active_room)
+		
 		.staticmethod("getInstance")
-		//.def("getLights", &world::getLights)
-		//.def("getModels", &world::getModels )		
-
+				
 		;
 
 
@@ -72,15 +100,23 @@ PyManipulator::PyManipulator(string file) {
 
 
 
-void PyManipulator::signal(string name,void *params) {
+void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,void* paramD) {
 	Py_BEGIN_ALLOW_THREADS
 		PyLocker::getInstance()->lock();
 	string signame="on"+name;
 	bp::object f=bp::extract<bp::object>(instance.attr(signame.c_str()));
 	world *w=world::getInstance();
+	
 	if(name=="Init") {
 		f(boost::ref(*w));
-	} else {
+	} else if(name=="EntityCollision") {
+		PhysicalEntity *a,*b;
+		a=(PhysicalEntity *)paramA;
+		b=(PhysicalEntity *)paramB;
+		MathTypes::vector cvec=*(MathTypes::vector *)paramC;
+		f(boost::ref(*a),boost::ref(*b),boost::ref(cvec));
+	}
+	else {
 		f();
 	}
 
@@ -125,9 +161,9 @@ PyScripting::~PyScripting() {
 }
 
 
-void PyScripting::broadcast(string name,void *params) {
+void PyScripting::broadcast(string name,void *paramA,void *paramB,void* paramC,void* paramD) {
 	for(int i=0; i<manipulators.size(); i++) {
-		manipulators[i]->signal(name,params);
+		manipulators[i]->signal(name,paramA,paramB,paramC,paramD);
 	}
 }
 
