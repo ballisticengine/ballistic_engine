@@ -49,6 +49,7 @@ protected:
 	void moveEntities();
 	Timer time;
 	TerrainMap *tm;
+	
 public:
 	ObserverEntity observer;
 	roomEntity *active_room;
@@ -58,6 +59,8 @@ public:
 
 	static world *getInstance(); 
 	static world & getRef();
+	
+	world();
 	~world();
 	
 	//obj_reflist getModelsRef();

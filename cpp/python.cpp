@@ -46,6 +46,7 @@ BOOST_PYTHON_MODULE(world)
 	bp::class_<PhysicalEntity,PhysicalEntity*,bp::bases<entity> >("PhysicalEntity")
 		.def("getVelocity",&PhysicalEntity::getVelocity)
 		.def("setVelocity",&PhysicalEntity::setVelocity)
+		.def_readwrite("velocity",&PhysicalEntity::velocity)
 
 		;
 

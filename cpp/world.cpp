@@ -11,6 +11,9 @@ TerrainMap * world::getTerrain() {
 }
 
 bool world::parseXml(string &fn) {
+	this->observer.name="observer";
+	this->observer.type="observer";
+
 	string wd=fn;
 	fn=fn+string(DS)+string("level.xml");
 	shapeFactory *shapef=(shapeFactory *)shapeFactory::getInstance();
@@ -87,6 +90,7 @@ bool world::parseXml(string &fn) {
 				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
 				current_e=(entity *)oe;
 				//oe->face(rx,ry,rz);
+				//oe->velocity.t.x=10;
 				roomE->addObjectEntity(oe);
 				if (shp->frame_count>0) {
 					roomE->model_animator.addShape(shp);
@@ -145,6 +149,10 @@ void world::prepare() {
 
 }
 
+world::world() {
+	//this->scripting=PyScripting::getInstance();
+}
+
 world::~world() {
 	cout << "World cleaning up..." << endl;
 	deleteVector(rooms);
@@ -167,6 +175,8 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	 return;
 	}
 	
+
+
 	x.translation=c.translation-e->getCoords().translation;
 
 	rooms_list rl=this->rooms;

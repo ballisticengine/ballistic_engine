@@ -15,9 +15,10 @@ public:
 
 class PhysicalEntity : public entity {
 protected:
-	TrRot velocity,acceleration;
+	
 	void setIfNotZero(e_loc &a,e_loc &b);
 public:
+	TrRot velocity,acceleration;
 	PhysicalEntity();
 	coords nextCoords(time_int diff);
 	void changeVelocity(TrRot velocity);
