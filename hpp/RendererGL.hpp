@@ -32,11 +32,20 @@ typedef vector<GLhandleARB> shader_list;
 #define BUFFER_OFFSET(i) ((void*)(i))
 
 struct GLHint {
-	GLuint vertexid,faceid;
+	GLuint vertexid,faceid,normid,uvid;
+	vector <GLuint> face_chunks;
+	vector<size_t> chunk_sizes;
+	vector<texture *> texture_chunks;
+	
+	
 };
 
 struct Geom {
- e_loc x,y,z;//,nx,ny,nz;//,u,v;
+ float x,y,z;//,nx,ny,nz,u,v;
+};
+
+struct Guv {
+	float u,v;
 };
 
 class RendererGL : public renderer,public singleton<RendererGL> {
