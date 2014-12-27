@@ -30,7 +30,8 @@ public:
 	virtual ~entity();
 
 	coords getCoords();
-	
+	string name;
+	string type;
 	/*
 	Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
 	*/

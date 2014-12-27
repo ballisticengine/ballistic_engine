@@ -11,17 +11,18 @@ renderer::~renderer() {
 
 void renderer::positionLights() {
 	lights_list lights=this->w->active_room->lights;
- //cout << "Lights" << lights.size() << endl;
- for(int i=0; i<lights.size(); i++) {
-  this->lightSpecific(lights[i]);
- // cout << "Light " << i << endl;
- }
+	size_t lights_size=lights.size();
+ 
+	for(size_t i=0; i<lights_size; i++) {
+		 this->lightSpecific(lights[i]);
+	}
 }
 
 void renderer::setupTextures() {
 	textureFactory *tf=textureFactory::getInstance();
 	vector<void *> ts=tf->getAll();
-	for(int i=0; i<ts.size(); i++) {
+	size_t ts_size=ts.size();
+	for(size_t i=0; i<ts_size; i++) {
 		this->setupTexture((texture *)ts[i]);
 	}
 }
@@ -69,9 +70,9 @@ void renderer::init() {
 void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transformuje
 	obj_list ents=w->active_room->models;
 	//cout << ents.size() << endl;
-	
-	for(int i=0; i<ents.size(); i++) {
-		
+	size_t ents_size=ents.size();
+	for(size_t i=0; i<ents_size; i++) {
+		//cout << ents[i]->name << ", " << ents[i]->type << endl;	
 		coords c=ents[i]->getCoords();
 		this->reset();
 		this->positionCamera();
@@ -91,11 +92,13 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 
 void renderer::renderAllRooms() {
 	rooms_list rooms=w->rooms;
-	for(size_t i=0; i<rooms.size(); i++) {
-		
+	size_t rooms_size=rooms.size();
+	for(size_t i=0; i<rooms_size; i++) {
+		//cout << w->rooms[i]->name << "," <<  w->rooms[i]->type << endl;
 		this->renderFaceTexShape((faceTexShape *)rooms[i]->getModel());
 		if(state->debug_visual) {
-			for(size_t n=0; n<rooms[i]->boundings.size(); n++) {
+			size_t boundings_size=rooms[i]->boundings.size();
+			for(size_t n=0; n<boundings_size; n++) {
 				this->drawBoundingBox(rooms[i]->boundings[n]);
 			}
 		}
@@ -108,7 +111,7 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
 	size_t ** polys = s->faces;
 	size_t uvc=0;
 
-	for (int i = 0; i < s->f_count; i++) {
+	for (size_t i = 0; i < s->f_count; i++) {
         //texPoly *t=(texPoly *)polys[i];
 		
 		if(s->textures[i]) {
@@ -122,7 +125,7 @@ void renderer::renderFaceTexShape(faceTexShape *s) {
 
 		//int count=s->getPolyCount();
 		this->beginHinted(s);
-		for (int n = 0; n < s->v_per_poly; n++) {
+		for (size_t n = 0; n < s->v_per_poly; n++) {
 			
 			
 			this->renderVertex(&s->vertices[s->faces[i][n]],&s->normals[s->faces[i][n]],&s->uvs[uvc]);
@@ -140,7 +143,7 @@ void renderer::setFlush(flushf flush_callback) {
 void renderer::renderPShape(shape *s) {
     
 	this->begin();
-	for (int i = 0; i < s->v_count; i++) {
+	for (size_t i = 0; i < s->v_count; i++) {
 		this->renderVertex(&s->vertices[i],0,&s->uvs[i]);
     }
 	this->end();
@@ -150,9 +153,9 @@ void renderer::renderShape(shape *s) {
     //poly_list tris;
 	//tris = s->getPolys();
     this->begin();
-	for (int i = 0; i < s->f_count; i++) {
+	for (size_t i = 0; i < s->f_count; i++) {
        
-		for (int n = 0; n < 3; n++) {
+		for (size_t n = 0; n < 3; n++) {
 			this->renderVertex(&s->vertices[s->faces[i][n]],&s->normals[s->faces[i][n]],&s->uvs[i]);
         }
     }

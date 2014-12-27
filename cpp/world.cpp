@@ -54,16 +54,21 @@ bool world::parseXml(string &fn) {
 			roomE->ambient_light.b=room.second.get<e_loc>("ambient_light.b"),
 			roomE->ambient_light.g=room.second.get<e_loc>("ambient_light.g")
 			;
+
+			roomE->name=room.second.get<string>("shape.name");
 		cout << "Ambient light: " << roomE->ambient_light.r << ", " << roomE->ambient_light.g << ", " << roomE->ambient_light.b << endl;
 		roomE->setModel(fs);
 		this->addRoomEntity(roomE);
 		ptree &room_ents=(ptree)room.second.get_child("entities");
 		BOOST_FOREACH(const ptree::value_type &entobj, room_ents) {
-			string type=entobj.second.get<string>("type");
+			string type=entobj.second.get<string>("type"),name=entobj.second.get<string>("name");
 			e_loc x=entobj.second.get<float>("location.x"),y=entobj.second.get<float>("location.y"),
 				z=entobj.second.get<float>("location.z"),rx=entobj.second.get<float>("facing.x"),
 				ry=entobj.second.get<float>("facing.y"),rz=entobj.second.get<float>("facing.z");
+			entity *current_e=0;
 			if (type=="object") {
+				string objectbraces="[OBJECT]";
+				name=name.replace(name.find(objectbraces), objectbraces.length(), "");
 				string mfn=wd+DS+MODEL_DIR+DS+entobj.second.get<string>("model"),
 					tfn=entobj.second.get<string>("texture");
 				e_loc sc=entobj.second.get<e_loc>("scale");
@@ -80,7 +85,7 @@ bool world::parseXml(string &fn) {
 				oe->setBoundingBox(new BoundingCube(oe->getModel()));
 				
 				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
-				
+				current_e=(entity *)oe;
 				//oe->face(rx,ry,rz);
 				roomE->addObjectEntity(oe);
 				if (shp->frame_count>0) {
@@ -96,7 +101,7 @@ bool world::parseXml(string &fn) {
 				color.g=entobj.second.get<float>("g");
 				color.b=entobj.second.get<float>("b");
 				color.a=1.0f;
-
+				current_e=(entity *)l;
 				l->setAllColors(color);
 				roomE->addLightEntity(l);
 			} else if (type=="bounding") {
@@ -114,6 +119,11 @@ bool world::parseXml(string &fn) {
 				BoundingCube *bc=new BoundingCube(minx,miny,minz,maxx,maxy,maxz);
 				roomE->boundings.push_back(bc);
 				//roomE->setBoundingBox(bc);
+			}
+			if (current_e) {
+			
+				current_e->name=name;
+				current_e->type=type;
 			}
 
 		}
