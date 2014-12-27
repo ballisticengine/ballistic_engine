@@ -13,7 +13,7 @@ protected:
 	map<char *,void *> settings;
 	
 public:
-	bool debug_visual,lighting,noclip;
+	bool debug_visual,lighting,noclip,keypress;
 	void set(char * key,void *setting);
 	void * get(char * key);
 	void * toggle(char *key);

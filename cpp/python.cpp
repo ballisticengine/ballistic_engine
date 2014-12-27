@@ -43,8 +43,8 @@ BOOST_PYTHON_MODULE(world)
 	bp::class_<world,shared_ptr<world>,boost::noncopyable>("world",bp::no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
 		.def("getInstance",&getSharedInstance )
 		.staticmethod("getInstance")
-		.def("getLights", &world::getLights)
-		.def("getModels", &world::getModels )		
+		//.def("getLights", &world::getLights)
+		//.def("getModels", &world::getModels )		
 
 		;
 

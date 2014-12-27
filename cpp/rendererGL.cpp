@@ -163,7 +163,7 @@ void RendererGL::render() {
 	glMatrixMode(GL_MODELVIEW);
 	
 	
-	renderSkybox(w->getSkybox());
+	renderSkybox(w->sky);
 	glFrontFace(GL_CW);
 	this->positionLights();
 	this->reset();
@@ -184,26 +184,23 @@ void RendererGL::render() {
 	this->reset();
 	this->positionCamera();
 
-	//this->renderAllEntities();
+	this->renderAllEntities();
 	glFlush();
 	this->flush_callback();
 	
 }
 
 
-void RendererGL::renderFaceTexShape(faceTexShape *s) {
+void RendererGL::renderFaceTexShapex(faceTexShape *s) {
 
 	
 	
 	
 	
 	GLHint *hint=(struct GLHint *)(s->renderer_hint);
-	glBindBuffer(GL_ARRAY_BUFFER,hint->uvid ); 
-	glClientActiveTexture(GL_TEXTURE0);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY); 
-	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+	
 	//cout << "CS: " << hint->face_chunks.size() << ", " << hint->chunk_sizes[0] << endl;
-	this->assignTexture(s->textures[0]);
+	
 	glBindBuffer(GL_ARRAY_BUFFER,hint->vertexid );  
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, 0);               
@@ -212,9 +209,13 @@ void RendererGL::renderFaceTexShape(faceTexShape *s) {
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glNormalPointer(GL_FLOAT, 0, 0);
 	
-	
+	cout << hint->texture_chunks.size() << endl;
 	for(size_t i=0; i<hint->face_chunks.size(); i++) {
-		
+	glBindBuffer(GL_ARRAY_BUFFER,hint->uvid ); 
+	glClientActiveTexture(GL_TEXTURE0);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY); 
+	glTexCoordPointer(2, GL_FLOAT, 0, NULL);
+		this->assignTexture(hint->texture_chunks[i]);
 		
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, hint->face_chunks[i]);
 		glDrawElements(count_names[s->v_per_poly], hint->chunk_sizes[i]*s->v_per_poly, GL_UNSIGNED_INT, 0);
@@ -233,7 +234,7 @@ void RendererGL::renderFaceTexShape(faceTexShape *s) {
 
 void RendererGL::setUpVbo(shape *s) {
 	Geom *g=new Geom[s->v_count],*ns=new Geom[s->v_count];
-	Guv *guvs=new Guv[s->v_count];
+	Guv *guvs=new Guv[s->f_count*s->v_per_poly];
 	GLuint **chunk_faces;
 	GLuint *faces=new GLuint[s->f_count*s->v_per_poly];
 	vector<size_t> chunk_sizes;
@@ -282,10 +283,17 @@ void RendererGL::setUpVbo(shape *s) {
 	for(size_t i=0; i<s->v_count; i++) {
 		g[i].x=s->vertices[i].x; g[i].y=s->vertices[i].y; g[i].z=s->vertices[i].z;
 		ns[i].x=s->normals[i].x; ns[i].y=s->normals[i].y; ns[i].z=s->normals[i].z;
-		guvs[i].u=s->uvs[i].u; guvs[i].v=s->uvs[i].v; 
+		
 	}
 
-	
+	size_t uc=0;
+	for(size_t i=0; i<s->f_count; i++) {
+		for(size_t n=0; n<s->v_per_poly; n++) {
+			guvs[s->faces[i][n]].u=s->uvs[s->faces[i][n]].u; 
+			guvs[s->faces[i][n]].v=s->uvs[s->faces[i][n]].v; 
+			uc++;
+		}
+	}
 	
 	GLuint vid;
 	glGenBuffers(1,&(hint->vertexid));
@@ -324,7 +332,7 @@ void RendererGL::setUpVbo(shape *s) {
 void RendererGL::setUpVbos() {
 	obj_list models=this->w->getActiveRoom()->models;
 	for(size_t i=0; i<models.size(); i++) {
-		//setUpVbo(models[i]->getModel());		
+		setUpVbo(models[i]->getModel());		
 
 	}
 	setUpVbo(this->w->getActiveRoom()->getModel());
@@ -356,7 +364,7 @@ void RendererGL::specificInit() {
 	//glEnable( GL_LIGHTING );
 	//glEnable(GL_LIGHT0);
 	
-	this->setupTexture(w->getSkybox()->getTexture());
+	this->setupTexture(w->sky->getTexture());
 
 	//this->setupTexture(w->getTerrain()->getTexture());
 
@@ -375,7 +383,7 @@ void RendererGL::specificInit() {
 	}	
 
 	//this->setupTexture(this->w->testsprite->tex);
-	this->setUpVbos();
+	//this->setUpVbos();
 }
 
 void RendererGL::addShader(string name) {

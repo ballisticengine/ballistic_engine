@@ -10,7 +10,7 @@ renderer::~renderer() {
 }
 
 void renderer::positionLights() {
- lights_list lights=this->w->getLights();
+	lights_list lights=this->w->active_room->lights;
  //cout << "Lights" << lights.size() << endl;
  for(int i=0; i<lights.size(); i++) {
   this->lightSpecific(lights[i]);
@@ -35,7 +35,7 @@ void renderer::init() {
 	frustum_y = c->getVD()->frustum_y;
     this->vd = vd;
     this->w = (world *) world::getInstance();
-    skybox *sky = this->w->getSkybox();
+	skybox *sky = this->w->sky;
 
     sky->makeShape(frustum_x, frustum_y);
 	
@@ -67,7 +67,7 @@ void renderer::init() {
  }
 
 void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transformuje
-	obj_list ents=w->getModels();
+	obj_list ents=w->active_room->models;
 	//cout << ents.size() << endl;
 	
 	for(int i=0; i<ents.size(); i++) {
@@ -90,7 +90,7 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transfor
 }
 
 void renderer::renderAllRooms() {
-	rooms_list rooms=w->getRooms();
+	rooms_list rooms=w->rooms;
 	for(size_t i=0; i<rooms.size(); i++) {
 		
 		this->renderFaceTexShape((faceTexShape *)rooms[i]->getModel());

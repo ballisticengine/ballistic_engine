@@ -15,6 +15,7 @@ protected:
 
 public:
 	ObserverEntity();
+	virtual ~ObserverEntity();
 	virtual void setCamera(camera *c);
 	virtual camera *getCamera();
 	virtual void bobHead();

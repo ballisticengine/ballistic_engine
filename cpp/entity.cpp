@@ -74,6 +74,13 @@ entity::entity() {
 	this->bounding_box=0;
 }
 
+entity::~entity() {
+	cout << "Destroying entity" << endl;
+	//if (this->bounding_box) {
+		//delete this->bounding_box;
+	//}
+}
+
 /* offset to w³aœciwie nowa pozycja, a nie przemieszczenie */
 
 MathTypes::vector entity::collides(BoundingCube *bound,coords offset) 

@@ -6,6 +6,7 @@ SDL_Surface *sdlIO::screen=0;
 sdlIO::sdlIO() {
 	w=world::getInstance();
 	fullscreen=false;
+	engineState::getInstance()->keypress=false;
 }
 
 void sdlIO::setRenderer(renderer *r) {
@@ -13,8 +14,16 @@ void sdlIO::setRenderer(renderer *r) {
 }
 
 void sdlIO::initWindow() {
-   SDL_Init(SDL_INIT_EVERYTHING);
-	// SDL_Init(SDL_INIT_VIDEO);
+   //SDL_Init(SDL_INIT_EVERYTHING);
+     SDL_Init(SDL_INIT_VIDEO);
+	   SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
+    SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 5 );
+    SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
+    SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
+    SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
+   
+   SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+	 
 	 SDL_CreateWindowAndRenderer(config::getInstance()->getVD()->width, config::getInstance()->getVD()->height, 
 		 SDL_WINDOW_OPENGL, &sdlIO::window, &sdlIO::displayRenderer);
     sdlIO::screen = SDL_GetWindowSurface(sdlIO::window);
@@ -41,7 +50,8 @@ void sdlIO::eventLoop() {
 				engineState::getInstance()->setExit(true);
             }
 			if (event.type==SDL_KEYDOWN) {
-				 switch (event.key.keysym.sym) {
+				engineState::getInstance()->keypress=true; 
+				switch (event.key.keysym.sym) {
 					case SDLK_F1:
 						//wireframes
 						engineState::getInstance()->debug_visual=!engineState::getInstance()->debug_visual;
@@ -81,6 +91,10 @@ void sdlIO::eventLoop() {
 						engineState::getInstance()->setExit(true);
 						break;
 				 }
+			}
+
+			if (event.type==SDL_KEYUP) {
+				engineState::getInstance()->keypress=false; 
 			}
 
 	   }

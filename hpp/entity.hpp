@@ -27,6 +27,8 @@ protected:
 	void syncBounding();
 public:
 	entity();
+	virtual ~entity();
+
 	coords getCoords();
 	
 	/*

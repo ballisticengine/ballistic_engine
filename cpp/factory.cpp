@@ -11,7 +11,7 @@ void * factory::get(string fn) {
 factory::~factory() {
  cout << "Cleaning up" << endl;
  for(int i=0; i<item_ptr.size(); i++) {
-	//delete item_ptr[i];
+	delete item_ptr[i];
  }
 }
 

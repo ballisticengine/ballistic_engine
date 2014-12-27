@@ -31,6 +31,7 @@ typedef vector<GLhandleARB> shader_list;
 
 #define BUFFER_OFFSET(i) ((void*)(i))
 
+
 struct GLHint {
 	GLuint vertexid,faceid,normid,uvid;
 	vector <GLuint> face_chunks;
@@ -87,7 +88,7 @@ class RendererGL : public renderer,public singleton<RendererGL> {
 	//virtual void renderFaceTexShape(faceTexShape *s);
 	void setUpVbos();
 	void setUpVbo(shape *s);
-	void renderFaceTexShape(faceTexShape *s);
+	void renderFaceTexShapex(faceTexShape *s);
 public:
     RendererGL();
 	virtual void setupTexture(texture *t);    

@@ -32,3 +32,7 @@ ObserverEntity::ObserverEntity() {
 	headbob_i=0;
 	bob_timer.getDiffR();
 }
+
+ObserverEntity::~ObserverEntity() {
+	//delete this->cam;
+}

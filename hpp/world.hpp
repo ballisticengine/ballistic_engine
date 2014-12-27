@@ -31,6 +31,7 @@ using namespace boost::property_tree;
 #include "observerEntity.hpp"
 #include "material.hpp"
 #include "sprite.hpp"
+#include "utils.hpp"
 
 typedef vector <roomEntity *> rooms_list;
 
@@ -38,34 +39,28 @@ class world {
 protected:
 	
 	
-	rooms_list rooms;
-	
-	
-
-	skybox *sky;
 	camera default_camera;
-	ObserverEntity observer;
 	void moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision);
 	void moveEntities();
 	Timer time;
 	TerrainMap *tm;
 public:
+	ObserverEntity observer;
+	roomEntity *active_room;
 	Sprite *testsprite;
+	skybox *sky;
+	rooms_list rooms;
+
 	static world *getInstance(); 
 	static world & getRef();
 	~world();
-	ent_list getEntities();
-	obj_list getModels();
+	
 	//obj_reflist getModelsRef();
-	rooms_list getRooms();
-	lights_list getLights();
-	skybox * getSkybox();
+
 	camera *getCurrentCamera();
-	void makeTestWorld();
 	bool parseXml(string &fn);
 	void prepare();
 	void operator()();
-	void test();
 	roomEntity * getActiveRoom();
 	ObserverEntity * getObserver();
 	TerrainMap * getTerrain();

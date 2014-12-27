@@ -5,6 +5,11 @@ roomEntity::roomEntity() {
 
 }
 
+roomEntity::~roomEntity() {
+	deleteVector(this->boundings);
+	deleteVector(this->entities); //to usunie modele, physical_entities i entities z powodo hierarchii (patrz add*Entity)
+}
+
 void roomEntity::addEntity(entity *e) {
 	this->entities.push_back(e);
 }

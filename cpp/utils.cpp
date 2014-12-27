@@ -15,4 +15,7 @@ char *loadText(string fn) {
 	fclose(f);
 	return ft;
 }
+
+
+
 }

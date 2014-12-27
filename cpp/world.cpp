@@ -1,33 +1,13 @@
 #include "world.hpp"
 
-/*ent_list world::getEntities() {
-
-}*/
 
 
 
-skybox * world::getSkybox() {
-	return this->sky;
-}
 
-obj_list world::getModels() {
-	return this->getActiveRoom()->models;
-}
 
-rooms_list world::getRooms() {
-	return this->rooms;
-}
-
-void world::makeTestWorld() {
-	this->sky = new skybox("skybox.bmp");
-}
 
 TerrainMap * world::getTerrain() {
 	return this->tm;
-}
-
-void world::test() {
-	cout << "Test world";
 }
 
 bool world::parseXml(string &fn) {
@@ -145,21 +125,19 @@ bool world::parseXml(string &fn) {
 	texf->setWD(COMMON_DIR);
 	texture *stex = (texture *)texf->get("car.bmp");
 	this->testsprite=new Sprite(stex);
+	this->active_room=this->rooms[0];
 	return true;
 }
 
-lights_list world::getLights() {
-	return this->getActiveRoom()->lights;
-}
+
 
 void world::prepare() {
 
 }
 
 world::~world() {
-	/*for(int i=0; i<this->entities.size(); i++) {
-		// delete entities[i];
-	}*/
+	cout << "World cleaning up..." << endl;
+	deleteVector(rooms);
 }
 
 camera *world::getCurrentCamera() {
@@ -172,21 +150,29 @@ roomEntity * world::getActiveRoom() {
 
 void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision) {
 	
+	
 	coords c=e->nextCoords(time_diff),x;
+	
+	if((c.translation.x==0 && c.translation.y==0 && c.translation.z==0) && (c.rotation.x==0 && c.rotation.y==0 && c.rotation.z==0)) {
+	 return;
+	}
+	
 	x.translation=c.translation-e->getCoords().translation;
 
-	rooms_list rl=this->getRooms();
-	obj_list objs=this->getModels();
+	rooms_list rl=this->rooms;
+	obj_list objs=this->active_room->models;
 	BoundingCube *obc=e->getBoundingBox();
 
 	MathTypes::vector cvec;
 	
-	if(0) {//!engineState::getInstance()->noclip
+	if(!engineState::getInstance()->noclip) {
+	
 	/*
 	 Kolizje z obiektami
 	*/
-	//c.translation.write();
-	for(int i=0; i<objs.size(); i++) {
+
+	size_t objs_size=objs.size();
+	for(int i=0; i<objs_size; i++) {
 		cvec=objs[i]->collides(obc,c);
 		if(cvec.x) {
 			if(cvec.x<0) {
@@ -197,7 +183,6 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		}
 
 		if(cvec.z) {
-			//cout << cvec.x << endl;
 			if(cvec.z<0) {
 			c.translation.x=cvec.x-COLLISION_BACK;
 			} else if(cvec.z>0) {
@@ -206,7 +191,6 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		}
 
 		if(cvec.y) {
-			//cvec.write();
 			if(cvec.y<0) {
 			c.translation.y=+COLLISION_BACK;
 			} else {
@@ -219,10 +203,9 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	/*
 	Kolizje z poziomem
 	*/
-	for(int i=0; i<rl.size(); i++) {
-		//break;
+	size_t rl_size=rl.size();
+	for(int i=0; i<rl_size; i++) {
 		cvec=rl[i]->collides(obc,c);
-		//cvec.write();
 		if(cvec.x) {
 			c.translation.z=cvec.x;
 		}
@@ -261,14 +244,14 @@ void world::moveEntities() {
 
 void world::operator()() {
 
-	this->getActiveRoom()->model_animator.start();
+	//this->getActiveRoom()->model_animator.start();
 	time.start();
 
 
 	while(!engineState::getInstance()->exit()) {
 		this->moveEntities(); 
 	}
-	this->getActiveRoom()->model_animator.stop();
+	//this->getActiveRoom()->model_animator.stop();
 
 }
 

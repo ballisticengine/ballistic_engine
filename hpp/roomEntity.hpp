@@ -3,6 +3,7 @@
 
 #include "ObjectEntity.hpp"
 #include "modelAnimator.hpp"
+#include "utils.hpp"
 #include <cmath>
 
 using namespace std;
@@ -28,6 +29,7 @@ public:
 	void addObjectEntity(ObjectEntity *e);
 	void addLightEntity(light *e);
 	roomEntity();
+	~roomEntity();
 	virtual MathTypes::vector collides(BoundingCube *bound,coords offset);
 };
 
