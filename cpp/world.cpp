@@ -11,6 +11,7 @@ TerrainMap * world::getTerrain() {
 }
 
 bool world::parseXml(string &fn) {
+	
 	this->observer.name="observer";
 	this->observer.type="observer";
 
@@ -133,9 +134,11 @@ bool world::parseXml(string &fn) {
 		}
 		
 	}
+	
+	observer.setCamera(&default_camera);
 	observer.locate(jx,jy,jz);
 	observer.face(rx,ry,rz);
-	observer.setCamera(&default_camera);
+	
 	texf->setWD(COMMON_DIR);
 	texture *stex = (texture *)texf->get("car.bmp");
 	this->testsprite=new Sprite(stex);
@@ -156,6 +159,7 @@ world::world() {
 world::~world() {
 	cout << "World cleaning up..." << endl;
 	deleteVector(rooms);
+	
 }
 
 camera *world::getCurrentCamera() {
@@ -170,13 +174,16 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	
 	
 	coords c=e->nextCoords(time_diff),x;
+	//cout << "SC: ";
+	//c.translation.write();
+	//TrRot v=e->getVelocity();
 	bool movement=true;
 	if((c.translation.x==0 && c.translation.y==0 && c.translation.z==0) && (c.rotation.x==0 && c.rotation.y==0 && c.rotation.z==0)) {
 	 movement=false;
 	}
 	
 	if(!movement) {
-	 return;
+	 //return;
 	}
 
 
@@ -198,12 +205,14 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	for(int i=0; i<objs_size; i++) {
 		cvec=objs[i]->collides(obc,c);
 		
-		if(cvec.x) {
-			if(cvec.x<0) {
+	if(cvec.x) {
+		if(cvec.x<0) {
 			c.translation.z=cvec.z-COLLISION_BACK;
 			} else if(cvec.x>0) {
 			c.translation.z=cvec.z+COLLISION_BACK;
 			}
+			
+			
 		}
 
 		if(cvec.z) {
@@ -212,6 +221,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 			} else if(cvec.z>0) {
 			c.translation.x=cvec.x+COLLISION_BACK;
 			}
+			
 		}
 
 		if(cvec.y) {
@@ -220,9 +230,15 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 			} else {
 			c.translation.y=-COLLISION_BACK;
 			}
-		}
-		if(cvec.x || cvec.y || cvec.z) {
 			
+		}
+		
+		
+		if(cvec.x || cvec.y || cvec.z) {
+			//e->setVelocity(v);
+			//c=e->nextCoords(time_diff);
+			//cout << "EC: ";
+			//c.translation.write();
 			PyScripting::getInstance()->broadcast("EntityCollision",(void *)e,(void *)objs[i],(void *)&cvec);
 		} else {
 			PyScripting::getInstance()->broadcast("EntityMovement",(void *)e);

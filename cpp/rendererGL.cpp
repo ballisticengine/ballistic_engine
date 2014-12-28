@@ -169,7 +169,7 @@ void RendererGL::render() {
 	this->reset();
 
 	this->positionCamera();
-	//this->renderSprite(this->w->testsprite);
+	
 	this->reset();
 
 	this->positionCamera();
@@ -185,6 +185,9 @@ void RendererGL::render() {
 	this->positionCamera();
 
 	this->renderAllEntities();
+	if(state->debug_visual) {
+		this->drawBoundingBox(w->observer.getBoundingBox());
+	}
 	glFlush();
 	this->flush_callback();
 	

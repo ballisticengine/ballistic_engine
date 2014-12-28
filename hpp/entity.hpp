@@ -39,11 +39,11 @@ public:
 	
 
 
-	void translate(e_loc x,e_loc y,e_loc z);
-	void translate(coords c);
-	void rotate(e_loc x,e_loc y, e_loc z);
-	void locate(e_loc x,e_loc y,e_loc z);
-	void face(e_loc x,e_loc y,e_loc z);
+	virtual void translate(e_loc x,e_loc y,e_loc z);
+	virtual void translate(coords c);
+	virtual void rotate(e_loc x,e_loc y, e_loc z);
+	virtual void locate(e_loc x,e_loc y,e_loc z);
+	virtual void face(e_loc x,e_loc y,e_loc z);
 	
 	virtual void makeBoundingBox();
 	virtual void setBoundingBox(BoundingCube *box);
