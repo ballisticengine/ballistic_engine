@@ -3,7 +3,7 @@
 
 
 
-fdfadfadsfads
+
 
 
 TerrainMap * world::getTerrain() {
