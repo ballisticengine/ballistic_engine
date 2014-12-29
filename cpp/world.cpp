@@ -63,7 +63,7 @@ bool world::parseXml(string &fn) {
 		cout << "Ambient light: " << roomE->ambient_light.r << ", " << roomE->ambient_light.g << ", " << roomE->ambient_light.b << endl;
 		roomE->setModel(fs);
 		this->addRoomEntity(roomE);
-		ptree &room_ents=(ptree)room.second.get_child("entities");
+		ptree room_ents=(ptree)room.second.get_child("entities");
 		BOOST_FOREACH(const ptree::value_type &entobj, room_ents) {
 			string type=entobj.second.get<string>("type"),name=entobj.second.get<string>("name");
 			e_loc x=entobj.second.get<float>("location.x"),y=entobj.second.get<float>("location.y"),
@@ -88,7 +88,7 @@ bool world::parseXml(string &fn) {
 				oe->locate(x,y,z);
 				oe->setBoundingBox(new BoundingCube(oe->getModel()));
 				
-				oe->face(-90,0,0); //tymczasowo, i tak wiêkszoœæ obiektów potrzebuje dok³adnie takiego obrotu
+				oe->face(-90,0,0); //tymczasowo, i tak wiï¿½kszoï¿½ï¿½ obiektï¿½w potrzebuje dokï¿½adnie takiego obrotu
 				current_e=(entity *)oe;
 				//oe->face(rx,ry,rz);
 				//oe->velocity.t.x=10;
@@ -268,7 +268,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		}
 	}
 	}
-	//TODO: tutaj trzeba te¿ ustawiæ velocity bo dla tego siê mo¿e dupiæ
+	//TODO: tutaj trzeba teï¿½ ustawiï¿½ velocity bo dla tego siï¿½ moï¿½e dupiï¿½
 	e->translate(c);
 	e->rotate(c.rotation.x,c.rotation.x,c.rotation.z);
 

@@ -11,7 +11,11 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#ifdef __WIN32__
 #include <SDL/SDL.h>
+#else
+#include <SDL2/SDL.h>
+#endif
 
 using namespace std;
 

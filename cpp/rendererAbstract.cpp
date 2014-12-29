@@ -67,7 +67,7 @@ void renderer::init() {
   this->rotateSpecific(x,y,z,d);
  }
 
-void renderer::renderAllEntities() { //to sie nie nadaje do poziomów bo transformuje
+void renderer::renderAllEntities() { //to sie nie nadaje do poziomï¿½w bo transformuje
 	obj_list ents=w->active_room->models;
 	//cout << ents.size() << endl;
 	size_t ents_size=ents.size();
@@ -108,7 +108,7 @@ void renderer::renderAllRooms() {
 void renderer::renderFaceTexShape(faceTexShape *s) {
    
   
-	size_t ** polys = s->faces;
+	size_t ** polys = (size_t **)s->faces;
 	size_t uvc=0;
 
 	for (size_t i = 0; i < s->f_count; i++) {
@@ -180,7 +180,7 @@ void renderer::locate(e_loc x,e_loc y,e_loc z) {
 	this->translate(x,y,z);
 }
 
-void renderer::face(e_loc x,e_loc y,e_loc z) { //tu Ÿle, bo powinien mno¿yæ, wywaliæ rotateSpecific(x,y,z) zostawiæ to z x,y,z,d
+void renderer::face(e_loc x,e_loc y,e_loc z) { //tu ï¿½le, bo powinien mnoï¿½yï¿½, wywaliï¿½ rotateSpecific(x,y,z) zostawiï¿½ to z x,y,z,d
 	/*static int i=0;
 	x-=cursor.rx;
 	y-=cursor.ry;
@@ -197,13 +197,13 @@ void renderer::reset() {
 	this->resetSpecific();
 	cursor.translation.x=0;
 	cursor.translation.y=0;
-	cursor.translation.z=0; //coœ nie dzia³a z frustum_start zmienionym
+	cursor.translation.z=0; //coï¿½ nie dziaï¿½a z frustum_start zmienionym
 	cursor.rotation.x=0;
 	cursor.rotation.y=0;
 	cursor.rotation.z=0;
 }
 
- void renderer::setCamera(camera *c) { //to przenieœæ do world
+ void renderer::setCamera(camera *c) { //to przenieï¿½ï¿½ do world
 	 this->active_camera=c;
  }
 

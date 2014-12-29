@@ -3,7 +3,7 @@
 
 #include <iostream>
 using namespace std;
-#include <SDL/SDL.h>
+
 
 #include "animator.hpp"
 #include "types.hpp"

@@ -3,7 +3,11 @@
 
 #include <iostream>
 
+#ifdef __WIN32__
 #include <SDL/SDL.h>
+#else
+#include <SDL2/SDL.h>
+#endif
 #include <boost/thread/thread.hpp>
 #include <cmath>
 
