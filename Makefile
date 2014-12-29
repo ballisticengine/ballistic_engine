@@ -4,7 +4,7 @@ OUTPUT=ballistic -lstdc++
 
 $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	   renderer.o rendererGL.o texture.o world.o skybox.o \
-	   texturegl.o engine.o sprite.o abstractEntity.o loaderMD2.o \
+	   engine.o sprite.o loaderMD2.o \
 	   config.o engineState.o loaderXML.o \
 	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o facetexShape.o \
 	   python.o utlis.o \
@@ -15,133 +15,133 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
 
+modelview: tools/modelviewer/modelview.cpp
+	g++ $(CFLAGS) $^ -o modelviewer
+
 main.o: main.cpp sdl.o
 	g++ $(CFLAGS) -c $^ -o $@
 
-config.o: cpp/config.cpp
+config.o: cpp/config/config.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 
-loaderMD2.o: cpp/loaderMD2.cpp
+loaderMD2.o: cpp/loaders/loaderMD2.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-loaderXML.o: cpp/loaderXML.cpp
+loaderXML.o: cpp/loaders/loaderXML.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-factory.o: cpp/factory.cpp
+factory.o: cpp/factories/factory.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-textureFactory.o: cpp/textureFactory.cpp
+textureFactory.o: cpp/factories/textureFactory.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-shapeFactory.o: cpp/shapeFactory.cpp
+shapeFactory.o: cpp/factories/shapeFactory.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 
-animator.o: cpp/animator.cpp
+animator.o: cpp/anim/animator.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-modelAnimator.o: cpp/modelAnimator.cpp
+modelAnimator.o: cpp/anim/modelAnimator.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-pointlight.o: cpp/pointlight.cpp
+pointlight.o: cpp/entities/pointlight.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-facetexShape.o: cpp/facetexShape.cpp
+facetexShape.o: cpp/types/facetexShape.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-shape2d.o: cpp/shape2d.cpp
+shape2d.o: cpp/types/shape2d.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-sprite.o: cpp/sprite.cpp
+sprite.o: cpp/entities/sprite.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
 engine.o: cpp/engine.cpp
 	g++ $(CFLAGS) -c $^  -o $@
 	
-abstractEntity.o: cpp/abstractEntity.cpp
+
+
+skybox.o: cpp/types/skybox.cpp 
 	g++ $(CFLAGS) -c $^  -o $@
 
-skybox.o: cpp/skybox.cpp 
-	g++ $(CFLAGS) -c $^  -o $@
-
-world.o: cpp/world.cpp 
+world.o: cpp/entities/world.cpp 
 	g++ $(CFLAGS) -c $^  -o $@
 	
-entity.o: cpp/entity.cpp types.o
+entity.o: cpp/entities/entity.cpp types.o
 	g++ $(CFLAGS) -c $^ -o $@
 
 
-objectEntity.o: cpp/objectEntity.cpp
+objectEntity.o: cpp/entities/objectEntity.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-physicalEntity.o: cpp/physicalEntity.cpp
+physicalEntity.o: cpp/entities/physicalEntity.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-observerEntity.o: cpp/observerEntity.cpp
+observerEntity.o: cpp/entities/observerEntity.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-roomEntity.o: cpp/roomEntity.cpp
+roomEntity.o: cpp/entities/roomEntity.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-camera.o: cpp/camera.cpp
+camera.o: cpp/entities/camera.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-types.o: cpp/types.cpp 
+types.o: cpp/types/types.cpp 
 	g++ $(CFLAGS) -c $^ -o $@
 
-sdl.o: cpp/sdlio.cpp
+sdl.o: cpp/io/sdlio.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-sdlControls.o: cpp/sdlControls.cpp
+sdlControls.o: cpp/io/sdlControls.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-texturegl.o: cpp/textureGL.cpp
+
+texture.o: cpp/types/texture.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-texture.o: cpp/texture.cpp
+renderer.o: cpp/renderer/rendererAbstract.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-renderer.o: cpp/rendererAbstract.cpp
-	g++ $(CFLAGS) -c $^ -o $@
-
-rendererGL.o: cpp/rendererGL.cpp
+rendererGL.o: cpp/renderer/GL/rendererGL.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 	
-singleton.o: cpp/singleton.cpp
+singleton.o: cpp/misc/singleton.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-engineState.o: cpp/engineState.cpp
+engineState.o: cpp/config/engineState.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-mathTypes.o: cpp/mathTypes.cpp
+mathTypes.o: cpp/types/mathTypes.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 
-python.o: cpp/python.cpp
+python.o: cpp/python/python.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-material.o: cpp/material.cpp
+material.o: cpp/types/material.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-materiable.o: cpp/materiable.cpp
+materiable.o: cpp/entities/materiable.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-texturable.o: cpp/texturable.cpp
+texturable.o: cpp/entities/texturable.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-light.o: cpp/light.cpp
+light.o: cpp/entities/light.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
 	
-boundingCube.o: cpp/boundingCube.cpp
+boundingCube.o: cpp/types/boundingCube.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-utlis.o: cpp/utils.cpp
+utlis.o: cpp/misc/utils.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-timer.o: cpp/timerPosix.cpp
+timer.o: cpp/time/timerPosix.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 clean:
