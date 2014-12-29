@@ -1,7 +1,10 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include <iostream>
+#include <cstdio>
 
+using namespace std;
 typedef long double time_int;
 #ifdef _WIN32
 #include <windows.h>
@@ -24,10 +27,20 @@ public:
 
 #else
 #include <sys/time.h>
+#include <boost/timer/timer.hpp>
+#include <boost/chrono/chrono.hpp>
+
+using boost::timer::nanosecond_type;
+using boost::timer::cpu_times;
+using boost::timer::cpu_timer;
+using boost::timer::auto_cpu_timer;
 
 class Timer {
 protected:
-	timeval b,e,diff,frequency;
+ cpu_timer  start_timer,end_timer;
+ 
+ cpu_times b,e;
+ time_int diff;
 	time_int ticksToSec(time_int ts);
 public:
 	Timer();

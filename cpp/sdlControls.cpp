@@ -62,7 +62,7 @@ void sdlControls::operator()() {
 		 vel.t.z+=-cos(deg2rad(rotx))*vstep;
 		// o->bobHead();
 	 }
-
+        
 	 
 	 o->setVelocity(vel);
 	 o->rotate(0,(e_loc)xx,0);

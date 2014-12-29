@@ -344,9 +344,9 @@ void RendererGL::setUpVbos() {
 
 void RendererGL::specificInit() {
 	glewInit();
-	if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
+	/*if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
 	 cout << "Shaders in place\n";
-	}
+	}*/
 
 	glViewport(0, 0,config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
 	glMatrixMode(GL_PROJECTION);

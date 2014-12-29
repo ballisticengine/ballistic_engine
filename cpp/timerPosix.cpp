@@ -1,35 +1,55 @@
 #include "timer.hpp"
 Timer::Timer() {
-   // QueryPerformanceFrequency(&frequency);
-    e.tv_usec=0;
-    b.tv_usec=0;
+ b.user=0;
+    e.user=0;
+    
+    //clock_getres(CLOCK_REALTIME,&res);
 }
 
 void Timer::start() {
-    gettimeofday(&b,0);
+    //  start_timer.start();
+    
+    //end_timer.start();
+    
+    
 }
 
 void Timer::stop() {
-    gettimeofday(&e,0);
+    end_timer.stop();
 }
 
 time_int Timer::getDiff() {
-    diff.tv_usec = e.tv_usec - b.tv_usec;
-    return this->ticksToSec(((time_int)diff.tv_usec));
+     
+    e=end_timer.elapsed();
+    diff=(time_int)e.user;
+    
+    //cout << "Elapsed" << e.user << endl;
+    //cout.flush();
+        //printf("%lu\n",diff); 
+       // fflush(stdout);
+    //cout << diff.tv_usec << endl;
+    return this->ticksToSec(diff);
 }
 
 time_int Timer::getDiffR() {
     this->stop();
+    this->getDiff(); 
     time_int r = this->getDiff(); 
+    //time_int r;
+    cout << r << endl;
     this->start();
+  
     return r;
 }
 
 time_int Timer::getDiffNR() {
-    time_int r = this->getDiff();
-    return this->ticksToSec(r);
+    //time_int r = this->getDiff();
+   // return this->ticksToSec(r);
 }
 
 time_int Timer::ticksToSec(time_int ts) {
-    return ts * 1000 * 1000;
+    //clock_getres(CLOCK_MONOTONIC,&res);
+    //cout << res.tv_nsec << ", " << res.tv_sec << endl;
+    //cout.flush();
+    return ts/1000/1000/1000/1000/10;
 }

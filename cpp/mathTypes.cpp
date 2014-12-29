@@ -35,7 +35,7 @@ void vector::write() {
 	std::cout << this->x << ", " << this->y << ", " << this->z << std::endl;
 }
 
-vector  & vector::crossProduct(const MathTypes::vector * b) {
+vector   vector::crossProduct(const MathTypes::vector * b) {
 	//ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
 	/*
 	 n[0]=va[1]*vb[2] - va[2]*vb[1];
@@ -53,7 +53,7 @@ vector  & vector::crossProduct(const MathTypes::vector * b) {
 	return v;
 }
 
-vector & vector::unit() {
+vector  vector::unit() {
 	/*
 	nvx = vx / l
 		nvy = vy / l
@@ -77,12 +77,14 @@ vector::vector(const BasicVector &v) {
  x=v.x;
  y=v.y;
  z=v.z;
+ 
 }
 
-void vector::operator=(const vector &v) {
+vector & vector::operator=(const vector &v) {
 	x=v.x;
 	y=v.y;
 	z=v.z;	
+        return *this;
 }
 
 e_loc vector::ifZero(e_loc value) {
@@ -94,7 +96,7 @@ e_loc vector::ifZero(e_loc value) {
   return 0;
  
 }
-vector & vector::diff(const MathTypes::vector & v) {
+vector  vector::diff(const MathTypes::vector & v) {
 	vector lv;
 	lv.x=x-v.x;
 	lv.y=y-v.y;
@@ -108,7 +110,7 @@ e_loc vector::length() {
 	return length;
 }
 
-vector & vector::normalize() {
+vector  vector::normalize() {
 	vector v=*this;
 	v.x/=length();
 	v.y/=length();
@@ -122,7 +124,7 @@ e_loc vector::dotProduct(const MathTypes::vector * b) {
 	return dp;
 }
 
-vector & vector::operator+(const vector &b) {
+vector  vector::operator+(const vector &b) {
 	vector v;
 	v.x=this->x+b.x;
 	v.y=this->y+b.y;
@@ -130,7 +132,7 @@ vector & vector::operator+(const vector &b) {
 	return v;
 }
 
-vector & vector::operator-(const vector &b) {
+vector  vector::operator-(const vector &b) {
 	vector v;
 	v.x=this->x-b.x;
 	v.y=this->y-b.y;
@@ -138,7 +140,7 @@ vector & vector::operator-(const vector &b) {
 	return v;
 }
 
-vector & vector::operator/(const e_loc val) {
+vector  vector::operator/(const e_loc val) {
  vector v;
  
  v.x=this->x/val;
@@ -147,7 +149,7 @@ vector & vector::operator/(const e_loc val) {
  return v;
 }
 
-vector & vector::operator/(const vector &b) {
+vector vector::operator/(const vector &b) {
  vector v;
  v.x=this->x/b.x;
  v.y=this->y/b.y;
@@ -155,15 +157,18 @@ vector & vector::operator/(const vector &b) {
  return v;
 }
 
-vector & vector::operator*(const vector &b) {
- vector v;
+vector  vector::operator*(const vector &b) {
+ std::cout << "Multx";
+ std::cout.flush();
+    vector v;
  v.x=x*b.x;
  v.y=y*b.y;
  v.z=z*b.z;
  return v;
 }
-vector & vector::operator*(const double a) {
-	vector v;
+vector  vector::operator*(const double a) {
+std::cout << "Mult";	
+    vector v;
 	v.x=x*a;
 	v.y=y*a;
 	v.z=z*a;

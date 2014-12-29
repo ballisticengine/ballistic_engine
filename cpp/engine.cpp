@@ -30,12 +30,15 @@ void engine::prepare() {
    
 	io->initWindow();
 	io->setRenderer(r);
-	r->init();
-	r->setCamera(w->getCurrentCamera());
-	r->setFlush(sdlIO::flush);
+	cout << "Renderer init\n";
+        r->init();
+	cout << "Camera set\n";
+        r->setCamera(w->getCurrentCamera());
+	cout << "Flush set\n";
+        r->setFlush(sdlIO::flush);
 	
 	//this->pythonInit();
-	
+	cout << "World loop\n";
 	boost::thread(boost::ref(*w));
 
 	
