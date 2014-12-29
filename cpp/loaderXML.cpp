@@ -38,7 +38,7 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 	s->uv_count=uv_count;
 	s->vertices=new v_type[v_count];
 	s->normals=new n_type[v_count];
-	s->faces=new size_t*[f_count];
+	s->faces=new unsigned int*[f_count];
 	s->uvs=new uv[uv_count];
 	s->textures=new texture*[f_count];
 	s->frame_count=0;
@@ -75,7 +75,7 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 	int n=0,uvc=0;
 	BOOST_FOREACH(const ptree::value_type &face,faces) {
 		ptree f_verts=face.second.get_child("vertices");
-		s->faces[i]=new size_t[vpf];
+		s->faces[i]=new unsigned int[vpf];
 		try {
 			
 		string texname=face.second.get<string>("texture");		

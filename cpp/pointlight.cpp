@@ -1,5 +1,8 @@
 #include "pointlight.hpp"
+#include "light.hpp"
 
 LightType PointLight::getType() {
-	return LightType::POINTLIGHT;
+    LightType l; //WARNING
+    //l=LightType.POINTLIGHT;
+   // return LightType::POINTLIGHT;
 }

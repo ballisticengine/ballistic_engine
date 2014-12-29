@@ -36,7 +36,7 @@ public:
 	virtual void setAnimator(ModelAnimator *a);
 	virtual ModelAnimator * getAnimator();
 	virtual void setScale(e_loc scale);
-	virtual faceTexShape * getXML(ptree &shp);
+	virtual faceTexShape * getXML(ptree shp);
 	shapeFactory();
 	 
 };

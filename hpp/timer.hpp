@@ -28,13 +28,14 @@ public:
 class Timer {
 protected:
 	timeval b,e,diff,frequency;
-	time_int ticksToSec(time_int &ts);
+	time_int ticksToSec(time_int ts);
 public:
 	Timer();
 	void start();
 	void stop();
 	time_int getDiff();
 	time_int getDiffR();
+        time_int getDiffNR();
 
 };
 #endif

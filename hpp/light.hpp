@@ -13,7 +13,7 @@
 
 
 /*
-Wspólne w³aœciwoœci dla materia³ów i œwiate³
+Wspï¿½lne wï¿½aï¿½ciwoï¿½ci dla materiaï¿½ï¿½w i ï¿½wiateï¿½
 */
 class LightOrMaterial {
 protected:
@@ -28,15 +28,15 @@ public:
 	virtual void setAllColors(const colorRGBA &color);
 };
 
-/* rodzaj œwiat³a zwracany przez funckjê light::getType() */
-enum LightType {
+/* rodzaj ï¿½wiatï¿½a zwracany przez funckjï¿½ light::getType() */
+typedef enum  {
  POINTLIGHT,
  SPOTLIGHT,
  SUNLIGHT
-}  ;
+}  LightType ;
 
 /**
-* Abstrakcyjna klasa opisuj¹ca œwiat³o
+* Abstrakcyjna klasa opisujï¿½ca ï¿½wiatï¿½o
 */
 class light : public entity,public LightOrMaterial {
 protected:

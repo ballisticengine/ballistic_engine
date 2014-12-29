@@ -44,7 +44,7 @@ shapeFactory::shapeFactory() {
  scale=1;
 }
 
-faceTexShape * shapeFactory::getXML(ptree &shp) {
+faceTexShape * shapeFactory::getXML(ptree shp) {
 	loaderXML *loader=loaderXML::getInstance();
 	
 	string name=loader->getName(shp);

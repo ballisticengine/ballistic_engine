@@ -34,7 +34,7 @@ void engine::prepare() {
 	r->setCamera(w->getCurrentCamera());
 	r->setFlush(sdlIO::flush);
 	
-	this->pythonInit();
+	//this->pythonInit();
 	
 	boost::thread(boost::ref(*w));
 

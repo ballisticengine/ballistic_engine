@@ -35,6 +35,7 @@ namespace bp=boost::python;
 //#include "pyVector.hpp"
 
 using namespace std;
+using namespace boost;
 
 
 class PyLocker : public singleton<PyLocker>{
