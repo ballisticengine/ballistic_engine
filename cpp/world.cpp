@@ -10,7 +10,7 @@ TerrainMap * world::getTerrain() {
 	return this->tm;
 }
 
-bool world::parseXml(string &fn) {
+bool world::parseXml(string &fn) { 
 	
 	this->observer.name="observer";
 	this->observer.type="observer";
