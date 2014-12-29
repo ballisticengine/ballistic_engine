@@ -20,7 +20,7 @@ time_int Timer::getDiff() {
 
 time_int Timer::getDiffR() {
     this->stop();
-    time_int r = this->getDiff();
+    time_int r = this->getDiff(); 
     this->start();
     return r;
 }
