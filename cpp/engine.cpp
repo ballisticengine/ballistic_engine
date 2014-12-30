@@ -17,7 +17,7 @@ void engine::prepare() {
 	string start_lvl_dir=string(CONFIG_DIR)+string(DS)+string(LVL_DIR),
 		start_lvl=start_lvl_dir+DS+config::getInstance()->getStart();
 	cout << start_lvl << endl;
-	w->parseXml(start_lvl);  
+	w->parseXml(config::getInstance()->getStart());  
 	
 	videoData vd=*config::getInstance()->getVD();	
     

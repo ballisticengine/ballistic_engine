@@ -1,11 +1,8 @@
 #include "types/skybox.hpp"    
 
 skybox::skybox(string tex_name) {
-    sky=new texture(tex_name);
-    if(! sky->load()) {
-        cout << "Texture error";
-        cout.flush();
-    }
+    textureFactory *texf=(textureFactory *)textureFactory::getInstance();
+    sky=(texture *)texf->get(tex_name);
     cout << tex_name << endl;
    
     

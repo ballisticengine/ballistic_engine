@@ -15,16 +15,20 @@ bool world::parseXml(string &fn) {
 	this->observer.name="observer";
 	this->observer.type="observer";
 
-	string wd=fn;
-	fn=fn+string(DS)+string("level.xml");
+	string wd=fn,level_path=string(CONFIG_DIR)+string(DS)+string(LVL_DIR)+DS+fn,level_xml=level_path+DS+string("level.xml");;
+        
+	cout << "Level: " << level_path << endl;
+        //fn=fn+string(DS)+string("level.xml");
 	shapeFactory *shapef=(shapeFactory *)shapeFactory::getInstance();
-	textureFactory *texf=(textureFactory *)textureFactory::getInstance();
-	texf->setWD(wd+DS+TEX_DIR);
+	shapef->setLevel(fn);
+        textureFactory *texf=(textureFactory *)textureFactory::getInstance();
+	//texf->setWD(wd+DS+TEX_DIR);
+        texf->setLevel(fn);
 	using boost::property_tree::ptree;
 	ptree pt;
-	read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
+	read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace);
 	string skyfn= pt.get<string>("world.config.skybox");
-	this->sky = new skybox(wd+DS+"textures"+DS+skyfn);
+	this->sky = new skybox(skyfn);
 
 	//string tm_tex=pt.get<string>("world.config.terrain.map");
 	//tm=new TerrainMap(tm_tex,tm_tex);
@@ -39,7 +43,7 @@ bool world::parseXml(string &fn) {
 		rz=world_jp.get<e_loc>("rz");
 	
 
-	string gfn=wd+DS+"geometry.xml";
+	string gfn=level_path+DS+"geometry.xml";
 
 	/* Geometria poziomu */
 	ptree gpt;
@@ -77,7 +81,7 @@ bool world::parseXml(string &fn) {
 					tfn=entobj.second.get<string>("texture");
 				e_loc sc=entobj.second.get<e_loc>("scale");
 				shapef->setScale(sc);
-				faceTexShape *shp=(faceTexShape *)shapef->get(mfn);
+				faceTexShape *shp=(faceTexShape *)shapef->get(entobj.second.get<string>("model"));
 				texture *tex=(texture *)texf->get(tfn);
 				Material *mat=new Material();
 				ObjectEntity *oe=new ObjectEntity();
@@ -140,8 +144,8 @@ bool world::parseXml(string &fn) {
 	observer.locate(jx,jy,jz);
 	observer.face(rx,ry,rz);
 	
-	texf->setWD(COMMON_DIR);
-	texture *stex = (texture *)texf->get("car.bmp");
+	//texf->setWD(COMMON_DIR);
+	texture *stex = (texture *)texf->get("@car.bmp");
 	this->testsprite=new Sprite(stex);
 	this->active_room=this->rooms[0];
 	return true;

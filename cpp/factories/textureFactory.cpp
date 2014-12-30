@@ -5,3 +5,11 @@ void * textureFactory::actualLoad(string fn) {
  t->load();
  return (void *)t;
 }
+
+string textureFactory::getSubDir() {
+    return string("textures");
+}
+
+textureFactory::textureFactory() {
+    
+}

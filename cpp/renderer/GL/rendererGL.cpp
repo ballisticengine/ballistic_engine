@@ -379,11 +379,11 @@ void RendererGL::specificInit() {
 	gluQuadricNormals(bounding_box_q, GLU_SMOOTH);  
 	gluQuadricTexture(bounding_box_q, GL_TRUE);
 	ptree & shaders=config::getInstance()->getNode("config.screen.shaders");
-	BOOST_FOREACH(const ptree::value_type &shad, shaders) {
-		string sn=shad.second.get_value<string>();
-		cout << "Adding shader: " << sn << endl;
-		addShader(sn);
-	}	
+//	BOOST_FOREACH(const ptree::value_type &shad, shaders) {
+//		string sn=shad.second.get_value<string>();
+//		cout << "Adding shader: " << sn << endl;
+//		addShader(sn);
+//	}	
 
 	//this->setupTexture(this->w->testsprite->tex);
 	//this->setUpVbos();

@@ -44,6 +44,11 @@ shapeFactory::shapeFactory() {
  scale=1;
 }
 
+string shapeFactory::getSubDir() {
+    return string("models");
+}
+
+
 faceTexShape * shapeFactory::getXML(ptree shp) {
 	loaderXML *loader=loaderXML::getInstance();
 	

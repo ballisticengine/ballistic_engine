@@ -43,11 +43,10 @@ class manipulatorClass(object):
             else:
                 entity.translate3(-cvec.z*100,0,-cvec.x*100)
         elif entity.type=="observer":
-           """if cvec.y!=0:
-               #entity.translate3(0,cvec.y,0)
-                pass
-           else:"""
-           entity.translate3(cvec.z,0,cvec.x)
+           if cvec.y!=0:
+               entity.translate3(0,cvec.y,0)
+           else:
+                entity.translate3(cvec.z,0,cvec.x)
 
 
 

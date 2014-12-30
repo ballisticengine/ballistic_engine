@@ -31,6 +31,7 @@ protected:
 	e_loc scale;
 	ptree *shp;
 	ModelAnimator *animator;
+        virtual string getSubDir();
 
 public:
 	virtual void setAnimator(ModelAnimator *a);

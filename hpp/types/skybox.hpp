@@ -9,6 +9,7 @@ using namespace std;
 
 #include "types/types.hpp"
 #include "types/texture.hpp"
+#include "factories/textureFactory.hpp"
 
 
 class skybox {

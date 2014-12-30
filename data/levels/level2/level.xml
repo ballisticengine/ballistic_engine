@@ -1,7 +1,7 @@
 <world>
     <config>
         <skybox>
-            skybox.bmp
+            @skybox.bmp
         </skybox>
         <terrain>
             <map>terrain.bmp</map>
