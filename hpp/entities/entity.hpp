@@ -38,7 +38,7 @@ public:
 	virtual MathTypes::vector collides(BoundingCube *bound,coords offset);
 	
 
-
+        virtual void translate3(e_loc x,e_loc y,e_loc z);
 	virtual void translate(e_loc x,e_loc y,e_loc z);
 	virtual void translate(coords c);
 	virtual void rotate(e_loc x,e_loc y, e_loc z);

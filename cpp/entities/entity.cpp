@@ -18,8 +18,14 @@ void entity::rotate(e_loc x,e_loc y, e_loc z) {
  this->rz+=z;
 }
 
+void entity::translate3(e_loc x,e_loc y,e_loc z) {
+    this->translate(x,y,z);
+    
+}
+
 void entity::translate(e_loc x,e_loc y,e_loc z) {
- this->x+=x;
+    
+    this->x+=x;
  this->y+=y;
  this->z+=z;
  if(this->bounding_box) {

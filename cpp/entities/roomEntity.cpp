@@ -40,6 +40,7 @@ MathTypes::vector roomEntity::collides(BoundingCube *bound,coords offset) {
 	//bound2.max=bound->min;
 	//bound2.min=bound->max;
 	MathTypes::vector cvec,ctmp,cres,none,am,bm,dm;
+        ctmp.x=ctmp.y=ctmp.z=0;
 	e_loc smallest_dist=999999;
 	//cout << "D" << a->width << endl;
 

@@ -37,6 +37,7 @@ BOOST_PYTHON_MODULE(world)
 	bp::class_<entity,entity *>("entity")
 		.def("getCoords",&entity::getCoords)
 		.def("locate",&entity::locate)
+                .def("translate3",&entity::translate3)
 		.def_readonly("name",&entity::name)
 		.def_readonly("type",&entity::type)
 		;
@@ -122,7 +123,8 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		PhysicalEntity *a;
 		a=(PhysicalEntity *)paramA;	
 		roomEntity *r=(roomEntity *)paramB;
-		f(boost::ref(*a),boost::ref(*r));
+                MathTypes::vector cvec=*(MathTypes::vector *)paramC;
+		f(boost::ref(*a),boost::ref(*r),boost::ref(cvec));
 	} else {
 		f();
 	}

@@ -194,7 +194,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	BoundingCube *obc=e->getBoundingBox();
 
 	MathTypes::vector cvec;
-	
+	bool lc=false;
 	if(!engineState::getInstance()->noclip) {
 	
 	/*
@@ -249,27 +249,35 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	Kolizje z poziomem
 	*/
 	size_t rl_size=rl.size();
-	for(int i=0; i<rl_size; i++) {
+	
+        for(int i=0; i<rl_size; i++) {
 		cvec=rl[i]->collides(obc,c);
-		if(cvec.x) {
+                
+                		if(cvec.x) {
 			c.translation.z=cvec.x;
 		}
 
-		if(cvec.z) {
+		/*if(cvec.z) {
 			c.translation.x=cvec.z;
 		}
 
 		if(cvec.y) {
 			c.translation.y=cvec.y;
-		}
-
+		}*/
+                
 		if(cvec.x || cvec.y || cvec.z) {
-			PyScripting::getInstance()->broadcast("LevelCollision",(void *)e,(void *)rl[i]);
+                    //c.translation.write();
+                    lc=true;
+                    PyScripting::getInstance()->broadcast("LevelCollision",(void *)e,(void *)rl[i],(void *)&cvec);
 		}
 	}
 	}
 	//TODO: tutaj trzeba te� ustawi� velocity bo dla tego si� mo�e dupi�
-	e->translate(c);
+	if(!lc) {
+            e->translate(c);
+        } else {
+            //cout << "LC";
+        }
 	e->rotate(c.rotation.x,c.rotation.x,c.rotation.z);
 
 
