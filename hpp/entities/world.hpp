@@ -32,7 +32,7 @@ using namespace boost::property_tree;
 #include "types/material.hpp"
 #include "entities/sprite.hpp"
 #include "misc/utils.hpp"
-//#include "python.hpp"
+#include "python/python.hpp"
 
 typedef vector <roomEntity *> rooms_list;
 

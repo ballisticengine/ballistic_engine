@@ -23,12 +23,12 @@ void entity::translate(e_loc x,e_loc y,e_loc z) {
  this->y+=y;
  this->z+=z;
  if(this->bounding_box) {
-	 this->bounding_box->max.x+=x;
-	 this->bounding_box->max.y+=y;
-	 this->bounding_box->max.z+=z;
-	 this->bounding_box->min.x+=x;
-	 this->bounding_box->min.y+=y;
-	 this->bounding_box->min.z+=z;
+	 this->bounding_box->max.x-=x;
+	 this->bounding_box->max.y-=y;
+	 this->bounding_box->max.z-=z;
+	 this->bounding_box->min.x-=x;
+	 this->bounding_box->min.y-=y;
+	 this->bounding_box->min.z-=z;
 	 this->bounding_box->loc.x=this->x;
 	 this->bounding_box->loc.y=this->y;
 	 this->bounding_box->loc.z=this->z;
@@ -42,12 +42,12 @@ void entity::locate(e_loc x,e_loc y,e_loc z) {
  this->y=y;
  this->z=z;
  if(this->bounding_box) { //todo: bez kopiuj wklej
-	 this->bounding_box->max.x+=x;
-	 this->bounding_box->max.y+=y;
-	 this->bounding_box->max.z+=z;
-	 this->bounding_box->min.x+=x;
-	 this->bounding_box->min.y+=y;
-	 this->bounding_box->min.z+=z;
+	 this->bounding_box->max.x-=x;
+	 this->bounding_box->max.y-=y;
+	 this->bounding_box->max.z-=z;
+	 this->bounding_box->min.x-=x;
+	 this->bounding_box->min.y-=y;
+	 this->bounding_box->min.z-=z;
 	 this->bounding_box->loc.x=this->x;
 	 this->bounding_box->loc.y=this->y;
 	 this->bounding_box->loc.z=this->z;

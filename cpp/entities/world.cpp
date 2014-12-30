@@ -239,9 +239,9 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 			//c=e->nextCoords(time_diff);
 			//cout << "EC: ";
 			//c.translation.write();
-			//PyScripting::getInstance()->broadcast("EntityCollision",(void *)e,(void *)objs[i],(void *)&cvec);
+			PyScripting::getInstance()->broadcast("EntityCollision",(void *)e,(void *)objs[i],(void *)&cvec);
 		} else {
-			//PyScripting::getInstance()->broadcast("EntityMovement",(void *)e);
+			PyScripting::getInstance()->broadcast("EntityMovement",(void *)e);
 		}
 	}
 	
@@ -264,7 +264,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		}
 
 		if(cvec.x || cvec.y || cvec.z) {
-			//PyScripting::getInstance()->broadcast("LevelCollision",(void *)e,(void *)rl[i]);
+			PyScripting::getInstance()->broadcast("LevelCollision",(void *)e,(void *)rl[i]);
 		}
 	}
 	}
@@ -285,7 +285,7 @@ void world::moveEntities() {
 		ObjectEntity *e=things[i];
 		
 		
-		//this->moveEntity((PhysicalEntity *)e,lt,false);
+		this->moveEntity((PhysicalEntity *)e,lt,false);
 	}
 
 	this->moveEntity((PhysicalEntity *)&this->observer,lt,false);
@@ -322,5 +322,4 @@ world & world::getRef() {
 
 void world::addRoomEntity(roomEntity *e) {
 	this->rooms.push_back(e);
-	//this->addEntity(e);
 }

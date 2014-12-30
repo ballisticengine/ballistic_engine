@@ -90,8 +90,7 @@ PyManipulator::PyManipulator(string file) {
 	classname=p.stem().string();
 	iname=classname+"_instance";
 	string codeinit=iname+"="+classname+"()";
-
-	cout << "INIT: " << codeinit << endl;
+        cout << "INIT: " << codeinit << endl;
 	PyRun_SimpleString(codeinit.c_str());
 	module = bp::import("__main__");
 	instance=module.attr(iname.c_str());
@@ -145,13 +144,15 @@ PyManipulator::~PyManipulator() {
 
 void PyScripting::loadManipulators() {
 	namespace fs = boost::filesystem;
-	fs::path py_dir("python/manipulators/");
+	fs::path py_dir("./python/manipulators/");
 	fs::directory_iterator end_iter;
 	for( fs::directory_iterator dir_iter(py_dir) ; dir_iter != end_iter ; ++dir_iter) {
 		if (fs::is_regular_file(dir_iter->status()) ) {
-			PyManipulator *pyman=new PyManipulator(dir_iter->path().string());
+		cout << "Python file: " << dir_iter->path().string() << endl;	
+                    PyManipulator *pyman=new PyManipulator(dir_iter->path().string());
 			manipulators.push_back(pyman);
 		}
+                
 	}
 
 	broadcast("Init",0);

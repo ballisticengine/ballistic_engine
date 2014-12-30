@@ -37,7 +37,7 @@ void engine::prepare() {
 	cout << "Flush set\n";
         r->setFlush(sdlIO::flush);
 	
-	//this->pythonInit();
+	this->pythonInit();
 	cout << "World loop\n";
 	boost::thread(boost::ref(*w));
 

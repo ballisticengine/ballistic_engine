@@ -51,5 +51,5 @@ time_int Timer::ticksToSec(time_int ts) {
     //clock_getres(CLOCK_MONOTONIC,&res);
     //cout << res.tv_nsec << ", " << res.tv_sec << endl;
     //cout.flush();
-    return ts/1000/1000/1000/1000/100;
+    return ts/1000/1000/1000/1000/10;
 }

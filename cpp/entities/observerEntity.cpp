@@ -5,6 +5,45 @@ void ObserverEntity::setCamera(camera *c) {
 	
 }
 
+void ObserverEntity::translate(e_loc x,e_loc y,e_loc z) {
+ this->x+=x;
+ this->y+=y;
+ this->z+=z;
+ if(this->bounding_box) {
+	 this->bounding_box->max.x+=x;
+	 this->bounding_box->max.y+=y;
+	 this->bounding_box->max.z+=z;
+	 this->bounding_box->min.x+=x;
+	 this->bounding_box->min.y+=y;
+	 this->bounding_box->min.z+=z;
+	 this->bounding_box->loc.x=this->x;
+	 this->bounding_box->loc.y=this->y;
+	 this->bounding_box->loc.z=this->z;
+ }
+ this->cam->translate(x,y,z);
+}
+
+
+
+void ObserverEntity::locate(e_loc x,e_loc y,e_loc z) {
+ this->x=x;
+ this->y=y;
+ this->z=z;
+ if(this->bounding_box) { //todo: bez kopiuj wklej
+	 this->bounding_box->max.x+=x;
+	 this->bounding_box->max.y+=y;
+	 this->bounding_box->max.z+=z;
+	 this->bounding_box->min.x+=x;
+	 this->bounding_box->min.y+=y;
+	 this->bounding_box->min.z+=z;
+	 this->bounding_box->loc.x=this->x;
+	 this->bounding_box->loc.y=this->y;
+	 this->bounding_box->loc.z=this->z;
+ }
+	this->cam->locate(x,y,z);
+
+}
+
 void ObserverEntity::bobHead() {
 	//if(bob_timer.getDiffR()==0.0) {
 	// cout <<bob_timer.getDiffR() << endl;
@@ -17,20 +56,14 @@ void ObserverEntity::bobHead() {
  
 }
 
-void ObserverEntity::translate(e_loc x,e_loc y,e_loc z) {
-	entity::translate(x,y,z);
-	this->cam->translate(x,y,z);
-}
+
 
 void ObserverEntity::rotate(e_loc x,e_loc y, e_loc z) {
-	entity::rotate(x,y,z);
+	
 	this->cam->rotate(x,y,z);
 }
 
-void ObserverEntity::locate(e_loc x,e_loc y,e_loc z) {
-	entity::locate(x,y,z);
-	this->cam->locate(x,y,z);
-}
+
 
 void ObserverEntity::face(e_loc x,e_loc y,e_loc z) {
 	entity::face(x,y,z);

@@ -1,4 +1,4 @@
-#import ManipulatorClass
+import ManipulatorClass
 import ctypes
 import world
 class testManipulator(ManipulatorClass):
