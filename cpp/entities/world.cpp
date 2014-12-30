@@ -122,7 +122,8 @@ bool world::parseXml(string &fn) {
 				cout << "Found bounding\n";
 				cout << minx << ", " << miny << ", " << minz << ", " << maxx << ", " << maxy << ", " << maxz << endl;
 				BoundingCube *bc=new BoundingCube(minx,miny,minz,maxx,maxy,maxz);
-				roomE->boundings.push_back(bc);
+				bc->name=name;
+                                roomE->boundings.push_back(bc);
 				//roomE->setBoundingBox(bc);
 			}
 			if (current_e) {
@@ -253,9 +254,9 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
         for(int i=0; i<rl_size; i++) {
 		cvec=rl[i]->collides(obc,c);
                 
-                		if(cvec.x) {
-			c.translation.z=cvec.x;
-		}
+//                		if(cvec.x) {
+//			c.translation.z=cvec.x;
+//		}
 
 		/*if(cvec.z) {
 			c.translation.x=cvec.z;
@@ -275,7 +276,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	//TODO: tutaj trzeba te� ustawi� velocity bo dla tego si� mo�e dupi�
 	if(!lc) {
             e->translate(c);
-        } else {
+       } else {
             //cout << "LC";
         }
 	e->rotate(c.rotation.x,c.rotation.x,c.rotation.z);
@@ -293,7 +294,7 @@ void world::moveEntities() {
 		ObjectEntity *e=things[i];
 		
 		
-		this->moveEntity((PhysicalEntity *)e,lt,false);
+		//this->moveEntity((PhysicalEntity *)e,lt,false);
 	}
 
 	this->moveEntity((PhysicalEntity *)&this->observer,lt,false);

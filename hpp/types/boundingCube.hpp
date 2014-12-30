@@ -22,6 +22,7 @@ public:
 	e_loc getWidth();
 	e_loc getHeight();
 	e_loc getDepth();
+        string name;
 	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
 	MathTypes::vector max,min,loc;
 

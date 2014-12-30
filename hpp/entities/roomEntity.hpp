@@ -2,6 +2,7 @@
 #define ROOM_ENTITY_H
 
 #include "entities/ObjectEntity.hpp"
+#include "types/boundingCube.hpp"
 #include "anim/modelAnimator.hpp"
 #include "misc/utils.hpp"
 #include <cmath>
@@ -15,7 +16,7 @@ typedef vector <light *> lights_list;
 typedef vector <PhysicalEntity *> phys_list;
 
 class roomEntity : public ObjectEntity {
-
+    BoundingCube *last_bound;
 public:
 	ModelAnimator model_animator;
 	ent_list entities;

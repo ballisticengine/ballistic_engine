@@ -209,20 +209,20 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 	 return res;
 	}
 	
+        
 	if(ox>oz) {
-	 res.x=bm.z-am.z; 
+	 res.x=(bm.z-am.z); 
 	}
 
 	
 	
 	if(oz>ox) {
-	 res.z=bm.x-am.x;//am.z-bm.z;
+	 res.z=(bm.x-am.x);
 	}
 	
-	if(b->min.y<a->min.y || b->max.y>a->max.y) { //todo
-	 res.y=am.y-bm.y;
-	 //res.write();
+	if(b->min.y<a->min.y || b->max.y>a->max.y) { 
+	 res.y=(am.y-bm.y);
 	}
-	//res.write();
+	
 	return res;
 }
