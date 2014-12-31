@@ -1,5 +1,5 @@
-CFLAGS=-Ihpp/ -I/usr/include/python2.7 -lSDL2 -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
-OUTPUT=ballistic -lstdc++ 
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -lstdc++  -lSDL2 -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
+OUTPUT=ballistic 
 
 
 $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
@@ -151,5 +151,6 @@ timer.o: cpp/time/timerPosix.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 clean:
-	rm ./*.o
+	rm ./*.o \
+	rm ./$(OUTPUT)
 	

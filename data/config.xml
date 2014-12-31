@@ -16,6 +16,12 @@
 
            
         </shaders>
+        <hud>
+            <image>
+                <name>test</name>
+                <texture>@car.bmp</texture>
+            </image>
+        </hud>
     </screen>
     <game>
         <start_level>
