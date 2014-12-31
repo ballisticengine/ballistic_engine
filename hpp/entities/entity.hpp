@@ -26,6 +26,7 @@ protected:
     void syncBounding();
 public:
     BoundingCube *bounding_box;
+    BoundingCube *last_bound;
     entity();
     virtual ~entity();
 

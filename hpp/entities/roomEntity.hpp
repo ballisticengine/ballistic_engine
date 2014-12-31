@@ -16,7 +16,7 @@ typedef vector <light *> lights_list;
 typedef vector <PhysicalEntity *> phys_list;
 
 class roomEntity : public ObjectEntity {
-    BoundingCube *last_bound;
+   
 public:
 	ModelAnimator model_animator;
 	ent_list entities;

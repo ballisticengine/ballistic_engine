@@ -24,9 +24,9 @@ class testManipulator(object):
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
         print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
-        #entityb.velocity.t.x=-entitya.velocity.t.x
-        #entityb.velocity.t.y=-entitya.velocity.t.y
-        #entityb.velocity.t.z=-entitya.velocity.t.z
+        entityb.velocity.t.x=-entitya.velocity.t.x
+        entityb.velocity.t.y=-entitya.velocity.t.y
+        entityb.velocity.t.z=-entitya.velocity.t.z
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):

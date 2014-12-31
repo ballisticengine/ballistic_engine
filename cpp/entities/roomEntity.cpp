@@ -49,16 +49,18 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
     for (size_t i = 0; i < boundings.size(); i++) {
         bool col = hitTest(boundings[i], bound, offset.translation);
         if (col) {
+            //cout << ent->name << ent->last_bound << endl;
             in_bounding = boundings[i];
-            if (!last_bound) {
-                last_bound = in_bounding;
+            if (!ent->last_bound) {
+                ent->last_bound = in_bounding;
             }
             in_count++;
-        } else if (boundings[i] == last_bound) {
+        } else if ( boundings[i] == ent->last_bound) {
             ctmp.x = ctmp.y = ctmp.z = 0;
+         
 
-
-            bound_current = offsetBounding(last_bound, offset);
+            bound_current = offsetBounding(ent->last_bound, offset);
+        
             am.x = bound_current.min.x + bound_current.width / 2;
             am.y = bound_current.min.y + bound_current.height / 2;
             am.z = bound_current.min.z + bound_current.depth / 2;
@@ -111,14 +113,14 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
         }
     }
 
-    //cout << in_count << ", " << out_count << endl;
+   // cout << in_count << ", " << out_count << endl;
     if (in_count == 0) {
-        //cvec.write();
+        cvec.write();
         return cvec;
 
     } else {
 
-        last_bound = in_bounding;
+        ent->last_bound = in_bounding;
     }
 
     return none;

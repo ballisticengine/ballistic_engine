@@ -298,7 +298,7 @@ void world::moveEntities() {
 		ObjectEntity *e=things[i];
 		
 		
-		//this->moveEntity((PhysicalEntity *)e,lt,false);
+		this->moveEntity((PhysicalEntity *)e,lt,false);
 	}
 
 	this->moveEntity((PhysicalEntity *)&this->observer,lt,false);
