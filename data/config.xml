@@ -26,5 +26,8 @@
         <script>
            manipulatorClass 
         </script>
+        <script>
+            testManipulator
+        </script>
     </scripts>
 </config>

@@ -78,8 +78,7 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 		s->faces[i]=new unsigned int[vpf];
 		try {
 			
-		string texname=face.second.get<string>("texture");
-cout <<  "Texname: " << texname << endl;		
+		string texname=face.second.get<string>("texture");		
 		texture *t=(texture *)textureFactory::getInstance()->get(texname,this->force_common);
 				s->textures[i]=t; 
 			} catch(std::exception e) {
