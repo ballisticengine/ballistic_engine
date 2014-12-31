@@ -1,3 +1,5 @@
+#include <bits/stl_pair.h>
+
 #include "config/config.hpp"
 
 config::config() {
@@ -16,6 +18,12 @@ config::config() {
 	vd.frustum_x=pt.get<float>("config.screen.frustum_width");
 	vd.frustum_y=pt.get<float>("config.screen.frustum_height");
 	start_level=pt.get<string>("config.game.start_level");
+        
+        ptree scripts_xml=pt.get_child("config.scripts");
+        BOOST_FOREACH(const ptree::value_type &script, scripts_xml) {
+            string script_s=script.second.get_value<string>();
+            scripts.push_back(script_s);
+        }
 	
 }
         
@@ -34,4 +42,8 @@ ptree & config::getNode(string node) {
 
 const ptree & config::getPtree() {
  return this->pt;
+}
+
+vector <string> config::getScripts() {
+    return this->scripts;
 }

@@ -22,4 +22,9 @@
             level2
         </start_level>
     </game>
+    <scripts>
+        <script>
+           manipulatorClass 
+        </script>
+    </scripts>
 </config>

@@ -32,11 +32,13 @@ class config : public singleton<config> {
 	ptree pt;
 	videoData vd;
 	string start_level;
+        vector<string>  scripts;
 
 public:
     config();
 	videoData * getVD();
 	string & getStart();
+        vector <string> getScripts();
 	const ptree & getPtree();
 	ptree & getNode(string node);
 	 

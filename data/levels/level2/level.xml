@@ -23,6 +23,11 @@
         <hud>
             car.bmp
         </hud>
+        <scripts>
+            <script>
+                test
+            </script>
+        </scripts>
     </config>
     
 </world>
