@@ -11,7 +11,7 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	   entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o boundingCube.o \
-	   timer.o
+	   timer.o image.o hud.o
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
 
@@ -19,6 +19,12 @@ modelview: tools/modelviewer/modelview.cpp
 	g++ $(CFLAGS) $^ -o modelviewer
 
 main.o: main.cpp sdl.o
+	g++ $(CFLAGS) -c $^ -o $@
+
+image.o: cpp/ui/image.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+hud.o: cpp/ui/hud.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 config.o: cpp/config/config.cpp
