@@ -29,8 +29,8 @@ void roomEntity::addLightEntity(light *e) {
     this->addEntity(e);
 }
 
-MathTypes::vector roomEntity::collides(BoundingCube *bound, coords offset) {
-
+MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
+    BoundingCube *bound=ent->bounding_box;
     e_loc in_count = 0, out_count = 0;
     in_count = out_count = 0;
     BoundingCube bound_off = *bound, bound_current, *in_bounding;

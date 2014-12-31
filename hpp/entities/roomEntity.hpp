@@ -31,7 +31,7 @@ public:
 	void addLightEntity(light *e);
 	roomEntity();
 	~roomEntity();
-	virtual MathTypes::vector collides(BoundingCube *bound,coords offset);
+	virtual MathTypes::vector collides(entity *ent,coords offset);
 };
 
 #endif

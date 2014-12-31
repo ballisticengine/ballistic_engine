@@ -89,64 +89,9 @@ entity::~entity() {
 
 /* offset to w�a�ciwie nowa pozycja, a nie przemieszczenie */
 
-MathTypes::vector entity::collides(BoundingCube *bound,coords offset) 
+MathTypes::vector entity::collides(entity *ent,coords offset) 
 
-{
-	
-	return collisionTest(this->bounding_box,bound,offset);
-	
-}
-
-void entity::setBoundingBox(BoundingCube *box) {
-	this->bounding_box=box;
-	bounding_box->max.x-=x;
-	bounding_box->max.y-=y;
-	bounding_box->max.z-=z;
-	
-	bounding_box->min.x-=x;
-	bounding_box->min.y-=y;
-	bounding_box->min.z-=z;
-}
-
-BoundingCube * entity::getBoundingBox() {
-	return this->bounding_box;
-}
-
-void entity::makeBoundingBox() {
-	///
-}
-
-BoundingCube offsetBounding(BoundingCube *bc,coords offset) {
-	BoundingCube bcr;
-	bcr=*bc;
-	bcr.max=bcr.max+offset.translation;
-	bcr.min=bcr.min+offset.translation;
-	return bcr;
-}
-
-bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
-	MathTypes::vector amax,amin,bmax,bmin;
-	amax=a->max+offset;
-	amin=a->min+offset;
-	bmax=b->max+offset;
-	bmin=b->min+offset;
-	
-	//offset.write();
-
-	bool collide=(
-		amax.x > bmin.x && 
-		 amin.x < bmax.x &&
-		amax.y > bmin.y &&
-		 amin.y < bmax.y &&
-		 amax.z > bmin.z &&
-		amin.z < bmax.z
-		);
-	return collide;
-}
-
-MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
-
-	
+{       BoundingCube *a=this->bounding_box,*b=ent->bounding_box;
 	
 	MathTypes::vector res,offsetx=offset.translation,offsety=offset.translation,offsetz=offset.translation;
 	
@@ -225,4 +170,53 @@ MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset) {
 	}
 	
 	return res;
+	
 }
+
+void entity::setBoundingBox(BoundingCube *box) {
+	this->bounding_box=box;
+	bounding_box->max.x-=x;
+	bounding_box->max.y-=y;
+	bounding_box->max.z-=z;
+	
+	bounding_box->min.x-=x;
+	bounding_box->min.y-=y;
+	bounding_box->min.z-=z;
+}
+
+BoundingCube * entity::getBoundingBox() {
+	return this->bounding_box;
+}
+
+void entity::makeBoundingBox() {
+	///
+}
+
+BoundingCube offsetBounding(BoundingCube *bc,coords offset) {
+	BoundingCube bcr;
+	bcr=*bc;
+	bcr.max=bcr.max+offset.translation;
+	bcr.min=bcr.min+offset.translation;
+	return bcr;
+}
+
+bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
+	MathTypes::vector amax,amin,bmax,bmin;
+	amax=a->max+offset;
+	amin=a->min+offset;
+	bmax=b->max+offset;
+	bmin=b->min+offset;
+	
+	//offset.write();
+
+	bool collide=(
+		amax.x > bmin.x && 
+		 amin.x < bmax.x &&
+		amax.y > bmin.y &&
+		 amin.y < bmax.y &&
+		 amax.z > bmin.z &&
+		amin.z < bmax.z
+		);
+	return collide;
+}
+

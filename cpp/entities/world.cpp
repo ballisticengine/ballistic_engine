@@ -208,7 +208,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 
 	size_t objs_size=objs.size();
 	for(int i=0; i<objs_size; i++) {
-		cvec=objs[i]->collides(obc,c);
+		cvec=objs[i]->collides(e,c);
 		
 	if(cvec.x) {
 		if(cvec.x<0) {
@@ -256,7 +256,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	size_t rl_size=rl.size();
 	
         for(int i=0; i<rl_size; i++) {
-		cvec=rl[i]->collides(obc,c);
+		cvec=rl[i]->collides(e,c);
                 
 //                		if(cvec.x) {
 //			c.translation.z=cvec.x;

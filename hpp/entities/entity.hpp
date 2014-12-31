@@ -14,41 +14,41 @@ using namespace std;
  Abstrakcyjna klasa opisująca wszystkie obiekty na mapie
  */
 
-BoundingCube offsetBounding(BoundingCube *bc,coords offset);
-MathTypes::vector collisionTest(BoundingCube *a,BoundingCube *b,coords offset);
-bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset);
+BoundingCube offsetBounding(BoundingCube *bc, coords offset);
 
+bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::vector offset);
 
 class entity {
 protected:
-    e_loc x,y,z,rx,ry,rz;
-	MathTypes::vector velocity;
-	BoundingCube *bounding_box;
-	void syncBounding();
+    e_loc x, y, z, rx, ry, rz;
+    MathTypes::vector velocity;
+
+    void syncBounding();
 public:
-	entity();
-	virtual ~entity();
+    BoundingCube *bounding_box;
+    entity();
+    virtual ~entity();
 
-	coords getCoords();
-	string name;
-	string type;
-	/*
-	Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
-	*/
-	virtual MathTypes::vector collides(BoundingCube *bound,coords offset);
-	
+    coords getCoords();
+    string name;
+    string type;
+    /*
+    Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
+     */
+    virtual MathTypes::vector collides(entity *ent, coords offset);
 
-        virtual void translate3(e_loc x,e_loc y,e_loc z);
-	virtual void translate(e_loc x,e_loc y,e_loc z);
-	virtual void translate(coords c);
-	virtual void rotate(e_loc x,e_loc y, e_loc z);
-	virtual void locate(e_loc x,e_loc y,e_loc z);
-	virtual void face(e_loc x,e_loc y,e_loc z);
-	
-	virtual void makeBoundingBox();
-	virtual void setBoundingBox(BoundingCube *box);
-	virtual BoundingCube * getBoundingBox();
-	string type_hint;
+
+    virtual void translate3(e_loc x, e_loc y, e_loc z);
+    virtual void translate(e_loc x, e_loc y, e_loc z);
+    virtual void translate(coords c);
+    virtual void rotate(e_loc x, e_loc y, e_loc z);
+    virtual void locate(e_loc x, e_loc y, e_loc z);
+    virtual void face(e_loc x, e_loc y, e_loc z);
+
+    virtual void makeBoundingBox();
+    virtual void setBoundingBox(BoundingCube *box);
+    virtual BoundingCube * getBoundingBox();
+    string type_hint;
 };
 
 typedef vector<entity *> entity_list;
