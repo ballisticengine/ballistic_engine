@@ -277,7 +277,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		}
 	}
 	}
-	//TODO: tutaj trzeba te� ustawi� velocity bo dla tego si� mo�e dupi�
+	
 	if(!lc) {
             e->translate(c);
        } else {

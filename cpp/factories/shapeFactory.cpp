@@ -18,7 +18,8 @@ void * shapeFactory::actualLoad(string fn) {
   //this->scale=1; //skalowanie jest jednorazowe
   } else if (ext==XML_EXT) {
 	 loaderXML *loader=loaderXML::getInstance();
-	 loader->load(fn,s);
+	 
+         loader->load(fn,s,uses_common);
 	
 	 
   }

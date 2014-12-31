@@ -1,7 +1,7 @@
 #include "loaders/loaderXML.hpp"
 
-bool loaderXML::load(string fn, faceTexShape *s) {
-
+bool loaderXML::load(string fn, faceTexShape *s,bool force_common) {
+    this->force_common=force_common;
 	ptree pt;
 	read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
 	ptree shp=pt.get_child("shape");
@@ -78,8 +78,9 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 		s->faces[i]=new unsigned int[vpf];
 		try {
 			
-		string texname=face.second.get<string>("texture");		
-		texture *t=(texture *)textureFactory::getInstance()->get(texname);
+		string texname=face.second.get<string>("texture");
+cout <<  "Texname: " << texname << endl;		
+		texture *t=(texture *)textureFactory::getInstance()->get(texname,this->force_common);
 				s->textures[i]=t; 
 			} catch(std::exception e) {
 				s->textures[i]=0;

@@ -22,11 +22,12 @@ using namespace boost::property_tree;
 
 class loaderXML : public singleton<loaderXML> {
 protected:
- //bool loadFile(string fn);
+    bool  force_common;
+    //bool loadFile(string fn);
  void toShape(ptree &geom,ptree &shape,faceTexShape *s);
 public:
 	string loadXML(ptree &tree,faceTexShape *s);
-	bool load(string fn, faceTexShape *s);
+	bool load(string fn, faceTexShape *s,bool force_common=false);
 	string getName(ptree &tree);
 	//loadXML(string fn,shape *s); //TODO
 };
