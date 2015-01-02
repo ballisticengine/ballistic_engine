@@ -77,7 +77,14 @@ void BoundingCube::calculate(shape * s) {
 		}
 	}
 
-	
+	e_loc tmp1,tmp2;
+        tmp1=min.z;
+        tmp2=max.z;
+        min.z=min.y;
+        max.z=max.y;
+        min.y=tmp1;
+        max.y=tmp2;
+        
 }
 
 e_loc BoundingCube::getWidth() {
