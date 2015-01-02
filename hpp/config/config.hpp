@@ -12,14 +12,9 @@ using namespace boost::property_tree;
 
 #include "misc/singleton.hpp"
 
-#define CONFIG_DIR "data"
-#define SHADER_DIR "data/shaders"
-#define LVL_DIR "levels" //w data/
-#define DS "/"
-#define CONFIG_FN "config.xml"
-#define MODEL_DIR "models"
-#define TEX_DIR "textures"
-#define COMMON_DIR "common"
+#include "config/path.hpp"
+
+#include "ui/hud.hpp"
 
 using boost::property_tree::ptree;
 

@@ -401,7 +401,7 @@ void RendererGL::specificInit() {
     
     /*
      Notka:
-     * Możnaby właściwie robić setupTexture nie tak, tylko pobierać wszystkie z factory i iteraować na nic
+     * Możnaby właściwie robić setupTexture nie tak, tylko pobierać wszystkie z factory i iteraować na nich
      */
     
     this->setupTexture(w->sky->getTexture());
@@ -415,7 +415,7 @@ void RendererGL::specificInit() {
     gluQuadricTexture(lightbulb, GL_TRUE);
     gluQuadricNormals(bounding_box_q, GLU_SMOOTH);
     gluQuadricTexture(bounding_box_q, GL_TRUE);
-    hud->addImage("@car.bmp","test",1,1,1,1);
+   // hud->addImage("@car.bmp","test",1,1,1,1);
     
     image_list images=hud->getImages();
     for(size_t i=0; i<images.size(); i++) {

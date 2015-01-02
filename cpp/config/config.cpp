@@ -2,6 +2,7 @@
 
 #include "config/config.hpp"
 
+
 config::config() {
    
     string fn=string(CONFIG_DIR)+string(DS)+string(CONFIG_FN);
@@ -25,6 +26,23 @@ config::config() {
             scripts.push_back(script_s);
         }
 	
+        HUD *hud=HUD::getInstance();
+        ptree hud_xml=pt.get_child("config.screen.hud");
+        BOOST_FOREACH(const ptree::value_type &image, hud_xml) {
+            string 
+                name=image.second.get<string>("name"),
+                texname=image.second.get<string>("texture")    
+                    ;
+            e_loc 
+                width=image.second.get<e_loc>("width"),
+                height=image.second.get<e_loc>("height"),
+                    x=image.second.get<e_loc>("x"),
+                    y=image.second.get<e_loc>("y")
+                    ;
+            
+            hud->addImage(texname,name,width,height,x,y);
+            
+        }
 }
         
 

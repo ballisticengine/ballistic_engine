@@ -20,6 +20,10 @@
             <image>
                 <name>test</name>
                 <texture>@car.bmp</texture>
+                <width>1</width>
+                <height>1</height>
+                <x>-1</x>
+                <y>-1</y>
             </image>
         </hud>
     </screen>

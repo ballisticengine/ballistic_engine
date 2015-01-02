@@ -7,7 +7,7 @@
 #include "types/texture.hpp"
 #include "entities/texturable.hpp"
 #include "factories/textureFactory.hpp"
-#include "config/config.hpp"
+//#include "config/config.hpp"
 
 using namespace std;
 

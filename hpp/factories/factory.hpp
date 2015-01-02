@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 #include "misc/singleton.hpp"
-#include "config/config.hpp"
+#include "config/path.hpp"
 
 /*
 Fabryka abstrakcyjna - zwraca pliki, je�li nie istniej� - �aduje
