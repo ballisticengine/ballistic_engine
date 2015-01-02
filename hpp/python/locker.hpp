@@ -1,14 +1,20 @@
-/* 
- * File:   locker.hpp
- * Author: maciek
- *
- * Created on 2 stycznia 2015, 16:19
- */
-
 #ifndef LOCKER_HPP
 #define	LOCKER_HPP
+#define BOOST_PYTHON_STATIC_LIB 1
+
+#define BOOST_PYTHON_NO_LIB 1
 
 
+#include <boost/python.hpp>
+#include "misc/singleton.hpp"
+
+
+class PyLocker : public singleton<PyLocker>{
+	 PyGILState_STATE state;
+public:
+	void lock();
+	void unlock();
+};
 
 #endif	/* LOCKER_HPP */
 

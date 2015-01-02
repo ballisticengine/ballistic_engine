@@ -30,7 +30,7 @@ using namespace std;
 
 #include "misc/utils.hpp"
 
-#include "python/python.hpp"
+#include "python/scripting.hpp"
 
 typedef boost::shared_ptr<world> world_ptr;
 

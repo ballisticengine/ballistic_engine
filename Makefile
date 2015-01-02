@@ -7,13 +7,26 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	   engine.o sprite.o loaderMD2.o \
 	   config.o engineState.o loaderXML.o \
 	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o facetexShape.o \
-	   python.o utlis.o \
-	   entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
+	   world_defs.o pylocker.o manipulator.o pyscripting.o \
+	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o boundingCube.o \
 	   timer.o image.o hud.o
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
+
+
+pylocker.o: cpp/python/locker.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+manipulator.o: cpp/python/manipulator.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+pyscripting.o: cpp/python/scripting.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+world_defs.o: cpp/python/world_defs.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 modelview: tools/modelviewer/modelview.cpp
 	g++ $(CFLAGS) $^ -o modelviewer
@@ -125,8 +138,6 @@ mathTypes.o: cpp/types/mathTypes.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 
-python.o: cpp/python/python.cpp
-	g++ $(CFLAGS) -c $^ -o $@
 
 material.o: cpp/types/material.cpp
 	g++ $(CFLAGS) -c $^ -o $@

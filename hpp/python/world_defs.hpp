@@ -38,37 +38,13 @@ using namespace std;
 using namespace boost;
 
 
-class PyLocker : public singleton<PyLocker>{
-	 PyGILState_STATE state;
-public:
-	void lock();
-	void unlock();
-};
-
-class PyManipulator {
-protected:
-	char *code;
-	string filename,classname,iname;
-	bp::object module,instance;
-public:
-  PyManipulator(string file);
-  void signal(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);
-  ~PyManipulator();
-};
 
 
-typedef  vector<PyManipulator *> man_list;
+void init_world();
 
-class PyScripting : public singleton<PyScripting> {
-protected:
-	man_list manipulators;
-public:
-	PyScripting();
-	void broadcast(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);
-	void broadcastInit();
-	~PyScripting();
-	void loadManipulators();
-};
+
+
+
 
 
 #endif
