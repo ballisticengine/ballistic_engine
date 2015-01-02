@@ -11,10 +11,13 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o boundingCube.o \
-	   timer.o image.o hud.o
+	   timer.o image.o hud.o uimesh.o
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
 
+
+uimesh.o: cpp/ui/uiMesh.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 pylocker.o: cpp/python/locker.cpp
 	g++ $(CFLAGS) -c $^ -o $@

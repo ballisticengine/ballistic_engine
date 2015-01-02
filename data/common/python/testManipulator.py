@@ -10,23 +10,23 @@ class testManipulator(object):
 
         self.world=world
         for m in self.world.active_room.models:
-            if m.name=="Table1" or m.name=="Table2":
-                #m.velocity.t.x=-1
-                #m.velocity.t.y=-1
-                #m.velocity.t.z=-1
+            #m.acceleration.t.y=-9.3
+            pass
+            #print m.velocity.y
 
-
-                print "Table velocided"
 
     def onEntityMovement(self,entity):
-        pass
+        print entity.name,"is moving"
 
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
         print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
-        entityb.velocity.t.x=-entitya.velocity.t.x
-        entityb.velocity.t.y=-entitya.velocity.t.y
-        entityb.velocity.t.z=-entitya.velocity.t.z
+        #entityb.velocity.t.x=-entitya.velocity.t.x
+        #entityb.velocity.t.y=-entitya.velocity.t.y
+        #entityb.velocity.t.z=-entitya.velocity.t.z
+        if entitya.type=="observer":
+            
+            pass
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):

@@ -144,14 +144,14 @@ void RendererGL::renderSprite(Sprite *sprite) {
         }
     glLoadMatrixf(mat);
 
-//    glBegin(GL_QUADS);
-//    //cout << sprite << endl;
-//    for (size_t i = 0; i < 4; i++) {
-//        glTexCoord2d(sprite->shape->uvs[i].u, sprite->shape->uvs[i].v);
-//        glVertex3d(sprite->shape->vertices[i].x, sprite->shape->vertices[i].y, sprite->shape->vertices[i].z);
-//
-//    }
-//    glEnd();
+    //    glBegin(GL_QUADS);
+    //    //cout << sprite << endl;
+    //    for (size_t i = 0; i < 4; i++) {
+    //        glTexCoord2d(sprite->shape->uvs[i].u, sprite->shape->uvs[i].v);
+    //        glVertex3d(sprite->shape->vertices[i].x, sprite->shape->vertices[i].y, sprite->shape->vertices[i].z);
+    //
+    //    }
+    //    glEnd();
 
     renderShape2d(sprite->shape);
     //glPopMatrix();
@@ -173,12 +173,20 @@ void RendererGL::drawHud() {
     glDisable(GL_LIGHTING);
     for (size_t i = 0; i < images.size(); i++) {
         this->reset();
-      
-        glTranslated(images[i]->x,images[i]->y,0);
+
+        glTranslated(images[i]->x, images[i]->y, 0);
         drawHudImage(images[i]);
     }
-     glEnable(GL_DEPTH_TEST);
-     glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING);
+    this->reset();
+    glTranslated(hud->mesh->c.translation.x,hud->mesh->c.translation.y,hud->mesh->c.translation.z);
+    glRotated(hud->mesh->c.rotation.x,1,0,0);
+    glRotated(hud->mesh->c.rotation.y,0,1,0);
+    glRotated(hud->mesh->c.rotation.z,0,0,1);
+    glScaled(hud->mesh->scale,hud->mesh->scale,hud->mesh->scale);
+    this->renderFaceTexShape(hud->mesh->model);
+    glEnable(GL_DEPTH_TEST);
+    
 }
 
 void RendererGL::drawHudImage(UiImage *img) {
@@ -196,7 +204,7 @@ void RendererGL::render() {
 
     renderSkybox(w->sky);
     //glFrontFace(GL_CW);
-  
+
     this->positionLights();
     this->reset();
 
@@ -217,7 +225,7 @@ void RendererGL::render() {
     if (state->debug_visual) {
         this->drawBoundingBox(w->observer.getBoundingBox());
     }
-      drawHud();
+    drawHud();
     glFlush();
     this->flush_callback();
 
@@ -398,15 +406,6 @@ void RendererGL::specificInit() {
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     //glEnable( GL_LIGHTING );
     //glEnable(GL_LIGHT0);
-    
-    /*
-     Notka:
-     * Możnaby właściwie robić setupTexture nie tak, tylko pobierać wszystkie z factory i iteraować na nich
-     */
-    
-    this->setupTexture(w->sky->getTexture());
-
-    //this->setupTexture(w->getTerrain()->getTexture());
 
 
     lightbulb = gluNewQuadric();
@@ -415,13 +414,16 @@ void RendererGL::specificInit() {
     gluQuadricTexture(lightbulb, GL_TRUE);
     gluQuadricNormals(bounding_box_q, GLU_SMOOTH);
     gluQuadricTexture(bounding_box_q, GL_TRUE);
-   // hud->addImage("@car.bmp","test",1,1,1,1);
-    
-    image_list images=hud->getImages();
-    for(size_t i=0; i<images.size(); i++) {
-     setupTexture(images[i]->tex);   
-    }
-    
+    // hud->addImage("@car.bmp","test",1,1,1,1);
+
+    UiMesh *mesh=new UiMesh("@gun.xml",0,0,-10);
+    mesh->scale=0.5;
+    mesh->c.translation.x=100;
+    mesh->c.translation.y=-50;
+   mesh->c.translation.z=-150; 
+   mesh->c.rotation.y=90;
+   mesh->c.rotation.x=-45;
+    hud->mesh=mesh;
     ptree & shaders = config::getInstance()->getNode("config.screen.shaders");
     //	BOOST_FOREACH(const ptree::value_type &shad, shaders) {
     //		string sn=shad.second.get_value<string>();

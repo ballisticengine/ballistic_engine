@@ -6,6 +6,8 @@ void HUD::addImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc 
   this->images.push_back(img);  
 }
 
+
+
 image_list HUD::getImages() {
  return this->images;   
 }

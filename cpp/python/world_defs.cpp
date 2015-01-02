@@ -48,6 +48,7 @@ BOOST_PYTHON_MODULE(world)
 		.def("getVelocity",&PhysicalEntity::getVelocity)
 		.def("setVelocity",&PhysicalEntity::setVelocity)
 		.def_readwrite("velocity",&PhysicalEntity::velocity)
+                .def_readwrite("acceleration",&PhysicalEntity::acceleration)
 
 		;
 
