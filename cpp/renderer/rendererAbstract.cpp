@@ -97,6 +97,10 @@ void renderer::renderAllRooms() {
     size_t rooms_size = rooms.size();
     for (size_t i = 0; i < rooms_size; i++) {
         //cout << w->rooms[i]->name << "," <<  w->rooms[i]->type << endl;
+        coords rc=rooms[i]->getCoords();
+        this->reset();
+        this->positionCamera();
+        this->locate(rc.translation.x,rc.translation.y,rc.translation.z);
         this->renderFaceTexShape((faceTexShape *) rooms[i]->getModel());
         if (state->debug_visual) {
             size_t boundings_size = rooms[i]->boundings.size();

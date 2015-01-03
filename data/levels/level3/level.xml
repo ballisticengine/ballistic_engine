@@ -8,9 +8,9 @@
             <texture></texture>
         </terrain>
         <jump_point>
-            <x>180.0</x>
-            <y>-220.0</y>
-            <z>-50.0</z>
+            <x>200.0</x>
+            <y>17.0</y>
+            <z>0.0</z>
             <rx>0.0</rx>
             <ry>0.0</ry>
             <rz>0.0</rz>

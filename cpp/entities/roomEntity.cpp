@@ -115,7 +115,7 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
 
    // cout << in_count << ", " << out_count << endl;
     if (in_count == 0) {
-        cvec.write();
+        //cvec.write();
         return cvec;
 
     } else {

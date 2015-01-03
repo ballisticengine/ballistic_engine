@@ -57,6 +57,10 @@ BOOST_PYTHON_MODULE(world)
 		.def_readwrite("model",&ObjectEntity::model)
 		;
 
+        bp::class_<ObserverEntity,ObserverEntity*,bp::bases<PhysicalEntity> >("ObserverEntity")
+            .def("bobHead",&ObserverEntity::bobHead)
+        ;
+        
 	bp::class_<obj_list>("obj_list")
 		.def(bp::vector_indexing_suite<obj_list>() );
 
@@ -73,7 +77,7 @@ BOOST_PYTHON_MODULE(world)
 	bp::class_<world,shared_ptr<world>,boost::noncopyable>("world",bp::no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
 		.def("getInstance",&getSharedInstance )
 		.def_readonly("active_room", &world::active_room)
-		
+		.def_readwrite("observer",&world::observer)
 		.staticmethod("getInstance")
 				
 		;

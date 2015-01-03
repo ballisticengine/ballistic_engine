@@ -25,13 +25,13 @@ class testManipulator(object):
         #entityb.velocity.t.y=-entitya.velocity.t.y
         #entityb.velocity.t.z=-entitya.velocity.t.z
         if entitya.type=="observer":
-            
+
             pass
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):
-        #print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
-        cvec.write()
+        print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
+        #cvec.write()
         self.wccount+=1
         if entity.type=="object":
             entity.velocity.t.x=-entity.velocity.t.x

@@ -35,7 +35,8 @@ bool world::parseXml(string &fn) {
 	//ptree& entities = pt.get_child("world.entities");
 
 	ptree& world_jp=pt.get_child("world.config.jump_point");
-	e_loc jx=world_jp.get<e_loc>("x"),
+      //  e_loc jx,jy,jz,rx,ry,rz;
+        	e_loc jx=world_jp.get<e_loc>("x"),
 		jy=world_jp.get<e_loc>("y"),
 		jz=world_jp.get<e_loc>("z"),
 		rx=world_jp.get<e_loc>("rx"),
@@ -66,7 +67,13 @@ bool world::parseXml(string &fn) {
 			roomE->name=room.second.get<string>("shape.name");
 		cout << "Ambient light: " << roomE->ambient_light.r << ", " << roomE->ambient_light.g << ", " << roomE->ambient_light.b << endl;
 		roomE->setModel(fs);
-		this->addRoomEntity(roomE);
+		e_loc 
+                rx=room.second.get<e_loc>("location.x"),
+                ry=room.second.get<e_loc>("location.y"),
+                        rz=room.second.get<e_loc>("location.z")
+                        ;
+                roomE->locate(rx,ry,rz);
+                this->addRoomEntity(roomE);
 		ptree room_ents=(ptree)room.second.get_child("entities");
 		BOOST_FOREACH(const ptree::value_type &entobj, room_ents) {
 			string type=entobj.second.get<string>("type"),name=entobj.second.get<string>("name");
@@ -129,7 +136,14 @@ bool world::parseXml(string &fn) {
 				bc->name=name;
                                 roomE->boundings.push_back(bc);
 				//roomE->setBoundingBox(bc);
-			}
+			} else if(type=="JumpPoint") {
+//                            jx=x;
+//                            jy=-y;
+//                            jz=z;
+//                            rx=0;
+//                            ry=0;
+//                            rz=0;
+                        }
 			if (current_e) {
 			
 				current_e->name=name;
@@ -139,7 +153,7 @@ bool world::parseXml(string &fn) {
 		}
 		
 	}
-	
+	cout << "Jumppoint: " << (long)jx << ", " << (long)jy << ", " << (long)jz << endl;
 	observer.setCamera(&default_camera);
 	observer.locate(jx,jy,jz);
 	observer.face(rx,ry,rz);
@@ -186,7 +200,7 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 	if((c.translation.x==0 && c.translation.y==0 && c.translation.z==0) && (c.rotation.x==0 && c.rotation.y==0 && c.rotation.z==0)) {
 	 movement=false;
 	}
-	c.translation.write();
+	//c.translation.write();
 	if(!movement) {
 	 //return;
 	}
