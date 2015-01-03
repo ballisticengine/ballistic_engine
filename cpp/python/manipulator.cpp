@@ -29,9 +29,10 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 	string signame="on"+name;
 	bp::object f=bp::extract<bp::object>(instance.attr(signame.c_str()));
 	world *w=world::getInstance();
+        HUD *h=HUD::getInstance();
 	
 	if(name=="Init") {
-		f(boost::ref(*w));
+		f(boost::ref(*w),boost::ref(*h));
 	} else if(name=="EntityCollision") {
 		PhysicalEntity *a,*b;
 		a=(PhysicalEntity *)paramA;

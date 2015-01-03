@@ -6,6 +6,14 @@ UiImage::UiImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc y)
     this->tex=(texture *)textureFactory::getInstance()->get(fn);
 }
 
+UiImage::UiImage() {
+    
+}
+
+void UiImage::setText() {
+    
+}
+
  UiImage::~UiImage() {
      //delete this->shape; //to robi GPF - sprawdzić
      //Do not remove texture - factory handes that

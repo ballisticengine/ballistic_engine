@@ -184,13 +184,21 @@ void RendererGL::drawHud() {
     glRotated(hud->mesh->c.rotation.y,0,1,0);
     glRotated(hud->mesh->c.rotation.z,0,0,1);
     glScaled(hud->mesh->scale,hud->mesh->scale,hud->mesh->scale);
-    this->renderFaceTexShape(hud->mesh->model);
+    //this->renderFaceTexShape(hud->mesh->model);
     glEnable(GL_DEPTH_TEST);
     
 }
 
 void RendererGL::drawHudImage(UiImage *img) {
+    HUD *h=HUD::getInstance();
+    UiImage *i=h->getImage("test");
+    Draw2d *d=Draw2d::getInstance();
+    d->setSurface(i->tex->getSurface());
+    d->text("test123");
+    img->tex->setSurface(d->surf);
+    this->setupTexture(img->tex);
     this->assignTexture(img->tex);
+    
     this->renderShape2d(img->shape);
 }
 
@@ -433,6 +441,8 @@ void RendererGL::specificInit() {
 
     //this->setupTexture(this->w->testsprite->tex);
     //this->setUpVbos();
+    
+    
 }
 
 void RendererGL::addShader(string name) {

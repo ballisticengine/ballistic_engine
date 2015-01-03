@@ -21,8 +21,20 @@ void texture::free() {
     delete surf;
 }
 
+void texture::setPixels(void *pixels) {
+    this->surf->pixels=pixels;
+}
+
 void * texture::getPixels() {
  return surf->pixels;   
+}
+
+SDL_Surface * texture::getSurface() {
+    return this->surf;
+}
+
+void texture::setSurface(SDL_Surface *surf) {
+    this->surf=surf;
 }
 
 int texture::getWidth() {

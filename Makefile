@@ -1,13 +1,13 @@
-CFLAGS=-Ihpp/ -I/usr/include/python2.7 -lstdc++  -lSDL2 -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -lstdc++  -lSDL2 -lSDL2_ttf -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
 OUTPUT=ballistic 
 
 
 $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
-	   renderer.o rendererGL.o texture.o world.o skybox.o \
+	   sdl2d.o renderer.o rendererGL.o texture.o world.o skybox.o \
 	   engine.o sprite.o loaderMD2.o \
 	   config.o engineState.o loaderXML.o \
 	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o facetexShape.o \
-	   world_defs.o pylocker.o manipulator.o pyscripting.o \
+	   world_defs.o hud_defs.o pylocker.o manipulator.o pyscripting.o \
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o boundingCube.o \
@@ -15,6 +15,9 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
 
+
+sdl2d.o: cpp/io/sdl2d.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 uimesh.o: cpp/ui/uiMesh.cpp
 	g++ $(CFLAGS) -c $^ -o $@
@@ -26,6 +29,9 @@ manipulator.o: cpp/python/manipulator.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
 pyscripting.o: cpp/python/scripting.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+hud_defs.o: cpp/python/hud_defs.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 world_defs.o: cpp/python/world_defs.cpp
@@ -165,6 +171,6 @@ timer.o: cpp/time/timerPosix.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 clean:
-	rm ./*.o \
+	rm ./*.o 
 	rm ./$(OUTPUT)
 	

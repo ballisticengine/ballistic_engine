@@ -8,6 +8,7 @@
 
 #include "python/manipulator.hpp"
 #include "python/world_defs.hpp"
+#include "python/hud_defs.hpp"
 
 
 

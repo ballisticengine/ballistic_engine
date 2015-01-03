@@ -1,12 +1,9 @@
 #include "python/world_defs.hpp"
 
+#include "python/null_deleter.hpp"
 
-struct NullDeleter
-{
-	void operator()(const void*){}
-};
 
-shared_ptr<world> getSharedInstance()
+shared_ptr<world> getSharedWorldInstance()
 {
 	return shared_ptr<world>( world::getInstance(),NullDeleter() );
 }
@@ -75,7 +72,7 @@ BOOST_PYTHON_MODULE(world)
 
 
 	bp::class_<world,shared_ptr<world>,boost::noncopyable>("world",bp::no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
-		.def("getInstance",&getSharedInstance )
+		.def("getInstance",&getSharedWorldInstance )
 		.def_readonly("active_room", &world::active_room)
 		.def_readwrite("observer",&world::observer)
 		.staticmethod("getInstance")

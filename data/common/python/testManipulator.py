@@ -1,18 +1,12 @@
-class testManipulator(object):
+
+class testManipulator(manipulatorClass):
 
     def __init__(self):
         self.ccount=0
         self.wccount=0
 
     """"""
-    def onInit(self,world):
-        print "init"
 
-        self.world=world
-        for m in self.world.active_room.models:
-            #m.acceleration.t.y=-9.3
-            pass
-            #print m.velocity.y
 
 
     def onEntityMovement(self,entity):
@@ -51,7 +45,12 @@ class testManipulator(object):
 
 
     def onSelfLoad(self):
-        pass
+        print self.hud
+        img=self.hud.getImage("test")
+        img2=self.hud.getImage("test2")
+        
+        #uiHelperTest()
+
 
     def onEngineLoad(self):
         pass

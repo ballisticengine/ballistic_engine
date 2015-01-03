@@ -28,6 +28,7 @@ PyScripting::PyScripting() {
 	Py_Initialize();
 	PyEval_InitThreads(); 
 	init_world();
+        init_hud();
 }
 
 PyScripting::~PyScripting() {

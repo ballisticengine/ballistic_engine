@@ -1,8 +1,10 @@
 class manipulatorClass(object):
 
 
-    def onInit(self,world):
+    def onInit(self,world,hud):
         print "init"
+        self.world=world
+        self.hud=hud
 
 
     def onEntityMovement(self,entity):

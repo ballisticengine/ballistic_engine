@@ -28,13 +28,16 @@ public:
 	texture(string fn);
     virtual bool load();
     virtual void free();
-    //todo: tać poniższe do renderera
-//    virtual void setup()=0;
-//    virtual void assign()=0;
-    void * getPixels();
-    int getWidth();
-    int getHeight();
-	string getFilename();
+    
+    SDL_Surface *getSurface();
+    void setSurface(SDL_Surface *surf);
+    
+    virtual void * getPixels();
+    virtual void setPixels(void *pixels);
+    
+    virtual int getWidth();
+    virtual int getHeight();
+    virtual string getFilename();
     
 };
 

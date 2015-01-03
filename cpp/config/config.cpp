@@ -43,6 +43,10 @@ config::config() {
             hud->addImage(texname,name,width,height,x,y);
             
         }
+//        UiImage *img1,*img2;
+//        img1=hud->getImage("test");
+//        img2=hud->getImage("test2");
+        //img1->tex->setPixels(img2->tex->getPixels());
 }
         
 

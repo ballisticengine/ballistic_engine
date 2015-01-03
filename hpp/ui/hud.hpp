@@ -10,9 +10,10 @@
 class HUD : public singleton<HUD> {
 protected:
         image_list images; //tu zrobić mapę a nie vector
-    
+        image_map images_mapped;
 public:
     virtual void addImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc y);
+    virtual UiImage *getImage(string name);
     UiMesh *mesh;
     virtual image_list getImages();
     HUD();

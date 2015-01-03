@@ -16,7 +16,8 @@ void sdlIO::setRenderer(renderer *r) {
 void sdlIO::initWindow() {
    //SDL_Init(SDL_INIT_EVERYTHING);
      SDL_Init(SDL_INIT_VIDEO);
-	   SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
+	 Draw2d::getInstance();
+     SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
     SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 5 );
     SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
     SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 16 );
@@ -29,6 +30,7 @@ void sdlIO::initWindow() {
     sdlIO::screen = SDL_GetWindowSurface(sdlIO::window);
 	SDL_GLContext context;
 	context = SDL_GL_CreateContext(window);
+       
 }
 
 void sdlIO::flush() {

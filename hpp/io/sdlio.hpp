@@ -5,6 +5,7 @@
 #include <SDL/SDL.h>
 #else
 #include <SDL2/SDL.h>
+#include <SDL/SDL_ttf.h>
 #endif
 #include <boost/thread/thread.hpp>
 #include "renderer/rendererAbstract.hpp"
@@ -13,6 +14,8 @@
 #include "config/engineState.hpp"
 #include "io/sdlControls.hpp"
 #include "entities/world.hpp"
+#include "config/path.hpp"
+#include "io/sdl2d.hpp"
 
 class sdlIO  :  public singleton<sdlIO> {
 private:

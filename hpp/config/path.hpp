@@ -9,6 +9,7 @@
 #define MODEL_DIR "models"
 #define TEX_DIR "textures"
 #define COMMON_DIR "common"
+#define FONT_DIR "fonts"
 
 #endif	
 

@@ -19,6 +19,7 @@ using namespace std;
 #include "misc/singleton.hpp"
 #include "config/config.hpp"
 #include "misc/utils.hpp"
+#include "ui/hud.hpp"
 
 #include "python/locker.hpp"
 
