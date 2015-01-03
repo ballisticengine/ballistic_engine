@@ -49,7 +49,7 @@ bool world::parseXml(string &fn) {
 	/* Geometria poziomu */
 	ptree gpt;
 	read_xml(gfn, gpt, boost::property_tree::xml_parser::trim_whitespace);
-	ptree &rooms=gpt.get_child("level");
+	ptree &rooms=gpt.get_child("level.rooms");
 
 	BOOST_FOREACH(const ptree::value_type &room, rooms) {
 
