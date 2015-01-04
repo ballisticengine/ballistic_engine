@@ -31,5 +31,5 @@ void Draw2d::text(string text) {
     offset.x = 10;
     offset.y = 10; 
     SDL_BlitSurface( message, 0, this->surf, &offset );
-    //this->surf=message;
+    this->surf=message;
 }

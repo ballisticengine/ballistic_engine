@@ -190,13 +190,13 @@ void RendererGL::drawHud() {
 }
 
 void RendererGL::drawHudImage(UiImage *img) {
-    HUD *h=HUD::getInstance();
-    UiImage *i=h->getImage("test");
-    Draw2d *d=Draw2d::getInstance();
-    d->setSurface(i->tex->getSurface());
-    d->text("test123");
-    img->tex->setSurface(d->surf);
-    this->setupTexture(img->tex);
+//    HUD *h=HUD::getInstance();
+//    UiImage *i=h->getImage("test");
+//    Draw2d *d=Draw2d::getInstance();
+//    d->setSurface(i->tex->getSurface());
+//    d->text("test123");
+//    
+//    this->setupTexture(img->tex);
     this->assignTexture(img->tex);
     
     this->renderShape2d(img->shape);

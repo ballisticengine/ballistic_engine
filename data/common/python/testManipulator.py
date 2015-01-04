@@ -48,7 +48,7 @@ class testManipulator(manipulatorClass):
         print self.hud
         img=self.hud.getImage("test")
         img2=self.hud.getImage("test2")
-        
+
         #uiHelperTest()
 
 
