@@ -3,21 +3,7 @@
         
         <resx>1366</resx>
         <resy>768</resy>
-    </tmp>
-    <screen>
-        <resx>640</resx>
-        <resy>480</resy>
-        <fullscreen>0</fullscreen>
-        <frustum_start>2</frustum_start>
-        <frustum_end>5000</frustum_end>
-        <frustum_width>20</frustum_width>
-        <frustum_height>20</frustum_height>
-        <shaders>
-
-           
-        </shaders>
-        <hud>
-            <image>
+     <image>
                 <name>test</name>
                 <texture>@car.bmp</texture>
                 <width>1</width>
@@ -33,6 +19,23 @@
                 <x>1</x>
                 <y>-1</y>
             </image>
+    </tmp>
+    <screen>
+        <resx>640</resx>
+        <resy>480</resy>
+        <fullscreen>0</fullscreen>
+        <frustum_start>2</frustum_start>
+        <frustum_end>5000</frustum_end>
+        <frustum_width>20</frustum_width>
+        <frustum_height>20</frustum_height>
+        <shaders>
+
+           <shader>
+               light
+           </shader>
+        </shaders>
+        <hud>
+           
         </hud>
     </screen>
     <game>

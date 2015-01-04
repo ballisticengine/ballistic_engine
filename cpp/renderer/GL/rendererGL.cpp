@@ -96,14 +96,14 @@ void RendererGL::lightSpecific(light *l) {
     colorRGBA c = l->getDiffuse();
     GLfloat intensity[] = {c.r, c.g, c.b, c.a};
 
-    GLfloat shin = 30;
-    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight); //??
-    glLightfv(light_numbers[light_counter], GL_AMBIENT, ambientLight);
+    GLfloat shin = 0.0001;
+    // glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight); //??
+    glLightfv(light_numbers[light_counter], GL_AMBIENT, intensity);
     glLightfv(light_numbers[light_counter], GL_DIFFUSE, intensity);
     glLightfv(light_numbers[light_counter], GL_SPECULAR, intensity);
 
     glLightfv(light_numbers[light_counter], GL_POSITION, position);
-
+//glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shin);
     GLfloat ambient[] = {1.0f, 0.0f, 0.0f};
     //glLightf(light_numbers[light_counter], GL_CONSTANT_ATTENUATION, 2);
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
@@ -179,26 +179,26 @@ void RendererGL::drawHud() {
     }
     glEnable(GL_LIGHTING);
     this->reset();
-    glTranslated(hud->mesh->c.translation.x,hud->mesh->c.translation.y,hud->mesh->c.translation.z);
-    glRotated(hud->mesh->c.rotation.x,1,0,0);
-    glRotated(hud->mesh->c.rotation.y,0,1,0);
-    glRotated(hud->mesh->c.rotation.z,0,0,1);
-    glScaled(hud->mesh->scale,hud->mesh->scale,hud->mesh->scale);
+    glTranslated(hud->mesh->c.translation.x, hud->mesh->c.translation.y, hud->mesh->c.translation.z);
+    glRotated(hud->mesh->c.rotation.x, 1, 0, 0);
+    glRotated(hud->mesh->c.rotation.y, 0, 1, 0);
+    glRotated(hud->mesh->c.rotation.z, 0, 0, 1);
+    glScaled(hud->mesh->scale, hud->mesh->scale, hud->mesh->scale);
     //this->renderFaceTexShape(hud->mesh->model);
     glEnable(GL_DEPTH_TEST);
-    
+
 }
 
 void RendererGL::drawHudImage(UiImage *img) {
-//    HUD *h=HUD::getInstance();
-//    UiImage *i=h->getImage("test");
-//    Draw2d *d=Draw2d::getInstance();
-//    d->setSurface(i->tex->getSurface());
-//    d->text("test123");
-//    
-//    this->setupTexture(img->tex);
+    //    HUD *h=HUD::getInstance();
+    //    UiImage *i=h->getImage("test");
+    //    Draw2d *d=Draw2d::getInstance();
+    //    d->setSurface(i->tex->getSurface());
+    //    d->text("test123");
+    //    
+    //    this->setupTexture(img->tex);
     this->assignTexture(img->tex);
-    
+
     this->renderShape2d(img->shape);
 }
 
@@ -237,6 +237,35 @@ void RendererGL::render() {
     glFlush();
     this->flush_callback();
 
+}
+
+void RendererGL::renderFaceTexShape(faceTexShape *s) {
+
+    size_t ** polys = (size_t **) s->faces;
+    size_t uvc = 0;
+
+    for (size_t i = 0; i < s->f_count; i++) {
+        //texPoly *t=(texPoly *)polys[i];
+
+        if (s->textures[i]) {
+            this->assignTexture(s->textures[i]);
+
+        }
+
+        //if(t->getMaterial()) {
+        //	this->assignMaterial(t->getMaterial());	
+        //}
+
+        //int count=s->getPolyCount();
+        this->beginHinted(s);
+        for (size_t n = 0; n < s->v_per_poly; n++) {
+
+
+            this->renderVertex(&s->vertices[s->faces[i][n]], &s->normals[s->faces[i][n]], &s->uvs[uvc]);
+            uvc++;
+        }
+        this->end();
+    }
 }
 
 void RendererGL::renderFaceTexShapex(faceTexShape *s) {
@@ -392,9 +421,9 @@ void RendererGL::setUpVbos() {
 
 void RendererGL::specificInit() {
     glewInit();
-    /*if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
-     cout << "Shaders in place\n";
-    }*/
+    if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
+        cout << "Shaders in place\n";
+    }
 
     glViewport(0, 0, config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
     glMatrixMode(GL_PROJECTION);
@@ -424,25 +453,26 @@ void RendererGL::specificInit() {
     gluQuadricTexture(bounding_box_q, GL_TRUE);
     // hud->addImage("@car.bmp","test",1,1,1,1);
 
-    UiMesh *mesh=new UiMesh("@gun.xml",0,0,-10);
-    mesh->scale=0.5;
-    mesh->c.translation.x=100;
-    mesh->c.translation.y=-50;
-   mesh->c.translation.z=-150; 
-   mesh->c.rotation.y=90;
-   mesh->c.rotation.x=-45;
-    hud->mesh=mesh;
+    UiMesh *mesh = new UiMesh("@gun.xml", 0, 0, -10);
+    mesh->scale = 0.5;
+    mesh->c.translation.x = 100;
+    mesh->c.translation.y = -50;
+    mesh->c.translation.z = -150;
+    mesh->c.rotation.y = 90;
+    mesh->c.rotation.x = -45;
+    hud->mesh = mesh;
     ptree & shaders = config::getInstance()->getNode("config.screen.shaders");
-    //	BOOST_FOREACH(const ptree::value_type &shad, shaders) {
-    //		string sn=shad.second.get_value<string>();
-    //		cout << "Adding shader: " << sn << endl;
-    //		addShader(sn);
-    //	}	
+
+    BOOST_FOREACH(const ptree::value_type &shad, shaders) {
+        string sn = shad.second.get_value<string>();
+        cout << "Adding shader: " << sn << endl;
+        addShader(sn);
+    }
 
     //this->setupTexture(this->w->testsprite->tex);
     //this->setUpVbos();
-    
-    
+
+
 }
 
 void RendererGL::addShader(string name) {
@@ -459,11 +489,49 @@ void RendererGL::addShader(string name) {
     delete vf;
     glCompileShaderARB(vhandle);
     glCompileShaderARB(fhandle);
+    GLint vcompiled, fcompiled, linked;
+
+
     GLhandleARB p = glCreateProgramObjectARB();
     glAttachObjectARB(p, vhandle);
     glAttachObjectARB(p, fhandle);
     glLinkProgramARB(p);
+    glGetProgramiv(p, GL_LINK_STATUS, &linked);
+    glGetObjectParameterivARB(vhandle, GL_COMPILE_STATUS, &vcompiled);
+    glGetObjectParameterivARB(vhandle, GL_COMPILE_STATUS, &fcompiled);
+    if (!vcompiled || !fcompiled || !linked) {
+        cout << "Shader " << name << vcompiled << ", " << fcompiled << "error:\n";
+        if (!vcompiled) {
+            cout << "Vertex shader error\n";
+        }
 
+        if (!fcompiled) {
+            cout << "Frament shader error\n";
+        }
+
+        if (!linked) {
+            cout << "Link error\n";
+        }
+
+        GLint blen = 0;
+        GLsizei slen = 0;
+
+        glGetShaderiv(p, GL_INFO_LOG_LENGTH, &blen);
+
+        if (blen > 1) {
+            GLchar* compiler_log = (GLchar*) malloc(blen);
+
+            glGetInfoLogARB(p, blen, &slen, compiler_log);
+            cout << "compiler_log:\n" << compiler_log;
+            free(compiler_log);
+        }
+    }
+
+    texloc = glGetUniformLocation(p, "tex");
+    
+    
+    glUniform1i(glGetUniformLocation(p, "light_count"),2);
+    glUseProgram(p);
 
     shaders.push_back(p);
 
@@ -502,6 +570,8 @@ void RendererGL::renderSkybox(skybox *sky) {
 void RendererGL::assignTexture(texture *t) {
     GLuint tex_id;
     tex_id = this->textures_ids[t];
+    glActiveTexture(GL_TEXTURE0);
+    glUniform1i(texloc, 0);
     glBindTexture(GL_TEXTURE_2D, tex_id);
 }
 

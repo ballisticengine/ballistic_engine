@@ -111,36 +111,7 @@ void renderer::renderAllRooms() {
     }
 }
 
-void renderer::renderFaceTexShape(faceTexShape *s) {
 
-
-    size_t ** polys = (size_t **) s->faces;
-    size_t uvc = 0;
-
-    for (size_t i = 0; i < s->f_count; i++) {
-        //texPoly *t=(texPoly *)polys[i];
-
-        if (s->textures[i]) {
-            this->assignTexture(s->textures[i]);
-
-        }
-
-        //if(t->getMaterial()) {
-        //	this->assignMaterial(t->getMaterial());	
-        //}
-
-        //int count=s->getPolyCount();
-        this->beginHinted(s);
-        for (size_t n = 0; n < s->v_per_poly; n++) {
-
-
-            this->renderVertex(&s->vertices[s->faces[i][n]], &s->normals[s->faces[i][n]], &s->uvs[uvc]);
-            uvc++;
-        }
-        this->end();
-    }
-
-}
 
 void renderer::setFlush(flushf flush_callback) {
     this->flush_callback = flush_callback;

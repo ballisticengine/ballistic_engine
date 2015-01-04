@@ -65,6 +65,8 @@ protected:
     shape *test;
     GLUquadricObj *lightbulb, *bounding_box_q;
     GLhandleARB light_shader_v, light_shader_f;
+    
+    GLint texloc;
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
     virtual void renderSprite(Sprite *sprite);
@@ -92,6 +94,7 @@ protected:
     //virtual void renderFaceTexShape(faceTexShape *s);
     void setUpVbos();
     void setUpVbo(shape *s);
+     void renderFaceTexShape(faceTexShape *s);
     void renderFaceTexShapex(faceTexShape *s);
 public:
     RendererGL();

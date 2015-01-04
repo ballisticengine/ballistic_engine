@@ -35,7 +35,7 @@ protected:
     world *w;
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
-    virtual void renderFaceTexShape(faceTexShape *s);
+    virtual void renderFaceTexShape(faceTexShape *s)=0;
     virtual void renderVertex(v_type *v, n_type *normal, uv *uvs) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
     virtual void renderSprite(Sprite *sprite) = 0;
