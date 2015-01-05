@@ -47,7 +47,10 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
      */
     
     for (size_t i = 0; i < boundings.size(); i++) {
-        bool col = hitTest(boundings[i], bound, offset.translation);
+        bound_current = offsetBounding(bound, offset);
+        bool col = roomHitTest(boundings[i], &bound_current, offset.translation);
+        
+       
         if (col) {
             //cout << ent->name << ent->last_bound << endl;
             in_bounding = boundings[i];
@@ -80,11 +83,17 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
                     oy = abs(yAxis - halfh)
                     ;
 
+//            static int i=0;
+//            cout << "hit"<<i<<endl;
+//            i++;
             if (bound_current.min.y >= bound->min.y) {
                 ctmp.y = COLLISION_BACK;
+               // cout << "A";
             }
-            else if (bound_current.max.y <= bound->max.y) {
+            else if (bound_current.min.y <= bound->max.y+bound->height) {
+                //cout << bound_current.min.y << ", " << bound->min.y << ", " << bound_current.max.y << ", " << bound->max.y << endl;
                 ctmp.y = -COLLISION_BACK;
+              //  cout << "B";
             }
             if (ox > oz) {
                 e_loc dif = am.z - bm.z;

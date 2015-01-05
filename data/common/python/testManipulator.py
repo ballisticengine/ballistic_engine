@@ -10,7 +10,8 @@ class testManipulator(manipulatorClass):
 
 
     def onEntityMovement(self,entity):
-        print entity.name,"is moving"
+        #print entity.name,"is moving"
+        pass
 
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
@@ -24,30 +25,33 @@ class testManipulator(manipulatorClass):
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):
-        print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
+        #print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
         #cvec.write()
         self.wccount+=1
         if entity.type=="object":
-            entity.velocity.t.x=-entity.velocity.t.x
-            entity.velocity.t.y=-entity.velocity.t.y
-            entity.velocity.t.z=-entity.velocity.t.z
+            #return
+            #entity.velocity.t.x=-entity.velocity.t.x
+            #entity.velocity.t.y=-entity.velocity.t.y
+            #entity.velocity.t.z=-entity.velocity.t.z
 
             if cvec.y!=0:
-                entity.translate3(0,-cvec.y*100000,0)
+                #entity.translate3(0,-cvec.y*100000,0)
+                pass
             else:
                 entity.translate3(-cvec.z*100,0,-cvec.x*100)
         elif entity.type=="observer":
 
-            entity.translate3(cvec.z,0,cvec.x)
+            entity.translate3(cvec.z,cvec.y,cvec.x)
 
 
 
 
 
     def onSelfLoad(self):
-        print self.hud
-        img=self.hud.getImage("test")
-        img2=self.hud.getImage("test2")
+        objects=self.world.active_room.models
+        for o in objects:
+            o.acceleration.t.y=-9.2
+            pass
 
         #uiHelperTest()
 

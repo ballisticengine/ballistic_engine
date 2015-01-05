@@ -67,7 +67,7 @@ protected:
     GLUquadricObj *lightbulb, *bounding_box_q;
     GLhandleARB light_shader_v, light_shader_f;
     
-    GLint texloc,use_light_glsl;
+    GLint texloc,use_light_glsl,light_set;
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
     virtual void renderSprite(Sprite *sprite);

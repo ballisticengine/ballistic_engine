@@ -220,3 +220,23 @@ bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
 	return collide;
 }
 
+bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
+	MathTypes::vector amax,amin,bmax,bmin;
+	amax=a->max+offset;
+	amin=a->min+offset;
+	bmax=b->max+offset;
+	bmin=b->min+offset;
+	
+	//offset.write();
+
+	bool collide=(
+		amax.x > bmin.x && 
+		 amin.x < bmax.x &&
+		amax.y > bmax.y &&
+		 amin.y < bmin.y &&
+		 amax.z > bmin.z &&
+		amin.z < bmax.z
+		);
+	return collide;
+}
+

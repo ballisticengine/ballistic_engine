@@ -529,8 +529,8 @@ void RendererGL::addShader(string name) {
     glUseProgram(p);
     texloc = glGetUniformLocation(p, "tex");
     use_light_glsl=glGetUniformLocation(p,"use_light");
-    
-    glUniform1i(use_light_glsl,1);
+    light_set=1;
+    glUniform1i(use_light_glsl,light_set);
   
     glUniform1i(glGetUniformLocation(p, "light_count"),7); //!!
    
@@ -568,7 +568,7 @@ void RendererGL::renderSkybox(skybox *sky) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glFrontFace(GL_CW);
-    glUniform1i(use_light_glsl,1);
+    glUniform1i(use_light_glsl,light_set);
 }
 
 void RendererGL::assignTexture(texture *t) {

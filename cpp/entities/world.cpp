@@ -284,7 +284,9 @@ void world::moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision)
 		if(cvec.y) {
 			c.translation.y=cvec.y;
 		}*/
-                
+//                if(cvec.y) {
+//                    cvec.write();
+//		}
 		if(cvec.x || cvec.y || cvec.z) {
                     //c.translation.write();
                     lc=true;
