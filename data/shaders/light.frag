@@ -4,11 +4,18 @@ varying vec3 v;
 varying vec2 vTexCoord;    
 varying in vec2 uv;
 uniform int light_count;
+uniform int use_light;
+
 void main (void)  
 {  
-   vec4 amb,diff,spec; 
+  
+    if(use_light==0) {
+        gl_FragColor =   texture2D(tex, gl_TexCoord[0].st); 
+        return;
+     }
+ vec4 amb,diff,spec; 
    
-for(int i=0; i<2; i++) {
+for(int i=0; i<light_count; i++) {
    
 float dist=distance(v, gl_LightSource[i].position.xyz)   ; 
 vec3 L = normalize(gl_LightSource[i].position.xyz - v);   

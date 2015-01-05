@@ -58,6 +58,7 @@ protected:
     int light_counter;
     char * loadText(string fn);
     shader_list shaders;
+    
     void addShader(string name);
     map<texture *, GLuint> textures_ids;
     virtual void renderVertex(v_type *v, n_type *normal, uv *uvs);
@@ -66,7 +67,7 @@ protected:
     GLUquadricObj *lightbulb, *bounding_box_q;
     GLhandleARB light_shader_v, light_shader_f;
     
-    GLint texloc;
+    GLint texloc,use_light_glsl;
     virtual void specificInit();
     virtual void renderSkybox(skybox *sky);
     virtual void renderSprite(Sprite *sprite);
@@ -87,7 +88,6 @@ protected:
     virtual void drawHud();
     virtual void drawHudImage(UiImage *img);
     virtual void resetSpecific();
-
     virtual void drawBox(e_loc width, e_loc height, e_loc depth);
 
     virtual void renderTerrainSpecific();

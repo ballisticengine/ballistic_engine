@@ -526,12 +526,14 @@ void RendererGL::addShader(string name) {
             free(compiler_log);
         }
     }
-
-    texloc = glGetUniformLocation(p, "tex");
-    
-    
-    glUniform1i(glGetUniformLocation(p, "light_count"),2);
     glUseProgram(p);
+    texloc = glGetUniformLocation(p, "tex");
+    use_light_glsl=glGetUniformLocation(p,"use_light");
+    
+    glUniform1i(use_light_glsl,1);
+  
+    glUniform1i(glGetUniformLocation(p, "light_count"),7); //!!
+   
 
     shaders.push_back(p);
 
@@ -556,6 +558,7 @@ void RendererGL::renderSkybox(skybox *sky) {
     glFrontFace(GL_CCW);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
+    glUniform1i(use_light_glsl,0);
     this->translate(0, 0, -18);
     this->assignTexture(sky->getTexture());
     glBegin(GL_QUADS);
@@ -565,6 +568,7 @@ void RendererGL::renderSkybox(skybox *sky) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glFrontFace(GL_CW);
+    glUniform1i(use_light_glsl,1);
 }
 
 void RendererGL::assignTexture(texture *t) {

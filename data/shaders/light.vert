@@ -2,6 +2,8 @@ varying vec3 N;
 varying vec3 v;
 varying out vec2 uv;
 attribute vec4 gl_MultiTexCoord0;
+
+
 void main(void)
 {
 
