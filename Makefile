@@ -2,7 +2,7 @@ CFLAGS=-Ihpp/ -I/usr/include/python2.7 -lstdc++  -lSDL2 -lSDL2_ttf -lGL -lGLU -l
 OUTPUT=ballistic 
 
 
-$(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
+$(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
 	   sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
 	   engine.o sprite.o loaderMD2.o \
 	   config.o engineState.o loaderXML.o \
@@ -15,6 +15,8 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
 
+lightormaterial.o: cpp/types/lightOrMaterial.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 shape.o: cpp/types/shape.cpp
 	g++ $(CFLAGS) -c $^ -o $@
