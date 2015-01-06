@@ -102,7 +102,7 @@ void ObserverEntity::face(e_loc x,e_loc y,e_loc z) {
 
 camera * ObserverEntity::getCamera() {
  
- cam->locate(x,y+headbob_add,z);
+ cam->locate(x,y-bounding_box->height/2,z);
  //cam->face(rx,ry,rz);
  
  return this->cam;
@@ -111,7 +111,7 @@ camera * ObserverEntity::getCamera() {
 
 
 ObserverEntity::ObserverEntity() {
-	this->bounding_box=new BoundingCube(7,7,7);
+	this->bounding_box=new BoundingCube(7,30,7);
 	headbob_i=0;
 	bob_timer.getDiffR();
 	this->cam=cam;

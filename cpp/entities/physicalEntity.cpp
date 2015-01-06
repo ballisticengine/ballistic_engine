@@ -1,7 +1,7 @@
 #include "entities/physicalEntity.hpp"
 
 void TrRot::reset() {
-    t.x = t.y = t.z = r.x = r.y = r.z = 0;
+    t.x =  t.z = r.x = r.y = r.z = 0; //t.y =
 }
 
 TrRot::TrRot() {

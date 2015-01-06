@@ -44,8 +44,12 @@ class testManipulator(manipulatorClass):
             else:
                 entity.translate3(-cvec.z*100,0,-cvec.x*100)
         elif entity.type=="observer":
+            entity.acceleration.t.y=0
+            if cvec.y:
+                entity.translate3(0,cvec.y,0)
+            else:
+                entity.translate3(cvec.z,0,cvec.x)
 
-            entity.translate3(cvec.z,cvec.y,cvec.x)
 
 
 
@@ -53,9 +57,15 @@ class testManipulator(manipulatorClass):
 
     def onSelfLoad(self):
         objects=self.world.active_room.models
+        observer=self.world.observer
+        observer.acceleration.t.y=92
+        print observer
         for o in objects:
             if not o.no_physics:
                 o.acceleration.t.y=-9.2
+            if o.name=="Table1":
+                print "table1 found"
+                #o.face()
 
 
         #uiHelperTest()
