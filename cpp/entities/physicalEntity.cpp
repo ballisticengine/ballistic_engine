@@ -62,4 +62,5 @@ void PhysicalEntity::printVelocity() {
 PhysicalEntity::PhysicalEntity() {
     this->velocity.reset();
     this->acceleration.reset();
+    this->no_physics=false;
 }

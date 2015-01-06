@@ -23,7 +23,7 @@ public:
 	coords nextCoords(time_int diff);
 	void changeVelocity(TrRot velocity);
 	void setVelocity(TrRot velocity);
-       
+        bool no_physics;
 	//void resetT();
 	TrRot getVelocity();
 	void printVelocity();

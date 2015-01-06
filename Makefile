@@ -3,7 +3,7 @@ OUTPUT=ballistic
 
 
 $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
-	   sdl2d.o renderer.o rendererGL.o texture.o world.o skybox.o \
+	   sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
 	   engine.o sprite.o loaderMD2.o \
 	   config.o engineState.o loaderXML.o \
 	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o facetexShape.o \
@@ -95,7 +95,10 @@ engine.o: cpp/engine.cpp
 skybox.o: cpp/types/skybox.cpp 
 	g++ $(CFLAGS) -c $^  -o $@
 
-world.o: cpp/entities/world.cpp 
+world.o: cpp/world/world.cpp 
+	g++ $(CFLAGS) -c $^  -o $@
+	
+worldLoad.o: cpp/world/worldLoad.cpp
 	g++ $(CFLAGS) -c $^  -o $@
 	
 entity.o: cpp/entities/entity.cpp types.o
