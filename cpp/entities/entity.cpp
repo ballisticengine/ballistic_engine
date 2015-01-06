@@ -156,17 +156,44 @@ MathTypes::vector entity::collides(entity *ent,coords offset)
 	
         
 	if(ox>oz) {
-	 res.x=(bm.z-am.z); 
+	  e_loc dif = am.z - bm.z;
+            res.x=(bm.z-am.z); 
+            if(dif) {
+                if (dif > 0) {
+                    res.x = -COLLISION_BACK;
+                } else {
+                    res.x = COLLISION_BACK;
+                }
+            }
 	}
 
 	
 	
 	if(oz>ox) {
-	 res.z=(bm.x-am.x);
+	  e_loc dif = am.x - bm.x;
+            
+          res.z=(bm.x-am.x);
+           if (dif > 0) {
+                    res.z = -COLLISION_BACK;
+                } else {
+                    res.z = COLLISION_BACK;
+                }
 	}
 	
+//        if(b->min.y<a->min.y) {
+//            res.y=COLLISION_BACK;
+//        } else if ( b->max.y>a->max.y) {
+//            res.y=-COLLISION_BACK;
+//        }
+        
 	if(b->min.y<a->min.y || b->max.y>a->max.y) { 
-	 res.y=(am.y-bm.y);
+//	 res.y=(am.y-bm.y);
+             e_loc dif = am.y - bm.y;
+            if (dif > 0) {
+                    res.y = COLLISION_BACK;
+                } else {
+                    res.y = -COLLISION_BACK;
+                }
 	}
 	
 	return res;

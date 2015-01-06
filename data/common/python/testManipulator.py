@@ -20,8 +20,9 @@ class testManipulator(manipulatorClass):
         #entityb.velocity.t.y=-entitya.velocity.t.y
         #entityb.velocity.t.z=-entitya.velocity.t.z
         if entitya.type=="observer":
+            cvec.write()
+            entitya.translate3(cvec.z,-cvec.y,cvec.x)
 
-            pass
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):
@@ -50,7 +51,7 @@ class testManipulator(manipulatorClass):
     def onSelfLoad(self):
         objects=self.world.active_room.models
         for o in objects:
-            o.acceleration.t.y=-9.2
+            o.acceleration.t.y=-90.2
             pass
 
         #uiHelperTest()
