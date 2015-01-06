@@ -168,6 +168,11 @@ void world::moveEntities() {
 		this->moveEntity((PhysicalEntity *)e,lt,false);
 	}
 
+        if(observer.stateChanged()) {
+            
+           PyScripting::getInstance()->broadcast("ObserverStateChange",observer.getState());
+        }
+        
 	this->moveEntity((PhysicalEntity *)&this->observer,lt,false);
 }
 

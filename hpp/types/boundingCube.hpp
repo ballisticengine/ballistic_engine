@@ -2,8 +2,10 @@
 #define BOUNDING_CUBE_H
 
 #include "types/types.hpp"
+
 #include "types/mathTypes.hpp"
-#include "vector"
+#include "types/shape.hpp"
+#include <vector>
 
 
 class BoundingCube {

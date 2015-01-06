@@ -1,10 +1,10 @@
 #include "entities/ObjectEntity.hpp"
 
-faceTexShape * ObjectEntity::getModel() {
+shape * ObjectEntity::getModel() {
 	return model;  
 }
 
-void ObjectEntity::setModel(faceTexShape *model) {
+void ObjectEntity::setModel(shape *model) {
 	this->model=model;
 }
 

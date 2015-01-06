@@ -239,7 +239,7 @@ void RendererGL::render() {
 
 }
 
-void RendererGL::renderFaceTexShape(faceTexShape *s) {
+void RendererGL::renderFaceTexShape(shape *s) {
 
     size_t ** polys = (size_t **) s->faces;
     size_t uvc = 0;
@@ -268,7 +268,7 @@ void RendererGL::renderFaceTexShape(faceTexShape *s) {
     }
 }
 
-void RendererGL::renderFaceTexShapex(faceTexShape *s) {
+void RendererGL::renderFaceTexShapex(shape *s) {
 
 
 

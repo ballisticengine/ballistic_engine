@@ -30,9 +30,12 @@ class manipulatorClass(object):
     """
     Rozwiazac jakos kilka klawiszy na raz. np argument cycles liczacy czy to ten sam cykl io
     """
-    def onMovementKey(self,type):
+    def onMovementKey(self):
         pass
 
+
+    def onObserverStateChange(self,state):
+        pass
 
     def onMouseMove(self):
         pass

@@ -101,7 +101,7 @@ void renderer::renderAllRooms() {
         this->reset();
         this->positionCamera();
         this->locate(rc.translation.x,rc.translation.y,rc.translation.z);
-        this->renderFaceTexShape((faceTexShape *) rooms[i]->getModel());
+        this->renderFaceTexShape((shape *) rooms[i]->getModel());
         if (state->debug_visual) {
             size_t boundings_size = rooms[i]->boundings.size();
             for (size_t n = 0; n < boundings_size; n++) {

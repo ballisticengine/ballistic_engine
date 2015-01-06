@@ -10,7 +10,7 @@ ModelAnimator * shapeFactory::getAnimator() {
 
 void * shapeFactory::actualLoad(string fn) {
   string ext=factory::getExt(fn);
-  faceTexShape *s=new faceTexShape();
+  shape *s=new shape();
   if(ext==MD2_EXT) {
   loaderMD2 *loader=loaderMD2::getInstance();
   
@@ -50,7 +50,7 @@ string shapeFactory::getSubDir() {
 }
 
 
-faceTexShape * shapeFactory::getXML(ptree shp) {
+shape * shapeFactory::getXML(ptree shp) {
 	loaderXML *loader=loaderXML::getInstance();
 	
 	string name=loader->getName(shp);
@@ -58,7 +58,7 @@ faceTexShape * shapeFactory::getXML(ptree shp) {
 	this->shp=&shp;
 	name=name+"."+GEOM_MEM_EXT;
 	
-	faceTexShape *s=(faceTexShape *)this->get(name);
+	shape *s=(shape *)this->get(name);
 	
 	return s;
 }

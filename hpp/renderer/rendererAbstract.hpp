@@ -7,10 +7,10 @@ using namespace std;
 
 #include "misc/singleton.hpp"
 #include "types/types.hpp"
-#include "types/facetexShape.hpp"
+#include "types/shape.hpp"
 #include "types/texture.hpp"
 #include "types/skybox.hpp"
-#include "entities/world.hpp" //TODO: przenie�� logik� do world
+#include "entities/world.hpp" 
 #include "config/config.hpp"
 #include "factories/textureFactory.hpp"
 #include "entities/camera.hpp"
@@ -35,7 +35,7 @@ protected:
     world *w;
     virtual void renderShape(shape *s);
     virtual void renderPShape(shape *s);
-    virtual void renderFaceTexShape(faceTexShape *s)=0;
+    virtual void renderFaceTexShape(shape *s)=0;
     virtual void renderVertex(v_type *v, n_type *normal, uv *uvs) = 0;
     virtual void renderSkybox(skybox *sky) = 0;
     virtual void renderSprite(Sprite *sprite) = 0;

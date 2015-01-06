@@ -31,6 +31,7 @@ e_loc deg2rad(e_loc deg);
 
 
 class sdlControls : public singleton<sdlControls> {
+    size_t anykey(const Uint8 *state,int ksize);
 public:
 	void operator()();
 };

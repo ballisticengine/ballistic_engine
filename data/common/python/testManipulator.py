@@ -4,14 +4,17 @@ class testManipulator(manipulatorClass):
     def __init__(self):
         self.ccount=0
         self.wccount=0
+        self.kcount=0
 
     """"""
 
 
 
     def onEntityMovement(self,entity):
-        #print entity.name,"is moving"
-        pass
+        print entity.name,"is moving"
+        if entity.type=="observer":
+            entity.bobHead()
+        
 
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
@@ -75,6 +78,11 @@ class testManipulator(manipulatorClass):
         pass
 
 
-    def onMovementKey(self,type):
-        print type
+    def onObserverStateChange(self,state):
+        print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        self.kcount+=1
+        #self.world.observer.velocity.reset()
+        #if state.movement.forward:
+        #   self.world.observer.velocity.t.z=-10
+
 

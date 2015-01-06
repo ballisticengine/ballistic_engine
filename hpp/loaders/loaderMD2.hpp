@@ -15,6 +15,7 @@
 using namespace std;
 
 #include "types/types.hpp"
+#include "types/shape.hpp"
 #include "loaders/md2struct.hpp"
 #include "misc/singleton.hpp"
 

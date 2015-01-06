@@ -6,15 +6,18 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o \
 	   sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
 	   engine.o sprite.o loaderMD2.o \
 	   config.o engineState.o loaderXML.o \
-	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o facetexShape.o \
+	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o \
 	   world_defs.o hud_defs.o pylocker.o manipulator.o pyscripting.o \
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
-	   types.o shape2d.o boundingCube.o \
+	   types.o shape2d.o shape.o boundingCube.o \
 	   timer.o image.o hud.o uimesh.o
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
 
+
+shape.o: cpp/types/shape.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 sdl2d.o: cpp/io/sdl2d.cpp
 	g++ $(CFLAGS) -c $^ -o $@
@@ -78,8 +81,7 @@ modelAnimator.o: cpp/anim/modelAnimator.cpp
 pointlight.o: cpp/entities/pointlight.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-facetexShape.o: cpp/types/facetexShape.cpp
-	g++ $(CFLAGS) -c $^ -o $@
+
 	
 shape2d.o: cpp/types/shape2d.cpp
 	g++ $(CFLAGS) -c $^ -o $@

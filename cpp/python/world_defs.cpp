@@ -55,8 +55,34 @@ BOOST_PYTHON_MODULE(world)
 		.def_readwrite("model",&ObjectEntity::model)
 		;
 
+        
+        
+        bp::class_<ObserverMovement,ObserverMovement *>("ObserverMovement")
+        .def_readwrite("forward",&ObserverMovement::forward)
+        .def_readwrite("left",&ObserverMovement::left)
+        .def_readwrite("right",&ObserverMovement::right)
+        .def_readwrite("back",&ObserverMovement::back)
+        .def_readwrite("up",&ObserverMovement::up)
+        .def_readwrite("down",&ObserverMovement::down)
+        ;
+        
+        bp::class_<ObserverMouse,ObserverMouse *>("ObserverMouse")
+         .def_readwrite("left",&ObserverMouse::left)
+         .def_readwrite("right",&ObserverMouse::right)
+         .def_readwrite("middle",&ObserverMouse::middle)
+        
+        ;
+        
+        
+        bp::class_<ObserverState,ObserverState *>("ObserverState")
+        .def_readwrite("movement",&ObserverState::movement)
+        .def_readwrite("mouse",&ObserverState::mouse)
+        ;
+        
         bp::class_<ObserverEntity,ObserverEntity*,bp::bases<PhysicalEntity> >("ObserverEntity")
             .def("bobHead",&ObserverEntity::bobHead)
+         //   .def("getState",&ObserverEntity::getState)
+        //    .def("setState",&ObserverEntity::setState)
         ;
         
 	bp::class_<obj_list>("obj_list")

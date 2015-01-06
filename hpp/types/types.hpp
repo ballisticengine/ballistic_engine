@@ -12,6 +12,7 @@
 #include "types/mathTypes.hpp"
 #include "types/texture.hpp"
 
+
 using namespace std;
 
 
@@ -53,34 +54,7 @@ struct frame {
 	v_type *verts;
 };
 
-class ShapeAbstract {
-public:
-	
-	MathTypes::BasicVector *vertices,*normals;
-	uv *uvs;
-	unsigned int **faces;
-	size_t v_count,uv_count,f_count,v_per_poly;
-	virtual ~ShapeAbstract();
-};
 
-
-class shape : public ShapeAbstract {
-
-public:
-    shape();
-	texture **textures;
-	
-	size_t frame_count;
-	frame *frames;
-	e_loc *frame_times;
-	void *renderer_hint;
-	
-	virtual void calculateNormals();
-    
-     ~shape();
-};
-
-typedef vector<shape *> shape_list;
 
 #endif	/* TYPES_HPP */
 

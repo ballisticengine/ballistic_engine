@@ -6,7 +6,7 @@
 #include "types/texture.hpp"
 #include "types/types.hpp" 
 #include "types/material.hpp"
-#include "types/facetexShape.hpp"
+#include "types/shape.hpp"
 #include "types/boundingCube.hpp"
 
 
@@ -17,10 +17,10 @@ protected:
 	
 	Material *mat;
 public:
-	virtual faceTexShape * getModel();
+	virtual shape * getModel();
 	
-	faceTexShape *model;
-	virtual void setModel(faceTexShape *model);
+	shape *model;
+	virtual void setModel(shape *model);
 	
 	virtual Material *getMaterial();
 	virtual void setMaterial(Material *mat);

@@ -1,5 +1,35 @@
 #include "entities/observerEntity.hpp"
 
+
+
+bool ObserverMovement::operator==(const ObserverMovement &m) {
+    
+    if(m.forward==forward && m.back==back && m.left==left && m.right==right && m.up==up && m.down==down) { //
+        return true;
+    }
+    return false;
+}
+
+ void ObserverMovement::reset() {
+     forward=back=left=right=up=down=false;
+ }
+
+bool  ObserverMouse::operator==(const ObserverMouse &m) {
+    if (m.left==left && m.right==right && m.middle==middle) {
+        return true;
+    }
+    return false;
+}
+
+bool ObserverState::operator==(const ObserverState &s) {
+    if (movement==s.movement) {
+        return true;
+    } 
+    return false;
+}
+///////////
+
+
 void ObserverEntity::setCamera(camera *c) {
 	this->cam=c;
 	
@@ -45,14 +75,14 @@ void ObserverEntity::locate(e_loc x,e_loc y,e_loc z) {
 }
 
 void ObserverEntity::bobHead() {
-	//if(bob_timer.getDiffR()==0.0) {
-	// cout <<bob_timer.getDiffR() << endl;
-		//return;
-	//}
+//	if(bob_timer.getDiffR()==0.0) {
+//	 cout <<bob_timer.getDiffR() << endl;
+//		return;
+//	}
 	
- 
- headbob_i+=8*bob_timer.getDiffR();
- headbob_add=sin(headbob_i)*2;
+    
+// headbob_i+=80*bob_timer.getDiffR();
+// headbob_add=sin(headbob_i)*2;
  
 }
 
@@ -72,7 +102,7 @@ void ObserverEntity::face(e_loc x,e_loc y,e_loc z) {
 
 camera * ObserverEntity::getCamera() {
  
- //cam->locate(x,y+headbob_add,z);
+ cam->locate(x,y+headbob_add,z);
  //cam->face(rx,ry,rz);
  
  return this->cam;
@@ -89,4 +119,32 @@ ObserverEntity::ObserverEntity() {
 
 ObserverEntity::~ObserverEntity() {
 	//delete this->cam;
+}
+
+ObserverState * ObserverEntity::getState() {
+    //this->state_changed=false;
+    
+    
+    return &this->state;
+}
+
+void ObserverEntity::setState(ObserverState * state) {
+   
+    
+   
+    this->state=*state;
+
+}
+
+bool ObserverEntity::stateChanged() {
+    bool c=this->state_changed;
+    this->state_changed=false;
+    return c;
+    
+    
+    
+}
+
+void ObserverEntity::refreshState() {
+    this->state_changed=true;
 }

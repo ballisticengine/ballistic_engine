@@ -7,6 +7,7 @@ using namespace std;
 
 #include "anim/animator.hpp"
 #include "types/types.hpp"
+#include "types/shape.hpp"
 #include "time/timer.hpp"
 
 struct ShapeState {

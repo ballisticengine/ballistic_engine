@@ -43,7 +43,7 @@ bool world::parseXml(string &fn) {
 
 	BOOST_FOREACH(const ptree::value_type &room, rooms) {
 
-		faceTexShape *fs=shapef->getXML((ptree)room.second);
+		shape *fs=shapef->getXML((ptree)room.second);
 		
 		roomEntity *roomE=new roomEntity();
 		shapef->setAnimator(&roomE->model_animator);
@@ -79,7 +79,7 @@ bool world::parseXml(string &fn) {
 				e_loc sc=entobj.second.get<e_loc>("scale");
 				bool physics=entobj.second.get<bool>("physics");
                                 shapef->setScale(sc);
-				faceTexShape *shp=(faceTexShape *)shapef->get(entobj.second.get<string>("model"));
+				shape *shp=(shape *)shapef->get(entobj.second.get<string>("model"));
 				texture *tex=(texture *)texf->get(tfn);
 				Material *mat=new Material();
 				ObjectEntity *oe=new ObjectEntity();

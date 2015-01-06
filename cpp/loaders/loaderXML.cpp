@@ -1,6 +1,6 @@
 #include "loaders/loaderXML.hpp"
 
-bool loaderXML::load(string fn, faceTexShape *s,bool force_common) {
+bool loaderXML::load(string fn, shape *s,bool force_common) {
     this->force_common=force_common;
 	ptree pt;
 	read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
@@ -10,7 +10,7 @@ bool loaderXML::load(string fn, faceTexShape *s,bool force_common) {
 	return true;
 }
 
-void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
+void loaderXML::toShape(ptree &geom,ptree &shape_xml,shape *s) {
 
 	ptree 
 		verts=geom.get_child("vertices"),
@@ -27,7 +27,7 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 	
 	string type;
 	try {
-	type=shape.get<string>("type");
+	type=shape_xml.get<string>("type");
 	}catch(std::exception e) {
 				type="level";
 			} 
@@ -41,6 +41,7 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 	s->faces=new unsigned int*[f_count];
 	s->uvs=new uv[uv_count];
 	s->textures=new texture*[f_count];
+       // s->materials=new Material*[f_count];
 	s->frame_count=0;
 	int i;
 	
@@ -85,6 +86,14 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 				s->textures[i]=0;
 				
 			} 
+                
+                try {
+                ptree material=face.second.get_child("material");
+                cout << "mat" << endl;
+                } catch(std::exception e) {
+                    
+                }
+                
 		n=0;
 		BOOST_FOREACH(const ptree::value_type &f_vx,f_verts) {
 			size_t index=f_vx.second.get<size_t>("i");
@@ -100,8 +109,8 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 	}
 	
 	if(type=="animation") {
-		ptree frames=shape.get_child("frames");
-		size_t frame_count=shape.get<size_t>("frame_count");
+		ptree frames=shape_xml.get_child("frames");
+		size_t frame_count=shape_xml.get<size_t>("frame_count");
 		s->frame_count=frame_count;
 		s->frames=new frame[frame_count];
 		s->frame_times=new e_loc[frame_count];
@@ -133,7 +142,7 @@ void loaderXML::toShape(ptree &geom,ptree &shape,faceTexShape *s) {
 
 }
 
-string loaderXML::loadXML(ptree &tree,faceTexShape *s) {
+string loaderXML::loadXML(ptree &tree,shape *s) {
 	ptree & geom=tree.get_child("shape.geom"),
 		&shape=tree.get_child("shape")
 		;

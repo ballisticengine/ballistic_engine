@@ -94,8 +94,8 @@ protected:
     //virtual void renderFaceTexShape(faceTexShape *s);
     void setUpVbos();
     void setUpVbo(shape *s);
-     void renderFaceTexShape(faceTexShape *s);
-    void renderFaceTexShapex(faceTexShape *s);
+     void renderFaceTexShape(shape *s);
+    void renderFaceTexShapex(shape *s);
 public:
     RendererGL();
     virtual void setupTexture(texture *t);

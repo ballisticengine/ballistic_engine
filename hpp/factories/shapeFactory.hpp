@@ -10,7 +10,7 @@ using namespace boost::property_tree;
 
 #include "factories/factory.hpp"
 #include "types/types.hpp"
-#include "types/facetexShape.hpp"
+#include "types/shape.hpp"
 #include "loaders/loaderMD2.hpp"
 #include "loaders/loaderXML.hpp"
 #include "anim/animator.hpp"
@@ -37,7 +37,7 @@ public:
 	virtual void setAnimator(ModelAnimator *a);
 	virtual ModelAnimator * getAnimator();
 	virtual void setScale(e_loc scale);
-	virtual faceTexShape * getXML(ptree shp);
+	virtual shape * getXML(ptree shp);
 	shapeFactory();
 	 
 };

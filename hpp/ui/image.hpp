@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include "types/types.hpp"
+#include "types/shape.hpp"
 #include "types/shape2d.hpp"
 #include "types/texture.hpp"
 #include "entities/texturable.hpp"

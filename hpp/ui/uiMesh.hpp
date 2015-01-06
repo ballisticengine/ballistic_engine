@@ -3,7 +3,7 @@
 
 #include <string>
 #include "types/types.hpp"
-#include "types/facetexShape.hpp"
+
 #include "types/texture.hpp"
 #include "entities/texturable.hpp"
 #include "factories/shapeFactory.hpp"
@@ -14,7 +14,7 @@ using namespace std;
 class UiMesh  {
    
 public:
-    faceTexShape *model;
+    shape *model;
     coords c;
     e_loc scale;
     UiMesh(string model,e_loc x,e_loc y,e_loc z);
