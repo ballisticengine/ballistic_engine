@@ -7,13 +7,17 @@
 
 #include <boost/python.hpp>
 #include "misc/singleton.hpp"
+#include <iostream>
+#include <map>
+using namespace std;
 
-
-class PyLocker : public singleton<PyLocker>{
-	 PyGILState_STATE state;
+class PyLocker : public singleton<PyLocker> {
+    PyGILState_STATE state;
+   
 public:
-	void lock();
-	void unlock();
+    PyLocker();
+    void lock();
+    void unlock();
 };
 
 #endif	/* LOCKER_HPP */

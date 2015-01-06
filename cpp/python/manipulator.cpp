@@ -49,7 +49,12 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		roomEntity *r=(roomEntity *)paramB;
                 MathTypes::vector cvec=*(MathTypes::vector *)paramC;
 		f(boost::ref(*a),boost::ref(*r),boost::ref(cvec));
-	} else {
+	} else if(name=="MovementKey") {
+            const int k_type=*((int *)paramA);
+            f(1);
+        } 
+        
+        else {
 		f();
 	}
 

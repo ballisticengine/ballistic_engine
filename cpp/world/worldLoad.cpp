@@ -77,13 +77,15 @@ bool world::parseXml(string &fn) {
 				string mfn=wd+DS+MODEL_DIR+DS+entobj.second.get<string>("model"),
 					tfn=entobj.second.get<string>("texture");
 				e_loc sc=entobj.second.get<e_loc>("scale");
-				shapef->setScale(sc);
+				bool physics=entobj.second.get<bool>("physics");
+                                shapef->setScale(sc);
 				faceTexShape *shp=(faceTexShape *)shapef->get(entobj.second.get<string>("model"));
 				texture *tex=(texture *)texf->get(tfn);
 				Material *mat=new Material();
 				ObjectEntity *oe=new ObjectEntity();
 				shp->calculateNormals(); 
-				oe->setModel(shp);
+				oe->no_physics=!physics;
+                                oe->setModel(shp);
 				oe->setMaterial(mat);
 				oe->setTexture(tex);
 				oe->locate(x,y,z);

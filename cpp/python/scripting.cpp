@@ -29,6 +29,7 @@ PyScripting::PyScripting() {
 	PyEval_InitThreads(); 
 	init_world();
         init_hud();
+       
 }
 
 PyScripting::~PyScripting() {
@@ -37,8 +38,12 @@ PyScripting::~PyScripting() {
 
 
 void PyScripting::broadcast(string name,void *paramA,void *paramB,void* paramC,void* paramD) {
-	for(int i=0; i<manipulators.size(); i++) {
+    
+    
+    
+    for(int i=0; i<manipulators.size(); i++) {
 		manipulators[i]->signal(name,paramA,paramB,paramC,paramD);
 	}
+
 }
 

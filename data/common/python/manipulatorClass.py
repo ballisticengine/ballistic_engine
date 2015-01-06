@@ -27,11 +27,15 @@ class manipulatorClass(object):
         pass
 
 
-    def onKeyDown(self):
+    """
+    Rozwiazac jakos kilka klawiszy na raz. np argument cycles liczacy czy to ten sam cykl io
+    """
+    def onMovementKey(self,type):
         pass
+
 
     def onMouseMove(self):
         pass
 
-    def onMouseClick(self):
+    def onMouseClick(self,button):
         pass

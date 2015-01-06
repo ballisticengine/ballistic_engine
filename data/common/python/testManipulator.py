@@ -51,8 +51,9 @@ class testManipulator(manipulatorClass):
     def onSelfLoad(self):
         objects=self.world.active_room.models
         for o in objects:
-            o.acceleration.t.y=-90.2
-            pass
+            if not o.no_physics:
+                o.acceleration.t.y=-9.2
+
 
         #uiHelperTest()
 
@@ -72,4 +73,8 @@ class testManipulator(manipulatorClass):
 
     def onMouseClick(self):
         pass
+
+
+    def onMovementKey(self,type):
+        print type
 

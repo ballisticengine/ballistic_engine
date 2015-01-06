@@ -15,6 +15,7 @@ void sdlControls::operator()() {
 	int x,y,winw=config::getInstance()->getVD()->width/2,winh=config::getInstance()->getVD()->height/2;
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	TrRot vel;
+        
 	while(!engineState::getInstance()->exit()) {
 	 const Uint8 *state = SDL_GetKeyboardState(NULL);
 	 SDL_GetRelativeMouseState(&x,&y);
@@ -29,9 +30,11 @@ void sdlControls::operator()() {
 	camera *c=o->getCamera();
 	//o->printVelocity();
 	vel.reset();
-	 
+        int k_type;
 	 if(state[SDL_SCANCODE_W]) {
 		vel.t.y=-vstep;
+                k_type=K_UP;
+                //PyScripting::getInstance()->broadcast("MovementKey",(void *)&k_type);
 	 } 
 	
 	if(state[SDL_SCANCODE_S]) {

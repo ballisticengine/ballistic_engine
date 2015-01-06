@@ -19,6 +19,7 @@ typedef  vector<PyManipulator *> man_list;
 class PyScripting : public singleton<PyScripting> {
 protected:
 	man_list manipulators;
+        
 public:
 	PyScripting();
 	void broadcast(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);

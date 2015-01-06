@@ -33,6 +33,7 @@ using namespace boost::property_tree;
 #include "entities/sprite.hpp"
 #include "misc/utils.hpp"
 #include "python/scripting.hpp"
+#include "python/locker.hpp"
 
 typedef vector <roomEntity *> rooms_list;
 
@@ -49,6 +50,7 @@ protected:
 	void moveEntities();
 	Timer time;
 	TerrainMap *tm;
+        PyLocker *locker;
 	
 public:
 	ObserverEntity observer;

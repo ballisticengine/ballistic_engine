@@ -20,6 +20,9 @@ using namespace std;
 #include "types/types.hpp"
 #include "types/mathTypes.hpp"
 #include "entities/observerEntity.hpp"
+#include "io/keyTypes.hpp"
+#include "python/scripting.hpp"
+
 
 #define PI 3.14159265
 
