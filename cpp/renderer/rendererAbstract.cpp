@@ -81,7 +81,7 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziom�w bo transf
         this->locate(c.translation.x, c.translation.y, c.translation.z);
         this->face(c.rotation.x, c.rotation.y, c.rotation.z);
 
-        //this->assignMaterial(ents[i]->getMaterial());
+        
 
         //this->drawBoundingBox(ents[i]->getBoundingBox());
         this->renderFaceTexShape(ents[i]->getModel());

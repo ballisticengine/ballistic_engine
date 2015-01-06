@@ -247,6 +247,10 @@ void RendererGL::renderFaceTexShape(shape *s) {
     for (size_t i = 0; i < s->f_count; i++) {
         //texPoly *t=(texPoly *)polys[i];
 
+        if(s->materials[i]) {
+            this->assignMaterial(s->materials[i]);
+        }
+        
         if (s->textures[i]) {
             this->assignTexture(s->textures[i]);
 

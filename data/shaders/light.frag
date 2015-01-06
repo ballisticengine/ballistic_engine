@@ -30,10 +30,11 @@ vec3 L = normalize(gl_LightSource[i].position.xyz - v);
     diff += gl_FrontLightProduct[i].diffuse * max(dot(N,L), 0.0)*atten;    
    
    // calculate Specular Term:
-   spec += gl_FrontLightProduct[i].specular  * pow(max(dot(R,E),0.0),0.3*0.00000001); 
+   spec += (gl_FrontLightProduct[i].specular  * pow(max(dot(R,E),0.0)*0.1,0.3*gl_FrontMaterial.shininess)); 
    
     
 }
 // write Total Color:   //gl_FrontLightModelProduct.sceneColor + Iamb + Idiff + Ispec +
-   gl_FragColor =   diff*texture2D(tex, gl_TexCoord[0].st);   //vec4(0,0,0,0); //
+    gl_FragColor=(diff*texture2D(tex, gl_TexCoord[0].st)+spec);  
+// gl_FragColor =   diff*texture2D(tex, gl_TexCoord[0].st);   //vec4(0,0,0,0); //
 }
