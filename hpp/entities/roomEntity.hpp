@@ -5,6 +5,7 @@
 #include "types/boundingCube.hpp"
 #include "anim/modelAnimator.hpp"
 #include "misc/utils.hpp"
+#include "entities/light.hpp"
 #include <cmath>
 
 using namespace std;

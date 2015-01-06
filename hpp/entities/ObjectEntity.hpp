@@ -8,6 +8,7 @@
 #include "types/material.hpp"
 #include "types/shape.hpp"
 #include "types/boundingCube.hpp"
+#include "entities/texturable.hpp"
 
 
 class ObjectEntity : public PhysicalEntity,public Texturable {

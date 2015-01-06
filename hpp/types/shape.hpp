@@ -9,6 +9,7 @@ using namespace std;
 
 #include "types/mathTypes.hpp"
 #include "types/types.hpp"
+#include "types/material.hpp"
 
 
 
@@ -29,7 +30,7 @@ class shape : public ShapeAbstract {
 public:
     shape();
 	texture **textures;
-        //Material **materials;
+        Material **materials;
 	
 	size_t frame_count;
 	frame *frames;

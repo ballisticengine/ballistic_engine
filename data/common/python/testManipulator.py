@@ -11,10 +11,10 @@ class testManipulator(manipulatorClass):
 
 
     def onEntityMovement(self,entity):
-        print entity.name,"is moving"
+        #print entity.name,"is moving"
         if entity.type=="observer":
             entity.bobHead()
-        
+
 
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1

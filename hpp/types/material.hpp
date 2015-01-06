@@ -1,10 +1,10 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
-#include "entities/light.hpp"
+
 #include "types/types.hpp"
 #include "types/texture.hpp"
-#include "entities/texturable.hpp"
+#include "types/lightOrMaterial.hpp"
 
 
 class Material : public LightOrMaterial {
