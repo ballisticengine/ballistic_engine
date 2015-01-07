@@ -30,7 +30,7 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 	bp::object f=bp::extract<bp::object>(instance.attr(signame.c_str()));
 	world *w=world::getInstance();
         HUD *h=HUD::getInstance();
-	
+	try {
 	if(name=="Init") {
 		f(boost::ref(*w),boost::ref(*h));
 	} else if(name=="EntityCollision") {
@@ -57,7 +57,11 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
         else {
 		f();
 	}
-
+        }catch(const bp::error_already_set& e) {
+            cout << "PyError:\n";
+             assert(PyErr_Occurred());
+             PyErr_Print();
+        }
 	//sigcode=iname+".on"+name+"()";
 	PyLocker::getInstance()->unlock();
 	Py_END_ALLOW_THREADS

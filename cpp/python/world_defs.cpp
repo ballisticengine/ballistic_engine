@@ -25,6 +25,10 @@ BOOST_PYTHON_MODULE(world)
 		.def("reset",&TrRot::reset)
 		;
 
+        bp::class_<coords,coords *>("coords")
+        .def_readwrite("rotation",&coords::rotation)
+        .def_readwrite("translation",&coords::translation)
+        ;
 	bp::class_<ShapeAbstract,ShapeAbstract *>("ShapeAbstract");
 	bp::class_<shape,shape *,bp::bases<ShapeAbstract> >("shape");
 
@@ -81,6 +85,8 @@ BOOST_PYTHON_MODULE(world)
         
         bp::class_<ObserverEntity,ObserverEntity*,bp::bases<PhysicalEntity> >("ObserverEntity")
             .def("bobHead",&ObserverEntity::bobHead)
+            //.def("getCoords",&ObserverEntity::getCoords)
+        
          //   .def("getState",&ObserverEntity::getState)
         //    .def("setState",&ObserverEntity::setState)
         ;

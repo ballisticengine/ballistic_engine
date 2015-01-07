@@ -9,9 +9,13 @@ TrRot::TrRot() {
 }
 
 coords PhysicalEntity::nextCoords(time_int diff) {
-    if (acceleration.t.x || acceleration.t.y || acceleration.t.z) {
+    if (acceleration.t.x) {
         velocity.t.x+=acceleration.t.x*diff;
+    }
+    if (acceleration.t.y) { 
         velocity.t.y+=acceleration.t.y*diff;
+    }
+    if (acceleration.t.z) {
         velocity.t.z+=acceleration.t.z*diff;
     }
 

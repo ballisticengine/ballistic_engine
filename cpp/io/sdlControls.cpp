@@ -19,7 +19,7 @@ void sdlControls::operator()() {
 
     ObserverEntity *o = world::getInstance()->getObserver();
     e_loc step = 0.09, rstep = 0.1, vstep = 50;
-    static e_loc rotx = 0;
+    static e_loc rotx = 0,roty=0,oldroty=0;
     static e_loc z = 0;
     e_loc xx;
     int x, y, winw = config::getInstance()->getVD()->width / 2, winh = config::getInstance()->getVD()->height / 2;
@@ -35,6 +35,7 @@ void sdlControls::operator()() {
 
         xx = x;
         rotx += x;
+        roty+=y;
 
         rotx = normalizeRotation(rotx);
 
@@ -59,44 +60,48 @@ void sdlControls::operator()() {
         }
 
         if (state[SDL_SCANCODE_RIGHT]) {
-            vel.t.x += -cos(deg2rad(rotx)) * vstep;
-            vel.t.z += -sin(deg2rad(rotx)) * vstep;
+//            vel.t.x += -cos(deg2rad(rotx)) * vstep;
+//            vel.t.z += -sin(deg2rad(rotx)) * vstep;
             ostate.movement.right = true;
             // o->bobHead();
         }
 
         if (state[SDL_SCANCODE_LEFT]) {
-            vel.t.x += cos(deg2rad(rotx)) * vstep;
-            vel.t.z += sin(deg2rad(rotx)) * vstep;
+//            vel.t.x += cos(deg2rad(rotx)) * vstep;
+//            vel.t.z += sin(deg2rad(rotx)) * vstep;
             ostate.movement.left = true;
             //o->bobHead();
         }
 
         if (state[SDL_SCANCODE_UP]) {
             ostate.movement.forward = true;
-            vel.t.x += -sin(deg2rad(rotx)) * vstep;
-            vel.t.z += cos(deg2rad(rotx)) * vstep;
+//            vel.t.x += -sin(deg2rad(rotx)) * vstep;
+//            vel.t.z += cos(deg2rad(rotx)) * vstep;
             //o->bobHead();
         }
 
         if (state[SDL_SCANCODE_DOWN]) {
             ostate.movement.back = true;
-            vel.t.x += sin(deg2rad(rotx)) * vstep;
-            vel.t.z += -cos(deg2rad(rotx)) * vstep;
+//            vel.t.x += sin(deg2rad(rotx)) * vstep;
+//            vel.t.z += -cos(deg2rad(rotx)) * vstep;
             // o->bobHead();
         }
 
         
-
+//    o->rotate(0, (e_loc) xx, 0); //tu normalizować rotację a nie w pythonie
+//        o->rotate((e_loc) y, 0, 0);
+        o->face((e_loc)roty,(e_loc)rotx,0);
         o->setState(&ostate);
-        if(keys_p!=anykey(state,ksize)) {
+        if(keys_p!=anykey(state,ksize) || rotx!=oldroty) {
             keys_p=anykey(state,ksize);
+            
+            oldroty=rotx;
+          
             o->refreshState();
         }
         
-        o->setVelocity(vel);
-        o->rotate(0, (e_loc) xx, 0);
-        o->rotate((e_loc) y, 0, 0);
+        //o->setVelocity(vel);
+    
 
 
     }

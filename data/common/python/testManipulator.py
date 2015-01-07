@@ -1,3 +1,9 @@
+import math
+
+def deg2rad(deg):
+    f=3.141/180
+    rad=deg*f
+    return rad
 
 class testManipulator(manipulatorClass):
 
@@ -5,6 +11,7 @@ class testManipulator(manipulatorClass):
         self.ccount=0
         self.wccount=0
         self.kcount=0
+
 
     """"""
 
@@ -58,7 +65,8 @@ class testManipulator(manipulatorClass):
     def onSelfLoad(self):
         objects=self.world.active_room.models
         observer=self.world.observer
-        observer.acceleration.t.y=92
+        self.oldrotx=self.world.observer.getCoords().rotation.x
+        #observer.acceleration.t.y=92
         print observer
         for o in objects:
             if not o.no_physics:
@@ -89,10 +97,31 @@ class testManipulator(manipulatorClass):
 
 
     def onObserverStateChange(self,state):
-        print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        #print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
         self.kcount+=1
-        #self.world.observer.velocity.reset()
-        #if state.movement.forward:
-        #   self.world.observer.velocity.t.z=-10
+        self.world.observer.velocity.reset()
+        coords=self.world.observer.getCoords()
+        step=100
+        xdelta=deg2rad(coords.rotation.y)
 
+        if state.movement.forward:
+            self.world.observer.velocity.t.x+=-math.sin(xdelta)*step
+            self.world.observer.velocity.t.z+=math.cos(xdelta)*step
 
+        if state.movement.back:
+            self.world.observer.velocity.t.x+=math.sin(xdelta)*step
+            self.world.observer.velocity.t.z+=-math.cos(xdelta)*step
+
+        if state.movement.left:
+            self.world.observer.velocity.t.x+=math.cos(xdelta)*step
+            self.world.observer.velocity.t.z+=math.sin(xdelta)*step
+
+        if state.movement.right:
+            self.world.observer.velocity.t.x+=-math.cos(xdelta)*step
+            self.world.observer.velocity.t.z+=-math.sin(xdelta)*step
+
+        if state.movement.up:
+            self.world.observer.velocity.t.y+=-step
+
+        if state.movement.down:
+            self.world.observer.velocity.t.y+=step

@@ -31,7 +31,7 @@ public:
     entity();
     virtual ~entity();
 
-    coords getCoords();
+    virtual coords getCoords();
     string name;
     string type;
     /*
