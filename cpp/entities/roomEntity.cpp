@@ -82,27 +82,26 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
                     oz = abs(zdif),
                     oy = abs(yAxis - halfh)
                     ;
+            bool zside=oz > ox,xside=ox > oz,yside=oy<oz && oy<ox;
+            //cout << ox << ", " << oy << ", " << oz << endl;
+            if (yside) {
+                e_loc dif = am.y - bm.y;
+                 if (dif > 0) {
+                    ctmp.y = COLLISION_BACK;
+                } else {
+                    ctmp.y = -COLLISION_BACK;
+                }
 
-//            static int i=0;
-//            cout << "hit"<<i<<endl;
-//            i++;
-            if (bound_current.min.y >= bound->min.y) {
-                ctmp.y = COLLISION_BACK;
-               // cout << "A";
             }
-            else if (bound_current.min.y <= bound->max.y+bound->height) {
-                //cout << bound_current.min.y << ", " << bound->min.y << ", " << bound_current.max.y << ", " << bound->max.y << endl;
-                ctmp.y = -COLLISION_BACK;
-              //  cout << "B";
-            }
-            if (ox > oz) {
+
+            if (xside  && !yside) {
                 e_loc dif = am.z - bm.z;
                 if (dif > 0) {
                     ctmp.x = COLLISION_BACK;
                 } else {
                     ctmp.x = -COLLISION_BACK;
                 }
-            } else if (oz > ox) {
+            } else if (zside && !yside) {
                 e_loc dif = am.x - bm.x;
 
                 if (dif > 0) {

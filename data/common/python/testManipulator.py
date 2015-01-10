@@ -36,26 +36,26 @@ class testManipulator(manipulatorClass):
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):
-        #print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
-        #cvec.write()
+        print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
+        cvec.write()
         self.wccount+=1
         if entity.type=="object":
             #return
             #entity.velocity.t.x=-entity.velocity.t.x
             #entity.velocity.t.y=-entity.velocity.t.y
             #entity.velocity.t.z=-entity.velocity.t.z
-
-            if cvec.y!=0:
-                #entity.translate3(0,-cvec.y*100000,0)
-                pass
-            else:
-                entity.translate3(-cvec.z*100,0,-cvec.x*100)
+            if cvec.y:
+                entity.velocity.t.y=0
+                entity.acceleration.t.y=0
+            entity.translate3(-cvec.z*100,-cvec.y,-cvec.x*100)
         elif entity.type=="observer":
             entity.acceleration.t.y=0
             if cvec.y:
-                entity.translate3(0,cvec.y,0)
-            else:
-                entity.translate3(cvec.z,0,cvec.x)
+                entity.velocity.t.y=0
+            entity.translate3(cvec.z,cvec.y,cvec.x)
+
+
+
 
 
 
@@ -66,7 +66,7 @@ class testManipulator(manipulatorClass):
         objects=self.world.active_room.models
         observer=self.world.observer
         self.oldrotx=self.world.observer.getCoords().rotation.x
-        #observer.acceleration.t.y=92
+        observer.acceleration.t.y=92
         print observer
         for o in objects:
             if not o.no_physics:
@@ -97,8 +97,8 @@ class testManipulator(manipulatorClass):
 
 
     def onObserverStateChange(self,state):
-        print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
-        print state.mouse.left ,state.mouse.right,state.mouse.middle
+        #print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        #print state.mouse.left ,state.mouse.right,state.mouse.middle
         self.kcount+=1
         self.world.observer.velocity.reset()
         coords=self.world.observer.getCoords()

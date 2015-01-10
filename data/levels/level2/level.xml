@@ -3,10 +3,7 @@
         <skybox>
             @skybox.bmp
         </skybox>
-        <terrain>
-            <map>terrain.bmp</map>
-            <texture></texture>
-        </terrain>
+       
         <jump_point>
             <x>180.0</x>
             <y>-220.0</y>
