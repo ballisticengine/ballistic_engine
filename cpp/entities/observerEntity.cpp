@@ -12,6 +12,10 @@ void ObserverMovement::reset() {
     forward = back = left = right = up = down = false;
 }
 
+void ObserverMouse::reset() {
+    left=right=middle=0;
+}
+
 bool ObserverMouse::operator==(const ObserverMouse &m) {
     if (m.left == left && m.right == right && m.middle == middle) {
         return true;
@@ -20,7 +24,7 @@ bool ObserverMouse::operator==(const ObserverMouse &m) {
 }
 
 bool ObserverState::operator==(const ObserverState &s) {
-    if (movement == s.movement) {
+    if (movement == s.movement && mouse==s.mouse) {
         return true;
     }
     return false;

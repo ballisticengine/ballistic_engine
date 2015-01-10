@@ -19,6 +19,7 @@ class ObserverMouse {
 public:
     bool left,right,middle;
     bool operator==(const ObserverMouse &m);
+    void reset();
 };
 
 class ObserverState {

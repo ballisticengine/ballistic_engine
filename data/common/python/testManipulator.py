@@ -97,7 +97,8 @@ class testManipulator(manipulatorClass):
 
 
     def onObserverStateChange(self,state):
-        #print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        print state.mouse.left ,state.mouse.right,state.mouse.middle
         self.kcount+=1
         self.world.observer.velocity.reset()
         coords=self.world.observer.getCoords()

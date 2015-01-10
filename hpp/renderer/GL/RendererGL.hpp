@@ -80,7 +80,8 @@ protected:
     virtual void beginHinted(shape *s);
     virtual void translateSpecific(e_loc x, e_loc y, e_loc z);
     virtual void lightSpecific(light *l);
-    //virtual void rotateSpecific(e_loc x,e_loc y,e_loc z);
+    virtual void lightOff();
+    virtual void lightOn();
     virtual void positionCameraSpecific();
     virtual void rotateSpecific(e_loc x, e_loc y, e_loc z, e_loc d);
     virtual void setAmbientLight(colorRGB *c);

@@ -3,20 +3,12 @@
         
         <resx>1366</resx>
         <resy>768</resy>
-     <image>
+    <image>
                 <name>test</name>
                 <texture>@car.bmp</texture>
                 <width>1</width>
                 <height>1</height>
                 <x>-1</x>
-                <y>-1</y>
-            </image>
-            <image>
-                <name>test2</name>
-                <texture>@table_wood.bmp</texture>
-                <width>1</width>
-                <height>1</height>
-                <x>1</x>
                 <y>-1</y>
             </image>
     </tmp>
@@ -35,7 +27,8 @@
            </shader>
         </shaders>
         <hud>
-           
+            
+          
         </hud>
     </screen>
     <game>

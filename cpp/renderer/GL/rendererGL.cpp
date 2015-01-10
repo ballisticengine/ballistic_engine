@@ -167,17 +167,25 @@ void RendererGL::renderShape2d(Shape2d *shape) {
     glEnd();
 }
 
+void RendererGL::lightOff() {
+  glUniform1i(use_light_glsl,0);  
+}
+
+void RendererGL::lightOn() {
+    glUniform1i(use_light_glsl,1);
+}
+
 void RendererGL::drawHud() {
     image_list images = this->hud->getImages();
     glDisable(GL_DEPTH_TEST);
-    glDisable(GL_LIGHTING);
+    this->lightOff();
     for (size_t i = 0; i < images.size(); i++) {
         this->reset();
 
         glTranslated(images[i]->x, images[i]->y, 0);
         drawHudImage(images[i]);
     }
-    glEnable(GL_LIGHTING);
+    this->lightOn();
     this->reset();
     glTranslated(hud->mesh->c.translation.x, hud->mesh->c.translation.y, hud->mesh->c.translation.z);
     glRotated(hud->mesh->c.rotation.x, 1, 0, 0);
@@ -562,7 +570,7 @@ void RendererGL::renderSkybox(skybox *sky) {
     glFrontFace(GL_CCW);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
-    glUniform1i(use_light_glsl,0);
+    this->lightOff();
     this->translate(0, 0, -18);
     this->assignTexture(sky->getTexture());
     glBegin(GL_QUADS);
@@ -572,7 +580,7 @@ void RendererGL::renderSkybox(skybox *sky) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glFrontFace(GL_CW);
-    glUniform1i(use_light_glsl,light_set);
+    this->lightOn();
 }
 
 void RendererGL::assignTexture(texture *t) {
@@ -644,6 +652,7 @@ void RendererGL::drawBoundingBox(BoundingCube *bound) {
     //drawBox(bound->getWidth(),bound->getHeight(),bound->getDepth());
     this->reset();
     this->positionCamera();
+    this->lightOff();
     glDisable(GL_TEXTURE_2D);
     glDisable(GL_LIGHTING);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -692,6 +701,7 @@ void RendererGL::drawBoundingBox(BoundingCube *bound) {
     glEnable(GL_LIGHTING);
     glEnable(GL_CULL_FACE);
     glColor3f(1, 1, 1);
+    this->lightOn();
 }
 
 void RendererGL::drawBox(e_loc width, e_loc height, e_loc depth) {
