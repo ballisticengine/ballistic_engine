@@ -28,6 +28,7 @@ void sdlControls::operator()() {
     int ksize = 255;
     size_t keys_p = 0;
     static Uint32 mouse_state, old_mouse_state;
+    static bool oldl=false,oldr,oldm;
     while (!engineState::getInstance()->exit()) {
         const Uint8 *state = SDL_GetKeyboardState(&ksize);
         mouse_state = SDL_GetRelativeMouseState(&x, &y);
@@ -85,14 +86,20 @@ void sdlControls::operator()() {
         ostate.mouse.left = mouse_state & SDL_BUTTON(SDL_BUTTON_LEFT);
         ostate.mouse.right = mouse_state & SDL_BUTTON(SDL_BUTTON_RIGHT);
         ostate.mouse.middle = mouse_state & SDL_BUTTON(SDL_BUTTON_MIDDLE);
-
+        if(!ostate.mouse.left && oldl) {
+           
+            ostate.mouse.leftclick=true;
+        }
+        
 
         o->face((e_loc) roty, (e_loc) rotx, 0);
         o->setState(&ostate);
-        if (keys_p != anykey(state, ksize) || rotx != oldroty || mouse_state != old_mouse_state) {
+        if (keys_p != anykey(state, ksize) || rotx != oldroty || mouse_state != old_mouse_state ) {
             keys_p = anykey(state, ksize);
             oldroty = rotx;
+             oldl=ostate.mouse.left;
             o->refreshState();
+            
         }
     }
 }

@@ -17,7 +17,7 @@ public:
 
 class ObserverMouse {
 public:
-    bool left,right,middle;
+    bool left,right,middle,leftclick,rightclick,middleclick;
     bool operator==(const ObserverMouse &m);
     void reset();
 };

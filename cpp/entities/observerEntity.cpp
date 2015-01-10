@@ -13,7 +13,7 @@ void ObserverMovement::reset() {
 }
 
 void ObserverMouse::reset() {
-    left=right=middle=0;
+    leftclick=rightclick=middleclick=left=right=middle=0;
 }
 
 bool ObserverMouse::operator==(const ObserverMouse &m) {
