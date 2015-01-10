@@ -10,9 +10,9 @@
 class ObserverMovement {
 public:
     bool operator==(const ObserverMovement &m);
-    bool forward,left,right,back,up,down;
+    bool forward,left,right,back,up,down,jump;
     
-     void reset();
+    void reset();
 };
 
 class ObserverMouse {

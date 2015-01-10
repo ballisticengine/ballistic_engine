@@ -108,7 +108,8 @@ BOOST_PYTHON_MODULE(world)
 		.def("getInstance",&getSharedWorldInstance )
 		.def_readonly("active_room", &world::active_room)
 		.def_readwrite("observer",&world::observer)
-		.staticmethod("getInstance")
+		.def("spawnObject",&world::spawnObject)
+                .staticmethod("getInstance")
 				
 		;
 

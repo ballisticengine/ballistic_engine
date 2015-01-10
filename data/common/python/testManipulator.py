@@ -11,6 +11,7 @@ class testManipulator(manipulatorClass):
         self.ccount=0
         self.wccount=0
         self.kcount=0
+        self.spawned=False
 
 
     """"""
@@ -101,9 +102,18 @@ class testManipulator(manipulatorClass):
         #print state.mouse.left ,state.mouse.right,state.mouse.middle
         self.kcount+=1
         self.world.observer.velocity.reset()
-        coords=self.world.observer.getCoords()
+        ocoords=self.world.observer.getCoords()
+        from world import coords
+
         step=100
-        xdelta=deg2rad(coords.rotation.y)
+        xdelta=deg2rad(ocoords.rotation.y)
+
+
+        if state.mouse.left:
+            if not self.spawned:
+                self.world.spawnObject("test",ocoords,"x")
+                self.spawned=True
+                ocoords.translation.write()
 
         if state.movement.forward:
             self.world.observer.velocity.t.x+=-math.sin(xdelta)*step

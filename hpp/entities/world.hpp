@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <map>
+#include <queue>
 
 using namespace std;
 using namespace boost::property_tree;
@@ -36,6 +38,7 @@ using namespace boost::property_tree;
 #include "python/locker.hpp"
 
 typedef vector <roomEntity *> rooms_list;
+typedef map<string,shape*> preload_map;
 
 struct PyEntityCollisionParams {
 	PhysicalEntity *a,*b;
@@ -44,13 +47,15 @@ struct PyEntityCollisionParams {
 class world {
 protected:
 	
-	
 	camera default_camera;
 	void moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision);
 	void moveEntities();
 	Timer time;
 	TerrainMap *tm;
         PyLocker *locker;
+        preload_map shape_preloads;
+        bool moving_lock;
+        queue<ObjectEntity *> spawn_queue;
 	
 public:
 	ObserverEntity observer;
@@ -58,10 +63,13 @@ public:
 	Sprite *testsprite;
 	skybox *sky;
 	rooms_list rooms;
+       
 
 	static world *getInstance(); 
 	static world & getRef();
-	
+	void spawnObject(string preload_name,coords c,string object_name="");
+        preload_map getAllShapePreloads();
+        
 	world();
 	~world();
 	

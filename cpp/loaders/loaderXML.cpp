@@ -82,7 +82,9 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
         try {
 
             string texname = face.second.get<string>("texture");
+            
             texture *t = (texture *) textureFactory::getInstance()->get(texname, this->force_common);
+            
             s->textures[i] = t;
         } catch (std::exception e) {
             s->textures[i] = 0;

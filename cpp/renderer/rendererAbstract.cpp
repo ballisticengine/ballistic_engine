@@ -23,8 +23,14 @@ void renderer::setupTextures() {
     vector<void *> ts = tf->getAll();
     size_t ts_size = ts.size();
     for (size_t i = 0; i < ts_size; i++) {
+        
         this->setupTexture((texture *) ts[i]);
     }
+    
+//    preload_map preload_shapes=w->getAllShapePreloads();
+//    for(preload_map::iterator i=preload_shapes.begin(); i!=preload_shapes.end(); i++) {
+//        i->second->
+//    }
 }
 
 void renderer::init() {
@@ -47,6 +53,7 @@ void renderer::init() {
     this->hud = HUD::getInstance();
     
     this->specificInit();
+    cout << "Setting up textueres...\n";
     this->setupTextures();
 
 }

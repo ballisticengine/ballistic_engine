@@ -613,7 +613,6 @@ void RendererGL::assignMaterial(Material *m) {
 void RendererGL::setupTexture(texture *t) {
 
     GLuint tex_id;
-
     glGenTextures(1, &tex_id);
     this->textures_ids[t] = tex_id;
     glBindTexture(GL_TEXTURE_2D, tex_id);

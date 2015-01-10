@@ -1,9 +1,16 @@
 <world>
+    <preloads>
+            <preload>
+                <type>model</type>
+                <name>test</name>
+                <file>ball.xml</file>
+            </preload>
+        </preloads>
     <config>
         <skybox>
             @skybox.bmp
         </skybox>
-       
+        
         <jump_point>
             <x>180.0</x>
             <y>-220.0</y>
