@@ -1,7 +1,7 @@
 #include "factories/textureFactory.hpp"
 
 void * textureFactory::actualLoad(string fn) {
- texture *t=new texture();
+ texture *t=new texture(fn);
 // t->load();
    loader->load(fn,t); 
  return (void *)t;

@@ -19,13 +19,22 @@
 
 using namespace std;
 
+#include "misc/utils.hpp"
+
+enum textureFormat {
+    TF_RGBA,
+    TF_RGB,
+    TF_BGR,
+};
+
 class texture {
 protected:
     string filename;
     SDL_Surface *surf;
 public:
     texture();
-    
+    texture(string filename);
+    virtual textureFormat getFormat();
    virtual void free();
     
     SDL_Surface *getSurface();

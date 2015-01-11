@@ -613,10 +613,32 @@ void RendererGL::assignMaterial(Material *m) {
 void RendererGL::setupTexture(texture *t) {
 
     GLuint tex_id;
+    GLint tf;
+    textureFormat tformat=t->getFormat();
+    
+    switch(tformat) {
+        case TF_BGR:
+            tf=GL_BGR_EXT;
+            break;
+            
+        case TF_RGB:
+            tf=GL_RGB;
+            break;
+            
+        case TF_RGBA:
+            tf=GL_RGBA;
+            break;
+            
+        default:
+            tf=GL_RGB;
+            break;
+        
+    }
+    
     glGenTextures(1, &tex_id);
     this->textures_ids[t] = tex_id;
     glBindTexture(GL_TEXTURE_2D, tex_id);
-    glTexStorage2D(GL_TEXTURE_2D, 8, GL_BGR_EXT, t->getWidth(), t->getHeight());
+    glTexStorage2D(GL_TEXTURE_2D, 8, tf, t->getWidth(), t->getHeight());
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
             GL_LINEAR);
@@ -626,7 +648,7 @@ void RendererGL::setupTexture(texture *t) {
     //for testing
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, tf, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
     glGenerateMipmap(GL_TEXTURE_2D);
 }
 

@@ -9,7 +9,7 @@ ModelAnimator * shapeFactory::getAnimator() {
 }
 
 void * shapeFactory::actualLoad(string fn) {
-  string ext=factory::getExt(fn);
+  string ext=Utils::getExt(fn);
   shape *s=new shape();
   if(ext==MD2_EXT) {
   loaderMD2 *loader=loaderMD2::getInstance();

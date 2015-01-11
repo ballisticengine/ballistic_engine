@@ -20,7 +20,6 @@ protected:
 	vector <void *> item_ptr;
 	bool force_common,uses_common;
         virtual void * actualLoad(string fn)=0;
-	static string getExt(string fn);
         virtual string getSubDir()=0;
 public:
 	 factory();

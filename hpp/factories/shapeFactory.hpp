@@ -15,6 +15,7 @@ using namespace boost::property_tree;
 #include "loaders/loaderXML.hpp"
 #include "anim/animator.hpp"
 #include "anim/modelAnimator.hpp"
+#include "misc/utils.hpp"
 
 
 #define GEOM_MEM_EXT "[geom]"
