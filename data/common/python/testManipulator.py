@@ -19,6 +19,7 @@ class testManipulator(manipulatorClass):
 
 
     def onEntityMovement(self,entity):
+        return
         #print entity.name,"is moving"
         if entity.type=="observer":
             entity.bobHead()
@@ -27,11 +28,15 @@ class testManipulator(manipulatorClass):
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
         print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
-        entityb.velocity.t.x=-entitya.velocity.t.x
-        entityb.velocity.t.y=-entitya.velocity.t.y
-        entityb.velocity.t.z=-entitya.velocity.t.z
+        entityb.velocity.t.x=0 #-entitya.velocity.t.x
+        entityb.velocity.t.y=0 #-entitya.velocity.t.y
+        entityb.velocity.t.z=0 #-entitya.velocity.t.z
+        entitya.translate3(-cvec.z,-cvec.y,-cvec.x)
         if entitya.type=="observer":
             cvec.write()
+            entityb.velocity.t.x=-entitya.velocity.t.x
+            entityb.velocity.t.y=-entitya.velocity.t.y
+            entityb.velocity.t.z=-entitya.velocity.t.z
             entitya.translate3(cvec.z,-cvec.y,cvec.x)
 
         #cvec.write()
@@ -42,28 +47,34 @@ class testManipulator(manipulatorClass):
         self.wccount+=1
         if entity.type=="object":
             #return
-
-            #if cvec.y:
-            entity.velocity.t.y=0
             entity.acceleration.t.y=0
-            if cvec.x:
-                entity.velocity.t.x=0#-entity.velocity.t.x
-                entity.acceleration.t.x=0
-            if cvec.z:
-                entity.velocity.t.z=0#-entity.velocity.t.z
-                entity.acceleration.t.z=0
+            entity.acceleration.t.x=0
+            entity.acceleration.t.z=0
+            oldz=entity.velocity.t.z
+            #if cvec.y:
+            entity.velocity.t.y=0# -entity.velocity.t.y
+
+            #if cvec.x:
+            entity.velocity.t.x=-entity.velocity.t.x
+
+
+            entity.velocity.t.z=-entity.velocity.t.z
+
+
 
 
 
             #entity.velocity.t.x=-entity.velocity.t.x
             #entity.velocity.t.y=-entity.velocity.t.y
             #entity.velocity.t.z=-entity.velocity.t.z
-            entity.translate3(cvec.z,-cvec.y,-cvec.x)
+            mult=100
+            entity.translate3(-cvec.x*1000,-cvec.y,-cvec.z*1000)
+            #entity.velocity.t.z=-oldz
         elif entity.type=="observer":
             entity.acceleration.t.y=0
-            if cvec.y:
-                entity.velocity.t.y=0
-            entity.translate3(cvec.z,cvec.y,cvec.x)
+            #if cvec.y:
+            entity.velocity.t.y=0
+            entity.translate3(cvec.x,-cvec.y,cvec.z)
 
 
 
@@ -82,6 +93,7 @@ class testManipulator(manipulatorClass):
         for o in objects:
             if not o.no_physics:
                 o.acceleration.t.y=-9.2
+                pass
             if o.type=="object":
                 o.weight=100
             if o.type=="observer":
@@ -95,8 +107,8 @@ class testManipulator(manipulatorClass):
 
 
     def onObserverStateChange(self,state):
-        #print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
-        #print state.mouse.left ,state.mouse.right,state.mouse.middle,state.mouse.leftclick
+        print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        print state.mouse.left ,state.mouse.right,state.mouse.middle,state.mouse.leftclick
         self.kcount+=1
         self.world.observer.velocity.reset()
         ocoords=self.world.observer.getCoords()
@@ -106,7 +118,7 @@ class testManipulator(manipulatorClass):
         xdelta=deg2rad(ocoords.rotation.y)
         ocoords.translation.x-=50
 
-        if state.mouse.leftclick and self.spawnc==0:
+        if state.mouse.left:
                 x=self.world.spawnObject("test",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
                 x.acceleration.t.y=-9.2

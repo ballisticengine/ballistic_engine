@@ -180,14 +180,10 @@ MathTypes::vector entity::collides(entity *ent,coords offset)
                 }
 	}
 	
-//        if(b->min.y<a->min.y) {
-//            res.y=COLLISION_BACK;
-//        } else if ( b->max.y>a->max.y) {
-//            res.y=-COLLISION_BACK;
-//        }
+
         
 	if(b->min.y<a->min.y || b->max.y>a->max.y) { 
-//	 res.y=(am.y-bm.y);
+
              e_loc dif = am.y - bm.y;
             if (dif > 0) {
                     res.y = COLLISION_BACK;
@@ -247,7 +243,7 @@ bool hitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
 	return collide;
 }
 
-bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
+bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) { // tu coś jest źle
 	MathTypes::vector amax,amin,bmax,bmin;
 	amax=a->max+offset;
 	amin=a->min+offset;

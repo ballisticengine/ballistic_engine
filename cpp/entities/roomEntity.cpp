@@ -82,32 +82,30 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
                     oz = abs(zdif),
                     oy = abs(yAxis - halfh)
                     ;
-            bool zside=oz > ox,xside=ox > oz,yside=oy<oz && oy<ox;
+            bool zside=(bound_current.min.z<bound->min.z || bound_current.max.z>bound->max.z) ,
+                    xside=(bound_current.min.x>bound->min.x || bound_current.max.x<bound->max.x),
+                    yside=(bound_current.min.y>bound->min.y || bound_current.max.y<bound->max.y);
             //cout << ox << ", " << oy << ", " << oz << endl;
-            if (yside) {
-                e_loc dif = am.y - bm.y;
-                 if (dif > 0) {
-                    ctmp.y = COLLISION_BACK;
-                } else {
-                    ctmp.y = -COLLISION_BACK;
+            if (yside ) { // && !(xside && zside)
+                if(bound_current.min.y>bound->min.y) {
+                    ctmp.y=COLLISION_BACK;
+                } else if(bound_current.max.y<bound->max.y) {
+                    ctmp.y=-COLLISION_BACK;
                 }
 
             }
 
-            if (xside  && !yside) {
-                e_loc dif = am.z - bm.z;
-                if (dif > 0) {
-                    ctmp.x = COLLISION_BACK;
-                } else {
-                    ctmp.x = -COLLISION_BACK;
+            if (xside ) {
+                if (bound_current.min.x>bound->min.x) {
+                    ctmp.x=COLLISION_BACK;
+                } else if(bound_current.max.x<bound->max.x) {
+                    ctmp.x=-COLLISION_BACK;
                 }
             } else if (zside && !yside) {
-                e_loc dif = am.x - bm.x;
-
-                if (dif > 0) {
-                    ctmp.z = COLLISION_BACK;
-                } else {
-                    ctmp.z = -COLLISION_BACK;
+                if(bound_current.min.z<bound->min.z) {
+                    ctmp.z=-COLLISION_BACK;
+                } else if(bound_current.max.z>bound->max.z) {
+                    ctmp.z=COLLISION_BACK;
                 }
             }
 

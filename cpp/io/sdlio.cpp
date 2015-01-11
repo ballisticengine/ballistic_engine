@@ -51,7 +51,8 @@ void sdlIO::eventLoop() {
             if (event.type == SDL_QUIT) {
 				engineState::getInstance()->setExit(true);
             }
-			if (event.type==SDL_KEYDOWN) {
+		
+                if (event.type==SDL_KEYDOWN) {
 				engineState::getInstance()->keypress=true; 
 				switch (event.key.keysym.sym) {
 					case SDLK_F1:

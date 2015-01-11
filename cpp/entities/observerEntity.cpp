@@ -36,7 +36,7 @@ void ObserverEntity::setCamera(camera *c) {
 
 }
 
-void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) {
+void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) { //tu podejżane (bo w entity jest duplikacja)
     this->x += x;
     this->y += y;
     this->z += z;
