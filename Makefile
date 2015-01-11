@@ -4,7 +4,7 @@ OUTPUT=ballistic
 
 $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
 	   sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
-	   engine.o sprite.o loaderMD2.o \
+	   engine.o sprite.o loaderMD2.o texLoader.o \
 	   config.o engineState.o loaderXML.o \
 	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o \
 	   world_defs.o hud_defs.o pylocker.o manipulator.o pyscripting.o \
@@ -14,6 +14,9 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o 
 	   timer.o image.o hud.o uimesh.o
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
+
+texLoader.o: cpp/loaders/texLoader.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 lightormaterial.o: cpp/types/lightOrMaterial.cpp
 	g++ $(CFLAGS) -c $^ -o $@
