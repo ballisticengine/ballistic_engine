@@ -11,7 +11,7 @@ class testManipulator(manipulatorClass):
         self.ccount=0
         self.wccount=0
         self.kcount=0
-        self.spawned=False
+        self.spawnc=0
 
 
     """"""
@@ -27,9 +27,9 @@ class testManipulator(manipulatorClass):
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
         print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
-        #entityb.velocity.t.x=-entitya.velocity.t.x
-        #entityb.velocity.t.y=-entitya.velocity.t.y
-        #entityb.velocity.t.z=-entitya.velocity.t.z
+        entityb.velocity.t.x=-entitya.velocity.t.x
+        entityb.velocity.t.y=-entitya.velocity.t.y
+        entityb.velocity.t.z=-entitya.velocity.t.z
         if entitya.type=="observer":
             cvec.write()
             entitya.translate3(cvec.z,-cvec.y,cvec.x)
@@ -42,13 +42,23 @@ class testManipulator(manipulatorClass):
         self.wccount+=1
         if entity.type=="object":
             #return
+
+            #if cvec.y:
+            entity.velocity.t.y=0
+            entity.acceleration.t.y=0
+            if cvec.x:
+                entity.velocity.t.x=0#-entity.velocity.t.x
+                entity.acceleration.t.x=0
+            if cvec.z:
+                entity.velocity.t.z=0#-entity.velocity.t.z
+                entity.acceleration.t.z=0
+
+
+
             #entity.velocity.t.x=-entity.velocity.t.x
             #entity.velocity.t.y=-entity.velocity.t.y
             #entity.velocity.t.z=-entity.velocity.t.z
-            if cvec.y:
-                entity.velocity.t.y=0
-                entity.acceleration.t.y=0
-            entity.translate3(-cvec.z*100,-cvec.y,-cvec.x*100)
+            entity.translate3(cvec.z,-cvec.y,-cvec.x)
         elif entity.type=="observer":
             entity.acceleration.t.y=0
             if cvec.y:
@@ -72,29 +82,16 @@ class testManipulator(manipulatorClass):
         for o in objects:
             if not o.no_physics:
                 o.acceleration.t.y=-9.2
-            if o.name=="Table1":
-                print "table1 found"
+            if o.type=="object":
+                o.weight=100
+            if o.type=="observer":
+                o.weight=80
                 #o.face()
 
 
         #uiHelperTest()
 
 
-    def onEngineLoad(self):
-        pass
-
-    def onEntityLoop(self,entity):
-        pass
-
-
-    def onKeyDown(self):
-        pass
-
-    def onMouseMove(self):
-        pass
-
-    def onMouseClick(self):
-        pass
 
 
     def onObserverStateChange(self,state):
@@ -107,12 +104,14 @@ class testManipulator(manipulatorClass):
 
         step=100
         xdelta=deg2rad(ocoords.rotation.y)
+        ocoords.translation.x-=50
 
-
-        if state.mouse.leftclick:
-                self.world.spawnObject("test",ocoords,"x")
-                #self.spawned=True
-                ocoords.translation.write()
+        if state.mouse.leftclick and self.spawnc==0:
+                x=self.world.spawnObject("test",ocoords,str(self.spawnc))
+                x.translate3(0,10,0)
+                x.acceleration.t.y=-9.2
+                x.weight=1
+                self.spawnc+=1
 
         if state.movement.forward:
             self.world.observer.velocity.t.x+=-math.sin(xdelta)*step

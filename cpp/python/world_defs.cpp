@@ -49,7 +49,7 @@ BOOST_PYTHON_MODULE(world) {
             .def_readwrite("velocity", &PhysicalEntity::velocity)
             .def_readwrite("acceleration", &PhysicalEntity::acceleration)
             .def_readwrite("no_physics", &PhysicalEntity::no_physics)
-
+            .def_readwrite("weight",&PhysicalEntity::weight)
             ;
 
 
@@ -109,7 +109,7 @@ BOOST_PYTHON_MODULE(world) {
             .def("getInstance", &getSharedWorldInstance)
             .def_readonly("active_room", &world::active_room)
             .def_readwrite("observer", &world::observer)
-            .def("spawnObject", &world::spawnObject)
+            .def("spawnObject", &world::spawnObject,bp::return_value_policy<bp::reference_existing_object>())
             .staticmethod("getInstance")
 
             ;

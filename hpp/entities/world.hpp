@@ -67,7 +67,7 @@ public:
 
 	static world *getInstance(); 
 	static world & getRef();
-	void spawnObject(string preload_name,coords c,string object_name="");
+	ObjectEntity * spawnObject(string preload_name,coords c,string object_name="");
         preload_map getAllShapePreloads();
         
 	world();

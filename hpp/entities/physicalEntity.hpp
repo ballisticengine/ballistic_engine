@@ -19,6 +19,7 @@ protected:
 	void setIfNotZero(e_loc &a,e_loc &b);
 public:
 	TrRot velocity,acceleration;
+        e_loc weight;
 	PhysicalEntity();
 	coords nextCoords(time_int diff);
 	void changeVelocity(TrRot velocity);

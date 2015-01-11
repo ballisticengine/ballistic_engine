@@ -257,12 +257,12 @@ bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset) {
 	//offset.write();
 
 	bool collide=(
-		amax.x > bmin.x && 
-		 amin.x < bmax.x &&
+		amax.x > bmax.x && 
+		 amin.x < bmin.x &&
 		amax.y > bmax.y &&
 		 amin.y < bmin.y &&
-		 amax.z > bmin.z &&
-		amin.z < bmax.z
+		 amin.z < bmin.z &&
+		amax.z > bmax.z
 		);
 	return collide;
 }
