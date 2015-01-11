@@ -25,9 +25,8 @@ protected:
     SDL_Surface *surf;
 public:
     texture();
-	texture(string fn);
-    virtual bool load();
-    virtual void free();
+    
+   virtual void free();
     
     SDL_Surface *getSurface();
     void setSurface(SDL_Surface *surf);

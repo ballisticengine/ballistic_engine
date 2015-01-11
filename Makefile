@@ -1,4 +1,4 @@
-CFLAGS=-Ihpp/ -I/usr/include/python2.7 -lstdc++  -lSDL2 -lSDL2_ttf -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
 OUTPUT=ballistic 
 
 
