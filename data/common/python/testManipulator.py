@@ -28,10 +28,14 @@ class testManipulator(manipulatorClass):
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
         print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
-        entityb.velocity.t.x=0 #-entitya.velocity.t.x
-        entityb.velocity.t.y=0 #-entitya.velocity.t.y
-        entityb.velocity.t.z=0 #-entitya.velocity.t.z
-        entitya.translate3(-cvec.z,-cvec.y,-cvec.x)
+        if entitya.type!="observer":
+            entitya.velocity.t.x=-entitya.velocity.t.x
+            entitya.velocity.t.y=-entitya.velocity.t.y
+            entitya.velocity.t.z=-entitya.velocity.t.z
+            entityb.velocity.t.x=-entityb.velocity.t.x
+            entityb.velocity.t.y=-entityb.velocity.t.y
+            entityb.velocity.t.z=-entityb.velocity.t.z
+            entitya.translate3(-cvec.z,-cvec.y,-cvec.x)
         if entitya.type=="observer":
             cvec.write()
             entityb.velocity.t.x=-entitya.velocity.t.x
@@ -46,19 +50,17 @@ class testManipulator(manipulatorClass):
         cvec.write()
         self.wccount+=1
         if entity.type=="object":
-            #return
-            entity.acceleration.t.y=0
-            entity.acceleration.t.x=0
-            entity.acceleration.t.z=0
-            oldz=entity.velocity.t.z
-            #if cvec.y:
-            entity.velocity.t.y=0# -entity.velocity.t.y
+            if cvec.y:
+                entity.velocity.t.y=0
+                entity.acceleration.t.y=0
 
-            #if cvec.x:
-            entity.velocity.t.x=-entity.velocity.t.x
+            if cvec.x:
+             entity.velocity.t.x=-entity.velocity.t.x
+             entity.acceleration.t.x=0
 
-
-            entity.velocity.t.z=-entity.velocity.t.z
+            if cvec.z:
+                entity.velocity.t.z=-entity.velocity.t.z
+                entity.acceleration.t.z=0
 
 
 
@@ -116,12 +118,18 @@ class testManipulator(manipulatorClass):
 
         step=100
         xdelta=deg2rad(ocoords.rotation.y)
-        ocoords.translation.x-=50
+        ydelta=deg2rad(ocoords.rotation.x)
+
+        ocoords.translation.x-=math.sin(xdelta)*50
+        ocoords.translation.z+=math.cos(xdelta)*50
 
         if state.mouse.left:
                 x=self.world.spawnObject("test",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
                 x.acceleration.t.y=-9.2
+                x.velocity.t.x=500*math.sin(xdelta)
+                x.velocity.t.z=500*(-math.cos(xdelta))
+                x.velocity.t.y=500*(-math.sin(ydelta))
                 x.weight=1
                 self.spawnc+=1
 

@@ -192,7 +192,7 @@ void RendererGL::drawHud() {
     glRotated(hud->mesh->c.rotation.y, 0, 1, 0);
     glRotated(hud->mesh->c.rotation.z, 0, 0, 1);
     glScaled(hud->mesh->scale, hud->mesh->scale, hud->mesh->scale);
-    //this->renderFaceTexShape(hud->mesh->model);
+    this->renderFaceTexShape(hud->mesh->model);
     glEnable(GL_DEPTH_TEST);
 
 }
