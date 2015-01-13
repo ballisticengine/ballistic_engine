@@ -213,7 +213,7 @@ void RendererGL::drawHudImage(UiImage *img) {
 void RendererGL::render() {
 
     glClearColor(1,0,0,1);
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     light_counter = 0;
     glMatrixMode(GL_MODELVIEW);
 
