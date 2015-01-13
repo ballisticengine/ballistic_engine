@@ -212,8 +212,8 @@ void RendererGL::drawHudImage(UiImage *img) {
 
 void RendererGL::render() {
 
-    //glClearColor(1,1,1,1);
-    glClear(GL_DEPTH_BUFFER_BIT);
+    glClearColor(1,0,0,1);
+    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     light_counter = 0;
     glMatrixMode(GL_MODELVIEW);
 
@@ -451,7 +451,10 @@ void RendererGL::specificInit() {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
-
+glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glBlendFunc(GL_ONE,GL_S_ALPHA);
+    
+glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     //glEnable( GL_LIGHTING );
     //glEnable(GL_LIGHT0);
@@ -639,16 +642,16 @@ void RendererGL::setupTexture(texture *t) {
     this->textures_ids[t] = tex_id;
     glBindTexture(GL_TEXTURE_2D, tex_id);
     glTexStorage2D(GL_TEXTURE_2D, 8, tf, t->getWidth(), t->getHeight());
-
+    glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
             GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
             GL_LINEAR_MIPMAP_LINEAR);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+   // glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     //for testing
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, t->getWidth(), t->getHeight(), 0, tf, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+    glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
     glGenerateMipmap(GL_TEXTURE_2D);
 }
 

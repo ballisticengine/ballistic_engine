@@ -16,6 +16,7 @@ void texture::free() {
 
 textureFormat texture::getFormat() {
      string ext=Utils::getExt(this->filename);
+     return TF_RGBA;
      if(ext=="bmp") {
      return TF_BGR;
      } else {
