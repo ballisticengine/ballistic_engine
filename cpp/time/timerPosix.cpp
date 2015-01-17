@@ -1,46 +1,37 @@
 #include "time/timer.hpp"
 Timer::Timer() {
- b.user=0;
-    e.user=0;
-    
-    //clock_getres(CLOCK_REALTIME,&res);
+ 
 }
 
 void Timer::start() {
-    //  start_timer.start();
-    
-    //end_timer.start();
-    
-    
+ clock_gettime( CLOCK_REALTIME, &s);
 }
 
 void Timer::stop() {
-  //  end_timer.stop();
-   // end_timer.start();
+  clock_gettime( CLOCK_REALTIME, &e);
 }
 
 time_int Timer::getDiff() {
      
-    e=end_timer.elapsed();
-    diff=(time_int)e.wall;
-    
-    //cout << "Elapsed" << e.user << endl;
-    //cout.flush();
-        //printf("%lu\n",diff); 
-       // fflush(stdout);
-    //cout << diff.tv_usec << endl;
+   timespec temp;
+	if ((e.tv_nsec-s.tv_nsec)<0) {
+		temp.tv_sec = e.tv_sec-s.tv_sec-1;
+		temp.tv_nsec = 1000000000+e.tv_nsec-s.tv_nsec;
+	} else {
+		temp.tv_sec = e.tv_sec-s.tv_sec;
+		temp.tv_nsec = e.tv_nsec-s.tv_nsec;
+	}
+	time_int diff=( temp.tv_sec + temp.tv_nsec);
     return this->ticksToSec(diff);
 }
 
 time_int Timer::getDiffR() {
-    this->stop();
-    this->getDiff(); 
-    //end_timer.start();
-    time_int r = this->getDiff(); 
-    //time_int r;
-    //cout << r << endl;
-    this->start();
-  
+    
+    stop();
+    
+    time_int r=getDiff();
+    ///cout << r << endl;
+    start();
     return r;
 }
 
@@ -50,8 +41,6 @@ time_int Timer::getDiffNR() {
 }
 
 time_int Timer::ticksToSec(time_int ts) {
-    //clock_getres(CLOCK_MONOTONIC,&res);
-    //cout << res.tv_nsec << ", " << res.tv_sec << endl;
-    //cout.flush();
-    return ts/1000/1000/1000/1000/10;
+  
+    return ts/ 10000000L;
 }
