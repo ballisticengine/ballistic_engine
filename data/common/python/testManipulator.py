@@ -49,9 +49,9 @@ class testManipulator(manipulatorClass):
         if entitya.type=="observer":
             #cvec.write()
             #entityb.velocity.t.x=-entitya.velocity.t.x
-            entityb.velocity.t.y=-entitya.velocity.t.y
+            #entityb.velocity.t.y=-entitya.velocity.t.y
             entityb.velocity.t.z=-entitya.velocity.t.z
-            entitya.translate3(cvec.z,-cvec.y,cvec.x)
+            #entitya.translate3(cvec.z,-cvec.y,cvec.x)
 
         #cvec.write()
 
@@ -134,12 +134,12 @@ class testManipulator(manipulatorClass):
         ocoords.translation.z+=math.cos(xdelta)*50
 
         if state.mouse.left:
-                x=self.world.spawnObject("test",ocoords,str(self.spawnc))
+                x=self.world.spawnObject("bullet",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
-                x.acceleration.t.y=-9.2
-                x.velocity.t.x=1*math.sin(xdelta)
-                x.velocity.t.z=1*(-math.cos(xdelta))
-                x.velocity.t.y=1*(-math.sin(ydelta))
+                #x.acceleration.t.y=-9.2
+                x.velocity.t.x=100*math.sin(xdelta)
+                x.velocity.t.z=100*(-math.cos(xdelta))
+                x.velocity.t.y=100*(-math.sin(ydelta))
                 x.weight=1.2
                 self.spawnc+=1
 

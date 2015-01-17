@@ -42,5 +42,5 @@ time_int Timer::getDiffNR() {
 
 time_int Timer::ticksToSec(time_int ts) {
   
-    return ts/ 10000000L; 
+    return ts/ 100000000L; 
 }

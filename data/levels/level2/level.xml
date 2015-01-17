@@ -1,6 +1,11 @@
 <world>
     <preloads>
-            <preload>
+        <preload>
+                <type>model</type>
+                <name>bullet</name>
+                <file>bullet.xml</file>
+            </preload>    
+        <preload>
                 <type>model</type>
                 <name>test</name>
                 <file>ball.xml</file>
