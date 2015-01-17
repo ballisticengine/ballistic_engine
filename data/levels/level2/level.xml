@@ -5,6 +5,11 @@
                 <name>test</name>
                 <file>ball.xml</file>
             </preload>
+            <preload>
+                <type>texture</type>
+                <name>testex</name>
+                <file>decal.jpeg</file>
+            </preload>
         </preloads>
     <config>
         <skybox>

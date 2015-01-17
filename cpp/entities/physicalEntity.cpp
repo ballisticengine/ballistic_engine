@@ -9,15 +9,7 @@ TrRot::TrRot() {
 }
 
 coords PhysicalEntity::nextCoords(time_int diff) {
-    if (acceleration.t.x) {
-        velocity.t.x+=acceleration.t.x*diff;
-    }
-    if (acceleration.t.y) { 
-        velocity.t.y+=acceleration.t.y*diff;
-    }
-    if (acceleration.t.z) {
-        velocity.t.z+=acceleration.t.z*diff;
-    }
+   
 
     coords c;
     //cout << diff < endl;
@@ -27,6 +19,15 @@ coords PhysicalEntity::nextCoords(time_int diff) {
     c.rotation.x = velocity.r.x*diff;
     c.rotation.y = velocity.r.y*diff;
     c.rotation.z = velocity.r.z*diff;
+     if (acceleration.t.x) {
+        velocity.t.x+=acceleration.t.x*diff;
+    }
+    if (acceleration.t.y) { 
+        velocity.t.y+=acceleration.t.y*diff;
+    }
+    if (acceleration.t.z) {
+        velocity.t.z+=acceleration.t.z*diff;
+    }
     return c;
 }
 

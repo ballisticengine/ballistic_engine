@@ -19,26 +19,36 @@ class testManipulator(manipulatorClass):
 
 
     def onEntityMovement(self,entity):
-        return
-        #print entity.name,"is moving"
+
+        #print entity.name,"is moving",entity.weight
         if entity.type=="observer":
             entity.bobHead()
+        else:
+            return
+            if entity.velocity.t.x!=0:
+                entity.velocity.t.x/=entity.weight
+            #if entity.velocity.t.y!=0:
+            #    entity.velocity.t.y/=entity.weight
+            if entity.velocity.t.z!=0:
+                entity.velocity.t.z/=entity.weight
+
 
 
     def onEntityCollision(self,entitya,entityb,cvec):
         self.ccount+=1
-        print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
+        #print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
+
         if entitya.type!="observer":
             entitya.velocity.t.x=-entitya.velocity.t.x
             entitya.velocity.t.y=-entitya.velocity.t.y
             entitya.velocity.t.z=-entitya.velocity.t.z
-            entityb.velocity.t.x=-entityb.velocity.t.x
-            entityb.velocity.t.y=-entityb.velocity.t.y
-            entityb.velocity.t.z=-entityb.velocity.t.z
+            #entityb.velocity.t.x=-entityb.velocity.t.x
+            #entityb.velocity.t.y=-entityb.velocity.t.y
+            #entityb.velocity.t.z=-entityb.velocity.t.z
             entitya.translate3(-cvec.z,-cvec.y,-cvec.x)
         if entitya.type=="observer":
-            cvec.write()
-            entityb.velocity.t.x=-entitya.velocity.t.x
+            #cvec.write()
+            #entityb.velocity.t.x=-entitya.velocity.t.x
             entityb.velocity.t.y=-entitya.velocity.t.y
             entityb.velocity.t.z=-entitya.velocity.t.z
             entitya.translate3(cvec.z,-cvec.y,cvec.x)
@@ -46,8 +56,8 @@ class testManipulator(manipulatorClass):
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):
-        print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
-        cvec.write()
+        #print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
+        #cvec.write()
         self.wccount+=1
         if entity.type=="object":
             if cvec.y:
@@ -90,7 +100,7 @@ class testManipulator(manipulatorClass):
         objects=self.world.active_room.models
         observer=self.world.observer
         self.oldrotx=self.world.observer.getCoords().rotation.x
-        observer.acceleration.t.y=92
+        observer.acceleration.t.y=9.2
         print observer
         for o in objects:
             if not o.no_physics:
@@ -116,7 +126,7 @@ class testManipulator(manipulatorClass):
         ocoords=self.world.observer.getCoords()
         from world import coords
 
-        step=100
+        step=5
         xdelta=deg2rad(ocoords.rotation.y)
         ydelta=deg2rad(ocoords.rotation.x)
 
@@ -127,10 +137,10 @@ class testManipulator(manipulatorClass):
                 x=self.world.spawnObject("test",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
                 x.acceleration.t.y=-9.2
-                x.velocity.t.x=500*math.sin(xdelta)
-                x.velocity.t.z=500*(-math.cos(xdelta))
-                x.velocity.t.y=500*(-math.sin(ydelta))
-                x.weight=1
+                x.velocity.t.x=1*math.sin(xdelta)
+                x.velocity.t.z=1*(-math.cos(xdelta))
+                x.velocity.t.y=1*(-math.sin(ydelta))
+                x.weight=1.2
                 self.spawnc+=1
 
         if state.movement.forward:

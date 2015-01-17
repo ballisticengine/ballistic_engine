@@ -39,6 +39,7 @@ using namespace boost::property_tree;
 
 typedef vector <roomEntity *> rooms_list;
 typedef map<string,shape*> preload_map;
+typedef map<string,texture *> tex_preload_map;
 
 struct PyEntityCollisionParams {
 	PhysicalEntity *a,*b;
@@ -54,6 +55,7 @@ protected:
 	TerrainMap *tm;
         PyLocker *locker;
         preload_map shape_preloads;
+        tex_preload_map tex_preloads;
         bool moving_lock;
         queue<ObjectEntity *> spawn_queue;
 	

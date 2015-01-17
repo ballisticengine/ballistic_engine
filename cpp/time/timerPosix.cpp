@@ -15,13 +15,14 @@ void Timer::start() {
 }
 
 void Timer::stop() {
-    end_timer.stop();
+  //  end_timer.stop();
+   // end_timer.start();
 }
 
 time_int Timer::getDiff() {
      
     e=end_timer.elapsed();
-    diff=(time_int)e.user;
+    diff=(time_int)e.wall;
     
     //cout << "Elapsed" << e.user << endl;
     //cout.flush();
@@ -34,6 +35,7 @@ time_int Timer::getDiff() {
 time_int Timer::getDiffR() {
     this->stop();
     this->getDiff(); 
+    //end_timer.start();
     time_int r = this->getDiff(); 
     //time_int r;
     //cout << r << endl;

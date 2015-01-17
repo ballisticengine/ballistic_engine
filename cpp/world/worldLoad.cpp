@@ -36,9 +36,13 @@ bool world::parseXml(string &fn) {
                 type=preload.second.get<string>("type"),
                 file=preload.second.get<string>("file");
         cout << "File "<<file << ", " << name << endl;
-        shape *shp = (shape *) shapef->get(file);
-        shape_preloads[name]=shp;
-        
+        if(type=="model") {
+            shape *shp = (shape *) shapef->get(file);
+            shape_preloads[name]=shp;
+        } else if(type=="texture") {
+            texture *tex=(texture *)texf->get(file);
+            tex_preloads[name]=tex;
+        }
         
     }
    

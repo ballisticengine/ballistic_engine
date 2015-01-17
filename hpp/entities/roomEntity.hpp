@@ -6,6 +6,7 @@
 #include "anim/modelAnimator.hpp"
 #include "misc/utils.hpp"
 #include "entities/light.hpp"
+#include "entities/sprite.hpp"
 #include <cmath>
 
 using namespace std;
@@ -15,6 +16,8 @@ typedef vector <ObjectEntity *> obj_list;
 
 typedef vector <light *> lights_list;
 typedef vector <PhysicalEntity *> phys_list;
+typedef vector <Sprite *> sprite_list;
+typedef vector <Sprite *> decal_list;
 
 class roomEntity : public ObjectEntity {
    
@@ -25,6 +28,7 @@ public:
 	obj_list models;
 	lights_list lights;
 	bounding_list boundings;
+        decal_list decals;
 	colorRGBA ambient_light;
 	void addEntity(entity *e);
 	void addPhysicalEntity(PhysicalEntity *e);

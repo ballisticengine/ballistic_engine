@@ -45,7 +45,7 @@ hud_defs.o: cpp/python/hud_defs.cpp
 world_defs.o: cpp/python/world_defs.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-modelview: tools/modelviewer/modelview.cpp
+modelview: engine_tools/modelviewer/modelview.cpp
 	g++ $(CFLAGS) $^ -o modelviewer
 
 main.o: main.cpp sdl.o
