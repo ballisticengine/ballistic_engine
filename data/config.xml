@@ -11,6 +11,9 @@
                 <x>-1</x>
                 <y>-1</y>
             </image>
+            <shader>
+               light
+           </shader>
     </tmp>
     <screen>
         <resx>640</resx>
@@ -22,9 +25,7 @@
         <frustum_height>20</frustum_height>
         <shaders>
 
-           <shader>
-               light
-           </shader>
+           
         </shaders>
         <hud>
             

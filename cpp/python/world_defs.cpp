@@ -40,6 +40,7 @@ BOOST_PYTHON_MODULE(world) {
             .def_readonly("name", &entity::name)
             .def_readonly("type", &entity::type)
             .def_readwrite("subtype",&entity::subtype)
+            .def_readwrite("no_collisions",&entity::no_collisions)
             ;
 
 
@@ -100,6 +101,7 @@ BOOST_PYTHON_MODULE(world) {
     bp::class_<roomEntity, roomEntity *, bp::bases<ObjectEntity> >("roomEntity")
             .def_readwrite("models", &roomEntity::models)
             .def("placeDecal",&roomEntity::placeDecal)
+            .def("placePreloadDecal",&roomEntity::placePreloadDecal)
             .def("spawnObject", &roomEntity::spawnObject,bp::return_value_policy<bp::reference_existing_object>())
             ;
 

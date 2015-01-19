@@ -78,6 +78,7 @@ void entity::translate(coords c) {
 
 entity::entity() {
 	this->bounding_box=0;
+        no_collisions=false;
 }
 
 entity::~entity() {

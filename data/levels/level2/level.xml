@@ -12,7 +12,7 @@
             </preload>
             <preload>
                 <type>texture</type>
-                <name>testex</name>
+                <name>decal</name>
                 <file>decal.jpeg</file>
             </preload>
         </preloads>

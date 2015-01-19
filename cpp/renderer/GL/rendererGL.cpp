@@ -198,9 +198,12 @@ void RendererGL::drawHud() {
 }
 
 void RendererGL::renderDecal(Sprite *decal) {
+     this->reset();
+    this->positionCamera();
     coords c=decal->getCoords();
     this->translate(c);
-    this->face(c.rotation.x,c.rotation.y,c.rotation.z);
+    this->face(c.rotation.x,90,c.rotation.z);
+    this->assignTexture(decal->tex);
     this->renderShape2d(decal->shape);
     
 }
@@ -242,8 +245,7 @@ void RendererGL::render() {
 
     this->renderAllRooms();
 
-    this->reset();
-    this->positionCamera();
+   
     this->renderAllDecals();
     
     this->reset();

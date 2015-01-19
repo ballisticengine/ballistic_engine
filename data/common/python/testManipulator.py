@@ -61,27 +61,22 @@ class testManipulator(manipulatorClass):
         self.wccount+=1
         if entity.type=="object":
             if entity.subtype=="bullet":
-                pass
-            if cvec.y:
-                entity.velocity.t.y=0
-                entity.acceleration.t.y=0
+                self.world.active_room.placePreloadDecal("decal",entity.getCoords())
+                entity.velocity.x=entity.velocity.y=entity.velocity.z=0
+                entity.no_collisions=True
+            else:
+                if cvec.y:
+                    entity.velocity.t.y=0
+                    entity.acceleration.t.y=0
 
-            if cvec.x:
-             entity.velocity.t.x=-entity.velocity.t.x
-             entity.acceleration.t.x=0
+                if cvec.x:
+                 entity.velocity.t.x=-entity.velocity.t.x
+                 entity.acceleration.t.x=0
 
-            if cvec.z:
-                entity.velocity.t.z=-entity.velocity.t.z
-                entity.acceleration.t.z=0
+                if cvec.z:
+                    entity.velocity.t.z=-entity.velocity.t.z
+                    entity.acceleration.t.z=0
 
-
-
-
-
-            #entity.velocity.t.x=-entity.velocity.t.x
-            #entity.velocity.t.y=-entity.velocity.t.y
-            #entity.velocity.t.z=-entity.velocity.t.z
-            mult=100
             entity.translate3(-cvec.x*1000,-cvec.y,-cvec.z*1000)
             #entity.velocity.t.z=-oldz
         elif entity.type=="observer":

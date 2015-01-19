@@ -33,6 +33,13 @@ void roomEntity::addLightEntity(light *e) {
 void roomEntity::placeDecal(Sprite *decal,coords c) {
     decal->locate(c.translation.x,c.translation.y,c.translation.z);
     decal->face(c.rotation.x,c.rotation.y,c.rotation.z);
+    decals.push_back(decal);
+}
+
+void roomEntity::placePreloadDecal(string preload,coords c) {
+    texture *tex=preload_store->tex_preloads[preload];
+    Sprite *decal=new Sprite(tex);
+    placeDecal(decal,c);
 }
 
 ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string object_name) {
@@ -48,11 +55,6 @@ ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string objec
     oe->type="object";
     room->addObjectEntity(oe);
     return oe;
-}
-
-void roomEntity::placePreloadDecal(string preload,coords c) {
-    //texture *tex=;
-    //Sprite *decal=new Sprite(tex);
 }
 
 
