@@ -60,6 +60,8 @@ class testManipulator(manipulatorClass):
         #cvec.write()
         self.wccount+=1
         if entity.type=="object":
+            if entity.subtype=="bullet":
+                pass
             if cvec.y:
                 entity.velocity.t.y=0
                 entity.acceleration.t.y=0
@@ -136,6 +138,7 @@ class testManipulator(manipulatorClass):
         if state.mouse.left:
                 x=self.world.spawnObject("bullet",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
+                x.subtype="bullet"
                 #x.acceleration.t.y=-9.2
                 x.velocity.t.x=100*math.sin(xdelta)
                 x.velocity.t.z=100*(-math.cos(xdelta))

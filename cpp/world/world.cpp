@@ -1,4 +1,4 @@
-#include "entities/world.hpp"
+#include "world/world.hpp"
 
 TerrainMap * world::getTerrain() {
     return this->tm;

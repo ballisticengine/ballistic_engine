@@ -4,7 +4,8 @@
 #include "types/types.hpp"
 #include "entities/light.hpp"
 #include "types/mathTypes.hpp"
-#include "entities/world.hpp"
+#include "world/world.hpp"
+
 PyManipulator::PyManipulator(string file) {
 
 	code=Utils::loadText(file);

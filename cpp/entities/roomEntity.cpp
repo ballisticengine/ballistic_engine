@@ -29,6 +29,17 @@ void roomEntity::addLightEntity(light *e) {
     this->addEntity(e);
 }
 
+void roomEntity::placeDecal(Sprite *decal,coords c) {
+    decal->locate(c.translation.x,c.translation.y,c.translation.z);
+    decal->face(c.rotation.x,c.rotation.y,c.rotation.z);
+}
+
+void roomEntity::placePreloadDecal(string preload,coords c) {
+    //texture *tex=;
+    //Sprite *decal=new Sprite(tex);
+}
+
+
 MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
     BoundingCube *bound=ent->bounding_box;
     e_loc in_count = 0, out_count = 0;

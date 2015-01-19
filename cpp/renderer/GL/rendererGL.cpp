@@ -197,6 +197,14 @@ void RendererGL::drawHud() {
 
 }
 
+void RendererGL::renderDecal(Sprite *decal) {
+    coords c=decal->getCoords();
+    this->translate(c);
+    this->face(c.rotation.x,c.rotation.y,c.rotation.z);
+    this->renderShape2d(decal->shape);
+    
+}
+
 void RendererGL::drawHudImage(UiImage *img) {
     //    HUD *h=HUD::getInstance();
     //    UiImage *i=h->getImage("test");
@@ -234,6 +242,10 @@ void RendererGL::render() {
 
     this->renderAllRooms();
 
+    this->reset();
+    this->positionCamera();
+    this->renderAllDecals();
+    
     this->reset();
     this->positionCamera();
 

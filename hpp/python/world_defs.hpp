@@ -31,7 +31,7 @@ namespace bp=boost::python;
 #include "types/types.hpp"
 #include "entities/light.hpp"
 #include "types/mathTypes.hpp"
-#include "entities/world.hpp"
+#include "world/world.hpp"
 //#include "pyVector.hpp"
 
 using namespace std;

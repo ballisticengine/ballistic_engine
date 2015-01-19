@@ -34,6 +34,7 @@ public:
     virtual coords getCoords();
     string name;
     string type;
+    string subtype;
     /*
     Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
      */

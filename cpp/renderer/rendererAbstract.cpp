@@ -33,6 +33,14 @@ void renderer::setupTextures() {
 //    }
 }
 
+void renderer::renderAllDecals() {
+    decal_list decals=this->w->active_room->decals;
+    size_t dsize=decals.size();
+    for(size_t i=0; i<dsize; i++) {
+        renderDecal(decals[i]);
+    }
+}
+
 void renderer::init() {
 
     config *c = config::getInstance();

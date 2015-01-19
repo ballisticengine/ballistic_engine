@@ -34,7 +34,10 @@ public:
 	void addPhysicalEntity(PhysicalEntity *e);
 	void addObjectEntity(ObjectEntity *e);
 	void addLightEntity(light *e);
-	roomEntity();
+	void placeDecal(Sprite *decal,coords c);
+        void placePreloadDecal(string preload,coords c);
+        
+        roomEntity();
 	~roomEntity();
 	virtual MathTypes::vector collides(entity *ent,coords offset);
 };

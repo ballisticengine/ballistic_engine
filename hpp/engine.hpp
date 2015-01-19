@@ -22,7 +22,7 @@ using namespace boost::python;
 using namespace std;
 
 #include "misc/singleton.hpp"
-#include "entities/world.hpp"
+#include "world/world.hpp"
 #include "renderer/GL/RendererGL.hpp"
 #include "io/sdlio.hpp"
 #include "io/sdlControls.hpp"

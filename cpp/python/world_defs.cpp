@@ -39,6 +39,7 @@ BOOST_PYTHON_MODULE(world) {
             .def("translate3", &entity::translate3)
             .def_readonly("name", &entity::name)
             .def_readonly("type", &entity::type)
+            .def_readwrite("subtype",&entity::subtype)
             ;
 
 
@@ -98,6 +99,7 @@ BOOST_PYTHON_MODULE(world) {
 
     bp::class_<roomEntity, roomEntity *, bp::bases<ObjectEntity> >("roomEntity")
             .def_readwrite("models", &roomEntity::models)
+            .def("placeDecal",&roomEntity::placeDecal)
             ;
 
     bp::class_<lights_list>("lights_list")

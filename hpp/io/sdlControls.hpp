@@ -15,7 +15,7 @@ using namespace std;
 
 #include "config/engineState.hpp"
 #include "misc/singleton.hpp"
-#include "entities/world.hpp"
+#include "world/world.hpp"
 #include "config/config.hpp"
 #include "types/types.hpp"
 #include "types/mathTypes.hpp"

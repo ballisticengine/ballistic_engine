@@ -13,7 +13,7 @@
 #include "misc/singleton.hpp"
 #include "config/engineState.hpp"
 #include "io/sdlControls.hpp"
-#include "entities/world.hpp"
+#include "world/world.hpp"
 #include "config/path.hpp"
 #include "io/sdl2d.hpp"
 

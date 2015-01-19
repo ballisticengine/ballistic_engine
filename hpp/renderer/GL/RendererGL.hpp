@@ -90,7 +90,7 @@ protected:
     virtual void drawHudImage(UiImage *img);
     virtual void resetSpecific();
     virtual void drawBox(e_loc width, e_loc height, e_loc depth);
-
+    virtual void renderDecal(Sprite *decal);
     virtual void renderTerrainSpecific();
     //virtual void renderFaceTexShape(faceTexShape *s);
     void setUpVbos();

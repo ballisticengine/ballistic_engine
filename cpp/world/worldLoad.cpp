@@ -1,4 +1,4 @@
-#include "entities/world.hpp"
+#include "world/world.hpp"
 
 bool world::parseXml(string &fn) {
 

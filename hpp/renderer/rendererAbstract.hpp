@@ -10,7 +10,7 @@ using namespace std;
 #include "types/shape.hpp"
 #include "types/texture.hpp"
 #include "types/skybox.hpp"
-#include "entities/world.hpp" 
+#include "world/world.hpp" 
 #include "config/config.hpp"
 #include "factories/textureFactory.hpp"
 #include "entities/camera.hpp"
@@ -47,6 +47,8 @@ protected:
     virtual void lightOn()=0;
     virtual void renderAllEntities();
     virtual void renderAllRooms();
+    virtual void renderAllDecals();
+    virtual void renderDecal(Sprite *decal)=0;
     virtual void setAmbientLight(colorRGB *c) = 0;
     virtual void positionCameraSpecific();
 
