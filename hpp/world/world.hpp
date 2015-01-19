@@ -36,10 +36,9 @@ using namespace boost::property_tree;
 #include "misc/utils.hpp"
 #include "python/scripting.hpp"
 #include "python/locker.hpp"
+#include "world/PreloadStore.hpp"
 
 typedef vector <roomEntity *> rooms_list;
-typedef map<string,shape*> preload_map;
-typedef map<string,texture *> tex_preload_map;
 
 struct PyEntityCollisionParams {
 	PhysicalEntity *a,*b;
@@ -55,8 +54,7 @@ protected:
 	Timer time;
 	TerrainMap *tm;
         PyLocker *locker;
-        preload_map shape_preloads;
-        tex_preload_map tex_preloads;
+        
         bool moving_lock;
         queue<ObjectEntity *> spawn_queue;
 	
@@ -71,8 +69,8 @@ public:
 	static world *getInstance(); 
 	static world & getRef();
 	
-        ObjectEntity * spawnObject(string preload_name,coords c,string object_name="");
-        preload_map getAllShapePreloads();
+        
+        
         
 	world();
 	~world();

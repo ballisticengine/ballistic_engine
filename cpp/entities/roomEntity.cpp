@@ -2,6 +2,7 @@
 
 roomEntity::roomEntity() {
     last_bound = 0;
+    preload_store=PreloadStore::getInstance();
 }
 
 roomEntity::~roomEntity() {
@@ -32,6 +33,21 @@ void roomEntity::addLightEntity(light *e) {
 void roomEntity::placeDecal(Sprite *decal,coords c) {
     decal->locate(c.translation.x,c.translation.y,c.translation.z);
     decal->face(c.rotation.x,c.rotation.y,c.rotation.z);
+}
+
+ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string object_name) {
+//    moving_lock = true;
+    roomEntity * room = this;
+    ObjectEntity *oe = new ObjectEntity();
+    oe->setModel(preload_store->shape_preloads[preload_name]);
+    
+    oe->locate(-c.translation.x,-c.translation.y,-c.translation.z);
+    oe->face(-90, 0, 0);
+    oe->setBoundingBox(new BoundingCube(oe->getModel()));
+    oe->name=object_name;
+    oe->type="object";
+    room->addObjectEntity(oe);
+    return oe;
 }
 
 void roomEntity::placePreloadDecal(string preload,coords c) {

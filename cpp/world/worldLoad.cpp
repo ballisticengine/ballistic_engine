@@ -29,7 +29,7 @@ bool world::parseXml(string &fn) {
             ry = world_jp.get<e_loc>("ry"),
             rz = world_jp.get<e_loc>("rz");
 
-
+    PreloadStore *ps=PreloadStore::getInstance();
     ptree preloads=pt.get_child("world.preloads");
     BOOST_FOREACH(const ptree::value_type &preload, preloads) {
         string name=preload.second.get<string>("name"),
@@ -38,10 +38,10 @@ bool world::parseXml(string &fn) {
         cout << "File "<<file << ", " << name << endl;
         if(type=="model") {
             shape *shp = (shape *) shapef->get(file);
-            shape_preloads[name]=shp;
+            ps->shape_preloads[name]=shp;
         } else if(type=="texture") {
             texture *tex=(texture *)texf->get(file);
-            tex_preloads[name]=tex;
+            ps->tex_preloads[name]=tex;
         }
         
     }

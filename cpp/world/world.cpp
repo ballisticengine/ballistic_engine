@@ -23,24 +23,9 @@ camera *world::getCurrentCamera() {
     return &this->default_camera;
 }
 
-preload_map world::getAllShapePreloads() {
-    return this->shape_preloads;
-}
 
-ObjectEntity * world::spawnObject(string preload_name,coords c,string object_name) {
-//    moving_lock = true;
-    roomEntity * room = this->active_room;
-    ObjectEntity *oe = new ObjectEntity();
-    oe->setModel(shape_preloads[preload_name]);
-    
-    oe->locate(-c.translation.x,-c.translation.y,-c.translation.z);
-    oe->face(-90, 0, 0);
-    oe->setBoundingBox(new BoundingCube(oe->getModel()));
-    oe->name=object_name;
-    oe->type="object";
-    room->addObjectEntity(oe);
-    return oe;
-}
+
+
 
 roomEntity * world::getActiveRoom() {
     return this->rooms[0];

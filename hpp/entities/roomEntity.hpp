@@ -7,6 +7,7 @@
 #include "misc/utils.hpp"
 #include "entities/light.hpp"
 #include "entities/sprite.hpp"
+#include "world/PreloadStore.hpp"
 #include <cmath>
 
 using namespace std;
@@ -20,7 +21,8 @@ typedef vector <Sprite *> sprite_list;
 typedef vector <Sprite *> decal_list;
 
 class roomEntity : public ObjectEntity {
-   
+protected:
+    PreloadStore *preload_store;
 public:
 	ModelAnimator model_animator;
 	ent_list entities;
@@ -36,7 +38,7 @@ public:
 	void addLightEntity(light *e);
 	void placeDecal(Sprite *decal,coords c);
         void placePreloadDecal(string preload,coords c);
-        
+        ObjectEntity * spawnObject(string preload_name,coords c,string object_name="");
         roomEntity();
 	~roomEntity();
 	virtual MathTypes::vector collides(entity *ent,coords offset);

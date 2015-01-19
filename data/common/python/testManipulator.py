@@ -136,7 +136,7 @@ class testManipulator(manipulatorClass):
         ocoords.translation.z+=math.cos(xdelta)*50
 
         if state.mouse.left:
-                x=self.world.spawnObject("bullet",ocoords,str(self.spawnc))
+                x=self.world.active_room.spawnObject("bullet",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
                 x.subtype="bullet"
                 #x.acceleration.t.y=-9.2

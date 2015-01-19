@@ -100,6 +100,7 @@ BOOST_PYTHON_MODULE(world) {
     bp::class_<roomEntity, roomEntity *, bp::bases<ObjectEntity> >("roomEntity")
             .def_readwrite("models", &roomEntity::models)
             .def("placeDecal",&roomEntity::placeDecal)
+            .def("spawnObject", &roomEntity::spawnObject,bp::return_value_policy<bp::reference_existing_object>())
             ;
 
     bp::class_<lights_list>("lights_list")
@@ -111,7 +112,7 @@ BOOST_PYTHON_MODULE(world) {
             .def("getInstance", &getSharedWorldInstance)
             .def_readonly("active_room", &world::active_room)
             .def_readwrite("observer", &world::observer)
-            .def("spawnObject", &world::spawnObject,bp::return_value_policy<bp::reference_existing_object>())
+            
             .staticmethod("getInstance")
 
             ;
