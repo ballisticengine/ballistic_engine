@@ -3,7 +3,7 @@
         <preload>
                 <type>model</type>
                 <name>bullet</name>
-                <file>bullet.xml</file>
+                <file>@bullet.xml</file>
             </preload>    
         <preload>
                 <type>model</type>
@@ -13,7 +13,7 @@
             <preload>
                 <type>texture</type>
                 <name>decal</name>
-                <file>decal.png</file>
+                <file>@decal.png</file>
             </preload>
         </preloads>
     <config>
