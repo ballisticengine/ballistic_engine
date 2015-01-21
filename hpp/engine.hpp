@@ -10,21 +10,40 @@
 
 #include <iostream>
 
+#define BOOST_PYTHON_STATIC_LIB 1
+
+#define BOOST_PYTHON_NO_LIB 1
+
+#include <boost/python.hpp>
+
+using namespace boost::python;
+
 using namespace std;
 
-#include "singleton.hpp"
-#include "world.hpp"
-#include "rendererGL.hpp"
-#include "sdlio.hpp"
-#include "config.hpp"
+#include "misc/singleton.hpp"
+#include "world/world.hpp"
+#include "renderer/GL/RendererGL.hpp"
+#include "io/sdlio.hpp"
+#include "io/sdlControls.hpp"
+#include "config/config.hpp"
+
+#include "misc/utils.hpp"
+
+#include "python/scripting.hpp"
+
+typedef boost::shared_ptr<world> world_ptr;
+
 
 
 class engine : public singleton<engine> {
     sdlIO *io;
-	rendererGL *r;
+	RendererGL *r;
+	
     public:
-        void prepare();
+		void pythonInit();
+		void prepare();
         void start();
+		~engine();
 };
 
 #endif	/* ENGINE_HPP */

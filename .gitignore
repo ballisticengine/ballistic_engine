@@ -4,3 +4,8 @@
 /ballistic.exe
 /ballistic
 *.o
+*.pyc
+/blender_lvl
+/blender_lvl/*
+/.idea
+

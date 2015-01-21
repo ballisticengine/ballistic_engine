@@ -1,0 +1,26 @@
+<world>
+    <config>
+        <skybox>
+            @skybox.bmp
+        </skybox>
+        
+      <jump_point>
+            <x>180.0</x>
+            <y>-220.0</y>
+            <z>-50.0</z>
+            <rx>0.0</rx>
+            <ry>0.0</ry>
+            <rz>0.0</rz>
+        </jump_point>
+        <ambient_light>
+            <r>1.0</r>
+            <g>0</g>
+            <b>0</b>
+        </ambient_light>
+        <hud>
+            @car.bmp
+        </hud>
+        
+    </config>
+    
+</world>

@@ -1,4 +1,20 @@
 <config>
+    <tmp>
+        
+        <resx>1366</resx>
+        <resy>768</resy>
+    <image>
+                <name>test</name>
+                <texture>@car.bmp</texture>
+                <width>1</width>
+                <height>1</height>
+                <x>-1</x>
+                <y>-1</y>
+            </image>
+            <shader>
+               light
+           </shader>
+    </tmp>
     <screen>
         <resx>800</resx>
         <resy>600</resy>
@@ -7,10 +23,26 @@
         <frustum_end>5000</frustum_end>
         <frustum_width>20</frustum_width>
         <frustum_height>20</frustum_height>
+        <shaders>
+
+           
+        </shaders>
+        <hud>
+            
+          
+        </hud>
     </screen>
     <game>
         <start_level>
-            level1
+            level2
         </start_level>
     </game>
+    <scripts>
+        <script>
+           manipulatorClass 
+        </script>
+        <script>
+            testManipulator
+        </script>
+    </scripts>
 </config>

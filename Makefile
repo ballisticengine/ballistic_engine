@@ -1,63 +1,189 @@
-CFLAGS=-Ihpp/ -lSDL -lGL -lGLU -lboost_thread 
-OUTPUT=ballistic -lstdc++ 
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
+OUTPUT=ballistic 
 
 
-$(OUTPUT): main.o sdl.o singleton.o renderer.o rendererGL.o entity.o texture.o world.o skybox.o texturegl.o engine.o sprite.o abstractEntity.o loaderMD2.o config.o
-	g++ $(CFLAGS) main.o sdl.o singleton.o renderer.o rendererGL.o types.o texture.o world.o skybox.o entity.o  engine.o sprite.o texturegl.o  abstractEntity.o config.o loaderMD2.o -o $(OUTPUT)
+$(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
+	   sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
+	   engine.o sprite.o loaderMD2.o texLoader.o \
+	   config.o engineState.o loaderXML.o PreloadStore.o \
+	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o \
+	   world_defs.o hud_defs.o pylocker.o manipulator.o pyscripting.o \
+	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
+	   material.o materiable.o texturable.o light.o pointlight.o \
+	   types.o shape2d.o shape.o boundingCube.o \
+	   timer.o image.o hud.o uimesh.o
+	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
+
+PreloadStore.o: cpp/world/PreloadStore.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+texLoader.o: cpp/loaders/texLoader.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+lightormaterial.o: cpp/types/lightOrMaterial.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+shape.o: cpp/types/shape.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+sdl2d.o: cpp/io/sdl2d.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+uimesh.o: cpp/ui/uiMesh.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+pylocker.o: cpp/python/locker.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+manipulator.o: cpp/python/manipulator.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+pyscripting.o: cpp/python/scripting.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+hud_defs.o: cpp/python/hud_defs.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+world_defs.o: cpp/python/world_defs.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+modelview: engine_tools/modelviewer/modelview.cpp
+	g++ $(CFLAGS) $^ -o modelviewer
 
 main.o: main.cpp sdl.o
-	g++ $(CFLAGS) -c main.cpp -o main.o
+	g++ $(CFLAGS) -c $^ -o $@
 
-config.o: cpp/config.cpp
-	g++ $(CFLAGS) -c cpp/config.cpp -o config.o
+image.o: cpp/ui/image.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+hud.o: cpp/ui/hud.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+config.o: cpp/config/config.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 
-loaderMD2.o: cpp/loaderMD2.cpp
-	g++ $(CFLAGS) -c cpp/loaderMD2.cpp -o loaderMD2.o
+loaderMD2.o: cpp/loaders/loaderMD2.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
+loaderXML.o: cpp/loaders/loaderXML.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+factory.o: cpp/factories/factory.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+textureFactory.o: cpp/factories/textureFactory.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+shapeFactory.o: cpp/factories/shapeFactory.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+
+animator.o: cpp/anim/animator.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+modelAnimator.o: cpp/anim/modelAnimator.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+pointlight.o: cpp/entities/pointlight.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+
+	
+shape2d.o: cpp/types/shape2d.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+sprite.o: cpp/entities/sprite.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
 engine.o: cpp/engine.cpp
-	g++ $(CFLAGS) -c cpp/engine.cpp  -o engine.o
+	g++ $(CFLAGS) -c $^  -o $@
 	
-abstractEntity.o: cpp/abstractEntity.cpp
-	g++ $(CFLAGS) -c cpp/abstractEntity.cpp  -o abstractEntity.o
 
-sprite.o: cpp/sprite.cpp
-	g++ $(CFLAGS) -c cpp/sprite.cpp  -o sprite.o
 
-skybox.o: cpp/skybox.cpp 
-	g++ $(CFLAGS) -c cpp/skybox.cpp  -o skybox.o
+skybox.o: cpp/types/skybox.cpp 
+	g++ $(CFLAGS) -c $^  -o $@
 
-world.o: cpp/world.cpp 
-	g++ $(CFLAGS) -c cpp/world.cpp  -o world.o
+world.o: cpp/world/world.cpp 
+	g++ $(CFLAGS) -c $^  -o $@
 	
-entity.o: cpp/entity.cpp types.o
-	g++ $(CFLAGS) -c cpp/entity.cpp types.o -o entity.o
+worldLoad.o: cpp/world/worldLoad.cpp
+	g++ $(CFLAGS) -c $^  -o $@
+	
+entity.o: cpp/entities/entity.cpp types.o
+	g++ $(CFLAGS) -c $^ -o $@
 
 
-types.o: cpp/types.cpp 
-	g++ $(CFLAGS) -c cpp/types.cpp -o types.o
+objectEntity.o: cpp/entities/objectEntity.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+physicalEntity.o: cpp/entities/physicalEntity.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+observerEntity.o: cpp/entities/observerEntity.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+roomEntity.o: cpp/entities/roomEntity.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
-sdl.o: cpp/sdlio.cpp
-	g++ $(CFLAGS) -c cpp/sdlio.cpp -o sdl.o
+camera.o: cpp/entities/camera.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+types.o: cpp/types/types.cpp 
+	g++ $(CFLAGS) -c $^ -o $@
 
-texturegl.o: cpp/textureGL.cpp
-	g++ $(CFLAGS) -c cpp/textureGL.cpp -o texturegl.o
+sdl.o: cpp/io/sdlio.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
-texture.o: cpp/texture.cpp
-	g++ $(CFLAGS) -c cpp/texture.cpp -o texture.o
+sdlControls.o: cpp/io/sdlControls.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
-renderer.o: cpp/rendererAbstract.cpp
-	g++ $(CFLAGS) -c cpp/rendererAbstract.cpp -o renderer.o
 
-rendererGL.o: cpp/rendererGL.cpp
-	g++ $(CFLAGS) -c cpp/rendererGL.cpp -o rendererGL.o
+texture.o: cpp/types/texture.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+renderer.o: cpp/renderer/rendererAbstract.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+rendererGL.o: cpp/renderer/GL/rendererGL.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 	
-singleton.o: cpp/singleton.cpp
-	g++ $(CFLAGS) -c cpp/singleton.cpp -o singleton.o
+singleton.o: cpp/misc/singleton.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 	
+engineState.o: cpp/config/engineState.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+mathTypes.o: cpp/types/mathTypes.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+
+
+material.o: cpp/types/material.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+materiable.o: cpp/entities/materiable.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+texturable.o: cpp/entities/texturable.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+light.o: cpp/entities/light.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+	
+boundingCube.o: cpp/types/boundingCube.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+utlis.o: cpp/misc/utils.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+timer.o: cpp/time/timerPosix.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 clean:
-	rm ./*.o
+	rm ./*.o 
+	rm ./$(OUTPUT)
 	
