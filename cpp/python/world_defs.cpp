@@ -36,6 +36,7 @@ BOOST_PYTHON_MODULE(world) {
     bp::class_<entity, entity *>("entity")
             .def("getCoords", &entity::getCoords)
             .def("locate", &entity::locate)
+            .def("face",&entity::face)
             .def("translate3", &entity::translate3)
             .def_readonly("name", &entity::name)
             .def_readonly("type", &entity::type)

@@ -201,8 +201,8 @@ void RendererGL::renderDecal(Sprite *decal) {
      this->reset();
     this->positionCamera();
     coords c=decal->getCoords();
-    this->translate(c);
-    this->face(c.rotation.x,90,c.rotation.z);
+    this->locate(c.translation.x,c.translation.y,c.translation.z);
+    this->face(c.rotation.x,c.rotation.y,c.rotation.z);
     this->assignTexture(decal->tex);
     this->renderShape2d(decal->shape);
     

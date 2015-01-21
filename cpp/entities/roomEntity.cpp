@@ -31,6 +31,7 @@ void roomEntity::addLightEntity(light *e) {
 }
 
 void roomEntity::placeDecal(Sprite *decal,coords c) {
+    
     decal->locate(c.translation.x,c.translation.y,c.translation.z);
     decal->face(c.rotation.x,c.rotation.y,c.rotation.z);
     decals.push_back(decal);
@@ -49,7 +50,7 @@ ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string objec
     oe->setModel(preload_store->shape_preloads[preload_name]);
     
     oe->locate(-c.translation.x,-c.translation.y,-c.translation.z);
-    oe->face(-90, 0, 0);
+    oe->face(c.rotation.x, c.rotation.y, c.rotation.z);
     oe->setBoundingBox(new BoundingCube(oe->getModel()));
     oe->name=object_name;
     oe->type="object";

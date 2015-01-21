@@ -19,6 +19,7 @@ BoundingCube offsetBounding(BoundingCube *bc, coords offset);
 
 bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::vector offset);
 bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset);
+
 class entity {
 protected:
     e_loc x, y, z, rx, ry, rz;

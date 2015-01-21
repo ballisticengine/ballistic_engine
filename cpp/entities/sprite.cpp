@@ -7,7 +7,7 @@ videoData *vd=config::getInstance()->getVD();
 	//this->height=((e_loc)this->tex->getHeight()/vd->height)*5;
 this->width=10;
 this->height=10;
-cout << "WH: " << this->width << ", " << this->height << endl;
+
 	this->shape=new Shape2d(this->width,this->height);
 }
 

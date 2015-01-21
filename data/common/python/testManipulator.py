@@ -5,6 +5,10 @@ def deg2rad(deg):
     rad=deg*f
     return rad
 
+def rad2deg(rad):
+    deg = 180 * rad / 3.141
+    return deg
+
 class testManipulator(manipulatorClass):
 
     def __init__(self):
@@ -61,7 +65,13 @@ class testManipulator(manipulatorClass):
         self.wccount+=1
         if entity.type=="object":
             if entity.subtype=="bullet":
-                self.world.active_room.placePreloadDecal("decal",entity.getCoords())
+                c=entity.getCoords()
+                cvec.write()
+
+                c.rotation.y=-90+c.rotation.y;
+
+                if not cvec.y:
+                    self.world.active_room.placePreloadDecal("decal",c)
                 entity.velocity.x=entity.velocity.y=entity.velocity.z=0
                 entity.no_collisions=True
             else:
@@ -84,11 +94,6 @@ class testManipulator(manipulatorClass):
             #if cvec.y:
             entity.velocity.t.y=0
             entity.translate3(cvec.x,-cvec.y,cvec.z)
-
-
-
-
-
 
 
 
@@ -135,9 +140,15 @@ class testManipulator(manipulatorClass):
                 x.translate3(0,10,0)
                 x.subtype="bullet"
                 #x.acceleration.t.y=-9.2
-                x.velocity.t.x=100*math.sin(xdelta)
-                x.velocity.t.z=100*(-math.cos(xdelta))
-                x.velocity.t.y=100*(-math.sin(ydelta))
+                xt=math.sin(xdelta)
+                yt=-math.cos(xdelta)
+                zt=-math.sin(ydelta)
+                vel=1
+                x.velocity.t.x=vel*xt #z powrotem do stopni
+                x.velocity.t.z=vel*yt
+                x.velocity.t.y=vel*zt
+                ocoords.rotation.write()
+                x.face(0,90-ocoords.rotation.y,-ocoords.rotation.x)
                 x.weight=1.2
                 self.spawnc+=1
 

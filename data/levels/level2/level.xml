@@ -13,7 +13,7 @@
             <preload>
                 <type>texture</type>
                 <name>decal</name>
-                <file>decal.jpeg</file>
+                <file>decal.png</file>
             </preload>
         </preloads>
     <config>
