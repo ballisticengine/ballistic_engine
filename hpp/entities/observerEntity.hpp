@@ -5,7 +5,9 @@
 #include "types/mathTypes.hpp"
 #include "entities/physicalEntity.hpp"
 #include "entities/camera.hpp"
+#include "entities/weapon.hpp"
 #include "time/timer.hpp"
+
 
 class ObserverMovement {
 public:
@@ -37,6 +39,7 @@ protected:
 	Timer bob_timer;
         ObserverState state,got_state;
         bool state_changed;
+        Weapon *current_weapon;
 public:
 	ObserverEntity();
 	virtual ~ObserverEntity();

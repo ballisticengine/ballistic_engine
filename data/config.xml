@@ -15,9 +15,9 @@
         <frustum_width>20</frustum_width>
         <frustum_height>20</frustum_height>
         <shaders>
-<shader>
-               light
-           </shader>
+            <shader>
+                light
+            </shader>
            
         </shaders>
         <hud>
@@ -36,13 +36,26 @@
         <start_level>
             level2
         </start_level>
+        <default_weapon>
+            pistol
+        </default_weapon>
+        <weapons>
+            <weapon>
+                <name>pistol</name>
+                <display_name>Some pistol</display_name>
+                <model>@gun.xml</model>
+                <bullet>@bullet.xml</bullet>
+                <decal>@decal.png</decal>
+                <velocity>1</velocity> 
+            </weapon>
+        </weapons>
     </game>
     <scripts>
         <script>
-           manipulatorClass 
+            manipulatorClass 
         </script>
         <script>
-            testManipulator
+            basicManipulator
         </script>
     </scripts>
 </config>

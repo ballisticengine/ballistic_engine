@@ -2,6 +2,9 @@
 
 #include "config/config.hpp"
 
+void config::loadWeapons() {
+    
+}
 
 config::config() {
    
@@ -43,10 +46,19 @@ config::config() {
             hud->addImage(texname,name,width,height,x,y);
             
         }
-//        UiImage *img1,*img2;
-//        img1=hud->getImage("test");
-//        img2=hud->getImage("test2");
-        //img1->tex->setPixels(img2->tex->getPixels());
+        
+        cout << "Loading weapons: \n";
+        ptree weapons_xml=pt.get_child("config.game.weapons");
+        BOOST_FOREACH(const ptree::value_type &weapon_xml, weapons_xml) {
+            Weapon *w=new Weapon();
+            w->name=weapon_xml.second.get<string>("name");
+            w->display_name=weapon_xml.second.get<string>("display_name");
+            w->initial_velocity=weapon_xml.second.get<e_loc>("velocity");
+            w->bullet=(shape *)shapeFactory::getInstance()->get(weapon_xml.second.get<string>("bullet"));
+            w->decal=(texture *)textureFactory::getInstance()->get(weapon_xml.second.get<string>("decal"));
+            cout << w->display_name << endl;
+        }
+        cout << "Weapons loaded.\n";
 }
         
 

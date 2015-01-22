@@ -9,7 +9,7 @@ def rad2deg(rad):
     deg = 180 * rad / 3.141
     return deg
 
-class testManipulator(manipulatorClass):
+class basicManipulator(manipulatorClass):
 
     def __init__(self):
         self.ccount=0

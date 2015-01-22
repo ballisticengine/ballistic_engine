@@ -11,10 +11,13 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o 
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
-	   timer.o image.o hud.o uimesh.o
+	   timer.o image.o hud.o uimesh.o weapon.o
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
 	
 
+weapon.o: cpp/entities/weapon.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
 PreloadStore.o: cpp/world/PreloadStore.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
