@@ -136,6 +136,7 @@ class testManipulator(manipulatorClass):
         ocoords.translation.z+=math.cos(xdelta)*50
 
         if state.mouse.left:
+                self.hud.getImage("test").setText("yay")
                 x=self.world.active_room.spawnObject("bullet",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
                 x.subtype="bullet"

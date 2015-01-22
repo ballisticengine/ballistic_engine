@@ -505,6 +505,7 @@ glEnable(GL_BLEND);
     }
         HUD *h=HUD::getInstance();
         UiImage *i=h->getImage("test");
+        i->setText("test123");
        // Draw2d *d=Draw2d::getInstance();
 //        d->setSurface(i->tex->getSurface());
 //        d->text("test123 dupa");

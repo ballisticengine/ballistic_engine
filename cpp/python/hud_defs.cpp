@@ -21,11 +21,13 @@ BOOST_PYTHON_MODULE(HUD) {
             ;
 
     bp::class_<UiImage, UiImage *>("UiImage")
-            .def_readwrite("tex", &UiImage::tex);
-
+            .def_readwrite("tex", &UiImage::tex)
+            .def("setText",&UiImage::setText)
+                    ;
     bp::class_<HUD, shared_ptr<HUD>, boost::noncopyable>("HUD", bp::no_init)
             .def("getInstance", &getSharedHUDInstance)
             .def("getImage", &HUD::getImage, bp::return_value_policy< bp::return_opaque_pointer >())
+            
 
             //.def("getImages",&HUD::getImages)
             ;

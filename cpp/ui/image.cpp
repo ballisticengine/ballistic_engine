@@ -14,14 +14,10 @@ UiImage::UiImage() {
 }
 
 void UiImage::setText(string text) {
-//     SDL_Color textColor = { 255, 0, 0 };
-//    this->tex->surf =TTF_RenderText_Solid( sdlIO::font,text.c_str(), textColor );
-//    this->tex->surf= SDL_ConvertSurfaceFormat(this->tex->surf,SDL_PIXELFORMAT_ABGR8888,0); 
-//    SDL_Rect offset;
-//
-//    //Get offsets
-//    offset.x = 0;
-//    offset.y = 0; 
+     SDL_Color textColor = { 255, 255, 255 };
+    this->tex->surf =TTF_RenderText_Solid( ttf->font,text.c_str(), textColor );
+    this->tex->surf= SDL_ConvertSurfaceFormat(this->tex->surf,SDL_PIXELFORMAT_ABGR8888,0); 
+    update=true;
 }
 
  UiImage::~UiImage() {
