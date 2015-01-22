@@ -161,6 +161,7 @@ void RendererGL::renderShape2d(Shape2d *shape) {
     glBegin(GL_QUADS);
     for (size_t i = 0; i < 4; i++) {
         glTexCoord2d(shape->uvs[i].u, shape->uvs[i].v);
+        glNormal3d(shape->normals[i].x,shape->normals[i].y,shape->normals[i].z);
         glVertex3d(shape->vertices[i].x, shape->vertices[i].y, shape->vertices[i].z);
 
     }
