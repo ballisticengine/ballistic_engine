@@ -187,16 +187,17 @@ void RendererGL::drawHud() {
     }
     this->lightOn();
     this->reset();
-    glTranslated(this->w->observer.current_weapon->c.translation.x,
-            this->w->observer.current_weapon->c.translation.y, 
-            this->w->observer.current_weapon->c.translation.z);
-    glRotated(this->w->observer.current_weapon->c.rotation.x, 1, 0, 0);
-    glRotated(this->w->observer.current_weapon->c.rotation.y, 0, 1, 0);
-    glRotated(this->w->observer.current_weapon->c.rotation.z, 0, 0, 1);
-    glScaled(this->w->observer.current_weapon->scale, 
-            this->w->observer.current_weapon->scale, 
-            this->w->observer.current_weapon->scale);
-    this->renderFaceTexShape(this->w->observer.current_weapon->model);
+    
+    glTranslated(this->w->observer.current_weapon->model->c.translation.x,
+            this->w->observer.current_weapon->model->c.translation.y, 
+            this->w->observer.current_weapon->model->c.translation.z);
+    glRotated(this->w->observer.current_weapon->model->c.rotation.x, 1, 0, 0);
+    glRotated(this->w->observer.current_weapon->model->c.rotation.y, 0, 1, 0);
+    glRotated(this->w->observer.current_weapon->model->c.rotation.z, 0, 0, 1);
+    glScaled(this->w->observer.current_weapon->model->scale, 
+            this->w->observer.current_weapon->model->scale, 
+            this->w->observer.current_weapon->model->scale);
+    this->renderFaceTexShape(this->w->observer.current_weapon->model->model);
     glEnable(GL_DEPTH_TEST);
 
 }
