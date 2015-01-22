@@ -36,9 +36,7 @@
         <start_level>
             level2
         </start_level>
-        <default_weapon>
-            pistol
-        </default_weapon>
+       
         <weapons>
             <weapon>
                 <name>pistol</name>
@@ -47,6 +45,19 @@
                 <bullet>@bullet.xml</bullet>
                 <decal>@decal.png</decal>
                 <velocity>1</velocity> 
+                <location>
+                    <x>100</x>
+                    <y>-50</y>
+                    <z>-150</z>
+                </location>
+                <rotation>
+                    <x>-45</x>
+                    <y>90</y>
+                    <z>0</z>
+                </rotation>
+                <scale>
+                    0.5
+                </scale>
             </weapon>
         </weapons>
     </game>

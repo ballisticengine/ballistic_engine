@@ -19,6 +19,7 @@ using namespace boost::property_tree;
 #include "types/types.hpp"
 #include "factories/shapeFactory.hpp"
 #include "factories/textureFactory.hpp"
+#include "ui/uiMesh.hpp"
 
 using boost::property_tree::ptree;
 

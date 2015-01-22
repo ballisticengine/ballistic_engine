@@ -54,6 +54,13 @@ config::config() {
             w->name=weapon_xml.second.get<string>("name");
             w->display_name=weapon_xml.second.get<string>("display_name");
             w->initial_velocity=weapon_xml.second.get<e_loc>("velocity");
+            w->model=new UiMesh(weapon_xml.second.get<string>("model"),0,0,-10);
+            w->model->c.translation.x=weapon_xml.second.get<e_loc>("location.x");
+            w->model->c.translation.y=weapon_xml.second.get<e_loc>("location.y");
+            w->model->c.translation.z=weapon_xml.second.get<e_loc>("location.z");
+            w->model->c.rotation.x=weapon_xml.second.get<e_loc>("rotation.x");
+            w->model->c.rotation.x=weapon_xml.second.get<e_loc>("rotation.y");
+            w->model->c.rotation.x=weapon_xml.second.get<e_loc>("rotation.z");
             w->bullet=(shape *)shapeFactory::getInstance()->get(weapon_xml.second.get<string>("bullet"));
             w->decal=(texture *)textureFactory::getInstance()->get(weapon_xml.second.get<string>("decal"));
             cout << w->display_name << endl;

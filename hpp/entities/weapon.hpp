@@ -6,19 +6,22 @@
 
 using namespace std;
 
-#include "entities/ObjectEntity.hpp"
+#include "entities/entity.hpp"
 #include "types/mathTypes.hpp"
 #include "types/texture.hpp"
 #include "types/shape.hpp"
+#include "ui/uiMesh.hpp"
 
 
 
-class Weapon : public ObjectEntity {
+class Weapon : public entity {
 public:
     e_loc initial_velocity;
+    UiMesh *model;
     texture *decal;
     shape *bullet;
     string display_name;
+    
     
 };
 

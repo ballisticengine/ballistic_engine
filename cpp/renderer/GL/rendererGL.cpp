@@ -159,10 +159,8 @@ void RendererGL::renderSprite(Sprite *sprite) {
 
 void RendererGL::renderShape2d(Shape2d *shape) {
     glBegin(GL_QUADS);
-    
     for (size_t i = 0; i < 4; i++) {
         glTexCoord2d(shape->uvs[i].u, shape->uvs[i].v);
-        glNormal3d(shape->normals[i].x,shape->normals[i].y,shape->normals[i].z);
         glVertex3d(shape->vertices[i].x, shape->vertices[i].y, shape->vertices[i].z);
 
     }
@@ -189,12 +187,16 @@ void RendererGL::drawHud() {
     }
     this->lightOn();
     this->reset();
-    glTranslated(hud->mesh->c.translation.x, hud->mesh->c.translation.y, hud->mesh->c.translation.z);
-    glRotated(hud->mesh->c.rotation.x, 1, 0, 0);
-    glRotated(hud->mesh->c.rotation.y, 0, 1, 0);
-    glRotated(hud->mesh->c.rotation.z, 0, 0, 1);
-    glScaled(hud->mesh->scale, hud->mesh->scale, hud->mesh->scale);
-    this->renderFaceTexShape(hud->mesh->model);
+    glTranslated(this->w->observer.current_weapon->c.translation.x,
+            this->w->observer.current_weapon->c.translation.y, 
+            this->w->observer.current_weapon->c.translation.z);
+    glRotated(this->w->observer.current_weapon->c.rotation.x, 1, 0, 0);
+    glRotated(this->w->observer.current_weapon->c.rotation.y, 0, 1, 0);
+    glRotated(this->w->observer.current_weapon->c.rotation.z, 0, 0, 1);
+    glScaled(this->w->observer.current_weapon->scale, 
+            this->w->observer.current_weapon->scale, 
+            this->w->observer.current_weapon->scale);
+    this->renderFaceTexShape(this->w->observer.current_weapon->model);
     glEnable(GL_DEPTH_TEST);
 
 }
@@ -206,22 +208,18 @@ void RendererGL::renderDecal(Sprite *decal) {
     this->locate(c.translation.x,c.translation.y,c.translation.z);
     this->face(c.rotation.x,c.rotation.y,c.rotation.z);
     this->assignTexture(decal->tex);
-    GLfloat diff[] = {1.0, 1.0, 1.0, 1.0};
-    ;
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diff);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, diff);
-    //glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shining);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, diff);
     this->renderShape2d(decal->shape);
     
 }
 
 void RendererGL::drawHudImage(UiImage *img) {
-    if(img->update) {
-        img->update=false;
-        this->setupTexture(img->tex);
-        
-    }   
+    //    HUD *h=HUD::getInstance();
+    //    UiImage *i=h->getImage("test");
+    //    Draw2d *d=Draw2d::getInstance();
+    //    d->setSurface(i->tex->getSurface());
+    //    d->text("test123");
+    //    
+    //    this->setupTexture(img->tex);
     this->assignTexture(img->tex);
 
     this->renderShape2d(img->shape);
@@ -503,15 +501,8 @@ glEnable(GL_BLEND);
         cout << "Adding shader: " << sn << endl;
         addShader(sn);
     }
-        HUD *h=HUD::getInstance();
-        UiImage *i=h->getImage("test");
-        i->setText("test123");
-       // Draw2d *d=Draw2d::getInstance();
-//        d->setSurface(i->tex->getSurface());
-//        d->text("test123 dupa");
-//        i->tex->surf=d->surf;
-        //this->setupTexture(i->tex);
-   // this->setupTexture(this->w->testsprite->tex);
+
+    //this->setupTexture(this->w->testsprite->tex);
     //this->setUpVbos();
 
 

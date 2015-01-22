@@ -20,7 +20,9 @@
         <skybox>
             @skybox.bmp
         </skybox>
-        
+         <default_weapon>
+            pistol
+        </default_weapon>
         <jump_point>
             <x>180.0</x>
             <y>-220.0</y>

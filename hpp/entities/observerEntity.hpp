@@ -39,9 +39,11 @@ protected:
 	Timer bob_timer;
         ObserverState state,got_state;
         bool state_changed;
-        Weapon *current_weapon;
+        
 public:
-	ObserverEntity();
+	
+    Weapon *current_weapon;
+    ObserverEntity();
 	virtual ~ObserverEntity();
 	virtual void setCamera(camera *c);
 	virtual camera *getCamera();

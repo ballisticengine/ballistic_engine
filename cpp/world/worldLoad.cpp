@@ -4,7 +4,7 @@ bool world::parseXml(string &fn) {
 
     this->observer.name = "observer";
     this->observer.type = "observer";
-
+    
     string wd = fn, level_path = string(CONFIG_DIR) + string(DS) + string(LVL_DIR) + DS + fn, level_xml = level_path + DS + string("level.xml");
     ;
 
@@ -18,7 +18,7 @@ bool world::parseXml(string &fn) {
     read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace);
     string skyfn = pt.get<string>("world.config.skybox");
     this->sky = new skybox(skyfn);
-
+    this->observer.current_weapon=config::getInstance()->available_weapons[pt.get<string>("world.config.default_weapon")];
 
     ptree& world_jp = pt.get_child("world.config.jump_point");
     //  e_loc jx,jy,jz,rx,ry,rz;
@@ -46,7 +46,8 @@ bool world::parseXml(string &fn) {
         
     }
    
-
+    
+    
     string gfn = level_path + DS + "geometry.xml";
 
     /* Geometria poziomu */
