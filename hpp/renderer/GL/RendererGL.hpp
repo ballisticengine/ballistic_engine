@@ -8,7 +8,7 @@
 #include "config/config.hpp"
 #include "ui/image.hpp"
 #include "ui/hud.hpp"
-#include "io/sdl2d.hpp"
+#include "io/ttf.hpp"
 #ifdef _WIN32
 #include <glew.h>
 #else 

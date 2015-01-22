@@ -505,12 +505,12 @@ glEnable(GL_BLEND);
     }
         HUD *h=HUD::getInstance();
         UiImage *i=h->getImage("test");
-        Draw2d *d=Draw2d::getInstance();
-        d->setSurface(i->tex->getSurface());
-        d->text("test123 dupa");
-        i->tex->surf=d->surf;
+       // Draw2d *d=Draw2d::getInstance();
+//        d->setSurface(i->tex->getSurface());
+//        d->text("test123 dupa");
+//        i->tex->surf=d->surf;
         //this->setupTexture(i->tex);
-    this->setupTexture(this->w->testsprite->tex);
+   // this->setupTexture(this->w->testsprite->tex);
     //this->setUpVbos();
 
 

@@ -16,7 +16,7 @@ void sdlIO::setRenderer(renderer *r) {
 void sdlIO::initWindow() {
    //SDL_Init(SDL_INIT_EVERYTHING);
      SDL_Init(SDL_INIT_VIDEO);
-	 Draw2d::getInstance();
+	 TTF::getInstance();
      SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
     SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
     SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8 );

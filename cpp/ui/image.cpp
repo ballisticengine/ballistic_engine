@@ -5,16 +5,23 @@ UiImage::UiImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc y)
     this->shape=new Shape2d(width,height);
     this->tex=(texture *)textureFactory::getInstance()->get(fn);
     update=true;
-    draw=Draw2d::getInstance();
+    ttf=TTF::getInstance();
 }
 
 UiImage::UiImage() {
-    draw=Draw2d::getInstance();
+    ttf=TTF::getInstance();
     update=true;
 }
 
-void UiImage::setText() {
-    
+void UiImage::setText(string text) {
+//     SDL_Color textColor = { 255, 0, 0 };
+//    this->tex->surf =TTF_RenderText_Solid( sdlIO::font,text.c_str(), textColor );
+//    this->tex->surf= SDL_ConvertSurfaceFormat(this->tex->surf,SDL_PIXELFORMAT_ABGR8888,0); 
+//    SDL_Rect offset;
+//
+//    //Get offsets
+//    offset.x = 0;
+//    offset.y = 0; 
 }
 
  UiImage::~UiImage() {

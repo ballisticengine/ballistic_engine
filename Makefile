@@ -27,7 +27,7 @@ lightormaterial.o: cpp/types/lightOrMaterial.cpp
 shape.o: cpp/types/shape.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-sdl2d.o: cpp/io/sdl2d.cpp
+sdl2d.o: cpp/io/ttf.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 uimesh.o: cpp/ui/uiMesh.cpp

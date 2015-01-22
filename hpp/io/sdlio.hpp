@@ -15,7 +15,7 @@
 #include "io/sdlControls.hpp"
 #include "world/world.hpp"
 #include "config/path.hpp"
-#include "io/sdl2d.hpp"
+#include "io/ttf.hpp"
 
 class sdlIO  :  public singleton<sdlIO> {
 private:

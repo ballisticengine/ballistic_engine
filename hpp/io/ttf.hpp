@@ -10,12 +10,13 @@
 
 using namespace std;
 
-class Draw2d : public singleton<Draw2d> {
+class TTF : public singleton<TTF> {
     protected:
-      TTF_Font *font;  
+  
       
     public:
-        Draw2d();
+            TTF_Font *font;  
+        TTF();
         SDL_Surface *surf;
         void setSurface(SDL_Surface *surf);
         void text(string text);

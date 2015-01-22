@@ -10,7 +10,7 @@
 #include "entities/texturable.hpp"
 #include "factories/textureFactory.hpp"
 //#include "config/config.hpp"
-#include "io/sdl2d.hpp"
+#include "io/ttf.hpp"
 
 using namespace std;
 
@@ -30,7 +30,7 @@ class UiImage : public Texturable {
 protected:
     IMAGE_POSITION_H h;
     IMAGE_POSITION_V v;
-    Draw2d *draw;
+    TTF *ttf;
 public:
     bool update;
     string name;
@@ -39,7 +39,7 @@ public:
     UiImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc y);
     UiImage();
     ~UiImage();
-    void setText();
+    void setText(string text);
     
     virtual void position(IMAGE_POSITION_H h,IMAGE_POSITION_V v);
     virtual IMAGE_POSITION_H getPositionH();
