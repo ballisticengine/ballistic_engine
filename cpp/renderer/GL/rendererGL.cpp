@@ -217,7 +217,11 @@ void RendererGL::renderDecal(Sprite *decal) {
 }
 
 void RendererGL::drawHudImage(UiImage *img) {
-       
+    if(img->update) {
+        img->update=false;
+        this->setupTexture(img->tex);
+        
+    }   
     this->assignTexture(img->tex);
 
     this->renderShape2d(img->shape);
@@ -499,14 +503,14 @@ glEnable(GL_BLEND);
         cout << "Adding shader: " << sn << endl;
         addShader(sn);
     }
- HUD *h=HUD::getInstance();
+        HUD *h=HUD::getInstance();
         UiImage *i=h->getImage("test");
         Draw2d *d=Draw2d::getInstance();
         d->setSurface(i->tex->getSurface());
-        d->text("test123");
+        d->text("test123 dupa");
         i->tex->surf=d->surf;
-        this->setupTexture(i->tex);
-    //this->setupTexture(this->w->testsprite->tex);
+        //this->setupTexture(i->tex);
+    this->setupTexture(this->w->testsprite->tex);
     //this->setUpVbos();
 
 

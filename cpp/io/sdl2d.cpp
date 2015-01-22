@@ -24,7 +24,7 @@ void Draw2d::setSurface(SDL_Surface* surf) {
 
 void Draw2d::text(string text) {
     SDL_Color textColor = { 255, 0, 0 };
-    surf =TTF_RenderText_Solid( font, "DUPA", textColor );
+    surf =TTF_RenderText_Solid( font,text.c_str(), textColor );
     this->surf= SDL_ConvertSurfaceFormat(this->surf,SDL_PIXELFORMAT_ABGR8888,0); 
     SDL_Rect offset;
 

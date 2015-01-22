@@ -10,6 +10,7 @@
 #include "entities/texturable.hpp"
 #include "factories/textureFactory.hpp"
 //#include "config/config.hpp"
+#include "io/sdl2d.hpp"
 
 using namespace std;
 
@@ -29,8 +30,9 @@ class UiImage : public Texturable {
 protected:
     IMAGE_POSITION_H h;
     IMAGE_POSITION_V v;
-    
+    Draw2d *draw;
 public:
+    bool update;
     string name;
     Shape2d *shape;
     e_loc x,y; //Width i height w shape2d

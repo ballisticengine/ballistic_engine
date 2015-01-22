@@ -4,10 +4,13 @@ UiImage::UiImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc y)
     this->x=x; this->y=y; this->name=name;
     this->shape=new Shape2d(width,height);
     this->tex=(texture *)textureFactory::getInstance()->get(fn);
+    update=true;
+    draw=Draw2d::getInstance();
 }
 
 UiImage::UiImage() {
-    
+    draw=Draw2d::getInstance();
+    update=true;
 }
 
 void UiImage::setText() {
