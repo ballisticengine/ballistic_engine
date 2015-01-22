@@ -143,7 +143,7 @@ class testManipulator(manipulatorClass):
                 xt=math.sin(xdelta)
                 yt=-math.cos(xdelta)
                 zt=-math.sin(ydelta)
-                vel=1
+                vel=100
                 x.velocity.t.x=vel*xt #z powrotem do stopni
                 x.velocity.t.z=vel*yt
                 x.velocity.t.y=vel*zt

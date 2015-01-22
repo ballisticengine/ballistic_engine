@@ -159,8 +159,10 @@ void RendererGL::renderSprite(Sprite *sprite) {
 
 void RendererGL::renderShape2d(Shape2d *shape) {
     glBegin(GL_QUADS);
+    
     for (size_t i = 0; i < 4; i++) {
         glTexCoord2d(shape->uvs[i].u, shape->uvs[i].v);
+        glNormal3d(shape->normals[i].x,shape->normals[i].y,shape->normals[i].z);
         glVertex3d(shape->vertices[i].x, shape->vertices[i].y, shape->vertices[i].z);
 
     }
@@ -204,18 +206,18 @@ void RendererGL::renderDecal(Sprite *decal) {
     this->locate(c.translation.x,c.translation.y,c.translation.z);
     this->face(c.rotation.x,c.rotation.y,c.rotation.z);
     this->assignTexture(decal->tex);
+    GLfloat diff[] = {1.0, 1.0, 1.0, 1.0};
+    ;
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diff);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, diff);
+    //glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shining);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, diff);
     this->renderShape2d(decal->shape);
     
 }
 
 void RendererGL::drawHudImage(UiImage *img) {
-    //    HUD *h=HUD::getInstance();
-    //    UiImage *i=h->getImage("test");
-    //    Draw2d *d=Draw2d::getInstance();
-    //    d->setSurface(i->tex->getSurface());
-    //    d->text("test123");
-    //    
-    //    this->setupTexture(img->tex);
+       
     this->assignTexture(img->tex);
 
     this->renderShape2d(img->shape);
@@ -497,7 +499,13 @@ glEnable(GL_BLEND);
         cout << "Adding shader: " << sn << endl;
         addShader(sn);
     }
-
+ HUD *h=HUD::getInstance();
+        UiImage *i=h->getImage("test");
+        Draw2d *d=Draw2d::getInstance();
+        d->setSurface(i->tex->getSurface());
+        d->text("test123");
+        i->tex->surf=d->surf;
+        this->setupTexture(i->tex);
     //this->setupTexture(this->w->testsprite->tex);
     //this->setUpVbos();
 

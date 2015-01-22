@@ -3,7 +3,8 @@
 Shape2d::Shape2d(e_loc width,e_loc height) {
 	this->vertices=new v_type[4];
 	this->uvs=new uv[4];
-	e_loc 
+	this->normals=new v_type[4];
+        e_loc 
 		minx=-width/2,
 		maxx=width/2,
 		miny=height/2,
@@ -15,11 +16,18 @@ Shape2d::Shape2d(e_loc width,e_loc height) {
 	vertices[2].x=maxx;  vertices[2].y=miny;
 	vertices[1].x=maxx;  vertices[1].y=maxy;
 	vertices[0].x=minx;  vertices[0].y=maxy;
-
-	uvs[0].u=0; uvs[0].v=0;
-	uvs[1].u=1; uvs[1].v=0;
-	uvs[2].u=1; uvs[2].v=1;
-	uvs[3].u=0; uvs[3].v=1;
-	this->v_count=4;
+        
+	uvs[3].u=0; uvs[3].v=0;
+	uvs[2].u=1; uvs[2].v=0;
+	uvs[1].u=1; uvs[1].v=1;
+	uvs[0].u=0; uvs[0].v=1;
+	
+        for(size_t i=0; i<4; i++) {
+            normals[i].x=normals[i].y=0;
+            normals[i].z=1;
+        }
+        
+        
+        this->v_count=4;
 
 }

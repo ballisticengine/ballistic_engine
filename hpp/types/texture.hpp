@@ -30,8 +30,9 @@ enum textureFormat {
 class texture {
 protected:
     string filename;
-    SDL_Surface *surf;
+   
 public:
+     SDL_Surface *surf;
     texture();
     texture(string filename);
     virtual textureFormat getFormat();

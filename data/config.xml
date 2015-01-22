@@ -4,9 +4,7 @@
         <resx>1366</resx>
         <resy>768</resy>
     
-            <shader>
-               light
-           </shader>
+            
     </tmp>
     <screen>
         <resx>800</resx>
@@ -17,7 +15,9 @@
         <frustum_width>20</frustum_width>
         <frustum_height>20</frustum_height>
         <shaders>
-
+<shader>
+               light
+           </shader>
            
         </shaders>
         <hud>
