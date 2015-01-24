@@ -38,10 +38,11 @@ void engine::prepare() {
         r->setCamera(w->getCurrentCamera());
 	cout << "Flush set\n";
         r->setFlush(sdlIO::flush);
-	
+	// boost::thread(boost::ref(*r));
 	this->pythonInit();
 	cout << "World loop\n";
 	boost::thread(boost::ref(*w));
+       
 
 	
 

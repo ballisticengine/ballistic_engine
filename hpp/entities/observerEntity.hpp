@@ -12,7 +12,7 @@
 class ObserverMovement {
 public:
     bool operator==(const ObserverMovement &m);
-    bool forward,left,right,back,up,down,jump;
+    bool forward,left,right,back,up,down,jump,next_weapon,prev_weapon;
     
     void reset();
 };

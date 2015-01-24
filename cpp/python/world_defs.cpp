@@ -69,6 +69,8 @@ BOOST_PYTHON_MODULE(world) {
             .def_readwrite("back", &ObserverMovement::back)
             .def_readwrite("up", &ObserverMovement::up)
             .def_readwrite("down", &ObserverMovement::down)
+            .def_readwrite("prev_weapon", &ObserverMovement::prev_weapon)
+            .def_readwrite("next_weapon", &ObserverMovement::next_weapon)
             ;
 
     bp::class_<ObserverMouse, ObserverMouse *>("ObserverMouse")

@@ -14,6 +14,7 @@
 #include "config/engineState.hpp"
 #include "io/sdlControls.hpp"
 #include "world/world.hpp"
+#include "entities/observerEntity.hpp"
 #include "config/path.hpp"
 #include "io/ttf.hpp"
 
