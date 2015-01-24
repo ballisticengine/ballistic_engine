@@ -7,6 +7,7 @@
 using namespace std;
 
 #include "entities/entity.hpp"
+#include "entities/sprite.hpp"
 #include "types/mathTypes.hpp"
 #include "types/texture.hpp"
 #include "types/shape.hpp"
@@ -17,8 +18,8 @@ class Weapon : public entity {
 public:
     e_loc initial_velocity;
     UiMesh *model;
-    texture *decal;
-    shape *bullet;
+    texture *decal; 
+    shape *bullet; 
     string display_name; 
     Weapon *next,*prev;
 };

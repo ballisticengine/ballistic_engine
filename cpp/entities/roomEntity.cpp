@@ -37,6 +37,11 @@ void roomEntity::placeDecal(Sprite *decal,coords c) {
     decals.push_back(decal);
 }
 
+void roomEntity::placeDecalTexture(texture *tex,coords c) {
+    Sprite *decal=new Sprite(tex);
+    placeDecal(decal,c);
+}
+
 void roomEntity::placePreloadDecal(string preload,coords c) {
     texture *tex=preload_store->tex_preloads[preload];
     Sprite *decal=new Sprite(tex);
@@ -44,11 +49,14 @@ void roomEntity::placePreloadDecal(string preload,coords c) {
 }
 
 ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string object_name) {
-//    moving_lock = true;
     roomEntity * room = this;
+    return spawnShape(preload_store->shape_preloads[preload_name],c,object_name);
+}
+
+  ObjectEntity * roomEntity::spawnShape(shape *s,coords c,string object_name) {
+     roomEntity * room = this;
     ObjectEntity *oe = new ObjectEntity();
-    oe->setModel(preload_store->shape_preloads[preload_name]);
-    
+    oe->setModel(s);
     oe->locate(-c.translation.x,-c.translation.y,-c.translation.z);
     oe->face(c.rotation.x, c.rotation.y, c.rotation.z);
     oe->setBoundingBox(new BoundingCube(oe->getModel()));
@@ -56,8 +64,7 @@ ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string objec
     oe->type="object";
     room->addObjectEntity(oe);
     return oe;
-}
-
+  }
 
 MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
     BoundingCube *bound=ent->bounding_box;

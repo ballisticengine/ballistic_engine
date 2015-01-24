@@ -8,6 +8,7 @@
 #include "entities/light.hpp"
 #include "entities/sprite.hpp"
 #include "world/PreloadStore.hpp"
+#include "types/shape.hpp"
 #include <cmath>
 
 using namespace std;
@@ -38,7 +39,9 @@ public:
 	void addLightEntity(light *e);
 	void placeDecal(Sprite *decal,coords c);
         void placePreloadDecal(string preload,coords c);
+        void placeDecalTexture(texture *tex,coords c);
         ObjectEntity * spawnObject(string preload_name,coords c,string object_name="");
+        ObjectEntity * spawnShape(shape *s,coords c,string object_name="");
         roomEntity();
 	~roomEntity();
 	virtual MathTypes::vector collides(entity *ent,coords offset);

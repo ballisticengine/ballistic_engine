@@ -73,7 +73,7 @@ class basicManipulator(manipulatorClass):
                 c.rotation.y=-90+c.rotation.y;
 
                 if not cvec.y:
-                    self.world.active_room.placePreloadDecal("decal",c)
+                    self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,c)
                 entity.velocity.x=entity.velocity.y=entity.velocity.z=0
                 entity.no_collisions=True
             else:
@@ -143,7 +143,7 @@ class basicManipulator(manipulatorClass):
 
         if state.mouse.left:
                 self.showHudInfo()
-                x=self.world.active_room.spawnObject("bullet",ocoords,str(self.spawnc))
+                x=self.world.active_room.spawnShape(self.world.observer.current_weapon.bullet,ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
                 x.subtype="bullet"
                 #x.acceleration.t.y=-9.2

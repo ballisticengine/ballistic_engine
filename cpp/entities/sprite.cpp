@@ -1,7 +1,7 @@
 #include "entities/sprite.hpp"
 
 void Sprite::setUp() {
-videoData *vd=config::getInstance()->getVD();
+//videoData *vd=config::getInstance()->getVD();
 
 	//this->width=((e_loc)this->tex->getWidth()/vd->width)*5;
 	//this->height=((e_loc)this->tex->getHeight()/vd->height)*5;

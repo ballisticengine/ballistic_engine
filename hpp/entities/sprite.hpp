@@ -7,7 +7,7 @@
 #include "entities/texturable.hpp"
 #include "factories/textureFactory.hpp"
 #include "types/texture.hpp"
-#include "config/config.hpp"
+
 #include "types/shape2d.hpp"
 
 class Sprite : public entity,public Texturable {

@@ -111,12 +111,16 @@ BOOST_PYTHON_MODULE(world) {
     bp::class_<obj_list>("obj_list")
             .def(bp::vector_indexing_suite<obj_list>());
 
+    
+    bp::class_<Sprite,Sprite *,bp::bases<entity> >("Sprite");
 
     bp::class_<roomEntity, roomEntity *, bp::bases<ObjectEntity> >("roomEntity")
             .def_readwrite("models", &roomEntity::models)
             .def("placeDecal",&roomEntity::placeDecal)
             .def("placePreloadDecal",&roomEntity::placePreloadDecal)
+            .def("placeDecalTexture",&roomEntity::placeDecalTexture)
             .def("spawnObject", &roomEntity::spawnObject,bp::return_value_policy<bp::reference_existing_object>())
+            .def("spawnShape", &roomEntity::spawnShape,bp::return_value_policy<bp::reference_existing_object>()) 
             ;
 
     bp::class_<lights_list>("lights_list")

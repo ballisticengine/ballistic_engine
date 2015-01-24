@@ -16,6 +16,7 @@ using namespace boost::property_tree;
 
 #include "ui/hud.hpp"
 #include "entities/weapon.hpp"
+#include "entities/sprite.hpp"
 #include "types/types.hpp"
 #include "factories/shapeFactory.hpp"
 #include "factories/textureFactory.hpp"

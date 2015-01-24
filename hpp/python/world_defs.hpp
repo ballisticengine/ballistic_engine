@@ -29,6 +29,7 @@ namespace bp=boost::python;
 #include "entities/entity.hpp"
 #include "entities/physicalEntity.hpp"
 #include "entities/weapon.hpp"
+#include "entities/sprite.hpp"
 #include "types/types.hpp"
 #include "entities/light.hpp"
 #include "types/mathTypes.hpp"

@@ -44,7 +44,7 @@
                 <model>@gun.xml</model>
                 <bullet>@bullet.xml</bullet>
                 <decal>@decal.png</decal>
-                <velocity>100</velocity> 
+                <velocity>10</velocity> 
                 <location>
                     <x>100</x>
                     <y>-50</y>
@@ -63,8 +63,8 @@
                 <name>minitable</name>
                 <display_name>Mini table</display_name>
                 <model>@test.xml</model>
-                <bullet>@bullet.xml</bullet>
-                <decal>@decal.png</decal>
+                <bullet>@ball.xml</bullet>
+                <decal>@metal.png</decal>
                 <velocity>1</velocity>
                 <location>
                     <x>100</x>
