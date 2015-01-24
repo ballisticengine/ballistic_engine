@@ -75,7 +75,8 @@ class basicManipulator(manipulatorClass):
                 if not cvec.y:
                     self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,c)
                 entity.velocity.x=entity.velocity.y=entity.velocity.z=0
-                entity.no_collisions=True
+                #entity.no_collisions=True
+                self.world.active_room.removeObjectEntity(entity.name)
             else:
                 if cvec.y:
                     entity.velocity.t.y=0

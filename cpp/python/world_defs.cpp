@@ -121,7 +121,8 @@ BOOST_PYTHON_MODULE(world) {
             .def("placeDecalTexture",&roomEntity::placeDecalTexture)
             .def("spawnObject", &roomEntity::spawnObject,bp::return_value_policy<bp::reference_existing_object>())
             .def("spawnShape", &roomEntity::spawnShape,bp::return_value_policy<bp::reference_existing_object>()) 
-            ;
+            .def("removeObjectEntity",&roomEntity::removeObjectEntity)
+    ;
 
     bp::class_<lights_list>("lights_list")
             .def(bp::vector_indexing_suite<lights_list>());

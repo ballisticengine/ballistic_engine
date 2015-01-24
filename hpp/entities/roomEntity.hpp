@@ -40,6 +40,7 @@ public:
 	void placeDecal(Sprite *decal,coords c);
         void placePreloadDecal(string preload,coords c);
         void placeDecalTexture(texture *tex,coords c);
+        void removeObjectEntity(string name);
         ObjectEntity * spawnObject(string preload_name,coords c,string object_name="");
         ObjectEntity * spawnShape(shape *s,coords c,string object_name="");
         roomEntity();

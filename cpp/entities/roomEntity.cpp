@@ -66,6 +66,16 @@ ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string objec
     return oe;
   }
 
+void roomEntity::removeObjectEntity(string name) {
+    size_t i;
+    for(i=0; i<models.size(); i++) {
+        if(models[i]->name==name) {
+            break;
+        }
+    }
+    models.erase(models.begin()+i);
+}
+  
 MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
     BoundingCube *bound=ent->bounding_box;
     e_loc in_count = 0, out_count = 0;
