@@ -13,16 +13,13 @@ using namespace std;
 #include "ui/uiMesh.hpp"
 
 
-
 class Weapon : public entity {
 public:
     e_loc initial_velocity;
     UiMesh *model;
     texture *decal;
     shape *bullet;
-    string display_name;
-    
-    
+    string display_name; 
 };
 
 typedef map<string, Weapon *> weapon_map;

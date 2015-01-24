@@ -220,7 +220,6 @@ void RendererGL::drawHudImage(UiImage *img) {
     if(img->update) {
         img->update=false;
         this->setupTexture(img->tex);
-        
     }   
 
     this->assignTexture(img->tex);

@@ -22,7 +22,7 @@
         </shaders>
         <hud>
             <image>
-                <name>test</name>
+                <name>weapon</name>
                 <texture>@car.bmp</texture>
                 <width>1</width>
                 <height>1</height>

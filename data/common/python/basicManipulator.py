@@ -98,7 +98,11 @@ class basicManipulator(manipulatorClass):
 
 
 
+    def showHudInfo(self):
+        self.hud.getImage("weapon").setText(self.world.observer.current_weapon.display_name)
+
     def onSelfLoad(self):
+        self.showHudInfo()
         objects=self.world.active_room.models
         observer=self.world.observer
         self.oldrotx=self.world.observer.getCoords().rotation.x
@@ -136,7 +140,7 @@ class basicManipulator(manipulatorClass):
         ocoords.translation.z+=math.cos(xdelta)*50
 
         if state.mouse.left:
-                self.hud.getImage("test").setText("yay")
+                self.showHudInfo()
                 x=self.world.active_room.spawnObject("bullet",ocoords,str(self.spawnc))
                 x.translate3(0,10,0)
                 x.subtype="bullet"
@@ -144,7 +148,7 @@ class basicManipulator(manipulatorClass):
                 xt=math.sin(xdelta)
                 yt=-math.cos(xdelta)
                 zt=-math.sin(ydelta)
-                vel=100
+                vel=self.world.observer.current_weapon.initial_velocity
                 x.velocity.t.x=vel*xt #z powrotem do stopni
                 x.velocity.t.z=vel*yt
                 x.velocity.t.y=vel*zt
