@@ -103,6 +103,8 @@ BOOST_PYTHON_MODULE(world) {
         .def_readonly("decal",&Weapon::decal)
         .def_readonly("bullet",&Weapon::bullet)
         .def_readonly("display_name",&Weapon::display_name)
+        .def_readonly("next",&Weapon::next)
+        .def_readonly("prev",&Weapon::prev)
         
     ;
     

@@ -49,6 +49,7 @@ config::config() {
         
         cout << "Loading weapons: \n";
         ptree weapons_xml=pt.get_child("config.game.weapons");
+        Weapon *prev=0;
         BOOST_FOREACH(const ptree::value_type &weapon_xml, weapons_xml) {
             Weapon *w=new Weapon();
             w->name=weapon_xml.second.get<string>("name");
@@ -64,6 +65,17 @@ config::config() {
             w->model->scale=weapon_xml.second.get<e_loc>("scale");
             w->bullet=(shape *)shapeFactory::getInstance()->get(weapon_xml.second.get<string>("bullet"));
             w->decal=(texture *)textureFactory::getInstance()->get(weapon_xml.second.get<string>("decal"));
+           
+           // w->prev=prev;
+//            
+           
+           
+                w->prev=prev;
+                w->next=0;
+                if(prev) {
+                    prev->next=w;
+                } 
+             prev=w;
             available_weapons[w->name]=w;
             cout << w->display_name << endl;
         }

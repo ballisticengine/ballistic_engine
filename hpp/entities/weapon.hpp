@@ -20,6 +20,7 @@ public:
     texture *decal;
     shape *bullet;
     string display_name; 
+    Weapon *next,*prev;
 };
 
 typedef map<string, Weapon *> weapon_map;

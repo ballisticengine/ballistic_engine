@@ -129,7 +129,6 @@ class basicManipulator(manipulatorClass):
     def onObserverStateChange(self,state):
         #print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
         #print state.mouse.left ,state.mouse.right,state.mouse.middle,state.mouse.leftclick
-        print "SC"
         self.kcount+=1
         self.world.observer.velocity.reset()
         ocoords=self.world.observer.getCoords()
@@ -162,11 +161,16 @@ class basicManipulator(manipulatorClass):
 
         if state.movement.prev_weapon:
             self.pc+=1
-            print "PC",self.pc
+            print "Prev weapon",self.pc
+            if self.world.observer.current_weapon.prev:
+                self.world.observer.current_weapon=self.world.observer.current_weapon.prev
 
         if state.movement.next_weapon:
             self.nc+=1
-            print "NC",self.nc
+            print "Next weapon",self.nc
+            if self.world.observer.current_weapon.next:
+                self.world.observer.current_weapon=self.world.observer.current_weapon.next
+            
 
         if state.movement.forward:
             self.world.observer.velocity.t.x+=-math.sin(xdelta)*step
