@@ -55,7 +55,6 @@ config::config() {
             w->display_name=weapon_xml.second.get<string>("display_name");
             w->initial_velocity=weapon_xml.second.get<e_loc>("velocity");
             w->model=new UiMesh(weapon_xml.second.get<string>("model"),0,0,-10);
-            
             w->model->c.translation.x=weapon_xml.second.get<e_loc>("location.x");
             w->model->c.translation.y=weapon_xml.second.get<e_loc>("location.y");
             w->model->c.translation.z=weapon_xml.second.get<e_loc>("location.z");

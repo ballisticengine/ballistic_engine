@@ -89,12 +89,21 @@ BOOST_PYTHON_MODULE(world) {
 
     bp::class_<ObserverEntity, ObserverEntity*, bp::bases<PhysicalEntity> >("ObserverEntity")
             .def("bobHead", &ObserverEntity::bobHead)
-            //.def("getCoords",&ObserverEntity::getCoords)
+            .def_readwrite("current_weapon",&ObserverEntity::current_weapon)
+    //.def("getCoords",&ObserverEntity::getCoords)
 
             //   .def("getState",&ObserverEntity::getState)
             //    .def("setState",&ObserverEntity::setState)
             ;
-
+    
+    bp::class_<Weapon, Weapon*, bp::bases<entity> >("Weapon")
+        .def_readonly("initial_velocity",&Weapon::initial_velocity)
+        .def_readonly("decal",&Weapon::decal)
+        .def_readonly("bullet",&Weapon::bullet)
+        .def_readonly("display_name",&Weapon::display_name)
+        
+    ;
+    
     bp::class_<obj_list>("obj_list")
             .def(bp::vector_indexing_suite<obj_list>());
 
