@@ -216,7 +216,7 @@ void RendererGL::renderDecal(Sprite *decal) {
     
 }
 
-void RendererGL::drawHudImage(UiImage *img) {
+void RendererGL::drawHudImage(UiImage *img) { 
     if(img->update) {
         img->update=false;
         this->setupTexture(img->tex);
