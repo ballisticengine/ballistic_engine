@@ -115,14 +115,14 @@ void sdlIO::eventLoop() {
                 observer_state->movement.next_weapon = false;
                 observer_state->movement.prev_weapon = false;
                 switch (event.key.keysym.sym) {
-                    case SDLK_o:
+                    case SDLK_LEFTBRACKET:
                         //observer_state->movement.next_weapon=false;
 
                         observer_state->movement.prev_weapon = true;
 
                         break;
 
-                    case SDLK_p:
+                    case SDLK_RIGHTBRACKET:
                         //observer_state->movement.prev_weapon=false;
 
                         observer_state->movement.next_weapon = true;
