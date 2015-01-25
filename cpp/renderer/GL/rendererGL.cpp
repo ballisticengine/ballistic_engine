@@ -227,6 +227,10 @@ void RendererGL::drawHudImage(UiImage *img) {
     this->renderShape2d(img->shape);
 }
 
+void  RendererGL::previewRender() {
+   
+}
+
 void RendererGL::render() {
 
     glClearColor(1,0,0,1);
@@ -488,14 +492,7 @@ glEnable(GL_BLEND);
     gluQuadricTexture(bounding_box_q, GL_TRUE);
     // hud->addImage("@car.bmp","test",1,1,1,1);
 
-    UiMesh *mesh = new UiMesh("@gun.xml", 0, 0, -10);
-    mesh->scale = 0.5;
-    mesh->c.translation.x = 100;
-    mesh->c.translation.y = -50;
-    mesh->c.translation.z = -150;
-    mesh->c.rotation.y = 90;
-    mesh->c.rotation.x = -45;
-    hud->mesh = mesh;
+   
     ptree & shaders = config::getInstance()->getNode("config.screen.shaders");
 
     BOOST_FOREACH(const ptree::value_type &shad, shaders) {

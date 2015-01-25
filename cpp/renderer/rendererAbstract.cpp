@@ -41,6 +41,17 @@ void renderer::renderAllDecals() {
     }
 }
 
+void renderer::previewInit() {
+     config *c = config::getInstance();
+    frustum_start = c->getVD()->frustum_start;
+    frustum_end = c->getVD()->frustum_end;
+    frustum_x = c->getVD()->frustum_x;
+    frustum_y = c->getVD()->frustum_y;
+    this->vd = vd;
+    this->specificInit();
+    this->setupTextures();
+}
+
 void renderer::init() {
 
     config *c = config::getInstance();

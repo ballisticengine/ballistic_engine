@@ -14,8 +14,8 @@ void sdlIO::setRenderer(renderer *r) {
 }
 
 void sdlIO::initWindow() {
-    //SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_Init(SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_EVERYTHING);
+    //SDL_Init(SDL_INIT_VIDEO);
     TTF::getInstance();
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -37,6 +37,50 @@ void sdlIO::initWindow() {
 void sdlIO::flush() {
     SDL_GL_SwapWindow(sdlIO::window);
     //SDL_RenderPresent(displayRenderer);
+}
+
+void sdlIO::previewLoop() {
+     SDL_Event event;
+     GLPreview *p; 
+     while (!engineState::getInstance()->exit()) {
+        while (SDL_PollEvent(& event)) {
+           
+            if (event.type == SDL_QUIT) {
+                engineState::getInstance()->setExit(true);
+            }
+            
+            if(event.type==SDL_KEYDOWN) {
+                 p=(GLPreview *)r;
+                 switch (event.key.keysym.sym) {
+                     case SDLK_s:
+                         p->c.translation.z--;
+                         break;
+                         
+                     case SDLK_w:
+                         p->c.translation.z++;
+                         break;
+                         
+                     case SDLK_LEFT:
+                         p->c.rotation.y--;
+                         break;
+                     
+                     case SDLK_RIGHT:
+                         p->c.rotation.y++;
+                         break;
+                         
+                     case SDLK_UP:
+                         p->c.rotation.x--;
+                         break;  
+                         
+                     case SDLK_DOWN:
+                         p->c.rotation.x++;
+                         break;    
+                }
+                 
+            }
+        }
+        r->render();
+      }
 }
 
 void sdlIO::eventLoop() {

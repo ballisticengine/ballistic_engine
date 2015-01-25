@@ -17,6 +17,7 @@
 #include "entities/observerEntity.hpp"
 #include "config/path.hpp"
 #include "io/ttf.hpp"
+#include "renderer/GL/GLPreview.hpp"
 
 class sdlIO  :  public singleton<sdlIO> {
 private:
@@ -25,6 +26,7 @@ private:
 	static SDL_Window *window;
 	sdlControls ctrl;
 	renderer *r;
+        
 	world *w;
 	bool fullscreen;
 public:
@@ -32,6 +34,7 @@ public:
     void setRenderer(renderer *r);
 	static void initWindow();
     void eventLoop();
+    void previewLoop();
     sdlIO();
     ~sdlIO();
 };

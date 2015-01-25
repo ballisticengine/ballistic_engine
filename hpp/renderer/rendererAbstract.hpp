@@ -24,7 +24,10 @@ using namespace std;
 
 typedef void (*flushf)();
 
+class ModelView;
+
 class renderer {
+friend class ModelView;
 protected:
     HUD *hud;
     engineState *state;
@@ -65,10 +68,12 @@ protected:
     coords cursor;
     e_loc gx, gy, gz, gr; //globalne transformacje 
 public:
+    
     renderer();
     virtual void setFlush(flushf flush_callback);
 
-    void init();
+    virtual void init();
+   virtual void previewInit(); 
 
     virtual void specificInit() {
 
@@ -100,6 +105,7 @@ public:
     virtual ~renderer();
     virtual void operator()();
     virtual void render() = 0;
+    virtual void previewRender() = 0;
     virtual void setCamera(camera *c);
     virtual void positionCamera();
 };
