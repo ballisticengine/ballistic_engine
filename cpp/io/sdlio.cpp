@@ -69,11 +69,11 @@ void sdlIO::previewLoop() {
                          break;
                          
                      case SDLK_UP:
-                         p->c.rotation.x--;
+                         p->c.rotation.z--;
                          break;  
                          
                      case SDLK_DOWN:
-                         p->c.rotation.x++;
+                         p->c.rotation.z++;
                          break;    
                 }
                  

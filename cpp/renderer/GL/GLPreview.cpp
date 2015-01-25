@@ -16,7 +16,7 @@ GLPreview *GLPreview::getInstance() {
 }
 
 void GLPreview::render() {
-     glClearColor(1,0,0,1);
+     glClearColor(0.5,0.5,0.5,1);
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
