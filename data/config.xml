@@ -44,7 +44,7 @@
                 <model>@gun.xml</model>
                 <bullet>@bullet.xml</bullet>
                 <decal>@decal.png</decal>
-                <velocity>10</velocity> 
+                <velocity>1</velocity> 
                 <location>
                     <x>100</x>
                     <y>-50</y>

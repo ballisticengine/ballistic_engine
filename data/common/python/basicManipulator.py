@@ -166,6 +166,7 @@ class basicManipulator(manipulatorClass):
             print "Prev weapon",self.pc
             if self.world.observer.current_weapon.prev:
                 self.world.observer.current_weapon=self.world.observer.current_weapon.prev
+                self.showHudInfo()
 
         if state.movement.next_weapon:
             self.nc+=1
@@ -173,6 +174,7 @@ class basicManipulator(manipulatorClass):
             state.movement.next_weapon=False
             if self.world.observer.current_weapon.next:
                 self.world.observer.current_weapon=self.world.observer.current_weapon.next
+                self.showHudInfo()
 
 
         if state.movement.forward:
