@@ -51,6 +51,7 @@ struct Guv {
     float u, v;
 };
 
+
 class RendererGL : public renderer, public singleton<RendererGL> {
 protected:
     GLuint v, f;
@@ -101,6 +102,7 @@ public:
     RendererGL();
     virtual void setupTexture(texture *t);
     virtual void render();
+    virtual void previewRender();
 };
 
 #endif	/* RendererGL_HPP */

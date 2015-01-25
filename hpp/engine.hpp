@@ -9,6 +9,7 @@
 #define	ENGINE_HPP
 
 #include <iostream>
+#include <string>
 
 #define BOOST_PYTHON_STATIC_LIB 1
 
@@ -23,9 +24,12 @@ using namespace std;
 #include "misc/singleton.hpp"
 #include "world/world.hpp"
 #include "renderer/GL/RendererGL.hpp"
+#include "renderer/GL/GLPreview.hpp"
 #include "io/sdlio.hpp"
 #include "io/sdlControls.hpp"
 #include "config/config.hpp"
+#include "factories/shapeFactory.hpp"
+#include "types/shape.hpp"
 
 #include "misc/utils.hpp"
 
@@ -42,6 +46,7 @@ class engine : public singleton<engine> {
     public:
 		void pythonInit();
 		void prepare();
+                void preview(string model);
         void start();
 		~engine();
 };

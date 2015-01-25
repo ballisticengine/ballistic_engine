@@ -1,9 +1,8 @@
 CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
 OUTPUT=ballistic 
 
-
-$(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
-	   sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
+deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
+	sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
 	   engine.o sprite.o loaderMD2.o texLoader.o \
 	   config.o engineState.o loaderXML.o PreloadStore.o \
 	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o \
@@ -11,10 +10,24 @@ $(OUTPUT): main.o sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o 
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
-	   timer.o image.o hud.o uimesh.o weapon.o
+	   timer.o image.o hud.o uimesh.o weapon.o glpreview.o
+
+$(OUTPUT): $(deps) main.o 
 	g++ $(CFLAGS) $^ -o $(OUTPUT)
+
+glpreview.o: cpp/renderer/GL/GLPreview.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+modelview: modelview.o modelrenderer.o $(deps)
+	g++ $(CFLAGS) $^ -o modelview
 	
 
+modelrenderer.o: engine_tools/modelviewer/renderer.cpp
+	g++ $(CFLAGS) -I./hpp -c $^ -o $@
+	
+modelview.o: engine_tools/modelviewer/modelview.cpp
+	g++ $(CFLAGS) -I./hpp -c $^ -o $@
+	
 weapon.o: cpp/entities/weapon.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
@@ -51,8 +64,7 @@ hud_defs.o: cpp/python/hud_defs.cpp
 world_defs.o: cpp/python/world_defs.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-modelview: engine_tools/modelviewer/modelview.cpp
-	g++ $(CFLAGS) $^ -o modelviewer
+
 
 main.o: main.cpp sdl.o
 	g++ $(CFLAGS) -c $^ -o $@
@@ -189,4 +201,5 @@ timer.o: cpp/time/timerPosix.cpp
 clean:
 	rm ./*.o 
 	rm ./$(OUTPUT)
+	rm ./modelview
 	
