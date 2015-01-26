@@ -18,6 +18,7 @@ using namespace std;
 #include "types/shape.hpp"
 #include "loaders/md2struct.hpp"
 #include "misc/singleton.hpp"
+#include "factories/textureFactory.hpp"
 
 class loaderMD2 : public singleton<loaderMD2>{
 protected:

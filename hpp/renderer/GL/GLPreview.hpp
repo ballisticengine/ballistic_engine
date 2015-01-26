@@ -15,6 +15,7 @@ class GLPreview : public RendererGL,public singleton<GLPreview> {
 protected:
     shape* model;
     virtual void specificInit();
+    PointLight l;
    
 public:
      coords c;    

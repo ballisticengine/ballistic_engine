@@ -39,7 +39,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
     s->vertices = new v_type[v_count];
     s->normals = new n_type[v_count];
     s->faces = new face[f_count];
-    s->uvs = new uv[uv_count];
+    //s->uvs = new uv[uv_count];
     s->textures = new texture*[f_count];
     s->materials = new Material*[f_count];
     s->frame_count = 0;

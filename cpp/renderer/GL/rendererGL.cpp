@@ -279,27 +279,28 @@ void RendererGL::renderFaceTexShape(shape *s) {
     for (size_t i = 0; i < s->f_count; i++) {
         //texPoly *t=(texPoly *)polys[i];
 
-        if(s->materials[i]) {
+        if(s->materials && s->materials[i]) {
             this->assignMaterial(s->materials[i]);
         }
         
-        if (s->textures[i]) {
+        if (s->textures && s->textures[i]) {
             this->assignTexture(s->textures[i]);
 
         }
 
-        //if(t->getMaterial()) {
-        //	this->assignMaterial(t->getMaterial());	
-        //}
+//        if(t->getMaterial()) {
+//        	this->assignMaterial(t->getMaterial());	
+//        }
 
         //int count=s->getPolyCount();
         this->beginHinted(s);
         for (size_t n = 0; n < s->v_per_poly; n++) {
+           // glNormal3d(s->normals[s->faces[i].index[n]].x,s->normals[s->faces[i].index[n]].y,s->normals[s->faces[i].index[n]].z);
+           glTexCoord2d( s->faces[i].uvs[n].u, s->faces[i].uvs[n].v);
+            glVertex3d(s->vertices[s->faces[i].index[n]].x,
+                    s->vertices[s->faces[i].index[n]].y,
+                    s->vertices[s->faces[i].index[n]].z);
 
-
-            this->renderVertex(&s->vertices[s->faces[i].index[n]], 
-                    &s->normals[s->faces[i].index[n]], 
-                    &s->faces[i].uvs[n]);
             uvc++;
         }
         this->end();
@@ -455,6 +456,7 @@ void RendererGL::renderSkybox(skybox *sky) {
 }
 
 void RendererGL::assignTexture(texture *t) {
+    
     GLuint tex_id;
     tex_id = this->textures_ids[t];
     glActiveTexture(GL_TEXTURE0);
@@ -517,8 +519,10 @@ void RendererGL::setupTexture(texture *t) {
             GL_LINEAR_MIPMAP_LINEAR);
    // glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     //for testing
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
+//glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
     glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
     glGenerateMipmap(GL_TEXTURE_2D);
 }

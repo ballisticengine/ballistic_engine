@@ -68,6 +68,7 @@ struct md2file {
  md2header header;
  md2frame *frames;
  md2triangle *tris;
+ unsigned char skin[64];
  md2st *st;
 };
 
