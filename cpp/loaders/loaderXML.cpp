@@ -38,7 +38,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
     s->uv_count = uv_count;
     s->vertices = new v_type[v_count];
     s->normals = new n_type[v_count];
-    s->faces = new unsigned int*[f_count];
+    s->faces = new face[f_count];
     s->uvs = new uv[uv_count];
     s->textures = new texture*[f_count];
     s->materials = new Material*[f_count];
@@ -78,7 +78,8 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
 
     BOOST_FOREACH(const ptree::value_type &face, faces) {
         ptree f_verts = face.second.get_child("vertices");
-        s->faces[i] = new unsigned int[vpf];
+        s->faces[i].index = new unsigned int[vpf];
+        s->faces[i].uvs=new uv[vpf];
         try {
 
             string texname = face.second.get<string>("texture");
@@ -115,20 +116,29 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
         }
 
         n = 0;
-
+       
         BOOST_FOREACH(const ptree::value_type &f_vx, f_verts) {
             size_t index = f_vx.second.get<size_t>("i");
-            s->faces[i][n] = index;
+            s->faces[i].index[n] = index;
             ptree uv = f_vx.second.get_child("uv");
-            s->uvs[uvc].u = uv.get<e_loc>("u");
-            s->uvs[uvc].v = uv.get<e_loc>("v");
+            s->faces[i].uvs[n].u = uv.get<e_loc>("u");
+            s->faces[i].uvs[n].v = uv.get<e_loc>("v");
             uvc++;
             n++;
 
         }
         i++;
     }
-
+//    face *nfs=new face[f_count];
+//    int q=f_count-1;
+//    for(int p=0; p<f_count; p++) {
+//        nfs[p]=s->faces[p];
+//        nfs[p].uvs=s->faces[q].uvs;
+//        q--;
+//    }
+//    
+//    s->faces=nfs;
+    
     if (type == "animation") {
         ptree frames = shape_xml.get_child("frames");
         size_t frame_count = shape_xml.get<size_t>("frame_count");

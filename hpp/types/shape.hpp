@@ -12,15 +12,19 @@ using namespace std;
 #include "types/material.hpp"
 
 
+struct face {
+    unsigned int *index;
+    uv *uvs;
+};
 
 
 class ShapeAbstract {
 public:
 	
 	MathTypes::BasicVector *vertices,*normals;
+	face *faces;
 	uv *uvs;
-	unsigned int **faces;
-	size_t v_count,uv_count,f_count,v_per_poly;
+        size_t v_count,uv_count,f_count,v_per_poly;
 	virtual ~ShapeAbstract();
 };
 

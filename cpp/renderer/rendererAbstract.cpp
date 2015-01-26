@@ -155,14 +155,14 @@ void renderer::renderPShape(shape *s) {
 void renderer::renderShape(shape *s) {
     //poly_list tris;
     //tris = s->getPolys();
-    this->begin();
-    for (size_t i = 0; i < s->f_count; i++) {
-
-        for (size_t n = 0; n < 3; n++) {
-            this->renderVertex(&s->vertices[s->faces[i][n]], &s->normals[s->faces[i][n]], &s->uvs[i]);
-        }
-    }
-    this->end();
+//    this->begin();
+//    for (size_t i = 0; i < s->f_count; i++) {
+//
+//        for (size_t n = 0; n < 3; n++) {
+//            this->renderVertex(&s->vertices[s->faces[i][n]], &s->normals[s->faces[i][n]], &s->uvs[i]);
+//        }
+//    }
+//    this->end();
 }
 
 void renderer::operator()() {
