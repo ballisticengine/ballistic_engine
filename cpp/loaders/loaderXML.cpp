@@ -80,8 +80,10 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
         ptree f_verts = face.second.get_child("vertices");
         s->faces[i].index = new unsigned int[vpf];
         s->faces[i].uvs=new uv[vpf];
+        s->faces[i].normals= new MathTypes::BasicVector[vpf];
         try {
-
+            
+            
             string texname = face.second.get<string>("texture");
             
             texture *t = (texture *) textureFactory::getInstance()->get(texname, this->force_common);
@@ -123,6 +125,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
             ptree uv = f_vx.second.get_child("uv");
             s->faces[i].uvs[n].u = uv.get<e_loc>("u");
             s->faces[i].uvs[n].v = uv.get<e_loc>("v");
+            s->faces[i].normals[n]=s->normals[index];
             uvc++;
             n++;
 

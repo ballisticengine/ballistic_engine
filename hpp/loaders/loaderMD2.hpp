@@ -19,7 +19,9 @@ using namespace std;
 #include "loaders/md2struct.hpp"
 #include "misc/singleton.hpp"
 #include "factories/textureFactory.hpp"
-
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 class loaderMD2 : public singleton<loaderMD2>{
 protected:
 	void md2ToShape(md2file *md2,shape *s);

@@ -18,7 +18,7 @@ void GLPreview::setModel(shape *model) {
 void GLPreview::specificInit() {
     RendererGL::specificInit();
     lightOff();
-    glFrontFace(GL_CW);
+    //glFrontFace(GL_CW);
     
 }
 GLPreview *GLPreview::getInstance() {

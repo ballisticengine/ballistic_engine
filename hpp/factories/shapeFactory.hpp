@@ -16,7 +16,9 @@ using namespace boost::property_tree;
 #include "anim/animator.hpp"
 #include "anim/modelAnimator.hpp"
 #include "misc/utils.hpp"
-
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 #define GEOM_MEM_EXT "[geom]"
 #define MD2_EXT "md2"

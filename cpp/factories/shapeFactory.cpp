@@ -11,6 +11,9 @@ ModelAnimator * shapeFactory::getAnimator() {
 void * shapeFactory::actualLoad(string fn) {
   string ext=Utils::getExt(fn);
   shape *s=new shape();
+    int cw=GL_CW;
+    s->renderer_hint=(void *)new int;
+    *((int *)s->renderer_hint)=cw;
   if(ext==MD2_EXT) {
   loaderMD2 *loader=loaderMD2::getInstance();
   

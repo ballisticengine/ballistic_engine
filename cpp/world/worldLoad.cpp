@@ -95,7 +95,7 @@ bool world::parseXml(string &fn) {
                 shapef->setScale(sc);
                 shape *shp = (shape *) shapef->get(entobj.second.get<string>("model"));
                 ObjectEntity *oe = new ObjectEntity();
-                shp->calculateNormals();
+                //shp->calculateNormals(); //UWAGA!!
                 oe->no_physics = !physics;
                 oe->setModel(shp);
                 oe->locate(x, y, z);

@@ -262,6 +262,7 @@ void RendererGL::render() {
     this->positionCamera();
 
     this->renderAllEntities();
+    
     if (state->debug_visual) {
         this->drawBoundingBox(w->observer.getBoundingBox());
     }
@@ -272,10 +273,11 @@ void RendererGL::render() {
 }
 
 void RendererGL::renderFaceTexShape(shape *s) {
-
+    
     size_t ** polys = (size_t **) s->faces;
     size_t uvc = 0;
-
+    int dir=*((int *)s->renderer_hint);
+    glFrontFace(dir);
     for (size_t i = 0; i < s->f_count; i++) {
         //texPoly *t=(texPoly *)polys[i];
 
@@ -295,7 +297,7 @@ void RendererGL::renderFaceTexShape(shape *s) {
         //int count=s->getPolyCount();
         this->beginHinted(s);
         for (size_t n = 0; n < s->v_per_poly; n++) {
-           // glNormal3d(s->normals[s->faces[i].index[n]].x,s->normals[s->faces[i].index[n]].y,s->normals[s->faces[i].index[n]].z);
+            glNormal3d(s->faces[i].normals[n].x,s->faces[i].normals[n].y,s->faces[i].normals[n].z);
            glTexCoord2d( s->faces[i].uvs[n].u, s->faces[i].uvs[n].v);
             glVertex3d(s->vertices[s->faces[i].index[n]].x,
                     s->vertices[s->faces[i].index[n]].y,

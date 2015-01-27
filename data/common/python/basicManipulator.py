@@ -113,7 +113,7 @@ class basicManipulator(manipulatorClass):
         print observer
         for o in objects:
             if not o.no_physics:
-                o.acceleration.t.y=-9.2
+                #o.acceleration.t.y=-9.2
                 pass
             if o.type=="object":
                 o.weight=100

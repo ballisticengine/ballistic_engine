@@ -14,6 +14,7 @@ using namespace std;
 
 struct face {
     unsigned int *index;
+    MathTypes::BasicVector *normals;
     uv *uvs;
 };
 

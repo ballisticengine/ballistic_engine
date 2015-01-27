@@ -14,6 +14,7 @@
 #else 
 #include <GL/glew.h>
 #endif
+#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 

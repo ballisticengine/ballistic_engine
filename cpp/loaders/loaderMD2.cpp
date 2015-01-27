@@ -6,16 +6,21 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
     s->vertices = new MathTypes::BasicVector[s->v_count];
     s->f_count = md2->header.num_tris;
     s->v_per_poly = 3;
-    s->textures=new texture*[s->f_count];
-    s->materials=new Material*[s->f_count];
-    
+    s->textures = new texture*[s->f_count];
+    s->materials = new Material*[s->f_count];
+
     for (int i = 0; i < s->v_count; i++) {
         md2_vertex_t md2v = md2->frames[0].verts[i];
         float * scale = md2->frames[0].scale;
         vec3_t scaled;
 
         for (int n = 0; n < 3; n++) {
-            scaled[n] = (float) md2v.v[n];
+            if (n == 2) {
+               
+                scaled[n] = (float) md2v.v[n] * scale[n] * this->scale - md2->frames[0].translate[n] / (this->scale/(this->scale*13));
+            } else {
+                scaled[n] = (float) md2v.v[n] * scale[n] * this->scale + md2->frames[0].translate[n] * this->scale;
+            }
         }
 
         s->vertices[i].x = scaled[0];
@@ -26,20 +31,24 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
 
     cout << "MD2 Skin: " << md2->skin << endl;
     e_loc u, v;
-    s->faces=new face[s->f_count];
+    s->faces = new face[s->f_count];
     for (int i = 0; i < s->f_count; i++) {
-        s->faces[i].index=new unsigned int[s->v_per_poly];
-        s->faces[i].uvs=new uv[s->v_per_poly];
-        s->textures[i]=0;
-        s->materials[i]=0;
+        s->faces[i].index = new unsigned int[s->v_per_poly];
+        s->faces[i].uvs = new uv[s->v_per_poly];
+        s->textures[i] = 0;
+        s->materials[i] = 0;
         for (int vi = 0; vi < 3; vi++) {
-            s->faces[i].index[vi]=md2->tris[i].vertex[vi];
+            s->faces[i].index[vi] = md2->tris[i].vertex[vi];
             int iv = md2->tris[i].st[vi];
             s->faces[i].uvs[vi].u = (float) md2->st[iv].s / (float) md2->header.skinwidth;
             s->faces[i].uvs[vi].v = (float) md2->st[iv].t / (float) md2->header.skinheight;
         }
     }
-    s->textures[0]=(texture *)textureFactory::getInstance()->get("@"+string((char *)md2->skin));
+    s->textures[0] = (texture *) textureFactory::getInstance()->get("@" + string((char *) md2->skin));
+    s->calculateNormals();
+    int cw=GL_CCW;
+    s->renderer_hint=(void *)new int;
+    *((int *)s->renderer_hint)=cw;
     //    for (int t = 0; t < md2->header.num_tris; t++) {
     //
     //
@@ -121,10 +130,10 @@ bool loaderMD2::loadMD2(string fn, shape *s, e_loc scale) {
                 md2->header.num_xyz, f);
         break; //no support for animations for now
     }
-    fseek(f,md2->header.ofs_skins,SEEK_SET);
-    fread(md2->skin,sizeof(unsigned char),64,f);
+    fseek(f, md2->header.ofs_skins, SEEK_SET);
+    fread(md2->skin, sizeof (unsigned char), 64, f);
     fclose(f);
-    
+
     this->md2ToShape(md2, s);
     return true;
 }
