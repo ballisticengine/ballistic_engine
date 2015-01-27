@@ -41,8 +41,9 @@ class basicManipulator(manipulatorClass):
 
 
     def onEntityCollision(self,entitya,entityb,cvec):
+
         self.ccount+=1
-        #print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
+        print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
 
         if entitya.type!="observer":
             entitya.velocity.t.x=-entitya.velocity.t.x
@@ -62,7 +63,7 @@ class basicManipulator(manipulatorClass):
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):
-        #print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
+        print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
         #cvec.write()
         self.wccount+=1
         if entity.type=="object":
@@ -113,7 +114,7 @@ class basicManipulator(manipulatorClass):
         print observer
         for o in objects:
             if not o.no_physics:
-                #o.acceleration.t.y=-9.2
+                o.acceleration.t.y=-9.2
                 pass
             if o.type=="object":
                 o.weight=100

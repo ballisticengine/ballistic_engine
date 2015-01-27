@@ -64,6 +64,9 @@ void world::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
 
         size_t objs_size = objs.size();
         for (int i = 0; i < objs_size; i++) {
+            if (e==objs[i]) {
+                break;
+            }
             cvec = objs[i]->collides(e, c);
 
 
