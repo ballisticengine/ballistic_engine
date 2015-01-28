@@ -8,16 +8,20 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
     s->v_per_poly = 3;
     s->textures = new texture*[s->f_count];
     s->materials = new Material*[s->f_count];
-
+    cout << "T: " << md2->frames[0].translate[2] << endl;
     for (int i = 0; i < s->v_count; i++) {
         md2_vertex_t md2v = md2->frames[0].verts[i];
         float * scale = md2->frames[0].scale;
         vec3_t scaled;
-
+        
         for (int n = 0; n < 3; n++) {
             if (n == 2) {
+                if( md2->frames[0].translate[n]>=0) {
                
-                scaled[n] = (float) md2v.v[n] * scale[n] * this->scale - md2->frames[0].translate[n];// * this->scale;/// (this->scale/(this->scale*13));
+                scaled[n] = (float) md2v.v[n] * scale[n] * this->scale - md2->frames[0].translate[n]*(this->scale*5.4);
+                } else {
+                   scaled[n] = (float) md2v.v[n] * scale[n] * this->scale + md2->frames[0].translate[n]*(this->scale*4.5);
+                }
             } else {
                 scaled[n] = (float) md2v.v[n] * scale[n] * this->scale + md2->frames[0].translate[n] * this->scale;
             }
@@ -95,6 +99,7 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
 
 bool loaderMD2::loadMD2(string fn, shape *s, e_loc scale) {
     this->scale = scale;
+    cout << "MD2: " << fn << endl;
     FILE *f;
     f = fopen(fn.c_str(), "rb");
     if (!f) {

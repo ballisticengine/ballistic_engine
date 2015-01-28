@@ -63,7 +63,7 @@ class basicManipulator(manipulatorClass):
         #cvec.write()
 
     def onLevelCollision(self,entity,room,cvec):
-        print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
+        #print "world collision",entity.name,room.name,"Type",entity.type,"Counter:",self.wccount
         #cvec.write()
         self.wccount+=1
         if entity.type=="object":
