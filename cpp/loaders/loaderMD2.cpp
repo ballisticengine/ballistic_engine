@@ -17,7 +17,7 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
         for (int n = 0; n < 3; n++) {
             if (n == 2) {
                
-                scaled[n] = (float) md2v.v[n] * scale[n] * this->scale - md2->frames[0].translate[n] / (this->scale/(this->scale*13));
+                scaled[n] = (float) md2v.v[n] * scale[n] * this->scale - md2->frames[0].translate[n];// * this->scale;/// (this->scale/(this->scale*13));
             } else {
                 scaled[n] = (float) md2v.v[n] * scale[n] * this->scale + md2->frames[0].translate[n] * this->scale;
             }
