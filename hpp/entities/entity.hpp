@@ -29,6 +29,7 @@ protected:
 public:
     bool no_collisions;
     BoundingCube *bounding_box;
+    bounding_list boundings;
     BoundingCube *last_bound;
     entity();
     virtual ~entity();
@@ -51,7 +52,8 @@ public:
     virtual void face(e_loc x, e_loc y, e_loc z);
 
     virtual void makeBoundingBox();
-    virtual void setBoundingBox(BoundingCube *box);
+    
+    virtual void addBoundingBox(BoundingCube *box);
     virtual BoundingCube * getBoundingBox();
     string type_hint;
 };

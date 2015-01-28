@@ -11,13 +11,14 @@ void engine::preview(string model) {
 
     cout << "Config init..." << endl;
     config::getInstance();
+    
     GLPreview *pr = new GLPreview();
 
     cout << "IO\n";
 
 
     io = new sdlIO();
-
+    return;
     io->initWindow();
     io->setRenderer(pr);
 //    cout << "Renderer init\n";
@@ -36,7 +37,7 @@ void engine::prepare() {
     cout << "Config init..." << endl;
     config::getInstance();
 
-    cout << "World\n";
+    cout << "Get World\n";
     world *w = (world *) world::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
             start_lvl = start_lvl_dir + DS + config::getInstance()->getStart();

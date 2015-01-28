@@ -310,6 +310,7 @@ void RendererGL::renderFaceTexShape(shape *s) {
 }
 
 void RendererGL::specificInit() {
+   
     glewInit();
     if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
         cout << "Shaders in place\n";

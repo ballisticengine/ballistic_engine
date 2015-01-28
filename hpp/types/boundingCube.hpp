@@ -6,13 +6,14 @@
 #include "types/mathTypes.hpp"
 #include "types/shape.hpp"
 #include <vector>
-
+#include <string>
 
 class BoundingCube {
 protected:
 	
 public:
-	e_loc width,height,depth;
+        
+        e_loc width,height,depth;
 	BoundingCube();
 	BoundingCube(shape *s);
 	BoundingCube(e_loc width,e_loc height,e_loc depth);

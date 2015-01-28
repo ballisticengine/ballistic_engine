@@ -9,6 +9,7 @@ void world::prepare() {
 }
 
 world::world() {
+    
     //this->scripting=PyScripting::getInstance();
     moving_lock = false;
 }

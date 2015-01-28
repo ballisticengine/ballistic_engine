@@ -1,7 +1,7 @@
 #include "world/world.hpp"
 
 bool world::parseXml(string &fn) {
-
+    cout << "Loading...\n";
     this->observer.name = "observer";
     this->observer.type = "observer";
     
@@ -99,7 +99,7 @@ bool world::parseXml(string &fn) {
                 oe->no_physics = !physics;
                 oe->setModel(shp);
                 oe->locate(x, y, z);
-                oe->setBoundingBox(new BoundingCube(oe->getModel()));
+                oe->addBoundingBox(new BoundingCube(oe->getModel()));
 
                 oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
                 current_e = (entity *) oe;

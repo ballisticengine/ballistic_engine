@@ -13,7 +13,7 @@ void ObserverMovement::reset() {
 }
 
 void ObserverMouse::reset() {
-    leftclick=rightclick=middleclick=left=right=middle=0;
+    leftclick = rightclick = middleclick = left = right = middle = 0;
 }
 
 bool ObserverMouse::operator==(const ObserverMouse &m) {
@@ -24,7 +24,7 @@ bool ObserverMouse::operator==(const ObserverMouse &m) {
 }
 
 bool ObserverState::operator==(const ObserverState &s) {
-    if (movement == s.movement && mouse==s.mouse) {
+    if (movement == s.movement && mouse == s.mouse) {
         return true;
     }
     return false;
@@ -40,17 +40,17 @@ void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) { //tu podejżane (bo 
     this->x += x;
     this->y += y;
     this->z += z;
-    if (this->bounding_box) {
-        this->bounding_box->max.x += x;
-        this->bounding_box->max.y += y;
-        this->bounding_box->max.z += z;
-        this->bounding_box->min.x += x;
-        this->bounding_box->min.y += y;
-        this->bounding_box->min.z += z;
-        this->bounding_box->loc.x = this->x;
-        this->bounding_box->loc.y = this->y;
-        this->bounding_box->loc.z = this->z;
-    }
+   
+        boundings[0]->max.x += x;
+        boundings[0]->max.y += y;
+        boundings[0]->max.z += z;
+        boundings[0]->min.x += x;
+        boundings[0]->min.y += y;
+        boundings[0]->min.z += z;
+        boundings[0]->loc.x = this->x;
+        boundings[0]->loc.y = this->y;
+        boundings[0]->loc.z = this->z;
+   
     this->cam->translate(x, y, z);
 }
 
@@ -58,17 +58,17 @@ void ObserverEntity::locate(e_loc x, e_loc y, e_loc z) {
     this->x = x;
     this->y = y;
     this->z = z;
-    if (this->bounding_box) { //todo: bez kopiuj wklej
-        this->bounding_box->max.x += x;
-        this->bounding_box->max.y += y;
-        this->bounding_box->max.z += z;
-        this->bounding_box->min.x += x;
-        this->bounding_box->min.y += y;
-        this->bounding_box->min.z += z;
-        this->bounding_box->loc.x = this->x;
-        this->bounding_box->loc.y = this->y;
-        this->bounding_box->loc.z = this->z;
-    }
+    
+        boundings[0]->max.x += x;
+        boundings[0]->max.y += y;
+        boundings[0]->max.z += z;
+        boundings[0]->min.x += x;
+        boundings[0]->min.y += y;
+        boundings[0]->min.z += z;
+        boundings[0]->loc.x = this->x;
+        boundings[0]->loc.y = this->y;
+        boundings[0]->loc.z = this->z;
+    
     this->cam->locate(x, y, z);
 
 }
@@ -97,14 +97,14 @@ void ObserverEntity::face(e_loc x, e_loc y, e_loc z) {
 
 camera * ObserverEntity::getCamera() {
 
-    cam->locate(x, y - bounding_box->height / 2, z);
+    cam->locate(x, y - boundings[0]->height / 2, z);
     //cam->face(rx,ry,rz);
 
     return this->cam;
 }
 
 ObserverEntity::ObserverEntity() {
-    this->bounding_box = new BoundingCube(7, 30, 7);
+    boundings.push_back(new BoundingCube(7, 30, 7));
     headbob_i = 0;
     bob_timer.getDiffR();
     this->cam = cam;

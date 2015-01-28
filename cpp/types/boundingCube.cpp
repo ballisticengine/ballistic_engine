@@ -47,7 +47,8 @@ void BoundingCube::calculateSizes() {
 }
 
 void BoundingCube::calculate(shape * s) {
-//vert_list vs=s->getVertices();
+    cout << "BCC";
+    //vert_list vs=s->getVertices();
 	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
 	max.x=min.x=max.y=min.y=max.z=min.z=0;
 	

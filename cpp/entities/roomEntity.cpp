@@ -59,7 +59,7 @@ ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string objec
     oe->setModel(s);
     oe->locate(-c.translation.x,-c.translation.y,-c.translation.z);
     oe->face(c.rotation.x, c.rotation.y, c.rotation.z);
-    oe->setBoundingBox(new BoundingCube(oe->getModel()));
+    oe->addBoundingBox(new BoundingCube(oe->getModel()));
     oe->name=object_name;
     oe->type="object";
     room->addObjectEntity(oe);
@@ -77,7 +77,7 @@ void roomEntity::removeObjectEntity(string name) {
 }
   
 MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
-    BoundingCube *bound=ent->bounding_box;
+    BoundingCube *bound=ent->boundings[0];
     e_loc in_count = 0, out_count = 0;
     in_count = out_count = 0;
     BoundingCube bound_off = *bound, bound_current, *in_bounding;
