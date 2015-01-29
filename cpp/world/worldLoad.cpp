@@ -86,6 +86,7 @@ bool world::parseXml(string &fn) {
                     z = entobj.second.get<float>("location.z"), rx = entobj.second.get<float>("facing.x"),
                     ry = entobj.second.get<float>("facing.y"), rz = entobj.second.get<float>("facing.z");
             entity *current_e = 0;
+            boost::algorithm::to_lower(type);
             if (type == "object") {
                 string objectbraces = "[OBJECT]";
                 name = name.replace(name.find(objectbraces), objectbraces.length(), "");

@@ -12,6 +12,7 @@
 #include <ctime>
 #include <map>
 #include <queue>
+#include <boost/algorithm/string.hpp>    
 
 using namespace std;
 using namespace boost::property_tree;
@@ -37,6 +38,7 @@ using namespace boost::property_tree;
 #include "python/scripting.hpp"
 #include "python/locker.hpp"
 #include "world/PreloadStore.hpp"
+
 
 typedef vector <roomEntity *> rooms_list;
 
