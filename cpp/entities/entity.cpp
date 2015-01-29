@@ -84,16 +84,8 @@ entity::~entity() {
     //}
 }
 
-/* offset to w�a�ciwie nowa pozycja, a nie przemieszczenie */
-
-MathTypes::vector entity::collides(entity *ent, coords offset)
- {
-    
-    int i=0,n=0;
-    
-    BoundingCube *a = boundings[i], *b = ent->boundings[n];
-
-    MathTypes::vector res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
+ MathTypes::vector entity::cTest(BoundingCube *a,BoundingCube *b,coords offset) {
+      MathTypes::vector res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
 
     offsetx.y = offsetx.z = 0;
     offsety.x = offsety.z = 0;
@@ -185,6 +177,41 @@ MathTypes::vector entity::collides(entity *ent, coords offset)
     }
 
     return res;
+ }
+
+/* offset to w�a�ciwie nowa pozycja, a nie przemieszczenie */
+
+MathTypes::vector entity::collides(entity *ent, coords offset)
+ {
+    
+    int i=0,n=0;
+    
+    BoundingCube *a = boundings[0], *b = ent->boundings[0];
+    e_loc sa=a->width*a->height,sb=b->width*b->height;
+    
+    MathTypes::vector res;
+    
+    
+    for(size_t i=0; i<boundings.size(); i++) {
+        for(size_t n=0; n<ent->boundings.size(); n++) {
+            BoundingCube *a = boundings[i], *b = ent->boundings[n];
+            MathTypes::vector cvec=cTest(a,b,offset);
+            e_loc nsa,nsb;
+            if(cvec.x || cvec.y || cvec.z) {
+                nsa=a->width*a->height;
+                nsb=b->width*b->height;
+            }
+            
+            if(nsa<=sa && nsb<=sb) {
+                sa=nsa;
+                sb=nsb;
+                res=cvec;
+            }
+        }
+    }
+    a = boundings[i];
+    b = ent->boundings[n];
+    return res; //cTest(a,b,offset);
 
 }
 

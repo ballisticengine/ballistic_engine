@@ -20,11 +20,16 @@ BoundingCube offsetBounding(BoundingCube *bc, coords offset);
 bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::vector offset);
 bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset);
 
+struct collsionInfo {
+    MathTypes::vector cvec;
+    string name;
+};
+
 class entity {
 protected:
     e_loc x, y, z, rx, ry, rz;
     MathTypes::vector velocity;
-
+    virtual MathTypes::vector cTest(BoundingCube *a,BoundingCube *b,coords offset);
     void syncBounding();
 public:
     bool no_collisions;
