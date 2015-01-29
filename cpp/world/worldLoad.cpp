@@ -37,7 +37,7 @@ bool world::parseXml(string &fn) {
                 file=preload.second.get<string>("file");
         cout << "File "<<file << ", " << name << endl;
         if(type=="model") {
-            shape *shp = (shape *) shapef->get(file);
+            shape *shp = shapef->getShape(file);
             ps->shape_preloads[name]=shp;
         } else if(type=="texture") {
             texture *tex=(texture *)texf->get(file);
@@ -93,21 +93,25 @@ bool world::parseXml(string &fn) {
                 e_loc sc = entobj.second.get<e_loc>("scale");
                 bool physics = entobj.second.get<bool>("physics");
                 shapef->setScale(sc);
-                shape *shp = (shape *) shapef->get(entobj.second.get<string>("model"));
+                modelInfo *mi = (modelInfo *) shapef->get(entobj.second.get<string>("model"));
                 ObjectEntity *oe = new ObjectEntity();
                 //shp->calculateNormals(); //UWAGA!!
                 oe->no_physics = !physics;
-                oe->setModel(shp);
+                oe->setModel(mi->s);
                 oe->locate(x, y, z);
-                oe->addBoundingBox(new BoundingCube(oe->getModel()));
-
+                if(mi->boundings.size()>0) {
+                    cout << entobj.second.get<string>("model") << " has custom bounding boxes " << endl;
+                    oe->boundings=mi->boundings;
+                } else {
+                    oe->addBoundingBox(new BoundingCube(oe->getModel()));
+                }
                 oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
                 current_e = (entity *) oe;
                 //oe->face(rx,ry,rz);
                 //oe->velocity.t.x=10;
                 roomE->addObjectEntity(oe);
-                if (shp->frame_count > 0) {
-                    roomE->model_animator.addShape(shp);
+                if (mi->s->frame_count > 0) {
+                    roomE->model_animator.addShape(mi->s);
                 }
             } else if (type == "light") {
                 //cout << "Light " << x << ", " << y << ", " << z << endl ;	

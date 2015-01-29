@@ -176,6 +176,8 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
     }
     
     mi->s=s;
+    
+    
 
 
 }

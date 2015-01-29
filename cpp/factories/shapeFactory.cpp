@@ -34,7 +34,12 @@ void * shapeFactory::actualLoad(string fn) {
         cout << "Unknown extension " << ext << endl;
         return 0;
     }
-    return (void *) mi->s;
+    return (void *) mi;
+}
+
+shape * shapeFactory::getShape(string fn,bool force_common) {
+    modelInfo *mi=(modelInfo *)this->get(fn,force_common);
+    return mi->s;
 }
 
 void shapeFactory::setScale(e_loc scale) {

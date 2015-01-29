@@ -416,9 +416,10 @@ void RendererGL::addShader(string name) {
     glUseProgram(p);
     texloc = glGetUniformLocation(p, "tex");
     use_light_glsl=glGetUniformLocation(p,"use_light");
+    glsl_bounding=glGetUniformLocation(p,"bounding");
     light_set=1;
     glUniform1i(use_light_glsl,light_set);
-  
+    glUniform1i(glsl_bounding,0);
     glUniform1i(glGetUniformLocation(p, "light_count"),7); //!!
    
 
@@ -549,6 +550,7 @@ void RendererGL::positionCameraSpecific() {
 
 void RendererGL::drawBoundingBox(BoundingCube *bound) {
     //drawBox(bound->getWidth(),bound->getHeight(),bound->getDepth());
+      glUniform1i(glsl_bounding,1);  
     this->reset();
     this->positionCamera();
     this->lightOff();
@@ -601,6 +603,7 @@ void RendererGL::drawBoundingBox(BoundingCube *bound) {
     glEnable(GL_CULL_FACE);
     glColor3f(1, 1, 1);
     this->lightOn();
+    glUniform1i(glsl_bounding,0);  
 }
 
 void RendererGL::drawBox(e_loc width, e_loc height, e_loc depth) {

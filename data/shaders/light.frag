@@ -6,11 +6,16 @@ varying vec2 vTexCoord;
 varying in vec2 uv;
 uniform int light_count;
 uniform int use_light;
+uniform int bounding;
 
 void main (void)  
 {  
-  
-    if(use_light==0) {
+  if(bounding==1) {
+    gl_FragColor=vec4(0,1,0,1);
+return;
+   }
+    
+if(use_light==0) {
         gl_FragColor =   texture2D(tex, gl_TexCoord[0].st); 
         return;
      }

@@ -35,7 +35,8 @@ protected:
 
 public:
 	virtual void setAnimator(ModelAnimator *a);
-	virtual ModelAnimator * getAnimator();
+	virtual shape * getShape(string fn,bool force_common=false);
+        virtual ModelAnimator * getAnimator();
 	virtual void setScale(e_loc scale);
 	virtual shape * getXML(ptree shp);
 	shapeFactory();
