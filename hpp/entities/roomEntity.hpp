@@ -45,7 +45,7 @@ public:
         ObjectEntity * spawnShape(shape *s,coords c,string object_name="");
         roomEntity();
 	~roomEntity();
-	virtual MathTypes::vector collides(entity *ent,coords offset);
+	virtual collsionInfo collides(entity *ent,coords offset);
 };
 
 #endif

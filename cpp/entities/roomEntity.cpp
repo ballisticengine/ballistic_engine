@@ -76,7 +76,7 @@ void roomEntity::removeObjectEntity(string name) {
     models.erase(models.begin()+i);
 }
   
-MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
+ collsionInfo roomEntity::collides(entity *ent,coords offset) {
     BoundingCube *bound=ent->boundings[0];
     e_loc in_count = 0, out_count = 0;
     in_count = out_count = 0;
@@ -165,18 +165,19 @@ MathTypes::vector roomEntity::collides(entity *ent,coords offset) {
             out_count++;
         }
     }
-
+    collsionInfo ci;
    // cout << in_count << ", " << out_count << endl;
     if (in_count == 0) {
         //cvec.write();
-        return cvec;
+        ci.cvec=cvec;
+        return ci;
 
     } else {
 
         ent->last_bound = in_bounding;
     }
-
-    return none;
+    ci.cvec=none;
+    return ci;
 }
 
 

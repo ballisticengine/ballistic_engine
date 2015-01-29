@@ -181,12 +181,12 @@ entity::~entity() {
 
 /* offset to w�a�ciwie nowa pozycja, a nie przemieszczenie */
 
-MathTypes::vector entity::collides(entity *ent, coords offset)
+collsionInfo entity::collides(entity *ent, coords offset)
  {
     
     int i=0,n=0;
     
-    BoundingCube *a = boundings[0], *b = ent->boundings[0];
+    BoundingCube *a = boundings[0], *b = ent->boundings[0],*bwin;
     e_loc sa=a->width*a->height,sb=b->width*b->height;
     
     MathTypes::vector res;
@@ -206,12 +206,17 @@ MathTypes::vector entity::collides(entity *ent, coords offset)
                 sa=nsa;
                 sb=nsb;
                 res=cvec;
+                bwin=b;
             }
         }
     }
     a = boundings[i];
     b = ent->boundings[n];
-    return res; //cTest(a,b,offset);
+    
+    collsionInfo ret;
+    ret.cvec=res;
+    ret.name=bwin->name;
+    return ret; //cTest(a,b,offset);
 
 }
 
