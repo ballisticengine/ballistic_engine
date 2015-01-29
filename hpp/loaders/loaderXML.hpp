@@ -18,16 +18,22 @@ using namespace boost::property_tree;
 #include "types/shape.hpp"
 #include "factories/textureFactory.hpp"
 #include "types/material.hpp"
+#include "types/boundingCube.hpp"
 #include "misc/utils.hpp"
+
+struct modelInfo {
+    shape *s;
+    bounding_list boundings;    
+};
 
 class loaderXML : public singleton<loaderXML> {
 protected:
     bool  force_common;
     //bool loadFile(string fn);
- void toShape(ptree &geom,ptree &shape_xml,shape *s);
+ void toShape(ptree &geom,ptree &shape_xml,modelInfo *mi);
 public:
 	string loadXML(ptree &tree,shape *s);
-	bool load(string fn, shape *s,bool force_common=false);
+	bool load(string fn, modelInfo *mi,bool force_common=false);
 	string getName(ptree &tree);
 	//loadXML(string fn,shape *s); //TODO
 };

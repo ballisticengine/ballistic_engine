@@ -1,16 +1,16 @@
 #include "loaders/loaderXML.hpp"
 
-bool loaderXML::load(string fn, shape *s, bool force_common) {
+bool loaderXML::load(string fn, modelInfo *mi, bool force_common) {
     this->force_common = force_common;
     ptree pt;
     read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
     ptree shp = pt.get_child("shape");
     ptree geom = shp.get_child("geom");
-    this->toShape(geom, shp, s);
+    this->toShape(geom, shp, mi);
     return true;
 }
 
-void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
+void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
 
     ptree
     verts = geom.get_child("vertices"),
@@ -31,7 +31,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
     } catch (std::exception e) {
         type = "level";
     }
-
+    shape *s=mi->s;
     s->f_count = f_count;
     s->v_count = v_count;
     s->v_per_poly = vpf;
@@ -174,6 +174,8 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, shape *s) {
 
         }
     }
+    
+    mi->s=s;
 
 
 }
@@ -184,7 +186,10 @@ string loaderXML::loadXML(ptree &tree, shape *s) {
             ;
 
     string name = this->getName(tree);
-    this->toShape(geom, shape, s);
+    modelInfo *mi=new modelInfo();
+    mi->s=s;
+    this->toShape(geom, shape, mi);
+    
     return name;
 }
 

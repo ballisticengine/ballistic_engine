@@ -108,11 +108,14 @@ void renderer::renderAllEntities() { //to sie nie nadaje do poziom�w bo transf
         this->face(c.rotation.x, c.rotation.y, c.rotation.z);
 
         
-
-        //this->drawBoundingBox(ents[i]->getBoundingBox());
+        size_t b=0;
+        
         this->renderFaceTexShape(ents[i]->getModel());
         if (state->debug_visual) {
-            this->drawBoundingBox(ents[i]->getBoundingBox());
+            for(b=0; b<ents[i]->boundings.size(); b++) {
+                this->drawBoundingBox(ents[i]->boundings[b]);
+            }
+            b=0;
         }
 
     }

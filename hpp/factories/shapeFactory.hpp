@@ -25,9 +25,6 @@ using namespace boost::property_tree;
 #define XML_EXT "xml"
 
 
-
-
-
 class shapeFactory: public factory, public singleton<shapeFactory> {
 protected:
 	virtual void * actualLoad(string fn);
