@@ -550,7 +550,7 @@ void RendererGL::positionCameraSpecific() {
 
 void RendererGL::drawBoundingBox(BoundingCube *bound) {
     //drawBox(bound->getWidth(),bound->getHeight(),bound->getDepth());
-      glUniform1i(glsl_bounding,1);  
+    glUniform1i(glsl_bounding,1);  
     this->reset();
     this->positionCamera();
     this->lightOff();

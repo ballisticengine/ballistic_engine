@@ -176,9 +176,44 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
     }
     
     mi->s=s;
-    
-    
-
+    try {
+        ptree bounds_xml=shape_xml.get_child("bounds");
+        BOOST_FOREACH(const ptree::value_type &bound_xml, bounds_xml) {
+            /*
+               e_loc
+                minx = entobj.second.get<float>("min.x"),
+                        miny = entobj.second.get<float>("min.y"),
+                        minz = entobj.second.get<float>("min.z"),
+                        maxx = entobj.second.get<float>("max.x"),
+                        maxy = entobj.second.get<float>("max.y"),
+                        maxz = entobj.second.get<float>("max.z")
+                        ;
+                cout << "Found bounding\n";
+                cout << minx << ", " << miny << ", " << minz << ", " << maxx << ", " << maxy << ", " << maxz << endl;
+                BoundingCube *bc = new BoundingCube(minx, miny, minz, maxx, maxy, maxz);
+                bc->name = name;
+                roomE->boundings.push_back(bc);
+             */
+            e_loc
+                minx = bound_xml.second.get<float>("min.x"),
+                        miny = bound_xml.second.get<float>("min.y"),
+                        minz = bound_xml.second.get<float>("min.z"),
+                        maxx = bound_xml.second.get<float>("max.x"),
+                        maxy = bound_xml.second.get<float>("max.y"),
+                        maxz = bound_xml.second.get<float>("max.z")
+                        ;
+            string name=bound_xml.second.get<string>("name");
+            BoundingCube *bc = new BoundingCube(minx, miny, minz, maxx, maxy, maxz);
+            bc->name = name;
+            cout << "Bounding names:\n";
+            cout << bc->name << endl;
+            mi->boundings.push_back(bc);
+            
+        }
+        
+    } catch (std::exception e) {
+        
+    }
 
 }
 
