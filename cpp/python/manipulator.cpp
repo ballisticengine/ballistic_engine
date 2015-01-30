@@ -38,8 +38,9 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		PhysicalEntity *a,*b;
 		a=(PhysicalEntity *)paramA;
 		b=(PhysicalEntity *)paramB;
-		MathTypes::vector cvec=*(MathTypes::vector *)paramC;
-		f(boost::ref(*a),boost::ref(*b),boost::ref(cvec));
+		//MathTypes::vector cvec=*(MathTypes::vector *)paramC;
+                collsionInfo ci=*(collsionInfo *)paramC;
+		f(boost::ref(*a),boost::ref(*b),boost::ref(ci));
 	} else if(name=="EntityMovement") {
 		PhysicalEntity *a;
 		a=(PhysicalEntity *)paramA;	

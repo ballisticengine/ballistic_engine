@@ -15,7 +15,7 @@ using namespace std;
 
 
 
-
+#include "entities/entity.hpp"
 #include "misc/singleton.hpp"
 #include "config/config.hpp"
 #include "misc/utils.hpp"

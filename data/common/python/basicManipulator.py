@@ -40,10 +40,10 @@ class basicManipulator(manipulatorClass):
 
 
 
-    def onEntityCollision(self,entitya,entityb,cvec):
-
+    def onEntityCollision(self,entitya,entityb,ci):
+        cvec=ci.cvec
         self.ccount+=1
-        print entitya.name,"collided",entityb.name,"vector",cvec,"Counter:",self.ccount
+        print entitya.name,"collided",entityb.name,"nameA",ci.nameA,'nameB',ci.nameB,"vector",cvec,"Counter:",self.ccount
 
         if entitya.type!="observer":
             entitya.velocity.t.x=-entitya.velocity.t.x

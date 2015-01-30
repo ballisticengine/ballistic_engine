@@ -215,7 +215,8 @@ collsionInfo entity::collides(entity *ent, coords offset)
     
     collsionInfo ret;
     ret.cvec=res;
-    ret.name=bwin->name;
+    ret.nameB=bwin->name;
+    ret.nameA=a->name;
     return ret; //cTest(a,b,offset);
 
 }

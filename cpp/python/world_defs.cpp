@@ -31,8 +31,23 @@ BOOST_PYTHON_MODULE(world) {
     bp::class_<shape, shape *, bp::bases<ShapeAbstract> >("shape");
 
 
+    bp::class_<BoundingCube, BoundingCube *>("BoundingCube")
+        .def_readonly("name",&BoundingCube::name)
+        .def_readonly("max",&BoundingCube::max)
+        .def_readonly("min",&BoundingCube::max)
+        .def_readonly("loc",&BoundingCube::loc)
+        .def_readonly("width",&BoundingCube::width)
+        .def_readonly("height",&BoundingCube::height)
+        .def_readonly("depth",&BoundingCube::depth)
+    ;
 
-
+    
+    bp::class_<collsionInfo, collsionInfo *>("collsionInfo")
+        .def_readonly("cvec",&collsionInfo::cvec)
+        .def_readonly("nameA",&collsionInfo::nameA)
+        .def_readonly("nameB",&collsionInfo::nameB)
+    ;
+    
     bp::class_<entity, entity *>("entity")
             .def("getCoords", &entity::getCoords)
             .def("locate", &entity::locate)

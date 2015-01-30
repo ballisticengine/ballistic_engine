@@ -22,7 +22,7 @@ bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::vector offset);
 
 struct collsionInfo {
     MathTypes::vector cvec;
-    string name;
+    string nameA,nameB;
 };
 
 class entity {
