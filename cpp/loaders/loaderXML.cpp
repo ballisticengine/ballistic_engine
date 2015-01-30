@@ -132,15 +132,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
         }
         i++;
     }
-//    face *nfs=new face[f_count];
-//    int q=f_count-1;
-//    for(int p=0; p<f_count; p++) {
-//        nfs[p]=s->faces[p];
-//        nfs[p].uvs=s->faces[q].uvs;
-//        q--;
-//    }
-//    
-//    s->faces=nfs;
+
     
     if (type == "animation") {
         ptree frames = shape_xml.get_child("frames");
@@ -176,31 +168,30 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
     }
     
     mi->s=s;
+    e_loc slocx=0,slocy=0,slocz=0;
+            
+    try {
+            slocx=shape_xml.get<e_loc>("loc.x");
+            slocy=shape_xml.get<e_loc>("loc.y");
+            slocz=shape_xml.get<e_loc>("loc.z");
+    }catch (std::exception e) {
+        cout << "No loc for " << type;
+    }
     try {
         ptree bounds_xml=shape_xml.get_child("bounds");
         BOOST_FOREACH(const ptree::value_type &bound_xml, bounds_xml) {
-            /*
-               e_loc
-                minx = entobj.second.get<float>("min.x"),
-                        miny = entobj.second.get<float>("min.y"),
-                        minz = entobj.second.get<float>("min.z"),
-                        maxx = entobj.second.get<float>("max.x"),
-                        maxy = entobj.second.get<float>("max.y"),
-                        maxz = entobj.second.get<float>("max.z")
-                        ;
-                cout << "Found bounding\n";
-                cout << minx << ", " << miny << ", " << minz << ", " << maxx << ", " << maxy << ", " << maxz << endl;
-                BoundingCube *bc = new BoundingCube(minx, miny, minz, maxx, maxy, maxz);
-                bc->name = name;
-                roomE->boundings.push_back(bc);
-             */
+            cout << "SLC " << slocx << endl;
             e_loc
-                minx = bound_xml.second.get<float>("min.x"),
-                        miny = bound_xml.second.get<float>("min.y"),
-                        minz = bound_xml.second.get<float>("min.z"),
-                        maxx = bound_xml.second.get<float>("max.x"),
-                        maxy = bound_xml.second.get<float>("max.y"),
-                        maxz = bound_xml.second.get<float>("max.z")
+                        locx=bound_xml.second.get<e_loc>("loc.x"),
+                        locy=bound_xml.second.get<e_loc>("loc.y"),
+                        locz=bound_xml.second.get<e_loc>("loc.z"),
+                        minx = bound_xml.second.get<e_loc>("min.x")-slocx+locx,
+                        miny = bound_xml.second.get<e_loc>("min.y")-slocy+locy,
+                        minz = bound_xml.second.get<e_loc>("min.z")-slocz+locz,
+                       
+                        maxx = bound_xml.second.get<e_loc>("max.x")-slocx+locx,
+                        maxy = bound_xml.second.get<e_loc>("max.y")-slocy+locy,
+                        maxz = bound_xml.second.get<e_loc>("max.z")-slocz+locz
                         ;
             string name=bound_xml.second.get<string>("name");
             BoundingCube *bc = new BoundingCube(minx, miny, minz, maxx, maxy, maxz);

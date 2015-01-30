@@ -73,7 +73,7 @@ void entity::translate(coords c) {
 }
 
 entity::entity() {
-    
+
     no_collisions = false;
 }
 
@@ -84,8 +84,8 @@ entity::~entity() {
     //}
 }
 
- MathTypes::vector entity::cTest(BoundingCube *a,BoundingCube *b,coords offset) {
-      MathTypes::vector res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
+MathTypes::vector entity::cTest(BoundingCube *a, BoundingCube *b, coords offset) {
+    MathTypes::vector res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
 
     offsetx.y = offsetx.z = 0;
     offsety.x = offsety.z = 0;
@@ -177,46 +177,51 @@ entity::~entity() {
     }
 
     return res;
- }
+}
 
 /* offset to w�a�ciwie nowa pozycja, a nie przemieszczenie */
 
-collsionInfo entity::collides(entity *ent, coords offset)
- {
-    
-    int i=0,n=0;
-    
-    BoundingCube *a = boundings[0], *b = ent->boundings[0],*bwin;
-    e_loc sa=a->width*a->height,sb=b->width*b->height;
-    
+collsionInfo entity::collides(entity *ent, coords offset) {
+
+    int i = 0, n = 0;
+
+    BoundingCube *a = boundings[0], *b = ent->boundings[0], *awin; //nie bwin tylko awin
+    e_loc sa = 9999999999999, sb = b->width * b->height;
+
     MathTypes::vector res;
-    
-    
-    for(size_t i=0; i<boundings.size(); i++) {
-        for(size_t n=0; n<ent->boundings.size(); n++) {
+    bool has_res = false;
+    e_loc nsa, nsb;
+    for (size_t i = 0; i < boundings.size(); i++) {
+        for (size_t n = 0; n < ent->boundings.size(); n++) {
             BoundingCube *a = boundings[i], *b = ent->boundings[n];
-            MathTypes::vector cvec=cTest(a,b,offset);
-            e_loc nsa,nsb;
-            if(cvec.x || cvec.y || cvec.z) {
-                nsa=a->width*a->height;
-                nsb=b->width*b->height;
+            MathTypes::vector cvec = cTest(a, b, offset);
+
+            if (cvec.x || cvec.y || cvec.z) {
+                nsa = a->width * a->height;
+                cout << nsa << ", " << sa << endl;
+                cout.flush();
+                //nsb=b->width*b->height;
+                if (nsa <= sa) {
+                    sa = nsa;
+                    //sb = nsb;
+                    res = cvec;
+                    has_res = true;
+                    awin = a;
+                }
             }
-            
-            if(nsa<=sa && nsb<=sb) {
-                sa=nsa;
-                sb=nsb;
-                res=cvec;
-                bwin=b;
-            }
+
+
         }
     }
-    a = boundings[i];
-    b = ent->boundings[n];
-    
     collsionInfo ret;
-    ret.cvec=res;
-    ret.nameB=bwin->name;
-    ret.nameA=a->name;
+    if (has_res) {
+        ret.collided = true;
+        ret.cvec = res;
+        ret.nameB = b->name;
+        ret.nameA = awin->name;
+    } else {
+        ret.collided = false;
+    }
     return ret; //cTest(a,b,offset);
 
 }
@@ -234,8 +239,8 @@ void entity::addBoundingBox(BoundingCube *box) {
 }
 
 BoundingCube * entity::getBoundingBox() {
-    if(boundings.size()>0) {
-    return boundings[0];
+    if (boundings.size() > 0) {
+        return boundings[0];
     } else {
         return 0;
     }

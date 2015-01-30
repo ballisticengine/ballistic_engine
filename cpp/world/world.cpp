@@ -72,7 +72,7 @@ void world::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
             cvec=ci.cvec;
 
 
-            if (cvec.x || cvec.y || cvec.z) {
+            if (ci.collided) {
                 lc = true;
 
                 PyScripting::getInstance()->broadcast("EntityCollision", (void *) e, (void *) objs[i], (void *) &ci);

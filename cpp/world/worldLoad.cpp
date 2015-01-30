@@ -104,6 +104,12 @@ bool world::parseXml(string &fn) {
                     cout << entobj.second.get<string>("model") << " has custom bounding boxes " << endl;
                     for(int i=0; i<mi->boundings.size(); i++) {
                         cout << mi->boundings[i]->name << endl;
+//                        mi->boundings[i]->max.x+=x;
+//                        mi->boundings[i]->max.y+=y;
+//                        mi->boundings[i]->max.z+=z;
+//                        mi->boundings[i]->min.x+=x;
+//                        mi->boundings[i]->min.y+=y;
+//                        mi->boundings[i]->min.z+=z;
                         oe->addBoundingBox(mi->boundings[i]);
                     }
                     //oe->boundings=mi->boundings;
