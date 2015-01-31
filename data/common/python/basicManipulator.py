@@ -147,9 +147,11 @@ class basicManipulator(manipulatorClass):
         if state.mouse.left:
                 self.showHudInfo()
                 x=self.world.active_room.spawnShape(self.world.observer.current_weapon.bullet,ocoords,str(self.spawnc))
-                x.translate3(0,10,0)
+                #
+                x.face(0,90-ocoords.rotation.y,-ocoords.rotation.x)
+                x.translate3(0,15-ocoords.rotation.x,0)
+
                 x.subtype="bullet"
-                #x.acceleration.t.y=-9.2
                 xt=math.sin(xdelta)
                 yt=-math.cos(xdelta)
                 zt=-math.sin(ydelta)
@@ -158,7 +160,8 @@ class basicManipulator(manipulatorClass):
                 x.velocity.t.z=vel*yt
                 x.velocity.t.y=vel*zt
                 ocoords.rotation.write()
-                x.face(0,90-ocoords.rotation.y,-ocoords.rotation.x)
+
+
                 x.weight=1.2
                 self.spawnc+=1
 

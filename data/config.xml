@@ -17,8 +17,7 @@
         <shaders>
             <shader>
                 light
-            </shader>
-           
+            </shader>   
         </shaders>
         <hud>
             <image>
