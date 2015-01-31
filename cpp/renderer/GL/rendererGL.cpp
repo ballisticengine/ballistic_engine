@@ -261,7 +261,7 @@ void RendererGL::render() {
     this->reset();
     this->positionCamera();
 
-    this->renderAllEntities();
+    this->renderAllEntities(); 
     
     if (state->debug_visual) {
         this->drawBoundingBox(w->observer.getBoundingBox());
@@ -276,7 +276,8 @@ void RendererGL::renderFaceTexShape(shape *s) {
     
     size_t ** polys = (size_t **) s->faces;
     size_t uvc = 0;
-    int dir=*((int *)s->renderer_hint);
+    int dir=*((int *)s->renderer_hint),int_prev_dir;
+    glGetIntegerv(GL_FRONT_FACE,&int_prev_dir);
     glFrontFace(dir);
     for (size_t i = 0; i < s->f_count; i++) {
         //texPoly *t=(texPoly *)polys[i];
@@ -307,6 +308,7 @@ void RendererGL::renderFaceTexShape(shape *s) {
         }
         this->end();
     }
+    glFrontFace(int_prev_dir);
 }
 
 void RendererGL::specificInit() {

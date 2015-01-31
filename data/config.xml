@@ -29,6 +29,14 @@
                 <x>-1</x>
                 <y>-1</y>
             </image>
+            <image>
+                <name>crosshair</name>
+                <texture>@aim.png</texture>
+                <width>0.15</width>
+                <height>0.2</height>
+                <x>0</x>
+                <y>0</y>
+            </image>
           
         </hud>
     </screen>

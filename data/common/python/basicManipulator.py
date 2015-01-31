@@ -104,6 +104,7 @@ class basicManipulator(manipulatorClass):
 
     def showHudInfo(self):
         self.hud.getImage("weapon").setText(self.world.observer.current_weapon.display_name)
+        pass
 
     def onSelfLoad(self):
         self.showHudInfo()
