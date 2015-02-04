@@ -32,6 +32,7 @@ protected:
     IMAGE_POSITION_V v;
     TTF *ttf;
 public:
+    SDL_Surface *surf; //
     bool update;
     string name;
     Shape2d *shape;

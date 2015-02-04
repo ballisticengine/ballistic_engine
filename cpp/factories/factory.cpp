@@ -1,8 +1,8 @@
 #include "factories/factory.hpp"
 
-void * factory::get(string fn, bool force_common) {
+void * factory::get(string fn, bool force_common,bool clone) {
     this->force_common = force_common;
-    if (items.find(fn) == items.end()) {
+    if (items.find(fn) == items.end() || clone) {
         string path;
 
         if (fn[0] == '@' || force_common) {
@@ -20,8 +20,13 @@ void * factory::get(string fn, bool force_common) {
         }
         //cout << "Factory: " << path << endl;
         //cout.flush();
-        items[fn] = this->actualLoad(path);
-        item_ptr.push_back(items[fn]);
+        if(clone) {
+            void *p=this->actualLoad(path);
+            item_ptr.push_back(p);
+        } else {
+            items[fn] = this->actualLoad(path);
+            item_ptr.push_back(items[fn]);
+        }
     }
     return items[fn];
 }

@@ -489,7 +489,7 @@ void RendererGL::assignMaterial(Material *m) {
 
 }
 
-void RendererGL::setupTexture(texture *t) {
+void RendererGL::setupTexture(texture *t,char *pixels) {
 
     GLuint tex_id;
     GLint tf;
@@ -534,7 +534,11 @@ void RendererGL::setupTexture(texture *t) {
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 //glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
-    glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+    if(pixels) {
+        glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) pixels);
+    } else {
+        glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+    }
     glGenerateMipmap(GL_TEXTURE_2D);
 }
 

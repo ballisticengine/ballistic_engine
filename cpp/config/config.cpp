@@ -64,7 +64,7 @@ config::config() {
             w->model->c.rotation.z=weapon_xml.second.get<e_loc>("rotation.z");
             w->model->scale=weapon_xml.second.get<e_loc>("scale");
             w->bullet=shapeFactory::getInstance()->getShape(weapon_xml.second.get<string>("bullet"));
-            w->decal=(texture *)textureFactory::getInstance()->get(weapon_xml.second.get<string>("decal"));
+            w->decal=(texture *)textureFactory::getInstance()->get(weapon_xml.second.get<string>("decal.texture"));
            
            // w->prev=prev;
 //            

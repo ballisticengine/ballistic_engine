@@ -35,6 +35,7 @@ public:
      SDL_Surface *surf;
     texture();
     texture(string filename);
+    texture *clone();
     virtual textureFormat getFormat();
    virtual void free();
     

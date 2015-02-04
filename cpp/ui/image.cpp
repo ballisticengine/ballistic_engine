@@ -3,7 +3,9 @@
 UiImage::UiImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc y) {
     this->x=x; this->y=y; this->name=name;
     this->shape=new Shape2d(width,height);
-    this->tex=(texture *)textureFactory::getInstance()->get(fn);
+    texture *tex=(texture *)textureFactory::getInstance()->get(fn,false);
+    this->tex=tex->clone();
+  //  this->surf=SDL_ConvertSurfaceFormat(this->tex->surf,SDL_PIXELFORMAT_ABGR8888,0); 
     update=true;
     ttf=TTF::getInstance();
 }

@@ -101,7 +101,7 @@ protected:
     void renderFaceTexShapex(shape *s);
 public:
     RendererGL();
-    virtual void setupTexture(texture *t);
+    virtual void setupTexture(texture *t,char *pixels=0);
     virtual void render();
     virtual void previewRender();
 };

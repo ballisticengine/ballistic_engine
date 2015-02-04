@@ -44,6 +44,12 @@ class basicManipulator(manipulatorClass):
         cvec=ci.cvec
         self.ccount+=1
         print entitya.name,"collided",entityb.name,"nameA",ci.nameA,'nameB',ci.nameB,"vector",cvec,"Counter:",self.ccount
+        if entitya.subtype=="bullet":
+            c=entitya.getCoords()
+            c.rotation.y=-90+c.rotation.y
+            #if entityb.subtype!="bullet":
+            #    self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,c)
+            self.world.active_room.removeObjectEntity(entitya.name)
 
         if entitya.type!="observer":
             entitya.velocity.t.x=-entitya.velocity.t.x
@@ -104,6 +110,7 @@ class basicManipulator(manipulatorClass):
 
     def showHudInfo(self):
         self.hud.getImage("weapon").setText(self.world.observer.current_weapon.display_name)
+        self.hud.getImage("score").setText("text")
         pass
 
     def onSelfLoad(self):

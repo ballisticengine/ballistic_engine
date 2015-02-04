@@ -79,8 +79,8 @@ public:
 
     };
 
-    virtual void setupTexture(texture *t) {
-    }
+    virtual  void setupTexture(texture *t,char *pixels=0)=0;
+    
 
     virtual void setupTextures();
 
