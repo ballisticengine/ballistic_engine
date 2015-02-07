@@ -2,7 +2,7 @@
 #define	SDL2D_HPP
 
 #include <SDL2/SDL.h>
-#include <SDL/SDL_ttf.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <string>
 #include "misc/singleton.hpp"

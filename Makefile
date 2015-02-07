@@ -1,4 +1,4 @@
-CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python 
 OUTPUT=ballistic 
 
 deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
@@ -13,7 +13,7 @@ deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
 	   timer.o image.o hud.o uimesh.o weapon.o glpreview.o
 
 $(OUTPUT): $(deps) main.o 
-	g++ $(CFLAGS) $^ -o $(OUTPUT)
+	g++  $^ -o $(OUTPUT) $(CFLAGS)
 
 glpreview.o: cpp/renderer/GL/GLPreview.cpp
 	g++ $(CFLAGS) -c $^ -o $@

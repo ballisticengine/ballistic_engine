@@ -20,9 +20,6 @@ class basicManipulator(manipulatorClass):
         self.pc=0
 
 
-    """"""
-
-
 
     def onEntityMovement(self,entity):
 
