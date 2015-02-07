@@ -1,8 +1,11 @@
 class manipulatorClass(object):
 
+    score=0
+
 
     def onInit(self,world,hud):
         print "init"
+
         self.world=world
         self.hud=hud
 

@@ -32,31 +32,31 @@ BOOST_PYTHON_MODULE(world) {
 
 
     bp::class_<BoundingCube, BoundingCube *>("BoundingCube")
-        .def_readonly("name",&BoundingCube::name)
-        .def_readonly("max",&BoundingCube::max)
-        .def_readonly("min",&BoundingCube::max)
-        .def_readonly("loc",&BoundingCube::loc)
-        .def_readonly("width",&BoundingCube::width)
-        .def_readonly("height",&BoundingCube::height)
-        .def_readonly("depth",&BoundingCube::depth)
-    ;
+            .def_readonly("name", &BoundingCube::name)
+            .def_readonly("max", &BoundingCube::max)
+            .def_readonly("min", &BoundingCube::max)
+            .def_readonly("loc", &BoundingCube::loc)
+            .def_readonly("width", &BoundingCube::width)
+            .def_readonly("height", &BoundingCube::height)
+            .def_readonly("depth", &BoundingCube::depth)
+            ;
 
-    
+
     bp::class_<collsionInfo, collsionInfo *>("collsionInfo")
-        .def_readonly("cvec",&collsionInfo::cvec)
-        .def_readonly("nameA",&collsionInfo::nameA)
-        .def_readonly("nameB",&collsionInfo::nameB)
-    ;
-    
+            .def_readonly("cvec", &collsionInfo::cvec)
+            .def_readonly("nameA", &collsionInfo::nameA)
+            .def_readonly("nameB", &collsionInfo::nameB)
+            ;
+
     bp::class_<entity, entity *>("entity")
             .def("getCoords", &entity::getCoords)
             .def("locate", &entity::locate)
-            .def("face",&entity::face)
+            .def("face", &entity::face)
             .def("translate3", &entity::translate3)
             .def_readonly("name", &entity::name)
             .def_readonly("type", &entity::type)
-            .def_readwrite("subtype",&entity::subtype)
-            .def_readwrite("no_collisions",&entity::no_collisions)
+            .def_readwrite("subtype", &entity::subtype)
+            .def_readwrite("no_collisions", &entity::no_collisions)
             ;
 
 
@@ -67,7 +67,7 @@ BOOST_PYTHON_MODULE(world) {
             .def_readwrite("velocity", &PhysicalEntity::velocity)
             .def_readwrite("acceleration", &PhysicalEntity::acceleration)
             .def_readwrite("no_physics", &PhysicalEntity::no_physics)
-            .def_readwrite("weight",&PhysicalEntity::weight)
+            .def_readwrite("weight", &PhysicalEntity::weight)
             ;
 
 
@@ -106,38 +106,41 @@ BOOST_PYTHON_MODULE(world) {
 
     bp::class_<ObserverEntity, ObserverEntity*, bp::bases<PhysicalEntity> >("ObserverEntity")
             .def("bobHead", &ObserverEntity::bobHead)
-            .def_readwrite("current_weapon",&ObserverEntity::current_weapon)
-    //.def("getCoords",&ObserverEntity::getCoords)
+            .def("kickBack", &ObserverEntity::kickBack)
+            .def("face", &ObserverEntity::face)
+            .def("rotate", &ObserverEntity::rotate)
+            .def_readwrite("current_weapon", &ObserverEntity::current_weapon)
+            //.def("getCoords",&ObserverEntity::getCoords)
 
             //   .def("getState",&ObserverEntity::getState)
             //    .def("setState",&ObserverEntity::setState)
             ;
-    
+
     bp::class_<Weapon, Weapon*, bp::bases<entity> >("Weapon")
-        .def_readonly("initial_velocity",&Weapon::initial_velocity)
-        .def_readonly("decal",&Weapon::decal)
-        .def_readonly("bullet",&Weapon::bullet)
-        .def_readonly("display_name",&Weapon::display_name)
-        .def_readonly("next",&Weapon::next)
-        .def_readonly("prev",&Weapon::prev)
-        
-    ;
-    
+            .def_readonly("initial_velocity", &Weapon::initial_velocity)
+            .def_readonly("decal", &Weapon::decal)
+            .def_readonly("bullet", &Weapon::bullet)
+            .def_readonly("display_name", &Weapon::display_name)
+            .def_readonly("next", &Weapon::next)
+            .def_readonly("prev", &Weapon::prev)
+
+            ;
+
     bp::class_<obj_list>("obj_list")
             .def(bp::vector_indexing_suite<obj_list>());
 
-    
-    bp::class_<Sprite,Sprite *,bp::bases<entity> >("Sprite");
+
+    bp::class_<Sprite, Sprite *, bp::bases<entity> >("Sprite");
 
     bp::class_<roomEntity, roomEntity *, bp::bases<ObjectEntity> >("roomEntity")
             .def_readwrite("models", &roomEntity::models)
-            .def("placeDecal",&roomEntity::placeDecal)
-            .def("placePreloadDecal",&roomEntity::placePreloadDecal)
-            .def("placeDecalTexture",&roomEntity::placeDecalTexture)
-            .def("spawnObject", &roomEntity::spawnObject,bp::return_value_policy<bp::reference_existing_object>())
-            .def("spawnShape", &roomEntity::spawnShape,bp::return_value_policy<bp::reference_existing_object>()) 
-            .def("removeObjectEntity",&roomEntity::removeObjectEntity)
-    ;
+            .def("placeDecal", &roomEntity::placeDecal)
+            .def("placePreloadDecal", &roomEntity::placePreloadDecal)
+            .def("placeDecalTexture", &roomEntity::placeDecalTexture)
+            .def("spawnObject", &roomEntity::spawnObject, bp::return_value_policy<bp::reference_existing_object>())
+            .def("spawnShape", &roomEntity::spawnShape, bp::return_value_policy<bp::reference_existing_object>())
+            .def("removeObjectEntity", &roomEntity::removeObjectEntity)
+            ;
 
     bp::class_<lights_list>("lights_list")
             .def(bp::vector_indexing_suite<lights_list>());
@@ -148,7 +151,7 @@ BOOST_PYTHON_MODULE(world) {
             .def("getInstance", &getSharedWorldInstance)
             .def_readonly("active_room", &world::active_room)
             .def_readwrite("observer", &world::observer)
-            
+
             .staticmethod("getInstance")
 
             ;

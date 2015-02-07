@@ -114,8 +114,5 @@
         <script>
             basicManipulator
         </script>
-        <script>
-            aimingManipulator
-        </script>
     </scripts>
 </config>

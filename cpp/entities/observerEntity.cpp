@@ -85,12 +85,26 @@ void ObserverEntity::bobHead() {
 
 }
 
+void ObserverEntity::kickBack(e_loc force) {
+    cout << "Kickback";
+    lock=true;
+    this->cam->rotate(90,0,0);
+    lock=false;
+}
+
 void ObserverEntity::rotate(e_loc x, e_loc y, e_loc z) {
+    if(lock) {
+        return;
+    }
     entity::rotate(x, y, z);
     this->cam->rotate(x, y, z);
 }
 
 void ObserverEntity::face(e_loc x, e_loc y, e_loc z) {
+    if(lock) {
+        return;
+    }
+    
     entity::face(x, y, z);
     this->cam->face(x, y, z);
 }
@@ -108,6 +122,7 @@ ObserverEntity::ObserverEntity() {
     headbob_i = 0;
     bob_timer.getDiffR();
     this->cam = cam;
+    lock=false;
 }
 
 ObserverEntity::~ObserverEntity() {

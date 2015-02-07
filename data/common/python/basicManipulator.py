@@ -36,6 +36,13 @@ class basicManipulator(manipulatorClass):
                 entity.velocity.t.z/=entity.weight
 
 
+    def bulletCollision(self,entitya,entityb):
+        if "target" in entityb.name:
+            score=int(entitya.name.replace("[BOUNDING]",""))
+            if score!=0:
+                manipulatorClass.score+=score
+            self.showHudInfo()
+
 
     def onEntityCollision(self,entitya,entityb,ci):
         cvec=ci.cvec
@@ -44,8 +51,7 @@ class basicManipulator(manipulatorClass):
         if entitya.subtype=="bullet":
             c=entitya.getCoords()
             c.rotation.y=-90+c.rotation.y
-            #if entityb.subtype!="bullet":
-            #    self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,c)
+            self.bulletCollision(entitya,entityb)
             self.world.active_room.removeObjectEntity(entitya.name)
 
         if entitya.type!="observer":
@@ -107,7 +113,7 @@ class basicManipulator(manipulatorClass):
 
     def showHudInfo(self):
         self.hud.getImage("weapon").setText(self.world.observer.current_weapon.display_name)
-        self.hud.getImage("score").setText("text")
+        self.hud.getImage("score").setText("Score: "+str(manipulatorClass.score))
         pass
 
     def onSelfLoad(self):
@@ -168,6 +174,7 @@ class basicManipulator(manipulatorClass):
 
                 x.weight=1.2
                 self.spawnc+=1
+                self.world.observer.kickBack(10)
 
         if state.movement.prev_weapon:
             self.pc+=1

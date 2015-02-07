@@ -35,10 +35,10 @@ public:
 class ObserverEntity : public PhysicalEntity {
 protected:
 	camera *cam;
-	e_loc headbob_add,headbob_i;
-	Timer bob_timer;
+	e_loc headbob_add,headbob_i,kickback;
+	Timer bob_timer,kick_timer;
         ObserverState state,got_state;
-        bool state_changed;
+        bool state_changed,lock;
         
 public:
 	
@@ -48,6 +48,7 @@ public:
 	virtual void setCamera(camera *c);
 	virtual camera *getCamera();
 	virtual void bobHead();
+        virtual void kickBack(e_loc force);
 	
 	virtual ObserverState  * getState();
         virtual void setState(ObserverState *state);
