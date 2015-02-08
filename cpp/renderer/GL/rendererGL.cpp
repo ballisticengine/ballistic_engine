@@ -553,10 +553,13 @@ void RendererGL::rotateSpecific(e_loc x, e_loc y, e_loc z, e_loc d) {
 void RendererGL::resetSpecific() {
     glLoadIdentity();
     glTranslatef(0, 0, -frustum_start);
+    
 }
 
 void RendererGL::positionCameraSpecific() {
-    //glRotatef(-90,1,0,0);
+//    glRotatef(this->w->roomrot_x,1,0,0);
+//    glRotatef(this->w->roomrot_y,0,1,0);
+//    glRotatef(this->w->roomrot_z,0,0,1);
 }
 
 void RendererGL::drawBoundingBox(BoundingCube *bound) {

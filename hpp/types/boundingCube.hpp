@@ -18,7 +18,9 @@ public:
 	BoundingCube(shape *s);
 	BoundingCube(e_loc width,e_loc height,e_loc depth);
 	BoundingCube(e_loc minx,e_loc miny,e_loc minz,e_loc maxx,e_loc maxy,e_loc maxz);
-	void calculateSizes();
+	
+        void rotate(e_loc x,e_loc y,e_loc z);
+        void calculateSizes();
 	void calculate(shape *s);
 	e_loc toSphereRadius();
 	void print();

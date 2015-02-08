@@ -52,7 +52,9 @@ class basicManipulator(manipulatorClass):
             c=entitya.getCoords()
             c.rotation.y=-90+c.rotation.y
             self.bulletCollision(entitya,entityb)
+            self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,entitya.getCoords())
             self.world.active_room.removeObjectEntity(entitya.name)
+
 
         if entitya.type!="observer":
             entitya.velocity.t.x=-entitya.velocity.t.x
@@ -121,7 +123,7 @@ class basicManipulator(manipulatorClass):
         objects=self.world.active_room.models
         observer=self.world.observer
         self.oldrotx=self.world.observer.getCoords().rotation.x
-        observer.acceleration.t.y=9.2
+        #observer.acceleration.t.y=9.2
         print observer
         for o in objects:
             if not o.no_physics:

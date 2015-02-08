@@ -15,6 +15,7 @@ void entity::rotate(e_loc x, e_loc y, e_loc z) {
     this->rx += x;
     this->ry += y;
     this->rz += z;
+    
 }
 
 void entity::translate3(e_loc x, e_loc y, e_loc z) {

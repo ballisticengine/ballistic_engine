@@ -18,6 +18,18 @@ e_loc BoundingCube::toSphereRadius() {
 	return 0;
 }
 
+void BoundingCube::rotate(e_loc x,e_loc y,e_loc z) {
+//    e_loc tmp;
+//    if(x) {
+//        tmp=max.z;
+//        max.z=max.y;
+//        max.y=tmp;
+//        tmp=min.z;
+//        min.z=min.y;
+//        min.y=tmp;
+//    }
+}
+
 BoundingCube::BoundingCube(e_loc width,e_loc height,e_loc depth) {
 	this->width=width;
 	this->height=height;

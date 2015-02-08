@@ -130,6 +130,7 @@ void renderer::renderAllRooms() {
         this->reset();
         this->positionCamera();
         this->locate(rc.translation.x,rc.translation.y,rc.translation.z);
+        this->face(rc.rotation.x,rc.rotation.y,rc.rotation.z);
         this->renderFaceTexShape((shape *) rooms[i]->getModel());
         if (state->debug_visual) {
             size_t boundings_size = rooms[i]->boundings.size();
@@ -207,6 +208,7 @@ void renderer::reset() {
     cursor.rotation.x = 0;
     cursor.rotation.y = 0;
     cursor.rotation.z = 0;
+    
 }
 
 void renderer::setCamera(camera *c) { //to przenie�� do world
@@ -224,5 +226,5 @@ void renderer::positionCamera() {
     rotate(0, 1, 0, c.rotation.y);
     rotate(0, 0, 1, c.rotation.z);
     translate(c.translation.x, c.translation.y, c.translation.z);
-    //this->positionCameraSpecific();
+    this->positionCameraSpecific();
 }

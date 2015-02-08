@@ -66,7 +66,7 @@ public:
 	Sprite *testsprite;
 	skybox *sky;
 	rooms_list rooms;
-       
+        e_loc roomrot_x,roomrot_y,roomrot_z;
 
 	static world *getInstance(); 
 	static world & getRef();
