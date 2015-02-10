@@ -10,6 +10,7 @@
         <resx>800</resx>
         <resy>600</resy>
         <fullscreen>0</fullscreen>
+        <use_desktop_fs>1</use_desktop_fs>
         <frustum_start>2</frustum_start>
         <frustum_end>5000</frustum_end>
         <frustum_width>20</frustum_width>
@@ -56,7 +57,7 @@
             <weapon>
                 <name>pistol</name>
                 <display_name>Some pistol</display_name>
-                <model>@gun.xml</model>
+                <model>@w_machinegun.md2</model>
                 <bullet>@bullet.xml</bullet>
                 
                 <decal>
@@ -69,15 +70,15 @@
                 <location>
                     <x>0</x>
                     <y>-60</y>
-                    <z>-150</z>
+                    <z>-200</z>
                 </location>
                 <rotation>
-                    <x>-45</x>
-                    <y>90</y>
-                    <z>0</z>
+                    <x>-90</x>
+                    <y>0</y>
+                    <z>90</z>
                 </rotation>
                 <scale>
-                    0.5
+                    6
                 </scale>
             </weapon>
             <weapon>
