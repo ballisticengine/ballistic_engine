@@ -91,7 +91,7 @@ protected:
     virtual void drawHud();
     virtual void drawHudImage(UiImage *img);
     virtual void resetSpecific();
-   
+    virtual void drawWeapon(Weapon *weapon);
     virtual void drawBox(e_loc width, e_loc height, e_loc depth);
     virtual void renderDecal(Sprite *decal);
     virtual void renderTerrainSpecific();

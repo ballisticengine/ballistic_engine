@@ -27,14 +27,14 @@
                 <width>1</width>
                 <height>0.5</height>
                 <x>-1</x>
-                <y>-1</y>
+                <y>-1.5</y>
             </image>
             <image>
                 <name>score</name>
                 <texture>@car.bmp</texture>
                 <width>1</width>
                 <height>0.5</height>
-                <x>1</x>
+                <x>-1</x>
                 <y>-1</y>
             </image>
             <image>
