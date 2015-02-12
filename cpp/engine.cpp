@@ -19,7 +19,7 @@ void engine::preview(string model) {
 
     io = new sdlIO();
     return;
-    io->initWindow();
+    io->initWindow(io);
     io->setRenderer(pr);
 //    cout << "Renderer init\n";
     //shapeFactory::getInstance()->setWD(".");
@@ -55,7 +55,7 @@ void engine::prepare() {
 
     io = new sdlIO();
 
-    io->initWindow();
+    io->initWindow(io);
     io->setRenderer(r);
     cout << "Renderer init\n";
     r->init();

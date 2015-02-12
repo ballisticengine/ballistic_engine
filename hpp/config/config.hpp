@@ -21,6 +21,7 @@ using namespace boost::property_tree;
 #include "factories/shapeFactory.hpp"
 #include "factories/textureFactory.hpp"
 #include "ui/uiMesh.hpp"
+#include "config/engineState.hpp"
 
 using boost::property_tree::ptree;
 

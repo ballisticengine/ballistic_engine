@@ -21,7 +21,10 @@ config::config() {
 	vd.frustum_end=pt.get<float>("config.screen.frustum_end");
 	vd.frustum_x=pt.get<float>("config.screen.frustum_width");
 	vd.frustum_y=pt.get<float>("config.screen.frustum_height");
-	start_level=pt.get<string>("config.game.start_level");
+	engineState::getInstance()->fullscreen=pt.get<bool>("config.screen.fullscreen");
+        engineState::getInstance()->desktop_fs=pt.get<bool>("config.screen.use_desktop_fs");
+        
+        start_level=pt.get<string>("config.game.start_level");
         
         ptree scripts_xml=pt.get_child("config.scripts");
         BOOST_FOREACH(const ptree::value_type &script, scripts_xml) {

@@ -26,13 +26,16 @@ private:
 	static SDL_Window *window;
 	sdlControls ctrl;
 	renderer *r;
-        
+        static sdlIO *me;
 	world *w;
 	bool fullscreen;
+        static int window_w,window_h;
+        static void toggleFullscreen();
 public:
     static void flush();
     void setRenderer(renderer *r);
-	static void initWindow();
+    renderer *getRenderer();
+    static void initWindow(sdlIO *me);
     void eventLoop();
     void previewLoop();
     sdlIO();

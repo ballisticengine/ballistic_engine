@@ -54,7 +54,7 @@ protected:
     virtual void renderDecal(Sprite *decal)=0;
     virtual void setAmbientLight(colorRGB *c) = 0;
     virtual void positionCameraSpecific();
-
+    
     virtual void assignTexture(texture *t) = 0;
     virtual void assignMaterial(Material *m) = 0;
     virtual void resetSpecific() = 0;
@@ -71,7 +71,7 @@ public:
     
     renderer();
     virtual void setFlush(flushf flush_callback);
-
+virtual void setVideoMode()=0;
     virtual void init();
    virtual void previewInit(); 
 

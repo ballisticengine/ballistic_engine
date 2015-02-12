@@ -311,18 +311,26 @@ void RendererGL::renderFaceTexShape(shape *s) {
     glFrontFace(int_prev_dir);
 }
 
+
+ void  RendererGL::setVideoMode() {
+     glViewport(0, 0, config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
+      glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+     gluPerspective(90, 1, 1, 5000);
+ }
+
 void RendererGL::specificInit() {
-   
+    
     glewInit();
     if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
         cout << "Shaders in place\n";
     }
 
-    glViewport(0, 0, config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    this->setVideoMode();
+    
+   
     //glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
-    gluPerspective(90, 1, 1, 5000);
+   
     glCullFace(GL_FRONT);
     glFrontFace(GL_CW);
     glEnable(GL_CULL_FACE);

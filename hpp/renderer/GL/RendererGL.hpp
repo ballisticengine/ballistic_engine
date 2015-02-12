@@ -91,6 +91,7 @@ protected:
     virtual void drawHud();
     virtual void drawHudImage(UiImage *img);
     virtual void resetSpecific();
+   
     virtual void drawBox(e_loc width, e_loc height, e_loc depth);
     virtual void renderDecal(Sprite *decal);
     virtual void renderTerrainSpecific();
@@ -101,6 +102,7 @@ protected:
     void renderFaceTexShapex(shape *s);
 public:
     RendererGL();
+     virtual void setVideoMode();
     virtual void setupTexture(texture *t,char *pixels=0);
     virtual void render();
     virtual void previewRender();

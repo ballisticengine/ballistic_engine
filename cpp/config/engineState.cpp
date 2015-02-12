@@ -5,6 +5,7 @@ engineState::engineState() {
  debug_visual=false;
  lighting=true;
  noclip=false;
+
 }
 
 void engineState::setExit(bool exit) {
