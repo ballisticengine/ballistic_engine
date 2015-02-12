@@ -123,9 +123,9 @@
                     <z>-50</z>
                 </location>
                 <rotation>
-                    <x>180</x>
-                    <y>90</y>
-                    <z>-180</z>
+                    <x>0</x>
+                    <y>0</y>
+                    <z>0</z>
                 </rotation>
                 <scale>
                     0.5
