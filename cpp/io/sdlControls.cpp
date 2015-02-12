@@ -84,7 +84,16 @@ void sdlControls::operator()() {
         ostate.mouse.right = mouse_state & SDL_BUTTON(SDL_BUTTON_RIGHT);
         ostate.mouse.middle = mouse_state & SDL_BUTTON(SDL_BUTTON_MIDDLE);
 
-        o->face((e_loc) roty, (e_loc) rotx, 0);
+        if(abs(roty)+abs(y)+1>90) {
+            //cout << "Here you go " << rotx << "\n";
+            //  o->face((e_loc) roty, (e_loc) rotx, 0);
+            o->rotate((e_loc)0,(e_loc)x,0);
+            roty-=y;
+        } else {
+             o->rotate((e_loc)y,(e_loc)x,0);
+        }
+        //o->face((e_loc) roty, (e_loc) rotx, 0);
+        //o->rotate((e_loc)y,(e_loc)x,0);
         o->setState(&ostate);
         if (keys_p != anykey(state, ksize) || rotx != oldroty || mouse_state != old_mouse_state) {
             keys_p = anykey(state, ksize);

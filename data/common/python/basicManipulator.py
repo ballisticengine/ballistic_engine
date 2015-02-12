@@ -176,7 +176,7 @@ class basicManipulator(manipulatorClass):
 
                 x.weight=1.2
                 self.spawnc+=1
-                self.world.observer.kickBack(10)
+                #self.world.observer.kickBack(-10)
 
         if state.movement.prev_weapon:
             self.pc+=1
