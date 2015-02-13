@@ -1,0 +1,9 @@
+Do uruchomienia programu wymagane są następujące biblioteki w systemie Linux:
+1. SDL2
+2. SDL2_ttf
+3. SDL2_image
+4. GLEW
+5. Boost
+
+Program był kompilowany w dystrybucji Ubuntu Linux, aby zainstalować zależności można posłużyć się skryptem
+ubuntu_deps : sudo sh ./ubuntu_deps . Zainstaluje to wymagane biblioteki automatycznie.
