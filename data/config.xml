@@ -3,9 +3,7 @@
         
         <resx>1366</resx>
         <resy>768</resy>
-    <shader>
-                light
-            </shader>   
+    
             
     </tmp>
     <screen>
@@ -18,7 +16,9 @@
         <frustum_width>20</frustum_width>
         <frustum_height>20</frustum_height>
         <shaders>
-            
+            <shader>
+                light
+            </shader>   
         </shaders>
         <hud>
             <image>
@@ -62,11 +62,11 @@
                 
                 <decal>
                     <texture>@decal.png</texture>
-                    <width>1</width>
-                    <height>1</height>
+                    <width>0</width>
+                    <height>0</height>
                 </decal>
                 
-                <velocity>5</velocity> 
+                <velocity>50</velocity> 
                 <location>
                     <x>0</x>
                     <y>-100</y>

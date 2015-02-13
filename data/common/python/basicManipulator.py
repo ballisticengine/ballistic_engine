@@ -18,6 +18,7 @@ class basicManipulator(manipulatorClass):
         self.spawnc=0
         self.nc=0
         self.pc=0
+        self.last_left=False
 
 
 
@@ -52,7 +53,7 @@ class basicManipulator(manipulatorClass):
             c=entitya.getCoords()
             c.rotation.y=-90+c.rotation.y
             self.bulletCollision(entitya,entityb)
-            self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,entitya.getCoords())
+            #self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,entitya.getCoords())
             self.world.active_room.removeObjectEntity(entitya.name)
 
 
@@ -142,8 +143,8 @@ class basicManipulator(manipulatorClass):
 
 
     def onObserverStateChange(self,state):
-        #print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
-        #print state.mouse.left ,state.mouse.right,state.mouse.middle,state.mouse.leftclick
+        print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        print state.mouse.left ,state.mouse.right,state.mouse.middle,state.mouse.leftclick
         self.kcount+=1
         self.world.observer.velocity.reset()
         ocoords=self.world.observer.getCoords()
@@ -157,6 +158,7 @@ class basicManipulator(manipulatorClass):
         ocoords.translation.z+=math.cos(xdelta)*50
 
         if state.mouse.left:
+
                 self.showHudInfo()
                 x=self.world.active_room.spawnShape(self.world.observer.current_weapon.bullet,ocoords,str(self.spawnc))
                 #
