@@ -17,6 +17,7 @@ public:
 	Sprite();
 	Sprite(string file);
 	Sprite(texture *tex);
+        Sprite(texture *tex,e_loc w,e_loc h);
 	e_loc width;
 	e_loc height;
 	Shape2d *shape;

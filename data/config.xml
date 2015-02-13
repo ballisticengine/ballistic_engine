@@ -3,7 +3,31 @@
         
         <resx>1366</resx>
         <resy>768</resy>
-    
+     <weapon>
+                <name>bfg</name>
+                <display_name>BFG</display_name>
+                <model>@w_bfg.md2</model>
+                <bullet>@ball.xml</bullet>
+                <decal>
+                    <texture>@decal.png</texture>
+                    <width>1</width>
+                    <height>1</height>
+                </decal>
+                <velocity>1</velocity>
+                <location>
+                    <x>0</x>
+                    <y>0</y>
+                    <z>-50</z>
+                </location>
+                <rotation>
+                    <x>180</x>
+                    <y>-270</y>
+                    <z>180</z>
+                </rotation>
+                <scale>
+                    0.5
+                </scale>
+            </weapon>
             
     </tmp>
     <screen>
@@ -83,54 +107,30 @@
             </weapon>
             <weapon>
                 <name>minitable</name>
-                <display_name>Machine pistol</display_name>
+                <display_name>Pistol</display_name>
                 <model>@weapon.md2</model>
-                <bullet>@ball.xml</bullet>
+                <bullet>@bullet.xml</bullet>
                 <decal>
                     <texture>@decal.png</texture>
                     <width>1</width>
                     <height>1</height>
                 </decal>
-                <velocity>1</velocity>
+                <velocity>1000</velocity>
                 <location>
-                    <x>30</x>
-                    <y>0</y>
-                    <z>-50</z>
+                    <x>20</x>
+                    <y>-5</y>
+                    <z>-30</z>
                 </location>
                 <rotation>
-                    <x>180</x>
-                    <y>90</y>
-                    <z>-180</z>
+                    <x>90</x>
+                    <y>-200</y>
+                    <z>270</z>
                 </rotation>
                 <scale>
-                    0.5
+                    1
                 </scale>
             </weapon>
-            <weapon>
-                <name>bfg</name>
-                <display_name>BFG</display_name>
-                <model>@w_bfg.md2</model>
-                <bullet>@ball.xml</bullet>
-                <decal>
-                    <texture>@decal.png</texture>
-                    <width>1</width>
-                    <height>1</height>
-                </decal>
-                <velocity>1</velocity>
-                <location>
-                    <x>30</x>
-                    <y>0</y>
-                    <z>-50</z>
-                </location>
-                <rotation>
-                    <x>0</x>
-                    <y>0</y>
-                    <z>0</z>
-                </rotation>
-                <scale>
-                    0.5
-                </scale>
-            </weapon>
+           
         </weapons>
     </game>
     <scripts>

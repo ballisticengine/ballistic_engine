@@ -74,8 +74,8 @@ class basicManipulator(manipulatorClass):
             #cvec.write()
             #entityb.velocity.t.x=-entitya.velocity.t.x
             #entityb.velocity.t.y=-entitya.velocity.t.y
-            entityb.velocity.t.z=-entitya.velocity.t.z
-            #entitya.translate3(cvec.z,-cvec.y,cvec.x)
+            #entityb.velocity.t.z=-entitya.velocity.t.z
+            entitya.translate3(cvec.z,-cvec.y,cvec.x)
 
         #cvec.write()
 
@@ -87,11 +87,18 @@ class basicManipulator(manipulatorClass):
             if entity.subtype=="bullet":
                 c=entity.getCoords()
                 cvec.write()
-
+                oldrot=c.rotation.y
                 c.rotation.y=-90+c.rotation.y;
+                print "ROTY: "+str(c.rotation.y)
 
-                if not cvec.y:
-                    self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,c)
+                roty=c.rotation.y
+
+                fact=roty/math.fabs(roty)
+
+
+
+                #if not cvec.y:
+                    #self.world.active_room.placeDecalTexture(self.world.observer.current_weapon.decal,c)
                 entity.velocity.x=entity.velocity.y=entity.velocity.z=0
                 #entity.no_collisions=True
                 self.world.active_room.removeObjectEntity(entity.name)
@@ -129,7 +136,7 @@ class basicManipulator(manipulatorClass):
         objects=self.world.active_room.models
         observer=self.world.observer
         self.oldrotx=self.world.observer.getCoords().rotation.x
-        #observer.acceleration.t.y=9.2
+        observer.acceleration.t.y=9.2
         print observer
         for o in objects:
             if not o.no_physics:
@@ -184,8 +191,7 @@ class basicManipulator(manipulatorClass):
                 x.weight=1.2
                 self.spawnc+=1
 
-                #self.world.observer.kickBack(-10)
-        print state.mouse.left
+
         self.last_left=state.mouse.left
 
         if state.movement.prev_weapon:

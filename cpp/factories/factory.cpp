@@ -2,6 +2,7 @@
 
 void * factory::get(string fn, bool force_common,bool clone) {
     this->force_common = force_common;
+    
     if (items.find(fn) == items.end() || clone) {
         string path;
 
