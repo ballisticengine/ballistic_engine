@@ -10,6 +10,7 @@ deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
+	   timerdefs.o \
 	   timer.o image.o hud.o uimesh.o weapon.o glpreview.o
 
 $(OUTPUT): $(deps) main.o 
@@ -21,6 +22,9 @@ glpreview.o: cpp/renderer/GL/GLPreview.cpp
 modelview: modelview.o modelrenderer.o $(deps)
 	g++ $(CFLAGS) $^ -o modelview
 	
+
+timerdefs.o: cpp/python/timer_defs.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 
 modelrenderer.o: engine_tools/modelviewer/renderer.cpp
 	g++ $(CFLAGS) -I./hpp -c $^ -o $@

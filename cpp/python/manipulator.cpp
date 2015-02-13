@@ -33,7 +33,8 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
         HUD *h=HUD::getInstance();
 	try {
 	if(name=="Init") {
-		f(boost::ref(*w),boost::ref(*h));
+            //static Timer *t=new Timer();
+                f(boost::ref(*w),boost::ref(*h));
 	} else if(name=="EntityCollision") {
 		PhysicalEntity *a,*b;
 		a=(PhysicalEntity *)paramA;

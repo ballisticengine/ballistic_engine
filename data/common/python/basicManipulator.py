@@ -9,6 +9,8 @@ def rad2deg(rad):
     deg = 180 * rad / 3.141
     return deg
 
+import Timer
+
 class basicManipulator(manipulatorClass):
 
     def __init__(self):
@@ -18,6 +20,9 @@ class basicManipulator(manipulatorClass):
         self.spawnc=0
         self.nc=0
         self.pc=0
+        self.last_left=False
+        self.timer=Timer.Timer()
+        self.timer.start()
         self.last_left=False
 
 
@@ -143,8 +148,8 @@ class basicManipulator(manipulatorClass):
 
 
     def onObserverStateChange(self,state):
-        print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
-        print state.mouse.left ,state.mouse.right,state.mouse.middle,state.mouse.leftclick
+        #print self.kcount,state.movement.up,state.movement.down,state.movement.left,state.movement.right,state.movement.forward,state.movement.back
+        #print state.mouse.left ,state.mouse.right,state.mouse.middle,state.mouse.leftclick
         self.kcount+=1
         self.world.observer.velocity.reset()
         ocoords=self.world.observer.getCoords()
@@ -157,7 +162,7 @@ class basicManipulator(manipulatorClass):
         ocoords.translation.x-=math.sin(xdelta)*50
         ocoords.translation.z+=math.cos(xdelta)*50
 
-        if state.mouse.left:
+        if state.mouse.left and state.movement.left==self.last_left:
 
                 self.showHudInfo()
                 x=self.world.active_room.spawnShape(self.world.observer.current_weapon.bullet,ocoords,str(self.spawnc))
@@ -178,7 +183,10 @@ class basicManipulator(manipulatorClass):
 
                 x.weight=1.2
                 self.spawnc+=1
+
                 #self.world.observer.kickBack(-10)
+        print state.mouse.left
+        self.last_left=state.mouse.left
 
         if state.movement.prev_weapon:
             self.pc+=1

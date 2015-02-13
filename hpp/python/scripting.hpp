@@ -10,6 +10,7 @@
 #include "python/manipulator.hpp"
 #include "python/world_defs.hpp"
 #include "python/hud_defs.hpp"
+#include "python/timer_defs.hpp"
 #include "config/engineState.hpp"
 
 
