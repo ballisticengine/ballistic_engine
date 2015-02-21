@@ -7,3 +7,8 @@ Do uruchomienia programu wymagane są następujące biblioteki w systemie Linux:
 
 Program był kompilowany w dystrybucji Ubuntu Linux, aby zainstalować zależności można posłużyć się skryptem
 ubuntu_deps : sudo sh ./ubuntu_deps . Zainstaluje to wymagane biblioteki automatycznie.
+
+Aby uruchomić silnik należy wpisać polecenie ./ballistic w obecnym katalogu.
+W katalogach cpp i hpp znajdują się źródła. Aby je skompilować należy doinstalować pakiety *-dev dla wyżej 
+wymienionych bibliotek.
+W katalogu xmlgeom znajduje się eksporter poziomów i modeli do programu Blender 2.6
