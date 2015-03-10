@@ -14,12 +14,12 @@ using namespace std;
 #include "ui/uiMesh.hpp"
 
 
-class Weapon : public entity {
+class Weapon : public Entity {
 public:
     e_loc initial_velocity;
     UiMesh *model;
-    texture *decal; 
-    shape *bullet; 
+    Texture *decal; 
+    Shape *bullet; 
     string display_name; 
     Weapon *next,*prev;
 };

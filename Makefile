@@ -205,5 +205,5 @@ timer.o: cpp/time/timerPosix.cpp
 clean:
 	rm ./*.o 
 	rm ./$(OUTPUT)
-	rm ./modelview
+	
 	

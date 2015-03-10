@@ -18,10 +18,10 @@ protected:
 	
 	Material *mat;
 public:
-	virtual shape * getModel();
+	virtual Shape * getModel();
 	
-	shape *model;
-	virtual void setModel(shape *model);
+	Shape *model;
+	virtual void setModel(Shape *model);
 	
 	virtual Material *getMaterial();
 	virtual void setMaterial(Material *mat);

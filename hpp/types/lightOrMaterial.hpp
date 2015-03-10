@@ -8,15 +8,15 @@ Wsp�lne w�a�ciwo�ci dla materia��w i �wiate�
 */
 class LightOrMaterial {
 protected:
-	colorRGBA ambient,diffuse,specular;
+	ColorRGBA ambient,diffuse,specular;
 public:
-	virtual colorRGBA getAmbient();
-	virtual colorRGBA getDiffuse();
-	virtual colorRGBA getSpecular();
-	virtual void setAmbient(const colorRGBA &color);
-	virtual void setDiffuse(const colorRGBA &color);
-	virtual void setSpecular(const colorRGBA &color);
-	virtual void setAllColors(const colorRGBA &color);
+	virtual ColorRGBA getAmbient();
+	virtual ColorRGBA getDiffuse();
+	virtual ColorRGBA getSpecular();
+	virtual void setAmbient(const ColorRGBA &color);
+	virtual void setDiffuse(const ColorRGBA &color);
+	virtual void setSpecular(const ColorRGBA &color);
+	virtual void setAllColors(const ColorRGBA &color);
 };
 
 #endif

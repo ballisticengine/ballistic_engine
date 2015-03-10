@@ -13,7 +13,7 @@ Fabryka abstrakcyjna - zwraca pliki, je�li nie istniej� - �aduje
 */
 
 
-class factory   {
+class Factory   {
 protected:
 	string wd,lvl;
 	map <string,void *> items;
@@ -22,8 +22,8 @@ protected:
         virtual void * actualLoad(string fn)=0;
         virtual string getSubDir()=0;
 public:
-	 factory();
-	 virtual ~factory();
+	 Factory();
+	 virtual ~Factory();
 	 virtual void * get(string fn,bool force_common=false,bool clone=false);
 	 virtual vector <void *> getAll();
 	 virtual void setWD(string wd);

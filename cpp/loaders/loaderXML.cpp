@@ -1,6 +1,6 @@
-#include "loaders/loaderXML.hpp"
+#include "loaders/LoaderXML.hpp"
 
-bool loaderXML::load(string fn, modelInfo *mi, bool force_common) {
+bool LoaderXML::load(string fn, ModelInfo *mi, bool force_common) {
     this->force_common = force_common;
     ptree pt;
     read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
@@ -10,7 +10,7 @@ bool loaderXML::load(string fn, modelInfo *mi, bool force_common) {
     return true;
 }
 
-void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
+void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
 
     ptree
     verts = geom.get_child("vertices"),
@@ -31,16 +31,16 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
     } catch (std::exception e) {
         type = "level";
     }
-    shape *s=mi->s;
+    Shape *s=mi->s;
     s->f_count = f_count;
     s->v_count = v_count;
     s->v_per_poly = vpf;
     s->uv_count = uv_count;
     s->vertices = new v_type[v_count];
     s->normals = new n_type[v_count];
-    s->faces = new face[f_count];
+    s->faces = new Face[f_count];
     //s->uvs = new uv[uv_count];
-    s->textures = new texture*[f_count];
+    s->textures = new Texture*[f_count];
     s->materials = new Material*[f_count];
     s->frame_count = 0;
     int i;
@@ -67,7 +67,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
         s->normals[i].y = ny;
         s->normals[i].z = nz;
 
-        MathTypes::vector norm;
+        MathTypes::Vector3d norm;
 
         i++;
     }
@@ -79,14 +79,14 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
     BOOST_FOREACH(const ptree::value_type &face, faces) {
         ptree f_verts = face.second.get_child("vertices");
         s->faces[i].index = new unsigned int[vpf];
-        s->faces[i].uvs=new uv[vpf];
+        s->faces[i].uvs=new UV[vpf];
         s->faces[i].normals= new MathTypes::BasicVector[vpf];
         try {
             
             
             string texname = face.second.get<string>("texture");
             
-            texture *t = (texture *) textureFactory::getInstance()->get(texname, this->force_common);
+            Texture *t = (Texture *) TextureFactory::getInstance()->get(texname, this->force_common);
             
             s->textures[i] = t;
         } catch (std::exception e) {
@@ -96,7 +96,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
 
         try {
             ptree material = face.second.get_child("material");
-            colorRGBA sc, dc;
+            ColorRGBA sc, dc;
 
             sc.r = material.get<e_loc>("specular.r");
             sc.g = material.get<e_loc>("specular.g");
@@ -138,7 +138,7 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
         ptree frames = shape_xml.get_child("frames");
         size_t frame_count = shape_xml.get<size_t>("frame_count");
         s->frame_count = frame_count;
-        s->frames = new frame[frame_count];
+        s->frames = new Frame[frame_count];
         s->frame_times = new e_loc[frame_count];
         size_t frame_i = 0, vert_i;
 
@@ -208,20 +208,20 @@ void loaderXML::toShape(ptree &geom, ptree &shape_xml, modelInfo *mi) {
 
 }
 
-string loaderXML::loadXML(ptree &tree, shape *s) {
+string LoaderXML::loadXML(ptree &tree, Shape *s) {
     ptree & geom = tree.get_child("shape.geom"),
             &shape = tree.get_child("shape")
             ;
 
     string name = this->getName(tree);
-    modelInfo *mi=new modelInfo();
+    ModelInfo *mi=new ModelInfo();
     mi->s=s;
     this->toShape(geom, shape, mi);
     
     return name;
 }
 
-string loaderXML::getName(ptree &tree) {
+string LoaderXML::getName(ptree &tree) {
     string name = tree.get<string>("shape.name");
     return name;
 }

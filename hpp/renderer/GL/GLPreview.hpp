@@ -11,15 +11,15 @@ using namespace std;
 #include "types/types.hpp"
 #include "misc/singleton.hpp"
 
-class GLPreview : public RendererGL,public singleton<GLPreview> {
+class GLPreview : public RendererGL,public Singleton<GLPreview> {
 protected:
-    shape* model;
+    Shape* model;
     virtual void specificInit();
     PointLight l;
    
 public:
-     coords c;    
-    virtual void setModel(shape *model);
+     Coords c;    
+    virtual void setModel(Shape *model);
     static GLPreview *getInstance();
     virtual void render();
 };

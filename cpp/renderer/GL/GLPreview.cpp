@@ -1,13 +1,13 @@
 #include "renderer/GL/GLPreview.hpp"
 
-void GLPreview::setModel(shape *model) {
+void GLPreview::setModel(Shape *model) {
     this->model=model;
     c.translation.x=c.translation.y=c.translation.z=c.rotation.x=c.rotation.y=c.rotation.z=0;
     c.translation.z=-10;
     c.rotation.x=-90;
    
     l.locate(0,0,-10);
-    colorRGBA cl;
+    ColorRGBA cl;
     cl.r=1;
     cl.g=1;
     cl.b=1;

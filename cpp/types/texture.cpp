@@ -1,16 +1,16 @@
 #include "types/texture.hpp"
 
 
-texture::texture() {
+Texture::Texture() {
     
 }
 
-texture::texture(string filename) {
+Texture::Texture(string filename) {
     this->filename=filename;
 }
 
-texture * texture::clone() {
-    texture *clone=new texture();
+Texture * Texture::clone() {
+    Texture *clone=new Texture();
     Uint32 rmask, gmask, bmask, amask;
     #if SDL_BYTEORDER == SDL_BIG_ENDIAN
     rmask = 0xff000000;
@@ -39,11 +39,11 @@ texture * texture::clone() {
     
 }
 
-void texture::free() {
+void Texture::free() {
     delete surf;
 }
 
-textureFormat texture::getFormat() {
+textureFormat Texture::getFormat() {
      string ext=Utils::getExt(this->filename);
      return TF_RGBA;
      if(ext=="bmp") {
@@ -57,30 +57,30 @@ textureFormat texture::getFormat() {
      }
 }
 
-void texture::setPixels(void *pixels) {
+void Texture::setPixels(void *pixels) {
     this->surf->pixels=pixels;
 }
 
-void * texture::getPixels() {
+void * Texture::getPixels() {
  return surf->pixels;   
 }
 
-SDL_Surface * texture::getSurface() {
+SDL_Surface * Texture::getSurface() {
     return this->surf;
 }
 
-void texture::setSurface(SDL_Surface *surf) {
+void Texture::setSurface(SDL_Surface *surf) {
     this->surf=surf;
 }
 
-int texture::getWidth() {
+int Texture::getWidth() {
     return surf->w;
 }
 
-int texture::getHeight() {
+int Texture::getHeight() {
     return surf->h;
 }
 
-string texture::getFilename() {
+string Texture::getFilename() {
 	return string(this->filename);
 }

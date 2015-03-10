@@ -5,7 +5,7 @@
 #endif
 #include "renderer/rendererAbstract.hpp"
 #include "loaders/loaderMD2.hpp"
-#include "config/config.hpp"
+#include "config/Config.hpp"
 #include "ui/image.hpp"
 #include "ui/hud.hpp"
 #include "io/ttf.hpp"
@@ -39,7 +39,7 @@ struct GLHint {
     GLuint vertexid, faceid, normid, uvid;
     vector <GLuint> face_chunks;
     vector<size_t> chunk_sizes;
-    vector<texture *> texture_chunks;
+    vector<Texture *> texture_chunks;
 
 
 };
@@ -53,7 +53,7 @@ struct Guv {
 };
 
 
-class RendererGL : public renderer, public singleton<RendererGL> {
+class RendererGL : public RendererAbstract, public Singleton<RendererGL> {
 protected:
     GLuint v, f;
     map <int, GLint> light_numbers, count_names;
@@ -62,31 +62,31 @@ protected:
     shader_list shaders;
     
     void addShader(string name);
-    map<texture *, GLuint> textures_ids;
-    virtual void renderVertex(v_type *v, n_type *normal, uv *uvs);
-    texture *tt, *qt;
-    shape *test;
+    map<Texture *, GLuint> textures_ids;
+    virtual void renderVertex(v_type *v, n_type *normal, UV *uvs);
+    Texture *tt, *qt;
+    Shape *test;
     GLUquadricObj *lightbulb, *bounding_box_q;
     GLhandleARB light_shader_v, light_shader_f;
     
     GLint texloc,use_light_glsl,light_set,glsl_bounding;
     virtual void specificInit();
-    virtual void renderSkybox(skybox *sky);
+    virtual void renderSkybox(Skybox *sky);
     virtual void renderSprite(Sprite *sprite);
-    virtual void assignTexture(texture *t);
+    virtual void assignTexture(Texture *t);
     virtual void assignMaterial(Material *m);
     virtual void begin();
     virtual void beginQuads();
     virtual void end();
     virtual void renderShape2d(Shape2d *shape);
-    virtual void beginHinted(shape *s);
+    virtual void beginHinted(Shape *s);
     virtual void translateSpecific(e_loc x, e_loc y, e_loc z);
-    virtual void lightSpecific(light *l);
+    virtual void lightSpecific(Light *l);
     virtual void lightOff();
     virtual void lightOn();
     virtual void positionCameraSpecific();
     virtual void rotateSpecific(e_loc x, e_loc y, e_loc z, e_loc d);
-    virtual void setAmbientLight(colorRGB *c);
+    virtual void setAmbientLight(ColorRGB *c);
     virtual void drawBoundingBox(BoundingCube *bound);
     virtual void drawHud();
     virtual void drawHudImage(UiImage *img);
@@ -97,13 +97,13 @@ protected:
     virtual void renderTerrainSpecific();
     //virtual void renderFaceTexShape(faceTexShape *s);
     void setUpVbos();
-    void setUpVbo(shape *s);
-     void renderFaceTexShape(shape *s);
-    void renderFaceTexShapex(shape *s);
+    void setUpVbo(Shape *s);
+     void renderFaceTexShape(Shape *s);
+    void renderFaceTexShapex(Shape *s);
 public:
     RendererGL();
      virtual void setVideoMode();
-    virtual void setupTexture(texture *t,char *pixels=0);
+    virtual void setupTexture(Texture *t,char *pixels=0);
     virtual void render();
     virtual void previewRender();
 };

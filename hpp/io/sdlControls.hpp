@@ -13,10 +13,10 @@
 
 using namespace std;
 
-#include "config/engineState.hpp"
+#include "config/EngineState.hpp"
 #include "misc/singleton.hpp"
-#include "world/world.hpp"
-#include "config/config.hpp"
+#include "world/World.hpp"
+#include "config/Config.hpp"
 #include "types/types.hpp"
 #include "types/mathTypes.hpp"
 #include "entities/observerEntity.hpp"
@@ -30,7 +30,7 @@ e_loc deg2rad(e_loc deg);
 
 
 
-class sdlControls : public singleton<sdlControls> {
+class SdlControls : public Singleton<SdlControls> {
     size_t anykey(const Uint8 *state,int ksize);
 public:
 	void operator()();

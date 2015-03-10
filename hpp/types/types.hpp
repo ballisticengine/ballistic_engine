@@ -16,11 +16,11 @@
 using namespace std;
 
 
-
 /**
 * Pomocnicza klasa reprezentująca kolor RGB
 */
-class colorRGB {
+
+class ColorRGB {
 public:
 	e_loc r,g,b;
 };
@@ -28,28 +28,28 @@ public:
 /**
 * Rozszerzenie colorRGB o kanał Alpha
 */
-class colorRGBA : public colorRGB {
+class ColorRGBA : public ColorRGB {
 public:
 	e_loc a;
 };
 
-struct coords {
-	MathTypes::vector translation,rotation;
+struct Coords {
+	MathTypes::Vector3d translation,rotation;
 };
 
-struct frustumSizes {
+struct FrustumSizes {
  e_loc x,y,znear,zfar;
 };
 
 
-struct uv {
+struct UV {
  e_loc u,v;
 };
 
 typedef MathTypes::BasicVector v_type;
 typedef MathTypes::BasicVector n_type;
 
-struct frame {
+struct Frame {
 	e_loc fnum,fval;
 	v_type *verts;
 };

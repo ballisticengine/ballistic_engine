@@ -4,7 +4,7 @@
 #include "types/types.hpp"
 #include "entities/light.hpp"
 #include "types/mathTypes.hpp"
-#include "world/world.hpp"
+#include "world/World.hpp"
 
 PyManipulator::PyManipulator(string file) {
 
@@ -29,7 +29,7 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		PyLocker::getInstance()->lock();
 	string signame="on"+name;
 	bp::object f=bp::extract<bp::object>(instance.attr(signame.c_str()));
-	world *w=world::getInstance();
+	World *w=World::getInstance();
         HUD *h=HUD::getInstance();
 	try {
 	if(name=="Init") {
@@ -40,7 +40,7 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		a=(PhysicalEntity *)paramA;
 		b=(PhysicalEntity *)paramB;
 		//MathTypes::vector cvec=*(MathTypes::vector *)paramC;
-                collsionInfo ci=*(collsionInfo *)paramC;
+                CollsionInfo ci=*(CollsionInfo *)paramC;
 		f(boost::ref(*a),boost::ref(*b),boost::ref(ci));
 	} else if(name=="EntityMovement") {
 		PhysicalEntity *a;
@@ -49,8 +49,8 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 	} else if(name=="LevelCollision") {
 		PhysicalEntity *a;
 		a=(PhysicalEntity *)paramA;	
-		roomEntity *r=(roomEntity *)paramB;
-                MathTypes::vector cvec=*(MathTypes::vector *)paramC;
+		RoomEntity *r=(RoomEntity *)paramB;
+                MathTypes::Vector3d cvec=*(MathTypes::Vector3d *)paramC;
 		f(boost::ref(*a),boost::ref(*r),boost::ref(cvec));
 	} else if(name=="ObserverStateChange") {
             ObserverState *s=(ObserverState *)paramA;

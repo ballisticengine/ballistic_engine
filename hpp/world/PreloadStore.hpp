@@ -10,10 +10,10 @@ using namespace std;
 #include "types/shape.hpp"
 #include "types/texture.hpp"
 
-typedef map<string,shape*> preload_map;
-typedef map<string,texture *> tex_preload_map;
+typedef map<string,Shape*> preload_map;
+typedef map<string,Texture *> tex_preload_map;
 
-class PreloadStore : public singleton<PreloadStore> {
+class PreloadStore : public Singleton<PreloadStore> {
     public:
         preload_map shape_preloads;
         tex_preload_map tex_preloads;

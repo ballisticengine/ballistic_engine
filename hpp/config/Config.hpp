@@ -21,26 +21,26 @@ using namespace boost::property_tree;
 #include "factories/shapeFactory.hpp"
 #include "factories/textureFactory.hpp"
 #include "ui/uiMesh.hpp"
-#include "config/engineState.hpp"
+#include "config/EngineState.hpp"
 
 using boost::property_tree::ptree;
 
-struct videoData {
+struct VideoData {
     int width, height, bpp;
     float frustum_start, frustum_end, frustum_x, frustum_y;
 };
 
-class config : public singleton<config> {
+class Config : public Singleton<Config> {
     ptree pt;
-    videoData vd;
+    VideoData vd;
     string start_level;
     vector<string> scripts;
     void loadWeapons();
 
 public:
     weapon_map available_weapons;
-    config();
-    videoData * getVD();
+    Config();
+    VideoData * getVD();
     string & getStart();
     vector <string> getScripts();
     const ptree & getPtree();

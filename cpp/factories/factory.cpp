@@ -1,6 +1,6 @@
 #include "factories/factory.hpp"
 
-void * factory::get(string fn, bool force_common,bool clone) {
+void * Factory::get(string fn, bool force_common,bool clone) {
     this->force_common = force_common;
     
     if (items.find(fn) == items.end() || clone) {
@@ -32,27 +32,27 @@ void * factory::get(string fn, bool force_common,bool clone) {
     return items[fn];
 }
 
-factory::~factory() {
+Factory::~Factory() {
     cout << "Cleaning up" << endl;
     for (int i = 0; i < item_ptr.size(); i++) {
         delete item_ptr[i];
     }
 }
 
-vector <void *> factory::getAll() {
+vector <void *> Factory::getAll() {
     return this->item_ptr;
 }
 
 
-factory::factory() {
+Factory::Factory() {
     wd = "./data";
 
 }
 
-void factory::setWD(string wd) {
+void Factory::setWD(string wd) {
     this->wd = wd;
 }
 
-void factory::setLevel(string lvl) {
+void Factory::setLevel(string lvl) {
     this->lvl = lvl;
 }

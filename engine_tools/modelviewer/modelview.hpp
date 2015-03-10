@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "loaders/loaderXML.hpp"
+#include "loaders/LoaderXML.hpp"
 #include "modelview.hpp"
 #include "renderer.hpp"
 

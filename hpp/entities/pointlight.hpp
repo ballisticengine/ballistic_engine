@@ -3,7 +3,7 @@
 /**
 �wiat�o punktowe
 */
-class PointLight : public light {
+class PointLight : public Light {
 public:
 	LightType getType();
 };

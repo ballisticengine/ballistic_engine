@@ -16,19 +16,19 @@ using namespace std;
 
 class TerrainMap {
 protected:
-	shape *quads,*s;
-	texture * tex, * terrain;
-	shapeFactory *sf;
-	textureFactory *tf;
+	Shape *quads,*s;
+	Texture * tex, * terrain;
+	ShapeFactory *sf;
+	TextureFactory *tf;
 	int w,h,qc;
 	void mapTerrain();
 
 public:
 	TerrainMap(string terrain_texture,string surface_texture);
 	~TerrainMap();
-	shape * getShape();
-	texture *getTexture();
-	shape *getQuads();
+	Shape * getShape();
+	Texture *getTexture();
+	Shape *getQuads();
 	int getQuadCount();
 	int getW();
 	int getH();

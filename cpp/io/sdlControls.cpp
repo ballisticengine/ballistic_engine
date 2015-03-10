@@ -5,7 +5,7 @@ e_loc deg2rad(e_loc deg) {
     return deg*f;
 }
 
-size_t sdlControls::anykey(const Uint8 *state, int ksize) {
+size_t SdlControls::anykey(const Uint8 *state, int ksize) {
     size_t ret = 0;
     for (size_t i = 0; i < ksize; i++) {
         if (state[i]) {
@@ -15,21 +15,21 @@ size_t sdlControls::anykey(const Uint8 *state, int ksize) {
     return ret;
 }
 
-void sdlControls::operator()() {
+void SdlControls::operator()() {
 
-    ObserverEntity *o = world::getInstance()->getObserver();
+    ObserverEntity *o = World::getInstance()->getObserver();
     e_loc step = 0.09, rstep = 0.1, vstep = 50;
     static e_loc rotx = 0, roty = 0, oldroty = 0;
     static e_loc z = 0;
     e_loc xx;
-    int x, y, winw = config::getInstance()->getVD()->width / 2, winh = config::getInstance()->getVD()->height / 2;
+    int x, y, winw = Config::getInstance()->getVD()->width / 2, winh = Config::getInstance()->getVD()->height / 2;
     SDL_SetRelativeMouseMode(SDL_TRUE);
     TrRot vel;
     int ksize = 255;
     size_t keys_p = 0;
     static Uint32 mouse_state, old_mouse_state;
     static bool oldl = false, oldr, oldm;
-    while (!engineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->exit()) {
         const Uint8 *state = SDL_GetKeyboardState(&ksize);
         mouse_state = SDL_GetRelativeMouseState(&x, &y);
 
@@ -42,7 +42,7 @@ void sdlControls::operator()() {
         rotx = normalizeRotation(rotx);
 
         vel = o->getVelocity();
-        camera *c = o->getCamera();
+        Camera *c = o->getCamera();
 
         vel.reset();
 

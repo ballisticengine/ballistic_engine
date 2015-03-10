@@ -2,7 +2,7 @@
 
 Shape2d::Shape2d(e_loc width,e_loc height) {
 	this->vertices=new v_type[4];
-	this->uvs=new uv[4];
+	this->uvs=new UV[4];
 	this->normals=new v_type[4];
         e_loc 
 		minx=-width/2,

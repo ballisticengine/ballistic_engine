@@ -1,26 +1,26 @@
 #include "io/sdlio.hpp"
-SDL_Window *sdlIO::window = 0;
-SDL_Renderer *sdlIO::displayRenderer = 0;
-SDL_Surface *sdlIO::screen = 0;
-sdlIO *sdlIO::me = 0;
-int sdlIO::window_w = 0;
-int sdlIO::window_h = 0;
+SDL_Window *SdlIO::window = 0;
+SDL_Renderer *SdlIO::displayRenderer = 0;
+SDL_Surface *SdlIO::screen = 0;
+SdlIO *SdlIO::me = 0;
+int SdlIO::window_w = 0;
+int SdlIO::window_h = 0;
 
-sdlIO::sdlIO() {
-    w = world::getInstance();
+SdlIO::SdlIO() {
+    w = World::getInstance();
 
-    engineState::getInstance()->keypress = false;
+    EngineState::getInstance()->keypress = false;
 }
 
-void sdlIO::setRenderer(renderer *r) {
+void SdlIO::setRenderer(RendererAbstract *r) {
     this->r = r;
 }
 
-renderer *sdlIO::getRenderer() {
+RendererAbstract *SdlIO::getRenderer() {
     return this->r;
 }
 
-void sdlIO::initWindow(sdlIO *me) {
+void SdlIO::initWindow(SdlIO *me) {
     SDL_Init(SDL_INIT_EVERYTHING);
     //SDL_Init(SDL_INIT_VIDEO);
     TTF::getInstance();
@@ -33,61 +33,61 @@ void sdlIO::initWindow(sdlIO *me) {
 
     SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 
-    SDL_CreateWindowAndRenderer(config::getInstance()->getVD()->width, config::getInstance()->getVD()->height,
-            SDL_WINDOW_OPENGL, &sdlIO::window, &sdlIO::displayRenderer);
-    sdlIO::screen = SDL_GetWindowSurface(sdlIO::window);
+    SDL_CreateWindowAndRenderer(Config::getInstance()->getVD()->width, Config::getInstance()->getVD()->height,
+            SDL_WINDOW_OPENGL, &SdlIO::window, &SdlIO::displayRenderer);
+    SdlIO::screen = SDL_GetWindowSurface(SdlIO::window);
     SDL_GLContext context;
-    sdlIO::me = me;
+    SdlIO::me = me;
     context = SDL_GL_CreateContext(window);
-    sdlIO::me->window_w = config::getInstance()->getVD()->width;
-    sdlIO::me->window_h = config::getInstance()->getVD()->height;
-    if (engineState::getInstance()->fullscreen) {
+    SdlIO::me->window_w = Config::getInstance()->getVD()->width;
+    SdlIO::me->window_h = Config::getInstance()->getVD()->height;
+    if (EngineState::getInstance()->fullscreen) {
         toggleFullscreen();
     }
 
 }
 
-void sdlIO::flush() {
-    SDL_GL_SwapWindow(sdlIO::window);
+void SdlIO::flush() {
+    SDL_GL_SwapWindow(SdlIO::window);
     //SDL_RenderPresent(displayRenderer);
 }
 
-void sdlIO::toggleFullscreen() {
-    bool fullscreen = engineState::getInstance()->fullscreen;
+void SdlIO::toggleFullscreen() {
+    bool fullscreen = EngineState::getInstance()->fullscreen;
     if (!fullscreen) {
-        if (engineState::getInstance()->desktop_fs) {
+        if (EngineState::getInstance()->desktop_fs) {
 
             SDL_SetWindowFullscreen(window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN);
             int w, h;
-            SDL_GetWindowSize(sdlIO::window, &w, &h);
-            config::getInstance()->getVD()->width = w;
-            config::getInstance()->getVD()->height = h;
+            SDL_GetWindowSize(SdlIO::window, &w, &h);
+            Config::getInstance()->getVD()->width = w;
+            Config::getInstance()->getVD()->height = h;
         } else {
             SDL_SetWindowFullscreen(window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
         }
 
     } else {
-        if (engineState::getInstance()->desktop_fs) {
-            config::getInstance()->getVD()->width = sdlIO::me->window_w;
-            config::getInstance()->getVD()->height = sdlIO::me->window_h;
+        if (EngineState::getInstance()->desktop_fs) {
+            Config::getInstance()->getVD()->width = SdlIO::me->window_w;
+            Config::getInstance()->getVD()->height = SdlIO::me->window_h;
         }
         SDL_SetWindowFullscreen(window, 0);
     }
 
 
 
-    sdlIO::me->r->setVideoMode();
-    engineState::getInstance()->fullscreen = !fullscreen;
+    SdlIO::me->r->setVideoMode();
+    EngineState::getInstance()->fullscreen = !fullscreen;
 }
 
-void sdlIO::previewLoop() {
+void SdlIO::previewLoop() {
     SDL_Event event;
     GLPreview *p;
-    while (!engineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->exit()) {
         while (SDL_PollEvent(& event)) {
 
             if (event.type == SDL_QUIT) {
-                engineState::getInstance()->setExit(true);
+                EngineState::getInstance()->setExit(true);
             }
 
             if (event.type == SDL_KEYDOWN) {
@@ -124,7 +124,7 @@ void sdlIO::previewLoop() {
     }
 }
 
-void sdlIO::eventLoop() {
+void SdlIO::eventLoop() {
 
     SDL_Event event;
     float rot = 0, tr = 0;
@@ -132,15 +132,15 @@ void sdlIO::eventLoop() {
 
     boost::thread(boost::ref(this->ctrl));
     TrRot vel;
-    while (!engineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->exit()) {
         while (SDL_PollEvent(& event)) {
 
             if (event.type == SDL_QUIT) {
-                engineState::getInstance()->setExit(true);
+                EngineState::getInstance()->setExit(true);
             }
 
             if (event.type == SDL_KEYDOWN) {
-                engineState::getInstance()->keypress = true;
+                EngineState::getInstance()->keypress = true;
                 ObserverState *observer_state;
                 observer_state = this->w->observer.getState();
                 observer_state->movement.next_weapon = false;
@@ -153,16 +153,16 @@ void sdlIO::eventLoop() {
 
                     case SDLK_F1:
                         //wireframes
-                        engineState::getInstance()->debug_visual = !engineState::getInstance()->debug_visual;
+                        EngineState::getInstance()->debug_visual = !EngineState::getInstance()->debug_visual;
                         break;
 
                     case SDLK_F2:
                         //ligthing
-                        engineState::getInstance()->lighting = !engineState::getInstance()->lighting;
+                        EngineState::getInstance()->lighting = !EngineState::getInstance()->lighting;
                         break;
 
                     case SDLK_F3:
-                        engineState::getInstance()->noclip = !engineState::getInstance()->noclip;
+                        EngineState::getInstance()->noclip = !EngineState::getInstance()->noclip;
                         break;
 
                     case SDLK_f:
@@ -183,14 +183,14 @@ void sdlIO::eventLoop() {
                         break;
 
                     case SDLK_ESCAPE:
-                        engineState::getInstance()->setExit(true);
+                        EngineState::getInstance()->setExit(true);
                         break;
                 }
 
             }
 
             if (event.type == SDL_KEYUP) {
-                engineState::getInstance()->keypress = false;
+                EngineState::getInstance()->keypress = false;
                 ObserverState *observer_state;
                 observer_state = this->w->observer.getState();
                 observer_state->movement.next_weapon = false;
@@ -221,6 +221,6 @@ void sdlIO::eventLoop() {
     }
 }
 
-sdlIO::~sdlIO() {
+SdlIO::~SdlIO() {
     SDL_Quit();
 }

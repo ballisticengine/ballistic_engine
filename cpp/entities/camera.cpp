@@ -1,16 +1,16 @@
-#include "entities/camera.hpp"
+#include "entities/Camera.hpp"
 
-camera::camera() {
+Camera::Camera() {
 }
 
-camera::camera(frustumSizes frustum) {
+Camera::Camera(FrustumSizes frustum) {
 	this->setFrustum(frustum);
 }
 
-void camera::setFrustum(frustumSizes frustum) {
+void Camera::setFrustum(FrustumSizes frustum) {
  this->frustum=frustum;
 }
 
-frustumSizes camera::getFrustum() {
+FrustumSizes Camera::getFrustum() {
  return this->frustum;
 }

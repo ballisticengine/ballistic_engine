@@ -31,12 +31,12 @@ bool ObserverState::operator==(const ObserverState &s) {
 }
 ///////////
 
-void ObserverEntity::setCamera(camera *c) {
+void ObserverEntity::setCamera(Camera *c) {
     this->cam = c;
 
 }
 
-void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) { //tu podejżane (bo w entity jest duplikacja)
+void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) { //tu podejżane (bo w Entity jest duplikacja)
     this->x += x;
     this->y += y;
     this->z += z;
@@ -96,7 +96,7 @@ void ObserverEntity::rotate(e_loc x, e_loc y, e_loc z) {
     if(lock) {
         return;
     }
-    entity::rotate(x, y, z);
+    Entity::rotate(x, y, z);
     this->cam->rotate(x, y, z);
 }
 
@@ -105,11 +105,11 @@ void ObserverEntity::face(e_loc x, e_loc y, e_loc z) {
         return;
     }
     
-    entity::face(x, y, z);
+    Entity::face(x, y, z);
     this->cam->face(x, y, z);
 }
 
-camera * ObserverEntity::getCamera() {
+Camera * ObserverEntity::getCamera() {
 
     cam->locate(x, y - boundings[0]->height / 2, z);
     //cam->face(rx,ry,rz);

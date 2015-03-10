@@ -12,7 +12,7 @@ void PyScripting::loadManipulators() {
 		}
                 
 	}*/
-        vector<string> scripts=config::getInstance()->getScripts();
+        vector<string> scripts=Config::getInstance()->getScripts();
         for(int i=0; i<scripts.size(); i++) {
             string pyfn=string(CONFIG_DIR)+DS+string(COMMON_DIR)+DS+
                        string("python")+DS+scripts[i]+".py";
@@ -27,7 +27,7 @@ void PyScripting::loadManipulators() {
 PyScripting::PyScripting() {
 	Py_Initialize();
 	PyEval_InitThreads(); 
-	init_world();
+	init_World();
         init_hud(); 
         init_timer();
        

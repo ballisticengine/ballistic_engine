@@ -10,14 +10,14 @@
 
 #include "types/shape2d.hpp"
 
-class Sprite : public entity,public Texturable {
+class Sprite : public Entity,public Texturable {
 protected:
 	virtual void setUp();
 public:
 	Sprite();
 	Sprite(string file);
-	Sprite(texture *tex);
-        Sprite(texture *tex,e_loc w,e_loc h);
+	Sprite(Texture *tex);
+        Sprite(Texture *tex,e_loc w,e_loc h);
 	e_loc width;
 	e_loc height;
 	Shape2d *shape;

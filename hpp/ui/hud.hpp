@@ -7,7 +7,7 @@
 #include "ui/uiMesh.hpp"
 #include "types/types.hpp"
 
-class HUD : public singleton<HUD> {
+class HUD : public Singleton<HUD> {
 protected:
         image_list images; //tu zrobić mapę a nie vector
         image_map images_mapped;

@@ -11,22 +11,22 @@
 #include "python/world_defs.hpp"
 #include "python/hud_defs.hpp"
 #include "python/timer_defs.hpp"
-#include "config/engineState.hpp"
+#include "config/EngineState.hpp"
 
 
 using namespace std;
 
 typedef  vector<PyManipulator *> man_list;
 
-struct signal_type {
+struct SignalType {
     string name;
     void *paramA,*paramB,*paramC,*paramD;
 };
 
-class PyScripting : public singleton<PyScripting> {
+class PyScripting : public Singleton<PyScripting> {
 protected:
 	man_list manipulators;
-        queue<signal_type> sig_queue;
+        queue<SignalType> sig_queue;
         bool processing,other_bcast;
         
 public:

@@ -1,5 +1,5 @@
-#ifndef ENGINESTATE_HPP
-#define ENGINESTATE_HPP
+#ifndef EngineState_HPP
+#define EngineState_HPP
 
 #include "misc/singleton.hpp"
 #include <map>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class engineState : public singleton<engineState> {
+class EngineState : public Singleton<EngineState> {
 protected:
 	bool global_exit;
 	map<char *,void *> settings;
@@ -17,7 +17,7 @@ public:
 	void set(char * key,void *setting);
 	void * get(char * key);
 	void * toggle(char *key);
-	engineState();
+	EngineState();
 	void setExit(bool exit);
 	bool exit();
 	bool light;

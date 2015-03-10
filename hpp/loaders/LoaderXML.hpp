@@ -21,19 +21,19 @@ using namespace boost::property_tree;
 #include "types/boundingCube.hpp"
 #include "misc/utils.hpp"
 
-struct modelInfo {
-    shape *s;
+struct ModelInfo {
+    Shape *s;
     bounding_list boundings;    
 };
 
-class loaderXML : public singleton<loaderXML> {
+class LoaderXML : public Singleton<LoaderXML> {
 protected:
     bool  force_common;
     //bool loadFile(string fn);
- void toShape(ptree &geom,ptree &shape_xml,modelInfo *mi);
+ void toShape(ptree &geom,ptree &shape_xml,ModelInfo *mi);
 public:
-	string loadXML(ptree &tree,shape *s);
-	bool load(string fn, modelInfo *mi,bool force_common=false);
+	string loadXML(ptree &tree,Shape *s);
+	bool load(string fn, ModelInfo *mi,bool force_common=false);
 	string getName(ptree &tree);
 	//loadXML(string fn,shape *s); //TODO
 };

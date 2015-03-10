@@ -2,7 +2,7 @@
 #define	SINGLETON_HPP
 
 template <typename T>
-class singleton {
+class Singleton {
 protected:
     
     void *params;

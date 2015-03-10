@@ -1,60 +1,60 @@
-#include "entities/roomEntity.hpp"
+#include "entities/RoomEntity.hpp"
 
-roomEntity::roomEntity() {
+RoomEntity::RoomEntity() {
     last_bound = 0;
     preload_store=PreloadStore::getInstance();
 }
 
-roomEntity::~roomEntity() {
+RoomEntity::~RoomEntity() {
     deleteVector(this->boundings);
     deleteVector(this->entities); //to usunie modele, physical_entities i entities z powodo hierarchii (patrz add*Entity)
 }
 
-void roomEntity::addEntity(entity *e) {
+void RoomEntity::addEntity(Entity *e) {
     this->entities.push_back(e);
 }
 
-void roomEntity::addPhysicalEntity(PhysicalEntity *e) {
+void RoomEntity::addPhysicalEntity(PhysicalEntity *e) {
     this->phys_entities.push_back(e);
     this->addEntity(e);
 }
 
-void roomEntity::addObjectEntity(ObjectEntity *e) {
+void RoomEntity::addObjectEntity(ObjectEntity *e) {
     this->models.push_back(e);
 
     this->addPhysicalEntity(e);
 }
 
-void roomEntity::addLightEntity(light *e) {
+void RoomEntity::addLightEntity(Light *e) {
     this->lights.push_back(e);
     this->addEntity(e);
 }
 
-void roomEntity::placeDecal(Sprite *decal,coords c) {
+void RoomEntity::placeDecal(Sprite *decal,Coords c) {
     
     decal->locate(c.translation.x,c.translation.y,c.translation.z);
     decal->face(c.rotation.x,c.rotation.y,c.rotation.z);
     decals.push_back(decal);
 }
 
-void roomEntity::placeDecalTexture(texture *tex,coords c) {
+void RoomEntity::placeDecalTexture(Texture *tex,Coords c) {
     Sprite *decal=new Sprite(tex);
     placeDecal(decal,c);
 }
 
-void roomEntity::placePreloadDecal(string preload,coords c) {
-    texture *tex=preload_store->tex_preloads[preload];
+void RoomEntity::placePreloadDecal(string preload,Coords c) {
+    Texture *tex=preload_store->tex_preloads[preload];
     Sprite *decal=new Sprite(tex);
     placeDecal(decal,c);
 }
 
-ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string object_name) {
-    roomEntity * room = this;
+ObjectEntity * RoomEntity::spawnObject(string preload_name,Coords c,string object_name) {
+    RoomEntity * room = this;
     return spawnShape(preload_store->shape_preloads[preload_name],c,object_name);
 }
 
-  ObjectEntity * roomEntity::spawnShape(shape *s,coords c,string object_name) {
-     roomEntity * room = this;
+  ObjectEntity * RoomEntity::spawnShape(Shape *s,Coords c,string object_name) {
+     RoomEntity * room = this;
     ObjectEntity *oe = new ObjectEntity();
     oe->setModel(s);
     oe->locate(-c.translation.x,-c.translation.y,-c.translation.z);
@@ -66,7 +66,7 @@ ObjectEntity * roomEntity::spawnObject(string preload_name,coords c,string objec
     return oe;
   }
 
-void roomEntity::removeObjectEntity(string name) {
+void RoomEntity::removeObjectEntity(string name) {
     size_t i;
     for(i=0; i<models.size(); i++) {
         if(models[i]->name==name) {
@@ -76,15 +76,15 @@ void roomEntity::removeObjectEntity(string name) {
     models.erase(models.begin()+i);
 }
   
- collsionInfo roomEntity::collides(entity *ent,coords offset) {
+ CollsionInfo RoomEntity::collides(Entity *ent,Coords offset) {
     BoundingCube *bound=ent->boundings[0];
     e_loc in_count = 0, out_count = 0;
     in_count = out_count = 0;
     BoundingCube bound_off = *bound, bound_current, *in_bounding;
-    MathTypes::vector tmp;
+    MathTypes::Vector3d tmp;
 
 
-    MathTypes::vector cvec, ctmp, cres, none, am, bm, dm;
+    MathTypes::Vector3d cvec, ctmp, cres, none, am, bm, dm;
 
     e_loc smallest_dist = 999999;
 
@@ -165,7 +165,7 @@ void roomEntity::removeObjectEntity(string name) {
             out_count++;
         }
     }
-    collsionInfo ci;
+    CollsionInfo ci;
    // cout << in_count << ", " << out_count << endl;
     if (in_count == 0) {
         //cvec.write();

@@ -4,7 +4,7 @@
 #include "types/types.hpp"
 #include "types/mathTypes.hpp"
 #include "entities/physicalEntity.hpp"
-#include "entities/camera.hpp"
+#include "entities/Camera.hpp"
 #include "entities/weapon.hpp"
 #include "time/timer.hpp"
 
@@ -34,7 +34,7 @@ public:
 
 class ObserverEntity : public PhysicalEntity {
 protected:
-	camera *cam;
+	Camera *cam;
 	e_loc headbob_add,headbob_i,kickback;
 	Timer bob_timer,kick_timer;
         ObserverState state,got_state;
@@ -45,8 +45,8 @@ public:
     Weapon *current_weapon;
     ObserverEntity();
 	virtual ~ObserverEntity();
-	virtual void setCamera(camera *c);
-	virtual camera *getCamera();
+	virtual void setCamera(Camera *c);
+	virtual Camera *getCamera();
 	virtual void bobHead();
         virtual void kickBack(e_loc force);
 	

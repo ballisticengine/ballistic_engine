@@ -11,7 +11,7 @@
 #include <map>
 using namespace std;
 
-class PyLocker : public singleton<PyLocker> {
+class PyLocker : public Singleton<PyLocker> {
     PyGILState_STATE state;
    
 public:

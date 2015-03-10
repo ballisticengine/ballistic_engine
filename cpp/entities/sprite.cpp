@@ -1,7 +1,7 @@
 #include "entities/sprite.hpp"
 
 void Sprite::setUp() {
-    //videoData *vd=config::getInstance()->getVD();
+    //videoData *vd=Config::getInstance()->getVD();
 
     //this->width=((e_loc)this->tex->getWidth()/vd->width)*5;
     //this->height=((e_loc)this->tex->getHeight()/vd->height)*5;
@@ -17,12 +17,12 @@ Sprite::Sprite() {
 
 }
 
-Sprite::Sprite(texture *tex) {
+Sprite::Sprite(Texture *tex) {
     this->tex = tex;
     this->setUp();
 }
 
-Sprite::Sprite(texture *tex,e_loc w,e_loc h) {
+Sprite::Sprite(Texture *tex,e_loc w,e_loc h) {
      this->width=w;
      this->height=h;
      this->tex=tex;
@@ -30,6 +30,6 @@ Sprite::Sprite(texture *tex,e_loc w,e_loc h) {
  }
 
 Sprite::Sprite(string file) {
-    this->tex = (texture *) textureFactory::getInstance()->get(file);
+    this->tex = (Texture *) TextureFactory::getInstance()->get(file);
     this->setUp();
 }

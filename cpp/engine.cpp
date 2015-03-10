@@ -1,50 +1,50 @@
 #include "engine.hpp"
 
-void engine::pythonInit() {
+void Engine::pythonInit() {
     PyScripting::getInstance()->loadManipulators();
 
 }
 
-void engine::preview(string model) {
+void Engine::preview(string model) {
     cout << "Model: " << model << endl;
     cout << "Preparing..." << endl;
 
     cout << "Config init..." << endl;
-    config::getInstance();
+    Config::getInstance();
     
     GLPreview *pr = new GLPreview();
 
     cout << "IO\n";
 
 
-    io = new sdlIO();
+    io = new SdlIO();
     return;
     io->initWindow(io);
     io->setRenderer(pr);
 //    cout << "Renderer init\n";
     //shapeFactory::getInstance()->setWD(".");
-    shape *s=(shape *)shapeFactory::getInstance()->get(model);
+    Shape *s=(Shape *)ShapeFactory::getInstance()->get(model);
     pr->setModel(s);
     pr->previewInit();
-    pr->setFlush(sdlIO::flush);
+    pr->setFlush(SdlIO::flush);
     io->previewLoop();
     
 }
 
-void engine::prepare() {
+void Engine::prepare() {
     cout << "Preparing..." << endl;
 
     cout << "Config init..." << endl;
-    config::getInstance();
+    Config::getInstance();
 
     cout << "Get World\n";
-    world *w = (world *) world::getInstance();
+    World *w = (World *) World::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
-            start_lvl = start_lvl_dir + DS + config::getInstance()->getStart();
+            start_lvl = start_lvl_dir + DS + Config::getInstance()->getStart();
     cout << start_lvl << endl;
-    w->parseXml(config::getInstance()->getStart());
+    w->parseXml(Config::getInstance()->getStart());
 
-    videoData vd = *config::getInstance()->getVD();
+    VideoData vd = *Config::getInstance()->getVD();
 
 
 
@@ -53,7 +53,7 @@ void engine::prepare() {
     cout << "IO\n";
 
 
-    io = new sdlIO();
+    io = new SdlIO();
 
     io->initWindow(io);
     io->setRenderer(r);
@@ -62,7 +62,7 @@ void engine::prepare() {
     cout << "Camera set\n";
     r->setCamera(w->getCurrentCamera());
     cout << "Flush set\n";
-    r->setFlush(sdlIO::flush);
+    r->setFlush(SdlIO::flush);
     // boost::thread(boost::ref(*r));
     this->pythonInit();
     cout << "World loop\n";
@@ -75,11 +75,11 @@ void engine::prepare() {
 
 }
 
-engine::~engine() {
+Engine::~Engine() {
 
 }
 
-void engine::start() {
+void Engine::start() {
 
     io->eventLoop();
 

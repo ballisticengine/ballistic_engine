@@ -8,10 +8,10 @@ TrRot::TrRot() {
     this->reset();
 }
 
-coords PhysicalEntity::nextCoords(time_int diff) {
+Coords PhysicalEntity::nextCoords(time_int diff) {
    
 
-    coords c;
+    Coords c;
     //cout << diff < endl;
     c.translation.x = velocity.t.x*diff;
     c.translation.y = velocity.t.y*diff;

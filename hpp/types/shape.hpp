@@ -11,43 +11,35 @@ using namespace std;
 #include "types/types.hpp"
 #include "types/material.hpp"
 
-
-struct face {
+struct Face {
     unsigned int *index;
     MathTypes::BasicVector *normals;
-    uv *uvs;
+    UV *uvs;
 };
-
 
 class ShapeAbstract {
 public:
-	
-	MathTypes::BasicVector *vertices,*normals;
-	face *faces;
-	uv *uvs;
-        size_t v_count,uv_count,f_count,v_per_poly;
-	virtual ~ShapeAbstract();
+    MathTypes::BasicVector *vertices, *normals;
+    Face *faces;
+    UV *uvs;
+    size_t v_count, uv_count, f_count, v_per_poly;
+    virtual ~ShapeAbstract();
 };
 
-
-class shape : public ShapeAbstract {
-
+class Shape : public ShapeAbstract {
 public:
-    shape();
-	texture **textures;
-        Material **materials;
-	
-	size_t frame_count;
-	frame *frames;
-	e_loc *frame_times;
-	void *renderer_hint;
-	
-	virtual void calculateNormals();
-    
-     ~shape();
+    Shape();
+    Texture **textures;
+    Material **materials;
+    size_t frame_count;
+    Frame *frames;
+    e_loc *frame_times;
+    void *renderer_hint;
+    virtual void calculateNormals();
+    ~Shape();
 };
 
-typedef vector<shape *> shape_list;
+typedef vector<Shape *> shape_list;
 
 #endif	
 

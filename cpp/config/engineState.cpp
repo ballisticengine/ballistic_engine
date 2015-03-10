@@ -1,6 +1,6 @@
-#include "config/engineState.hpp"
+#include "config/EngineState.hpp"
 
-engineState::engineState() {
+EngineState::EngineState() {
  global_exit=false;
  debug_visual=false;
  lighting=true;
@@ -8,11 +8,11 @@ engineState::engineState() {
 
 }
 
-void engineState::setExit(bool exit) {
+void EngineState::setExit(bool exit) {
 
 	global_exit=exit;
 }
 
-bool engineState::exit() {
+bool EngineState::exit() {
  return global_exit;
 }

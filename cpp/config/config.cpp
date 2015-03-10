@@ -1,12 +1,12 @@
 #include <bits/stl_pair.h>
 
-#include "config/config.hpp"
+#include "config/Config.hpp"
 
-void config::loadWeapons() {
+void Config::loadWeapons() {
     
 }
 
-config::config() {
+Config::Config() {
    
     string fn=string(CONFIG_DIR)+string(DS)+string(CONFIG_FN);
     
@@ -15,25 +15,25 @@ config::config() {
    
 	read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
 	
-	vd.width=pt.get<int>("config.screen.resx"); 
-	vd.height=pt.get<int>("config.screen.resy");
-	vd.frustum_start=pt.get<float>("config.screen.frustum_start");
-	vd.frustum_end=pt.get<float>("config.screen.frustum_end");
-	vd.frustum_x=pt.get<float>("config.screen.frustum_width");
-	vd.frustum_y=pt.get<float>("config.screen.frustum_height");
-	engineState::getInstance()->fullscreen=pt.get<bool>("config.screen.fullscreen");
-        engineState::getInstance()->desktop_fs=pt.get<bool>("config.screen.use_desktop_fs");
+	vd.width=pt.get<int>("Config.screen.resx"); 
+	vd.height=pt.get<int>("Config.screen.resy");
+	vd.frustum_start=pt.get<float>("Config.screen.frustum_start");
+	vd.frustum_end=pt.get<float>("Config.screen.frustum_end");
+	vd.frustum_x=pt.get<float>("Config.screen.frustum_width");
+	vd.frustum_y=pt.get<float>("Config.screen.frustum_height");
+	EngineState::getInstance()->fullscreen=pt.get<bool>("Config.screen.fullscreen");
+        EngineState::getInstance()->desktop_fs=pt.get<bool>("Config.screen.use_desktop_fs");
         
-        start_level=pt.get<string>("config.game.start_level");
+        start_level=pt.get<string>("Config.game.start_level");
         
-        ptree scripts_xml=pt.get_child("config.scripts");
+        ptree scripts_xml=pt.get_child("Config.scripts");
         BOOST_FOREACH(const ptree::value_type &script, scripts_xml) {
             string script_s=script.second.get_value<string>();
             scripts.push_back(script_s);
         }
 	
         HUD *hud=HUD::getInstance();
-        ptree hud_xml=pt.get_child("config.screen.hud");
+        ptree hud_xml=pt.get_child("Config.screen.hud");
         BOOST_FOREACH(const ptree::value_type &image, hud_xml) {
             string 
                 name=image.second.get<string>("name"),
@@ -51,7 +51,7 @@ config::config() {
         }
         
         cout << "Loading weapons: \n";
-        ptree weapons_xml=pt.get_child("config.game.weapons");
+        ptree weapons_xml=pt.get_child("Config.game.weapons");
         Weapon *prev=0;
         BOOST_FOREACH(const ptree::value_type &weapon_xml, weapons_xml) {
             Weapon *w=new Weapon();
@@ -66,8 +66,8 @@ config::config() {
             w->model->c.rotation.y=weapon_xml.second.get<e_loc>("rotation.y");
             w->model->c.rotation.z=weapon_xml.second.get<e_loc>("rotation.z");
             w->model->scale=weapon_xml.second.get<e_loc>("scale");
-            w->bullet=shapeFactory::getInstance()->getShape(weapon_xml.second.get<string>("bullet"));
-            w->decal=(texture *)textureFactory::getInstance()->get(weapon_xml.second.get<string>("decal.texture"));
+            w->bullet=ShapeFactory::getInstance()->getShape(weapon_xml.second.get<string>("bullet"));
+            w->decal=(Texture *)TextureFactory::getInstance()->get(weapon_xml.second.get<string>("decal.texture"));
            
            // w->prev=prev;
 //            
@@ -86,22 +86,22 @@ config::config() {
 }
         
 
-videoData * config::getVD() {
+VideoData * Config::getVD() {
  return &vd;
 }
 
-string & config::getStart() {
+string & Config::getStart() {
  return start_level;
 }
 
-ptree & config::getNode(string node) {
+ptree & Config::getNode(string node) {
 	return pt.get_child(node);
 }
 
-const ptree & config::getPtree() {
+const ptree & Config::getPtree() {
  return this->pt;
 }
 
-vector <string> config::getScripts() {
+vector <string> Config::getScripts() {
     return this->scripts;
 }

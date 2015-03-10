@@ -14,7 +14,7 @@ e_loc normalizeRotation(e_loc r) {
 
 namespace MathTypes {
 
-    BasicVector vector::getBasicVector() {
+    BasicVector Vector3d::getBasicVector() {
         BasicVector v;
         v.x = x;
         v.y = y;
@@ -22,27 +22,27 @@ namespace MathTypes {
         return v;
     }
 
-    vector::vector() {
+    Vector3d::Vector3d() {
         x = y = z = 0;
     }
 
-    std::ostream & vector::operator<<(std::ostream & ostr) {
+    std::ostream & Vector3d::operator<<(std::ostream & ostr) {
         ostr << this->x << ", " << this->y << ", " << this->z;
         return ostr;
     }
 
-    void vector::write() {
+    void Vector3d::write() {
         std::cout << this->x << ", " << this->y << ", " << this->z << std::endl;
     }
 
-    vector vector::crossProduct(const MathTypes::vector * b) {
+    Vector3d Vector3d::crossProduct(const MathTypes::Vector3d * b) {
         //ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
         /*
          n[0]=va[1]*vb[2] - va[2]*vb[1];
  n[1]=va[2]*vb[0] - va[0]*vb[2];
  n[2]=va[0]*vb[1] - va[1]*vb[0];
          */
-        vector a = *this, v = a;
+        Vector3d a = *this, v = a;
 
 
         v.x = a.y * b->z - a.z * b->y;
@@ -53,13 +53,13 @@ namespace MathTypes {
         return v;
     }
 
-    vector vector::unit() {
+    Vector3d Vector3d::unit() {
         /*
         nvx = vx / l
                 nvy = vy / l
                 nvz = vz / l
          */
-        vector v;
+        Vector3d v;
         v = *this;
         v.x = ifZero(v.x);
         v.y = ifZero(v.y);
@@ -67,27 +67,27 @@ namespace MathTypes {
         return v;
     }
 
-    vector::vector(const vector &v) {
+    Vector3d::Vector3d(const Vector3d &v) {
         x = v.x;
         y = v.y;
         z = v.z;
     }
 
-    vector::vector(const BasicVector &v) {
+    Vector3d::Vector3d(const BasicVector &v) {
         x = v.x;
         y = v.y;
         z = v.z;
 
     }
 
-    vector & vector::operator=(const vector &v) {
+    Vector3d & Vector3d::operator=(const Vector3d &v) {
         x = v.x;
         y = v.y;
         z = v.z;
         return *this;
     }
 
-    e_loc vector::ifZero(e_loc value) {
+    e_loc Vector3d::ifZero(e_loc value) {
         if (value > 0) {
             return 1;
         } else if (value < 0) {
@@ -97,51 +97,51 @@ namespace MathTypes {
 
     }
 
-    vector vector::diff(const MathTypes::vector & v) {
-        vector lv;
+    Vector3d Vector3d::diff(const MathTypes::Vector3d & v) {
+        Vector3d lv;
         lv.x = x - v.x;
         lv.y = y - v.y;
         lv.z = y - v.z;
         return lv;
     }
 
-    e_loc vector::length() {
+    e_loc Vector3d::length() {
         //vx*vx+vy*vy+vz*vz
         e_loc length = (e_loc) sqrt(x * x + y * y + z * z);
         return length;
     }
 
-    vector vector::normalize() {
-        vector v = *this;
+    Vector3d Vector3d::normalize() {
+        Vector3d v = *this;
         v.x /= length();
         v.y /= length();
         v.z /= length();
         return v;
     }
 
-    e_loc vector::dotProduct(const MathTypes::vector * b) {
+    e_loc Vector3d::dotProduct(const MathTypes::Vector3d * b) {
         e_loc dp = x * b->x + y * b->y + z * b->z;
         return dp;
     }
 
-    vector vector::operator+(const vector &b) {
-        vector v;
+    Vector3d Vector3d::operator+(const Vector3d &b) {
+        Vector3d v;
         v.x = this->x + b.x;
         v.y = this->y + b.y;
         v.z = this->z + b.z;
         return v;
     }
 
-    vector vector::operator-(const vector &b) {
-        vector v;
+    Vector3d Vector3d::operator-(const Vector3d &b) {
+        Vector3d v;
         v.x = this->x - b.x;
         v.y = this->y - b.y;
         v.z = this->z - b.z;
         return v;
     }
 
-    vector vector::operator/(const e_loc val) {
-        vector v;
+    Vector3d Vector3d::operator/(const e_loc val) {
+        Vector3d v;
 
         v.x = this->x / val;
         v.y = this->y / val;
@@ -149,24 +149,24 @@ namespace MathTypes {
         return v;
     }
 
-    vector vector::operator/(const vector &b) {
-        vector v;
+    Vector3d Vector3d::operator/(const Vector3d &b) {
+        Vector3d v;
         v.x = this->x / b.x;
         v.y = this->y / b.y;
         v.z = this->z / b.z;
         return v;
     }
 
-    vector vector::operator*(const vector &b) {
-        vector v;
+    Vector3d Vector3d::operator*(const Vector3d &b) {
+        Vector3d v;
         v.x = x * b.x;
         v.y = y * b.y;
         v.z = z * b.z;
         return v;
     }
 
-    vector vector::operator*(const double a) {
-        vector v;
+    Vector3d Vector3d::operator*(const double a) {
+        Vector3d v;
         v.x = x*a;
         v.y = y*a;
         v.z = z*a;

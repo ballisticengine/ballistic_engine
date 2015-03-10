@@ -15,13 +15,13 @@ public:
         
         e_loc width,height,depth;
 	BoundingCube();
-	BoundingCube(shape *s);
+	BoundingCube(Shape *s);
 	BoundingCube(e_loc width,e_loc height,e_loc depth);
 	BoundingCube(e_loc minx,e_loc miny,e_loc minz,e_loc maxx,e_loc maxy,e_loc maxz);
 	
         void rotate(e_loc x,e_loc y,e_loc z);
         void calculateSizes();
-	void calculate(shape *s);
+	void calculate(Shape *s);
 	e_loc toSphereRadius();
 	void print();
 	e_loc getWidth();
@@ -29,7 +29,7 @@ public:
 	e_loc getDepth();
         string name;
 	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
-	MathTypes::vector max,min,loc;
+	MathTypes::Vector3d max,min,loc;
 
 
 };

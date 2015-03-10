@@ -24,7 +24,7 @@
 namespace bp=boost::python;
 
 #include "misc/singleton.hpp"
-#include "config/config.hpp"
+#include "config/Config.hpp"
 #include "misc/utils.hpp"
 #include "entities/entity.hpp"
 #include "entities/physicalEntity.hpp"
@@ -34,7 +34,7 @@ namespace bp=boost::python;
 #include "entities/light.hpp"
 #include "types/mathTypes.hpp"
 #include "types/boundingCube.hpp"
-#include "world/world.hpp"
+#include "world/World.hpp"
 //#include "pyVector.hpp"
 
 using namespace std;
@@ -43,7 +43,7 @@ using namespace boost;
 
 
 
-void init_world();
+void init_World();
 
 
 

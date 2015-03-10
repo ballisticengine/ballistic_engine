@@ -1,6 +1,6 @@
-#include "world/world.hpp"
+#include "world/World.hpp"
 
-bool world::parseXml(string &fn) {
+bool World::parseXml(string &fn) {
     cout << "Loading...\n";
     this->observer.name = "observer";
     this->observer.type = "observer";
@@ -9,38 +9,38 @@ bool world::parseXml(string &fn) {
     ;
 
     cout << "Level: " << level_path << endl;
-    shapeFactory *shapef = (shapeFactory *) shapeFactory::getInstance();
+    ShapeFactory *shapef = (ShapeFactory *) ShapeFactory::getInstance();
     shapef->setLevel(fn);
-    textureFactory *texf = (textureFactory *) textureFactory::getInstance();
+    TextureFactory *texf = (TextureFactory *) TextureFactory::getInstance();
     texf->setLevel(fn);
     using boost::property_tree::ptree;
     ptree pt;
     read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace);
-    string skyfn = pt.get<string>("world.config.skybox");
-    this->sky = new skybox(skyfn);
-    this->observer.current_weapon = config::getInstance()->available_weapons[pt.get<string>("world.config.default_weapon")];
+    string skyfn = pt.get<string>("World.Config.skybox");
+    this->sky = new Skybox(skyfn);
+    this->observer.current_weapon = Config::getInstance()->available_weapons[pt.get<string>("World.Config.default_weapon")];
     ;
 
-    ptree& world_jp = pt.get_child("world.config.jump_point");
+    ptree& World_jp = pt.get_child("World.Config.jump_point");
     //  e_loc jx,jy,jz,rx,ry,rz;
-    e_loc jx = world_jp.get<e_loc>("x"),
-            jy = world_jp.get<e_loc>("y"),
-            jz = world_jp.get<e_loc>("z"),
-            rx = world_jp.get<e_loc>("rx"),
-            ry = world_jp.get<e_loc>("ry"),
-            rz = world_jp.get<e_loc>("rz");
+    e_loc jx = World_jp.get<e_loc>("x"),
+            jy = World_jp.get<e_loc>("y"),
+            jz = World_jp.get<e_loc>("z"),
+            rx = World_jp.get<e_loc>("rx"),
+            ry = World_jp.get<e_loc>("ry"),
+            rz = World_jp.get<e_loc>("rz");
 
 
     try {
-        roomrot_x = pt.get<e_loc>("world.config.rotation.x");
-        roomrot_y = pt.get<e_loc>("world.config.rotation.y");
-        roomrot_z = pt.get<e_loc>("world.config.rotation.z");
+        roomrot_x = pt.get<e_loc>("World.Config.rotation.x");
+        roomrot_y = pt.get<e_loc>("World.Config.rotation.y");
+        roomrot_z = pt.get<e_loc>("World.Config.rotation.z");
     } catch (std::exception e) {
         roomrot_x = roomrot_y = roomrot_z = 0;
     }
 
     PreloadStore *ps = PreloadStore::getInstance();
-    ptree preloads = pt.get_child("world.preloads");
+    ptree preloads = pt.get_child("World.preloads");
 
     BOOST_FOREACH(const ptree::value_type &preload, preloads) {
         string name = preload.second.get<string>("name"),
@@ -48,10 +48,10 @@ bool world::parseXml(string &fn) {
                 file = preload.second.get<string>("file");
         cout << "File " << file << ", " << name << endl;
         if (type == "model") {
-            shape *shp = shapef->getShape(file);
+            Shape *shp = shapef->getShape(file);
             ps->shape_preloads[name] = shp;
         } else if (type == "texture") {
-            texture *tex = (texture *) texf->get(file);
+            Texture *tex = (Texture *) texf->get(file);
             ps->tex_preloads[name] = tex;
         }
 
@@ -68,9 +68,9 @@ bool world::parseXml(string &fn) {
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
 
-        shape *fs = shapef->getXML((ptree) room.second);
+        Shape *fs = shapef->getXML((ptree) room.second);
 
-        roomEntity *roomE = new roomEntity();
+        RoomEntity *roomE = new RoomEntity();
         shapef->setAnimator(&roomE->model_animator);
         //poly_list polys=fs->getPolys();
 
@@ -97,7 +97,7 @@ bool world::parseXml(string &fn) {
             e_loc x = entobj.second.get<float>("location.x"), y = entobj.second.get<float>("location.y"),
                     z = entobj.second.get<float>("location.z"), rx = entobj.second.get<float>("facing.x"),
                     ry = entobj.second.get<float>("facing.y"), rz = entobj.second.get<float>("facing.z");
-            entity *current_e = 0;
+            Entity *current_e = 0;
             boost::algorithm::to_lower(type);
             if (type == "object") {
                 string objectbraces = "[OBJECT]";
@@ -106,7 +106,7 @@ bool world::parseXml(string &fn) {
                 e_loc sc = entobj.second.get<e_loc>("scale");
                 bool physics = entobj.second.get<bool>("physics");
                 shapef->setScale(sc);
-                modelInfo *mi = (modelInfo *) shapef->get(entobj.second.get<string>("model"));
+                ModelInfo *mi = (ModelInfo *) shapef->get(entobj.second.get<string>("model"));
                 ObjectEntity *oe = new ObjectEntity();
                 //shp->calculateNormals(); //UWAGA!!
                 oe->no_physics = !physics;
@@ -129,7 +129,7 @@ bool world::parseXml(string &fn) {
                     oe->addBoundingBox(new BoundingCube(oe->getModel()));
                 }
                 oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
-                current_e = (entity *) oe;
+                current_e = (Entity *) oe;
                 //oe->face(rx,ry,rz);
                 //oe->velocity.t.x=10;
                 roomE->addObjectEntity(oe);
@@ -142,12 +142,12 @@ bool world::parseXml(string &fn) {
                 //l->face(-90, 0, 0);
                 l->locate(x, y, z);
 
-                colorRGBA color;
+                ColorRGBA color;
                 color.r = entobj.second.get<float>("r");
                 color.g = entobj.second.get<float>("g");
                 color.b = entobj.second.get<float>("b");
                 color.a = 1.0f;
-                current_e = (entity *) l;
+                current_e = (Entity *) l;
                 l->setAllColors(color);
                 roomE->addLightEntity(l);
             } else if (type == "bounding") {
@@ -184,12 +184,12 @@ bool world::parseXml(string &fn) {
 
     }
     cout << "Jumppoint: " << (long) jx << ", " << (long) jy << ", " << (long) jz << endl;
-    observer.setCamera(&default_camera);
+    observer.setCamera(&default_Camera);
     observer.locate(jx, jy, jz);
     observer.face(rx, ry, rz);
     //observer.boundings[0]->rotate(-90,0,0);
     //texf->setWD(COMMON_DIR);
-    texture *stex = (texture *) texf->get("@car.bmp");
+    Texture *stex = (Texture *) texf->get("@car.bmp");
     this->testsprite = new Sprite(stex);
     this->active_room = this->rooms[0];
     return true;

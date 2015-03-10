@@ -5,13 +5,13 @@
 #include "types/texture.hpp"
 #include "loaders/texLoader.hpp"
 
-class textureFactory : public factory, public singleton<textureFactory> {
+class TextureFactory : public Factory, public Singleton<TextureFactory> {
 protected:
     virtual void * actualLoad(string fn);
     virtual string getSubDir();
-    texLoader *loader;
+    TexLoader *loader;
 public:
-    textureFactory();
+    TextureFactory();
 
 };
 

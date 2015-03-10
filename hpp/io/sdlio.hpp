@@ -11,35 +11,35 @@
 #include "renderer/rendererAbstract.hpp"
 #include "renderer/GL/RendererGL.hpp"
 #include "misc/singleton.hpp"
-#include "config/engineState.hpp"
+#include "config/EngineState.hpp"
 #include "io/sdlControls.hpp"
-#include "world/world.hpp"
+#include "world/World.hpp"
 #include "entities/observerEntity.hpp"
 #include "config/path.hpp"
 #include "io/ttf.hpp"
 #include "renderer/GL/GLPreview.hpp"
 
-class sdlIO  :  public singleton<sdlIO> {
+class SdlIO : public Singleton<SdlIO> {
 private:
     static SDL_Surface *screen;
     static SDL_Renderer* displayRenderer;
-	static SDL_Window *window;
-	sdlControls ctrl;
-	renderer *r;
-        static sdlIO *me;
-	world *w;
-	bool fullscreen;
-        static int window_w,window_h;
-        static void toggleFullscreen();
+    static SDL_Window *window;
+    SdlControls ctrl;
+    RendererAbstract *r;
+    static SdlIO *me;
+    World *w;
+    bool fullscreen;
+    static int window_w, window_h;
+    static void toggleFullscreen();
 public:
     static void flush();
-    void setRenderer(renderer *r);
-    renderer *getRenderer();
-    static void initWindow(sdlIO *me);
+    void setRenderer(RendererAbstract *r);
+    RendererAbstract *getRenderer();
+    static void initWindow(SdlIO *me);
     void eventLoop();
     void previewLoop();
-    sdlIO();
-    ~sdlIO();
+    SdlIO();
+    ~SdlIO();
 };
 
 #endif 

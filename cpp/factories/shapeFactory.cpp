@@ -1,14 +1,14 @@
 #include "factories/shapeFactory.hpp"
 
-void shapeFactory::setAnimator(ModelAnimator *a) {
+void ShapeFactory::setAnimator(ModelAnimator *a) {
     this->animator = a;
 }
 
-ModelAnimator * shapeFactory::getAnimator() {
+ModelAnimator * ShapeFactory::getAnimator() {
     return this->animator;
 }
 
-void * shapeFactory::get(string fn, bool force_common,bool clone) {
+void * ShapeFactory::get(string fn, bool force_common,bool clone) {
     this->force_common = force_common;
 
     
@@ -44,25 +44,25 @@ void * shapeFactory::get(string fn, bool force_common,bool clone) {
     return items[fn];
 }
 
-void * shapeFactory::actualLoad(string fn) {
+void * ShapeFactory::actualLoad(string fn) {
     string ext = Utils::getExt(fn);
-    modelInfo *mi = new modelInfo;
-    mi->s = new shape();
+    ModelInfo *mi = new ModelInfo;
+    mi->s = new Shape();
     int cw = GL_CW;
     mi->s->renderer_hint = (void *) new int;
     *((int *) mi->s->renderer_hint) = cw;
     if (ext == MD2_EXT) {
-        loaderMD2 *loader = loaderMD2::getInstance();
+        LoaderMD2 *loader = LoaderMD2::getInstance();
 
         loader->loadMD2(fn, mi->s, this->scale);
         //this->scale=1; //skalowanie jest jednorazowe
     } else if (ext == XML_EXT) {
-        loaderXML *loader = loaderXML::getInstance();
+        LoaderXML *loader = LoaderXML::getInstance();
 
         loader->load(fn, mi, uses_common);
     } else if (ext == GEOM_MEM_EXT) {
         cout << "GEOM";
-        loaderXML *loader = loaderXML::getInstance();
+        LoaderXML *loader = LoaderXML::getInstance();
         //write_xml(std::cout, *shp);
         loader->loadXML(*shp, mi->s);
         return (void *) mi->s;
@@ -73,32 +73,32 @@ void * shapeFactory::actualLoad(string fn) {
     return (void *) mi;
 }
 
-shape * shapeFactory::getShape(string fn,bool force_common) {
-    modelInfo *mi=(modelInfo *)this->get(fn,force_common);
+Shape * ShapeFactory::getShape(string fn,bool force_common) {
+    ModelInfo *mi=(ModelInfo *)this->get(fn,force_common);
     return mi->s;
 }
 
-void shapeFactory::setScale(e_loc scale) {
+void ShapeFactory::setScale(e_loc scale) {
     this->scale = scale;
 }
 
-shapeFactory::shapeFactory() {
+ShapeFactory::ShapeFactory() {
     scale = 1;
 }
 
-string shapeFactory::getSubDir() {
+string ShapeFactory::getSubDir() {
     return string("models");
 }
 
-shape * shapeFactory::getXML(ptree shp) {
-    loaderXML *loader = loaderXML::getInstance();
+Shape * ShapeFactory::getXML(ptree shp) {
+    LoaderXML *loader = LoaderXML::getInstance();
 
     string name = loader->getName(shp);
 
     this->shp = &shp;
     name = name + "." + GEOM_MEM_EXT;
 
-    shape *s = (shape *)this->get(name);
+    Shape *s = (Shape *)this->get(name);
 
     return s;
 }

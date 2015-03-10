@@ -13,15 +13,15 @@ using namespace std;
 #include "factories/textureFactory.hpp"
 
 
-class skybox {
-    texture *sky;
-    shape *box;
+class Skybox {
+    Texture *sky;
+    Shape *box;
    
 public:
-    skybox(string tex_name);
-    skybox(texture *tex);
-    shape *getShape();
-    texture *getTexture();
+    Skybox(string tex_name);
+    Skybox(Texture *tex);
+    Shape *getShape();
+    Texture *getTexture();
      void makeShape(float x,float y);
 };
 

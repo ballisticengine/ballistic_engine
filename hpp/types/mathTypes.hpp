@@ -14,32 +14,32 @@ struct BasicVector {
 	e_loc x,y,z;
 };
 
-class vector {
+class Vector3d {
 protected:
 	e_loc ifZero(e_loc value);
 
 public:
 	e_loc x,y,z;
-	vector(const vector &v);
-	vector(const BasicVector &v);
-	virtual vector & operator=(const vector &v);
+	Vector3d(const Vector3d &v);
+	Vector3d(const BasicVector &v);
+	virtual Vector3d & operator=(const Vector3d &v);
 	BasicVector getBasicVector();
-	vector();
-	virtual vector  unit();
-	virtual vector  normalize();
-	virtual  vector  diff(const MathTypes::vector & v);
+	Vector3d();
+	virtual Vector3d  unit();
+	virtual Vector3d  normalize();
+	virtual  Vector3d  diff(const MathTypes::Vector3d & v);
 	e_loc length();
-	vector  crossProduct(const MathTypes::vector * b); 
-	e_loc dotProduct(const MathTypes::vector * b);
+	Vector3d  crossProduct(const MathTypes::Vector3d * b); 
+	e_loc dotProduct(const MathTypes::Vector3d * b);
 	virtual std::ostream & operator<<(std::ostream & ostr);
 	virtual void write();
 	
-	vector  operator+(const vector &b);
-	vector  operator-(const vector &b);
-	vector  operator/(const e_loc val);
-	vector  operator/(const vector &b);
-	vector  operator*(const vector &b);
-	vector  operator*(const double a);
+	Vector3d  operator+(const Vector3d &b);
+	Vector3d  operator-(const Vector3d &b);
+	Vector3d  operator/(const e_loc val);
+	Vector3d  operator/(const Vector3d &b);
+	Vector3d  operator*(const Vector3d &b);
+	Vector3d  operator*(const double a);
 	//ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
 
 };

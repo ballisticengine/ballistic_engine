@@ -1,41 +1,41 @@
-#include "world/world.hpp"
+#include "world/World.hpp"
 
-TerrainMap * world::getTerrain() {
+TerrainMap * World::getTerrain() {
     return this->tm;
 }
 
-void world::prepare() {
+void World::prepare() {
 
 }
 
-world::world() {
+World::World() {
     
     //this->scripting=PyScripting::getInstance();
     moving_lock = false;
 }
 
-world::~world() {
+World::~World() {
     cout << "World cleaning up..." << endl;
     deleteVector(rooms);
 
 }
 
-camera *world::getCurrentCamera() {
-    return &this->default_camera;
+Camera *World::getCurrentCamera() {
+    return &this->default_Camera;
 }
 
 
 
 
 
-roomEntity * world::getActiveRoom() {
+RoomEntity * World::getActiveRoom() {
     return this->rooms[0];
 }
 
-void world::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collision) {
+void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collision) {
 
 
-    coords c = e->nextCoords(time_diff), x;
+    Coords c = e->nextCoords(time_diff), x;
     //cout << "SC: ";
     //c.translation.write();
     //TrRot v=e->getVelocity();
@@ -55,9 +55,9 @@ void world::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
     obj_list objs = this->active_room->models;
     BoundingCube *obc = e->getBoundingBox();
 
-    MathTypes::vector cvec;
+    MathTypes::Vector3d cvec;
     bool lc = false;
-    if (!engineState::getInstance()->noclip && !e->no_collisions) {
+    if (!EngineState::getInstance()->noclip && !e->no_collisions) {
 
         /*
          Kolizje z obiektami
@@ -68,7 +68,7 @@ void world::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
             if (e==objs[i]) {
                 break;
             }
-            collsionInfo ci = objs[i]->collides(e, c);
+            CollsionInfo ci = objs[i]->collides(e, c);
             cvec=ci.cvec;
 
 
@@ -87,7 +87,7 @@ void world::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
         size_t rl_size = rl.size();
 
         for (int i = 0; i < rl_size; i++) {
-            collsionInfo ci = rl[i]->collides(e, c);
+            CollsionInfo ci = rl[i]->collides(e, c);
             cvec=ci.cvec;
             if (cvec.x || cvec.y || cvec.z) {
                 //c.translation.write();
@@ -109,7 +109,7 @@ void world::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
 
 }
 
-void world::moveEntities() {
+void World::moveEntities() {
 
     e_loc x, y, z;
     x, y, z = 0;
@@ -131,13 +131,13 @@ void world::moveEntities() {
     this->moveEntity((PhysicalEntity *) & this->observer, lt, false);
 }
 
-void world::operator()() {
+void World::operator()() {
 
     //this->getActiveRoom()->model_animator.start();
     time.start();
 
     int n=0;
-    while (!engineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->exit()) {
 
         this->moveEntities();
 
@@ -146,20 +146,20 @@ void world::operator()() {
 
 }
 
-ObserverEntity * world::getObserver() {
+ObserverEntity * World::getObserver() {
     return &this->observer;
 }
 
-world * world::getInstance() {
-    static world i;
+World * World::getInstance() {
+    static World i;
     return &i;
 
 }
 
-world & world::getRef() {
-    return *world::getInstance();
+World & World::getRef() {
+    return *World::getInstance();
 }
 
-void world::addRoomEntity(roomEntity *e) {
+void World::addRoomEntity(RoomEntity *e) {
     this->rooms.push_back(e);
 }

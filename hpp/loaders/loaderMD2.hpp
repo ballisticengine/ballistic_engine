@@ -22,12 +22,13 @@ using namespace std;
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-class loaderMD2 : public singleton<loaderMD2>{
+
+class LoaderMD2 : public Singleton<LoaderMD2>{
 protected:
-	void md2ToShape(md2file *md2,shape *s);
+	void md2ToShape(md2file *md2,Shape *s);
 	e_loc scale;
 public:
-    bool loadMD2(string fn,shape *s,e_loc scale=1);
+    bool loadMD2(string fn,Shape *s,e_loc scale=1);
 };
 
 

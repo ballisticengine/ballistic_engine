@@ -24,7 +24,7 @@ protected:
 	vector <ShapeState> states;
 
 public:
-	void addShape(shape *s);
+	void addShape(Shape *s);
 
 
 };

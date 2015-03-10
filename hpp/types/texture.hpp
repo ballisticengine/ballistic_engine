@@ -27,15 +27,15 @@ enum textureFormat {
     TF_BGR,
 };
 
-class texture {
+class Texture {
 protected:
     string filename;
    
 public:
      SDL_Surface *surf;
-    texture();
-    texture(string filename);
-    texture *clone();
+    Texture();
+    Texture(string filename);
+    Texture *clone();
     virtual textureFormat getFormat();
    virtual void free();
     

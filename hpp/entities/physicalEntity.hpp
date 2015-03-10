@@ -8,12 +8,12 @@
 
 class TrRot {
 public:
-	MathTypes::vector t,r;
+	MathTypes::Vector3d t,r;
 	void reset();
 	TrRot();
 };
 
-class PhysicalEntity : public entity {
+class PhysicalEntity : public Entity {
 protected:
 	
 	void setIfNotZero(e_loc &a,e_loc &b);
@@ -21,7 +21,7 @@ public:
 	TrRot velocity,acceleration;
         e_loc weight;
 	PhysicalEntity();
-	coords nextCoords(time_int diff);
+	Coords nextCoords(time_int diff);
 	void changeVelocity(TrRot velocity);
 	void setVelocity(TrRot velocity);
         bool no_physics;

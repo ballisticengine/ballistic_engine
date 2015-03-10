@@ -1,7 +1,7 @@
 #include "entities/entity.hpp"
 
-coords entity::getCoords() {
-    coords c;
+Coords Entity::getCoords() {
+    Coords c;
     c.translation.x = x;
     c.translation.y = y;
     c.translation.z = z;
@@ -11,19 +11,19 @@ coords entity::getCoords() {
     return c;
 }
 
-void entity::rotate(e_loc x, e_loc y, e_loc z) {
+void Entity::rotate(e_loc x, e_loc y, e_loc z) {
     this->rx += x;
     this->ry += y;
     this->rz += z;
     
 }
 
-void entity::translate3(e_loc x, e_loc y, e_loc z) {
+void Entity::translate3(e_loc x, e_loc y, e_loc z) {
     this->translate(x, y, z);
 
 }
 
-void entity::translate(e_loc x, e_loc y, e_loc z) {
+void Entity::translate(e_loc x, e_loc y, e_loc z) {
 
     this->x += x;
     this->y += y;
@@ -42,7 +42,7 @@ void entity::translate(e_loc x, e_loc y, e_loc z) {
 
 }
 
-void entity::locate(e_loc x, e_loc y, e_loc z) {
+void Entity::locate(e_loc x, e_loc y, e_loc z) {
     this->x = x;
     this->y = y;
     this->z = z;
@@ -59,34 +59,34 @@ void entity::locate(e_loc x, e_loc y, e_loc z) {
     }
 }
 
-void entity::syncBounding() {
+void Entity::syncBounding() {
 
 }
 
-void entity::face(e_loc x, e_loc y, e_loc z) {
+void Entity::face(e_loc x, e_loc y, e_loc z) {
     this->rx = x;
     this->ry = y;
     this->rz = z;
 }
 
-void entity::translate(coords c) {
+void Entity::translate(Coords c) {
     this->translate(c.translation.x, c.translation.y, c.translation.z);
 }
 
-entity::entity() {
+Entity::Entity() {
 
     no_collisions = false;
 }
 
-entity::~entity() {
+Entity::~Entity() {
     cout << "Destroying entity" << endl;
     //if (this->bounding_box) {
     //delete this->bounding_box;
     //}
 }
 
-MathTypes::vector entity::cTest(BoundingCube *a, BoundingCube *b, coords offset) {
-    MathTypes::vector res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
+MathTypes::Vector3d Entity::cTest(BoundingCube *a, BoundingCube *b, Coords offset) {
+    MathTypes::Vector3d res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
 
     offsetx.y = offsetx.z = 0;
     offsety.x = offsety.z = 0;
@@ -115,7 +115,7 @@ MathTypes::vector entity::cTest(BoundingCube *a, BoundingCube *b, coords offset)
             halfd = a->depth / 2 + b->depth / 2;
 
 
-    MathTypes::vector am, bm;
+    MathTypes::Vector3d am, bm;
     //cout << "D" << a->width << endl;
     am.x = a->min.x + a->width / 2;
     am.y = a->min.y + a->height / 2;
@@ -182,20 +182,20 @@ MathTypes::vector entity::cTest(BoundingCube *a, BoundingCube *b, coords offset)
 
 /* offset to w�a�ciwie nowa pozycja, a nie przemieszczenie */
 
-collsionInfo entity::collides(entity *ent, coords offset) {
+CollsionInfo Entity::collides(Entity *ent, Coords offset) {
 
     int i = 0, n = 0;
 
     BoundingCube *a = boundings[0], *b = ent->boundings[0], *awin; //nie bwin tylko awin
     e_loc sa = 9999999999999, sb = b->width * b->height;
 
-    MathTypes::vector res;
+    MathTypes::Vector3d res;
     bool has_res = false;
     e_loc nsa, nsb;
     for (size_t i = 0; i < boundings.size(); i++) {
         for (size_t n = 0; n < ent->boundings.size(); n++) {
             BoundingCube *a = boundings[i], *b = ent->boundings[n];
-            MathTypes::vector cvec = cTest(a, b, offset);
+            MathTypes::Vector3d cvec = cTest(a, b, offset);
 
             if (cvec.x || cvec.y || cvec.z) {
                 nsa = a->width * a->height;
@@ -214,7 +214,7 @@ collsionInfo entity::collides(entity *ent, coords offset) {
 
         }
     }
-    collsionInfo ret;
+    CollsionInfo ret;
     if (has_res) {
         ret.collided = true;
         ret.cvec = res;
@@ -227,7 +227,7 @@ collsionInfo entity::collides(entity *ent, coords offset) {
 
 }
 
-void entity::addBoundingBox(BoundingCube *box) {
+void Entity::addBoundingBox(BoundingCube *box) {
     BoundingCube *bounding_box = box;
     bounding_box->max.x -= x;
     bounding_box->max.y -= y;
@@ -239,7 +239,7 @@ void entity::addBoundingBox(BoundingCube *box) {
     boundings.push_back(bounding_box);
 }
 
-BoundingCube * entity::getBoundingBox() {
+BoundingCube * Entity::getBoundingBox() {
     if (boundings.size() > 0) {
         return boundings[0];
     } else {
@@ -247,11 +247,11 @@ BoundingCube * entity::getBoundingBox() {
     }
 }
 
-void entity::makeBoundingBox() {
+void Entity::makeBoundingBox() {
     ///
 }
 
-BoundingCube offsetBounding(BoundingCube *bc, coords offset) {
+BoundingCube offsetBounding(BoundingCube *bc, Coords offset) {
     BoundingCube bcr;
     bcr = *bc;
     bcr.max = bcr.max + offset.translation;
@@ -259,8 +259,8 @@ BoundingCube offsetBounding(BoundingCube *bc, coords offset) {
     return bcr;
 }
 
-bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::vector offset) {
-    MathTypes::vector amax, amin, bmax, bmin;
+bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::Vector3d offset) {
+    MathTypes::Vector3d amax, amin, bmax, bmin;
     amax = a->max + offset;
     amin = a->min + offset;
     bmax = b->max + offset;
@@ -279,8 +279,8 @@ bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::vector offset) {
     return collide;
 }
 
-bool roomHitTest(BoundingCube *a, BoundingCube *b, MathTypes::vector offset) { // tu coś jest źle
-    MathTypes::vector amax, amin, bmax, bmin;
+bool roomHitTest(BoundingCube *a, BoundingCube *b, MathTypes::Vector3d offset) { // tu coś jest źle
+    MathTypes::Vector3d amax, amin, bmax, bmin;
     amax = a->max + offset;
     amin = a->min + offset;
     bmax = b->max + offset;

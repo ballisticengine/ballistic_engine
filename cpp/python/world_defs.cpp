@@ -2,19 +2,19 @@
 
 #include "python/null_deleter.hpp"
 
-shared_ptr<world> getSharedWorldInstance() {
-    return shared_ptr<world>(world::getInstance(), NullDeleter());
+shared_ptr<World> getSharedWorldInstance() {
+    return shared_ptr<World>(World::getInstance(), NullDeleter());
 }
 
-typedef boost::shared_ptr<world> world_ptr;
+typedef boost::shared_ptr<World> World_ptr;
 
-BOOST_PYTHON_MODULE(world) {
+BOOST_PYTHON_MODULE(World) {
 
-    bp::class_<MathTypes::vector, MathTypes::vector *>("Vector3d")
-            .def_readwrite("x", &MathTypes::vector::x)
-            .def_readwrite("y", &MathTypes::vector::y)
-            .def_readwrite("z", &MathTypes::vector::z)
-            .def("write", &MathTypes::vector::write)
+    bp::class_<MathTypes::Vector3d, MathTypes::Vector3d *>("Vector3d")
+            .def_readwrite("x", &MathTypes::Vector3d::x)
+            .def_readwrite("y", &MathTypes::Vector3d::y)
+            .def_readwrite("z", &MathTypes::Vector3d::z)
+            .def("write", &MathTypes::Vector3d::write)
             ;
 
     bp::class_<TrRot, TrRot *>("TrRot")
@@ -23,12 +23,12 @@ BOOST_PYTHON_MODULE(world) {
             .def("reset", &TrRot::reset)
             ;
 
-    bp::class_<coords, coords *>("coords")
-            .def_readwrite("rotation", &coords::rotation)
-            .def_readwrite("translation", &coords::translation)
+    bp::class_<Coords, Coords *>("Coords")
+            .def_readwrite("rotation", &Coords::rotation)
+            .def_readwrite("translation", &Coords::translation)
             ;
     bp::class_<ShapeAbstract, ShapeAbstract *>("ShapeAbstract");
-    bp::class_<shape, shape *, bp::bases<ShapeAbstract> >("shape");
+    bp::class_<Shape, Shape *, bp::bases<ShapeAbstract> >("Shape");
 
 
     bp::class_<BoundingCube, BoundingCube *>("BoundingCube")
@@ -42,26 +42,26 @@ BOOST_PYTHON_MODULE(world) {
             ;
 
 
-    bp::class_<collsionInfo, collsionInfo *>("collsionInfo")
-            .def_readonly("cvec", &collsionInfo::cvec)
-            .def_readonly("nameA", &collsionInfo::nameA)
-            .def_readonly("nameB", &collsionInfo::nameB)
+    bp::class_<CollsionInfo, CollsionInfo *>("CollsionInfo")
+            .def_readonly("cvec", &CollsionInfo::cvec)
+            .def_readonly("nameA", &CollsionInfo::nameA)
+            .def_readonly("nameB", &CollsionInfo::nameB)
             ;
 
-    bp::class_<entity, entity *>("entity")
-            .def("getCoords", &entity::getCoords)
-            .def("locate", &entity::locate)
-            .def("face", &entity::face)
-            .def("translate3", &entity::translate3)
-            .def_readonly("name", &entity::name)
-            .def_readonly("type", &entity::type)
-            .def_readwrite("subtype", &entity::subtype)
-            .def_readwrite("no_collisions", &entity::no_collisions)
+    bp::class_<Entity, Entity *>("Entity")
+            .def("getCoords", &Entity::getCoords)
+            .def("locate", &Entity::locate)
+            .def("face", &Entity::face)
+            .def("translate3", &Entity::translate3)
+            .def_readonly("name", &Entity::name)
+            .def_readonly("type", &Entity::type)
+            .def_readwrite("subtype", &Entity::subtype)
+            .def_readwrite("no_collisions", &Entity::no_collisions)
             ;
 
 
 
-    bp::class_<PhysicalEntity, PhysicalEntity*, bp::bases<entity> >("PhysicalEntity")
+    bp::class_<PhysicalEntity, PhysicalEntity*, bp::bases<Entity> >("PhysicalEntity")
             .def("getVelocity", &PhysicalEntity::getVelocity)
             .def("setVelocity", &PhysicalEntity::setVelocity)
             .def_readwrite("velocity", &PhysicalEntity::velocity)
@@ -116,7 +116,7 @@ BOOST_PYTHON_MODULE(world) {
             //    .def("setState",&ObserverEntity::setState)
             ;
 
-    bp::class_<Weapon, Weapon*, bp::bases<entity> >("Weapon")
+    bp::class_<Weapon, Weapon*, bp::bases<Entity> >("Weapon")
             .def_readonly("initial_velocity", &Weapon::initial_velocity)
             .def_readonly("decal", &Weapon::decal)
             .def_readonly("bullet", &Weapon::bullet)
@@ -130,16 +130,16 @@ BOOST_PYTHON_MODULE(world) {
             .def(bp::vector_indexing_suite<obj_list>());
 
 
-    bp::class_<Sprite, Sprite *, bp::bases<entity> >("Sprite");
+    bp::class_<Sprite, Sprite *, bp::bases<Entity> >("Sprite");
 
-    bp::class_<roomEntity, roomEntity *, bp::bases<ObjectEntity> >("roomEntity")
-            .def_readwrite("models", &roomEntity::models)
-            .def("placeDecal", &roomEntity::placeDecal)
-            .def("placePreloadDecal", &roomEntity::placePreloadDecal)
-            .def("placeDecalTexture", &roomEntity::placeDecalTexture)
-            .def("spawnObject", &roomEntity::spawnObject, bp::return_value_policy<bp::reference_existing_object>())
-            .def("spawnShape", &roomEntity::spawnShape, bp::return_value_policy<bp::reference_existing_object>())
-            .def("removeObjectEntity", &roomEntity::removeObjectEntity)
+    bp::class_<RoomEntity, RoomEntity *, bp::bases<ObjectEntity> >("RoomEntity")
+            .def_readwrite("models", &RoomEntity::models)
+            .def("placeDecal", &RoomEntity::placeDecal)
+            .def("placePreloadDecal", &RoomEntity::placePreloadDecal)
+            .def("placeDecalTexture", &RoomEntity::placeDecalTexture)
+            .def("spawnObject", &RoomEntity::spawnObject, bp::return_value_policy<bp::reference_existing_object>())
+            .def("spawnShape", &RoomEntity::spawnShape, bp::return_value_policy<bp::reference_existing_object>())
+            .def("removeObjectEntity", &RoomEntity::removeObjectEntity)
             ;
 
     bp::class_<lights_list>("lights_list")
@@ -147,10 +147,10 @@ BOOST_PYTHON_MODULE(world) {
 
 
 
-    bp::class_<world, shared_ptr<world>, boost::noncopyable>("world", bp::no_init)//.add_property("instance", shared_ptr<&world::getInstance>())
+    bp::class_<World, shared_ptr<World>, boost::noncopyable>("World", bp::no_init)//.add_property("instance", shared_ptr<&World::getInstance>())
             .def("getInstance", &getSharedWorldInstance)
-            .def_readonly("active_room", &world::active_room)
-            .def_readwrite("observer", &world::observer)
+            .def_readonly("active_room", &World::active_room)
+            .def_readwrite("observer", &World::observer)
 
             .staticmethod("getInstance")
 
@@ -160,7 +160,7 @@ BOOST_PYTHON_MODULE(world) {
 };
 
 void init_world() {
-    initworld();
+    initWorld();
 }
 
 

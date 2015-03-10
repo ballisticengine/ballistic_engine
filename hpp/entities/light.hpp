@@ -25,9 +25,9 @@ typedef enum  {
 /**
 * Abstrakcyjna klasa opisuj�ca �wiat�o
 */
-class light : public entity,public LightOrMaterial {
+class Light : public Entity,public LightOrMaterial {
 protected:
-	colorRGBA ambient,diffuse,specular;
+	ColorRGBA ambient,diffuse,specular;
 
 public:
 	

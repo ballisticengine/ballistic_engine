@@ -24,7 +24,7 @@
 namespace bp=boost::python;
 
 #include "misc/singleton.hpp"
-#include "config/config.hpp"
+#include "config/Config.hpp"
 #include "misc/utils.hpp"
 #include "ui/hud.hpp"
 #include "ui/image.hpp"

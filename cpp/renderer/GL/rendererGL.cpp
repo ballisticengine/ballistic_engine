@@ -2,7 +2,7 @@
 #include "types/types.hpp"
 #pragma comment(lib, "glu32.lib") 
 
-void RendererGL::renderVertex(v_type *v, n_type *normal, uv *uvs) {
+void RendererGL::renderVertex(v_type *v, n_type *normal, UV *uvs) {
     if (normal) {
         glNormal3d(normal->x, normal->y, normal->z);
     }
@@ -20,7 +20,7 @@ void RendererGL::beginQuads() {
     glBegin(GL_QUADS);
 }
 
-void RendererGL::beginHinted(shape *s) {
+void RendererGL::beginHinted(Shape *s) {
     int count = s->v_per_poly;
     glBegin(count_names[count]);
 }
@@ -29,7 +29,7 @@ void RendererGL::end() {
     glEnd();
 }
 
-void RendererGL::setAmbientLight(colorRGB *c) {
+void RendererGL::setAmbientLight(ColorRGB *c) {
     GLfloat global_ambient[] = {c->r, c->g, c->b};
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 }
@@ -55,7 +55,7 @@ void RendererGL::renderTerrainSpecific() {
      */
 }
 
-void RendererGL::lightSpecific(light *l) {
+void RendererGL::lightSpecific(Light *l) {
 
     if (light_counter > 7) {
         cout << "Too much lights" << endl;
@@ -64,7 +64,7 @@ void RendererGL::lightSpecific(light *l) {
 
 
 
-    coords lc = l->getCoords();
+    Coords lc = l->getCoords();
     this->reset();
 
     this->positionCamera();
@@ -78,7 +78,7 @@ void RendererGL::lightSpecific(light *l) {
     GLfloat position[] = {0, 0, 0, 1.0f};
 
     //glDisable(GL_LIGHTING);
-    if (engineState::getInstance()->debug_visual) {
+    if (EngineState::getInstance()->debug_visual) {
         glDisable(GL_LIGHTING);
         glBindTexture(GL_TEXTURE_2D, 0);
         glColor3f(1, 0, 0);
@@ -93,7 +93,7 @@ void RendererGL::lightSpecific(light *l) {
     GLfloat ambientLight[] = {0, 0, 0, 1.0f}; //??
     GLfloat diffuseLight[] = {0.8f, 0.8f, 0.8, 1.0f};
     GLfloat specularLight[] = {0.5f, 0.5f, 0.5f, 1.0f};
-    colorRGBA c = l->getDiffuse();
+    ColorRGBA c = l->getDiffuse();
     GLfloat intensity[] = {c.r, c.g, c.b, c.a};
 
     GLfloat shin = 0.0001;
@@ -129,7 +129,7 @@ void RendererGL::renderSprite(Sprite *sprite) {
     this->assignTexture(sprite->tex);
 
     //glPushMatrix();
-    coords c = this->w->getObserver()->getCamera()->getCoords();
+    Coords c = this->w->getObserver()->getCamera()->getCoords();
     float mat[16];
 
     glGetFloatv(GL_MODELVIEW_MATRIX, mat);
@@ -214,7 +214,7 @@ void RendererGL::drawHud() {
 void RendererGL::renderDecal(Sprite *decal) {
      this->reset();
     this->positionCamera();
-    coords c=decal->getCoords();
+    Coords c=decal->getCoords();
     this->locate(c.translation.x,c.translation.y,c.translation.z);
     this->face(c.rotation.x,c.rotation.y,c.rotation.z);
     this->assignTexture(decal->tex);
@@ -280,7 +280,7 @@ void RendererGL::render() {
 
 }
 
-void RendererGL::renderFaceTexShape(shape *s) {
+void RendererGL::renderFaceTexShape(Shape *s) {
     
     size_t ** polys = (size_t **) s->faces;
     size_t uvc = 0;
@@ -321,7 +321,7 @@ void RendererGL::renderFaceTexShape(shape *s) {
 
 
  void  RendererGL::setVideoMode() {
-     glViewport(0, 0, config::getInstance()->getVD()->width, config::getInstance()->getVD()->height);
+     glViewport(0, 0, Config::getInstance()->getVD()->width, Config::getInstance()->getVD()->height);
       glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
      gluPerspective(90, 1, 1, 5000);
@@ -366,7 +366,7 @@ glEnable(GL_BLEND);
     // hud->addImage("@car.bmp","test",1,1,1,1);
 
    
-    ptree & shaders = config::getInstance()->getNode("config.screen.shaders");
+    ptree & shaders = Config::getInstance()->getNode("Config.screen.shaders");
 
     BOOST_FOREACH(const ptree::value_type &shad, shaders) {
         string sn = shad.second.get_value<string>();
@@ -459,7 +459,7 @@ char * RendererGL::loadText(string fn) {
     return ft;
 }
 
-void RendererGL::renderSkybox(skybox *sky) {
+void RendererGL::renderSkybox(Skybox *sky) {
     this->reset();
     glFrontFace(GL_CCW);
     glDisable(GL_DEPTH_TEST);
@@ -477,7 +477,7 @@ void RendererGL::renderSkybox(skybox *sky) {
     this->lightOn();
 }
 
-void RendererGL::assignTexture(texture *t) {
+void RendererGL::assignTexture(Texture *t) {
     
     GLuint tex_id;
     tex_id = this->textures_ids[t];
@@ -487,7 +487,7 @@ void RendererGL::assignTexture(texture *t) {
 }
 
 void RendererGL::assignMaterial(Material *m) {
-    colorRGBA specular = m->getSpecular(),
+    ColorRGBA specular = m->getSpecular(),
             diffuse = m->getDiffuse()
             ;
     e_loc shining = m->getShininess(), emit = m->getEmission()
@@ -505,7 +505,7 @@ void RendererGL::assignMaterial(Material *m) {
 
 }
 
-void RendererGL::setupTexture(texture *t,char *pixels) {
+void RendererGL::setupTexture(Texture *t,char *pixels) {
 
     GLuint tex_id;
     GLint tf;

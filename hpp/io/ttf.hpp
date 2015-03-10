@@ -10,16 +10,13 @@
 
 using namespace std;
 
-class TTF : public singleton<TTF> {
-    protected:
-  
-      
-    public:
-            TTF_Font *font;  
-        TTF();
-        SDL_Surface *surf;
-        void setSurface(SDL_Surface *surf);
-        void text(string text);
+class TTF : public Singleton<TTF> {
+public:
+    TTF_Font *font;
+    TTF();
+    SDL_Surface *surf;
+    void setSurface(SDL_Surface *surf);
+    void text(string text);
 };
 
 #endif	

@@ -9,7 +9,7 @@
 #include "types/texture.hpp"
 #include "entities/texturable.hpp"
 #include "factories/textureFactory.hpp"
-//#include "config/config.hpp"
+//#include "config/Config.hpp"
 #include "io/ttf.hpp"
 
 using namespace std;

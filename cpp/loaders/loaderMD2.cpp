@@ -1,12 +1,12 @@
 #include "loaders/loaderMD2.hpp"
 
-void loaderMD2::md2ToShape(md2file *md2, shape *s) {
+void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
 
     s->v_count = md2->header.num_tris * 3; //num_xyz
     s->vertices = new MathTypes::BasicVector[s->v_count];
     s->f_count = md2->header.num_tris;
     s->v_per_poly = 3;
-    s->textures = new texture*[s->f_count];
+    s->textures = new Texture*[s->f_count];
     s->materials = new Material*[s->f_count];
     cout << "T: " << md2->frames[0].translate[2] << endl;
     for (int i = 0; i < s->v_count; i++) {
@@ -35,10 +35,10 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
 
     cout << "MD2 Skin: " << md2->skin << endl;
     e_loc u, v;
-    s->faces = new face[s->f_count];
+    s->faces = new Face[s->f_count];
     for (int i = 0; i < s->f_count; i++) {
         s->faces[i].index = new unsigned int[s->v_per_poly];
-        s->faces[i].uvs = new uv[s->v_per_poly];
+        s->faces[i].uvs = new UV[s->v_per_poly];
         s->textures[i] = 0;
         s->materials[i] = 0;
         for (int vi = 0; vi < 3; vi++) {
@@ -48,7 +48,7 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
             s->faces[i].uvs[vi].v = (float) md2->st[iv].t / (float) md2->header.skinheight;
         }
     }
-    s->textures[0] = (texture *) textureFactory::getInstance()->get("@" + string((char *) md2->skin));
+    s->textures[0] = (Texture *) TextureFactory::getInstance()->get("@" + string((char *) md2->skin));
     s->calculateNormals();
     int cw=GL_CCW;
     s->renderer_hint=(void *)new int;
@@ -97,7 +97,7 @@ void loaderMD2::md2ToShape(md2file *md2, shape *s) {
 
 }
 
-bool loaderMD2::loadMD2(string fn, shape *s, e_loc scale) {
+bool LoaderMD2::loadMD2(string fn, Shape *s, e_loc scale) {
     this->scale = scale;
     cout << "MD2: " << fn << endl;
     FILE *f;

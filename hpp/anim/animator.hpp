@@ -6,11 +6,11 @@
 
 using namespace std;
 
-#include "config/engineState.hpp"
+#include "config/EngineState.hpp"
 
 class Animator {
 protected:
-	engineState *state;
+	EngineState *state;
 	bool stop_animation;
 	
 	virtual void animate()=0;

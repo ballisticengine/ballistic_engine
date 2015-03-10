@@ -14,8 +14,8 @@ using namespace std;
 class UiMesh  {
    
 public:
-    shape *model;
-    coords c;
+    Shape *model;
+    Coords c;
     e_loc scale;
     UiMesh(string model,e_loc x,e_loc y,e_loc z);
 };

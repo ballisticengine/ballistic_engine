@@ -18,14 +18,14 @@ using namespace std;
 using namespace boost::property_tree;
 #include "entities/entity.hpp"
 #include "entities/ObjectEntity.hpp"
-#include "entities/roomEntity.hpp"
-#include "entities/camera.hpp"
+#include "entities/RoomEntity.hpp"
+#include "entities/Camera.hpp"
 #include "misc/singleton.hpp"
 #include "types/skybox.hpp"
-#include "config/config.hpp"
+#include "config/Config.hpp"
 #include "factories/shapeFactory.hpp"
 #include "factories/textureFactory.hpp"
-#include "config/engineState.hpp"
+#include "config/EngineState.hpp"
 #include "types/mathTypes.hpp"
 #include "entities/light.hpp"
 #include "entities/pointlight.hpp"
@@ -40,55 +40,52 @@ using namespace boost::property_tree;
 #include "world/PreloadStore.hpp"
 
 
-typedef vector <roomEntity *> rooms_list;
+typedef vector <RoomEntity *> rooms_list;
 
 struct PyEntityCollisionParams {
-	PhysicalEntity *a,*b;
+    PhysicalEntity *a, *b;
 };
 
-
-class world {
+class World {
 protected:
-	
-	camera default_camera;
-	void moveEntity(PhysicalEntity *e,time_int time_diff,bool skip_collision);
-	void moveEntities();
-	Timer time;
-	TerrainMap *tm;
-        PyLocker *locker;
-        
-        bool moving_lock;
-        queue<ObjectEntity *> spawn_queue;
-	
+    Camera default_Camera;
+    void moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collision);
+    void moveEntities();
+    Timer time;
+    TerrainMap *tm;
+    PyLocker *locker;
+    bool moving_lock;
+    queue<ObjectEntity *> spawn_queue;
+
 public:
-	ObserverEntity observer;
-	roomEntity *active_room;
-	Sprite *testsprite;
-	skybox *sky;
-	rooms_list rooms;
-        e_loc roomrot_x,roomrot_y,roomrot_z;
+    ObserverEntity observer;
+    RoomEntity *active_room;
+    Sprite *testsprite;
+    Skybox *sky;
+    rooms_list rooms;
+    e_loc roomrot_x, roomrot_y, roomrot_z;
 
-	static world *getInstance(); 
-	static world & getRef();
-	
-        
-        
-        
-	world();
-	~world();
-	
-	//obj_reflist getModelsRef();
+    static World *getInstance();
+    static World & getRef();
 
-	camera *getCurrentCamera();
-	bool parseXml(string &fn);
-	void prepare();
-	void operator()();
-	roomEntity * getActiveRoom();
-	ObserverEntity * getObserver();
-	TerrainMap * getTerrain();
 
-	
-	void addRoomEntity(roomEntity *e);
+
+
+    World();
+    ~World();
+
+    //obj_reflist getModelsRef();
+
+    Camera *getCurrentCamera();
+    bool parseXml(string &fn);
+    void prepare();
+    void operator()();
+    RoomEntity * getActiveRoom();
+    ObserverEntity * getObserver();
+    TerrainMap * getTerrain();
+
+
+    void addRoomEntity(RoomEntity *e);
 
 };
 

@@ -9,7 +9,7 @@ void ModelAnimator::animate() {
 		 size_t next_key=states[i].current_keyframe+1,current_key=states[i].current_keyframe;
 		for(size_t vi=0; vi<shapes[i]->v_count; vi++) {
 		
-		 MathTypes::vector s(shapes[i]->frames[current_key].verts[vi]),e(shapes[i]->frames[next_key].verts[vi]),r,diff,
+		 MathTypes::Vector3d s(shapes[i]->frames[current_key].verts[vi]),e(shapes[i]->frames[next_key].verts[vi]),r,diff,
 			 base(shapes[i]->frames[0].verts[vi]);
 		 
 		 diff=e-base;
@@ -41,7 +41,7 @@ void ModelAnimator::animate() {
 	}
 }
 
-void ModelAnimator::addShape(shape *s) {
+void ModelAnimator::addShape(Shape *s) {
 	cout << "Frame count: " << s->frame_count << endl;
 	this->shapes.push_back(s);
 	ShapeState state;

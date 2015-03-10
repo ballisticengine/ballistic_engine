@@ -7,9 +7,9 @@
 class Texturable {
 	
 public:
-	texture *tex;
-	virtual void setTexture(texture *tex);
-	virtual texture * getTexture();
+	Texture *tex;
+	virtual void setTexture(Texture *tex);
+	virtual Texture * getTexture();
 };
 
 

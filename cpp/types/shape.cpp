@@ -24,12 +24,12 @@ if(this->vertices) {
 
 /* shape */
 
- shape::shape() {
+ Shape::Shape() {
  
 	 this->renderer_hint=0;
  }
 
-shape::~shape() {
+Shape::~Shape() {
 	if(this->textures) {
 		delete this->textures;
 	}
@@ -43,9 +43,9 @@ shape::~shape() {
 	}
 }
 
-void shape::calculateNormals() {
+void Shape::calculateNormals() {
     
-    MathTypes::vector vec1,vec2,vec3,v1,v2,v3,d1,d2,d3;
+    MathTypes::Vector3d vec1,vec2,vec3,v1,v2,v3,d1,d2,d3;
     MathTypes::BasicVector n1,n2,n3;
     for(int i=0; i<this->f_count; i++) {
         for(int n=0; n<3; n++) {

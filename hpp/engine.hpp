@@ -22,12 +22,12 @@ using namespace boost::python;
 using namespace std;
 
 #include "misc/singleton.hpp"
-#include "world/world.hpp"
+#include "world/World.hpp"
 #include "renderer/GL/RendererGL.hpp"
 #include "renderer/GL/GLPreview.hpp"
 #include "io/sdlio.hpp"
 #include "io/sdlControls.hpp"
-#include "config/config.hpp"
+#include "config/Config.hpp"
 #include "factories/shapeFactory.hpp"
 #include "types/shape.hpp"
 
@@ -35,20 +35,17 @@ using namespace std;
 
 #include "python/scripting.hpp"
 
-typedef boost::shared_ptr<world> world_ptr;
+typedef boost::shared_ptr<World> World_ptr;
 
-
-
-class engine : public singleton<engine> {
-    sdlIO *io;
-	RendererGL *r;
-	
-    public:
-		void pythonInit();
-		void prepare();
-                void preview(string model);
-        void start();
-		~engine();
+class Engine : public Singleton<Engine> {
+    SdlIO *io;
+    RendererGL *r;
+public:
+    void pythonInit();
+    void prepare();
+    void preview(string model);
+    void start();
+    ~Engine();
 };
 
 #endif	/* ENGINE_HPP */

@@ -1,16 +1,16 @@
 #include "factories/textureFactory.hpp"
 
-void * textureFactory::actualLoad(string fn) {
- texture *t=new texture(fn);
+void * TextureFactory::actualLoad(string fn) {
+ Texture *t=new Texture(fn);
 // t->load();
    loader->load(fn,t); 
  return (void *)t;
 }
 
-string textureFactory::getSubDir() {
+string TextureFactory::getSubDir() {
     return string("textures");
 }
 
-textureFactory::textureFactory() {
-    loader=texLoader::getInstance();
+TextureFactory::TextureFactory() {
+    loader=TexLoader::getInstance();
 }

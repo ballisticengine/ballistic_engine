@@ -1,7 +1,7 @@
 #include "anim/animator.hpp"
 
 Animator::Animator() {
-	state=engineState::getInstance();
+	state=EngineState::getInstance();
 }
 
 void Animator::start() {

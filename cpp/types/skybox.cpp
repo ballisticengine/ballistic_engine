@@ -1,26 +1,26 @@
 #include "types/skybox.hpp"    
 
-skybox::skybox(string tex_name) {
-    textureFactory *texf=(textureFactory *)textureFactory::getInstance();
-    sky=(texture *)texf->get(tex_name);
+Skybox::Skybox(string tex_name) {
+    TextureFactory *texf=(TextureFactory *)TextureFactory::getInstance();
+    sky=(Texture *)texf->get(tex_name);
     cout << tex_name << endl;
    
     
 }
 
-skybox::skybox(texture *tex) {
+Skybox::Skybox(Texture *tex) {
 
 }
 
-texture *skybox::getTexture() {
+Texture *Skybox::getTexture() {
     return this->sky;
 }
 
-void skybox::makeShape(float x,float y) {
+void Skybox::makeShape(float x,float y) {
 
-    box=new shape();
+    box=new Shape();
 	box->vertices=new v_type[4];
-	box->uvs=new uv[4];
+	box->uvs=new UV[4];
 	box->v_count=4;
 	box->vertices[0].x=x;
 	box->vertices[0].y=-y;
@@ -49,6 +49,6 @@ void skybox::makeShape(float x,float y) {
 	box->addVertex(new vertex(x,y,0),new uv(1,0));*/
 }
 
-shape * skybox::getShape() {
+Shape * Skybox::getShape() {
     return box;
 }

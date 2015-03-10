@@ -13,15 +13,15 @@
 
 using namespace std;
 
-typedef vector <entity *> ent_list;
+typedef vector <Entity *> ent_list;
 typedef vector <ObjectEntity *> obj_list;
 
-typedef vector <light *> lights_list;
+typedef vector <Light *> lights_list;
 typedef vector <PhysicalEntity *> phys_list;
 typedef vector <Sprite *> sprite_list;
 typedef vector <Sprite *> decal_list;
 
-class roomEntity : public ObjectEntity {
+class RoomEntity : public ObjectEntity {
 protected:
     PreloadStore *preload_store;
 public:
@@ -32,20 +32,20 @@ public:
 	lights_list lights;
 	bounding_list boundings;
         decal_list decals;
-	colorRGBA ambient_light;
-	void addEntity(entity *e);
+	ColorRGBA ambient_light;
+	void addEntity(Entity *e);
 	void addPhysicalEntity(PhysicalEntity *e);
 	void addObjectEntity(ObjectEntity *e);
-	void addLightEntity(light *e);
-	void placeDecal(Sprite *decal,coords c);
-        void placePreloadDecal(string preload,coords c);
-        void placeDecalTexture(texture *tex,coords c);
+	void addLightEntity(Light *e);
+	void placeDecal(Sprite *decal,Coords c);
+        void placePreloadDecal(string preload,Coords c);
+        void placeDecalTexture(Texture *tex,Coords c);
         void removeObjectEntity(string name);
-        ObjectEntity * spawnObject(string preload_name,coords c,string object_name="");
-        ObjectEntity * spawnShape(shape *s,coords c,string object_name="");
-        roomEntity();
-	~roomEntity();
-	virtual collsionInfo collides(entity *ent,coords offset);
+        ObjectEntity * spawnObject(string preload_name,Coords c,string object_name="");
+        ObjectEntity * spawnShape(Shape *s,Coords c,string object_name="");
+        RoomEntity();
+	~RoomEntity();
+	virtual CollsionInfo collides(Entity *ent,Coords offset);
 };
 
 #endif

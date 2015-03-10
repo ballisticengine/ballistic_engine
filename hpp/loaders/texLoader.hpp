@@ -11,11 +11,11 @@ using namespace std;
 #include "types/texture.hpp"
 
 
-class texLoader : public singleton<texLoader> {
+class TexLoader : public Singleton<TexLoader> {
     public:
-    bool load(string fn,texture *tex);
-    texLoader();
-    ~texLoader();
+    bool load(string fn,Texture *tex);
+    TexLoader();
+    ~TexLoader();
 };
 
 #endif	
