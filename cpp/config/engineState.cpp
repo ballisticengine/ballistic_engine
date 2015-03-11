@@ -9,7 +9,6 @@ EngineState::EngineState() {
 }
 
 void EngineState::setExit(bool exit) {
-
 	global_exit=exit;
 }
 
