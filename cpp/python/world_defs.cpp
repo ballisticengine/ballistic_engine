@@ -110,10 +110,6 @@ BOOST_PYTHON_MODULE(World) {
             .def("face", &ObserverEntity::face)
             .def("rotate", &ObserverEntity::rotate)
             .def_readwrite("current_weapon", &ObserverEntity::current_weapon)
-            //.def("getCoords",&ObserverEntity::getCoords)
-
-            //   .def("getState",&ObserverEntity::getState)
-            //    .def("setState",&ObserverEntity::setState)
             ;
 
     bp::class_<Weapon, Weapon*, bp::bases<Entity> >("Weapon")

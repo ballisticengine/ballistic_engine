@@ -160,7 +160,7 @@ class basicManipulator(manipulatorClass):
         self.kcount+=1
         self.world.observer.velocity.reset()
         ocoords=self.world.observer.getCoords()
-        from world import coords
+        from World import Coords
 
         step=5
         xdelta=deg2rad(ocoords.rotation.y)

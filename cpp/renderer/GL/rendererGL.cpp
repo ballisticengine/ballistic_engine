@@ -366,7 +366,7 @@ glEnable(GL_BLEND);
     // hud->addImage("@car.bmp","test",1,1,1,1);
 
    
-    ptree & shaders = Config::getInstance()->getNode("Config.screen.shaders");
+    ptree & shaders = Config::getInstance()->getNode("config.screen.shaders");
 
     BOOST_FOREACH(const ptree::value_type &shad, shaders) {
         string sn = shad.second.get_value<string>();

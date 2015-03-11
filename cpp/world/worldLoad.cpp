@@ -16,12 +16,12 @@ bool World::parseXml(string &fn) {
     using boost::property_tree::ptree;
     ptree pt;
     read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace);
-    string skyfn = pt.get<string>("World.Config.skybox");
+    string skyfn = pt.get<string>("world.config.skybox");
     this->sky = new Skybox(skyfn);
-    this->observer.current_weapon = Config::getInstance()->available_weapons[pt.get<string>("World.Config.default_weapon")];
+    this->observer.current_weapon = Config::getInstance()->available_weapons[pt.get<string>("world.config.default_weapon")];
     ;
 
-    ptree& World_jp = pt.get_child("World.Config.jump_point");
+    ptree& World_jp = pt.get_child("world.config.jump_point");
     //  e_loc jx,jy,jz,rx,ry,rz;
     e_loc jx = World_jp.get<e_loc>("x"),
             jy = World_jp.get<e_loc>("y"),
@@ -32,15 +32,15 @@ bool World::parseXml(string &fn) {
 
 
     try {
-        roomrot_x = pt.get<e_loc>("World.Config.rotation.x");
-        roomrot_y = pt.get<e_loc>("World.Config.rotation.y");
-        roomrot_z = pt.get<e_loc>("World.Config.rotation.z");
+        roomrot_x = pt.get<e_loc>("world.config.rotation.x");
+        roomrot_y = pt.get<e_loc>("world.config.rotation.y");
+        roomrot_z = pt.get<e_loc>("world.config.rotation.z");
     } catch (std::exception e) {
         roomrot_x = roomrot_y = roomrot_z = 0;
     }
 
     PreloadStore *ps = PreloadStore::getInstance();
-    ptree preloads = pt.get_child("World.preloads");
+    ptree preloads = pt.get_child("world.preloads");
 
     BOOST_FOREACH(const ptree::value_type &preload, preloads) {
         string name = preload.second.get<string>("name"),

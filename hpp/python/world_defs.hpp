@@ -43,7 +43,7 @@ using namespace boost;
 
 
 
-void init_World();
+void init_world();
 
 
 
