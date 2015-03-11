@@ -131,7 +131,7 @@ void SdlIO::eventLoop() {
     //SDL_EnableKeyRepeat(300, 30);
 
     boost::thread(boost::ref(this->ctrl));
-    TrRot vel;
+    Coords vel;
     while (!EngineState::getInstance()->exit()) {
         while (SDL_PollEvent(& event)) {
 
@@ -178,7 +178,7 @@ void SdlIO::eventLoop() {
                     case SDLK_s:
 
 
-                        vel.t.y = 1;
+                        vel.translation.y = 1;
                         //w->getObserver()->setVelocity(vel);
                         break;
 

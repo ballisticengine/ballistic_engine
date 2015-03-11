@@ -110,6 +110,8 @@ virtual void setVideoMode()=0;
     virtual void positionCamera();
 };
 
-
+extern "C" {
+void * returnRenderer();
+}
 #endif	/* RENDERERABSTRACT_HPP */
 

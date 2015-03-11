@@ -34,12 +34,13 @@ using namespace std;
 #include "misc/utils.hpp"
 
 #include "python/scripting.hpp"
+#include "libload/LibLoad.hpp"
 
 typedef boost::shared_ptr<World> World_ptr;
 
 class Engine : public Singleton<Engine> {
     SdlIO *io;
-    RendererGL *r;
+    RendererAbstract *r;
 public:
     void pythonInit();
     void prepare();

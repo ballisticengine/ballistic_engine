@@ -228,3 +228,8 @@ void RendererAbstract::positionCamera() {
     translate(c.translation.x, c.translation.y, c.translation.z);
     this->positionCameraSpecific();
 }
+
+
+//RendererAbstract * returnRenderer() {
+//    return 0;
+//}

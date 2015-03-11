@@ -1,6 +1,6 @@
 #include "renderer/GL/RendererGL.hpp"
 #include "types/types.hpp"
-#pragma comment(lib, "glu32.lib") 
+//#pragma comment(lib, "glu32.lib") 
 
 void RendererGL::renderVertex(v_type *v, n_type *normal, UV *uvs) {
     if (normal) {
@@ -642,4 +642,9 @@ void RendererGL::drawBox(e_loc width, e_loc height, e_loc depth) {
 
 
 
+}
+extern "C" {
+void * returnRenderer() {
+    return (RendererAbstract *)RendererGL::getInstance();
+}
 }

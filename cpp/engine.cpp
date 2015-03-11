@@ -6,29 +6,29 @@ void Engine::pythonInit() {
 }
 
 void Engine::preview(string model) {
-    cout << "Model: " << model << endl;
-    cout << "Preparing..." << endl;
-
-    cout << "Config init..." << endl;
-    Config::getInstance();
-    
-    GLPreview *pr = new GLPreview();
-
-    cout << "IO\n";
-
-
-    io = new SdlIO();
-    return;
-    io->initWindow(io);
-    io->setRenderer(pr);
-//    cout << "Renderer init\n";
-    //shapeFactory::getInstance()->setWD(".");
-    Shape *s=(Shape *)ShapeFactory::getInstance()->get(model);
-    pr->setModel(s);
-    pr->previewInit();
-    pr->setFlush(SdlIO::flush);
-    io->previewLoop();
-    
+//    cout << "Model: " << model << endl;
+//    cout << "Preparing..." << endl;
+//
+//    cout << "Config init..." << endl;
+//    Config::getInstance();
+//    
+//    GLPreview *pr = new GLPreview();
+//
+//    cout << "IO\n";
+//
+//
+//    io = new SdlIO();
+//    return;
+//    io->initWindow(io);
+//    io->setRenderer(pr);
+////    cout << "Renderer init\n";
+//    //shapeFactory::getInstance()->setWD(".");
+//    Shape *s=(Shape *)ShapeFactory::getInstance()->get(model);
+//    pr->setModel(s);
+//    pr->previewInit();
+//    pr->setFlush(SdlIO::flush);
+//    io->previewLoop();
+//    
 }
 
 void Engine::prepare() {
@@ -46,10 +46,10 @@ void Engine::prepare() {
 
     VideoData vd = *Config::getInstance()->getVD();
 
+    cout << "RTEST" << endl;
 
-
-    r = RendererGL::getInstance();
-
+    r = LibLoad::getInstance()->getRenderer("./rendererGL.so");//RendererGL::getInstance();
+    
     cout << "IO\n";
 
 

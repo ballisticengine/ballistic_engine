@@ -17,16 +17,14 @@ BOOST_PYTHON_MODULE(World) {
             .def("write", &MathTypes::Vector3d::write)
             ;
 
-    bp::class_<TrRot, TrRot *>("TrRot")
-            .def_readwrite("t", &TrRot::t)
-            .def_readwrite("r", &TrRot::r)
-            .def("reset", &TrRot::reset)
-            ;
-
     bp::class_<Coords, Coords *>("Coords")
             .def_readwrite("rotation", &Coords::rotation)
             .def_readwrite("translation", &Coords::translation)
+            .def_readwrite("r", &Coords::rotation)
+            .def_readwrite("t", &Coords::translation)
+            .def("reset", &Coords::reset)
             ;
+   
     bp::class_<ShapeAbstract, ShapeAbstract *>("ShapeAbstract");
     bp::class_<Shape, Shape *, bp::bases<ShapeAbstract> >("Shape");
 
@@ -40,7 +38,6 @@ BOOST_PYTHON_MODULE(World) {
             .def_readonly("height", &BoundingCube::height)
             .def_readonly("depth", &BoundingCube::depth)
             ;
-
 
     bp::class_<CollsionInfo, CollsionInfo *>("CollsionInfo")
             .def_readonly("cvec", &CollsionInfo::cvec)
@@ -59,8 +56,6 @@ BOOST_PYTHON_MODULE(World) {
             .def_readwrite("no_collisions", &Entity::no_collisions)
             ;
 
-
-
     bp::class_<PhysicalEntity, PhysicalEntity*, bp::bases<Entity> >("PhysicalEntity")
             .def("getVelocity", &PhysicalEntity::getVelocity)
             .def("setVelocity", &PhysicalEntity::setVelocity)
@@ -69,13 +64,10 @@ BOOST_PYTHON_MODULE(World) {
             .def_readwrite("no_physics", &PhysicalEntity::no_physics)
             .def_readwrite("weight", &PhysicalEntity::weight)
             ;
-
-
+    
     bp::class_<ObjectEntity, ObjectEntity*, bp::bases<PhysicalEntity> >("ObjectEntity")
             .def_readwrite("model", &ObjectEntity::model)
             ;
-
-
 
     bp::class_<ObserverMovement, ObserverMovement *>("ObserverMovement")
             .def_readwrite("forward", &ObserverMovement::forward)
@@ -97,7 +89,6 @@ BOOST_PYTHON_MODULE(World) {
             .def_readwrite("middleclick", &ObserverMouse::middleclick)
 
             ;
-
 
     bp::class_<ObserverState, ObserverState *>("ObserverState")
             .def_readwrite("movement", &ObserverState::movement)
@@ -142,16 +133,12 @@ BOOST_PYTHON_MODULE(World) {
             .def(bp::vector_indexing_suite<lights_list>());
 
 
-
     bp::class_<World, shared_ptr<World>, boost::noncopyable>("World", bp::no_init)//.add_property("instance", shared_ptr<&World::getInstance>())
             .def("getInstance", &getSharedWorldInstance)
             .def_readonly("active_room", &World::active_room)
             .def_readwrite("observer", &World::observer)
-
             .staticmethod("getInstance")
-
             ;
-
 
 };
 

@@ -24,7 +24,7 @@ void SdlControls::operator()() {
     e_loc xx;
     int x, y, winw = Config::getInstance()->getVD()->width / 2, winh = Config::getInstance()->getVD()->height / 2;
     SDL_SetRelativeMouseMode(SDL_TRUE);
-    TrRot vel;
+    Coords vel;
     int ksize = 255;
     size_t keys_p = 0;
     static Uint32 mouse_state, old_mouse_state;
@@ -53,12 +53,12 @@ void SdlControls::operator()() {
 
 
         if (state[SDL_SCANCODE_W]) {
-            vel.t.y = -vstep;
+            vel.translation.y = -vstep;
             ostate.movement.up = true;
         }
 
         if (state[SDL_SCANCODE_S]) {
-            vel.t.y = vstep;
+            vel.translation.y = vstep;
             ostate.movement.down = true;
         }
 

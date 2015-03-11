@@ -33,8 +33,11 @@ public:
 	e_loc a;
 };
 
-struct Coords {
-	MathTypes::Vector3d translation,rotation;
+class Coords {
+public:	
+        MathTypes::Vector3d translation,rotation;
+        void reset();
+	Coords();
 };
 
 struct FrustumSizes {

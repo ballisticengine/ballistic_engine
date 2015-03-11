@@ -36,19 +36,12 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
 
 
     Coords c = e->nextCoords(time_diff), x;
-    //cout << "SC: ";
-    //c.translation.write();
-    //TrRot v=e->getVelocity();
     bool movement = true;
     if ((c.translation.x == 0 && c.translation.y == 0 && c.translation.z == 0) && (c.rotation.x == 0 && c.rotation.y == 0 && c.rotation.z == 0)) {
         movement = false;
     }
-    //c.translation.write();
-    if (!movement) {
-        //return;
-    }
-
-
+    
+ 
     x.translation = c.translation - e->getCoords().translation;
 
     rooms_list rl = this->rooms;

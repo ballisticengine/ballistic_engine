@@ -1,32 +1,26 @@
 #include "entities/physicalEntity.hpp"
 
-void TrRot::reset() {
-    t.x =  t.z = r.x = r.y = r.z = 0; //t.y =
-}
 
-TrRot::TrRot() {
-    this->reset();
-}
 
 Coords PhysicalEntity::nextCoords(time_int diff) {
    
 
     Coords c;
     //cout << diff < endl;
-    c.translation.x = velocity.t.x*diff;
-    c.translation.y = velocity.t.y*diff;
-    c.translation.z = velocity.t.z*diff;
-    c.rotation.x = velocity.r.x*diff;
-    c.rotation.y = velocity.r.y*diff;
-    c.rotation.z = velocity.r.z*diff;
-     if (acceleration.t.x) {
-        velocity.t.x+=acceleration.t.x*diff;
+    c.translation.x = velocity.translation.x*diff;
+    c.translation.y = velocity.translation.y*diff;
+    c.translation.z = velocity.translation.z*diff;
+    c.rotation.x = velocity.rotation.x*diff;
+    c.rotation.y = velocity.rotation.y*diff;
+    c.rotation.z = velocity.rotation.z*diff;
+     if (acceleration.translation.x) {
+        velocity.translation.x+=acceleration.translation.x*diff;
     }
-    if (acceleration.t.y) { 
-        velocity.t.y+=acceleration.t.y*diff;
+    if (acceleration.translation.y) { 
+        velocity.translation.y+=acceleration.translation.y*diff;
     }
-    if (acceleration.t.z) {
-        velocity.t.z+=acceleration.t.z*diff;
+    if (acceleration.translation.z) {
+        velocity.translation.z+=acceleration.translation.z*diff;
     }
     return c;
 }
@@ -37,31 +31,31 @@ void PhysicalEntity::setIfNotZero(e_loc &a, e_loc &b) {
     }
 }
 
-void PhysicalEntity::changeVelocity(TrRot velocity) {
-    setIfNotZero(velocity.t.x, this->velocity.t.x);
-    setIfNotZero(velocity.t.y, this->velocity.t.y);
-    setIfNotZero(velocity.t.z, this->velocity.t.z);
-    setIfNotZero(velocity.r.x, this->velocity.r.x);
-    setIfNotZero(velocity.r.y, this->velocity.r.y);
-    setIfNotZero(velocity.r.z, this->velocity.r.z);
+void PhysicalEntity::changeVelocity(Coords velocity) {
+    setIfNotZero(velocity.translation.x, this->velocity.translation.x);
+    setIfNotZero(velocity.translation.y, this->velocity.translation.y);
+    setIfNotZero(velocity.translation.z, this->velocity.translation.z);
+    setIfNotZero(velocity.rotation.x, this->velocity.rotation.x);
+    setIfNotZero(velocity.rotation.y, this->velocity.rotation.y);
+    setIfNotZero(velocity.rotation.z, this->velocity.rotation.z);
     //this->velocity=velocity;
 
 }
 
-void PhysicalEntity::setVelocity(TrRot velocity) {
+void PhysicalEntity::setVelocity(Coords velocity) {
 
     this->velocity = velocity;
 
 }
 
-TrRot PhysicalEntity::getVelocity() {
+Coords PhysicalEntity::getVelocity() {
 
     return this->velocity;
 }
 
 void PhysicalEntity::printVelocity() {
-    cout << "T: " << velocity.t.x << ", " << velocity.t.y << ", " << velocity.t.z << endl;
-    cout << "R: " << velocity.r.x << ", " << velocity.r.y << ", " << velocity.r.z << endl;
+    cout << "T: " << velocity.translation.x << ", " << velocity.translation.y << ", " << velocity.translation.z << endl;
+    cout << "R: " << velocity.rotation.x << ", " << velocity.rotation.y << ", " << velocity.rotation.z << endl;
 }
 
 PhysicalEntity::PhysicalEntity() {

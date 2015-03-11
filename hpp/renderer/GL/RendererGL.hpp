@@ -1,5 +1,6 @@
 #ifndef RendererGL_HPP
 #define	RendererGL_HPP
+
 #ifdef _WIN32
 #include "windows.h"
 #endif
@@ -9,6 +10,7 @@
 #include "ui/image.hpp"
 #include "ui/hud.hpp"
 #include "io/ttf.hpp"
+extern "C" { 
 #ifdef _WIN32
 #include <glew.h>
 #else 
@@ -17,7 +19,7 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-
+}
 #include <cstdlib>
 #include <cstring>
 #include <cstdio>
@@ -52,7 +54,7 @@ struct Guv {
     float u, v;
 };
 
-
+extern "C" { 
 class RendererGL : public RendererAbstract, public Singleton<RendererGL> {
 protected:
     GLuint v, f;
@@ -107,6 +109,6 @@ public:
     virtual void render();
     virtual void previewRender();
 };
-
+}
 #endif	/* RendererGL_HPP */
 

@@ -1,8 +1,8 @@
-CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python 
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lboost_thread -lpython2.7 -lboost_python -ldl
 OUTPUT=ballistic 
 
 deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
-	sdl2d.o renderer.o rendererGL.o texture.o world.o worldLoad.o skybox.o \
+	sdl2d.o texture.o world.o worldLoad.o skybox.o \
 	   engine.o sprite.o loaderMD2.o texLoader.o \
 	   config.o engineState.o loaderXML.o PreloadStore.o \
 	   factory.o textureFactory.o shapeFactory.o animator.o modelAnimator.o \
@@ -10,28 +10,31 @@ deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
-	   timerdefs.o \
-	   timer.o image.o hud.o uimesh.o weapon.o glpreview.o
+	   timerdefs.o LibLoad.o \
+	   timer.o image.o hud.o uimesh.o weapon.o # glpreview.o
 
 $(OUTPUT): $(deps) main.o 
-	g++  $^ -o $(OUTPUT) $(CFLAGS)
+	g++ -rdynamic  $^ -o $(OUTPUT) $(CFLAGS)
 
-glpreview.o: cpp/renderer/GL/GLPreview.cpp
+rendererGL.o: cpp/renderer/GL/rendererGL.cpp 
+	g++  -Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -c  -fPIC  $^ -o $@ 
+
+renderer.o: cpp/renderer/rendererAbstract.cpp
+	g++  -Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -c -fPIC  $^ -o $@ 
+
+rendererGL: rendererGL.o renderer.o
+	g++ $^ -shared -Wl,-soname,rendererGL.so -o rendererGL.so -lGL -lGLU -lGLEW   
+
+LibLoad.o: cpp/libload/LibLoad.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
-modelview: modelview.o modelrenderer.o $(deps)
-	g++ $(CFLAGS) $^ -o modelview
+glpreview.o: cpp/renderer/GL/GLPreview.cpp
+	g++ $(CFLAGS) -c $^ -o $@
 	
 
 timerdefs.o: cpp/python/timer_defs.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-modelrenderer.o: engine_tools/modelviewer/renderer.cpp
-	g++ $(CFLAGS) -I./hpp -c $^ -o $@
-	
-modelview.o: engine_tools/modelviewer/modelview.cpp
-	g++ $(CFLAGS) -I./hpp -c $^ -o $@
-	
 weapon.o: cpp/entities/weapon.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
@@ -162,11 +165,9 @@ sdlControls.o: cpp/io/sdlControls.cpp
 texture.o: cpp/types/texture.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-renderer.o: cpp/renderer/rendererAbstract.cpp
-	g++ $(CFLAGS) -c $^ -o $@
 
-rendererGL.o: cpp/renderer/GL/rendererGL.cpp
-	g++ $(CFLAGS) -c $^ -o $@
+
+
 
 	
 singleton.o: cpp/misc/singleton.cpp
