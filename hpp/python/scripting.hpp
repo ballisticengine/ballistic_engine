@@ -28,6 +28,7 @@ protected:
 	man_list manipulators;
         queue<SignalType> sig_queue;
         bool processing,other_bcast;
+        boost::mutex m;
         
 public:
 	PyScripting();

@@ -41,10 +41,11 @@ PyScripting::~PyScripting() {
 void PyScripting::broadcast(string name,void *paramA,void *paramB,void* paramC,void* paramD) {
     
     
-    
+    bool t=m.try_lock();
+    cout << t << endl;
     for(int i=0; i<manipulators.size(); i++) {
-		manipulators[i]->signal(name,paramA,paramB,paramC,paramD);
+		manipulators[i]->signal(name,paramA,paramB,paramC,paramD); //może tutaj przekazać mutex i potem by czekał w signal
 	}
-
+    m.unlock();
 }
 

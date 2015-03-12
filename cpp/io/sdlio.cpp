@@ -49,7 +49,6 @@ void SdlIO::initWindow(SdlIO *me) {
 
 void SdlIO::flush() {
     SDL_GL_SwapWindow(SdlIO::window);
-    //SDL_RenderPresent(displayRenderer);
 }
 
 void SdlIO::toggleFullscreen() {
@@ -73,8 +72,6 @@ void SdlIO::toggleFullscreen() {
         }
         SDL_SetWindowFullscreen(window, 0);
     }
-
-
 
     SdlIO::me->r->setVideoMode();
     EngineState::getInstance()->fullscreen = !fullscreen;
@@ -130,7 +127,7 @@ void SdlIO::eventLoop() {
     float rot = 0, tr = 0;
     //SDL_EnableKeyRepeat(300, 30);
 
-    boost::thread(boost::ref(this->ctrl));
+ 
     Coords vel;
     while (!EngineState::getInstance()->exit()) {
         while (SDL_PollEvent(& event)) {

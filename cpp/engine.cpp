@@ -80,8 +80,9 @@ Engine::~Engine() {
 }
 
 void Engine::start() {
-
+    SdlControls *ctrl=SdlControls::getInstance();
+    boost::thread(boost::ref(*ctrl));
     io->eventLoop();
-
+   
 
 }

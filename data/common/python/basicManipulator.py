@@ -26,6 +26,9 @@ class basicManipulator(manipulatorClass):
         self.last_left=False
 
 
+    def onTestSig(self):
+        print "test signal"
+
 
     def onEntityMovement(self,entity):
 

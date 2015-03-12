@@ -27,6 +27,8 @@ class manipulatorClass(object):
     def onEntityLoop(self,entity):
         pass
 
+    def onTestSig(self):
+        pass
 
     """
     Rozwiazac jakos kilka klawiszy na raz. np argument cycles liczacy czy to ten sam cykl io
