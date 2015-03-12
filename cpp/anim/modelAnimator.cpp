@@ -9,7 +9,7 @@ void ModelAnimator::animate() {
 		 size_t next_key=states[i].current_keyframe+1,current_key=states[i].current_keyframe;
 		for(size_t vi=0; vi<shapes[i]->v_count; vi++) {
 		
-		 MathTypes::Vector3d s(shapes[i]->frames[current_key].verts[vi]),e(shapes[i]->frames[next_key].verts[vi]),r,diff,
+		 Vector3d s(shapes[i]->frames[current_key].verts[vi]),e(shapes[i]->frames[next_key].verts[vi]),r,diff,
 			 base(shapes[i]->frames[0].verts[vi]);
 		 
 		 diff=e-base;

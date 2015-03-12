@@ -29,7 +29,7 @@ public:
 	e_loc getDepth();
         string name;
 	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
-	MathTypes::Vector3d max,min,loc;
+	Vector3d max,min,loc;
 
 
 };

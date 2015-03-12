@@ -36,7 +36,7 @@ void Engine::prepare() {
 
     cout << "Config init..." << endl;
     Config::getInstance();
-
+    
     cout << "Get World\n";
     World *w = (World *) World::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
@@ -46,9 +46,9 @@ void Engine::prepare() {
 
     VideoData vd = *Config::getInstance()->getVD();
 
-    cout << "RTEST" << endl;
+    cout << "renderer is: " << Config::getInstance()->getRenderer() << endl;
 
-    r = LibLoad::getInstance()->getRenderer("./rendererGL.so");//RendererGL::getInstance();
+    r = LibLoad::getInstance()->getRenderer(Config::getInstance()->getRenderer());//RendererGL::getInstance();
     
     cout << "IO\n";
 

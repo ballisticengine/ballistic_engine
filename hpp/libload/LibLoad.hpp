@@ -21,6 +21,7 @@ typedef vector<lib_handle> lib_vector;
 class LibLoad : public Singleton<LibLoad> {
 protected:
     lib_vector libs;
+    void error(string name);
     lib_handle load(string fn);
 public: 
     

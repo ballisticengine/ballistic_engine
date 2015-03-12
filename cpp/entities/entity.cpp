@@ -85,8 +85,8 @@ Entity::~Entity() {
     //}
 }
 
-MathTypes::Vector3d Entity::cTest(BoundingCube *a, BoundingCube *b, Coords offset) {
-    MathTypes::Vector3d res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
+Vector3d Entity::cTest(BoundingCube *a, BoundingCube *b, Coords offset) {
+    Vector3d res, offsetx = offset.translation, offsety = offset.translation, offsetz = offset.translation;
 
     offsetx.y = offsetx.z = 0;
     offsety.x = offsety.z = 0;
@@ -115,7 +115,7 @@ MathTypes::Vector3d Entity::cTest(BoundingCube *a, BoundingCube *b, Coords offse
             halfd = a->depth / 2 + b->depth / 2;
 
 
-    MathTypes::Vector3d am, bm;
+    Vector3d am, bm;
     //cout << "D" << a->width << endl;
     am.x = a->min.x + a->width / 2;
     am.y = a->min.y + a->height / 2;
@@ -189,13 +189,13 @@ CollsionInfo Entity::collides(Entity *ent, Coords offset) {
     BoundingCube *a = boundings[0], *b = ent->boundings[0], *awin; //nie bwin tylko awin
     e_loc sa = 9999999999999, sb = b->width * b->height;
 
-    MathTypes::Vector3d res;
+    Vector3d res;
     bool has_res = false;
     e_loc nsa, nsb;
     for (size_t i = 0; i < boundings.size(); i++) {
         for (size_t n = 0; n < ent->boundings.size(); n++) {
             BoundingCube *a = boundings[i], *b = ent->boundings[n];
-            MathTypes::Vector3d cvec = cTest(a, b, offset);
+            Vector3d cvec = cTest(a, b, offset);
 
             if (cvec.x || cvec.y || cvec.z) {
                 nsa = a->width * a->height;
@@ -259,8 +259,8 @@ BoundingCube offsetBounding(BoundingCube *bc, Coords offset) {
     return bcr;
 }
 
-bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::Vector3d offset) {
-    MathTypes::Vector3d amax, amin, bmax, bmin;
+bool hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset) {
+    Vector3d amax, amin, bmax, bmin;
     amax = a->max + offset;
     amin = a->min + offset;
     bmax = b->max + offset;
@@ -279,8 +279,8 @@ bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::Vector3d offset) {
     return collide;
 }
 
-bool roomHitTest(BoundingCube *a, BoundingCube *b, MathTypes::Vector3d offset) { // tu coś jest źle
-    MathTypes::Vector3d amax, amin, bmax, bmin;
+bool roomHitTest(BoundingCube *a, BoundingCube *b, Vector3d offset) { // tu coś jest źle
+    Vector3d amax, amin, bmax, bmin;
     amax = a->max + offset;
     amin = a->min + offset;
     bmax = b->max + offset;

@@ -8,7 +8,7 @@
 
 typedef double e_loc;
 
-namespace MathTypes {
+
 
 struct BasicVector {
 	e_loc x,y,z;
@@ -27,10 +27,10 @@ public:
 	Vector3d();
 	virtual Vector3d  unit();
 	virtual Vector3d  normalize();
-	virtual  Vector3d  diff(const MathTypes::Vector3d & v);
+	virtual  Vector3d  diff(const Vector3d & v);
 	e_loc length();
-	Vector3d  crossProduct(const MathTypes::Vector3d * b); 
-	e_loc dotProduct(const MathTypes::Vector3d * b);
+	Vector3d  crossProduct(const Vector3d * b); 
+	e_loc dotProduct(const Vector3d * b);
 	virtual std::ostream & operator<<(std::ostream & ostr);
 	virtual void write();
 	
@@ -46,7 +46,6 @@ public:
 
  
 
-} //namespace
 
 e_loc normalizeRotation(e_loc r);
 

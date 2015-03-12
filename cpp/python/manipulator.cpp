@@ -39,7 +39,7 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		PhysicalEntity *a,*b;
 		a=(PhysicalEntity *)paramA;
 		b=(PhysicalEntity *)paramB;
-		//MathTypes::vector cvec=*(MathTypes::vector *)paramC;
+		//vector cvec=*(vector *)paramC;
                 CollsionInfo ci=*(CollsionInfo *)paramC;
 		f(boost::ref(*a),boost::ref(*b),boost::ref(ci));
 	} else if(name=="EntityMovement") {
@@ -50,7 +50,7 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		PhysicalEntity *a;
 		a=(PhysicalEntity *)paramA;	
 		RoomEntity *r=(RoomEntity *)paramB;
-                MathTypes::Vector3d cvec=*(MathTypes::Vector3d *)paramC;
+                Vector3d cvec=*(Vector3d *)paramC;
 		f(boost::ref(*a),boost::ref(*r),boost::ref(cvec));
 	} else if(name=="ObserverStateChange") {
             ObserverState *s=(ObserverState *)paramA;

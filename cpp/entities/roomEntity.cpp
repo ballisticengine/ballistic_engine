@@ -81,10 +81,10 @@ void RoomEntity::removeObjectEntity(string name) {
     e_loc in_count = 0, out_count = 0;
     in_count = out_count = 0;
     BoundingCube bound_off = *bound, bound_current, *in_bounding;
-    MathTypes::Vector3d tmp;
+    Vector3d tmp;
 
 
-    MathTypes::Vector3d cvec, ctmp, cres, none, am, bm, dm;
+    Vector3d cvec, ctmp, cres, none, am, bm, dm;
 
     e_loc smallest_dist = 999999;
 

@@ -48,7 +48,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
     obj_list objs = this->active_room->models;
     BoundingCube *obc = e->getBoundingBox();
 
-    MathTypes::Vector3d cvec;
+    Vector3d cvec;
     bool lc = false;
     if (!EngineState::getInstance()->noclip && !e->no_collisions) {
 

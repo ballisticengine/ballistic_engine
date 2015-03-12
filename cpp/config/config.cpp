@@ -6,6 +6,11 @@ void Config::loadWeapons() {
 
 }
 
+string Config::getRenderer() {
+    return pt.get<string>("config.screen.renderer.name");
+    
+}
+
 Config::Config() {
 
     string fn = string(CONFIG_DIR) + string(DS) + string(CONFIG_FN);
@@ -18,6 +23,7 @@ Config::Config() {
     vd.frustum_end = pt.get<float>("config.screen.frustum_end");
     vd.frustum_x = pt.get<float>("config.screen.frustum_width");
     vd.frustum_y = pt.get<float>("config.screen.frustum_height");
+    
     
     EngineState::getInstance()->fullscreen = pt.get<bool>("config.screen.fullscreen");
     EngineState::getInstance()->desktop_fs = pt.get<bool>("config.screen.use_desktop_fs");

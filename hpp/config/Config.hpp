@@ -30,6 +30,8 @@ struct VideoData {
     float frustum_start, frustum_end, frustum_x, frustum_y;
 };
 
+
+
 class Config : public Singleton<Config> {
     ptree pt;
     VideoData vd;
@@ -39,6 +41,7 @@ class Config : public Singleton<Config> {
 
 public:
     weapon_map available_weapons;
+    string getRenderer();
     Config();
     VideoData * getVD();
     string & getStart();

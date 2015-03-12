@@ -12,8 +12,8 @@ BoundingCube::BoundingCube(Shape *s) {
 
 
 e_loc BoundingCube::toSphereRadius() {
-	MathTypes::Vector3d E=(max-min)/2.0f;	
-	MathTypes::Vector3d center=min+E;
+	Vector3d E=(max-min)/2.0f;	
+	Vector3d center=min+E;
 	
 	return 0;
 }

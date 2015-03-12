@@ -35,7 +35,7 @@ public:
 
 class Coords {
 public:	
-        MathTypes::Vector3d translation,rotation;
+        Vector3d translation,rotation;
         void reset();
 	Coords();
 };
@@ -49,8 +49,8 @@ struct UV {
  e_loc u,v;
 };
 
-typedef MathTypes::BasicVector v_type;
-typedef MathTypes::BasicVector n_type;
+typedef BasicVector v_type;
+typedef BasicVector n_type;
 
 struct Frame {
 	e_loc fnum,fval;

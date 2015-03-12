@@ -45,11 +45,11 @@ Shape::~Shape() {
 
 void Shape::calculateNormals() {
     
-    MathTypes::Vector3d vec1,vec2,vec3,v1,v2,v3,d1,d2,d3;
-    MathTypes::BasicVector n1,n2,n3;
+    Vector3d vec1,vec2,vec3,v1,v2,v3,d1,d2,d3;
+    BasicVector n1,n2,n3;
     for(int i=0; i<this->f_count; i++) {
         for(int n=0; n<3; n++) {
-        this->faces[i].normals=new MathTypes::BasicVector[3];
+        this->faces[i].normals=new BasicVector[3];
         v1=this->vertices[this->faces[i].index[0]];
         v2=this->vertices[this->faces[i].index[1]];
         v3=this->vertices[this->faces[i].index[2]];

@@ -3,7 +3,7 @@
 void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
 
     s->v_count = md2->header.num_tris * 3; //num_xyz
-    s->vertices = new MathTypes::BasicVector[s->v_count];
+    s->vertices = new BasicVector[s->v_count];
     s->f_count = md2->header.num_tris;
     s->v_per_poly = 3;
     s->textures = new Texture*[s->f_count];

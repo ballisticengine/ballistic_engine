@@ -1,35 +1,4 @@
 <config>
-    <tmp>
-        
-        <resx>1366</resx>
-        <resy>768</resy>
-     <weapon>
-                <name>bfg</name>
-                <display_name>BFG</display_name>
-                <model>@w_bfg.md2</model>
-                <bullet>@ball.xml</bullet>
-                <decal>
-                    <texture>@decal.png</texture>
-                    <width>1</width>
-                    <height>1</height>
-                </decal>
-                <velocity>1</velocity>
-                <location>
-                    <x>0</x>
-                    <y>0</y>
-                    <z>-50</z>
-                </location>
-                <rotation>
-                    <x>180</x>
-                    <y>-270</y>
-                    <z>180</z>
-                </rotation>
-                <scale>
-                    0.5
-                </scale>
-            </weapon>
-            
-    </tmp>
     <screen>
         <resx>800</resx>
         <resy>600</resy>
@@ -39,6 +8,16 @@
         <frustum_end>5000</frustum_end>
         <frustum_width>20</frustum_width>
         <frustum_height>20</frustum_height>
+        <renderer>
+            <name>rendererGL</name>
+            <params>
+                <shaders>
+                    <shader>
+                        light
+                    </shader>   
+                </shaders>
+            </params>
+        </renderer>
         <shaders>
             <shader>
                 light

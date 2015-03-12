@@ -11,7 +11,7 @@ deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
 	   timerdefs.o LibLoad.o \
-	   timer.o image.o hud.o uimesh.o weapon.o # glpreview.o
+	   timer.o image.o hud.o uimesh.o weapon.o rendererGL.so
 
 $(OUTPUT): $(deps) main.o 
 	g++ -rdynamic  $^ -o $(OUTPUT) $(CFLAGS)
@@ -22,7 +22,7 @@ rendererGL.o: cpp/renderer/GL/rendererGL.cpp
 renderer.o: cpp/renderer/rendererAbstract.cpp
 	g++  -Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -c -fPIC  $^ -o $@ 
 
-rendererGL: rendererGL.o renderer.o
+rendererGL.so: rendererGL.o renderer.o
 	g++ $^ -shared -Wl,-soname,rendererGL.so -o rendererGL.so -lGL -lGLU -lGLEW   
 
 LibLoad.o: cpp/libload/LibLoad.cpp

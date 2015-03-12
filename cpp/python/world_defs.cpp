@@ -10,11 +10,11 @@ typedef boost::shared_ptr<World> World_ptr;
 
 BOOST_PYTHON_MODULE(World) {
 
-    bp::class_<MathTypes::Vector3d, MathTypes::Vector3d *>("Vector3d")
-            .def_readwrite("x", &MathTypes::Vector3d::x)
-            .def_readwrite("y", &MathTypes::Vector3d::y)
-            .def_readwrite("z", &MathTypes::Vector3d::z)
-            .def("write", &MathTypes::Vector3d::write)
+    bp::class_<Vector3d, Vector3d *>("Vector3d")
+            .def_readwrite("x", &Vector3d::x)
+            .def_readwrite("y", &Vector3d::y)
+            .def_readwrite("z", &Vector3d::z)
+            .def("write", &Vector3d::write)
             ;
 
     bp::class_<Coords, Coords *>("Coords")

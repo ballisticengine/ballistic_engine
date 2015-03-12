@@ -12,7 +12,7 @@ e_loc normalizeRotation(e_loc r) {
 }
 
 
-namespace MathTypes {
+
 
     BasicVector Vector3d::getBasicVector() {
         BasicVector v;
@@ -35,7 +35,7 @@ namespace MathTypes {
         std::cout << this->x << ", " << this->y << ", " << this->z << std::endl;
     }
 
-    Vector3d Vector3d::crossProduct(const MathTypes::Vector3d * b) {
+    Vector3d Vector3d::crossProduct(const Vector3d * b) {
         //ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
         /*
          n[0]=va[1]*vb[2] - va[2]*vb[1];
@@ -97,7 +97,7 @@ namespace MathTypes {
 
     }
 
-    Vector3d Vector3d::diff(const MathTypes::Vector3d & v) {
+    Vector3d Vector3d::diff(const Vector3d & v) {
         Vector3d lv;
         lv.x = x - v.x;
         lv.y = y - v.y;
@@ -119,7 +119,7 @@ namespace MathTypes {
         return v;
     }
 
-    e_loc Vector3d::dotProduct(const MathTypes::Vector3d * b) {
+    e_loc Vector3d::dotProduct(const Vector3d * b) {
         e_loc dp = x * b->x + y * b->y + z * b->z;
         return dp;
     }
@@ -173,4 +173,3 @@ namespace MathTypes {
         return v;
     }
 
-}

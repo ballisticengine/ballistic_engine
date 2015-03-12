@@ -17,11 +17,11 @@ using namespace std;
 
 BoundingCube offsetBounding(BoundingCube *bc, Coords offset);
 
-bool hitTest(BoundingCube *a, BoundingCube *b, MathTypes::Vector3d offset);
-bool roomHitTest(BoundingCube *a,BoundingCube *b,MathTypes::Vector3d offset);
+bool hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset);
+bool roomHitTest(BoundingCube *a,BoundingCube *b,Vector3d offset);
 
 struct CollsionInfo {
-    MathTypes::Vector3d cvec;
+    Vector3d cvec;
     string nameA,nameB;
     bool collided;
 };
@@ -29,8 +29,8 @@ struct CollsionInfo {
 class Entity {
 protected:
     e_loc x, y, z, rx, ry, rz;
-    MathTypes::Vector3d velocity;
-    virtual MathTypes::Vector3d cTest(BoundingCube *a,BoundingCube *b,Coords offset);
+    Vector3d velocity;
+    virtual Vector3d cTest(BoundingCube *a,BoundingCube *b,Coords offset);
     void syncBounding();
 public:
     bool no_collisions;

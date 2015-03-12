@@ -1,13 +1,23 @@
 #include "libload/LibLoad.hpp"
 
+ void LibLoad::error(string name) {
+     cout << "Library " << name << " error: " << dlerror() << endl;
+ }
+
 RendererAbstract * LibLoad::getRenderer(string name) {
-    lib_handle h=this->load(name);
-    typedef void* (*hello_t)();;
-    hello_t fn;
-    cout << dlerror() << endl;
-    fn=( hello_t)dlsym(h, "returnRenderer");
-    cout << dlerror() << endl;
-//    RendererAbstract *(*rf)()=(RendererAbstract *())vf;
+    string file_name="./"+name+".so";
+    lib_handle h=this->load(file_name);
+    if(!h) {
+      error(name+" file ");  
+    }
+    typedef void* (*renderer_f)();;
+    renderer_f fn;
+    
+   
+    fn=( renderer_f)dlsym(h, "returnRenderer");
+    if(!fn) {
+        error(name + " function ");
+    }
     cout << fn << ", " << h << endl;
     return (RendererAbstract *)fn();
 }
