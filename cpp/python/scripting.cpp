@@ -1,17 +1,7 @@
 #include "python/scripting.hpp"
 
 void PyScripting::loadManipulators() {
-	/*namespace fs = boost::filesystem;
-	fs::path py_dir("./python/manipulators/");
-	fs::directory_iterator end_iter;
-	for( fs::directory_iterator dir_iter(py_dir) ; dir_iter != end_iter ; ++dir_iter) {
-		if (fs::is_regular_file(dir_iter->status()) ) {
-		cout << "Python file: " << dir_iter->path().string() << endl;	
-                    PyManipulator *pyman=new PyManipulator(dir_iter->path().string());
-			manipulators.push_back(pyman);
-		}
-                
-	}*/
+	
         vector<string> scripts=Config::getInstance()->getScripts();
         for(int i=0; i<scripts.size(); i++) {
             string pyfn=string(CONFIG_DIR)+DS+string(COMMON_DIR)+DS+
@@ -41,10 +31,10 @@ PyScripting::~PyScripting() {
 void PyScripting::broadcast(string name,void *paramA,void *paramB,void* paramC,void* paramD) {
     
     
-    bool t=m.try_lock();
-    cout << t << endl;
+    while(!m.try_lock()) {} ;
+    
     for(int i=0; i<manipulators.size(); i++) {
-		manipulators[i]->signal(name,paramA,paramB,paramC,paramD); //może tutaj przekazać mutex i potem by czekał w signal
+		manipulators[i]->signal(name,paramA,paramB,paramC,paramD); 
 	}
     m.unlock();
 }
