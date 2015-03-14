@@ -12,25 +12,25 @@
 #include "renderer/GL/RendererGL.hpp"
 #include "misc/singleton.hpp"
 #include "config/EngineState.hpp"
-#include "io/sdlControls.hpp"
 #include "world/World.hpp"
 #include "entities/observerEntity.hpp"
 #include "config/path.hpp"
 #include "io/ttf.hpp"
 #include "renderer/GL/GLPreview.hpp"
+#include "python/scripting.hpp"
 
 class SdlIO : public Singleton<SdlIO> {
 private:
     static SDL_Surface *screen;
     static SDL_Renderer* displayRenderer;
     static SDL_Window *window;
-    SdlControls ctrl;
     RendererAbstract *r;
     static SdlIO *me;
     World *w;
     bool fullscreen;
     static int window_w, window_h;
     static void toggleFullscreen();
+    size_t anykey(const Uint8 *state, int ksize);
 public:
     static void flush();
     void setRenderer(RendererAbstract *r);
@@ -38,8 +38,13 @@ public:
     static void initWindow(SdlIO *me);
     void eventLoop();
     void previewLoop();
+    void inputThread();
     SdlIO();
     ~SdlIO();
 };
+
+extern "C" {
+void * returnSdlIo();
+}
 
 #endif 

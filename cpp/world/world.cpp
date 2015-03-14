@@ -111,15 +111,11 @@ void World::moveEntities() {
     for (int i = 0; i < things.size(); i++) {
 
         ObjectEntity *e = things[i];
-
-
         this->moveEntity((PhysicalEntity *) e, lt, false);
+        
     }
 
-    if (observer.stateChanged()) {
-
-        PyScripting::getInstance()->broadcast("ObserverStateChange", observer.getState());
-    }
+   
  
     this->moveEntity((PhysicalEntity *) & this->observer, lt, false);
 }

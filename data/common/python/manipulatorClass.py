@@ -37,10 +37,11 @@ class manipulatorClass(object):
         pass
 
 
-    def onObserverStateChange(self,state):
+    def onMouseMove(self,deltax, deltay):
         pass
 
-    def onMouseMove(self):
+
+    def onKeyDown(self,key):
         pass
 
     def onMouseClick(self,button):

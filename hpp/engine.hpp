@@ -26,7 +26,6 @@ using namespace std;
 #include "renderer/GL/RendererGL.hpp"
 #include "renderer/GL/GLPreview.hpp"
 #include "io/sdlio.hpp"
-#include "io/sdlControls.hpp"
 #include "config/Config.hpp"
 #include "factories/shapeFactory.hpp"
 #include "types/shape.hpp"

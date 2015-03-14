@@ -33,10 +33,10 @@ void Engine::preview(string model) {
 
 void Engine::prepare() {
     cout << "Preparing..." << endl;
-
+ 
     cout << "Config init..." << endl;
     Config::getInstance();
-    
+   
     cout << "Get World\n";
     World *w = (World *) World::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
@@ -51,12 +51,13 @@ void Engine::prepare() {
     r = LibLoad::getInstance()->getRenderer(Config::getInstance()->getRenderer());//RendererGL::getInstance();
     
     cout << "IO\n";
-
+    
 
     io = new SdlIO();
 
     io->initWindow(io);
     io->setRenderer(r);
+
     cout << "Renderer init\n";
     r->init();
     cout << "Camera set\n";
@@ -68,11 +69,6 @@ void Engine::prepare() {
     cout << "World loop\n";
     boost::thread(boost::ref(*w));
 
-
-
-
-
-
 }
 
 Engine::~Engine() {
@@ -80,8 +76,10 @@ Engine::~Engine() {
 }
 
 void Engine::start() {
-    SdlControls *ctrl=SdlControls::getInstance();
-    boost::thread(boost::ref(*ctrl));
+   
+   
+    
+    boost::thread(boost::bind(&SdlIO::inputThread, SdlIO::getInstance()));
     io->eventLoop();
    
 

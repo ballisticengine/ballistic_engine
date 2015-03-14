@@ -54,6 +54,7 @@ void SdlIO::flush() {
 void SdlIO::toggleFullscreen() {
     bool fullscreen = EngineState::getInstance()->fullscreen;
     if (!fullscreen) {
+        
         if (EngineState::getInstance()->desktop_fs) {
 
             SDL_SetWindowFullscreen(window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN);
@@ -61,8 +62,11 @@ void SdlIO::toggleFullscreen() {
             SDL_GetWindowSize(SdlIO::window, &w, &h);
             Config::getInstance()->getVD()->width = w;
             Config::getInstance()->getVD()->height = h;
+            
         } else {
+            
             SDL_SetWindowFullscreen(window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+            
         }
 
     } else {
@@ -75,6 +79,52 @@ void SdlIO::toggleFullscreen() {
 
     SdlIO::me->r->setVideoMode();
     EngineState::getInstance()->fullscreen = !fullscreen;
+}
+
+
+size_t SdlIO::anykey(const Uint8 *state, int ksize) {
+    size_t ret = 0;
+    for (size_t i = 0; i < ksize; i++) {
+        if (state[i]) {
+            ret++;
+        }
+    }
+    return ret;
+}
+
+void SdlIO::inputThread() {
+    Uint32 mouse_state;
+    int mouse_x, mouse_y, last_x, last_y, delta_x, delta_y;
+    SDL_GetMouseState(&last_x, &last_y);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+    int ksize = 255;
+    while (!EngineState::getInstance()->exit()) {
+        delta_x = delta_y = 0;
+        mouse_state=SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
+
+        if (mouse_x) {
+            
+            delta_x = mouse_x + last_x;
+            last_x = mouse_x;
+            
+        }
+
+        if (mouse_y) {
+
+            delta_y = mouse_y + last_y;
+            last_y = mouse_y;
+        }
+
+        if (delta_x != 0 || delta_y != 0) {
+            PyScripting::getInstance()->broadcast("MouseMove",&mouse_x,&mouse_y);
+        }
+        
+        const Uint8 *keyboard_state = SDL_GetKeyboardState(&ksize);
+        if(anykey(keyboard_state, ksize)) {
+            
+        }
+        mouse_x=mouse_y=delta_x=delta_y=0;
+    }
 }
 
 void SdlIO::previewLoop() {
@@ -125,9 +175,9 @@ void SdlIO::eventLoop() {
 
     SDL_Event event;
     float rot = 0, tr = 0;
-    //SDL_EnableKeyRepeat(300, 30);
+    
 
- 
+
     Coords vel;
     while (!EngineState::getInstance()->exit()) {
         while (SDL_PollEvent(& event)) {
@@ -138,12 +188,6 @@ void SdlIO::eventLoop() {
 
             if (event.type == SDL_KEYDOWN) {
                 EngineState::getInstance()->keypress = true;
-                ObserverState *observer_state;
-                observer_state = this->w->observer.getState();
-                observer_state->movement.next_weapon = false;
-                observer_state->movement.prev_weapon = false;
-                this->w->observer.setState(observer_state);
-                this->w->observer.refreshState();
 
                 switch (event.key.keysym.sym) {
 
@@ -168,15 +212,11 @@ void SdlIO::eventLoop() {
                         break;
 
                     case SDLK_w:
-
-                        //w->getObserver()->translate(0,-1,0);
+                        
                         break;
 
                     case SDLK_s:
-
-
-                        vel.translation.y = 1;
-                        //w->getObserver()->setVelocity(vel);
+                        
                         break;
 
                     case SDLK_ESCAPE:
@@ -188,27 +228,19 @@ void SdlIO::eventLoop() {
 
             if (event.type == SDL_KEYUP) {
                 EngineState::getInstance()->keypress = false;
-                ObserverState *observer_state;
-                observer_state = this->w->observer.getState();
-                observer_state->movement.next_weapon = false;
-                observer_state->movement.prev_weapon = false;
+
                 switch (event.key.keysym.sym) {
                     case SDLK_LEFTBRACKET:
-                        //observer_state->movement.next_weapon=false;
 
-                        observer_state->movement.prev_weapon = true;
 
                         break;
 
                     case SDLK_RIGHTBRACKET:
-                        //observer_state->movement.prev_weapon=false;
-
-                        observer_state->movement.next_weapon = true;
+                        
 
                         break;
                 }
-                this->w->observer.setState(observer_state);
-                this->w->observer.refreshState();
+
             } else {
 
             }
@@ -220,4 +252,11 @@ void SdlIO::eventLoop() {
 
 SdlIO::~SdlIO() {
     SDL_Quit();
+}
+
+extern "C" {
+
+    void * returnSdlIo() {
+        return (void *) SdlIO::getInstance();
+    }
 }

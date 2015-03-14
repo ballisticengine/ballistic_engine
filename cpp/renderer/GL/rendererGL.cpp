@@ -507,6 +507,8 @@ void RendererGL::assignMaterial(Material *m) {
 
 void RendererGL::setupTexture(Texture *t,char *pixels) {
 
+   
+    cout << "Setting up " << t->getFilename() << endl;
     GLuint tex_id;
     GLint tf;
     textureFormat tformat=t->getFormat();
@@ -529,33 +531,29 @@ void RendererGL::setupTexture(Texture *t,char *pixels) {
             break;
         
     }
-    
+   
     glGenTextures(1, &tex_id);
     this->textures_ids[t] = tex_id;
     glBindTexture(GL_TEXTURE_2D, tex_id);
-    glTexStorage2D(GL_TEXTURE_2D, 8, tf, t->getWidth(), t->getHeight());
+    //glTexStorage2D(GL_TEXTURE_2D, 8, tf, t->getWidth(), t->getHeight());
     glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
             GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
             GL_LINEAR_MIPMAP_LINEAR);
-    
-//       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-//            GL_LINEAR_MIPMAP_LINEAR);
-//       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
-//            GL_LINEAR);
-   // glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    //for testing
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 //glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+    
     if(pixels) {
         glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) pixels);
     } else {
         glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
     }
     glGenerateMipmap(GL_TEXTURE_2D);
+    
 }
 
 void RendererGL::translateSpecific(e_loc x, e_loc y, e_loc z) {

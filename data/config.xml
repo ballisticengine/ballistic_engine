@@ -24,7 +24,7 @@
             </shader>   
         </shaders>
         <hud>
-            <image>
+             <image>
                 <name>weapon</name>
                 <texture>@car.bmp</texture>
                 <width>1</width>
@@ -117,7 +117,7 @@
             manipulatorClass 
         </script>
         <script>
-            basicManipulator
+            TestManipulator
         </script>
     </scripts>
 </config>

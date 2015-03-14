@@ -7,6 +7,7 @@ using namespace std;
 
 
 int main(int argc, char** argv) {
+    
     Engine *e=(Engine *)Engine::getInstance();
     if(argc>1) {
         cout << "Model view mode\n";

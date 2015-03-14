@@ -24,8 +24,8 @@ PyManipulator::PyManipulator(string file) {
 
 
 
-void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,void* paramD) {
-	Py_BEGIN_ALLOW_THREADS
+void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,void* paramD) {	
+    Py_BEGIN_ALLOW_THREADS
 		PyLocker::getInstance()->lock();
 	string signame="on"+name;
 	bp::object f=bp::extract<bp::object>(instance.attr(signame.c_str()));
@@ -52,12 +52,13 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
 		RoomEntity *r=(RoomEntity *)paramB;
                 Vector3d cvec=*(Vector3d *)paramC;
 		f(boost::ref(*a),boost::ref(*r),boost::ref(cvec));
-	} else if(name=="ObserverStateChange") {
-            ObserverState *s=(ObserverState *)paramA;
-            f(boost::ref(s));
-        } 
-        
-        else {
+	} else if(name=="MouseMove")  {
+            
+            int *a=(int *)paramA;
+            int *b=(int *)paramB;
+            f(*a,*b);
+            
+        } else {
 		f();
 	}
         }catch(const bp::error_already_set& e) {
@@ -65,12 +66,10 @@ void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,vo
              assert(PyErr_Occurred());
              PyErr_Print();
         }
-	//sigcode=iname+".on"+name+"()";
+	
 	PyLocker::getInstance()->unlock();
 	Py_END_ALLOW_THREADS
 
-		//cout << "Signal " << sigcode << endl;
-		//PyRun_SimpleString(sigcode.c_str());
 }
 
 PyManipulator::~PyManipulator() {

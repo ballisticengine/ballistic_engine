@@ -10,6 +10,7 @@ using namespace std;
 
 #include "misc/singleton.hpp"
 #include "renderer/rendererAbstract.hpp"
+#include "io/sdlio.hpp"
 
 /*
  To możnaby potraktować jako fabrykę, przywoływaną zawsze do pobrania danego podsystemu
@@ -26,6 +27,7 @@ protected:
 public: 
     
     RendererAbstract * getRenderer(string name);
+    SdlIO * getIO();
     ~LibLoad();
     
 };

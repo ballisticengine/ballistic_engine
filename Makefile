@@ -1,7 +1,7 @@
 CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lpthread -lboost_thread -lpython2.7 -lboost_python -ldl
 OUTPUT=ballistic 
 
-deps=sdl.o sdlControls.o singleton.o mathTypes.o lightormaterial.o \
+deps=sdl.o singleton.o mathTypes.o lightormaterial.o \
 	sdl2d.o texture.o world.o worldLoad.o skybox.o \
 	   engine.o sprite.o loaderMD2.o texLoader.o \
 	   config.o engineState.o loaderXML.o PreloadStore.o \
@@ -73,7 +73,7 @@ world_defs.o: cpp/python/world_defs.cpp
 
 
 
-main.o: main.cpp sdl.o
+main.o: main.cpp 
 	g++ $(CFLAGS) -c $^ -o $@
 
 image.o: cpp/ui/image.cpp
@@ -158,18 +158,9 @@ types.o: cpp/types/types.cpp
 sdl.o: cpp/io/sdlio.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-sdlControls.o: cpp/io/sdlControls.cpp
-	g++ $(CFLAGS) -c $^ -o $@
-
-
 texture.o: cpp/types/texture.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-
-
-
-
-	
 singleton.o: cpp/misc/singleton.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 	
@@ -204,6 +195,7 @@ timer.o: cpp/time/timerPosix.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 clean:
+	rm ./*.so
 	rm ./*.o 
 	rm ./$(OUTPUT)
 	
