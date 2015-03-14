@@ -8,71 +8,77 @@
 
 PyManipulator::PyManipulator(string file) {
 
-	code=Utils::loadText(file);
-	filename=boost::filesystem::basename(file);
-	PyRun_SimpleString(code);
-	boost::filesystem::path p(filename);
-	classname=p.stem().string();
-	iname=classname+"_instance";
-	string codeinit=iname+"="+classname+"()";
-        cout << "INIT: " << codeinit << endl;
-	PyRun_SimpleString(codeinit.c_str());
-	module = bp::import("__main__");
-	instance=module.attr(iname.c_str());
-	cout << "Loaded python script " << filename << endl;
+    code = Utils::loadText(file);
+    filename = boost::filesystem::basename(file);
+    PyRun_SimpleString(code);
+    boost::filesystem::path p(filename);
+    classname = p.stem().string();
+    iname = classname + "_instance";
+    string codeinit = iname + "=" + classname + "()";
+    cout << "INIT: " << codeinit << endl;
+    PyRun_SimpleString(codeinit.c_str());
+    module = bp::import("__main__");
+    instance = module.attr(iname.c_str());
+    cout << "Loaded python script " << filename << endl;
 }
 
-
-
-void PyManipulator::signal(string name,void *paramA,void *paramB,void* paramC,void* paramD) {	
+void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC, void* paramD) {
     Py_BEGIN_ALLOW_THREADS
-		PyLocker::getInstance()->lock();
-	string signame="on"+name;
-	bp::object f=bp::extract<bp::object>(instance.attr(signame.c_str()));
-	World *w=World::getInstance();
-        HUD *h=HUD::getInstance();
-	try {
-	if(name=="Init") {
+    PyLocker::getInstance()->lock();
+    string signame = "on" + name;
+    bp::object f = bp::extract<bp::object>(instance.attr(signame.c_str()));
+    World *w = World::getInstance();
+    HUD *h = HUD::getInstance();
+    try {
+        if (name == "Init") {
             //static Timer *t=new Timer();
-                f(boost::ref(*w),boost::ref(*h));
-	} else if(name=="EntityCollision") {
-		PhysicalEntity *a,*b;
-		a=(PhysicalEntity *)paramA;
-		b=(PhysicalEntity *)paramB;
-		//vector cvec=*(vector *)paramC;
-                CollsionInfo ci=*(CollsionInfo *)paramC;
-		f(boost::ref(*a),boost::ref(*b),boost::ref(ci));
-	} else if(name=="EntityMovement") {
-		PhysicalEntity *a;
-		a=(PhysicalEntity *)paramA;	
-		f(boost::ref(*a));
-	} else if(name=="LevelCollision") {
-		PhysicalEntity *a;
-		a=(PhysicalEntity *)paramA;	
-		RoomEntity *r=(RoomEntity *)paramB;
-                Vector3d cvec=*(Vector3d *)paramC;
-		f(boost::ref(*a),boost::ref(*r),boost::ref(cvec));
-	} else if(name=="MouseMove")  {
+            f(boost::ref(*w), boost::ref(*h));
+        } else if (name == "EntityCollision") {
+            PhysicalEntity *a, *b;
+            a = (PhysicalEntity *) paramA;
+            b = (PhysicalEntity *) paramB;
+            //vector cvec=*(vector *)paramC;
+            CollsionInfo ci = *(CollsionInfo *) paramC;
+            f(boost::ref(*a), boost::ref(*b), boost::ref(ci));
+        } else if (name == "EntityMovement") {
+            PhysicalEntity *a;
+            a = (PhysicalEntity *) paramA;
+            f(boost::ref(*a));
+        } else if (name == "LevelCollision") {
+            PhysicalEntity *a;
+            a = (PhysicalEntity *) paramA;
+            RoomEntity *r = (RoomEntity *) paramB;
+            Vector3d cvec = *(Vector3d *) paramC;
+            f(boost::ref(*a), boost::ref(*r), boost::ref(cvec));
+        } else if (name == "MouseMove") {
+
+            int *a = (int *) paramA;
+            int *b = (int *) paramB;
+            f(*a, *b);
+
+        } else if (name == "KeyDown") {
+            Uint8 *keyboard_state = (Uint8 *) paramA;
+            bp::list a;
+            for(size_t i=0; i<255; i++) {
+                a.append(keyboard_state[i]);
+            }
             
-            int *a=(int *)paramA;
-            int *b=(int *)paramB;
-            f(*a,*b);
-            
+            f(bp::tuple(a));
         } else {
-		f();
-	}
-        }catch(const bp::error_already_set& e) {
-            cout << "PyError:\n";
-             assert(PyErr_Occurred());
-             PyErr_Print();
+            f();
         }
-	
-	PyLocker::getInstance()->unlock();
-	Py_END_ALLOW_THREADS
+    } catch (const bp::error_already_set& e) {
+        cout << "PyError:\n";
+        assert(PyErr_Occurred());
+        PyErr_Print();
+    }
+
+    PyLocker::getInstance()->unlock();
+    Py_END_ALLOW_THREADS
 
 }
 
 PyManipulator::~PyManipulator() {
-	delete code;
+    delete code;
 }
 

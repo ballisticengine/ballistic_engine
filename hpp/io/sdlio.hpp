@@ -1,6 +1,9 @@
 #ifndef SDLIO_HPP
 #define	SDLIO_HPP
 
+
+#include <vector>
+using namespace std;
 #ifdef __WIN32__
 #include <SDL/SDL.h>
 #else

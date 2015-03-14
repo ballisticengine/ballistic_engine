@@ -9,7 +9,7 @@ shared_ptr<World> getSharedWorldInstance() {
 typedef boost::shared_ptr<World> World_ptr;
 
 BOOST_PYTHON_MODULE(World) {
-
+    
     bp::class_<Vector3d, Vector3d *>("Vector3d")
             .def_readwrite("x", &Vector3d::x)
             .def_readwrite("y", &Vector3d::y)

@@ -94,6 +94,7 @@ size_t SdlIO::anykey(const Uint8 *state, int ksize) {
 
 void SdlIO::inputThread() {
     Uint32 mouse_state;
+    
     int mouse_x, mouse_y, last_x, last_y, delta_x, delta_y;
     SDL_GetMouseState(&last_x, &last_y);
     SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -119,9 +120,11 @@ void SdlIO::inputThread() {
             PyScripting::getInstance()->broadcast("MouseMove",&mouse_x,&mouse_y);
         }
         
+        
+      
         const Uint8 *keyboard_state = SDL_GetKeyboardState(&ksize);
         if(anykey(keyboard_state, ksize)) {
-            
+            PyScripting::getInstance()->broadcast("KeyDown",(void *)keyboard_state);
         }
         mouse_x=mouse_y=delta_x=delta_y=0;
     }

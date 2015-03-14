@@ -1,3 +1,12 @@
+def deg2rad(deg):
+    f=3.141/180
+    rad=deg*f
+    return rad
+
+def rad2deg(rad):
+    deg = 180 * rad / 3.141
+    return deg
+
 class manipulatorClass(object):
 
     score=0
@@ -41,7 +50,7 @@ class manipulatorClass(object):
         pass
 
 
-    def onKeyDown(self,key):
+    def onKeyDown(self,states):
         pass
 
     def onMouseClick(self,button):
