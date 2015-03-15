@@ -50,7 +50,10 @@ class manipulatorClass(object):
         pass
 
 
-    def onKeyDown(self,states):
+    def onKeyDown(self,key):
+        pass
+
+    def onKeyUp(self,key):
         pass
 
     def onMouseClick(self,button):

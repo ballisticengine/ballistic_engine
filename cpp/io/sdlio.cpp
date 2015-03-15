@@ -98,7 +98,10 @@ void SdlIO::inputThread() {
     int mouse_x, mouse_y, last_x, last_y, delta_x, delta_y;
     SDL_GetMouseState(&last_x, &last_y);
     SDL_SetRelativeMouseMode(SDL_TRUE);
-    int ksize = 255;
+    int ksize = 255, last_num_keys=0,num_keys;
+    Uint8 last_keys[ksize+1];
+    memset(last_keys,0,ksize);
+    
     while (!EngineState::getInstance()->exit()) {
         delta_x = delta_y = 0;
         mouse_state=SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
@@ -123,11 +126,27 @@ void SdlIO::inputThread() {
         
       
         const Uint8 *keyboard_state = SDL_GetKeyboardState(&ksize);
-        if(anykey(keyboard_state, ksize)) {
-            PyScripting::getInstance()->broadcast("KeyDown",(void *)keyboard_state);
+        
+        //TODO: przerobić na jeden sygnał
+        for (size_t i = 0; i < ksize; i++) {
+            if (keyboard_state[i]==1) {
+                Uint8 k=keyboard_state[i];
+                PyScripting::getInstance()->broadcast("KeyDown",&i);
+                last_keys[i]=1;
+            } else {
+                
+                if(last_keys[i]==1) {
+                    PyScripting::getInstance()->broadcast("KeyUp",&i);
+                }
+                last_keys[i]=0;
+            }
+           
         }
+        
+       
         mouse_x=mouse_y=delta_x=delta_y=0;
     }
+    
 }
 
 void SdlIO::previewLoop() {

@@ -2,29 +2,31 @@ import math
 
 class TestManipulator(manipulatorClass):
     def onMouseMove(self,deltax, deltay):
-        print "mouse move", deltax, deltay
         self.world.observer.rotate(deltay/2, deltax/2, 0)
 
 
-    def onKeyDown(self,states):
+    def onKeyUp(self,key):
+        self.world.observer.velocity.reset()
+
+    def onKeyDown(self,key):
         self.world.observer.velocity.reset()
         ocoords=self.world.observer.getCoords()
-        step=5
+        step=10
         xdelta=deg2rad(ocoords.rotation.y)
         ydelta=deg2rad(ocoords.rotation.x)
 
-        if states[26]:
-            print 'forward'
+        if key==26:
             self.world.observer.velocity.t.x+=-math.sin(xdelta)*step
             self.world.observer.velocity.t.z+=math.cos(xdelta)*step
 
-        if states[22]:
+        if key==22:
             print "backward"
 
-        if states[4]:
-            print 'left'
+        if key==4:
+            pass
 
-        if states[7]:
+        if key==7:
             print 'right'
 
-         #print "States: ",states[26]
+
+        #print "States: ",states[26]

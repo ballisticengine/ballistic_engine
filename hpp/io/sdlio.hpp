@@ -3,6 +3,7 @@
 
 
 #include <vector>
+#include <cstring>
 using namespace std;
 #ifdef __WIN32__
 #include <SDL/SDL.h>
