@@ -22,6 +22,14 @@ PyManipulator::PyManipulator(string file) {
     cout << "Loaded python script " << filename << endl;
 }
 
+template <typename T> bp::list PyManipulator::arrayToList(T *array) {
+    bp::list a;
+    for (size_t i = 0; i < 255; i++) {
+        a.append(array[i]);
+    }
+    return a;
+}
+
 void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC, void* paramD) {
     Py_BEGIN_ALLOW_THREADS
     PyLocker::getInstance()->lock();
@@ -56,17 +64,10 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             int *b = (int *) paramB;
             f(*a, *b);
 
-        } else if (name == "KeyDown") {
-            Uint8 *a = (Uint8*) paramA;
-//            bp::list a;
-//            for(size_t i=0; i<255; i++) {
-//                a.append(keyboard_state[i]);
-//            }
-            
-            f(*a);
-        } else if(name=="KeyUp") {
-            Uint8 *a = (Uint8*) paramA;
-            f(*a);
+        } else if (name == "KeyDown" || name == "KeyUp" ) {
+            Uint8 **keyboard_state = (Uint8**) paramA;
+            bp::list a=PyManipulator::arrayToList(*keyboard_state);
+            f(a);
         } else {
             f();
         }

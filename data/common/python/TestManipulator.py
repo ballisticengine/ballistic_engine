@@ -1,32 +1,33 @@
 import math
+from World import Coords
 
 class TestManipulator(manipulatorClass):
-    def onMouseMove(self,deltax, deltay):
-        self.world.observer.rotate(deltay/2, deltax/2, 0)
+    def onMouseMove(self, deltax, deltay):
+        self.world.observer.rotate(deltay, deltax, 0)
 
 
-    def onKeyUp(self,key):
+    def onKeyUp(self, states):
         self.world.observer.velocity.reset()
 
-    def onKeyDown(self,key):
-        self.world.observer.velocity.reset()
-        ocoords=self.world.observer.getCoords()
+    def onKeyDown(self, states):
+        ocoords = self.world.observer.getCoords()
         step=10
-        xdelta=deg2rad(ocoords.rotation.y)
-        ydelta=deg2rad(ocoords.rotation.x)
+        xdelta = deg2rad(ocoords.rotation.y)
+        #ydelta = deg2rad(ocoords.rotation.x)
 
-        if key==26:
-            self.world.observer.velocity.t.x+=-math.sin(xdelta)*step
-            self.world.observer.velocity.t.z+=math.cos(xdelta)*step
+        velocity=Coords()
 
-        if key==22:
-            print "backward"
+        if states[26]:
+            velocity.t.x += -math.sin(xdelta)*step
+            velocity.t.z += math.cos(xdelta)*step
+        if states[22]:
+            velocity.t.x +=math.sin(xdelta)*step
+            velocity.t.z +=-math.cos(xdelta)*step
+        if states[4]:
+            velocity.t.x+=math.cos(xdelta)*step
+            velocity.t.z+=math.sin(xdelta)*step
+        if states[7]:
+            velocity.t.x+=-math.cos(xdelta)*step
+            velocity.t.z+=-math.sin(xdelta)*step
 
-        if key==4:
-            pass
-
-        if key==7:
-            print 'right'
-
-
-        #print "States: ",states[26]
+        self.world.observer.velocity=velocity

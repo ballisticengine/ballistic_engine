@@ -54,7 +54,7 @@ void SdlIO::flush() {
 void SdlIO::toggleFullscreen() {
     bool fullscreen = EngineState::getInstance()->fullscreen;
     if (!fullscreen) {
-        
+
         if (EngineState::getInstance()->desktop_fs) {
 
             SDL_SetWindowFullscreen(window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN);
@@ -62,11 +62,11 @@ void SdlIO::toggleFullscreen() {
             SDL_GetWindowSize(SdlIO::window, &w, &h);
             Config::getInstance()->getVD()->width = w;
             Config::getInstance()->getVD()->height = h;
-            
+
         } else {
-            
+
             SDL_SetWindowFullscreen(window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
-            
+
         }
 
     } else {
@@ -81,7 +81,6 @@ void SdlIO::toggleFullscreen() {
     EngineState::getInstance()->fullscreen = !fullscreen;
 }
 
-
 size_t SdlIO::anykey(const Uint8 *state, int ksize) {
     size_t ret = 0;
     for (size_t i = 0; i < ksize; i++) {
@@ -94,23 +93,23 @@ size_t SdlIO::anykey(const Uint8 *state, int ksize) {
 
 void SdlIO::inputThread() {
     Uint32 mouse_state;
-    
+
     int mouse_x, mouse_y, last_x, last_y, delta_x, delta_y;
     SDL_GetMouseState(&last_x, &last_y);
     SDL_SetRelativeMouseMode(SDL_TRUE);
-    int ksize = 255, last_num_keys=0,num_keys;
-    Uint8 last_keys[ksize+1];
-    memset(last_keys,0,ksize);
-    
+    int ksize = 255, last_num_keys = 0, num_keys;
+    Uint8 last_keys[ksize + 1];
+    memset(last_keys, 0, ksize);
+
     while (!EngineState::getInstance()->exit()) {
         delta_x = delta_y = 0;
-        mouse_state=SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
+        mouse_state = SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
 
         if (mouse_x) {
-            
+
             delta_x = mouse_x + last_x;
             last_x = mouse_x;
-            
+
         }
 
         if (mouse_y) {
@@ -120,33 +119,35 @@ void SdlIO::inputThread() {
         }
 
         if (delta_x != 0 || delta_y != 0) {
-            PyScripting::getInstance()->broadcast("MouseMove",&mouse_x,&mouse_y);
+            PyScripting::getInstance()->broadcast("MouseMove", &mouse_x, &mouse_y);
         }
-        
-        
-      
+
         const Uint8 *keyboard_state = SDL_GetKeyboardState(&ksize);
+        int down_count=0,up_count=0;
         
-        //TODO: przerobić na jeden sygnał
         for (size_t i = 0; i < ksize; i++) {
             if (keyboard_state[i]==1) {
-                Uint8 k=keyboard_state[i];
-                PyScripting::getInstance()->broadcast("KeyDown",&i);
-                last_keys[i]=1;
-            } else {
+                down_count++;
                 
+            } else {
                 if(last_keys[i]==1) {
-                    PyScripting::getInstance()->broadcast("KeyUp",&i);
+                    up_count++;
                 }
-                last_keys[i]=0;
             }
-           
+            last_keys[i]=keyboard_state[i];
         }
         
-       
-        mouse_x=mouse_y=delta_x=delta_y=0;
+        if (down_count) {
+            PyScripting::getInstance()->broadcast("KeyDown", &keyboard_state);
+        }
+        
+        if(up_count) {
+            PyScripting::getInstance()->broadcast("KeyUp", &keyboard_state);
+        }
+        
+        mouse_x = mouse_y = delta_x = delta_y = 0;
     }
-    
+
 }
 
 void SdlIO::previewLoop() {
@@ -197,7 +198,7 @@ void SdlIO::eventLoop() {
 
     SDL_Event event;
     float rot = 0, tr = 0;
-    
+
 
 
     Coords vel;
@@ -234,11 +235,11 @@ void SdlIO::eventLoop() {
                         break;
 
                     case SDLK_w:
-                        
+
                         break;
 
                     case SDLK_s:
-                        
+
                         break;
 
                     case SDLK_ESCAPE:
@@ -258,7 +259,7 @@ void SdlIO::eventLoop() {
                         break;
 
                     case SDLK_RIGHTBRACKET:
-                        
+
 
                         break;
                 }

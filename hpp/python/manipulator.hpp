@@ -32,6 +32,7 @@ protected:
 	char *code;
 	string filename,classname,iname;
 	bp::object module,instance;
+        template <typename T> static bp::list arrayToList(T *array);
 public:
   PyManipulator(string file);
   void signal(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);
