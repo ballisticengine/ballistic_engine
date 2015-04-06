@@ -20,7 +20,6 @@ using namespace std;
 #include "entities/observerEntity.hpp"
 #include "config/path.hpp"
 #include "io/ttf.hpp"
-#include "renderer/GL/GLPreview.hpp"
 #include "python/scripting.hpp"
 
 class SdlIO : public Singleton<SdlIO> {
@@ -41,7 +40,6 @@ public:
     RendererAbstract *getRenderer();
     static void initWindow(SdlIO *me);
     void eventLoop();
-    void previewLoop();
     void inputThread();
     SdlIO();
     ~SdlIO();

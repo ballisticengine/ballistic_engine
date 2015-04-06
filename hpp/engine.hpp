@@ -24,7 +24,6 @@ using namespace std;
 #include "misc/singleton.hpp"
 #include "world/World.hpp"
 #include "renderer/GL/RendererGL.hpp"
-#include "renderer/GL/GLPreview.hpp"
 #include "io/sdlio.hpp"
 #include "config/Config.hpp"
 #include "factories/shapeFactory.hpp"
@@ -43,7 +42,6 @@ class Engine : public Singleton<Engine> {
 public:
     void pythonInit();
     void prepare();
-    void preview(string model);
     void start();
     ~Engine();
 };

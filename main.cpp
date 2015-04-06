@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     Engine *e=(Engine *)Engine::getInstance();
     if(argc>1) {
         cout << "Model view mode\n";
-        e->preview(string(argv[1]));
+        //e->preview(string(argv[1]));
     } else {
     
     e->prepare();

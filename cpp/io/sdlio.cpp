@@ -150,50 +150,6 @@ void SdlIO::inputThread() {
 
 }
 
-void SdlIO::previewLoop() {
-    SDL_Event event;
-    GLPreview *p;
-    while (!EngineState::getInstance()->exit()) {
-        while (SDL_PollEvent(& event)) {
-
-            if (event.type == SDL_QUIT) {
-                EngineState::getInstance()->setExit(true);
-            }
-
-            if (event.type == SDL_KEYDOWN) {
-                p = (GLPreview *) r;
-                switch (event.key.keysym.sym) {
-                    case SDLK_s:
-                        p->c.translation.z--;
-                        break;
-
-                    case SDLK_w:
-                        p->c.translation.z++;
-                        break;
-
-                    case SDLK_LEFT:
-                        p->c.rotation.y--;
-                        break;
-
-                    case SDLK_RIGHT:
-                        p->c.rotation.y++;
-                        break;
-
-                    case SDLK_UP:
-                        p->c.rotation.z--;
-                        break;
-
-                    case SDLK_DOWN:
-                        p->c.rotation.z++;
-                        break;
-                }
-
-            }
-        }
-        r->render();
-    }
-}
-
 void SdlIO::eventLoop() {
 
     SDL_Event event;

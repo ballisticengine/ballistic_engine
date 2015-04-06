@@ -5,39 +5,13 @@ void Engine::pythonInit() {
 
 }
 
-void Engine::preview(string model) {
-//    cout << "Model: " << model << endl;
-//    cout << "Preparing..." << endl;
-//
-//    cout << "Config init..." << endl;
-//    Config::getInstance();
-//    
-//    GLPreview *pr = new GLPreview();
-//
-//    cout << "IO\n";
-//
-//
-//    io = new SdlIO();
-//    return;
-//    io->initWindow(io);
-//    io->setRenderer(pr);
-////    cout << "Renderer init\n";
-//    //shapeFactory::getInstance()->setWD(".");
-//    Shape *s=(Shape *)ShapeFactory::getInstance()->get(model);
-//    pr->setModel(s);
-//    pr->previewInit();
-//    pr->setFlush(SdlIO::flush);
-//    io->previewLoop();
-//    
-}
-
 void Engine::prepare() {
     cout << "Preparing..." << endl;
  
     cout << "Config init..." << endl;
     Config::getInstance();
    
-    cout << "Get World\n";
+    cout << "Loading world...\n";
     World *w = (World *) World::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
             start_lvl = start_lvl_dir + DS + Config::getInstance()->getStart();
@@ -45,8 +19,6 @@ void Engine::prepare() {
     w->parseXml(Config::getInstance()->getStart());
 
     VideoData vd = *Config::getInstance()->getVD();
-
-    cout << "renderer is: " << Config::getInstance()->getRenderer() << endl;
 
     r = LibLoad::getInstance()->getRenderer(Config::getInstance()->getRenderer());//RendererGL::getInstance();
     
@@ -77,10 +49,7 @@ Engine::~Engine() {
 
 void Engine::start() {
    
-   
-    
     boost::thread(boost::bind(&SdlIO::inputThread, SdlIO::getInstance()));
     io->eventLoop();
-   
 
 }
