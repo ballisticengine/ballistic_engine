@@ -1,6 +1,5 @@
 #include "renderer/GL/RendererGL.hpp"
 #include "types/types.hpp"
-//#pragma comment(lib, "glu32.lib") 
 
 void RendererGL::renderVertex(v_type *v, n_type *normal, UV *uvs) {
     if (normal) {
@@ -34,27 +33,6 @@ void RendererGL::setAmbientLight(ColorRGB *c) {
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 }
 
-void RendererGL::renderTerrainSpecific() {
-    /*TerrainMap *tm=w->getTerrain();
-    shape *s=tm->getQuads();
-    vert_list verts;
-
-    this->assignTexture(w->getTerrain()->getTexture());
-    glBegin(GL_QUADS);
-    for(int i=0; i<tm->getQuadCount(); i++) {
-
-            verts=s[i].getVertices();
-
-            for(int v=0; v<verts.size(); v++) {
-                    glVertex3f(verts[v]->x,verts[v]->y,verts[v]->z);
-            }
-
-    }
-    glEnd();
-    glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-     */
-}
-
 void RendererGL::lightSpecific(Light *l) {
 
     if (light_counter > 7) {
@@ -62,22 +40,15 @@ void RendererGL::lightSpecific(Light *l) {
         return;
     }
 
-
-
     Coords lc = l->getCoords();
     this->reset();
 
     this->positionCamera();
 
-    //glRotatef(-90,1,0,0);
-
-
     this->translate(lc.translation.x, lc.translation.y, lc.translation.z);
 
-    //glRotatef(-90,1,0,0);
     GLfloat position[] = {0, 0, 0, 1.0f};
 
-    //glDisable(GL_LIGHTING);
     if (EngineState::getInstance()->debug_visual) {
         glDisable(GL_LIGHTING);
         glBindTexture(GL_TEXTURE_2D, 0);
@@ -86,8 +57,6 @@ void RendererGL::lightSpecific(Light *l) {
         glEnable(GL_LIGHTING);
         glColor3f(1, 1, 1);
     }
-
-
 
     glEnable(light_numbers[light_counter]);
     GLfloat ambientLight[] = {0, 0, 0, 1.0f}; //??
@@ -103,13 +72,12 @@ void RendererGL::lightSpecific(Light *l) {
     glLightfv(light_numbers[light_counter], GL_SPECULAR, intensity);
 
     glLightfv(light_numbers[light_counter], GL_POSITION, position);
-//glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shin);
+    //glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shin);
     GLfloat ambient[] = {1.0f, 0.0f, 0.0f};
     //glLightf(light_numbers[light_counter], GL_CONSTANT_ATTENUATION, 2);
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
     //this->setAmbientLight(&w->getActiveRoom()->ambient_light);
     light_counter++;
-
 }
 
 RendererGL::RendererGL() {
@@ -128,7 +96,6 @@ RendererGL::RendererGL() {
 void RendererGL::renderSprite(Sprite *sprite) {
     this->assignTexture(sprite->tex);
 
-    //glPushMatrix();
     Coords c = this->w->getObserver()->getCamera()->getCoords();
     float mat[16];
 
@@ -154,14 +121,13 @@ void RendererGL::renderSprite(Sprite *sprite) {
     //    glEnd();
 
     renderShape2d(sprite->shape);
-    //glPopMatrix();
 }
 
 void RendererGL::renderShape2d(Shape2d *shape) {
     glBegin(GL_QUADS);
     for (size_t i = 0; i < 4; i++) {
         glTexCoord2d(shape->uvs[i].u, shape->uvs[i].v);
-        glNormal3d(shape->normals[i].x,shape->normals[i].y,shape->normals[i].z);
+        glNormal3d(shape->normals[i].x, shape->normals[i].y, shape->normals[i].z);
         glVertex3d(shape->vertices[i].x, shape->vertices[i].y, shape->vertices[i].z);
 
     }
@@ -169,26 +135,25 @@ void RendererGL::renderShape2d(Shape2d *shape) {
 }
 
 void RendererGL::lightOff() {
-  glUniform1i(use_light_glsl,0);  
+    glUniform1i(use_light_glsl, 0);
 }
 
 void RendererGL::lightOn() {
-    glUniform1i(use_light_glsl,1);
+    glUniform1i(use_light_glsl, 1);
 }
-
 
 void RendererGL::drawWeapon(Weapon *weapon) {
 
     this->reset();
-    
+
     glTranslated(weapon->model->c.translation.x,
-            weapon->model->c.translation.y, 
+            weapon->model->c.translation.y,
             weapon->model->c.translation.z);
     glRotated(weapon->model->c.rotation.x, 1, 0, 0);
     glRotated(weapon->model->c.rotation.y, 0, 1, 0);
     glRotated(weapon->model->c.rotation.z, 0, 0, 1);
-    glScaled(weapon->model->scale, 
-            weapon->model->scale, 
+    glScaled(weapon->model->scale,
+            weapon->model->scale,
             weapon->model->scale);
     this->renderFaceTexShape(weapon->model->model);
 }
@@ -204,73 +169,54 @@ void RendererGL::drawHud() {
         glTranslated(images[i]->x, images[i]->y, 0);
         drawHudImage(images[i]);
     }
-    
-         this->lightOn();
-    
+
+    this->lightOn();
+
     glEnable(GL_DEPTH_TEST);
 
 }
 
 void RendererGL::renderDecal(Sprite *decal) {
-     this->reset();
+    this->reset();
     this->positionCamera();
-    Coords c=decal->getCoords();
-    this->locate(c.translation.x,c.translation.y,c.translation.z);
-    this->face(c.rotation.x,c.rotation.y,c.rotation.z);
+    Coords c = decal->getCoords();
+    this->translate(c.translation.x, c.translation.y, c.translation.z);
+    this->face(c.rotation.x, c.rotation.y, c.rotation.z);
     this->assignTexture(decal->tex);
     this->renderShape2d(decal->shape);
-    
+
 }
 
-
 void RendererGL::drawHudImage(UiImage *img) {
-    
-    if(img->update) {
-        img->update=false;
+
+    if (img->update) {
+        img->update = false;
         this->setupTexture(img->tex);
-    }   
+    }
 
     this->assignTexture(img->tex);
 
     this->renderShape2d(img->shape);
 }
 
-void  RendererGL::previewRender() {
-   
-}
-
 void RendererGL::render() {
 
-    glClearColor(1,0,0,1);
+    glClearColor(1, 0, 0, 1);
     glClear(GL_DEPTH_BUFFER_BIT);
     light_counter = 0;
     glMatrixMode(GL_MODELVIEW);
-
-
     renderSkybox(w->sky);
     //glFrontFace(GL_CW);
-
     this->positionLights();
     this->reset();
-
     this->positionCamera();
-
     this->reset();
-
     this->positionCamera();
-
-
-
     this->renderAllRooms();
-
-   
     this->renderAllDecals();
-    
     this->reset();
     this->positionCamera();
-
-    this->renderAllEntities(); 
-    
+    this->renderAllEntities();
     if (state->debug_visual) {
         this->drawBoundingBox(w->observer.getBoundingBox());
     }
@@ -281,33 +227,27 @@ void RendererGL::render() {
 }
 
 void RendererGL::renderFaceTexShape(Shape *s) {
-    
+
     size_t ** polys = (size_t **) s->faces;
     size_t uvc = 0;
-    int dir=*((int *)s->renderer_hint),int_prev_dir;
-    glGetIntegerv(GL_FRONT_FACE,&int_prev_dir);
+    int dir = *((int *) s->renderer_hint), int_prev_dir;
+    glGetIntegerv(GL_FRONT_FACE, &int_prev_dir);
     glFrontFace(dir);
     for (size_t i = 0; i < s->f_count; i++) {
-        //texPoly *t=(texPoly *)polys[i];
 
-        if(s->materials && s->materials[i]) {
+        if (s->materials && s->materials[i]) {
             this->assignMaterial(s->materials[i]);
         }
-        
+
         if (s->textures && s->textures[i]) {
             this->assignTexture(s->textures[i]);
 
         }
 
-//        if(t->getMaterial()) {
-//        	this->assignMaterial(t->getMaterial());	
-//        }
-
-        //int count=s->getPolyCount();
         this->beginHinted(s);
         for (size_t n = 0; n < s->v_per_poly; n++) {
-            glNormal3d(s->faces[i].normals[n].x,s->faces[i].normals[n].y,s->faces[i].normals[n].z);
-           glTexCoord2d( s->faces[i].uvs[n].u, s->faces[i].uvs[n].v);
+            glNormal3d(s->faces[i].normals[n].x, s->faces[i].normals[n].y, s->faces[i].normals[n].z);
+            glTexCoord2d(s->faces[i].uvs[n].u, s->faces[i].uvs[n].v);
             glVertex3d(s->vertices[s->faces[i].index[n]].x,
                     s->vertices[s->faces[i].index[n]].y,
                     s->vertices[s->faces[i].index[n]].z);
@@ -319,26 +259,25 @@ void RendererGL::renderFaceTexShape(Shape *s) {
     glFrontFace(int_prev_dir);
 }
 
-
- void  RendererGL::setVideoMode() {
-     glViewport(0, 0, Config::getInstance()->getVD()->width, Config::getInstance()->getVD()->height);
-      glMatrixMode(GL_PROJECTION);
+void RendererGL::setVideoMode() {
+    glViewport(0, 0, Config::getInstance()->getVD()->width, Config::getInstance()->getVD()->height);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-     gluPerspective(90, 1, 1, 5000);
- }
+    gluPerspective(90, 1, 1, 5000);
+}
 
 void RendererGL::specificInit() {
-    
+
     glewInit();
     if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
         cout << "Shaders in place\n";
     }
 
     this->setVideoMode();
-    
-   
+
+
     //glFrustum(-frustum_x, frustum_x, -frustum_y, frustum_y, frustum_start, frustum_end);
-   
+
     glCullFace(GL_FRONT);
     glFrontFace(GL_CW);
     glEnable(GL_CULL_FACE);
@@ -348,10 +287,10 @@ void RendererGL::specificInit() {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
-glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //glBlendFunc(GL_ONE,GL_S_ALPHA);
-    
-glEnable(GL_BLEND);
+
+    glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     //glEnable( GL_LIGHTING );
     //glEnable(GL_LIGHT0);
@@ -365,7 +304,7 @@ glEnable(GL_BLEND);
     gluQuadricTexture(bounding_box_q, GL_TRUE);
     // hud->addImage("@car.bmp","test",1,1,1,1);
 
-   
+
     ptree & shaders = Config::getInstance()->getNode("config.screen.shaders");
 
     BOOST_FOREACH(const ptree::value_type &shad, shaders) {
@@ -433,13 +372,13 @@ void RendererGL::addShader(string name) {
     }
     glUseProgram(p);
     texloc = glGetUniformLocation(p, "tex");
-    use_light_glsl=glGetUniformLocation(p,"use_light");
-    glsl_bounding=glGetUniformLocation(p,"bounding");
-    light_set=1;
-    glUniform1i(use_light_glsl,light_set);
-    glUniform1i(glsl_bounding,0);
-    glUniform1i(glGetUniformLocation(p, "light_count"),7); //!!
-   
+    use_light_glsl = glGetUniformLocation(p, "use_light");
+    glsl_bounding = glGetUniformLocation(p, "bounding");
+    light_set = 1;
+    glUniform1i(use_light_glsl, light_set);
+    glUniform1i(glsl_bounding, 0);
+    glUniform1i(glGetUniformLocation(p, "light_count"), 7); //!!
+
 
     shaders.push_back(p);
 
@@ -478,7 +417,7 @@ void RendererGL::renderSkybox(Skybox *sky) {
 }
 
 void RendererGL::assignTexture(Texture *t) {
-    
+
     GLuint tex_id;
     tex_id = this->textures_ids[t];
     glActiveTexture(GL_TEXTURE0);
@@ -505,80 +444,72 @@ void RendererGL::assignMaterial(Material *m) {
 
 }
 
-void RendererGL::setupTexture(Texture *t,char *pixels) {
+void RendererGL::setupTexture(Texture *t, char *pixels) {
 
-   
+
     cout << "Setting up " << t->getFilename() << endl;
     GLuint tex_id;
     GLint tf;
-    textureFormat tformat=t->getFormat();
-    
-    switch(tformat) {
+    textureFormat tformat = t->getFormat();
+
+    switch (tformat) {
         case TF_BGR:
-            tf=GL_BGR_EXT;
+            tf = GL_BGR_EXT;
             break;
-            
+
         case TF_RGB:
-            tf=GL_RGB;
+            tf = GL_RGB;
             break;
-            
+
         case TF_RGBA:
-            tf=GL_RGBA;
+            tf = GL_RGBA;
             break;
-            
+
         default:
-            tf=GL_RGB;
+            tf = GL_RGB;
             break;
-        
+
     }
-   
+
     glGenTextures(1, &tex_id);
     this->textures_ids[t] = tex_id;
     glBindTexture(GL_TEXTURE_2D, tex_id);
     //glTexStorage2D(GL_TEXTURE_2D, 8, tf, t->getWidth(), t->getHeight());
-    glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
             GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
             GL_LINEAR_MIPMAP_LINEAR);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-//glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
-    
-    if(pixels) {
+    //glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
+
+    if (pixels) {
         glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) pixels);
     } else {
         glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
     }
     glGenerateMipmap(GL_TEXTURE_2D);
-    
+
 }
 
-void RendererGL::translateSpecific(e_loc x, e_loc y, e_loc z) {
+void RendererGL::translate(e_loc x, e_loc y, e_loc z) {
     glTranslated(x, y, z);
 }
 
-void RendererGL::rotateSpecific(e_loc x, e_loc y, e_loc z, e_loc d) {
+void RendererGL::rotate(e_loc x, e_loc y, e_loc z, e_loc d) {
     glRotatef(d, x, y, z);
 }
 
-void RendererGL::resetSpecific() {
+void RendererGL::reset() {
     glLoadIdentity();
     glTranslatef(0, 0, -frustum_start);
-    
-}
-
-void RendererGL::positionCameraSpecific() {
-//    glRotatef(this->w->roomrot_x,1,0,0);
-//    glRotatef(this->w->roomrot_y,0,1,0);
-//    glRotatef(this->w->roomrot_z,0,0,1);
 }
 
 void RendererGL::drawBoundingBox(BoundingCube *bound) {
-    //drawBox(bound->getWidth(),bound->getHeight(),bound->getDepth());
-    glUniform1i(glsl_bounding,1);  
+    glUniform1i(glsl_bounding, 1);
     this->reset();
     this->positionCamera();
     this->lightOff();
@@ -631,18 +562,29 @@ void RendererGL::drawBoundingBox(BoundingCube *bound) {
     glEnable(GL_CULL_FACE);
     glColor3f(1, 1, 1);
     this->lightOn();
-    glUniform1i(glsl_bounding,0);  
+    glUniform1i(glsl_bounding, 0);
 }
 
 void RendererGL::drawBox(e_loc width, e_loc height, e_loc depth) {
     e_loc xx = width / 2, yy = height / 2, zz = depth / 2;
+}
 
+void RendererGL::renderPShape(Shape *s) {
 
+    this->begin();
+    for (size_t i = 0; i < s->v_count; i++) {
+        this->renderVertex(&s->vertices[i], 0, &s->uvs[i]);
+    }
+    this->end();
+}
 
+void RendererGL::renderShape(Shape *s) {
 
 }
+
 extern "C" {
-void * returnRenderer() {
-    return (RendererAbstract *)RendererGL::getInstance();
-}
+
+    void * returnRenderer() {
+        return (RendererAbstract *) RendererGL::getInstance();
+    }
 }

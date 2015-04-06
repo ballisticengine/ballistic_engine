@@ -42,8 +42,6 @@ struct GLHint {
     vector <GLuint> face_chunks;
     vector<size_t> chunk_sizes;
     vector<Texture *> texture_chunks;
-
-
 };
 
 struct Geom {
@@ -62,7 +60,6 @@ protected:
     int light_counter;
     char * loadText(string fn);
     shader_list shaders;
-    
     void addShader(string name);
     map<Texture *, GLuint> textures_ids;
     virtual void renderVertex(v_type *v, n_type *normal, UV *uvs);
@@ -70,7 +67,6 @@ protected:
     Shape *test;
     GLUquadricObj *lightbulb, *bounding_box_q;
     GLhandleARB light_shader_v, light_shader_f;
-    
     GLint texloc,use_light_glsl,light_set,glsl_bounding;
     virtual void specificInit();
     virtual void renderSkybox(Skybox *sky);
@@ -82,33 +78,32 @@ protected:
     virtual void end();
     virtual void renderShape2d(Shape2d *shape);
     virtual void beginHinted(Shape *s);
-    virtual void translateSpecific(e_loc x, e_loc y, e_loc z);
+    virtual void translate(e_loc x, e_loc y, e_loc z);
     virtual void lightSpecific(Light *l);
     virtual void lightOff();
     virtual void lightOn();
-    virtual void positionCameraSpecific();
-    virtual void rotateSpecific(e_loc x, e_loc y, e_loc z, e_loc d);
+    virtual void rotate(e_loc x, e_loc y, e_loc z, e_loc d);
     virtual void setAmbientLight(ColorRGB *c);
     virtual void drawBoundingBox(BoundingCube *bound);
     virtual void drawHud();
     virtual void drawHudImage(UiImage *img);
-    virtual void resetSpecific();
+    virtual void reset();
     virtual void drawWeapon(Weapon *weapon);
     virtual void drawBox(e_loc width, e_loc height, e_loc depth);
     virtual void renderDecal(Sprite *decal);
-    virtual void renderTerrainSpecific();
-    //virtual void renderFaceTexShape(faceTexShape *s);
+    void renderPShape(Shape *s);
+    void renderShape(Shape *s);
     void setUpVbos();
     void setUpVbo(Shape *s);
-     void renderFaceTexShape(Shape *s);
+    void renderFaceTexShape(Shape *s);
     void renderFaceTexShapex(Shape *s);
 public:
     RendererGL();
      virtual void setVideoMode();
     virtual void setupTexture(Texture *t,char *pixels=0);
     virtual void render();
-    virtual void previewRender();
 };
+
 }
 #endif	/* RendererGL_HPP */
 

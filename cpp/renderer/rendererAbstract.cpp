@@ -22,15 +22,9 @@ void RendererAbstract::setupTextures() {
     TextureFactory *tf = TextureFactory::getInstance();
     vector<void *> ts = tf->getAll();
     size_t ts_size = ts.size();
-    for (size_t i = 0; i < ts_size; i++) {
-        
+    for (size_t i = 0; i < ts_size; i++) { 
         this->setupTexture((Texture *) ts[i]);
     }
-    
-//    preload_map preload_shapes=w->getAllShapePreloads();
-//    for(preload_map::iterator i=preload_shapes.begin(); i!=preload_shapes.end(); i++) {
-//        i->second->
-//    }
 }
 
 void RendererAbstract::renderAllDecals() {
@@ -41,19 +35,7 @@ void RendererAbstract::renderAllDecals() {
     }
 }
 
-void RendererAbstract::previewInit() {
-     Config *c = Config::getInstance();
-    frustum_start = c->getVD()->frustum_start;
-    frustum_end = c->getVD()->frustum_end;
-    frustum_x = c->getVD()->frustum_x;
-    frustum_y = c->getVD()->frustum_y;
-    this->vd = vd;
-    this->specificInit();
-    this->setupTextures();
-}
-
 void RendererAbstract::init() {
-
     Config *c = Config::getInstance();
     frustum_start = c->getVD()->frustum_start;
     frustum_end = c->getVD()->frustum_end;
@@ -62,54 +44,27 @@ void RendererAbstract::init() {
     this->vd = vd;
     this->w = (World *) World::getInstance();
     Skybox *sky = this->w->sky;
-
     sky->makeShape(frustum_x, frustum_y);
-
-    gx = 0;
-    gy = 0;
-    gz = 0;
-    gr = 0;
     this->hud = HUD::getInstance();
-    
     this->specificInit();
     cout << "Setting up textueres...\n";
     this->setupTextures();
-
-}
-
-void RendererAbstract::translate(e_loc x, e_loc y, e_loc z) {
-    cursor.translation.x += x;
-    cursor.translation.y += y;
-    cursor.translation.z += z;
-    this->translateSpecific(x, y, z);
 }
 
 void RendererAbstract::translate(Coords c) {
     this->translate(c.translation.x, c.translation.y, c.translation.z);
 }
 
-void RendererAbstract::rotate(e_loc x, e_loc y, e_loc z, e_loc d) {
-    cursor.rotation.x += x*d;
-    cursor.rotation.y += y*d;
-    cursor.rotation.z += z*d;
-    this->rotateSpecific(x, y, z, d);
-}
-
-void RendererAbstract::renderAllEntities() { //to sie nie nadaje do poziom�w bo transformuje
+void RendererAbstract::renderAllEntities() { 
     obj_list ents = w->active_room->models;
-    //cout << ents.size() << endl;
     size_t ents_size = ents.size();
     for (size_t i = 0; i < ents_size; i++) {
-        //cout << ents[i]->name << ", " << ents[i]->type << endl;	
         Coords c = ents[i]->getCoords();
         this->reset();
         this->positionCamera();
-        this->locate(c.translation.x, c.translation.y, c.translation.z);
-        this->face(c.rotation.x, c.rotation.y, c.rotation.z);
-
-        
+        this->translate(c.translation.x, c.translation.y, c.translation.z);
+        this->face(c.rotation.x, c.rotation.y, c.rotation.z); 
         size_t b=0;
-        
         this->renderFaceTexShape(ents[i]->getModel());
         if (state->debug_visual) {
             for(b=0; b<ents[i]->boundings.size(); b++) {
@@ -117,7 +72,6 @@ void RendererAbstract::renderAllEntities() { //to sie nie nadaje do poziom�w b
             }
             b=0;
         }
-
     }
 }
 
@@ -125,11 +79,10 @@ void RendererAbstract::renderAllRooms() {
     rooms_list rooms = w->rooms;
     size_t rooms_size = rooms.size();
     for (size_t i = 0; i < rooms_size; i++) {
-        //cout << w->rooms[i]->name << "," <<  w->rooms[i]->type << endl;
         Coords rc=rooms[i]->getCoords();
         this->reset();
         this->positionCamera();
-        this->locate(rc.translation.x,rc.translation.y,rc.translation.z);
+        this->translate(rc.translation.x,rc.translation.y,rc.translation.z);
         this->face(rc.rotation.x,rc.rotation.y,rc.rotation.z);
         this->renderFaceTexShape((Shape *) rooms[i]->getModel());
         if (state->debug_visual) {
@@ -141,95 +94,31 @@ void RendererAbstract::renderAllRooms() {
     }
 }
 
-
-
 void RendererAbstract::setFlush(flushf flush_callback) {
     this->flush_callback = flush_callback;
-}
-
-void RendererAbstract::renderPShape(Shape *s) {
-
-    this->begin();
-    for (size_t i = 0; i < s->v_count; i++) {
-        this->renderVertex(&s->vertices[i], 0, &s->uvs[i]);
-    }
-    this->end();
-}
-
-void RendererAbstract::renderShape(Shape *s) {
-    //poly_list tris;
-    //tris = s->getPolys();
-//    this->begin();
-//    for (size_t i = 0; i < s->f_count; i++) {
-//
-//        for (size_t n = 0; n < 3; n++) {
-//            this->renderVertex(&s->vertices[s->faces[i][n]], &s->normals[s->faces[i][n]], &s->uvs[i]);
-//        }
-//    }
-//    this->end();
 }
 
 void RendererAbstract::operator()() {
     this->init();
     while (true) {
         this->render();
-
     }
 }
 
-void RendererAbstract::locate(e_loc x, e_loc y, e_loc z) {
-    //this->face(-cursor.rx,-cursor.ry,-cursor.rz);
-    /*cout << cursor.x << ", " << cursor.y << ", " << cursor.rx << ", " << cursor.ry << ", " << cursor.rz << endl;
-    x-=cursor.x;
-    y-=cursor.y;
-    z-=cursor.z;
-     */
-    this->translate(x, y, z);
-}
-
-void RendererAbstract::face(e_loc x, e_loc y, e_loc z) { //tu �le, bo powinien mno�y�, wywali� rotateSpecific(x,y,z) zostawi� to z x,y,z,d
-    /*static int i=0;
-    x-=cursor.rx;
-    y-=cursor.ry;
-    z-=cursor.rz;
-    //cout << i++ << ": " <<cursor.rx << ", " << x << endl;*/
+void RendererAbstract::face(e_loc x, e_loc y, e_loc z) { 
     this->rotate(1, 0, 0, x);
     this->rotate(0, 1, 0, y);
     this->rotate(0, 0, 1, z);
-
-
-}
-
-void RendererAbstract::reset() {
-    this->resetSpecific();
-    cursor.translation.x = 0;
-    cursor.translation.y = 0;
-    cursor.translation.z = 0; //co� nie dzia�a z frustum_start zmienionym
-    cursor.rotation.x = 0;
-    cursor.rotation.y = 0;
-    cursor.rotation.z = 0;
-    
 }
 
 void RendererAbstract::setCamera(Camera *c) { //to przenie�� do World
     this->active_Camera = c;
 }
 
-void RendererAbstract::positionCameraSpecific() {
-
-}
-
 void RendererAbstract::positionCamera() {
-    // coords c=active_Camera->getCoords();
     Coords c = w->getObserver()->getCamera()->getCoords();
     rotate(1, 0, 0, c.rotation.x);
     rotate(0, 1, 0, c.rotation.y);
     rotate(0, 0, 1, c.rotation.z);
     translate(c.translation.x, c.translation.y, c.translation.z);
-    this->positionCameraSpecific();
 }
-
-
-//RendererAbstract * returnRenderer() {
-//    return 0;
-//}

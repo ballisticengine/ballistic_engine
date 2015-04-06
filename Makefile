@@ -27,10 +27,6 @@ rendererGL.so: rendererGL.o renderer.o
 
 LibLoad.o: cpp/libload/LibLoad.cpp
 	g++ $(CFLAGS) -c $^ -o $@
-	
-glpreview.o: cpp/renderer/GL/GLPreview.cpp
-	g++ $(CFLAGS) -c $^ -o $@
-	
 
 timerdefs.o: cpp/python/timer_defs.cpp
 	g++ $(CFLAGS) -c $^ -o $@
@@ -200,3 +196,7 @@ clean:
 	rm ./$(OUTPUT)
 	
 	
+clean_libs:
+	rm ./renderer.o
+	rm ./rendererGL.so
+	rm ./*.so
