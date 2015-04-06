@@ -225,7 +225,7 @@ void SdlIO::eventLoop() {
             }
 
         }
-        r->render();
+       r->render();
     }
 }
 

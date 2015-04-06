@@ -36,10 +36,12 @@ void Engine::prepare() {
     r->setCamera(w->getCurrentCamera());
     cout << "Flush set\n";
     r->setFlush(SdlIO::flush);
-    // boost::thread(boost::ref(*r));
+    
     this->pythonInit();
     cout << "World loop\n";
     boost::thread(boost::ref(*w));
+//         cout << "Renderer loop\n";
+//    boost::thread(boost::ref(*r));
 
 }
 
@@ -50,6 +52,7 @@ Engine::~Engine() {
 void Engine::start() {
    
     boost::thread(boost::bind(&SdlIO::inputThread, SdlIO::getInstance()));
+
     io->eventLoop();
 
 }

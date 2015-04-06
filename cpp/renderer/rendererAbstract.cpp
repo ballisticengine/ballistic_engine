@@ -99,8 +99,8 @@ void RendererAbstract::setFlush(flushf flush_callback) {
 }
 
 void RendererAbstract::operator()() {
-    this->init();
-    while (true) {
+    
+    while (!EngineState::getInstance()->exit()) {
         this->render();
     }
 }
@@ -111,7 +111,7 @@ void RendererAbstract::face(e_loc x, e_loc y, e_loc z) {
     this->rotate(0, 0, 1, z);
 }
 
-void RendererAbstract::setCamera(Camera *c) { //to przenie�� do World
+void RendererAbstract::setCamera(Camera *c) { 
     this->active_Camera = c;
 }
 
