@@ -11,7 +11,7 @@ deps=sdl.o singleton.o mathTypes.o lightormaterial.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
 	   timerdefs.o LibLoad.o \
-	   timer.o image.o hud.o uimesh.o weapon.o rendererGL.so
+	   timer.o image.o hud.o uimesh.o weapon.o rendererGL.so plane.o
 
 $(OUTPUT): $(deps) main.o 
 	g++ -rdynamic  $^ -o $(OUTPUT) $(CFLAGS)
@@ -188,6 +188,9 @@ utlis.o: cpp/misc/utils.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 timer.o: cpp/time/timerPosix.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+plane.o: cpp/types/plane.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 clean:
