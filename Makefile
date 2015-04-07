@@ -1,6 +1,7 @@
 CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lpthread -lboost_thread -lpython2.7 -lboost_python -ldl
 OUTPUT=ballistic 
 
+
 deps=sdl.o singleton.o mathTypes.o lightormaterial.o \
 	sdl2d.o texture.o world.o worldLoad.o skybox.o \
 	   engine.o sprite.o loaderMD2.o texLoader.o \
@@ -15,6 +16,18 @@ deps=sdl.o singleton.o mathTypes.o lightormaterial.o \
 
 $(OUTPUT): $(deps) main.o 
 	g++ -rdynamic  $^ -o $(OUTPUT) $(CFLAGS)
+
+
+test.o: cpp/test/test.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+test: $(deps) test.o
+	g++ -rdynamic  $^ -o test $(CFLAGS) -lgtest -lgtest_main 
+	./test
+
+clean_test:
+	rm ./test.o
+	rm ./test
 
 rendererGL.o: cpp/renderer/GL/rendererGL.cpp 
 	g++  -Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -c  -fPIC  $^ -o $@ 
