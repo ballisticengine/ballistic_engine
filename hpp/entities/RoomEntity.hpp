@@ -46,6 +46,9 @@ public:
         RoomEntity();
 	~RoomEntity();
 	virtual CollsionInfo collides(Entity *ent,Coords offset);
+        virtual void calcBoundings();
 };
+
+typedef vector <RoomEntity *> rooms_list;
 
 #endif

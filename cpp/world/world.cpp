@@ -108,12 +108,12 @@ void World::moveEntities() {
     x, y, z = 0;
     obj_list things = this->getActiveRoom()->models;
     time_int lt = time.getDiffR();
-    for (int i = 0; i < things.size(); i++) {
-
-        ObjectEntity *e = things[i];
-        this->moveEntity((PhysicalEntity *) e, lt, false);
-        
-    }
+//    for (int i = 0; i < things.size(); i++) {
+//
+//        ObjectEntity *e = things[i];
+//        this->moveEntity((PhysicalEntity *) e, lt, false);
+//        
+//    }
 
    
  

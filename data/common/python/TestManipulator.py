@@ -11,15 +11,16 @@ class TestManipulator(manipulatorClass):
 
     def onKeyDown(self, states):
         ocoords = self.world.observer.getCoords()
-        step=10
+        step=5
         xdelta = deg2rad(ocoords.rotation.y)
-        #ydelta = deg2rad(ocoords.rotation.x)
+        ydelta = deg2rad(ocoords.rotation.x)
 
         velocity=Coords()
 
         if states[26]:
             velocity.t.x += -math.sin(xdelta)*step
             velocity.t.z += math.cos(xdelta)*step
+            velocity.t.y += math.sin(ydelta)*step
         if states[22]:
             velocity.t.x +=math.sin(xdelta)*step
             velocity.t.z +=-math.cos(xdelta)*step

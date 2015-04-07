@@ -88,7 +88,7 @@ bool World::parseXml(string &fn) {
                 ;
         roomE->locate(rx, ry, rz);
         //roomE->face(roomrot_x, roomrot_y, roomrot_z);
-
+        roomE->calcBoundings();
         this->addRoomEntity(roomE);
         ptree room_ents = (ptree) room.second.get_child("entities");
 
@@ -164,7 +164,7 @@ bool World::parseXml(string &fn) {
                 cout << minx << ", " << miny << ", " << minz << ", " << maxx << ", " << maxy << ", " << maxz << endl;
                 BoundingCube *bc = new BoundingCube(minx, miny, minz, maxx, maxy, maxz);
                 bc->name = name;
-                roomE->boundings.push_back(bc);
+                //roomE->boundings.push_back(bc);
                 //roomE->setBoundingBox(bc);
             } else if (type == "JumpPoint") {
                 //                            jx=x;
@@ -192,5 +192,6 @@ bool World::parseXml(string &fn) {
     Texture *stex = (Texture *) texf->get("@car.bmp");
     this->testsprite = new Sprite(stex);
     this->active_room = this->rooms[0];
+   // octree=generateOctree(this->rooms);
     return true;
 }

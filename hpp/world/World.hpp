@@ -38,9 +38,10 @@ using namespace boost::property_tree;
 #include "python/scripting.hpp"
 #include "python/locker.hpp"
 #include "world/PreloadStore.hpp"
+#include "world/Octree.hpp"
 
 
-typedef vector <RoomEntity *> rooms_list;
+
 
 struct PyEntityCollisionParams {
     PhysicalEntity *a, *b;
@@ -56,6 +57,7 @@ protected:
     PyLocker *locker;
     bool moving_lock;
     queue<ObjectEntity *> spawn_queue;
+    OctreeNode *octree;
 
 public:
     ObserverEntity observer;

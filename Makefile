@@ -10,7 +10,7 @@ deps=sdl.o singleton.o mathTypes.o lightormaterial.o \
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
-	   timerdefs.o LibLoad.o \
+	   timerdefs.o LibLoad.o octree.o\
 	   timer.o image.o hud.o uimesh.o weapon.o rendererGL.so
 
 $(OUTPUT): $(deps) main.o 
@@ -188,6 +188,10 @@ utlis.o: cpp/misc/utils.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 timer.o: cpp/time/timerPosix.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+	
+	
+octree.o: cpp/world/Octree.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 clean:

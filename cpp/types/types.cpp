@@ -3,7 +3,7 @@
 
 
 void Coords::reset() {
-    translation.x =  translation.z = rotation.x = rotation.y = rotation.z = 0; //t.y =
+    translation.x =  translation.z = translation.y = rotation.x = rotation.y = rotation.z = 0; //t.y =
 }
 
 Coords::Coords() {

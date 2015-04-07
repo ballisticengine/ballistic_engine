@@ -118,7 +118,8 @@ Camera * ObserverEntity::getCamera() {
 }
 
 ObserverEntity::ObserverEntity() {
-    boundings.push_back(new BoundingCube(7, 30, 7));
+    //boundings.push_back(new BoundingCube(7, 30, 7));
+    boundings.push_back(new BoundingCube(1, 1, 1));
     headbob_i = 0;
     bob_timer.getDiffR();
     this->cam = cam;

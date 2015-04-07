@@ -2,7 +2,7 @@
 
 RoomEntity::RoomEntity() {
     last_bound = 0;
-    preload_store=PreloadStore::getInstance();
+    preload_store = PreloadStore::getInstance();
 }
 
 RoomEntity::~RoomEntity() {
@@ -30,157 +30,116 @@ void RoomEntity::addLightEntity(Light *e) {
     this->addEntity(e);
 }
 
-void RoomEntity::placeDecal(Sprite *decal,Coords c) {
-    
-    decal->locate(c.translation.x,c.translation.y,c.translation.z);
-    decal->face(c.rotation.x,c.rotation.y,c.rotation.z);
+void RoomEntity::placeDecal(Sprite *decal, Coords c) {
+
+    decal->locate(c.translation.x, c.translation.y, c.translation.z);
+    decal->face(c.rotation.x, c.rotation.y, c.rotation.z);
     decals.push_back(decal);
 }
 
-void RoomEntity::placeDecalTexture(Texture *tex,Coords c) {
-    Sprite *decal=new Sprite(tex);
-    placeDecal(decal,c);
+void RoomEntity::placeDecalTexture(Texture *tex, Coords c) {
+    Sprite *decal = new Sprite(tex);
+    placeDecal(decal, c);
 }
 
-void RoomEntity::placePreloadDecal(string preload,Coords c) {
-    Texture *tex=preload_store->tex_preloads[preload];
-    Sprite *decal=new Sprite(tex);
-    placeDecal(decal,c);
+void RoomEntity::placePreloadDecal(string preload, Coords c) {
+    Texture *tex = preload_store->tex_preloads[preload];
+    Sprite *decal = new Sprite(tex);
+    placeDecal(decal, c);
 }
 
-ObjectEntity * RoomEntity::spawnObject(string preload_name,Coords c,string object_name) {
+ObjectEntity * RoomEntity::spawnObject(string preload_name, Coords c, string object_name) {
     RoomEntity * room = this;
-    return spawnShape(preload_store->shape_preloads[preload_name],c,object_name);
+    return spawnShape(preload_store->shape_preloads[preload_name], c, object_name);
 }
 
-  ObjectEntity * RoomEntity::spawnShape(Shape *s,Coords c,string object_name) {
-     RoomEntity * room = this;
+ObjectEntity * RoomEntity::spawnShape(Shape *s, Coords c, string object_name) {
+    RoomEntity * room = this;
     ObjectEntity *oe = new ObjectEntity();
     oe->setModel(s);
-    oe->locate(-c.translation.x,-c.translation.y,-c.translation.z);
+    oe->locate(-c.translation.x, -c.translation.y, -c.translation.z);
     oe->face(c.rotation.x, c.rotation.y, c.rotation.z);
     oe->addBoundingBox(new BoundingCube(oe->getModel()));
-    oe->name=object_name;
-    oe->type="object";
+    oe->name = object_name;
+    oe->type = "object";
     room->addObjectEntity(oe);
     return oe;
-  }
+}
 
 void RoomEntity::removeObjectEntity(string name) {
     size_t i;
-    for(i=0; i<models.size(); i++) {
-        if(models[i]->name==name) {
+    for (i = 0; i < models.size(); i++) {
+        if (models[i]->name == name) {
             break;
         }
     }
-    models.erase(models.begin()+i);
+    models.erase(models.begin() + i);
 }
-  
- CollsionInfo RoomEntity::collides(Entity *ent,Coords offset) {
-    BoundingCube *bound=ent->boundings[0];
-    e_loc in_count = 0, out_count = 0;
-    in_count = out_count = 0;
-    BoundingCube bound_off = *bound, bound_current, *in_bounding;
-    Vector3d tmp;
 
+CollsionInfo RoomEntity::collides(Entity *ent, Coords offset) {
 
-    Vector3d cvec, ctmp, cres, none, am, bm, dm;
-
-    e_loc smallest_dist = 999999;
-
-    /*
-     UWAGA:
-     * jeśli punkt startowy będzie poza wszystkimi bryłami kolizji, to poniższe spowoduje GPF - wywali program
-     */
-    
-    for (size_t i = 0; i < boundings.size(); i++) {
-        bound_current = offsetBounding(bound, offset);
-        bool col = roomHitTest(boundings[i], &bound_current, offset.translation);
-        
-       
-        if (col) {
-            //cout << ent->name << ent->last_bound << endl;
-            in_bounding = boundings[i];
-            if (!ent->last_bound) {
-                ent->last_bound = in_bounding;
-            }
-            in_count++;
-        } else if ( boundings[i] == ent->last_bound) {
-            ctmp.x = ctmp.y = ctmp.z = 0;
-         
-
-            bound_current = offsetBounding(ent->last_bound, offset);
-        
-            am.x = bound_current.min.x + bound_current.width / 2;
-            am.y = bound_current.min.y + bound_current.height / 2;
-            am.z = bound_current.min.z + bound_current.depth / 2;
-            bm.x = bound->min.x + bound->width / 2;
-            bm.y = bound->min.y + bound->height / 2;
-            bm.z = bound->min.z + bound->depth / 2;
-            e_loc halfw = bound_current.width / 2 + bound->width / 2,
-                    halfh = bound_current.height / 2 + bound->height / 2,
-                    halfd = bound_current.depth / 2 + bound->depth / 2;
-            e_loc xAxis = abs(bm.x - am.x),
-                    zAxis = abs(bm.z - am.z),
-                    yAxis = abs(bm.y - am.y),
-                    xdif = xAxis - halfw,
-                    zdif = zAxis - halfd,
-                    ox = abs(xdif),
-                    oz = abs(zdif),
-                    oy = abs(yAxis - halfh)
-                    ;
-            bool zside=(bound_current.min.z<bound->min.z || bound_current.max.z>bound->max.z) ,
-                    xside=(bound_current.min.x>bound->min.x || bound_current.max.x<bound->max.x),
-                    yside=(bound_current.min.y>bound->min.y || bound_current.max.y<bound->max.y);
-            //cout << ox << ", " << oy << ", " << oz << endl;
-            if (yside ) { // && !(xside && zside)
-                if(bound_current.min.y>bound->min.y) {
-                    ctmp.y=COLLISION_BACK;
-                } else if(bound_current.max.y<bound->max.y) {
-                    ctmp.y=-COLLISION_BACK;
-                }
-
-            }
-
-            if (xside ) {
-                if (bound_current.min.x>bound->min.x) {
-                    ctmp.x=COLLISION_BACK;
-                } else if(bound_current.max.x<bound->max.x) {
-                    ctmp.x=-COLLISION_BACK;
-                }
-            } else if (zside && !yside) {
-                if(bound_current.min.z<bound->min.z) {
-                    ctmp.z=-COLLISION_BACK;
-                } else if(bound_current.max.z>bound->max.z) {
-                    ctmp.z=COLLISION_BACK;
-                }
-            }
-
-            dm = am - bm;
-            e_loc dist = dm.length();
-            //if (abs(dist)<smallest_dist) {
-
-            cvec = ctmp;
-            //}
-            out_count++;
-        }
-    }
     CollsionInfo ci;
-   // cout << in_count << ", " << out_count << endl;
-    if (in_count == 0) {
-        //cvec.write();
-        ci.cvec=cvec;
-        return ci;
-
-    } else {
-
-        ent->last_bound = in_bounding;
-    }
-    ci.cvec=none;
     return ci;
 }
 
+void RoomEntity::calcBoundings() {
+    for (size_t i = 0; i < model->f_count; i++) {
+        BoundingCube *bc = new BoundingCube();
+        bc->max.x = bc->min.x = bc->max.y = bc->min.y = bc->max.z = bc->min.z = 0;
+        /*
+         for (unsigned int i=0; i<s->v_count; i++) {
+               if (s->vertices[i].x > max.x) {
+                       max.x=s->vertices[i].x;
+               }
 
+               if(s->vertices[i].x < min.x) {
+                min.x=s->vertices[i].x;
+               }
 
+               if (s->vertices[i].y > max.y) {
+                       max.y=s->vertices[i].y;
+               }
+
+               if(s->vertices[i].y < min.y) {
+                min.y=s->vertices[i].y;
+               }
+
+               if (s->vertices[i].z > max.z) {
+                       max.z=s->vertices[i].z;
+               }
+
+               if(s->vertices[i].z < min.z) {
+                min.z=s->vertices[i].z;
+               }
+       }*/
+        for (size_t n = 0; n < 3; n++) {
+            if (model->vertices[model->faces[i].index[n]].x > bc->max.x) {
+                bc->max.x = model->vertices[model->faces[i].index[n]].x+this->getCoords().translation.x;
+            }
+            if (model->vertices[model->faces[i].index[n]].x < bc->min.x) {
+                bc->min.x = model->vertices[model->faces[i].index[n]].x+this->getCoords().translation.x;
+            }
+
+            if (model->vertices[model->faces[i].index[n]].y > bc->max.y) {
+                bc->max.y = model->vertices[model->faces[i].index[n]].y+this->getCoords().translation.y;
+            }
+
+            if (model->vertices[model->faces[i].index[n]].y < bc->min.y) {
+                bc->min.y = model->vertices[model->faces[i].index[n]].y+this->getCoords().translation.y;
+            }
+
+            if (model->vertices[model->faces[i].index[n]].z > bc->max.z) {
+                bc->max.z = model->vertices[model->faces[i].index[n]].z+this->getCoords().translation.z;
+            }
+
+            if (model->vertices[model->faces[i].index[n]].z < bc->min.z) {
+                bc->min.z = model->vertices[model->faces[i].index[n]].z+this->getCoords().translation.z;
+            }
+        }
+      
+     
+        boundings.push_back(bc);
+    }
+}
 
 
