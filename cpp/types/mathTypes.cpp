@@ -11,13 +11,7 @@ e_loc normalizeRotation(e_loc r) {
     return r;
 }
 
-BasicVector Vector3d::getBasicVector() {
-    BasicVector v;
-    v.x = x;
-    v.y = y;
-    v.z = z;
-    return v;
-}
+
 
 Vector3d::Vector3d() {
     x = y = z = 0;
@@ -78,12 +72,7 @@ Vector3d::Vector3d(const Vector3d &v) {
     z = v.z;
 }
 
-Vector3d::Vector3d(const BasicVector &v) {
-    x = v.x;
-    y = v.y;
-    z = v.z;
 
-}
 
 Vector3d::Vector3d(e_loc x,e_loc y,e_loc z) {
     this->x=x;

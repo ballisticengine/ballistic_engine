@@ -8,9 +8,7 @@
 
 typedef double e_loc;
 
-struct BasicVector {
-    e_loc x, y, z;
-};
+
 
 class Vector3d {
 protected:
@@ -20,10 +18,10 @@ public:
     e_loc x, y, z;
     Vector3d(e_loc x, e_loc y, e_loc z);
     Vector3d(const Vector3d &v);
-    Vector3d(const BasicVector &v);
+
     virtual Vector3d & operator=(const Vector3d &v);
     const bool  operator==( Vector3d &v);
-    BasicVector getBasicVector();
+
     Vector3d();
     virtual Vector3d unit();
     virtual Vector3d normalize();

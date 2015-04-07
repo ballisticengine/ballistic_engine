@@ -30,7 +30,7 @@ namespace bp=boost::python;
 #include "ui/image.hpp"
 #include "ui/uiMesh.hpp"
 #include "types/texture.hpp"
-//#include "pyVector.hpp"
+//#include "pyVector3d.hpp"
 
 using namespace std;
 using namespace boost;

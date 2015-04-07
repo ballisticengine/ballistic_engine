@@ -13,13 +13,13 @@ using namespace std;
 
 struct Face {
     unsigned int *index;
-    BasicVector *normals;
+    Vector3d *normals;
     UV *uvs;
 };
 
 class ShapeAbstract {
 public:
-    BasicVector *vertices, *normals;
+    Vector3d *vertices, *normals;
     Face *faces;
     UV *uvs;
     size_t v_count, uv_count, f_count, v_per_poly;

@@ -80,7 +80,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
         ptree f_verts = face.second.get_child("vertices");
         s->faces[i].index = new unsigned int[vpf];
         s->faces[i].uvs=new UV[vpf];
-        s->faces[i].normals= new BasicVector[vpf];
+        s->faces[i].normals= new Vector3d[vpf];
         try {
             
             
