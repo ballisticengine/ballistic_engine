@@ -35,7 +35,7 @@ namespace bp=boost::python;
 #include "types/mathTypes.hpp"
 #include "types/boundingCube.hpp"
 #include "world/World.hpp"
-//#include "pyVector.hpp"
+//#include "pyVector3d.hpp"
 
 using namespace std;
 using namespace boost;

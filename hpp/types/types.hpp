@@ -49,8 +49,8 @@ struct UV {
  e_loc u,v;
 };
 
-typedef BasicVector v_type;
-typedef BasicVector n_type;
+typedef Vector3d v_type;
+typedef Vector3d n_type;
 
 struct Frame {
 	e_loc fnum,fval;

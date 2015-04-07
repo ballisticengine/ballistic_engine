@@ -16,7 +16,7 @@ World::World() {
 
 World::~World() {
     cout << "World cleaning up..." << endl;
-    deleteVector(rooms);
+    deleteVector3d(rooms);
 
 }
 

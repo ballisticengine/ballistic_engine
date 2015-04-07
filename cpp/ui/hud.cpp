@@ -20,5 +20,5 @@ HUD::HUD() {
 }
 
 HUD::~HUD() {
-    deleteVector(this->images);
+    deleteVector3d(this->images);
 }
