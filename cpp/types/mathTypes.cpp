@@ -11,8 +11,6 @@ e_loc normalizeRotation(e_loc r) {
     return r;
 }
 
-
-
 Vector3d::Vector3d() {
     x = y = z = 0;
 }
@@ -27,11 +25,11 @@ void Vector3d::write() {
 }
 
 Vector3d Vector3d::operator^(Vector3d &b) {
-    return Vector3d(
-            y*b.z - z*b.y,
-            z*b.x - x*b.z,
-            x*b.y - y*b.x
-            );
+    Vector3d v;
+    v.x = y * b.z - z * b.y;
+    v.y = z * b.x - x * b.z;
+    v.z = x * b.y - y * b.x;
+    return v;
 }
 
 Vector3d Vector3d::crossProduct(const Vector3d * b) {
@@ -72,12 +70,10 @@ Vector3d::Vector3d(const Vector3d &v) {
     z = v.z;
 }
 
-
-
-Vector3d::Vector3d(e_loc x,e_loc y,e_loc z) {
-    this->x=x;
-    this->y=y;
-    this->z=z;
+Vector3d::Vector3d(e_loc x, e_loc y, e_loc z) {
+    this->x = x;
+    this->y = y;
+    this->z = z;
 }
 
 Vector3d & Vector3d::operator=(const Vector3d &v) {
@@ -132,7 +128,7 @@ Vector3d Vector3d::operator+(const Vector3d &b) {
     return v;
 }
 
-Vector3d Vector3d::operator-(const Vector3d &b)  {
+Vector3d Vector3d::operator-(const Vector3d &b) {
     Vector3d v;
     v.x = this->x - b.x;
     v.y = this->y - b.y;
@@ -174,21 +170,23 @@ Vector3d Vector3d::operator*(const double a) {
 }
 
 e_loc Vector3d::operator!() {
-    return sqrtf(x*x+y*y+z*z);
+    return sqrt(x * x + y * y + z * z);
 }
 
 Vector3d Vector3d::operator|(e_loc length) {
-    return *this*(length/!(*this));
+    return *this*(length / !(*this));
 }
 
 e_loc Vector3d::operator%(Vector3d &b) {
-    return x*b.x+y*b.y+z*b.z;
+
+    return dotProduct(&b);
+    //return x*b.x+y*b.y+z*b.z;
 }
 
 Vector3d Vector3d::operator-() {
-    return Vector3d(-x,-y,-z);
+    return Vector3d(-x, -y, -z);
 }
 
-const bool Vector3d::operator==( Vector3d &v) {
-    return v.x==x && v.y==y && v.z==z;
+const bool Vector3d::operator==(Vector3d &v) {
+    return v.x == x && v.y == y && v.z == z;
 }

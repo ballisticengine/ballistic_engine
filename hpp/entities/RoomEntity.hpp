@@ -3,6 +3,7 @@
 
 #include "entities/ObjectEntity.hpp"
 #include "types/boundingCube.hpp"
+#include "types/plane.hpp"
 #include "anim/modelAnimator.hpp"
 #include "misc/utils.hpp"
 #include "entities/light.hpp"
@@ -45,7 +46,7 @@ public:
         ObjectEntity * spawnShape(Shape *s,Coords c,string object_name="");
         RoomEntity();
 	~RoomEntity();
-	virtual CollsionInfo collides(Entity *ent,Coords offset);
+	virtual CollsionInfo collides(PhysicalEntity *ent,Coords offset);
         virtual void calcBoundings();
 };
 

@@ -16,8 +16,8 @@ public:
     const bool operator==( Plane &plane);
     const bool operator!=( Plane &plane);
     const bool PointOnPlane( Vector3d & point);
-    const e_loc DistanceToPlane( Vector3d &point);
-    const Vector3d RayIntersection( Vector3d &ray_pos, Vector3d &ray_dir);
+    e_loc DistanceToPlane( Vector3d &point);
+    Vector3d RayIntersection( Vector3d &ray_pos, Vector3d &ray_dir);
 };
 
 #endif	/* PLANE_HPP */

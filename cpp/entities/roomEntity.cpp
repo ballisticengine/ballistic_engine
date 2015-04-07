@@ -76,70 +76,40 @@ void RoomEntity::removeObjectEntity(string name) {
     models.erase(models.begin() + i);
 }
 
-CollsionInfo RoomEntity::collides(Entity *ent, Coords offset) {
-
+CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
+    //ray_pos jest już w ent
     CollsionInfo ci;
+    Vector3d a,b,c;
+    
+    
+    for(size_t i=0; i<model->f_count; i++) {
+      
+        a=model->vertices[model->faces[i].index[0]];
+        b=model->vertices[model->faces[i].index[1]];
+        c=model->vertices[model->faces[i].index[2]];
+//        a=a+getCoords().translation;
+//        b=c+getCoords().translation;
+//        b=c+getCoords().translation;
+        Plane p(a,b,c);
+        Vector3d v=ent->getCoords().translation;
+        e_loc dist=p.DistanceToPlane(v);
+        cout << p.PointOnPlane(v) << endl;
+//        if(dist<0) {
+//            cout << "LT!" << endl;
+//        } else if(dist>0) {
+//            cout << "GT!" << endl;
+//        } else {
+//            cout << "EQ!" << endl;
+//        }
+        
+        
+        
+    }
     return ci;
 }
 
 void RoomEntity::calcBoundings() {
-    for (size_t i = 0; i < model->f_count; i++) {
-        BoundingCube *bc = new BoundingCube();
-        bc->max.x = bc->min.x = bc->max.y = bc->min.y = bc->max.z = bc->min.z = 0;
-        /*
-         for (unsigned int i=0; i<s->v_count; i++) {
-               if (s->vertices[i].x > max.x) {
-                       max.x=s->vertices[i].x;
-               }
-
-               if(s->vertices[i].x < min.x) {
-                min.x=s->vertices[i].x;
-               }
-
-               if (s->vertices[i].y > max.y) {
-                       max.y=s->vertices[i].y;
-               }
-
-               if(s->vertices[i].y < min.y) {
-                min.y=s->vertices[i].y;
-               }
-
-               if (s->vertices[i].z > max.z) {
-                       max.z=s->vertices[i].z;
-               }
-
-               if(s->vertices[i].z < min.z) {
-                min.z=s->vertices[i].z;
-               }
-       }*/
-        for (size_t n = 0; n < 3; n++) {
-            if (model->vertices[model->faces[i].index[n]].x > bc->max.x) {
-                bc->max.x = model->vertices[model->faces[i].index[n]].x+this->getCoords().translation.x;
-            }
-            if (model->vertices[model->faces[i].index[n]].x < bc->min.x) {
-                bc->min.x = model->vertices[model->faces[i].index[n]].x+this->getCoords().translation.x;
-            }
-
-            if (model->vertices[model->faces[i].index[n]].y > bc->max.y) {
-                bc->max.y = model->vertices[model->faces[i].index[n]].y+this->getCoords().translation.y;
-            }
-
-            if (model->vertices[model->faces[i].index[n]].y < bc->min.y) {
-                bc->min.y = model->vertices[model->faces[i].index[n]].y+this->getCoords().translation.y;
-            }
-
-            if (model->vertices[model->faces[i].index[n]].z > bc->max.z) {
-                bc->max.z = model->vertices[model->faces[i].index[n]].z+this->getCoords().translation.z;
-            }
-
-            if (model->vertices[model->faces[i].index[n]].z < bc->min.z) {
-                bc->min.z = model->vertices[model->faces[i].index[n]].z+this->getCoords().translation.z;
-            }
-        }
-      
-     
-        boundings.push_back(bc);
-    }
+    
 }
 
 
