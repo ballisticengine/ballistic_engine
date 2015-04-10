@@ -56,9 +56,9 @@ void Shape::calculateNormals() {
         d1=v1-v2;
         d2=v3-v2;
         d3=v1-v3;
-        n1=d1.crossProduct(&d2);
-        n2=d3.crossProduct(&d2);
-        n3=d3.crossProduct(&d1);
+        n1=d1.crossProduct(d2);
+        n2=d3.crossProduct(d2);
+        n3=d3.crossProduct(d1);
         this->faces[i].normals[0]=n1;
         this->faces[i].normals[1]=n2;
         this->faces[i].normals[2]=n3;

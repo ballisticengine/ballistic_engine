@@ -18,10 +18,9 @@ Plane::Plane(const Plane &plane) {
 Plane::Plane(Vector3d &vA, Vector3d &vB, Vector3d &vC) {
     Vector3d normalA, normalB;
     normalA = (vC - vA) | 1;
-    normalB = (vC - vA) | 1;
+    normalB = (vC - vB) | 1;
     N = (normalA^normalB) | 1;
-    D = -vA % N;
-    //normalA=vC-vA;//|1;
+    D = vA % N;
 }
 
 const Plane & Plane::operator=(const Plane &plane) {
@@ -44,7 +43,16 @@ const bool Plane::PointOnPlane(Vector3d & point) {
 }
 
 e_loc Plane::DistanceToPlane(Vector3d &point) {
-    return N % point + D;
+//    cout << "N: \n";
+//    N.write();
+//    cout << "point: \n";
+//    point.write();
+//    cout << "D: \n";
+//    cout << D << endl;
+    e_loc dist=N % point + D;
+    cout << "dist:\n";
+    cout << dist << endl;
+    return dist;
 }
 
 Vector3d Plane::RayIntersection(Vector3d &ray_pos, Vector3d &ray_dir) {

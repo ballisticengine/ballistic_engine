@@ -24,7 +24,7 @@ void Vector3d::write() {
     std::cout << this->x << ", " << this->y << ", " << this->z << std::endl;
 }
 
-Vector3d Vector3d::operator^(Vector3d &b) {
+Vector3d Vector3d::operator^(const Vector3d &b) {
     Vector3d v;
     v.x = y * b.z - z * b.y;
     v.y = z * b.x - x * b.z;
@@ -32,21 +32,14 @@ Vector3d Vector3d::operator^(Vector3d &b) {
     return v;
 }
 
-Vector3d Vector3d::crossProduct(const Vector3d * b) {
-    //ay*bz-az*by,az*bx-ax*bz,ax*by-ay*bx
-    /*
-     n[0]=va[1]*vb[2] - va[2]*vb[1];
-    n[1]=va[2]*vb[0] - va[0]*vb[2];
-    n[2]=va[0]*vb[1] - va[1]*vb[0];
-     */
+Vector3d Vector3d::crossProduct(const Vector3d & b) {
+
     Vector3d a = *this, v = a;
 
+    v.x = a.y * b.z - a.z * b.y;
+    v.y = a.z * b.x - a.x * b.z;
+    v.z = a.x * b.y - a.y * b.x;
 
-    v.x = a.y * b->z - a.z * b->y;
-    v.y = a.z * b->x - a.x * b->z;
-    v.z = a.x * b->y - a.y * b->x;
-
-    //v.write();
     return v;
 }
 
@@ -115,8 +108,8 @@ Vector3d Vector3d::normalize() {
     return v;
 }
 
-e_loc Vector3d::dotProduct(const Vector3d * b) {
-    e_loc dp = x * b->x + y * b->y + z * b->z;
+e_loc Vector3d::dotProduct(const Vector3d & b) {
+    e_loc dp = x * b.x + y * b.y + z * b.z;
     return dp;
 }
 
@@ -174,12 +167,17 @@ e_loc Vector3d::operator!() {
 }
 
 Vector3d Vector3d::operator|(e_loc length) {
-    return *this*(length / !(*this));
+    Vector3d ret;
+    ret=*this;
+    //std::cout << !ret << ", " << length << ", " <<  (length / !ret)  << std::endl;
+    ret=ret*(length / !ret);
+    return ret;
+    //return *this*(length / !(*this));
 }
 
-e_loc Vector3d::operator%(Vector3d &b) {
+e_loc Vector3d::operator%(const Vector3d &b) {
 
-    return dotProduct(&b);
+    return dotProduct(b);
     //return x*b.x+y*b.y+z*b.z;
 }
 
@@ -187,6 +185,6 @@ Vector3d Vector3d::operator-() {
     return Vector3d(-x, -y, -z);
 }
 
-const bool Vector3d::operator==(Vector3d &v) {
+const bool Vector3d::operator==(const Vector3d &v) {
     return v.x == x && v.y == y && v.z == z;
 }

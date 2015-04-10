@@ -87,14 +87,15 @@ CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
         a=model->vertices[model->faces[i].index[0]];
         b=model->vertices[model->faces[i].index[1]];
         c=model->vertices[model->faces[i].index[2]];
-//        a=a+getCoords().translation;
-//        b=c+getCoords().translation;
-//        b=c+getCoords().translation;
+        a=a+getCoords().translation;
+        b=b+getCoords().translation;
+        c=c+getCoords().translation;
         Plane p(a,b,c);
         Vector3d v=ent->getCoords().translation;
         e_loc dist=p.DistanceToPlane(v);
-        cout << p.PointOnPlane(v) << endl;
-//        if(dist<0) {
+      //  cout << p.PointOnPlane(v) << endl;
+        //cout << dist << endl;
+        //        if(dist<0) {
 //            cout << "LT!" << endl;
 //        } else if(dist>0) {
 //            cout << "GT!" << endl;
