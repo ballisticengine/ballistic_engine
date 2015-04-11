@@ -44,11 +44,6 @@ Vector3d Vector3d::crossProduct(const Vector3d & b) {
 }
 
 Vector3d Vector3d::unit() {
-    /*
-    nvx = vx / l
-            nvy = vy / l
-            nvz = vz / l
-     */
     Vector3d v;
     v = *this;
     v.x = ifZero(v.x);
@@ -95,7 +90,6 @@ Vector3d Vector3d::diff(const Vector3d & v) {
 }
 
 e_loc Vector3d::length() {
-    //vx*vx+vy*vy+vz*vz
     e_loc length = (e_loc) sqrt(x * x + y * y + z * z);
     return length;
 }
@@ -168,17 +162,13 @@ e_loc Vector3d::operator!() {
 
 Vector3d Vector3d::operator|(e_loc length) {
     Vector3d ret;
-    ret=*this;
-    //std::cout << !ret << ", " << length << ", " <<  (length / !ret)  << std::endl;
-    ret=ret*(length / !ret);
+    ret = *this;
+    ret = ret * (length / !ret);
     return ret;
-    //return *this*(length / !(*this));
 }
 
 e_loc Vector3d::operator%(const Vector3d &b) {
-
     return dotProduct(b);
-    //return x*b.x+y*b.y+z*b.z;
 }
 
 Vector3d Vector3d::operator-() {

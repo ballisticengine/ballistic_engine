@@ -92,10 +92,25 @@ CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
         c=c+getCoords().translation;
         Plane p(a,b,c);
         Vector3d v=ent->getCoords().translation;
+        Vector3d r=ent->velocity.translation;
         e_loc dist=p.DistanceToPlane(v);
-      //  cout << p.PointOnPlane(v) << endl;
         //cout << dist << endl;
-        //        if(dist<0) {
+        Vector3d ri=p.RayIntersection(v,r);
+        ri=ri+getCoords().translation;
+       // ri.write();
+        Vector3d tri[3];
+        tri[0]=a;
+        tri[1]=b;
+        tri[2]=c;
+        Vector3d point(-349.688, 213.621, 158.99);
+        point=point+getCoords().translation;
+        bool res=pointInPolygon(point,tri,3);
+        if(res) {
+            cout << res << endl;
+        }
+      //  cout << p.PointOnPlane(v) << endl;
+       // cout << dist << endl;
+//        if(dist<0) {
 //            cout << "LT!" << endl;
 //        } else if(dist>0) {
 //            cout << "GT!" << endl;

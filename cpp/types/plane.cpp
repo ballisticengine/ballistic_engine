@@ -19,7 +19,7 @@ Plane::Plane(Vector3d &vA, Vector3d &vB, Vector3d &vC) {
     Vector3d normalA, normalB;
     normalA = (vC - vA) | 1;
     normalB = (vC - vB) | 1;
-    N = (normalA^normalB) | 1;
+    N = (normalB^normalA) | 1;
     D = vA % N;
 }
 
@@ -38,20 +38,15 @@ const bool Plane::operator!=(Plane &plane) {
 }
 
 const bool Plane::PointOnPlane(Vector3d & point) {
-    double d=0;
+    double d = 0;
     return DistanceToPlane(point) == d;
 }
 
 e_loc Plane::DistanceToPlane(Vector3d &point) {
-//    cout << "N: \n";
-//    N.write();
-//    cout << "point: \n";
-//    point.write();
-//    cout << "D: \n";
-//    cout << D << endl;
-    e_loc dist=N % point + D;
-    cout << "dist:\n";
-    cout << dist << endl;
+    e_loc dist = N % point + D;
+    //    if (abs(dist)<1) {
+    //        dist=floor(dist);
+    //    }
     return dist;
 }
 
@@ -61,4 +56,29 @@ Vector3d Plane::RayIntersection(Vector3d &ray_pos, Vector3d &ray_dir) {
         return ray_pos;
     }
     return ray_pos - ray_dir * (DistanceToPlane(ray_pos) / a);
+}
+
+bool pointInPolygon(Vector3d p, Vector3d *points, int n_points) {
+    Vector3d segment1, segment2;
+    double length1, length2;
+    double sum_angles = 0, cos_angle = 0;
+
+    for (size_t idx = 0; idx < n_points; idx++) {
+        segment1 = points[idx] - p;
+        segment2 = points[(idx + 1) % n_points] - p;
+        if (segment1.length() * segment2.length() <= TOLERANCE) {
+            sum_angles = TWOPI;
+            break;
+        }
+
+        cos_angle = (segment1 % segment2) / (segment1.length() * segment2.length());
+        sum_angles += cos(cos_angle);
+
+    }
+
+    if ((sum_angles <= (TWOPI + TOLERANCE)) && (sum_angles >= (TWOPI - TOLERANCE))) {
+        return true;
+    } else {
+        return false;
+    }
 }
