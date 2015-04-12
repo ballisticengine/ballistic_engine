@@ -1,6 +1,7 @@
 #include <limits.h>
 #include <gtest/gtest.h>
 
+
 #include "types/mathTypes.hpp"
 #include "types/plane.hpp"
 #include "types/shape.hpp"
@@ -28,15 +29,24 @@ TEST(Vector3d, Vector3dTest) {
 TEST(Plane, PlaneTest) {
 
     Vector3d verts[] = {
-        Vector3d(0, 0, 0),
         Vector3d(1, 1, 0),
-        Vector3d(0, 1, 0)
+        Vector3d(0, 1, 0),
+        Vector3d(0, 0, 0),
     };
 
-    Vector3d point(0, 0, 0), point2(10, 10, 10);
+    Vector3d point(0, 0, 0), point2(10, 10, 10), point3(0.2, 0.2, 0);
 
     ASSERT_EQ(pointInPolygon(point, verts, 3), true);
     ASSERT_EQ(pointInPolygon(point2, verts, 3), false);
+
+    Plane plane(verts[0], verts[1], verts[2]);
+    ASSERT_DOUBLE_EQ(plane.DistanceToPlane(point), 0);
+    //ASSERT_DOUBLE_EQ(plane.DistanceToPlane(point2),10);
+    e_loc dist = plane.DistanceToPlane(point2);
+    cout << dist << endl;
+    Vector3d inters = plane.RayIntersection(point2, point3)-point2;
+    inters.write();
+    ASSERT_EQ(pointInPolygon(inters, verts, 3), true);
 
 }
 

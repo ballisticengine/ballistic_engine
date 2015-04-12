@@ -55,7 +55,7 @@ Vector3d Plane::RayIntersection(Vector3d &ray_pos, Vector3d &ray_dir) {
     if (a == 0) {
         return ray_pos;
     }
-    return ray_pos - ray_dir * (DistanceToPlane(ray_pos) / a);
+    return ray_pos - (ray_dir * DistanceToPlane(ray_pos) / a);
 }
 
 bool pointInPolygon(Vector3d p, Vector3d *points, int n_points) {
@@ -75,7 +75,7 @@ bool pointInPolygon(Vector3d p, Vector3d *points, int n_points) {
         sum_angles += cos(cos_angle);
 
     }
-
+   // cout << sum_angles << endl;
     if ((sum_angles <= (TWOPI + TOLERANCE)) && (sum_angles >= (TWOPI - TOLERANCE))) {
         return true;
     } else {

@@ -90,21 +90,27 @@ CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
         a=a+getCoords().translation;
         b=b+getCoords().translation;
         c=c+getCoords().translation;
+       // a.y*=-1;b.y*=-1;c.y*=-1;
         Plane p(a,b,c);
         Vector3d v=ent->getCoords().translation;
         Vector3d r=ent->velocity.translation;
         e_loc dist=p.DistanceToPlane(v);
-        //cout << dist << endl;
-        Vector3d ri=p.RayIntersection(v,r);
-        ri=ri+getCoords().translation;
+ 
+//        cout << "A: ";
+//        v.write();
+//        cout << "B: ";
+//        getCoords().translation.write();
+        Vector3d ri=p.RayIntersection(v,r)-v;
+//        cout << "C: ";
+//        ri.write();
        // ri.write();
         Vector3d tri[3];
         tri[0]=a;
         tri[1]=b;
         tri[2]=c;
-        Vector3d point(-349.688, 213.621, 158.99);
-        point=point+getCoords().translation;
-        bool res=pointInPolygon(point,tri,3);
+        
+      
+        bool res=pointInPolygon(ri,tri,3);
         if(res) {
             cout << res << endl;
         }
