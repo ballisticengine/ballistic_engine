@@ -13,7 +13,7 @@ import math
 
 from helper import *
 
-def shapeExport(model,scale=1,omit_material=False,triangulate=False):
+def shapeExport(model,scale=1,omit_material=False,triangulate=False,swap_xy=False):
         #print ("SE")
         loc=model.location.copy()
         shape=ET.Element('shape')
@@ -59,6 +59,10 @@ def shapeExport(model,scale=1,omit_material=False,triangulate=False):
         else:
             model=model.to_mesh(scene, True, 'PREVIEW')
 
+        """if swap_xy:
+            bpy.ops.transform.rotate(value=1.57,axis=(1,0,0))
+            bpy.ops.object.transform_apply(location=True, rotation=True, scale=True)
+        """
         verts = model.vertices
 
 

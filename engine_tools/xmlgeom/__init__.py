@@ -47,7 +47,7 @@ if "bounding_hepler" in locals():
 
 class ExportXML(bpy.types.Operator,ExportHelper):
     bl_idname = "export_scene.xml_geom"
-    bl_label = 'Export to XML Geometry'
+    bl_label = 'Export to XML Level Geometry'
     filename_ext = ".xml"
     scale = FloatProperty(
             name="Scale",
@@ -72,7 +72,7 @@ class ExportXML(bpy.types.Operator,ExportHelper):
             #model=object.to_bmesh( bpy.context.scene, True, 'PREVIEW')
             #bpy.ops.triangulate(model, model.data.faces)
 
-            shape=shapeExport(object,self.scale,False,True)
+            shape=shapeExport(object,self.scale,False,True,True)
             type=ET.SubElement(shape,"type")
             type.text="level"
             room=ET.Element('room')
@@ -83,8 +83,6 @@ class ExportXML(bpy.types.Operator,ExportHelper):
             x.text=str(loc.x*self.scale)
             y.text=str(loc.y*self.scale)
             z.text=str(loc.z*self.scale)
-
-
             room_dict[object.name]=room
             loc_dict[object.name]=loc
             ambient_light=ET.Element('ambient_light')
