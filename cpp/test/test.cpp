@@ -41,11 +41,11 @@ TEST(Plane, PlaneTest) {
 
     Plane plane(verts[0], verts[1], verts[2]);
     ASSERT_DOUBLE_EQ(plane.DistanceToPlane(point), 0);
-    //ASSERT_DOUBLE_EQ(plane.DistanceToPlane(point2),10);
+    
     e_loc dist = plane.DistanceToPlane(point2);
-    cout << dist << endl;
+    
     Vector3d inters = plane.RayIntersection(point2, point3)-point2;
-    inters.write();
+    
     ASSERT_EQ(pointInPolygon(inters, verts, 3), true);
 
 }

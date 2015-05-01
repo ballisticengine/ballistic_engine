@@ -44,9 +44,9 @@ const bool Plane::PointOnPlane(Vector3d & point) {
 
 e_loc Plane::DistanceToPlane(Vector3d &point) {
     e_loc dist = N % point + D;
-    //    if (abs(dist)<1) {
-    //        dist=floor(dist);
-    //    }
+//        if (abs(dist)<1) {
+//            dist=floor(dist);
+//        }
     return dist;
 }
 
@@ -62,10 +62,13 @@ bool pointInPolygon(Vector3d p, Vector3d *points, int n_points) {
     Vector3d segment1, segment2;
     double length1, length2;
     double sum_angles = 0, cos_angle = 0;
-
+    //p.write();
     for (size_t idx = 0; idx < n_points; idx++) {
         segment1 = points[idx] - p;
+        
         segment2 = points[(idx + 1) % n_points] - p;
+        segment1=segment1.unit();
+        segment2=segment2.unit();
         if (segment1.length() * segment2.length() <= TOLERANCE) {
             sum_angles = TWOPI;
             break;
@@ -75,7 +78,7 @@ bool pointInPolygon(Vector3d p, Vector3d *points, int n_points) {
         sum_angles += cos(cos_angle);
 
     }
-   // cout << sum_angles << endl;
+    //cout << sum_angles << endl;
     if ((sum_angles <= (TWOPI + TOLERANCE)) && (sum_angles >= (TWOPI - TOLERANCE))) {
         return true;
     } else {

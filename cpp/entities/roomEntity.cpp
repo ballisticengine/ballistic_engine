@@ -81,7 +81,8 @@ CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
     CollsionInfo ci;
     Vector3d a,b,c;
     
-    
+    bool pos=false;
+    e_loc sum=0;
     for(size_t i=0; i<model->f_count; i++) {
       
         a=model->vertices[model->faces[i].index[0]];
@@ -93,28 +94,29 @@ CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
        // a.y*=-1;b.y*=-1;c.y*=-1;
         Plane p(a,b,c);
         Vector3d v=ent->getCoords().translation;
-        Vector3d r=ent->velocity.translation;
+        Vector3d r=ent->velocity.translation.unit();
         e_loc dist=p.DistanceToPlane(v);
- 
+        //cout << dist << endl;
+      
+        sum+=dist;
 //        cout << "A: ";
 //        v.write();
 //        cout << "B: ";
 //        getCoords().translation.write();
-        Vector3d ri=p.RayIntersection(v,r)-v;
+        Vector3d ri=p.RayIntersection(v,r);
 //        cout << "C: ";
-//        ri.write();
+       // ri.write();
        // ri.write();
         Vector3d tri[3];
         tri[0]=a;
         tri[1]=b;
         tri[2]=c;
         
-      
-        bool res=pointInPolygon(ri,tri,3);
-        if(res) {
-            cout << res << endl;
+        Vector3d ndiff=p.N.unit()-model->normals[model->faces[i].index[0]].unit();
+        if (dist<0) {
+            pos=true;
         }
-      //  cout << p.PointOnPlane(v) << endl;
+       // cout << p.DistanceToPlane(v) << endl;
        // cout << dist << endl;
 //        if(dist<0) {
 //            cout << "LT!" << endl;
@@ -126,6 +128,9 @@ CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
         
         
         
+    }
+    if(pos) {
+        cout << "COL" << endl;
     }
     return ci;
 }
