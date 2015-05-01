@@ -1,5 +1,13 @@
 #include "factories/factory.hpp"
 
+void Factory::abort(string reason) {
+    if (reason!="") {
+        cout << reason << endl;
+    }
+    cout << "Aborting..." << endl;
+    exit(1);   
+}
+
 void * Factory::get(string fn, bool force_common,bool clone) {
     this->force_common = force_common;
     

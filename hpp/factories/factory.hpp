@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 #include "misc/singleton.hpp"
 #include "config/path.hpp"
@@ -21,6 +22,7 @@ protected:
 	bool force_common,uses_common;
         virtual void * actualLoad(string fn)=0;
         virtual string getSubDir()=0;
+        static void abort(string reason="");
 public:
 	 Factory();
 	 virtual ~Factory();

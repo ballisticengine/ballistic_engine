@@ -53,7 +53,7 @@
     </screen>
     <game>
         <start_level>
-            level2
+            level3
         </start_level>
        
         <weapons>
@@ -84,31 +84,7 @@
                     15
                 </scale>
             </weapon>
-            <weapon>
-                <name>minitable</name>
-                <display_name>Pistol</display_name>
-                <model>@weapon.md2</model>
-                <bullet>@bullet.xml</bullet>
-                <decal>
-                    <texture>@decal.png</texture>
-                    <width>1</width>
-                    <height>1</height>
-                </decal>
-                <velocity>1000</velocity>
-                <location>
-                    <x>20</x>
-                    <y>-5</y>
-                    <z>-30</z>
-                </location>
-                <rotation>
-                    <x>90</x>
-                    <y>-200</y>
-                    <z>270</z>
-                </rotation>
-                <scale>
-                    1
-                </scale>
-            </weapon>
+           
            
         </weapons>
     </game>
