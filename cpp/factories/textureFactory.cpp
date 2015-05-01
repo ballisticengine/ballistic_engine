@@ -3,7 +3,10 @@
 void * TextureFactory::actualLoad(string fn) {
  Texture *t=new Texture(fn);
 // t->load();
-   loader->load(fn,t); 
+ if (!loader->load(fn,t)) {
+     Factory::abort("File "+fn);
+ }
+ 
  return (void *)t;
 }
 

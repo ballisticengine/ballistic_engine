@@ -1,13 +1,15 @@
 <world>
+    <preloads>
+    </preloads>
     <config>
         <skybox>
             @skybox.bmp
         </skybox>
-        
-      <jump_point>
-            <x>180.0</x>
-            <y>-220.0</y>
-            <z>-50.0</z>
+         <default_weapon>pistol</default_weapon>
+        <jump_point>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
             <rx>0.0</rx>
             <ry>0.0</ry>
             <rz>0.0</rz>
@@ -18,9 +20,13 @@
             <b>0</b>
         </ambient_light>
         <hud>
-            @car.bmp
+            
         </hud>
-        
+        <scripts>
+            <script>
+                test
+            </script>
+        </scripts>
     </config>
     
 </world>
