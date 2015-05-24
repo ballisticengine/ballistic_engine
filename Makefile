@@ -11,7 +11,7 @@ deps=sdl.o singleton.o mathTypes.o lightormaterial.o \
 	   utlis.o entity.o objectEntity.o physicalEntity.o observerEntity.o roomEntity.o camera.o \
 	   material.o materiable.o texturable.o light.o pointlight.o \
 	   types.o shape2d.o shape.o boundingCube.o \
-	   timerdefs.o LibLoad.o \
+	   timerdefs.o LibLoad.o collision.o \
 	   timer.o image.o hud.o uimesh.o weapon.o rendererGL.so plane.o
 
 
@@ -43,6 +43,9 @@ LibLoad.o: cpp/libload/LibLoad.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 timerdefs.o: cpp/python/timer_defs.cpp
+	g++ $(CFLAGS) -c $^ -o $@
+
+collision.o: cpp/world/collisionDetector.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 weapon.o: cpp/entities/weapon.cpp

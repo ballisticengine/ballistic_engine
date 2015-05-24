@@ -96,9 +96,15 @@ e_loc Vector3d::length() {
 
 Vector3d Vector3d::normalize() {
     Vector3d v = *this;
-    v.x /= length();
-    v.y /= length();
-    v.z /= length();
+    if (length()!=0) {
+        v.x /= length();
+        v.y /= length();
+        v.z /= length();
+    } else {
+        v.x=0;
+        v.y=0;
+        v.z=0;
+    }
     return v;
 }
 

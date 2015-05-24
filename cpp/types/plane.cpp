@@ -66,9 +66,9 @@ bool pointInPolygon(Vector3d p, Vector3d *points, int n_points) {
     for (size_t idx = 0; idx < n_points; idx++) {
         segment1 = points[idx] - p;
         
-        segment2 = points[(idx + 1) % n_points] - p;
-        segment1=segment1.unit();
-        segment2=segment2.unit();
+        segment2 = points[(idx + 1) % n_points+1] - p;
+        //segment1=segment1.unit();
+        //segment2=segment2.unit();
         if (segment1.length() * segment2.length() <= TOLERANCE) {
             sum_angles = TWOPI;
             break;
@@ -78,7 +78,7 @@ bool pointInPolygon(Vector3d p, Vector3d *points, int n_points) {
         sum_angles += cos(cos_angle);
 
     }
-    //cout << sum_angles << endl;
+    cout << sum_angles << endl;
     if ((sum_angles <= (TWOPI + TOLERANCE)) && (sum_angles >= (TWOPI - TOLERANCE))) {
         return true;
     } else {
