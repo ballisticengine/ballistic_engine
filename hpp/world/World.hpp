@@ -39,6 +39,7 @@ using namespace boost::property_tree;
 #include "python/locker.hpp"
 #include "world/PreloadStore.hpp"
 #include "world/Octree.hpp"
+#include "world/collisionDetector.hpp"
 
 
 
@@ -58,6 +59,7 @@ protected:
     bool moving_lock;
     queue<ObjectEntity *> spawn_queue;
     OctreeNode *octree;
+    CollisionDetector collisions;
 
 public:
     ObserverEntity observer;

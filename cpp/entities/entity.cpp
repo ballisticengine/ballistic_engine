@@ -15,7 +15,7 @@ void Entity::rotate(e_loc x, e_loc y, e_loc z) {
     this->rx += x;
     this->ry += y;
     this->rz += z;
-    
+
 }
 
 void Entity::translate3(e_loc x, e_loc y, e_loc z) {
@@ -196,12 +196,8 @@ CollsionInfo Entity::collides(Entity *ent, Coords offset) {
         for (size_t n = 0; n < ent->boundings.size(); n++) {
             BoundingCube *a = boundings[i], *b = ent->boundings[n];
             Vector3d cvec = cTest(a, b, offset);
-
             if (cvec.x || cvec.y || cvec.z) {
                 nsa = a->width * a->height;
-                cout << nsa << ", " << sa << endl;
-                cout.flush();
-                //nsb=b->width*b->height;
                 if (nsa <= sa) {
                     sa = nsa;
                     //sb = nsb;
@@ -210,8 +206,6 @@ CollsionInfo Entity::collides(Entity *ent, Coords offset) {
                     awin = a;
                 }
             }
-
-
         }
     }
     CollsionInfo ret;

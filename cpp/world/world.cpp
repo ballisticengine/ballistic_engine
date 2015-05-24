@@ -61,7 +61,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
             if (e==objs[i]) {
                 break;
             }
-            CollsionInfo ci = objs[i]->collides(e, c);
+            CollsionInfo ci = collisions.objectsCollide(objs[i],e,c); //objs[i]->collides(e, c);
             cvec=ci.cvec;
 
 
@@ -80,7 +80,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
         size_t rl_size = rl.size();
 
         for (int i = 0; i < rl_size; i++) {
-            CollsionInfo ci = rl[i]->collides(e, c);
+            CollsionInfo ci = collisions.roomCollide(rl[i],e,c); //rl[i]->collides(e, c);
             cvec=ci.cvec;
             if (cvec.x || cvec.y || cvec.z) {
                 //c.translation.write();
