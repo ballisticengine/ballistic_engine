@@ -46,7 +46,7 @@ public:
         ObjectEntity * spawnShape(Shape *s,Coords c,string object_name="");
         RoomEntity();
 	~RoomEntity();
-	virtual CollsionInfo collides(PhysicalEntity *ent,Coords offset);
+//	virtual CollsionInfo collides(PhysicalEntity *ent,Coords offset);
         virtual void calcBoundings();
 };
 

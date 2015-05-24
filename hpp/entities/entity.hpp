@@ -44,12 +44,7 @@ public:
     string name;
     string type;
     string subtype;
-    /*
-    Testuje kolizję z innym istnieniem. offset - przemieszczenie względem obecnej pozycji
-     */
-    virtual CollsionInfo collides(Entity *ent, Coords offset);
-
-
+   
     virtual void translate3(e_loc x, e_loc y, e_loc z);
     virtual void translate(e_loc x, e_loc y, e_loc z);
     virtual void translate(Coords c);
