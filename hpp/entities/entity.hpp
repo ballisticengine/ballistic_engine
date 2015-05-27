@@ -11,26 +11,21 @@ using namespace std;
 #include "types/boundingCube.hpp"
 #define COLLISION_BACK 0.0001
 
-/*
- Abstrakcyjna klasa opisująca wszystkie obiekty na mapie
- */
+
 
 BoundingCube offsetBounding(BoundingCube *bc, Coords offset);
 
-bool hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset);
-bool roomHitTest(BoundingCube *a,BoundingCube *b,Vector3d offset);
 
-struct CollsionInfo {
-    Vector3d cvec;
-    string nameA,nameB;
-    bool collided;
-};
+
+
+/*
+ Abstrakcyjna klasa opisująca wszystkie obiekty na mapie
+ */
 
 class Entity {
 protected:
     e_loc x, y, z, rx, ry, rz;
     Vector3d velocity;
-    virtual Vector3d cTest(BoundingCube *a,BoundingCube *b,Coords offset);
     void syncBounding();
 public:
     bool no_collisions;

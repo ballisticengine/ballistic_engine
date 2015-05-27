@@ -137,3 +137,43 @@ Vector3d CollisionDetector::cTest(BoundingCube *a, BoundingCube *b, Coords offse
 
     return res; 
 }
+
+bool CollisionDetector::hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset) { 
+    Vector3d amax, amin, bmax, bmin;
+    amax = a->max + offset;
+    amin = a->min + offset;
+    bmax = b->max + offset;
+    bmin = b->min + offset;
+
+    //offset.write();
+
+    bool collide = (
+            amax.x > bmin.x &&
+            amin.x < bmax.x &&
+            amax.y > bmin.y &&
+            amin.y < bmax.y &&
+            amax.z > bmin.z &&
+            amin.z < bmax.z
+            );
+    return collide; 
+}
+
+bool CollisionDetector::roomHitTest(BoundingCube *a,BoundingCube *b,Vector3d offset) {
+      Vector3d amax, amin, bmax, bmin;
+    amax = a->max + offset;
+    amin = a->min + offset;
+    bmax = b->max + offset;
+    bmin = b->min + offset;
+
+    //offset.write();
+
+    bool collide = (
+            amax.x > bmax.x &&
+            amin.x < bmin.x &&
+            amax.y > bmax.y &&
+            amin.y < bmin.y &&
+            amin.z < bmin.z &&
+            amax.z > bmax.z
+            );
+    return collide;
+}

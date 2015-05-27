@@ -7,13 +7,22 @@
 #include "types/mathTypes.hpp"
 
 
+struct CollsionInfo {
+    Vector3d cvec;
+    string nameA,nameB;
+    bool collided;
+};
+
+
 class CollisionDetector {
 private:
     Vector3d cTest(BoundingCube *a, BoundingCube *b, Coords offset);
+    bool hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset);
+    bool roomHitTest(BoundingCube *a, BoundingCube *b, Vector3d offset);
 public:
-    CollsionInfo objectsCollide(PhysicalEntity *a,PhysicalEntity *b,Coords offset);
-    CollsionInfo roomCollide(RoomEntity *r,PhysicalEntity *e,Coords offset);
-    
+    CollsionInfo objectsCollide(PhysicalEntity *a, PhysicalEntity *b, Coords offset);
+    CollsionInfo roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset);
+
 };
 
 
