@@ -1,4 +1,4 @@
-CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lboost_timer -lboost_filesystem -lboost_system -lpthread -lboost_thread -lpython2.7 -lboost_python -ldl
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/bullet -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lBulletCollision -lBulletDynamics -lLinearMath -lboost_timer -lboost_filesystem -lboost_system -lpthread -lboost_thread -lpython2.7 -lboost_python -ldl
 OUTPUT=ballistic 
 
 
@@ -31,10 +31,10 @@ clean_test:
 	rm ./test
 
 rendererGL.o: cpp/renderer/GL/rendererGL.cpp 
-	g++  -Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -c  -fPIC  $^ -o $@ 
+	g++  -Ihpp/ -I/usr/include/bullet -I/usr/include/python2.7 -I/usr/include/SDL2 -c  -fPIC  $^ -o $@ 
 
 renderer.o: cpp/renderer/rendererAbstract.cpp
-	g++  -Ihpp/ -I/usr/include/python2.7 -I/usr/include/SDL2 -c -fPIC  $^ -o $@ 
+	g++  -Ihpp/ -I/usr/include/bullet -I/usr/include/python2.7 -I/usr/include/SDL2 -c -fPIC  $^ -o $@ 
 
 rendererGL.so: rendererGL.o renderer.o
 	g++ $^ -shared -Wl,-soname,rendererGL.so -o rendererGL.so -lGL -lGLU -lGLEW   
@@ -46,7 +46,7 @@ timerdefs.o: cpp/python/timer_defs.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
 collision.o: cpp/world/collisionDetector.cpp
-	g++ $(CFLAGS) -c $^ -o $@
+	g++ $(CFLAGS)  -c $^ -o $@
 
 weapon.o: cpp/entities/weapon.cpp
 	g++ $(CFLAGS) -c $^ -o $@

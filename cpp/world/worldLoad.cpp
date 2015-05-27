@@ -90,6 +90,7 @@ bool World::parseXml(string &fn) {
         //roomE->face(roomrot_x, roomrot_y, roomrot_z);
         roomE->calcBoundings();
         this->addRoomEntity(roomE);
+        collisions.addRoom(roomE);
         ptree room_ents = (ptree) room.second.get_child("entities");
 
         BOOST_FOREACH(const ptree::value_type &entobj, room_ents) {

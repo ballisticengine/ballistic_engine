@@ -1,7 +1,7 @@
 #include "world/collisionDetector.hpp"
 
-CollsionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntity *eb,Coords offset) {
-   int i = 0, n = 0;
+CollsionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntity *eb, Coords offset) {
+    int i = 0, n = 0;
 
     BoundingCube *a = ea->boundings[0], *b = eb->boundings[0], *awin; //nie bwin tylko awin
     e_loc sa = 9999999999999, sb = b->width * b->height;
@@ -34,11 +34,11 @@ CollsionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntit
     } else {
         ret.collided = false;
     }
-    return ret; 
- 
+    return ret;
+
 }
 
-CollsionInfo CollisionDetector::roomCollide(RoomEntity *r, PhysicalEntity *e,Coords offset) {
+CollsionInfo CollisionDetector::roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset) {
     CollsionInfo ci;
     return ci;
 }
@@ -135,10 +135,10 @@ Vector3d CollisionDetector::cTest(BoundingCube *a, BoundingCube *b, Coords offse
         }
     }
 
-    return res; 
+    return res;
 }
 
-bool CollisionDetector::hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset) { 
+bool CollisionDetector::hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset) {
     Vector3d amax, amin, bmax, bmin;
     amax = a->max + offset;
     amin = a->min + offset;
@@ -155,11 +155,11 @@ bool CollisionDetector::hitTest(BoundingCube *a, BoundingCube *b, Vector3d offse
             amax.z > bmin.z &&
             amin.z < bmax.z
             );
-    return collide; 
+    return collide;
 }
 
-bool CollisionDetector::roomHitTest(BoundingCube *a,BoundingCube *b,Vector3d offset) {
-      Vector3d amax, amin, bmax, bmin;
+bool CollisionDetector::roomHitTest(BoundingCube *a, BoundingCube *b, Vector3d offset) {
+    Vector3d amax, amin, bmax, bmin;
     amax = a->max + offset;
     amin = a->min + offset;
     bmax = b->max + offset;
@@ -176,4 +176,30 @@ bool CollisionDetector::roomHitTest(BoundingCube *a,BoundingCube *b,Vector3d off
             amax.z > bmax.z
             );
     return collide;
+}
+
+CollisionDetector::CollisionDetector() {
+
+    broadphase = new btDbvtBroadphase();
+
+    collisionConfiguration = new btDefaultCollisionConfiguration();
+    dispatcher = new btCollisionDispatcher(collisionConfiguration);
+}
+
+CollisionDetector::~CollisionDetector() {
+
+}
+
+void CollisionDetector::addRoom(RoomEntity *room) {
+    btTriangleMesh *mTriMesh = new btTriangleMesh();
+    Shape *s = room->model;
+    btVector3 *v;
+    for (size_t i = 0; i < s->f_count; i++) {
+        v = new btVector3[3];
+        for (size_t n = 0; n < s->v_per_poly; n++) {
+            Vector3d vertex = s->vertices[s->faces[i].index[n]];
+            v[n] = btVector3(vertex.x, vertex.y, vertex.z);
+        }
+        mTriMesh->addTriangle(v[0], v[1], v[2]);
+    }
 }
