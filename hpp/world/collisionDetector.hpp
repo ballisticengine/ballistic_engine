@@ -28,6 +28,7 @@ public:
     CollisionDetector();
     ~CollisionDetector();
     void addRoom(RoomEntity *room);
+    void addEntity(Entity *entity);
     CollsionInfo objectsCollide(PhysicalEntity *a, PhysicalEntity *b, Coords offset);
     CollsionInfo roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset);
 

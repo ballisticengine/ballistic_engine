@@ -203,3 +203,7 @@ void CollisionDetector::addRoom(RoomEntity *room) {
         mTriMesh->addTriangle(v[0], v[1], v[2]);
     }
 }
+
+void CollisionDetector::addEntity(Entity *entity) {
+    
+}
