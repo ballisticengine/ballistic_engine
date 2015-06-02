@@ -116,7 +116,7 @@ void World::moveEntities() {
 //    }
 
    
- 
+    collisions.step(lt);
     this->moveEntity((PhysicalEntity *) & this->observer, lt, false);
 }
 
@@ -128,6 +128,7 @@ void World::operator()() {
     int n=0;
     while (!EngineState::getInstance()->exit()) {
 
+        
         this->moveEntities();
 
     }

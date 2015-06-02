@@ -134,6 +134,7 @@ bool World::parseXml(string &fn) {
                 //oe->face(rx,ry,rz);
                 //oe->velocity.t.x=10;
                 roomE->addObjectEntity(oe);
+                collisions.addEntity((Entity *)oe);
                 if (mi->s->frame_count > 0) {
                     roomE->model_animator.addShape(mi->s);
                 }

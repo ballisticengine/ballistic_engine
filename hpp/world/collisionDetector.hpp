@@ -18,17 +18,18 @@ struct CollsionInfo {
 
 class CollisionDetector {
 private:
-    Vector3d cTest(BoundingCube *a, BoundingCube *b, Coords offset);
-    bool hitTest(BoundingCube *a, BoundingCube *b, Vector3d offset);
-    bool roomHitTest(BoundingCube *a, BoundingCube *b, Vector3d offset);
     btBroadphaseInterface* broadphase;
     btDefaultCollisionConfiguration* collisionConfiguration;
     btCollisionDispatcher* dispatcher;
+    btSequentialImpulseConstraintSolver* solver;
+    btDiscreteDynamicsWorld* dynamicsWorld;
+    btAlignedObjectArray<btCollisionShape*> collisionShapes;
 public:
     CollisionDetector();
     ~CollisionDetector();
     void addRoom(RoomEntity *room);
     void addEntity(Entity *entity);
+    void step(e_loc timediff);
     CollsionInfo objectsCollide(PhysicalEntity *a, PhysicalEntity *b, Coords offset);
     CollsionInfo roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset);
 
