@@ -42,8 +42,11 @@ TEST(CollisionDetector, CollisionDetectorTest) {
     e2->name = "Entity2";
     e1->addBoundingBox(bounding1);
     e2->addBoundingBox(bounding2);
+    e1->locate(0,0,0);
+    e2->locate(0.5,0.5,0.5);
     collisions.addEntity((Entity *) e1);
     collisions.addEntity((Entity *) e2);
+    //collisions.step(1);
     collisions.objectsCollide(e1,e2,c);
 }
 

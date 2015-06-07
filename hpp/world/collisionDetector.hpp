@@ -22,7 +22,7 @@ private:
     btDefaultCollisionConfiguration* collisionConfiguration;
     btCollisionDispatcher* dispatcher;
     btSequentialImpulseConstraintSolver* solver;
-    btDiscreteDynamicsWorld* dynamicsWorld;
+    btCollisionWorld* dynamicsWorld;
     btAlignedObjectArray<btCollisionShape*> collisionShapes;
     int numContacts;
     void transformEntity(Entity *entity);
