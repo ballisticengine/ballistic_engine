@@ -90,7 +90,7 @@ bool World::parseXml(string &fn) {
         //roomE->face(roomrot_x, roomrot_y, roomrot_z);
         roomE->calcBoundings();
         this->addRoomEntity(roomE);
-        collisions.addRoom(roomE);
+       // collisions.addRoom(roomE);
         ptree room_ents = (ptree) room.second.get_child("entities");
 
         BOOST_FOREACH(const ptree::value_type &entobj, room_ents) {
@@ -126,6 +126,7 @@ bool World::parseXml(string &fn) {
                         oe->addBoundingBox(mi->boundings[i]);
                     }
                     //oe->boundings=mi->boundings;
+                    continue;
                 } else {
                     oe->addBoundingBox(new BoundingCube(oe->getModel()));
                 }
@@ -189,6 +190,7 @@ bool World::parseXml(string &fn) {
     observer.setCamera(&default_Camera);
     observer.locate(jx, jy, jz);
     observer.face(rx, ry, rz);
+     collisions.addEntity((Entity *)&observer);
     //observer.boundings[0]->rotate(-90,0,0);
     //texf->setWD(COMMON_DIR);
     Texture *stex = (Texture *) texf->get("@car.bmp");

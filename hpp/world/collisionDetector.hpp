@@ -24,6 +24,8 @@ private:
     btSequentialImpulseConstraintSolver* solver;
     btDiscreteDynamicsWorld* dynamicsWorld;
     btAlignedObjectArray<btCollisionShape*> collisionShapes;
+    int numContacts;
+    void transformEntity(Entity *entity);
 public:
     CollisionDetector();
     ~CollisionDetector();

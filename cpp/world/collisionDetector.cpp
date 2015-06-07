@@ -1,11 +1,30 @@
 #include "world/collisionDetector.hpp"
 
 CollsionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntity *eb, Coords offset) {
-   
-   
+
+
+    this->transformEntity(ea);
+    this->transformEntity(eb);
     CollsionInfo ret;
     ret.collided = false;
-    
+    dynamicsWorld->performDiscreteCollisionDetection();
+    int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+    cout << "MF: " << numManifolds << endl;
+    for (int i = 0; i < numManifolds; i++) {
+        btPersistentManifold* contactManifold = dynamicsWorld->getDispatcher()->getManifoldByIndexInternal(i);
+        btCollisionObject* obA = (btCollisionObject*) (contactManifold->getBody0());
+        btCollisionObject* obB = (btCollisionObject*) (contactManifold->getBody1());
+        contactManifold->refreshContactPoints(obA->getWorldTransform(), obB->getWorldTransform());
+        numContacts = contactManifold->getNumContacts();
+        for (int j = 0; j < numContacts; j++) {
+            //Get the contact information
+            btManifoldPoint& pt = contactManifold->getContactPoint(j);
+            btVector3 ptA = pt.getPositionWorldOnA();
+            btVector3 ptB = pt.getPositionWorldOnB();
+            double ptdist = pt.getDistance();
+            cout << "Dist:" << ptdist << endl;
+        }
+    }
     return ret;
 
 }
@@ -32,9 +51,9 @@ CollisionDetector::~CollisionDetector() {
 }
 
 void CollisionDetector::step(e_loc timediff) {
-    //dynamicsWorld->stepSimulation(timediff);
-    dynamicsWorld->performDiscreteCollisionDetection();
-    int numManifolds = dynamicsWorld->getDispatcher()->getNumManifolds();
+    dynamicsWorld->stepSimulation(timediff);
+
+
 }
 
 void CollisionDetector::addRoom(RoomEntity *room) {
@@ -52,10 +71,45 @@ void CollisionDetector::addRoom(RoomEntity *room) {
     //collisionShapes.push_back(mTriMesh);
 }
 
+void CollisionDetector::transformEntity(Entity *entity) {
+    btTransform btt;
+    Coords c = entity->getCoords();
+    btRigidBody *body = (btRigidBody*)entity->physics_data;
+    body->getMotionState()->getWorldTransform(btt);
+    btt.setOrigin(btVector3(c.translation.x, c.translation.y, c.translation.z));
+    body->getMotionState()->setWorldTransform(btt);
+    body->setCenterOfMassTransform(btt);
+}
+
 void CollisionDetector::addEntity(Entity *entity) {
-    btCollisionShape* colShape = new btBoxShape(btVector3(
-            entity->boundings[0]->width,
+
+    cout << "Adding to CE: " << entity->name << endl;
+    Coords c=entity->getCoords();
+    btCollisionShape* colShape = new btBoxShape(btVector3(entity->boundings[0]->width,
             entity->boundings[0]->height,
-            entity->boundings[0]->depth));
-    collisionShapes.push_back(colShape);
+            entity->boundings[0]->depth
+           ));
+     cout << entity->boundings[0]->width << ", "
+             << entity->boundings[0]->height << ", "
+             << entity->boundings[0]->depth
+             << endl;
+    btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
+    btRigidBody *body = new btRigidBody(1, motionState, colShape);
+    entity->physics_data=(void *)body;
+    dynamicsWorld->addCollisionObject(body);
+    this->transformEntity(entity);
+    btTransform abt;
+    btVector3 min,max;
+    
+//    colShape->getAabb(abt,min,max);
+//    entity->boundings[0]=new BoundingCube(min.x(),
+//            min.y(),
+//            min.z(),
+//            max.x(),
+//            max.y(),
+//            max.z());
+//    
+    
+    
+    //collisionShapes.push_back(colShape);
 }

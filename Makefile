@@ -1,4 +1,6 @@
-CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/bullet -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lBulletCollision -lBulletDynamics -lLinearMath -lboost_timer -lboost_filesystem -lboost_system -lpthread -lboost_thread -lpython2.7 -lboost_python -ldl
+CFLAGS=-Ihpp/ -I/usr/include/python2.7 -I/usr/include/bullet -I/usr/include/SDL2 -lstdc++  -lSDL2 -lSDL2_ttf -lSDL2_image -lGL -lGLU -lGLEW -lBulletCollision \
+-lBulletSoftBody -lBulletDynamics -lBulletCollision -lLinearMath \
+-lboost_timer -lboost_filesystem -lboost_system -lpthread -lboost_thread -lpython2.7 -lboost_python -ldl
 OUTPUT=ballistic 
 
 

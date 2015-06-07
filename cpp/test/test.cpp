@@ -5,6 +5,9 @@
 #include "types/mathTypes.hpp"
 #include "types/plane.hpp"
 #include "types/shape.hpp"
+#include "types/boundingCube.hpp"
+#include "entities/entity.hpp"
+#include "world/collisionDetector.hpp"
 
 TEST(Vector3d, Vector3dTest) {
     Vector3d zero = Vector3d();
@@ -26,28 +29,22 @@ TEST(Vector3d, Vector3dTest) {
 
 }
 
-TEST(Plane, PlaneTest) {
+TEST(CollisionDetector, CollisionDetectorTest) {
+    CollisionDetector collisions;
+    ObjectEntity *e1 = new ObjectEntity(),
+            *e2 = new ObjectEntity();
 
-    Vector3d verts[] = {
-        Vector3d(1, 1, 0),
-        Vector3d(0, 1, 0),
-        Vector3d(0, 0, 0),
-    };
-
-    Vector3d point(0, 0, 0), point2(10, 10, 10), point3(0.2, 0.2, 0);
-
-    ASSERT_EQ(pointInPolygon(point, verts, 3), true);
-    ASSERT_EQ(pointInPolygon(point2, verts, 3), false);
-
-    Plane plane(verts[0], verts[1], verts[2]);
-    ASSERT_DOUBLE_EQ(plane.DistanceToPlane(point), 0);
+    Coords c;
     
-    e_loc dist = plane.DistanceToPlane(point2);
-    
-    Vector3d inters = plane.RayIntersection(point2, point3)-point2;
-    
-    ASSERT_EQ(pointInPolygon(inters, verts, 3), true);
-
+    BoundingCube *bounding1 = new BoundingCube(0, 0, 0, 10, 10, 10),
+            *bounding2 = new BoundingCube(0, 0, 0, 10, 10, 10);
+    e1->name = "Entity1";
+    e2->name = "Entity2";
+    e1->addBoundingBox(bounding1);
+    e2->addBoundingBox(bounding2);
+    collisions.addEntity((Entity *) e1);
+    collisions.addEntity((Entity *) e2);
+    collisions.objectsCollide(e1,e2,c);
 }
 
 int main(int argc, char **argv) {

@@ -52,6 +52,7 @@ public:
     virtual void addBoundingBox(BoundingCube *box);
     virtual BoundingCube * getBoundingBox();
     string type_hint;
+    void *physics_data;
 };
 
 typedef vector<Entity *> entity_list;
