@@ -81,12 +81,12 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
 
         for (int i = 0; i < rl_size; i++) {
             CollsionInfo ci = collisions.roomCollide(rl[i],e,c); //rl[i]->collides(e, c);
-            cvec=ci.cvec;
-            if (cvec.x || cvec.y || cvec.z) {
-                //c.translation.write();
-                lc = true;
-                PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &cvec);
-            }
+//            cvec=ci.cvec;
+//            if (cvec.x || cvec.y || cvec.z) {
+//                //c.translation.write();
+//                lc = true;
+//                PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &cvec);
+//            }
         }
     }
 
@@ -108,15 +108,16 @@ void World::moveEntities() {
     x, y, z = 0;
     obj_list things = this->getActiveRoom()->models;
     time_int lt = time.getDiffR();
-//    for (int i = 0; i < things.size(); i++) {
-//
-//        ObjectEntity *e = things[i];
-//        this->moveEntity((PhysicalEntity *) e, lt, false);
-//        
-//    }
+    collisions.step(lt,rooms);
+    for (int i = 0; i < things.size(); i++) {
+
+        ObjectEntity *e = things[i];
+       // this->moveEntity((PhysicalEntity *) e, lt, false);
+        
+    }
 
    
-    collisions.step(lt);
+    
     this->moveEntity((PhysicalEntity *) & this->observer, lt, false);
 }
 

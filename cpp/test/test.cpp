@@ -7,6 +7,8 @@
 #include "types/shape.hpp"
 #include "types/boundingCube.hpp"
 #include "entities/entity.hpp"
+#include "entities/observerEntity.hpp"
+#include "entities/ObjectEntity.hpp"
 #include "world/collisionDetector.hpp"
 
 TEST(Vector3d, Vector3dTest) {
@@ -31,22 +33,24 @@ TEST(Vector3d, Vector3dTest) {
 
 TEST(CollisionDetector, CollisionDetectorTest) {
     CollisionDetector collisions;
-    ObjectEntity *e1 = new ObjectEntity(),
-            *e2 = new ObjectEntity();
+    ObjectEntity *e1 = new ObjectEntity();        
+    ObserverEntity *e2 = new ObserverEntity();
 
     Coords c;
     
     BoundingCube *bounding1 = new BoundingCube(0, 0, 0, 10, 10, 10),
             *bounding2 = new BoundingCube(0, 0, 0, 10, 10, 10);
     e1->name = "Entity1";
-    e2->name = "Entity2";
+    e2->name = "Observer";
     e1->addBoundingBox(bounding1);
-    e2->addBoundingBox(bounding2);
+  
     e1->locate(0,0,0);
-    e2->locate(0.5,0.5,0.5);
+    e2->locate(0,0,0);
+    
     collisions.addEntity((Entity *) e1);
     collisions.addEntity((Entity *) e2);
     //collisions.step(1);
+    //e2->translate(-100,0,0);
     collisions.objectsCollide(e1,e2,c);
 }
 

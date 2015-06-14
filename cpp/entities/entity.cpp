@@ -28,17 +28,17 @@ void Entity::translate(e_loc x, e_loc y, e_loc z) {
     this->x += x;
     this->y += y;
     this->z += z;
-    for (size_t i = 0; i < boundings.size(); i++) {
-        boundings[i]->max.x -= x;
-        boundings[i]->max.y -= y;
-        boundings[i]->max.z -= z;
-        boundings[i]->min.x -= x;
-        boundings[i]->min.y -= y;
-        boundings[i]->min.z -= z;
-        boundings[i]->loc.x = this->x;
-        boundings[i]->loc.y = this->y;
-        boundings[i]->loc.z = this->z;
-    }
+//    for (size_t i = 0; i < boundings.size(); i++) {
+//        boundings[i]->max.x -= x;
+//        boundings[i]->max.y -= y;
+//        boundings[i]->max.z -= z;
+//        boundings[i]->min.x -= x;
+//        boundings[i]->min.y -= y;
+//        boundings[i]->min.z -= z;
+//        boundings[i]->loc.x = this->x;
+//        boundings[i]->loc.y = this->y;
+//        boundings[i]->loc.z = this->z;
+//    }
 
 }
 
@@ -46,17 +46,17 @@ void Entity::locate(e_loc x, e_loc y, e_loc z) {
     this->x = x;
     this->y = y;
     this->z = z;
-    for (size_t i = 0; i < boundings.size(); i++) {
-        boundings[i]->max.x -= x;
-        boundings[i]->max.y -= y;
-        boundings[i]->max.z -= z;
-        boundings[i]->min.x -= x;
-        boundings[i]->min.y -= y;
-        boundings[i]->min.z -= z;
-        boundings[i]->loc.x = this->x;
-        boundings[i]->loc.y = this->y;
-        boundings[i]->loc.z = this->z;
-    }
+//    for (size_t i = 0; i < boundings.size(); i++) {
+//        boundings[i]->max.x -= x;
+//        boundings[i]->max.y -= y;
+//        boundings[i]->max.z -= z;
+//        boundings[i]->min.x -= x;
+//        boundings[i]->min.y -= y;
+//        boundings[i]->min.z -= z;
+//        boundings[i]->loc.x = this->x;
+//        boundings[i]->loc.y = this->y;
+//        boundings[i]->loc.z = this->z;
+//    }
 }
 
 void Entity::syncBounding() {
@@ -74,7 +74,7 @@ void Entity::translate(Coords c) {
 }
 
 Entity::Entity() {
-
+    parent=0;
     no_collisions = false;
 }
 

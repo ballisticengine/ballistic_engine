@@ -36,38 +36,41 @@ void ObserverEntity::setCamera(Camera *c) {
 
 }
 
+
+
 void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) { //tu podejżane (bo w Entity jest duplikacja)
     this->x += x;
     this->y += y;
     this->z += z;
    
-        boundings[0]->max.x += x;
-        boundings[0]->max.y += y;
-        boundings[0]->max.z += z;
-        boundings[0]->min.x += x;
-        boundings[0]->min.y += y;
-        boundings[0]->min.z += z;
-        boundings[0]->loc.x = this->x;
-        boundings[0]->loc.y = this->y;
-        boundings[0]->loc.z = this->z;
+//        boundings[0]->max.x += x;
+//        boundings[0]->max.y += y;
+//        boundings[0]->max.z += z;
+//        boundings[0]->min.x += x;
+//        boundings[0]->min.y += y;
+//        boundings[0]->min.z += z;
+//        boundings[0]->loc.x = this->x;
+//        boundings[0]->loc.y = this->y;
+//        boundings[0]->loc.z = this->z;
    
     this->cam->translate(x, y, z);
 }
 
 void ObserverEntity::locate(e_loc x, e_loc y, e_loc z) {
-    this->x = x;
-    this->y = y;
-    this->z = z;
+    Entity::locate(x,y,y);
+    //    this->x = x;
+//    this->y = y;
+//    this->z = z;
     
-        boundings[0]->max.x += x;
-        boundings[0]->max.y += y;
-        boundings[0]->max.z += z;
-        boundings[0]->min.x += x;
-        boundings[0]->min.y += y;
-        boundings[0]->min.z += z;
-        boundings[0]->loc.x = this->x;
-        boundings[0]->loc.y = this->y;
-        boundings[0]->loc.z = this->z;
+//        boundings[0]->max.x += x;
+//        boundings[0]->max.y += y;
+//        boundings[0]->max.z += z;
+//        boundings[0]->min.x += x;
+//        boundings[0]->min.y += y;
+//        boundings[0]->min.z += z;
+//        boundings[0]->loc.x = this->x;
+//        boundings[0]->loc.y = this->y;
+//        boundings[0]->loc.z = this->z;
     
     this->cam->locate(x, y, z);
 
@@ -119,10 +122,10 @@ Camera * ObserverEntity::getCamera() {
 
 ObserverEntity::ObserverEntity() {
     //boundings.push_back(new BoundingCube(7, 30, 7));
-    boundings.push_back(new BoundingCube(1, 1, 1));
+    boundings.push_back(new BoundingCube(10, 10, 10));
     headbob_i = 0;
     bob_timer.getDiffR();
-    this->cam = cam;
+    this->cam = &dummy_camera;
     lock=false;
 }
 

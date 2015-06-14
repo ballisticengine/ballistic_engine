@@ -89,7 +89,7 @@ void BoundingCube::calculate(Shape * s) {
 		 min.z=s->vertices[i].z;
 		}
 	}
-
+//
 	e_loc tmp1,tmp2;
         tmp1=min.z;
         tmp2=max.z;

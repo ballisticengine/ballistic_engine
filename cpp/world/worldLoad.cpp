@@ -87,10 +87,11 @@ bool World::parseXml(string &fn) {
                 rz = room.second.get<e_loc>("location.z")
                 ;
         roomE->locate(rx, ry, rz);
+        //collisions.setWorldTransform(Vector3d(rx,ry,rz));
         //roomE->face(roomrot_x, roomrot_y, roomrot_z);
         roomE->calcBoundings();
         this->addRoomEntity(roomE);
-       // collisions.addRoom(roomE);
+        collisions.addRoom(roomE);
         ptree room_ents = (ptree) room.second.get_child("entities");
 
         BOOST_FOREACH(const ptree::value_type &entobj, room_ents) {
@@ -134,6 +135,7 @@ bool World::parseXml(string &fn) {
                 current_e = (Entity *) oe;
                 //oe->face(rx,ry,rz);
                 //oe->velocity.t.x=10;
+                oe->parent=(Entity *)roomE;
                 roomE->addObjectEntity(oe);
                 collisions.addEntity((Entity *)oe);
                 if (mi->s->frame_count > 0) {
@@ -190,7 +192,7 @@ bool World::parseXml(string &fn) {
     observer.setCamera(&default_Camera);
     observer.locate(jx, jy, jz);
     observer.face(rx, ry, rz);
-     collisions.addEntity((Entity *)&observer);
+   collisions.addEntity((Entity *)&observer);
     //observer.boundings[0]->rotate(-90,0,0);
     //texf->setWD(COMMON_DIR);
     Texture *stex = (Texture *) texf->get("@car.bmp");
