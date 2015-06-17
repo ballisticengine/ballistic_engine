@@ -93,7 +93,7 @@ void CollisionDetector::addRoom(RoomEntity *room) {
         v = new btVector3[3];
         for (size_t n = 0; n < s->v_per_poly; n++) {
             Vector3d vertex = s->vertices[s->faces[i].index[n]];
-            v[n] = btVector3(vertex.x, vertex.y, vertex.z);
+            v[n] = btVector3(-vertex.x, -vertex.y, -vertex.z);
         }
         mTriMesh->addTriangle(v[0], v[1], v[2]);
     }
