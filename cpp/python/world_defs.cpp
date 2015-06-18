@@ -39,10 +39,17 @@ BOOST_PYTHON_MODULE(World) {
             .def_readonly("depth", &BoundingCube::depth)
             ;
 
-    bp::class_<CollsionInfo, CollsionInfo *>("CollsionInfo")
-            .def_readonly("cvec", &CollsionInfo::cvec)
-            .def_readonly("nameA", &CollsionInfo::nameA)
-            .def_readonly("nameB", &CollsionInfo::nameB)
+    bp::class_<CollisionParty, CollisionParty *>("CollisionInfo")
+        .def_readonly("cvec",&CollisionParty::cvec)
+        .def_readonly("name",&CollisionParty::name)
+        .def_readonly("diff",&CollisionParty::diff)
+    ;
+    
+    bp::class_<CollisionInfo, CollisionInfo *>("CollisionInfo")
+            .def_readonly("A", &CollisionInfo::A)
+            .def_readonly("B", &CollisionInfo::B)
+            .def_readonly("distance", &CollisionInfo::distance)
+            .def_readonly("collided", &CollisionInfo::collided)
             ;
 
     bp::class_<Entity, Entity *>("Entity")

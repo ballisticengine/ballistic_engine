@@ -76,9 +76,9 @@ void RoomEntity::removeObjectEntity(string name) {
     models.erase(models.begin() + i);
 }
 
-//CollsionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
+//CollisionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
 //    //ray_pos jest już w ent
-//    CollsionInfo ci;
+//    CollisionInfo ci;
 //    Vector3d a,b,c;
 //    
 //    bool pos=false;

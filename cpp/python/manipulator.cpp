@@ -46,7 +46,7 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             a = (PhysicalEntity *) paramA;
             b = (PhysicalEntity *) paramB;
             //vector cvec=*(vector *)paramC;
-            CollsionInfo ci = *(CollsionInfo *) paramC;
+            CollisionInfo ci = *(CollisionInfo *) paramC;
             f(boost::ref(*a), boost::ref(*b), boost::ref(ci));
         } else if (name == "EntityMovement") {
             PhysicalEntity *a;
@@ -56,7 +56,7 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             PhysicalEntity *a;
             a = (PhysicalEntity *) paramA;
             RoomEntity *r = (RoomEntity *) paramB;
-            Vector3d cvec = *(Vector3d *) paramC;
+            CollisionInfo cvec = *(CollisionInfo *) paramC;
             f(boost::ref(*a), boost::ref(*r), boost::ref(cvec));
         } else if (name == "MouseMove") {
 

@@ -17,13 +17,13 @@ class manipulatorClass(object):
         self.hud=hud
 
 
-    def onEntityMovement(self,entity):
+    def onEntityMovement(self, entity):
         pass
 
-    def onEntityCollision(self,entitya,entityb,cvec):
+    def onEntityCollision(self,entitya,entityb, collision_info):
        pass
 
-    def onLevelCollision(self,entity,room,cvec):
+    def onLevelCollision(self,entity,room, collision_info):
        pass
 
 

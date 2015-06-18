@@ -47,7 +47,9 @@ LibLoad.o: cpp/libload/LibLoad.cpp
 timerdefs.o: cpp/python/timer_defs.cpp
 	g++ $(CFLAGS) -c $^ -o $@
 
-collision.o: cpp/world/collisionDetector.cpp
+
+
+collision.o: cpp/physics/collisionDetector.cpp
 	g++ $(CFLAGS)  -c $^ -o $@
 
 weapon.o: cpp/entities/weapon.cpp

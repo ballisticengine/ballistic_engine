@@ -11,15 +11,21 @@
 #include "types/mathTypes.hpp"
 
 
-struct CollsionInfo {
-    Vector3d cvec;
-    string nameA,nameB;
+struct CollisionParty {
+    Vector3d cvec,diff;
+    string name;
+    
+};
+
+struct CollisionInfo {
+    CollisionParty A,B;
     bool collided;
+    e_loc distance;
 };
 
 
-typedef map<Entity *,CollsionInfo> CiMap;
-typedef vector<CollsionInfo> CiList;
+typedef map<Entity *,CollisionInfo> CiMap;
+typedef vector<CollisionInfo> CiList;
 
 class CollisionDetector {
 private:
@@ -40,8 +46,8 @@ public:
     void addRoom(RoomEntity *room);
     void addEntity(Entity *entity);
     void step(e_loc timediff,rooms_list rooms);
-    CollsionInfo objectsCollide(PhysicalEntity *a, PhysicalEntity *b, Coords offset);
-    CollsionInfo roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset);
+    CollisionInfo objectsCollide(PhysicalEntity *a, PhysicalEntity *b, Coords offset);
+    CollisionInfo roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset);
 
 };
 

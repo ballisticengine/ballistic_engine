@@ -1,8 +1,8 @@
-#include "world/collisionDetector.hpp"
+#include "physics/collisionDetector.hpp"
 
-CollsionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntity *eb, Coords offset) {
-    CollsionInfo ret;
-    ret.collided = false;
+CollisionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntity *eb, Coords offset) {
+    CollisionInfo ci;
+    ci.collided = false;
     static unsigned long cc = 0;
     this->transformEntity(ea);
 
@@ -28,29 +28,35 @@ CollsionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntit
         }
         contactManifold->refreshContactPoints(obA->getWorldTransform(), obB->getWorldTransform());
         numContacts = contactManifold->getNumContacts();
-        CollsionInfo ci;
         for (int j = 0; j < numContacts; j++) {
             //Get the contact information
             btManifoldPoint& pt = contactManifold->getContactPoint(j);
             btVector3 ptA = pt.getPositionWorldOnA();
             btVector3 ptB = pt.getPositionWorldOnB();
             double ptdist = pt.getDistance();
-
-
-
-            ci.nameA = a->name;
-            ci.nameB = b->name;
-            //            ci.collided=true;
-            cc++;
-            cout << a->name << ", " << b->name << ", Dist:" << ptdist << ", " << cc << endl;
+            
+            ci.A.name = a->name;
+            ci.B.name = b->name;
+            ci.A.cvec.x = ptA.x();
+            ci.A.cvec.y = ptA.y();
+            ci.A.cvec.z = ptA.z();
+            ci.B.cvec.x = ptB.x();
+            ci.B.cvec.y = ptB.y();
+            ci.B.cvec.z = ptB.z();
+            ci.A.diff=ci.B.cvec-ci.A.cvec;
+            ci.B.diff=ci.A.cvec-ci.B.cvec;
+            ci.collided=true;
+            ci.distance=ptdist;
+            //cc++;
+            //cout << a->name << ", " << b->name << ", Dist:" << ptdist << ", " << cc << endl;
         }
     }
 
-    return ret;
+    return ci;
 
 }
 
-CollsionInfo CollisionDetector::roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset) {
+CollisionInfo CollisionDetector::roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset) {
 
     return this->objectsCollide(e, r, offset);
 }

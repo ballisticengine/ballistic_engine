@@ -39,7 +39,7 @@ using namespace boost::property_tree;
 #include "python/locker.hpp"
 #include "world/PreloadStore.hpp"
 #include "world/Octree.hpp"
-#include "world/collisionDetector.hpp"
+#include "physics/collisionDetector.hpp"
 
 
 
