@@ -1,5 +1,6 @@
 #include "physics/collisionDetector.hpp"
 
+//TODO: use offset to prevent from 'jumping'
 CollisionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntity *eb, Coords offset) {
     CollisionInfo ci;
     ci.collided = false;
