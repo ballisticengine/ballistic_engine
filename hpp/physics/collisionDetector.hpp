@@ -24,6 +24,8 @@ struct CollisionInfo {
 };
 
 
+
+
 typedef map<Entity *,CollisionInfo> CiMap;
 typedef vector<CollisionInfo> CiList;
 
@@ -36,7 +38,7 @@ private:
     btCollisionWorld* dynamicsWorld;
     btAlignedObjectArray<btCollisionShape*> collisionShapes;
     int numContacts;
-    void transformEntity(Entity *entity);
+    void transformEntity(Entity *entity, Vector3d v);
     Vector3d world_transform;
     CiMap collision_map;
 public:

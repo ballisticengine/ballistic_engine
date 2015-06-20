@@ -38,7 +38,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
     }
 
 
-    x.translation = c.translation - e->getCoords().translation;
+   
 
     rooms_list rl = this->rooms;
     obj_list objs = this->active_room->models;
@@ -64,7 +64,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
             if (ci.collided) {
                 lc = true;
 
-                PyScripting::getInstance()->broadcast("EntityCollision", (void *) e, (void *) objs[i], (void *) &ci);
+                //PyScripting::getInstance()->broadcast("EntityCollision", (void *) e, (void *) objs[i], (void *) &ci);
             } else {
                 //PyScripting::getInstance()->broadcast("EntityMovement",(void *)e);
             }
@@ -73,29 +73,26 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
         /*
         Kolizje z poziomem
          */
+       
         size_t rl_size = rl.size();
         CollisionInfo ci;
         for (int i = 0; i < rl_size; i++) {
             ci = collisions.roomCollide(rl[i], e, c); //rl[i]->collides(e, c);
             
             if (ci.collided) {
-                PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &ci);
-            }
-            //            cvec=ci.cvec;
-            //            if (cvec.x || cvec.y || cvec.z) {
-            //                //c.translation.write();
-            //                lc = true;
-            //                PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &cvec);
-            //            }
+                lc=true;
+                //PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &ci);
+                
+            } 
         }
     }
-
-    if (!lc) {
-        e->translate(c);
+    //TODO move this to python or stick with c++ only for collisions
+//    if (!lc) {
+        e->translate(c); 
         if (movement) {
             PyScripting::getInstance()->broadcast("EntityMovement", (void *) e);
         }
-    }
+//    }
     e->rotate(c.rotation.x, c.rotation.x, c.rotation.z);
 
 
@@ -112,7 +109,7 @@ void World::moveEntities() {
     for (int i = 0; i < things.size(); i++) {
 
         ObjectEntity *e = things[i];
-        // this->moveEntity((PhysicalEntity *) e, lt, false);
+         this->moveEntity((PhysicalEntity *) e, lt, false);
 
     }
 
