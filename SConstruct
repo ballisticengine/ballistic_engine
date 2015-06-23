@@ -9,14 +9,14 @@ ALL_LIBS = GENERAL_LIBS + BOOST_LIBS + SDL_LIBS + GL_LIBS + BULLET_LIBS
 env = Environment(CPPPATH=[
     '/usr/include/python2.7',
     '/usr/include/bullet',
-    './hpp',
+    './src/hpp',
 ])
 
 
 
 env.SharedLibrary('./bin/rendererGL', [
-    'cpp/renderer/rendererAbstract.cpp',
-    'cpp/renderer/GL/rendererGL.cpp',
+    'src/cpp/renderer/rendererAbstract.cpp',
+    'src/cpp/renderer/GL/rendererGL.cpp',
     #'cpp/renderer/GL/*',
     ]
 )
