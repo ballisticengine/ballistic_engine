@@ -16,6 +16,7 @@ env = Environment(CPPPATH=[
 
 env.SharedLibrary('./bin/rendererGL', [
     'cpp/renderer/rendererAbstract.cpp',
+    'cpp/renderer/GL/rendererGL.cpp',
     #'cpp/renderer/GL/*',
     ]
 )
