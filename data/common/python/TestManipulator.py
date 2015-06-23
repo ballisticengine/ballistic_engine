@@ -54,7 +54,7 @@ class TestManipulator(manipulatorClass):
 
         if collision_info.distance>-0.2:
             return
-        diff.write()
+        #diff.write()
         c=entity.velocity
         #c.reset()
         t=entity.getCoords()

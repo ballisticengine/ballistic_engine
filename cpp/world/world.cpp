@@ -64,7 +64,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
             if (ci.collided) {
                 lc = true;
 
-                //PyScripting::getInstance()->broadcast("EntityCollision", (void *) e, (void *) objs[i], (void *) &ci);
+                PyScripting::getInstance()->broadcast("EntityCollision", (void *) e, (void *) objs[i], (void *) &ci);
             } else {
                 //PyScripting::getInstance()->broadcast("EntityMovement",(void *)e);
             }
@@ -81,7 +81,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
             
             if (ci.collided) {
                 lc=true;
-                //PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &ci);
+                PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &ci);
                 
             } 
         }
