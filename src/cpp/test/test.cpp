@@ -9,7 +9,7 @@
 #include "entities/entity.hpp"
 #include "entities/observerEntity.hpp"
 #include "entities/ObjectEntity.hpp"
-#include "world/collisionDetector.hpp"
+#include "physics/collisionDetector.hpp"
 
 TEST(Vector3d, Vector3dTest) {
     Vector3d zero = Vector3d();

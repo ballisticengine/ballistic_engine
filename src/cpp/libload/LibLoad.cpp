@@ -19,7 +19,7 @@ SdlIO * LibLoad::getIO() {
 }
 
 RendererAbstract * LibLoad::getRenderer(string name) {
-    string file_name = "./" + name + ".so";
+    string file_name = "./bin/" + name + ".so";
     lib_handle h = this->load(file_name);
     if (!h) {
         error(name + " file ");
