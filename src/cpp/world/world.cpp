@@ -124,7 +124,7 @@ void World::operator()() {
     time.start();
 
     int n = 0;
-    while (!EngineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->getBool("exit")) {
 
 
         this->moveEntities();

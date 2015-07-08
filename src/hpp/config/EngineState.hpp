@@ -3,24 +3,28 @@
 
 #include "misc/singleton.hpp"
 #include <map>
+#include <string>
 #include <iostream>
 
 using namespace std;
 
 class EngineState : public Singleton<EngineState> {
 protected:
-	bool global_exit;
-	map<char *,void *> settings;
+	map<string,string> string_settings;
+        map<string,bool> bool_settings;
 	
 public:
-	bool debug_visual,lighting,noclip,keypress,fullscreen,desktop_fs;
-	void set(char * key,void *setting);
-	void * get(char * key);
-	void * toggle(char *key);
+	bool debug_visual,lighting,noclip,keypress,fullscreen,desktop_fs,edit_mode,light;
+	
+        void setBool(string key, bool setting);
+        void setString(string key, string setting);
+        bool getBool(string key);
+        string getString(string string);
+	void toggleBool(string key);
+        
 	EngineState();
-	void setExit(bool exit);
-	bool exit();
-	bool light;
+	
+	
 
 };
 

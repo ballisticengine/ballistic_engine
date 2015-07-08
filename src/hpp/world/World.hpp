@@ -60,6 +60,7 @@ protected:
     queue<ObjectEntity *> spawn_queue;
     OctreeNode *octree;
     CollisionDetector collisions;
+    void cleanup();
 
 public:
     ObserverEntity observer;

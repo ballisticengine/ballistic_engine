@@ -5,6 +5,7 @@
 #include "entities/light.hpp"
 #include "types/mathTypes.hpp"
 #include "world/World.hpp"
+#include "config/EngineState.hpp"
 
 PyManipulator::PyManipulator(string file) {
 
@@ -37,10 +38,11 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
     bp::object f = bp::extract<bp::object>(instance.attr(signame.c_str()));
     World *w = World::getInstance();
     HUD *h = HUD::getInstance();
+    EngineState *es = EngineState::getInstance();
     try {
         if (name == "Init") {
             //static Timer *t=new Timer();
-            f(boost::ref(*w), boost::ref(*h));
+            f(boost::ref(*w), boost::ref(*h), boost::ref(*es));
         } else if (name == "EntityCollision") {
             PhysicalEntity *a, *b;
             a = (PhysicalEntity *) paramA;

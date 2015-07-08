@@ -100,7 +100,7 @@ void RendererAbstract::setFlush(flushf flush_callback) {
 
 void RendererAbstract::operator()() {
     
-    while (!EngineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->getBool("exit")) {
         this->render();
     }
 }

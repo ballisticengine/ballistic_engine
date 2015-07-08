@@ -101,7 +101,7 @@ void SdlIO::inputThread() {
     Uint8 last_keys[ksize + 1];
     memset(last_keys, 0, ksize);
 
-    while (!EngineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->getBool("exit")) {
         delta_x = delta_y = 0;
         mouse_state = SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
 
@@ -158,11 +158,11 @@ void SdlIO::eventLoop() {
 
 
     Coords vel;
-    while (!EngineState::getInstance()->exit()) {
+    while (!EngineState::getInstance()->getBool("exit")) {
         while (SDL_PollEvent(& event)) {
 
             if (event.type == SDL_QUIT) {
-                EngineState::getInstance()->setExit(true);
+                EngineState::getInstance()->setBool("exit", true);
             }
 
             if (event.type == SDL_KEYDOWN) {
@@ -184,7 +184,7 @@ void SdlIO::eventLoop() {
                     case SDLK_F3:
                         EngineState::getInstance()->noclip = !EngineState::getInstance()->noclip;
                         break;
-
+    
                     case SDLK_f:
                         toggleFullscreen();
 
@@ -199,7 +199,7 @@ void SdlIO::eventLoop() {
                         break;
 
                     case SDLK_ESCAPE:
-                        EngineState::getInstance()->setExit(true);
+                        EngineState::getInstance()->setBool("exit", true);
                         break;
                 }
 

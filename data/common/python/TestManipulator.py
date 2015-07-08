@@ -45,6 +45,7 @@ class TestManipulator(manipulatorClass):
         print entitya.name, entityb.name
 
     def onLevelCollision(self,entity,room, collision_info):
+        print self.engine_state.getBool('mode')
         diff=collision_info.A.diff
         #print collision_info.A.name, diff.write(),self.cc
 

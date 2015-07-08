@@ -14,7 +14,7 @@ void Animator::stop() {
 }
 
 void Animator::operator()() {
-	while(!(stop_animation || state->exit())) {
+	while(!(stop_animation || state->getBool("exit"))) {
 		animate();
 	}
 }

@@ -30,6 +30,7 @@ using namespace std;
 #include "types/shape.hpp"
 
 #include "misc/utils.hpp"
+#include "config/EngineState.hpp"
 
 #include "python/scripting.hpp"
 #include "libload/LibLoad.hpp"

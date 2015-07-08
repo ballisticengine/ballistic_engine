@@ -12,9 +12,10 @@ class manipulatorClass(object):
     score=0
 
 
-    def onInit(self,world,hud):
-        self.world=world
-        self.hud=hud
+    def onInit(self, world, hud, engine_state):
+        self.world = world
+        self.hud = hud
+        self.engine_state = engine_state
 
 
     def onEntityMovement(self, entity):
