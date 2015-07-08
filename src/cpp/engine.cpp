@@ -1,3 +1,8 @@
+/*
+ TODO: engine state switching
+ * States: normal - edit
+ * In edit S saves current level to file
+ */
 #include "engine.hpp"
 
 void Engine::pythonInit() {
@@ -20,7 +25,7 @@ void Engine::prepare() {
 
     VideoData vd = *Config::getInstance()->getVD();
 
-    r = LibLoad::getInstance()->getRenderer(Config::getInstance()->getRenderer());//RendererGL::getInstance();
+    r = LibLoad::getInstance()->getRenderer(Config::getInstance()->getRenderer());
     
     cout << "IO\n";
     
