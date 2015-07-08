@@ -25,8 +25,8 @@ Config::Config() {
     vd.frustum_y = pt.get<float>("config.screen.frustum_height");
     
     
-    EngineState::getInstance()->fullscreen = pt.get<bool>("config.screen.fullscreen");
-    EngineState::getInstance()->desktop_fs = pt.get<bool>("config.screen.use_desktop_fs");
+    EngineState::getInstance()->setBool("fullscreen",pt.get<bool>("config.screen.fullscreen"));
+    EngineState::getInstance()->setBool("desktop_fs", pt.get<bool>("config.screen.use_desktop_fs"));
 
     start_level = pt.get<string>("config.game.start_level");
     ptree scripts_xml = pt.get_child("config.scripts");

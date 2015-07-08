@@ -1,10 +1,6 @@
 #include "config/EngineState.hpp"
 
 EngineState::EngineState() {
- debug_visual=false;
- lighting=true;
- noclip=false;
- edit_mode=false;
 
 }
 
@@ -17,6 +13,9 @@ void EngineState::setString(string key, string setting) {
 }
 
 bool EngineState::getBool(string key) {
+//    if (bool_settings.count(key)==0) {
+//        
+//    }
     return bool_settings[key];
 }
 

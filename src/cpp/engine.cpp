@@ -15,10 +15,17 @@ void Engine::prepare() {
  
     cout << "Config init..." << endl;
     Config::getInstance();
+    
     EngineState::getInstance()->setBool("exit", false);
     EngineState::getInstance()->setBool("edit_mode", false);
+    EngineState::getInstance()->setBool("debug_visual", false);
+    EngineState::getInstance()->setBool("lighting", true);
+    EngineState::getInstance()->setBool("noclip", false);
+    EngineState::getInstance()->setBool("fullscreen", false);
+    EngineState::getInstance()->setBool("desktop_fs", false);
+    EngineState::getInstance()->setBool("light", false);
     EngineState::getInstance()->setString("version", "Staging");
-   
+    
     cout << "Loading world...\n";
     World *w = (World *) World::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),

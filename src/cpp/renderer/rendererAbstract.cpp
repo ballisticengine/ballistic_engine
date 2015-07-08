@@ -66,7 +66,7 @@ void RendererAbstract::renderAllEntities() {
         this->face(c.rotation.x, c.rotation.y, c.rotation.z); 
         size_t b=0;
         this->renderFaceTexShape(ents[i]->getModel());
-        if (state->debug_visual) {
+        if (state->getBool("debug_visual")) {
             for(b=0; b<ents[i]->boundings.size(); b++) {
                 this->drawBoundingBox(ents[i]->boundings[b]);
             }
@@ -85,7 +85,7 @@ void RendererAbstract::renderAllRooms() {
         this->translate(rc.translation.x,rc.translation.y,rc.translation.z);
         this->face(rc.rotation.x,rc.rotation.y,rc.rotation.z);
         this->renderFaceTexShape((Shape *) rooms[i]->getModel());
-        if (state->debug_visual) {
+        if (state->getBool("debug_visual")) {
             size_t boundings_size = rooms[i]->boundings.size();
             for (size_t n = 0; n < boundings_size; n++) {
                 this->drawBoundingBox(rooms[i]->boundings[n]);

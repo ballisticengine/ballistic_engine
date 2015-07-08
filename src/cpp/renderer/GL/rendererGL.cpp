@@ -49,7 +49,7 @@ void RendererGL::lightSpecific(Light *l) {
 
     GLfloat position[] = {0, 0, 0, 1.0f};
 
-    if (EngineState::getInstance()->debug_visual) {
+    if (EngineState::getInstance()->getBool("debug_visual")) {
         glDisable(GL_LIGHTING);
         glBindTexture(GL_TEXTURE_2D, 0);
         glColor3f(1, 0, 0);
@@ -217,7 +217,7 @@ void RendererGL::render() {
     this->reset();
     this->positionCamera();
     this->renderAllEntities();
-    if (state->debug_visual) {
+    if (state->getBool("debug_visual")) {
         this->drawBoundingBox(w->observer.getBoundingBox());
     }
     drawHud();

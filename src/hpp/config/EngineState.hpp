@@ -10,22 +10,16 @@ using namespace std;
 
 class EngineState : public Singleton<EngineState> {
 protected:
-	map<string,string> string_settings;
-        map<string,bool> bool_settings;
-	
-public:
-	bool debug_visual,lighting,noclip,keypress,fullscreen,desktop_fs,edit_mode,light;
-	
-        void setBool(string key, bool setting);
-        void setString(string key, string setting);
-        bool getBool(string key);
-        string getString(string string);
-	void toggleBool(string key);
-        
-	EngineState();
-	
-	
+    map<string, string> string_settings;
+    map<string, bool> bool_settings;
 
+public:
+    void setBool(string key, bool setting);
+    void setString(string key, string setting);
+    bool getBool(string key);
+    string getString(string string);
+    void toggleBool(string key);
+    EngineState();
 };
 
 #endif

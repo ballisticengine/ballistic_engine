@@ -46,7 +46,7 @@ void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collisio
 
     Vector3d cvec;
     bool lc = false;
-    if (!EngineState::getInstance()->noclip && !e->no_collisions) {
+    if (!EngineState::getInstance()->getBool("noclip") && !e->no_collisions) {
 
         /*
          Kolizje z obiektami

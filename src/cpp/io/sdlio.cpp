@@ -9,7 +9,7 @@ int SdlIO::window_h = 0;
 SdlIO::SdlIO() {
     w = World::getInstance();
 
-    EngineState::getInstance()->keypress = false;
+    EngineState::getInstance()->setBool("keypress",false);
 }
 
 void SdlIO::setRenderer(RendererAbstract *r) {
@@ -41,7 +41,7 @@ void SdlIO::initWindow(SdlIO *me) {
     context = SDL_GL_CreateContext(window);
     SdlIO::me->window_w = Config::getInstance()->getVD()->width;
     SdlIO::me->window_h = Config::getInstance()->getVD()->height;
-    if (EngineState::getInstance()->fullscreen) {
+    if (EngineState::getInstance()->getBool("fullscreen")) {
         toggleFullscreen();
     }
 
@@ -52,10 +52,10 @@ void SdlIO::flush() {
 }
 
 void SdlIO::toggleFullscreen() {
-    bool fullscreen = EngineState::getInstance()->fullscreen;
+    bool fullscreen = EngineState::getInstance()->getBool("fullscreen");
     if (!fullscreen) {
 
-        if (EngineState::getInstance()->desktop_fs) {
+        if (EngineState::getInstance()->getBool("desktop_fs")) {
 
             SDL_SetWindowFullscreen(window, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_SHOWN);
             int w, h;
@@ -70,7 +70,7 @@ void SdlIO::toggleFullscreen() {
         }
 
     } else {
-        if (EngineState::getInstance()->desktop_fs) {
+        if (EngineState::getInstance()->getBool("desktop_fs")) {
             Config::getInstance()->getVD()->width = SdlIO::me->window_w;
             Config::getInstance()->getVD()->height = SdlIO::me->window_h;
         }
@@ -78,7 +78,7 @@ void SdlIO::toggleFullscreen() {
     }
 
     SdlIO::me->r->setVideoMode();
-    EngineState::getInstance()->fullscreen = !fullscreen;
+    EngineState::getInstance()->toggleBool("fullscreen");
 }
 
 size_t SdlIO::anykey(const Uint8 *state, int ksize) {
@@ -123,28 +123,28 @@ void SdlIO::inputThread() {
         }
 
         const Uint8 *keyboard_state = SDL_GetKeyboardState(&ksize);
-        int down_count=0,up_count=0;
-        
+        int down_count = 0, up_count = 0;
+
         for (size_t i = 0; i < ksize; i++) {
-            if (keyboard_state[i]==1) {
+            if (keyboard_state[i] == 1) {
                 down_count++;
-                
+
             } else {
-                if(last_keys[i]==1) {
+                if (last_keys[i] == 1) {
                     up_count++;
                 }
             }
-            last_keys[i]=keyboard_state[i];
+            last_keys[i] = keyboard_state[i];
         }
-        
+
         if (down_count) {
             PyScripting::getInstance()->broadcast("KeyDown", &keyboard_state);
         }
-        
-        if(up_count) {
+
+        if (up_count) {
             PyScripting::getInstance()->broadcast("KeyUp", &keyboard_state);
         }
-        
+
         mouse_x = mouse_y = delta_x = delta_y = 0;
     }
 
@@ -166,25 +166,25 @@ void SdlIO::eventLoop() {
             }
 
             if (event.type == SDL_KEYDOWN) {
-                EngineState::getInstance()->keypress = true;
+                EngineState::getInstance()->setBool("keypress", true);
 
                 switch (event.key.keysym.sym) {
 
 
                     case SDLK_F1:
                         //wireframes
-                        EngineState::getInstance()->debug_visual = !EngineState::getInstance()->debug_visual;
+                        EngineState::getInstance()->toggleBool("debug_visual");
                         break;
 
                     case SDLK_F2:
                         //ligthing
-                        EngineState::getInstance()->lighting = !EngineState::getInstance()->lighting;
+                        EngineState::getInstance()->toggleBool("lighting");
                         break;
 
                     case SDLK_F3:
-                        EngineState::getInstance()->noclip = !EngineState::getInstance()->noclip;
+                        EngineState::getInstance()->toggleBool("noclip");
                         break;
-    
+
                     case SDLK_f:
                         toggleFullscreen();
 
@@ -206,7 +206,7 @@ void SdlIO::eventLoop() {
             }
 
             if (event.type == SDL_KEYUP) {
-                EngineState::getInstance()->keypress = false;
+                EngineState::getInstance()->setBool("keypress", false);
 
                 switch (event.key.keysym.sym) {
                     case SDLK_LEFTBRACKET:
@@ -225,7 +225,7 @@ void SdlIO::eventLoop() {
             }
 
         }
-       r->render();
+        r->render();
     }
 }
 
