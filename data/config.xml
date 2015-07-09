@@ -19,10 +19,12 @@
             </params>
         </renderer>
         <shaders>
-            
+            <shader>
+                light
+            </shader>   
         </shaders>
         <hud>
-             <image>
+            <image>
                 <name>weapon</name>
                 <texture>@car.bmp</texture>
                 <width>1</width>
