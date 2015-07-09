@@ -27,7 +27,7 @@ protected:
 public: 
     
     RendererAbstract * getRenderer(string name);
-    SdlIO * getIO();
+//    SdlIO * getIO();
     ~LibLoad();
     
 };
