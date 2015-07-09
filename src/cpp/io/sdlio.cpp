@@ -9,7 +9,7 @@ int SdlIO::window_h = 0;
 SdlIO::SdlIO() {
     w = World::getInstance();
 
-    EngineState::getInstance()->setBool("keypress",false);
+    EngineState::getInstance()->setBool("keypress", false);
 }
 
 void SdlIO::setRenderer(RendererAbstract *r) {
@@ -91,6 +91,69 @@ size_t SdlIO::anykey(const Uint8 *state, int ksize) {
     return ret;
 }
 
+void SdlIO::keyboardInputThread() {
+    static const Uint8 * keyboard_state;
+    int ksize = 255;
+    static int last_num_keys = 0, down_count = 0, up_count = 0;
+    Uint8 last_keys[ksize], before_keys[ksize];
+    memset(last_keys, 0, ksize);
+    memset(before_keys, 0, ksize);
+    while (!EngineState::getInstance()->getBool("exit")) {
+        keyboard_state = SDL_GetKeyboardState(&ksize);
+        down_count = 0;
+        up_count = 0;
+
+        for (size_t i = 0; i < ksize; i++) {
+            //
+            if (keyboard_state[i] == 1) {
+                down_count++;
+
+            } else {
+                if (last_keys[i] == 1) {
+                    up_count++;
+                }
+            }
+            last_keys[i] = keyboard_state[i];
+        }
+
+        if (down_count) {
+            PyScripting::getInstance()->broadcast("KeyDown", &keyboard_state);
+        }
+
+        if (up_count) {
+            PyScripting::getInstance()->broadcast("KeyUp", (void *)keyboard_state);
+        }
+    }
+}
+
+void SdlIO::mouseInputThread() {
+    static int mouse_x, mouse_y, last_x, last_y, delta_x, delta_y;
+    SDL_GetMouseState(&last_x, &last_y);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+    static Uint32 mouse_state;
+    while (!EngineState::getInstance()->getBool("exit")) {
+        delta_x = delta_y = 0;
+        mouse_state = SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
+        if (mouse_x) {
+
+            delta_x = mouse_x + last_x;
+            last_x = mouse_x;
+
+        }
+
+        if (mouse_y) {
+
+            delta_y = mouse_y + last_y;
+            last_y = mouse_y;
+        }
+
+        if (delta_x != 0 || delta_y != 0) {
+            PyScripting::getInstance()->broadcast("MouseMove", &mouse_x, &mouse_y);
+        }
+        //mouse_x = mouse_y = delta_x = delta_y = 0;
+    }
+}
+
 void SdlIO::inputThread() {
     Uint32 mouse_state;
 
@@ -98,7 +161,7 @@ void SdlIO::inputThread() {
     SDL_GetMouseState(&last_x, &last_y);
     SDL_SetRelativeMouseMode(SDL_TRUE);
     int ksize = 255, last_num_keys = 0, num_keys;
-    Uint8 last_keys[ksize + 1];
+    Uint8 last_keys[ksize];
     memset(last_keys, 0, ksize);
 
     while (!EngineState::getInstance()->getBool("exit")) {
@@ -142,7 +205,9 @@ void SdlIO::inputThread() {
         }
 
         if (up_count) {
-            PyScripting::getInstance()->broadcast("KeyUp", &keyboard_state);
+           // cout << "KEYUP" << endl;
+            // Its invoked on mousemove
+             PyScripting::getInstance()->broadcast("KeyUp", last_keys); //GPF
         }
 
         mouse_x = mouse_y = delta_x = delta_y = 0;
@@ -165,12 +230,13 @@ void SdlIO::eventLoop() {
                 EngineState::getInstance()->setBool("exit", true);
             }
 
-            if (event.type == SDL_KEYDOWN) {
+            if (event.type == SDL_KEYDOWN) { //Maybe move io thread logic here...
                 EngineState::getInstance()->setBool("keypress", true);
 
+                PyScripting::getInstance()->broadcast("KeyPress", (void *)&event.key.keysym.sym);
                 switch (event.key.keysym.sym) {
-
-
+                    
+                    
                     case SDLK_F1:
                         //wireframes
                         EngineState::getInstance()->toggleBool("debug_visual");

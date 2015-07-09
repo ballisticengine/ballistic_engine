@@ -66,10 +66,18 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             int *b = (int *) paramB;
             f(*a, *b);
 
-        } else if (name == "KeyDown" || name == "KeyUp" ) {
+        } else if (name == "KeyDown") {
             Uint8 **keyboard_state = (Uint8**) paramA;
-            bp::list a=PyManipulator::arrayToList(*keyboard_state);
+            bp::list a = PyManipulator::arrayToList(*keyboard_state);
             f(a);
+        } else if (name == "KeyUp") {
+            Uint8 *keyboard_state = (Uint8*) paramA;
+            bp::list a = PyManipulator::arrayToList(keyboard_state);
+            f(a);
+        } else if (name == "KeyPress") {
+            int *key = (int *)paramA;
+            f(*key);
+
         } else {
             f();
         }

@@ -40,6 +40,8 @@ public:
     RendererAbstract *getRenderer();
     static void initWindow(SdlIO *me);
     void eventLoop();
+    void keyboardInputThread();
+    void mouseInputThread();
     void inputThread();
     SdlIO();
     ~SdlIO();

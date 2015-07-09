@@ -14,9 +14,15 @@ class TestManipulator(manipulatorClass):
 
 
     def onKeyUp(self, states):
+        #TODO: KEYUP doesn't send upped key - fix
         self.world.observer.velocity.reset()
+        #print 'Up', state_number(states)
+
+    def onKeyPress(self, key):
+        print "KP", key
 
     def onKeyDown(self, states):
+        #print 'Down', state_number(states)
         ocoords = self.world.observer.getCoords()
         step=5
         xdelta = deg2rad(ocoords.rotation.y)
@@ -45,7 +51,7 @@ class TestManipulator(manipulatorClass):
         print entitya.name, entityb.name
 
     def onLevelCollision(self,entity,room, collision_info):
-        
+
         diff=collision_info.A.diff
         #print collision_info.A.name, diff.write(),self.cc
 

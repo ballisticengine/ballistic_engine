@@ -7,6 +7,14 @@ def rad2deg(rad):
     deg = 180 * rad / 3.141
     return deg
 
+def state_number(states):
+    i = 0
+    for s in states:
+        if s:
+            return i
+        i += 1
+    return -1
+
 class manipulatorClass(object):
 
     score=0
@@ -54,7 +62,10 @@ class manipulatorClass(object):
     def onKeyDown(self,key):
         pass
 
-    def onKeyUp(self,key):
+    def onKeyUp(self, key):
+        pass
+
+    def onKeyPress(self, key):
         pass
 
     def onMouseClick(self,button):

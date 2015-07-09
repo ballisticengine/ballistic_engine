@@ -66,7 +66,9 @@ Engine::~Engine() {
 
 void Engine::start() {
    
-    boost::thread(boost::bind(&SdlIO::inputThread, SdlIO::getInstance()));
+boost::thread(boost::bind(&SdlIO::keyboardInputThread, SdlIO::getInstance()));
+boost::thread(boost::bind(&SdlIO::mouseInputThread, SdlIO::getInstance()));
+    //    boost::thread(boost::bind(&SdlIO::inputThread, SdlIO::getInstance()));
 
     io->eventLoop();
 
