@@ -201,3 +201,7 @@ bool World::parseXml(string &fn) {
    // octree=generateOctree(this->rooms);
     return true;
 }
+
+bool World::saveXml(string &fn) {
+    ptree pt;
+}

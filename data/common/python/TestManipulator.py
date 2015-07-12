@@ -19,7 +19,9 @@ class TestManipulator(manipulatorClass):
         #print 'Up', state_number(states)
 
     def onKeyPress(self, key):
-        print "KP", key
+        if key == 27:
+            self.engine_state.setBool('exit', True)
+            print "EXIT"
 
     def onKeyDown(self, states):
         #print 'Down', state_number(states)

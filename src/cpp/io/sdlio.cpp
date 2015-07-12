@@ -234,60 +234,6 @@ void SdlIO::eventLoop() {
                 EngineState::getInstance()->setBool("keypress", true);
 
                 PyScripting::getInstance()->broadcast("KeyPress", (void *)&event.key.keysym.sym);
-                switch (event.key.keysym.sym) {
-                    
-                    
-                    case SDLK_F1:
-                        //wireframes
-                        EngineState::getInstance()->toggleBool("debug_visual");
-                        break;
-
-                    case SDLK_F2:
-                        //ligthing
-                        EngineState::getInstance()->toggleBool("lighting");
-                        break;
-
-                    case SDLK_F3:
-                        EngineState::getInstance()->toggleBool("noclip");
-                        break;
-
-                    case SDLK_f:
-                        toggleFullscreen();
-
-                        break;
-
-                    case SDLK_w:
-
-                        break;
-
-                    case SDLK_s:
-
-                        break;
-
-                    case SDLK_ESCAPE:
-                        EngineState::getInstance()->setBool("exit", true);
-                        break;
-                }
-
-            }
-
-            if (event.type == SDL_KEYUP) {
-                EngineState::getInstance()->setBool("keypress", false);
-
-                switch (event.key.keysym.sym) {
-                    case SDLK_LEFTBRACKET:
-
-
-                        break;
-
-                    case SDLK_RIGHTBRACKET:
-
-
-                        break;
-                }
-
-            } else {
-
             }
 
         }
