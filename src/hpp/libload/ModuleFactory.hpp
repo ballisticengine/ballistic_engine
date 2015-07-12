@@ -33,12 +33,11 @@ class ModuleFactory : public Singleton<ModuleFactory> {
 protected:
     lib_map libs;
     void error(string name);
-    lib_handle load(string fn);
+    Module loadLib(string file_name, string entry_point_name);
 public: 
     
     void registerModule(string name, string file_name, string entry_point_name);
     void * getModuleClass(string name);
-    RendererAbstract * getRenderer(string name);
 //    SdlIO * getIO();
     ~ModuleFactory();
     
