@@ -4,20 +4,6 @@ void LibLoad::error(string name) {
     cout << "Library " << name << " error: " << dlerror() << endl;
 }
 
-//SdlIO * LibLoad::getIO() {
-//    lib_handle h = this->load("./io.so");
-//    if (!h) {
-//        error("IO ERROR");
-//    }
-//  typedef void* (*renderer_f)();
-//    renderer_f fn;
-//    fn = (renderer_f) dlsym(h, "returnSdlIo");
-//    if (!fn) {
-//        error("function ");
-//    }
-//    return (SdlIO *) fn();
-//}
-
 RendererAbstract * LibLoad::getRenderer(string name) {
     string file_name = "./bin/" + name + ".so";
     lib_handle h = this->load(file_name);
