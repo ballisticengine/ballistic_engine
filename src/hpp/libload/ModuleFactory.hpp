@@ -19,7 +19,7 @@ using namespace std;
 typedef void * lib_handle;
 typedef vector<lib_handle> lib_vector;
 
-class LibLoad : public Singleton<LibLoad> {
+class ModuleFactory : public Singleton<ModuleFactory> {
 protected:
     lib_vector libs;
     void error(string name);
@@ -28,7 +28,7 @@ public:
     
     RendererAbstract * getRenderer(string name);
 //    SdlIO * getIO();
-    ~LibLoad();
+    ~ModuleFactory();
     
 };
 
