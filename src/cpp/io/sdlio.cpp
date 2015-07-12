@@ -216,13 +216,7 @@ void SdlIO::inputThread() {
 }
 
 void SdlIO::eventLoop() {
-
     SDL_Event event;
-    float rot = 0, tr = 0;
-
-
-
-    Coords vel;
     while (!EngineState::getInstance()->getBool("exit")) {
         while (SDL_PollEvent(& event)) {
 

@@ -135,9 +135,9 @@ bool World::parseXml(string &fn) {
                 current_e = (Entity *) oe;
                 //oe->face(rx,ry,rz);
                 //oe->velocity.t.x=10;
-                oe->parent=(Entity *)roomE;
+                oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
-                collisions.addEntity((Entity *)oe);
+                collisions.addEntity((Entity *) oe);
                 if (mi->s->frame_count > 0) {
                     roomE->model_animator.addShape(mi->s);
                 }
@@ -192,16 +192,22 @@ bool World::parseXml(string &fn) {
     observer.setCamera(&default_Camera);
     observer.locate(jx, jy, jz);
     observer.face(rx, ry, rz);
-   collisions.addEntity((Entity *)&observer);
+    collisions.addEntity((Entity *) & observer);
     //observer.boundings[0]->rotate(-90,0,0);
     //texf->setWD(COMMON_DIR);
     Texture *stex = (Texture *) texf->get("@car.bmp");
     this->testsprite = new Sprite(stex);
     this->active_room = this->rooms[0];
-   // octree=generateOctree(this->rooms);
+    // octree=generateOctree(this->rooms);
     return true;
 }
 
-bool World::saveXml(string &fn) {
-    ptree pt;
+bool World::saveXml(string fn) {
+    cout << "Dumping to " << fn << endl;
+    ptree level, rooms, room;
+
+    level.put("", "level");
+
+    write_xml(fn, level);
+
 }
