@@ -1,6 +1,6 @@
 #include "python/manipulator.hpp"
 #include "entities/entity.hpp"
-#include "entities/physicalEntity.hpp"
+#include "entities/ObjectEntity.hpp"
 #include "types/types.hpp"
 #include "entities/light.hpp"
 #include "types/mathTypes.hpp"
@@ -44,19 +44,19 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             //static Timer *t=new Timer();
             f(boost::ref(*w), boost::ref(*h), boost::ref(*es));
         } else if (name == "EntityCollision") {
-            PhysicalEntity *a, *b;
-            a = (PhysicalEntity *) paramA;
-            b = (PhysicalEntity *) paramB;
+            ObjectEntity *a, *b;
+            a = (ObjectEntity *) paramA;
+            b = (ObjectEntity *) paramB;
             //vector cvec=*(vector *)paramC;
             CollisionInfo ci = *(CollisionInfo *) paramC;
             f(boost::ref(*a), boost::ref(*b), boost::ref(ci));
         } else if (name == "EntityMovement") {
-            PhysicalEntity *a;
-            a = (PhysicalEntity *) paramA;
+            ObjectEntity *a;
+            a = (ObjectEntity *) paramA;
             f(boost::ref(*a));
         } else if (name == "LevelCollision") {
-            PhysicalEntity *a;
-            a = (PhysicalEntity *) paramA;
+            ObjectEntity *a;
+            a = (ObjectEntity *) paramA;
             RoomEntity *r = (RoomEntity *) paramB;
             CollisionInfo cvec = *(CollisionInfo *) paramC;
             f(boost::ref(*a), boost::ref(*r), boost::ref(cvec));

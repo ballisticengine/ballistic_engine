@@ -45,13 +45,13 @@ using namespace boost::property_tree;
 
 
 struct PyEntityCollisionParams {
-    PhysicalEntity *a, *b;
+    ObjectEntity *a, *b;
 };
 
 class World {
 protected:
     Camera default_Camera;
-    void moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collision);
+    void moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision);
     void moveEntities();
     Timer time;
     TerrainMap *tm;

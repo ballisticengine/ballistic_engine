@@ -28,7 +28,7 @@ RoomEntity * World::getActiveRoom() {
     return this->rooms[0];
 }
 
-void World::moveEntity(PhysicalEntity *e, time_int time_diff, bool skip_collision) {
+void World::moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision) {
 
 
     Coords c = e->nextCoords(time_diff), x;
@@ -109,13 +109,13 @@ void World::moveEntities() {
     for (int i = 0; i < things.size(); i++) {
 
         ObjectEntity *e = things[i];
-         this->moveEntity((PhysicalEntity *) e, lt, false);
+         this->moveEntity((ObjectEntity *) e, lt, false);
 
     }
 
 
 
-    this->moveEntity((PhysicalEntity *) & this->observer, lt, false);
+    this->moveEntity((ObjectEntity *) & this->observer, lt, false);
 }
 
 void World::operator()() {

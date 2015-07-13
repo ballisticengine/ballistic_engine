@@ -16,9 +16,7 @@ using namespace std;
 
 typedef vector <Entity *> ent_list;
 typedef vector <ObjectEntity *> obj_list;
-
 typedef vector <Light *> lights_list;
-typedef vector <PhysicalEntity *> phys_list;
 typedef vector <Sprite *> sprite_list;
 typedef vector <Sprite *> decal_list;
 
@@ -28,14 +26,12 @@ protected:
 public:
 	ModelAnimator model_animator;
 	ent_list entities;
-	phys_list phys_entities;
 	obj_list models;
 	lights_list lights;
 	bounding_list boundings;
         decal_list decals;
 	ColorRGBA ambient_light;
 	void addEntity(Entity *e);
-	void addPhysicalEntity(PhysicalEntity *e);
 	void addObjectEntity(ObjectEntity *e);
 	void addLightEntity(Light *e);
 	void placeDecal(Sprite *decal,Coords c);
@@ -46,7 +42,7 @@ public:
         ObjectEntity * spawnShape(Shape *s,Coords c,string object_name="");
         RoomEntity();
 	~RoomEntity();
-//	virtual CollisionInfo collides(PhysicalEntity *ent,Coords offset);
+//	virtual CollisionInfo collides(ObjectEntity *ent,Coords offset);
         virtual void calcBoundings();
 };
 

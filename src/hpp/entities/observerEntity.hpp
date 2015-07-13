@@ -3,7 +3,7 @@
 
 #include "types/types.hpp"
 #include "types/mathTypes.hpp"
-#include "entities/physicalEntity.hpp"
+#include "entities/ObjectEntity.hpp"
 #include "entities/Camera.hpp"
 #include "entities/weapon.hpp"
 #include "time/timer.hpp"
@@ -31,7 +31,7 @@ public:
 
 };
 
-class ObserverEntity : public PhysicalEntity {
+class ObserverEntity : public ObjectEntity {
 protected:
     Camera *cam;
     e_loc headbob_add, headbob_i, kickback;

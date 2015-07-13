@@ -63,18 +63,16 @@ BOOST_PYTHON_MODULE(World) {
             .def_readwrite("no_collisions", &Entity::no_collisions)
             ;
 
-    bp::class_<PhysicalEntity, PhysicalEntity*, bp::bases<Entity> >("PhysicalEntity")
-            .def("getVelocity", &PhysicalEntity::getVelocity)
-            .def("setVelocity", &PhysicalEntity::setVelocity)
-            .def_readwrite("velocity", &PhysicalEntity::velocity)
-            .def_readwrite("acceleration", &PhysicalEntity::acceleration)
-            .def_readwrite("no_physics", &PhysicalEntity::no_physics)
-            .def_readwrite("weight", &PhysicalEntity::weight)
-            ;
-    
-    bp::class_<ObjectEntity, ObjectEntity*, bp::bases<PhysicalEntity> >("ObjectEntity")
+    bp::class_<ObjectEntity, ObjectEntity*, bp::bases<Entity> >("ObjectEntity")
+            .def("getVelocity", &ObjectEntity::getVelocity)
+            .def("setVelocity", &ObjectEntity::setVelocity)
+            .def_readwrite("velocity", &ObjectEntity::velocity)
+            .def_readwrite("acceleration", &ObjectEntity::acceleration)
+            .def_readwrite("no_physics", &ObjectEntity::no_physics)
+            .def_readwrite("weight", &ObjectEntity::weight)
             .def_readwrite("model", &ObjectEntity::model)
             ;
+ 
 
     bp::class_<ObserverMovement, ObserverMovement *>("ObserverMovement")
             .def_readwrite("forward", &ObserverMovement::forward)
@@ -102,7 +100,7 @@ BOOST_PYTHON_MODULE(World) {
             .def_readwrite("mouse", &ObserverState::mouse)
             ;
 
-    bp::class_<ObserverEntity, ObserverEntity*, bp::bases<PhysicalEntity> >("ObserverEntity")
+    bp::class_<ObserverEntity, ObserverEntity*, bp::bases<ObjectEntity> >("ObserverEntity")
             .def("bobHead", &ObserverEntity::bobHead)
             .def("kickBack", &ObserverEntity::kickBack)
             .def("face", &ObserverEntity::face)

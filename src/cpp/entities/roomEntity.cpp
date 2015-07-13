@@ -13,16 +13,8 @@ RoomEntity::~RoomEntity() {
 void RoomEntity::addEntity(Entity *e) {
     this->entities.push_back(e);
 }
-
-void RoomEntity::addPhysicalEntity(PhysicalEntity *e) {
-    this->phys_entities.push_back(e);
-    this->addEntity(e);
-}
-
 void RoomEntity::addObjectEntity(ObjectEntity *e) {
     this->models.push_back(e);
-
-    this->addPhysicalEntity(e);
 }
 
 void RoomEntity::addLightEntity(Light *e) {
@@ -76,7 +68,7 @@ void RoomEntity::removeObjectEntity(string name) {
     models.erase(models.begin() + i);
 }
 
-//CollisionInfo RoomEntity::collides(PhysicalEntity *ent, Coords offset) {
+//CollisionInfo RoomEntity::collides(ObjectEntity *ent, Coords offset) {
 //    //ray_pos jest już w ent
 //    CollisionInfo ci;
 //    Vector3d a,b,c;

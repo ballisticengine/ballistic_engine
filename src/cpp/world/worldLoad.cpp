@@ -104,7 +104,6 @@ bool World::parseXml(string &fn) {
             if (type == "object") {
                 string objectbraces = "[OBJECT]";
                 name = name.replace(name.find(objectbraces), objectbraces.length(), "");
-
                 e_loc sc = entobj.second.get<e_loc>("scale");
                 bool physics = entobj.second.get<bool>("physics");
                 shapef->setScale(sc);
@@ -117,7 +116,7 @@ bool World::parseXml(string &fn) {
                 if (mi->boundings.size() > 0) {
                     cout << entobj.second.get<string>("model") << " has custom bounding boxes " << endl;
                     for (int i = 0; i < mi->boundings.size(); i++) {
-                        cout << mi->boundings[i]->name << endl;
+                        cout << "Bounding " << mi->boundings[i]->name << endl;
                         //                        mi->boundings[i]->max.x+=x;
                         //                        mi->boundings[i]->max.y+=y;
                         //                        mi->boundings[i]->max.z+=z;
@@ -134,19 +133,16 @@ bool World::parseXml(string &fn) {
                 oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
                 current_e = (Entity *) oe;
                 //oe->face(rx,ry,rz);
-                //oe->velocity.t.x=10;
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
-                collisions.addEntity((Entity *) oe);
+                collisions.addEntity((Entity *) oe);              
                 if (mi->s->frame_count > 0) {
                     roomE->model_animator.addShape(mi->s);
                 }
             } else if (type == "light") {
-                //cout << "Light " << x << ", " << y << ", " << z << endl ;	
                 PointLight *l = new PointLight();
                 //l->face(-90, 0, 0);
                 l->locate(x, y, z);
-
                 ColorRGBA color;
                 color.r = entobj.second.get<float>("r");
                 color.g = entobj.second.get<float>("g");
@@ -155,22 +151,6 @@ bool World::parseXml(string &fn) {
                 current_e = (Entity *) l;
                 l->setAllColors(color);
                 roomE->addLightEntity(l);
-            } else if (type == "bounding") {
-
-                e_loc
-                minx = entobj.second.get<float>("min.x"),
-                        miny = entobj.second.get<float>("min.y"),
-                        minz = entobj.second.get<float>("min.z"),
-                        maxx = entobj.second.get<float>("max.x"),
-                        maxy = entobj.second.get<float>("max.y"),
-                        maxz = entobj.second.get<float>("max.z")
-                        ;
-                cout << "Found bounding\n";
-                cout << minx << ", " << miny << ", " << minz << ", " << maxx << ", " << maxy << ", " << maxz << endl;
-                BoundingCube *bc = new BoundingCube(minx, miny, minz, maxx, maxy, maxz);
-                bc->name = name;
-                //roomE->boundings.push_back(bc);
-                //roomE->setBoundingBox(bc);
             } else if (type == "JumpPoint") {
                 //                            jx=x;
                 //                            jy=-y;
@@ -188,7 +168,6 @@ bool World::parseXml(string &fn) {
         }
 
     }
-    cout << "Jumppoint: " << (long) jx << ", " << (long) jy << ", " << (long) jz << endl;
     observer.setCamera(&default_Camera);
     observer.locate(jx, jy, jz);
     observer.face(rx, ry, rz);
@@ -199,15 +178,24 @@ bool World::parseXml(string &fn) {
     this->testsprite = new Sprite(stex);
     this->active_room = this->rooms[0];
     // octree=generateOctree(this->rooms);
+    cout << "Loaded world" << endl;
     return true;
 }
 
 bool World::saveXml(string fn) {
     cout << "Dumping to " << fn << endl;
-    ptree level, rooms, room;
+    ptree root, level, rooms, room, r_location;
 
-    level.put("", "level");
+    
+    
+    rooms.add_child("room",room);
+    
+    
+    level.add_child("rooms",rooms);
+    root.add_child("level", level);
+    
+    this->active_room;
 
-    write_xml(fn, level);
+    write_xml(std::cout, root);
 
 }

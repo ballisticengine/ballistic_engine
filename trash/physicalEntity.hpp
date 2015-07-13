@@ -7,14 +7,14 @@
 #include "time/timer.hpp"
 
 
-class ObjectEntity : public Entity {
+class PhysicalEntity : public Entity {
 protected:
 	
 	void setIfNotZero(e_loc &a,e_loc &b);
 public:
 	Coords velocity,acceleration;
         e_loc weight;
-	ObjectEntity();
+	PhysicalEntity();
 	Coords nextCoords(time_int diff);
 	void changeVelocity(Coords velocity);
 	void setVelocity(Coords velocity);

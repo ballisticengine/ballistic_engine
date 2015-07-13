@@ -1,7 +1,7 @@
 #include "physics/collisionDetector.hpp"
 
 //TODO: use offset to prevent from 'jumping'
-CollisionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEntity *eb, Coords offset) {
+CollisionInfo CollisionDetector::objectsCollide(ObjectEntity *ea, ObjectEntity *eb, Coords offset) {
     CollisionInfo ci;
     ci.collided = false;
     static unsigned long cc = 0;
@@ -62,7 +62,7 @@ CollisionInfo CollisionDetector::objectsCollide(PhysicalEntity *ea, PhysicalEnti
 
 }
 
-CollisionInfo CollisionDetector::roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset) {
+CollisionInfo CollisionDetector::roomCollide(RoomEntity *r, ObjectEntity *e, Coords offset) {
 
     return this->objectsCollide(e, r, offset);
 }

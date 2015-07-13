@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 
-#include "entities/physicalEntity.hpp"
+#include "entities/ObjectEntity.hpp"
 #include "entities/entity.hpp"
 #include "entities/RoomEntity.hpp"
 #include "types/mathTypes.hpp"
@@ -48,8 +48,8 @@ public:
     void addRoom(RoomEntity *room);
     void addEntity(Entity *entity);
     void step(e_loc timediff,rooms_list rooms);
-    CollisionInfo objectsCollide(PhysicalEntity *a, PhysicalEntity *b, Coords offset);
-    CollisionInfo roomCollide(RoomEntity *r, PhysicalEntity *e, Coords offset);
+    CollisionInfo objectsCollide(ObjectEntity *a, ObjectEntity *b, Coords offset);
+    CollisionInfo roomCollide(RoomEntity *r, ObjectEntity *e, Coords offset);
 
 };
 
