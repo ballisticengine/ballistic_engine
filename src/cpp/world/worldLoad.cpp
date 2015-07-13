@@ -135,7 +135,7 @@ bool World::parseXml(string &fn) {
                 //oe->face(rx,ry,rz);
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
-                collisions.addEntity((Entity *) oe);              
+                collisions.addEntity((Entity *) oe);
                 if (mi->s->frame_count > 0) {
                     roomE->model_animator.addShape(mi->s);
                 }
@@ -185,31 +185,67 @@ bool World::parseXml(string &fn) {
 bool World::saveXml(string fn) {
     cout << "Dumping to " << fn << endl;
     ptree root, level, rooms, room, r_location, r_shape, s_counts, v_count, f_count,
-            vpf, uv_count;
-    
-    v_count.put("", this->active_room->getModel()->v_count);
-    f_count.put("", this->active_room->getModel()->f_count);
-    uv_count.put("", this->active_room->getModel()->uv_count);
-    vpf.put("", this->active_room->getModel()->v_per_poly);
-    
+            vpf, uv_count, s_faces, s_vertices, f_material, f_vertices,
+            f_texture;
+
+    Shape *shape = this->active_room->getModel();
+
+    v_count.put("", shape->v_count);
+    f_count.put("", shape->f_count);
+    uv_count.put("", shape->uv_count);
+    vpf.put("", shape->v_per_poly);
+
+
     s_counts.add_child("vertices", v_count);
     s_counts.add_child("faces", f_count);
     s_counts.add_child("uvs", uv_count);
     s_counts.add_child("v_p_f", vpf);
-    
+
     r_shape.add_child("count", s_counts);
-   
+
+
+    for (size_t fi = 0; fi < shape->f_count; fi++) {
+        ptree *p_face = new ptree();
+        for (size_t vi = 0; vi < shape->v_per_poly; vi++) {
+            ptree *p_vertex = new ptree(), *p_uv = new ptree();
+            p_vertex->put("index", shape->faces[fi].index[vi]);
+            *p_uv = makeUVNode(shape->faces[fi].uvs[vi].u, shape->faces[fi].uvs[vi].v);
+            p_vertex->add_child("uv", *p_uv);
+            p_face->add_child("vertex", *p_vertex);
+
+            delete p_vertex;
+        }
+        s_faces.add_child("face", *p_face);
+        delete p_face;
+    }
+
+    for (size_t vi = 0; vi < shape->v_count; vi++) {
+        ptree *vertex = new ptree(), *coords = new ptree(), *normal = new ptree();
+
+        *coords = makeLocationNode(shape->vertices[vi].x, shape->vertices[vi].y, shape->vertices[vi].z);
+        *normal = makeLocationNode(shape->normals[vi].x, shape->normals[vi].y, shape->normals[vi].z);
+        vertex->add_child("coords", *coords);
+        vertex->add_child("normal", *normal);
+        s_vertices.add_child("vertex", *vertex);
+        delete vertex;
+        delete coords;
+        delete normal;
+    }
+    
+    r_shape.add_child("faces", s_faces);
+    r_shape.add_child("vertices", s_vertices);
+    
     Coords rcoords = this->active_room->getCoords();
     ColorRGBA rambient = this->active_room->ambient_light;
-    room.add_child("location",makeLocationNode(rcoords.translation.x, rcoords.translation.y, rcoords.translation.z));
-    room.add_child("ambient_light", makeRGBANode(rambient.r,rambient.g,rambient.b,rambient.a));
+    room.add_child("location", makeLocationNode(rcoords.translation.x, rcoords.translation.y, rcoords.translation.z));
+    room.add_child("ambient_light", makeRGBANode(rambient.r, rambient.g, rambient.b, rambient.a));
     room.add_child("shape", r_shape);
-    rooms.add_child("room",room);
-    
-    
-    level.add_child("rooms",rooms);
+    rooms.add_child("room", room);
+
+
+    level.add_child("rooms", rooms);
     root.add_child("level", level);
-    
+
     this->active_room;
 
     write_xml(std::cout, root);

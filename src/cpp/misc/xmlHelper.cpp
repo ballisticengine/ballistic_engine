@@ -24,3 +24,12 @@ ptree makeRGBANode(e_loc r, e_loc g, e_loc b, e_loc a) {
       color.add_child("a", la);
       return color;
 }
+
+ptree makeUVNode(e_loc u, e_loc v) {
+    ptree uv, lu, lv;
+    lu.put("", u);
+    lv.put("", v);
+    uv.add_child("u", lu);
+    uv.add_child("v", lv);
+    return uv;
+}
