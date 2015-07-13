@@ -40,6 +40,7 @@ using namespace boost::property_tree;
 #include "world/PreloadStore.hpp"
 #include "world/Octree.hpp"
 #include "physics/collisionDetector.hpp"
+#include "misc/xmlHelper.hpp"
 
 
 

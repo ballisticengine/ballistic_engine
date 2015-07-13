@@ -184,10 +184,26 @@ bool World::parseXml(string &fn) {
 
 bool World::saveXml(string fn) {
     cout << "Dumping to " << fn << endl;
-    ptree root, level, rooms, room, r_location;
-
+    ptree root, level, rooms, room, r_location, r_shape, s_counts, v_count, f_count,
+            vpf, uv_count;
     
+    v_count.put("", this->active_room->getModel()->v_count);
+    f_count.put("", this->active_room->getModel()->f_count);
+    uv_count.put("", this->active_room->getModel()->uv_count);
+    vpf.put("", this->active_room->getModel()->v_per_poly);
     
+    s_counts.add_child("vertices", v_count);
+    s_counts.add_child("faces", f_count);
+    s_counts.add_child("uvs", uv_count);
+    s_counts.add_child("v_p_f", vpf);
+    
+    r_shape.add_child("count", s_counts);
+   
+    Coords rcoords = this->active_room->getCoords();
+    ColorRGBA rambient = this->active_room->ambient_light;
+    room.add_child("location",makeLocationNode(rcoords.translation.x, rcoords.translation.y, rcoords.translation.z));
+    room.add_child("ambient_light", makeRGBANode(rambient.r,rambient.g,rambient.b,rambient.a));
+    room.add_child("shape", r_shape);
     rooms.add_child("room",room);
     
     
