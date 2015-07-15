@@ -1,7 +1,7 @@
 #include "factories/textureFactory.hpp"
 
-void * TextureFactory::actualLoad(string fn) {
- Texture *t=new Texture(fn);
+void * TextureFactory::actualLoad(string fn, string orig_fn) {
+ Texture *t=new Texture(fn, orig_fn);
 // t->load();
  if (!loader->load(fn,t)) {
      Factory::abort("File "+fn);

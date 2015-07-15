@@ -25,6 +25,10 @@ ptree makeRGBANode(e_loc r, e_loc g, e_loc b, e_loc a) {
       return color;
 }
 
+ptree makeRGBANode(ColorRGBA c) {
+    return makeRGBANode(c.r, c.g, c.b, c.a);
+}
+
 ptree makeUVNode(e_loc u, e_loc v) {
     ptree uv, lu, lv;
     lu.put("", u);
@@ -33,3 +37,4 @@ ptree makeUVNode(e_loc u, e_loc v) {
     uv.add_child("v", lv);
     return uv;
 }
+

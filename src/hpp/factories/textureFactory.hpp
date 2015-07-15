@@ -7,7 +7,7 @@
 
 class TextureFactory : public Factory, public Singleton<TextureFactory> {
 protected:
-    virtual void * actualLoad(string fn);
+    virtual void * actualLoad(string fn, string orig_fn);
     virtual string getSubDir();
     TexLoader *loader;
 public:

@@ -30,10 +30,10 @@ void * Factory::get(string fn, bool force_common,bool clone) {
         //cout << "Factory: " << path << endl;
         //cout.flush();
         if(clone) {
-            void *p=this->actualLoad(path);
+            void *p=this->actualLoad(path, fn);
             item_ptr.push_back(p);
         } else {
-            items[fn] = this->actualLoad(path);
+            items[fn] = this->actualLoad(path, fn);
             item_ptr.push_back(items[fn]);
         }
     }

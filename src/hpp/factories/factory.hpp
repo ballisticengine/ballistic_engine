@@ -20,7 +20,7 @@ protected:
 	map <string,void *> items;
 	vector <void *> item_ptr;
 	bool force_common,uses_common;
-        virtual void * actualLoad(string fn)=0;
+        virtual void * actualLoad(string fn, string orig_fn)=0;
         virtual string getSubDir()=0;
         static void abort(string reason="");
 public:

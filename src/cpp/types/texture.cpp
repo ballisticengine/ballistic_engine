@@ -1,18 +1,22 @@
 #include "types/texture.hpp"
 
-
 Texture::Texture() {
-    
+
 }
 
-Texture::Texture(string filename) {
-    this->filename=filename;
+string Texture::getOrigFilename() {
+    return this->orig_filename;
+}
+
+Texture::Texture(string filename, string orig_filename) {
+    this->filename = filename;
+    this->orig_filename = orig_filename;
 }
 
 Texture * Texture::clone() {
-    Texture *clone=new Texture();
+    Texture *clone = new Texture();
     Uint32 rmask, gmask, bmask, amask;
-    #if SDL_BYTEORDER == SDL_BIG_ENDIAN
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
     rmask = 0xff000000;
     gmask = 0x00ff0000;
     bmask = 0x0000ff00;
@@ -23,20 +27,20 @@ Texture * Texture::clone() {
     bmask = 0x00ff0000;
     amask = 0xff000000;
 #endif
-    clone->filename=filename;
-    
+    clone->filename = filename;
+
     SDL_Rect rect;
-    rect.x=rect.y=0;
-    rect.w=this->surf->w;
-    rect.h=this->surf->h;
+    rect.x = rect.y = 0;
+    rect.w = this->surf->w;
+    rect.h = this->surf->h;
     //clone->surf=SDL_CreateRGBSurface(0,this->surf->w,this->surf->h,32,amask,bmask,gmask,rmask);
-    clone->surf=SDL_CreateRGBSurfaceFrom(this->surf->pixels,this->surf->w,this->surf->h,
+    clone->surf = SDL_CreateRGBSurfaceFrom(this->surf->pixels, this->surf->w, this->surf->h,
             32,
             this->surf->pitch,
-            amask,bmask,gmask,rmask);
+            amask, bmask, gmask, rmask);
     //SDL_BlitSurface(surf,&rect,clone->surf,&rect);
     return clone;
-    
+
 }
 
 void Texture::free() {
@@ -44,25 +48,25 @@ void Texture::free() {
 }
 
 textureFormat Texture::getFormat() {
-     string ext=Utils::getExt(this->filename);
-     return TF_RGBA;
-     if(ext=="bmp") {
-     return TF_BGR;
-     } else {
-         if(this->surf->format->BitsPerPixel==32) {
-         return TF_RGBA;
-         } else {
-             return TF_RGB;
-         }
-     }
+    string ext = Utils::getExt(this->filename);
+    return TF_RGBA;
+    if (ext == "bmp") {
+        return TF_BGR;
+    } else {
+        if (this->surf->format->BitsPerPixel == 32) {
+            return TF_RGBA;
+        } else {
+            return TF_RGB;
+        }
+    }
 }
 
 void Texture::setPixels(void *pixels) {
-    this->surf->pixels=pixels;
+    this->surf->pixels = pixels;
 }
 
 void * Texture::getPixels() {
- return surf->pixels;   
+    return surf->pixels;
 }
 
 SDL_Surface * Texture::getSurface() {
@@ -70,7 +74,7 @@ SDL_Surface * Texture::getSurface() {
 }
 
 void Texture::setSurface(SDL_Surface *surf) {
-    this->surf=surf;
+    this->surf = surf;
 }
 
 int Texture::getWidth() {
@@ -82,5 +86,5 @@ int Texture::getHeight() {
 }
 
 string Texture::getFilename() {
-	return string(this->filename);
+    return string(this->filename);
 }

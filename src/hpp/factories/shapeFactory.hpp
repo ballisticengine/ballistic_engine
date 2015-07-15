@@ -27,7 +27,7 @@ using namespace boost::property_tree;
 
 class ShapeFactory: public Factory, public Singleton<ShapeFactory> {
 protected:
-	virtual void * actualLoad(string fn);
+	virtual void * actualLoad(string fn, string orig_fn);
 	e_loc scale;
 	ptree *shp;
 	ModelAnimator *animator;

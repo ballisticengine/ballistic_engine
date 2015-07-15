@@ -8,7 +8,7 @@ ModelAnimator * ShapeFactory::getAnimator() {
     return this->animator;
 }
 
-void * ShapeFactory::actualLoad(string fn) {
+void * ShapeFactory::actualLoad(string fn, string orig_fn) {
     string ext = Utils::getExt(fn);
     ModelInfo *mi = new ModelInfo;
     mi->s = new Shape();

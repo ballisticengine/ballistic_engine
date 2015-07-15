@@ -14,8 +14,8 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
 
     ptree
     verts = geom.get_child("vertices"),
-            faces = geom.get_child("faces"),
-            uvs = geom.get_child("uvs")
+            faces = geom.get_child("faces");
+            //uvs = geom.get_child("uvs")
             ;
     size_t
     v_count = geom.get<size_t>("counts.vertices"),

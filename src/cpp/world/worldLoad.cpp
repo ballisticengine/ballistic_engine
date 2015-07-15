@@ -184,7 +184,7 @@ bool World::parseXml(string &fn) {
 
 bool World::saveXml(string fn) {
     cout << "Dumping to " << fn << endl;
-    ptree root, level, rooms, room, r_location, r_shape, s_counts, v_count, f_count,
+    ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
             vpf, uv_count, s_faces, s_vertices, f_material, f_vertices,
             f_texture;
 
@@ -201,11 +201,28 @@ bool World::saveXml(string fn) {
     s_counts.add_child("uvs", uv_count);
     s_counts.add_child("v_p_f", vpf);
 
-    r_shape.add_child("count", s_counts);
+    r_shape.put("name", "room");
+    s_geom.add_child("counts", s_counts);
+    
 
-
+    //Faces
     for (size_t fi = 0; fi < shape->f_count; fi++) {
         ptree *p_face = new ptree();
+        if (shape->textures[fi]) {
+            p_face->put("texture", shape->textures[fi]->getOrigFilename());
+        }
+
+        if (shape->materials[fi]) {
+            ptree material, shining, emit;
+            
+            material.add_child("specular", makeRGBANode(shape->materials[fi]->getSpecular()));
+            material.add_child("diffuse", makeRGBANode(shape->materials[fi]->getDiffuse()));
+            material.put("shining", shape->materials[fi]->getShininess());
+            material.put("emit", shape->materials[fi]->getEmission());
+            
+            p_face->add_child("material", material);
+        }
+
         for (size_t vi = 0; vi < shape->v_per_poly; vi++) {
             ptree *p_vertex = new ptree(), *p_uv = new ptree();
             p_vertex->put("index", shape->faces[fi].index[vi]);
@@ -214,11 +231,13 @@ bool World::saveXml(string fn) {
             p_face->add_child("vertex", *p_vertex);
 
             delete p_vertex;
+            delete p_uv;
         }
         s_faces.add_child("face", *p_face);
         delete p_face;
     }
 
+    //Vertices
     for (size_t vi = 0; vi < shape->v_count; vi++) {
         ptree *vertex = new ptree(), *coords = new ptree(), *normal = new ptree();
 
@@ -231,9 +250,10 @@ bool World::saveXml(string fn) {
         delete coords;
         delete normal;
     }
-    
-    r_shape.add_child("faces", s_faces);
-    r_shape.add_child("vertices", s_vertices);
+
+    s_geom.add_child("faces", s_faces);
+    s_geom.add_child("vertices", s_vertices);
+    r_shape.add_child("geom", s_geom);
     
     Coords rcoords = this->active_room->getCoords();
     ColorRGBA rambient = this->active_room->ambient_light;
@@ -248,6 +268,6 @@ bool World::saveXml(string fn) {
 
     this->active_room;
 
-    write_xml(std::cout, root);
+    write_xml(fn, root);
 
 }

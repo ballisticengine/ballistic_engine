@@ -29,12 +29,12 @@ enum textureFormat {
 
 class Texture {
 protected:
-    string filename;
+    string filename, orig_filename;
    
 public:
      SDL_Surface *surf;
     Texture();
-    Texture(string filename);
+    Texture(string filename, string orig_filename);
     Texture *clone();
     virtual textureFormat getFormat();
    virtual void free();
@@ -48,6 +48,8 @@ public:
     virtual int getWidth();
     virtual int getHeight();
     virtual string getFilename();
+    virtual string getOrigFilename();
+    
     
 };
 
