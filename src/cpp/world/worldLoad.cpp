@@ -183,6 +183,7 @@ bool World::parseXml(string &fn) {
 }
 
 bool World::saveXml(string fn) {
+    //TODO: No such node (vertices)
     cout << "Dumping to " << fn << endl;
     ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
             vpf, uv_count, s_faces, s_vertices, f_material, f_vertices,
