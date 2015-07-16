@@ -4,10 +4,6 @@ Texture::Texture() {
 
 }
 
-string Texture::getOrigFilename() {
-    return this->orig_filename;
-}
-
 Texture::Texture(string filename, string orig_filename) {
     this->filename = filename;
     this->orig_filename = orig_filename;
@@ -85,6 +81,3 @@ int Texture::getHeight() {
     return surf->h;
 }
 
-string Texture::getFilename() {
-    return string(this->filename);
-}

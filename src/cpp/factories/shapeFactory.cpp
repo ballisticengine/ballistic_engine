@@ -8,12 +8,13 @@ ModelAnimator * ShapeFactory::getAnimator() {
     return this->animator;
 }
 
-void * ShapeFactory::actualLoad(string fn, string orig_fn) {
+LoadedResource * ShapeFactory::actualLoad(string fn, string orig_fn) {
     string ext = Utils::getExt(fn);
     ModelInfo *mi = new ModelInfo;
     mi->s = new Shape();
     int cw = GL_CW;
     mi->s->renderer_hint = (void *) new int;
+    
     *((int *) mi->s->renderer_hint) = cw;
     if (ext == MD2_EXT) {
         LoaderMD2 *loader = LoaderMD2::getInstance();
@@ -29,12 +30,13 @@ void * ShapeFactory::actualLoad(string fn, string orig_fn) {
         LoaderXML *loader = LoaderXML::getInstance();
         //write_xml(std::cout, *shp);
         loader->loadXML(*shp, mi->s);
-        return (void *) mi->s;
+        return new LoadedResource((void *) mi->s, 0);
     } else {
         cout << "Unknown extension " << ext << endl;
         return 0;
     }
-    return (void *) mi;
+    
+    return new LoadedResource((void *) mi, (Resource *)mi);
 }
 
 Shape * ShapeFactory::getShape(string fn,bool force_common) {

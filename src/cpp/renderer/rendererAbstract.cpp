@@ -20,10 +20,10 @@ void RendererAbstract::positionLights() {
 
 void RendererAbstract::setupTextures() {
     TextureFactory *tf = TextureFactory::getInstance();
-    vector<void *> ts = tf->getAll();
+    vector<LoadedResource *> ts = tf->getAll();
     size_t ts_size = ts.size();
     for (size_t i = 0; i < ts_size; i++) { 
-        this->setupTexture((Texture *) ts[i]);
+        this->setupTexture((Texture *) ts[i]->object);
     }
 }
 

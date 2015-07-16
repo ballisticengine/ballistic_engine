@@ -1,5 +1,9 @@
 #include "factories/factory.hpp"
 
+ LoadedResource::LoadedResource(void *object, Resource *resource) : object(object), resource(resource) {
+     
+ }
+
 void Factory::abort(string reason) {
     if (reason!="") {
         cout << reason << endl;
@@ -8,6 +12,8 @@ void Factory::abort(string reason) {
     exit(1);   
 }
 
+
+ 
 void * Factory::get(string fn, bool force_common,bool clone) {
     this->force_common = force_common;
     
@@ -30,14 +36,15 @@ void * Factory::get(string fn, bool force_common,bool clone) {
         //cout << "Factory: " << path << endl;
         //cout.flush();
         if(clone) {
-            void *p=this->actualLoad(path, fn);
+            LoadedResource *p=this->actualLoad(path, fn);
             item_ptr.push_back(p);
         } else {
             items[fn] = this->actualLoad(path, fn);
             item_ptr.push_back(items[fn]);
         }
+        
     }
-    return items[fn];
+    return items[fn]->object;
 }
 
 Factory::~Factory() {
@@ -47,7 +54,7 @@ Factory::~Factory() {
     }
 }
 
-vector <void *> Factory::getAll() {
+vector <LoadedResource *> Factory::getAll() {
     return this->item_ptr;
 }
 

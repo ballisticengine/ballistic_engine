@@ -10,6 +10,7 @@ using namespace std;
 #include "types/mathTypes.hpp"
 #include "types/types.hpp"
 #include "types/material.hpp"
+#include "types/Resource.hpp"
 
 struct Face {
     unsigned int *index;
@@ -17,7 +18,7 @@ struct Face {
     UV *uvs;
 };
 
-class ShapeAbstract {
+class ShapeAbstract : public Resource {
 public:
     Vector3d *vertices, *normals;
     Face *faces;

@@ -20,6 +20,7 @@
 using namespace std;
 
 #include "misc/utils.hpp"
+#include "types/Resource.hpp"
 
 enum textureFormat {
     TF_RGBA,
@@ -27,10 +28,8 @@ enum textureFormat {
     TF_BGR,
 };
 
-class Texture {
-protected:
-    string filename, orig_filename;
-   
+class Texture : public Resource {
+  
 public:
      SDL_Surface *surf;
     Texture();
@@ -47,10 +46,6 @@ public:
     
     virtual int getWidth();
     virtual int getHeight();
-    virtual string getFilename();
-    virtual string getOrigFilename();
-    
-    
 };
 
 
