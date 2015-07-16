@@ -186,8 +186,7 @@ bool World::saveXml(string fn) {
     //TODO: No such node (vertices)
     cout << "Dumping to " << fn << endl;
     ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
-            vpf, uv_count, s_faces, s_vertices, f_material,
-            f_texture;
+            vpf, uv_count, s_faces, s_vertices, f_material, f_texture, r_entities;
 
     Shape *shape = this->active_room->getModel();
 
@@ -263,7 +262,7 @@ bool World::saveXml(string fn) {
     room.add_child("location", makeLocationNode(rcoords.translation.x, rcoords.translation.y, rcoords.translation.z));
     room.add_child("ambient_light", makeRGBANode(rambient.r, rambient.g, rambient.b, rambient.a));
     room.add_child("shape", r_shape);
-    room.put("entities", "");
+    room.add_child("entities", r_entities);
     rooms.add_child("room", room);
 
 
