@@ -30,13 +30,13 @@ LoadedResource * ShapeFactory::actualLoad(string fn, string orig_fn) {
         LoaderXML *loader = LoaderXML::getInstance();
         //write_xml(std::cout, *shp);
         loader->loadXML(*shp, mi->s);
-        return new LoadedResource((void *) mi->s, 0);
+        return new LoadedResource((void *) mi->s, (Resource *)mi->s);
     } else {
         cout << "Unknown extension " << ext << endl;
         return 0;
     }
     
-    return new LoadedResource((void *) mi, (Resource *)mi);
+    return new LoadedResource((void *) mi, (Resource *)mi->s);
 }
 
 Shape * ShapeFactory::getShape(string fn,bool force_common) {

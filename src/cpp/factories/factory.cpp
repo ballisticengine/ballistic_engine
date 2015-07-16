@@ -33,8 +33,7 @@ void * Factory::get(string fn, bool force_common,bool clone) {
             path = wd + DS + string(LVL_DIR) + DS + lvl + DS + getSubDir() + DS + fn;
             uses_common = false;
         }
-        //cout << "Factory: " << path << endl;
-        //cout.flush();
+        
         if(clone) {
             LoadedResource *p=this->actualLoad(path, fn);
             item_ptr.push_back(p);
@@ -43,6 +42,8 @@ void * Factory::get(string fn, bool force_common,bool clone) {
             item_ptr.push_back(items[fn]);
         }
         
+        items[fn]->resource->setFilename(path);
+        items[fn]->resource->setOrigFilename(fn);
     }
     return items[fn]->object;
 }
