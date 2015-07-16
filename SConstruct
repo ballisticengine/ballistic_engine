@@ -14,17 +14,17 @@ env = Environment(CPPPATH=[
     './src/hpp',
 ])
 
-shared_env = Environment(CPPPATH=[
+l_shared_env = r_shared_env = Environment(CPPPATH=[
     '/usr/include/python2.7',
     '/usr/include/bullet',
     './src/hpp',
 ])
 
-shared_env['SHLIBPREFIX'] = ''
+l_shared_env['SHLIBPREFIX'] = r_shared_env['SHLIBPREFIX'] = ''
 
 src = './src/cpp/'
 
-shared_env.SharedLibrary('./bin/rendererGL', [
+r_shared_env.SharedLibrary('./bin/rendererGL', [
 
     'src/cpp/renderer/GL/rendererGL.cpp',
     'src/cpp/renderer/rendererAbstract.cpp',
@@ -34,7 +34,20 @@ shared_env.SharedLibrary('./bin/rendererGL', [
                          LIBS=ALL_LIBS,
                          LIBPATH='.'
 )
-shared_env.Append(LINKFLAGS=['-Wl,-soname,rendererGL.so'])
+
+l_shared_env.SharedLibrary('./bin/loaders/LoaderDummy', [
+
+    'src/cpp/loaders/LoaderDummy.cpp',
+    'src/cpp/loaders/Loader.cpp',
+
+
+],
+                         LIBS=ALL_LIBS,
+                         LIBPATH='.'
+)
+l_shared_env.Append(LINKFLAGS=['-Wl,-soname,LoaderDummy.so'])
+
+r_shared_env.Append(LINKFLAGS=['-Wl,-soname,rendererGL.so'])
 
 modules = [
     Glob(src + 'engine.cpp'),
@@ -53,6 +66,7 @@ modules = [
     Glob(src + 'ui/*.cpp'),
     Glob(src + 'world/*.cpp'),
     'bin/rendererGL.so',
+   'bin/loaders/LoaderDummy.so',
 ]
 
 main_modules = modules + [Glob(src + 'main.cpp'),

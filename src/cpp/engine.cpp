@@ -35,9 +35,9 @@ void Engine::prepare() {
 
     VideoData vd = *Config::getInstance()->getVD();
 
-    ModuleFactory::getInstance()->registerModule("renderer", Config::getInstance()->getRenderer(), "returnRenderer");
+    LibLoad::getInstance()->registerModule("renderer", Config::getInstance()->getRenderer(), "returnRenderer");
     
-    r = (RendererAbstract *)ModuleFactory::getInstance()->getModuleClass("renderer");
+    r = (RendererAbstract *)LibLoad::getInstance()->getModuleClass("renderer");
     
     cout << "IO\n";
     

@@ -19,7 +19,8 @@ using namespace std;
 
 typedef void * lib_handle;
 
-struct Module {
+class Module {
+public:
     lib_handle handle;
     string entry_point_name, file_name;
     void *module_class;
@@ -29,17 +30,18 @@ struct Module {
 typedef vector<lib_handle> lib_vector;
 typedef map<string, Module> lib_map;
 
-class ModuleFactory : public Singleton<ModuleFactory> {
+class LibLoad : public Singleton<LibLoad> {
 protected:
     lib_map libs;
     void error(string name);
     Module loadLib(string file_name, string entry_point_name);
 public: 
-    
+    void loadLoader(string file_name);
+    void discoverLoaders();
     void registerModule(string name, string file_name, string entry_point_name);
     void * getModuleClass(string name);
 //    SdlIO * getIO();
-    ~ModuleFactory();
+    ~LibLoad();
     
 };
 

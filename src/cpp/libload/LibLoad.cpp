@@ -1,10 +1,14 @@
-#include "libload/ModuleFactory.hpp"
+#include "libload/LibLoad.hpp"
 
-void ModuleFactory::error(string name) {
+void LibLoad::error(string name) {
     cout << "Library " << name << " error: " << dlerror() << endl;
 }
 
-Module ModuleFactory::loadLib(string file_name, string entry_point_name) {
+void LibLoad::discoverLoaders() {
+    
+}
+
+Module LibLoad::loadLib(string file_name, string entry_point_name) {
      Module module;
     module.entry_point_name = entry_point_name;
     module.file_name = file_name;
@@ -27,17 +31,17 @@ Module ModuleFactory::loadLib(string file_name, string entry_point_name) {
     return module;
 }
 
-void ModuleFactory::registerModule(string name, string file_name, string entry_point_name) {
+void LibLoad::registerModule(string name, string file_name, string entry_point_name) {
    
     Module module = loadLib(file_name, entry_point_name);
     libs[name] = module;
 }
 
-void * ModuleFactory::getModuleClass(string name) {
+void * LibLoad::getModuleClass(string name) {
     return libs[name].module_class;
 }
 
-ModuleFactory::~ModuleFactory() {
+LibLoad::~LibLoad() {
     for(lib_map::iterator i=libs.begin(); i!=libs.end(); i++) {
         dlclose(i->second.handle);
     }
