@@ -186,7 +186,7 @@ bool World::saveXml(string fn) {
     //TODO: No such node (vertices)
     cout << "Dumping to " << fn << endl;
     ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
-            vpf, uv_count, s_faces, s_vertices, f_material, f_vertices,
+            vpf, uv_count, s_faces, s_vertices, f_material,
             f_texture;
 
     Shape *shape = this->active_room->getModel();
@@ -204,38 +204,40 @@ bool World::saveXml(string fn) {
 
     r_shape.put("name", "room");
     s_geom.add_child("counts", s_counts);
-    
+
 
     //Faces
     for (size_t fi = 0; fi < shape->f_count; fi++) {
-        ptree *p_face = new ptree();
+        ptree *p_face = new ptree(), *f_vertices = new ptree();
         if (shape->textures[fi]) {
             p_face->put("texture", shape->textures[fi]->getOrigFilename());
         }
 
         if (shape->materials[fi]) {
             ptree material, shining, emit;
-            
+
             material.add_child("specular", makeRGBANode(shape->materials[fi]->getSpecular()));
             material.add_child("diffuse", makeRGBANode(shape->materials[fi]->getDiffuse()));
             material.put("shining", shape->materials[fi]->getShininess());
             material.put("emit", shape->materials[fi]->getEmission());
-            
+
             p_face->add_child("material", material);
         }
 
         for (size_t vi = 0; vi < shape->v_per_poly; vi++) {
             ptree *p_vertex = new ptree(), *p_uv = new ptree();
-            p_vertex->put("index", shape->faces[fi].index[vi]);
+            p_vertex->put("i", shape->faces[fi].index[vi]);
             *p_uv = makeUVNode(shape->faces[fi].uvs[vi].u, shape->faces[fi].uvs[vi].v);
             p_vertex->add_child("uv", *p_uv);
-            p_face->add_child("vertex", *p_vertex);
+            f_vertices->add_child("vertex", *p_vertex);
 
             delete p_vertex;
             delete p_uv;
         }
+        p_face->add_child("vertices", *f_vertices);
         s_faces.add_child("face", *p_face);
         delete p_face;
+        delete f_vertices;
     }
 
     //Vertices
@@ -255,12 +257,13 @@ bool World::saveXml(string fn) {
     s_geom.add_child("faces", s_faces);
     s_geom.add_child("vertices", s_vertices);
     r_shape.add_child("geom", s_geom);
-    
+
     Coords rcoords = this->active_room->getCoords();
     ColorRGBA rambient = this->active_room->ambient_light;
     room.add_child("location", makeLocationNode(rcoords.translation.x, rcoords.translation.y, rcoords.translation.z));
     room.add_child("ambient_light", makeRGBANode(rambient.r, rambient.g, rambient.b, rambient.a));
     room.add_child("shape", r_shape);
+    room.put("entities", "");
     rooms.add_child("room", room);
 
 
