@@ -3,6 +3,7 @@
 
 #include "libload/LibLoad.hpp"
 #include "loaders/dynamic/Loader.hpp"
+#include "factories/factory.hpp"
 
 TEST(LibLoad, LibLoadTest) {
     LibLoad *libload = LibLoad::getInstance();
@@ -12,5 +13,9 @@ TEST(LibLoad, LibLoadTest) {
             ;
     ASSERT_NE(0, (unsigned long)l1);
     ASSERT_EQ(0, l2);
+    
+};
+
+TEST(Factory, FactoryTest) {
     
 };
