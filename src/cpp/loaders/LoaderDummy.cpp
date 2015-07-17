@@ -1,4 +1,4 @@
-#include "loaders/dynamic/LoaderDummy.hpp"
+#include "loaders/LoaderDummy.hpp"
 
 extensions_s LoaderDummy::getFileExtensions() {
     extensions_s exts;
@@ -8,6 +8,10 @@ extensions_s LoaderDummy::getFileExtensions() {
 
 void * LoaderDummy::load(string file_name) {
     return 0;
+}
+
+LoaderType LoaderDummy::getType() {
+    return OTHER;
 }
 
 extern "C" {

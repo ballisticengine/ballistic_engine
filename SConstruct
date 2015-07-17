@@ -37,8 +37,8 @@ r_shared_env.SharedLibrary('./bin/rendererGL', [
 
 l_shared_env.SharedLibrary('./bin/loaders/LoaderDummy', [
 
-    'src/cpp/loaders/dynamic/LoaderDummy.cpp',
-    'src/cpp/loaders/dynamic/Loader.cpp',
+    'src/cpp/loaders/LoaderDummy.cpp',
+    'src/cpp/loaders/Loader.cpp',
 
 
 ],
@@ -82,7 +82,5 @@ env.Program('./bin/ballistic', main_modules, LIBS=ALL_LIBS, LIBPATH='.')
 
 if 'test' in COMMAND_LINE_TARGETS:
     env.Program('./test/test', test_modules, LIBS=ALL_LIBS+TEST_LIBS, LIBPATH='.')
-
-
 
 

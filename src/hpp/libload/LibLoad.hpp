@@ -12,7 +12,7 @@ using namespace std;
 namespace fs=boost::filesystem;
 
 #include "misc/singleton.hpp"
-#include "loaders/dynamic/Loader.hpp"
+#include "loaders/Loader.hpp"
 /*
  To możnaby potraktować jako fabrykę, przywoływaną zawsze do pobrania danego podsystemu
  */
@@ -39,7 +39,7 @@ protected:
 public: 
     void registerLoader(string file_name);
     void discoverLoaders();
-    Loader * getLoaderByExtension(string ext);
+    Loader * getLoaderByExtension(string ext, LoaderType type=NONE);
     void registerModule(string name, string file_name, string entry_point_name);
     void * getModuleClass(string name);
 //    SdlIO * getIO();
