@@ -9,6 +9,8 @@ using namespace std;
 #include "misc/singleton.hpp"
 #include "config/path.hpp"
 #include "types/Resource.hpp"
+#include "libload/LibLoad.hpp"
+#include "misc/utils.hpp"
 
 /*
 Fabryka abstrakcyjna - zwraca pliki, je�li nie istniej� - �aduje

@@ -15,6 +15,7 @@ void Factory::abort(string reason) {
 
  
 void * Factory::get(string fn, bool force_common,bool clone) {
+    string ext = Utils::getExt(fn);
     this->force_common = force_common;
     
     if (items.find(fn) == items.end() || clone) {

@@ -12,8 +12,6 @@ using namespace std;
 namespace fs=boost::filesystem;
 
 #include "misc/singleton.hpp"
-#include "renderer/rendererAbstract.hpp"
-#include "io/sdlio.hpp"
 #include "loaders/dynamic/Loader.hpp"
 /*
  To możnaby potraktować jako fabrykę, przywoływaną zawsze do pobrania danego podsystemu
