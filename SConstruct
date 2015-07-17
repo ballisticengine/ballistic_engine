@@ -37,8 +37,8 @@ r_shared_env.SharedLibrary('./bin/rendererGL', [
 
 l_shared_env.SharedLibrary('./bin/loaders/LoaderDummy', [
 
-    'src/cpp/loaders/LoaderDummy.cpp',
-    'src/cpp/loaders/Loader.cpp',
+    'src/cpp/loaders/dynamic/LoaderDummy.cpp',
+    'src/cpp/loaders/dynamic/Loader.cpp',
 
 
 ],
@@ -73,7 +73,7 @@ main_modules = modules + [Glob(src + 'main.cpp'),
                           ]
 
 test_modules = modules + [
-    src+'test/test.cpp',
+    src + '/test/test.cpp',
 ]
 
 env.Append(LINKFLAGS='-rdynamic')

@@ -1,4 +1,4 @@
-#include "loaders/Loader.hpp"
+#include "loaders/dynamic/Loader.hpp"
 
 bool Loader::handlesEntension(string extension) {
     extensions_s exts = this->getFileExtensions();

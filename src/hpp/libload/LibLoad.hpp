@@ -6,13 +6,15 @@
 #include <vector>
 #include <iostream>
 #include <dlfcn.h>
+#include <boost/filesystem.hpp>
 
 using namespace std;
+namespace fs=boost::filesystem;
 
 #include "misc/singleton.hpp"
 #include "renderer/rendererAbstract.hpp"
 #include "io/sdlio.hpp"
-
+#include "loaders/dynamic/Loader.hpp"
 /*
  To możnaby potraktować jako fabrykę, przywoływaną zawsze do pobrania danego podsystemu
  */
@@ -27,17 +29,19 @@ public:
 };
 
 
-typedef vector<lib_handle> lib_vector;
+typedef vector<Module> lib_vector;
 typedef map<string, Module> lib_map;
 
 class LibLoad : public Singleton<LibLoad> {
 protected:
     lib_map libs;
+    lib_vector loads;
     void error(string name);
     Module loadLib(string file_name, string entry_point_name);
 public: 
-    void loadLoader(string file_name);
+    void registerLoader(string file_name);
     void discoverLoaders();
+    Loader * getLoaderByExtension(string ext);
     void registerModule(string name, string file_name, string entry_point_name);
     void * getModuleClass(string name);
 //    SdlIO * getIO();

@@ -15,6 +15,7 @@ void Engine::prepare() {
  
     cout << "Config init..." << endl;
     Config::getInstance();
+    LibLoad::getInstance()->discoverLoaders();
     
     EngineState::getInstance()->setBool("exit", false);
     EngineState::getInstance()->setBool("edit_mode", false);
