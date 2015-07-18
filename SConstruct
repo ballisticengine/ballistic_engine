@@ -7,6 +7,12 @@ TEST_LIBS = ['gtest', 'gtest_main' ]
 
 ALL_LIBS = GENERAL_LIBS + BOOST_LIBS + SDL_LIBS + GL_LIBS + BULLET_LIBS
 
+src = './src/cpp/'
+
+
+SConscript(src+'resources/SConstruct')
+SConscript(src+'renderer/SConstruct')
+
 
 env = Environment(CPPPATH=[
     '/usr/include/python2.7',
@@ -14,40 +20,7 @@ env = Environment(CPPPATH=[
     './src/hpp',
 ])
 
-l_shared_env = r_shared_env = Environment(CPPPATH=[
-    '/usr/include/python2.7',
-    '/usr/include/bullet',
-    './src/hpp',
-])
 
-l_shared_env['SHLIBPREFIX'] = r_shared_env['SHLIBPREFIX'] = ''
-
-src = './src/cpp/'
-
-r_shared_env.SharedLibrary('./bin/rendererGL', [
-
-    'src/cpp/renderer/GL/rendererGL.cpp',
-    'src/cpp/renderer/rendererAbstract.cpp',
-
-
-],
-                         LIBS=ALL_LIBS,
-                         LIBPATH='.'
-)
-
-l_shared_env.SharedLibrary('./bin/loaders/LoaderDummy', [
-
-    'src/cpp/loaders/LoaderDummy.cpp',
-    'src/cpp/loaders/Loader.cpp',
-
-
-],
-                         LIBS=ALL_LIBS,
-                         LIBPATH='.'
-)
-l_shared_env.Append(LINKFLAGS=['-Wl,-soname,LoaderDummy.so'])
-
-r_shared_env.Append(LINKFLAGS=['-Wl,-soname,rendererGL.so'])
 
 modules = [
     Glob(src + 'engine.cpp'),
@@ -65,8 +38,6 @@ modules = [
     Glob(src + 'time/*.cpp'),
     Glob(src + 'ui/*.cpp'),
     Glob(src + 'world/*.cpp'),
-    'bin/rendererGL.so',
-   'bin/loaders/LoaderDummy.so',
 ]
 
 main_modules = modules + [Glob(src + 'main.cpp'),
@@ -74,13 +45,21 @@ main_modules = modules + [Glob(src + 'main.cpp'),
 
 test_modules = modules + [
     src + '/test/test.cpp',
+
 ]
 
 env.Append(LINKFLAGS='-rdynamic')
 
 env.Program('./bin/ballistic', main_modules, LIBS=ALL_LIBS, LIBPATH='.')
 
+
+
 if 'test' in COMMAND_LINE_TARGETS:
-    env.Program('./test/test', test_modules, LIBS=ALL_LIBS+TEST_LIBS, LIBPATH='.')
+    test = env.Program('./test/test', test_modules, LIBS=ALL_LIBS+TEST_LIBS, LIBPATH='.')
+    test_cmd = env.Command( None, None, "./test/test" )
+
+
+
+
 
 

@@ -1,0 +1,42 @@
+
+LIBS = ['SDL2', 'SDL2_ttf', 'SDL2_image',
+        'boost_timer', 'boost_filesystem', 'boost_system', 'boost_thread', 'boost_python',
+        'stdc++', 'pthread', 'dl'
+        ]
+
+root = Dir('../../../').abspath
+
+
+
+src = root+'/src'
+
+def make_loader(file):
+    print "MAKING", file
+    env = Environment(CPPPATH=[
+    '/usr/include/python2.7',
+    '/usr/include/bullet',
+    root + '/src/hpp',
+    ])
+    env['SHLIBPREFIX'] = ''
+
+    lib = env.SharedLibrary(file, [
+
+    './loaders/'+file+'.cpp',
+    './Loader.cpp',
+    ],
+                         LIBS=LIBS,
+                         LIBPATH='.',
+    )
+    fn = file+".so"
+    env.Append(LINKFLAGS=['-Wl,-soname,'+fn])
+    Command(target = root+'/bin/loaders/'+fn,
+        source = lib,
+        action = Copy("$TARGET", "$SOURCE"))
+
+
+
+
+LOADERS = ['LoaderDummy', 'LoaderXML']
+
+for l in LOADERS:
+    make_loader(l)

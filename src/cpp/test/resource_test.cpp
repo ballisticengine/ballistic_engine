@@ -2,8 +2,8 @@
 #include <gtest/gtest.h>
 
 #include "libload/LibLoad.hpp"
-#include "loaders/Loader.hpp"
-#include "factories/factory.hpp"
+#include "resources/Loader.hpp"
+#include "resources/Factory.hpp"
 
 TEST(LibLoad, LibLoadTest) {
     LibLoad *libload = LibLoad::getInstance();

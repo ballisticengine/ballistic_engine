@@ -1,0 +1,35 @@
+LIBS = ['stdc++', 'pthread', 'dl', 'GL', 'GLEW', 'GLU' ]
+
+root = Dir('../../../').abspath
+
+
+print "The root", root
+
+
+env = Environment(CPPPATH=[
+    '/usr/include/python2.7',
+    '/usr/include/bullet',
+    root+'/src/hpp',
+])
+
+env['SHLIBPREFIX'] = ''
+
+
+
+rlib = env.SharedLibrary('rendererGL', [
+
+    './GL/rendererGL.cpp',
+    './rendererAbstract.cpp',
+
+
+],
+                         LIBS=LIBS,
+                         LIBPATH='.'
+)
+
+env.Append(LINKFLAGS=['-Wl,-soname,rendererGL.so'])
+c = Command(target = root+'/bin/',
+        source = rlib,
+        action = Copy("$TARGET", "$SOURCE"))
+
+env.AlwaysBuild( c )
