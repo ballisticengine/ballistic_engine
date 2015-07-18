@@ -16,3 +16,7 @@ void Resource::setFilename(string fn) {
 void Resource::setOrigFilename(string fn) {
     this->orig_filename = fn;
 }
+
+Resource * Resource::getResource() {
+    return (Resource *)this;
+}

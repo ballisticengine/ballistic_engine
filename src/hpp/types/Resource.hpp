@@ -13,6 +13,7 @@ public:
     virtual string getOrigFilename();
     virtual void setFilename(string fn);
     virtual void setOrigFilename(string fn);
+    Resource * getResource();
     
 };
 

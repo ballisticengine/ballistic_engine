@@ -45,6 +45,7 @@ main_modules = modules + [Glob(src + 'main.cpp'),
 
 test_modules = modules + [
     src + '/test/test.cpp',
+    src + 'resources/ResourceManager.cpp'
 
 ]
 

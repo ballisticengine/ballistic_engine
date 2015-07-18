@@ -3,7 +3,7 @@
 
 #include "libload/LibLoad.hpp"
 #include "resources/Loader.hpp"
-#include "resources/Factory.hpp"
+#include "resources/ResourceManager.hpp"
 
 TEST(LibLoad, LibLoadTest) {
     LibLoad *libload = LibLoad::getInstance();
@@ -26,6 +26,6 @@ TEST(LibLoad, LibLoadTest) {
     
 };
 
-TEST(Factory, FactoryTest) {
+TEST(ResourceManager, ResourceManagerTest) {
     
 };
