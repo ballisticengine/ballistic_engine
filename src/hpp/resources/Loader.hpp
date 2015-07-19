@@ -8,6 +8,8 @@
 using namespace std;
 
 
+#include "resources/exceptions.hpp"
+
 enum LoaderType {
     LEVEL,
     TEXTURE,

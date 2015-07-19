@@ -21,7 +21,7 @@ void * TextureLoader::load(string file_name) {
     
     SDL_Surface * surf = IMG_Load(file_name.c_str()), *surf2;
     if (!surf) {
-        return 0;
+        throw ResourceNotFound(file_name);
     }
     surf2 = SDL_ConvertSurfaceFormat(surf, SDL_PIXELFORMAT_ABGR8888, 0);
 

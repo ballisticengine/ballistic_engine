@@ -38,7 +38,7 @@ modules = [
       Glob(src + 'ui/*.cpp'),
 
                              Glob(src + 'resources/ResourceManager.cpp'),
-
+                    Glob(src + 'resources/exceptions.cpp'),
                               Glob(src + 'world/*.cpp'),
                              Glob(src + 'python/*.cpp'),
                             Glob(src + 'engine.cpp'),
