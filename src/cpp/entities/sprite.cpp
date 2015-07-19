@@ -29,7 +29,3 @@ Sprite::Sprite(Texture *tex,e_loc w,e_loc h) {
      this->setUp();
  }
 
-Sprite::Sprite(string file) {
-    this->tex = (Texture *) TextureFactory::getInstance()->get(file);
-    this->setUp();
-}

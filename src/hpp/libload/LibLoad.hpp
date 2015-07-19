@@ -12,7 +12,7 @@ using namespace std;
 namespace fs=boost::filesystem;
 
 #include "misc/singleton.hpp"
-#include "loaders/Loader.hpp"
+#include "resources/Loader.hpp"
 /*
  To możnaby potraktować jako fabrykę, przywoływaną zawsze do pobrania danego podsystemu
  */

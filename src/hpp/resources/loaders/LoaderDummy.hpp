@@ -1,7 +1,13 @@
-#include "resources/Loader.hpp"
+
 #ifndef LOADERDUMMY_HPP
 #define	LOADERDUMMY_HPP
 
+#include <cstdio>
+#include <cstdlib>
+
+using namespace std;
+
+#include "resources/Loader.hpp"
 
 class LoaderDummy : public Loader {
     public:

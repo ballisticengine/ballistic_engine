@@ -1,15 +1,15 @@
 #include "types/skybox.hpp"    
 
 Skybox::Skybox(string tex_name) {
-    TextureFactory *texf=(TextureFactory *)TextureFactory::getInstance();
-    sky=(Texture *)texf->get(tex_name);
-    cout << tex_name << endl;
+//    TextureFactory *texf=(TextureFactory *)TextureFactory::getInstance();
+//    sky=(Texture *)texf->get(tex_name);
+//    cout << tex_name << endl;
    
     
 }
 
 Skybox::Skybox(Texture *tex) {
-
+    sky=tex;
 }
 
 Texture *Skybox::getTexture() {

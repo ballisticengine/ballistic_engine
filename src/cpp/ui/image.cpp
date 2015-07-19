@@ -3,7 +3,7 @@
 UiImage::UiImage(string fn,string name,e_loc width,e_loc height,e_loc x,e_loc y) {
     this->x=x; this->y=y; this->name=name;
     this->shape=new Shape2d(width,height);
-    Texture *tex=(Texture *)TextureFactory::getInstance()->get(fn,false);
+//    Texture *tex=(Texture *)TextureFactory::getInstance()->get(fn,false);
     this->tex=tex->clone();
   //  this->surf=SDL_ConvertSurfaceFormat(this->tex->surf,SDL_PIXELFORMAT_ABGR8888,0); 
     update=true;

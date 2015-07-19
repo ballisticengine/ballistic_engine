@@ -1,4 +1,15 @@
-#include "loaders/loaderMD2.hpp"
+#include "resources/loaders/LoaderMD2.hpp"
+
+extensions_s LoaderMD2::getFileExtensions() {
+    extensions_s exts;
+    exts.insert("md2");
+    return exts;
+}
+
+LoaderType LoaderMD2::getType() {
+    return SHAPE;
+}
+
 
 void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
 
@@ -13,14 +24,14 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
         md2_vertex_t md2v = md2->frames[0].verts[i];
         float * scale = md2->frames[0].scale;
         vec3_t scaled;
-        
+
         for (int n = 0; n < 3; n++) {
             if (n == 2) {
-                if( md2->frames[0].translate[n]>=0) {
-               
-                scaled[n] = (float) md2v.v[n] * scale[n] * this->scale - md2->frames[0].translate[n]*(this->scale*5.4);
+                if (md2->frames[0].translate[n] >= 0) {
+
+                    scaled[n] = (float) md2v.v[n] * scale[n] * this->scale - md2->frames[0].translate[n]*(this->scale * 5.4);
                 } else {
-                   scaled[n] = (float) md2v.v[n] * scale[n] * this->scale + md2->frames[0].translate[n]*(this->scale*4.5);
+                    scaled[n] = (float) md2v.v[n] * scale[n] * this->scale + md2->frames[0].translate[n]*(this->scale * 4.5);
                 }
             } else {
                 scaled[n] = (float) md2v.v[n] * scale[n] * this->scale + md2->frames[0].translate[n] * this->scale;
@@ -48,68 +59,30 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
             s->faces[i].uvs[vi].v = (float) md2->st[iv].t / (float) md2->header.skinheight;
         }
     }
-    s->textures[0] = (Texture *) TextureFactory::getInstance()->get("@" + string((char *) md2->skin));
+    //s->textures[0] = (Texture *) TextureFactory::getInstance()->get("@" + string((char *) md2->skin));
+    this->addDependency("@" + string((char *) md2->skin), s->textures[0]);
     s->calculateNormals();
-    int cw=GL_CCW;
-    s->renderer_hint=(void *)new int;
-    *((int *)s->renderer_hint)=cw;
-    //    for (int t = 0; t < md2->header.num_tris; t++) {
-    //
-    //
-    //        for (int vi = 0; vi < 3; vi++) {
-    //
-    //            i = md2->tris[t].vertex[vi];
-    //            iv = md2->tris[t].st[vi];
-    //            // cout << i << endl;    
-    //            md2_vertex_t md2v = md2->frames[0].verts[i];
-    //            float * scale = md2->frames[0].scale;
-    //            float *translate = md2->frames[0].translate;
-    //            vec3_t scaled;
-    //            float u, v;
-    //
-    //
-    //            for (int n = 0; n < 3; n++) {
-    //                scaled[n] = (float) md2v.v[n] * scale[n]; //+translate[n];
-    //				//cout << "SC: " << this->scale;
-    //				//scaled[n]*=this->scale;
-    //			}
-    //            
-    //			u = (float) md2->st[iv].s / (float) md2->header.skinwidth;
-    //            v = (float) md2->st[iv].t / (float) md2->header.skinheight;
-    //            utmp[vi]=new uv();
-    //			utmp[vi]->u=u;
-    //			utmp[vi]->v=v;
-    //			vs_tmp[vi] = new vertex(scaled[0], scaled[1], scaled[2]);
-    //            // cout << scaled[0] << "," << scaled[1] << "," << scaled[2] << endl;
-    //
-    //        }
-    //        vt = new triangle(vs_tmp[0], vs_tmp[1], vs_tmp[2]);
-    //		for(i=0; i<vt->v.size(); i++) {
-    //			vt->uvs.push_back(utmp[i]);
-    //			}
-    //		
-    //		//vt->calculateNormals();
-    //		
-    //		s->addPoly(vt);
-    //		
-    //    }
-
+    int cw = GL_CCW;
+    s->renderer_hint = (void *) new int;
+    *((int *) s->renderer_hint) = cw;
+  
 
 }
 
-bool LoaderMD2::loadMD2(string fn, Shape *s, e_loc scale) {
-    this->scale = scale;
-    cout << "MD2: " << fn << endl;
+void * LoaderMD2::load(string file_name) {
+    this->scale = 1;
+    Shape *shape=new Shape();
+    cout << "MD2: " << file_name << endl;
     FILE *f;
-    f = fopen(fn.c_str(), "rb");
+    f = fopen(file_name.c_str(), "rb");
     if (!f) {
-        return false;
+        return 0;
     }
     md2file *md2 = new md2file;
 
     fread(&md2->header, 1, sizeof (md2header), f);
     if (md2->header.ident != MD2_MAGIC) {
-        return false;
+        return 0;
     }
     md2->tris = (md2triangle *) malloc(sizeof (md2triangle) * md2->header.num_tris);
     md2->frames = (md2frame *)
@@ -139,6 +112,13 @@ bool LoaderMD2::loadMD2(string fn, Shape *s, e_loc scale) {
     fread(md2->skin, sizeof (unsigned char), 64, f);
     fclose(f);
 
-    this->md2ToShape(md2, s);
-    return true;
+    this->md2ToShape(md2, shape);
+    return (void *)shape;
+}
+
+extern "C" {
+
+    Loader * returnLoader() {
+        return (Loader *) new LoaderMD2();
+    }
 }

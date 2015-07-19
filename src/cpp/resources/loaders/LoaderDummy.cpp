@@ -1,4 +1,4 @@
-#include "loaders/LoaderDummy.hpp"
+#include "resources/loaders/LoaderDummy.hpp"
 
 extensions_s LoaderDummy::getFileExtensions() {
     extensions_s exts;
@@ -7,7 +7,14 @@ extensions_s LoaderDummy::getFileExtensions() {
 }
 
 void * LoaderDummy::load(string file_name) {
-    return 0;
+    FILE *f;
+    f = fopen(file_name.c_str(), "rb");
+    fseek(f, 0, SEEK_END);
+    size_t size = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    char *file_contents=new char[size];
+    fread(file_contents, 1, size, f);
+    return file_contents;
 }
 
 LoaderType LoaderDummy::getType() {

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <set>
+#include <vector>
 
 using namespace std;
 
@@ -15,14 +16,26 @@ enum LoaderType {
     NONE
 };
 
+struct LoaderDependency {
+    string file_name;
+    void *target;
+};
+
+typedef vector<LoaderDependency> dep_list; 
 typedef set<string> extensions_s;
 
 class Loader {
+protected:
+    dep_list dependencies;
+    virtual void addDependency(string file_name, void *target);
 public:
     virtual extensions_s getFileExtensions()=0;
     virtual LoaderType getType()=0;
     virtual void *load(string file_name)=0;
+    virtual void *loadFromData(void *data, size_t size);
     virtual bool handlesEntension(string extension);
+    virtual dep_list getDependencies();
+    virtual void cleanDependencies();
 };
 
 #endif	

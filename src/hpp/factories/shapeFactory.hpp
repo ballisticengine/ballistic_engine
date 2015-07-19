@@ -11,7 +11,7 @@ using namespace boost::property_tree;
 #include "factories/factory.hpp"
 #include "types/types.hpp"
 #include "types/shape.hpp"
-#include "loaders/loaderMD2.hpp"
+#include "loaders/LoaderMD2.hpp"
 #include "loaders/LoaderXML.hpp"
 #include "anim/animator.hpp"
 #include "anim/modelAnimator.hpp"

@@ -36,7 +36,7 @@ def make_loader(file):
 
 
 
-LOADERS = ['LoaderDummy', 'LoaderXML']
+LOADERS = ['LoaderDummy', 'LoaderXML', 'LoaderMD2', 'TextureLoader']
 
 for l in LOADERS:
     make_loader(l)

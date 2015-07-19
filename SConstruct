@@ -23,29 +23,39 @@ env = Environment(CPPPATH=[
 
 
 modules = [
-    Glob(src + 'engine.cpp'),
+
     Glob(src + 'types/*.cpp'),
     Glob(src + 'entities/*.cpp'),
-    Glob(src + 'factories/*.cpp'),
-    Glob(src + 'loaders/*.cpp'),
+
+
     Glob(src + 'libload/*.cpp'),
-    Glob(src + 'io/*.cpp'),
+
     Glob(src + 'config/*.cpp'),
     Glob(src + 'anim/*.cpp'),
     Glob(src + 'misc/*.cpp'),
     Glob(src + 'physics/*.cpp'),
-    Glob(src + 'python/*.cpp'),
     Glob(src + 'time/*.cpp'),
-    Glob(src + 'ui/*.cpp'),
-    Glob(src + 'world/*.cpp'),
+      Glob(src + 'ui/*.cpp'),
+
+                             Glob(src + 'resources/ResourceManager.cpp'),
+
+                              Glob(src + 'world/*.cpp'),
+                             Glob(src + 'python/*.cpp'),
+                            Glob(src + 'engine.cpp'),
+                               Glob(src + 'io/*.cpp'),
+
+
 ]
 
 main_modules = modules + [Glob(src + 'main.cpp'),
+
+
+
                           ]
 
 test_modules = modules + [
     src + '/test/test.cpp',
-    src + 'resources/ResourceManager.cpp'
+
 
 ]
 

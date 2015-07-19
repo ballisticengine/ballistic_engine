@@ -20,7 +20,7 @@ using namespace boost::property_tree;
 #include "types/material.hpp"
 #include "types/boundingCube.hpp"
 #include "misc/utils.hpp"
-#include "loaders/Loader.hpp"
+#include "resources/Loader.hpp"
 
 struct ModelInfo {
     Shape *s;
@@ -29,7 +29,7 @@ struct ModelInfo {
 
 class LoaderXML : public Loader {
 protected:
-
+    void toShape(ptree &geom,ptree &shape_xml,ModelInfo *mi);
 public:
     virtual extensions_s getFileExtensions();
     virtual LoaderType getType();
