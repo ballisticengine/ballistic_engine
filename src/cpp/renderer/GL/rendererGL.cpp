@@ -206,21 +206,22 @@ void RendererGL::render() {
     light_counter = 0;
     glMatrixMode(GL_MODELVIEW);
     renderSkybox(w->sky);
-    //glFrontFace(GL_CW);
-    this->positionLights();
-    this->reset();
+    glFrontFace(GL_CW);
+   this->reset();
     this->positionCamera();
+    this->positionLights();
+
     this->reset();
     this->positionCamera();
     this->renderAllRooms();
-    this->renderAllDecals();
+   // this->renderAllDecals();
     this->reset();
     this->positionCamera();
-    this->renderAllEntities();
+   this->renderAllEntities();
     if (state->getBool("debug_visual")) {
         this->drawBoundingBox(w->observer.getBoundingBox());
     }
-    drawHud();
+   // drawHud();
     glFlush();
     this->flush_callback();
 

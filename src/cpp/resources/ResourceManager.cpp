@@ -8,7 +8,17 @@ ResourceManager::~ResourceManager() {
 
 }
 
-void * ResourceManager::get(string file_name, LoaderType type) {
+factory_items_vector  ResourceManager::getByType(ResourceType type = NONE) {
+    factory_items_vector type_items;
+    for(size_t i=0; i<items_v.size(); i++) {
+       if(items_v[i]->type==type) {
+           type_items.push_back(items_v[i]);
+       }
+    }
+    return type_items;
+}
+
+void * ResourceManager::get(string file_name, ResourceType type) {
     //       string ext = Utils::getExt(fn);
     //    this->force_common = force_common;
     //    
@@ -51,20 +61,26 @@ void * ResourceManager::get(string file_name, LoaderType type) {
     string path;
     if (items.find(file_name) == items.end()) {
         path = resolveFilename(file_name, loader->getType());
-        void *resource = loader->load(path);
+        LoadedResource *resource=new LoadedResource();
+        resource->object = loader->load(path);
+        resource->type = loader->getType();
+        if(!resource) {
+            throw ResourceNotFound(file_name);
+        }
         dep_list dependencies = loader->getDependencies();
         for (size_t i = 0; i < dependencies.size(); i++) {
             cout << "Dependency " << dependencies[i].file_name << endl;
-            dependencies[i].target=this->get(dependencies[i].file_name);
+            *dependencies[i].target=this->get(dependencies[i].file_name);
         }
+        loader->cleanDependencies();
         items[file_name] = resource;
         items_v.push_back(resource);
     }
 
-    return items[file_name];
+    return items[file_name]->object;
 }
 
-string ResourceManager::resolveFilename(string file_name, LoaderType type) {
+string ResourceManager::resolveFilename(string file_name, ResourceType type) {
     string path, subdir = getSubDir(type);
     if (subdir != "") {
         subdir = getSubDir(type) + DS;
@@ -78,7 +94,7 @@ string ResourceManager::resolveFilename(string file_name, LoaderType type) {
     return path;
 }
 
-string ResourceManager::getSubDir(LoaderType type) {
+string ResourceManager::getSubDir(ResourceType type) {
     string subdir;
     switch (type) {
         case TEXTURE:

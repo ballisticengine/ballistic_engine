@@ -6,7 +6,7 @@ extensions_s LoaderMD2::getFileExtensions() {
     return exts;
 }
 
-LoaderType LoaderMD2::getType() {
+ResourceType LoaderMD2::getType() {
     return SHAPE;
 }
 
@@ -60,7 +60,7 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
         }
     }
     //s->textures[0] = (Texture *) TextureFactory::getInstance()->get("@" + string((char *) md2->skin));
-    this->addDependency("@" + string((char *) md2->skin), s->textures[0]);
+    this->addDependency("@" + string((char *) md2->skin), (void **)&s->textures[0]);
     s->calculateNormals();
     int cw = GL_CCW;
     s->renderer_hint = (void *) new int;
@@ -70,6 +70,7 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
 }
 
 void * LoaderMD2::load(string file_name) {
+    ModelInfo *mi=new ModelInfo();
     this->scale = 1;
     Shape *shape=new Shape();
     cout << "MD2: " << file_name << endl;
@@ -113,7 +114,8 @@ void * LoaderMD2::load(string file_name) {
     fclose(f);
 
     this->md2ToShape(md2, shape);
-    return (void *)shape;
+    mi->s=shape;
+    return (void *)mi;
 }
 
 extern "C" {

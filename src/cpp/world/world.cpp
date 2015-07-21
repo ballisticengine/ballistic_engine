@@ -1,8 +1,6 @@
 #include "world/World.hpp"
 
-TerrainMap * World::getTerrain() {
-    return this->tm;
-}
+
 
 void World::prepare() {
 

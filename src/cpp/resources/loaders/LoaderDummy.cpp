@@ -17,7 +17,7 @@ void * LoaderDummy::load(string file_name) {
     return file_contents;
 }
 
-LoaderType LoaderDummy::getType() {
+ResourceType LoaderDummy::getType() {
     return OTHER;
 }
 

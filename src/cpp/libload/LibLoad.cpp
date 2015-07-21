@@ -9,7 +9,7 @@ void LibLoad::registerLoader(string file_name) {
     loads.push_back(loadLib(file_name,"returnLoader"));
 }
 
-Loader * LibLoad::getLoaderByExtension(string ext, LoaderType type) {
+Loader * LibLoad::getLoaderByExtension(string ext, ResourceType type) {
     for(size_t i=0; i<loads.size(); i++) {
         Loader * loader = (Loader *)loads[i].module_class;
         

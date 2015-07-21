@@ -15,6 +15,7 @@ using namespace std;
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include "resources/ModelInfo.hpp"
 
 class LoaderMD2 : public Loader{
 protected:
@@ -22,7 +23,7 @@ protected:
 	e_loc scale;
 public:
     virtual extensions_s getFileExtensions();
-    virtual LoaderType getType();
+    virtual ResourceType getType();
     virtual void *load(string file_name);
 };
 

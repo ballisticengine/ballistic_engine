@@ -8,7 +8,7 @@ bool Loader::handlesEntension(string extension) {
     return false;
 }
 
-void Loader::addDependency(string file_name, void *target) {
+void Loader::addDependency(string file_name, void **target) {
     LoaderDependency dep;
     dep.file_name = file_name;
     dep.target = target;

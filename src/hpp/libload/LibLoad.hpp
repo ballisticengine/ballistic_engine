@@ -39,7 +39,7 @@ protected:
 public: 
     void registerLoader(string file_name);
     void discoverLoaders();
-    Loader * getLoaderByExtension(string ext, LoaderType type=NONE);
+    Loader * getLoaderByExtension(string ext, ResourceType type=NONE);
     void registerModule(string name, string file_name, string entry_point_name);
     void * getModuleClass(string name);
 //    SdlIO * getIO();

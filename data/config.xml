@@ -18,36 +18,14 @@
                 </shaders>
             </params>
         </renderer>
-        <shaders>
-            <shader>
+         <shader>
                 light
-            </shader>   
+            </shader>  
+        <shaders>
+            
         </shaders>
         <hud>
-            <image>
-                <name>weapon</name>
-                <texture>@car.bmp</texture>
-                <width>1</width>
-                <height>0.5</height>
-                <x>-1</x>
-                <y>-1.5</y>
-            </image>
-            <image>
-                <name>score</name>
-                <texture>@car.bmp</texture>
-                <width>1</width>
-                <height>0.5</height>
-                <x>-1</x>
-                <y>-1</y>
-            </image>
-            <image>
-                <name>crosshair</name>
-                <texture>@aim.png</texture>
-                <width>0.15</width>
-                <height>0.2</height>
-                <x>0</x>
-                <y>0</y>
-            </image>
+           
           
         </hud>
     </screen>
@@ -57,34 +35,6 @@
         </start_level>
        
         <weapons>
-            <weapon>
-                <name>pistol</name>
-                <display_name>Carbine</display_name>
-                <model>@w_machinegun.md2</model>
-                <bullet>@bullet.xml</bullet>
-                
-                <decal>
-                    <texture>@decal.png</texture>
-                    <width>0</width>
-                    <height>0</height>
-                </decal>
-                
-                <velocity>50</velocity> 
-                <location>
-                    <x>0</x>
-                    <y>-100</y>
-                    <z>-280</z>
-                </location>
-                <rotation>
-                    <x>-90</x>
-                    <y>20</y>
-                    <z>90</z>
-                </rotation>
-                <scale>
-                    15
-                </scale>
-            </weapon>
-           
            
         </weapons>
     </game>

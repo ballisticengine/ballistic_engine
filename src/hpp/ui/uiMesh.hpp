@@ -3,11 +3,11 @@
 
 #include <string>
 #include "types/types.hpp"
-
+#include "types/shape.hpp"
 #include "types/texture.hpp"
 #include "entities/texturable.hpp"
-#include "factories/shapeFactory.hpp"
-#include "factories/textureFactory.hpp"
+#include "resources/ResourceManager.hpp"
+
 
 using namespace std;
 

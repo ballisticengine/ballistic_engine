@@ -21,18 +21,18 @@ using namespace boost::property_tree;
 #include "types/boundingCube.hpp"
 #include "misc/utils.hpp"
 #include "resources/Loader.hpp"
-
-struct ModelInfo {
-    Shape *s;
-    bounding_list boundings;
-};
+#include "resources/ModelInfo.hpp"
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 class LoaderXML : public Loader {
 protected:
     void toShape(ptree &geom,ptree &shape_xml,ModelInfo *mi);
 public:
     virtual extensions_s getFileExtensions();
-    virtual LoaderType getType();
+    virtual ResourceType getType();
     virtual void *load(string file_name);
+    void *loadFromData(void *data, size_t size);
 };
 #endif

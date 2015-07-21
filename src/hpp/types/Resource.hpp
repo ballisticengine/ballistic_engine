@@ -5,6 +5,8 @@
 
 using namespace std;
 
+
+
 class Resource {
 protected:
     string filename, orig_filename;

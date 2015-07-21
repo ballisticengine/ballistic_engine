@@ -13,7 +13,7 @@ class LoaderDummy : public Loader {
     public:
         virtual extensions_s getFileExtensions();
         virtual void *load(string file_name);
-        LoaderType getType();
+        ResourceType getType();
 };
 
 

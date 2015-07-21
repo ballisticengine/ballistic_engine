@@ -15,7 +15,7 @@ class TextureLoader : public Loader {
     public:
     void * load(string file_name);
     virtual extensions_s getFileExtensions();
-    virtual LoaderType getType();
+    virtual ResourceType getType();
     TextureLoader();
     ~TextureLoader();
 };

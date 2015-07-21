@@ -18,8 +18,7 @@ using namespace boost::property_tree;
 #include "entities/weapon.hpp"
 #include "entities/sprite.hpp"
 #include "types/types.hpp"
-#include "factories/shapeFactory.hpp"
-#include "factories/textureFactory.hpp"
+#include "resources/ResourceManager.hpp"
 #include "ui/uiMesh.hpp"
 #include "config/EngineState.hpp"
 

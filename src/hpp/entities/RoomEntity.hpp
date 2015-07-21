@@ -24,7 +24,7 @@ class RoomEntity : public ObjectEntity {
 protected:
     PreloadStore *preload_store;
 public:
-	ModelAnimator model_animator;
+	//ModelAnimator model_animator;
 	ent_list entities;
 	obj_list models;
 	lights_list lights;

@@ -8,7 +8,7 @@
 #include "types/shape2d.hpp"
 #include "types/texture.hpp"
 #include "entities/texturable.hpp"
-#include "factories/textureFactory.hpp"
+#include "resources/ResourceManager.hpp"
 //#include "config/Config.hpp"
 #include "io/ttf.hpp"
 

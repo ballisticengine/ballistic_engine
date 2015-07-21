@@ -23,13 +23,11 @@ using namespace boost::property_tree;
 #include "misc/singleton.hpp"
 #include "types/skybox.hpp"
 #include "config/Config.hpp"
-#include "factories/shapeFactory.hpp"
-#include "factories/textureFactory.hpp"
+#include "resources/ResourceManager.hpp"
 #include "config/EngineState.hpp"
 #include "types/mathTypes.hpp"
 #include "entities/light.hpp"
 #include "entities/pointlight.hpp"
-#include "dontcare/terrainMap.hpp"
 #include "time/timer.hpp"
 #include "entities/observerEntity.hpp"
 #include "types/material.hpp"
@@ -41,7 +39,8 @@ using namespace boost::property_tree;
 #include "world/Octree.hpp"
 #include "physics/collisionDetector.hpp"
 #include "misc/xmlHelper.hpp"
-
+#include "resources/ModelInfo.hpp"
+#include "libload/LibLoad.hpp"
 
 
 
@@ -55,7 +54,7 @@ protected:
     void moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision);
     void moveEntities();
     Timer time;
-    TerrainMap *tm;
+    
     PyLocker *locker;
     bool moving_lock;
     queue<ObjectEntity *> spawn_queue;
@@ -89,7 +88,7 @@ public:
     void operator()();
     RoomEntity * getActiveRoom();
     ObserverEntity * getObserver();
-    TerrainMap * getTerrain();
+    
 
 
     void addRoomEntity(RoomEntity *e);

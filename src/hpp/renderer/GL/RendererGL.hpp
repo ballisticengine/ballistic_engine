@@ -5,7 +5,7 @@
 #include "windows.h"
 #endif
 #include "renderer/rendererAbstract.hpp"
-#include "loaders/LoaderMD2.hpp"
+
 #include "config/Config.hpp"
 #include "ui/image.hpp"
 #include "ui/hud.hpp"

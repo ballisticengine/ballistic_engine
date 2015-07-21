@@ -9,8 +9,10 @@ using namespace std;
 
 
 #include "resources/exceptions.hpp"
+#include "types/Resource.hpp"
 
-enum LoaderType {
+
+enum ResourceType {
     LEVEL,
     TEXTURE,
     SHAPE,
@@ -20,7 +22,7 @@ enum LoaderType {
 
 struct LoaderDependency {
     string file_name;
-    void *target;
+    void **target;
 };
 
 typedef vector<LoaderDependency> dep_list; 
@@ -29,10 +31,10 @@ typedef set<string> extensions_s;
 class Loader {
 protected:
     dep_list dependencies;
-    virtual void addDependency(string file_name, void *target);
+    virtual void addDependency(string file_name, void **target);
 public:
     virtual extensions_s getFileExtensions()=0;
-    virtual LoaderType getType()=0;
+    virtual ResourceType getType()=0;
     virtual void *load(string file_name)=0;
     virtual void *loadFromData(void *data, size_t size);
     virtual bool handlesEntension(string extension);
