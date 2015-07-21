@@ -28,7 +28,7 @@ struct LoadedResource {
 
 typedef map<string, LoadedResource *> factory_items_map;
 typedef vector<LoadedResource *> factory_items_vector;
-
+typedef map<void *, Resource *> res_obj;
 
 
 class ResourceManager : public Singleton<ResourceManager> {
@@ -37,6 +37,7 @@ protected:
     string wd, lvl;
     factory_items_map items;
     factory_items_vector items_v;
+    res_obj resmap;
     virtual string getSubDir(ResourceType type);
     virtual string resolveFilename(string file_name, ResourceType type);
 public:
@@ -48,8 +49,9 @@ public:
     virtual factory_items_vector getByType(ResourceType type);
     virtual void resolveDependencies(Loader *loader);
     virtual void resolveAllDependencies();
+    virtual Resource * getResource(void *object);
     ResourceManager();
-    ~ResourceManager();
+    ~ResourceManager(); //TODO: proper cleanup
 
 };
 

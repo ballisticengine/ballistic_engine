@@ -195,6 +195,7 @@ bool World::parseXml(string &fn) {
 
 bool World::saveXml(string fn) {
     //TODO: No such node (vertices)
+    ResourceManager *resman=ResourceManager::getInstance();
     cout << "Dumping to " << fn << endl;
     ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
             vpf, uv_count, s_faces, s_vertices, f_material, f_texture, r_entities;
@@ -220,7 +221,8 @@ bool World::saveXml(string fn) {
     for (size_t fi = 0; fi < shape->f_count; fi++) {
         ptree *p_face = new ptree(), *f_vertices = new ptree();
         if (shape->textures[fi]) {
-            p_face->put("texture", shape->textures[fi]->getOrigFilename());
+            string tfn = resman->getResource(shape->textures[fi])->getOrigFilename();
+            p_face->put("texture", tfn);
         }
 
         if (shape->materials[fi]) {

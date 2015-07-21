@@ -57,11 +57,21 @@ void * ResourceManager::get(string file_name, ResourceType type) {
             throw ResourceNotFound(file_name);
         }
         resolveDependencies(loader);
+        
+        Resource *resinfo=new Resource;
+        resinfo->setOrigFilename(file_name);
+        resinfo->setFilename(path);
+        resmap[resource->object]=resinfo;
+        
         items[file_name] = resource;
         items_v.push_back(resource);
     }
 
     return items[file_name]->object;
+}
+
+Resource * ResourceManager::getResource(void *object) {
+    return resmap[object];
 }
 
 string ResourceManager::resolveFilename(string file_name, ResourceType type) {
