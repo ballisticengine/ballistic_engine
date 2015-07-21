@@ -23,7 +23,7 @@ void *LoaderXML::load(string file_name) {
 
 void *LoaderXML::loadFromData(void *data, size_t size) {
 
-
+    //Doesn't work because it doesn't resolve dependencies!
     ModelInfo *mi = new ModelInfo();
     mi->s = new Shape();
     ptree *tree = (ptree *) data,

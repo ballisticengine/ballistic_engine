@@ -19,7 +19,7 @@ class TestManipulator(manipulatorClass):
         #print 'Up', state_number(states)
 
     def onKeyPress(self, key):
-        print key
+
         if key == 1073741893: #F12
             self.engine_state.toggleBool('edit_mode')
             print self.engine_state.getBool('edit_mode')
@@ -61,7 +61,7 @@ class TestManipulator(manipulatorClass):
         print entitya.name, entityb.name
 
     def onLevelCollision(self,entity,room, collision_info):
-        print "LC"
+
         return
         diff=collision_info.A.diff
         #print collision_info.A.name, diff.write(),self.cc

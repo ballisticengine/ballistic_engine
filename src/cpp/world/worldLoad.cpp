@@ -76,8 +76,8 @@ bool World::parseXml(string &fn) {
         
         //Shape *fs = shapef->getXML((ptree) room.second);
         ptree room_p = (ptree) room.second;
-        ModelInfo *mi = (ModelInfo *)xml_loader->loadFromData((void *)&room.second, 0); 
-        Shape *fs = mi->s;
+        ModelInfo *rmi = (ModelInfo *)xml_loader->loadFromData((void *)&room.second, 0); 
+        
         RoomEntity *roomE = new RoomEntity();
         
        // shapef->setAnimator(&roomE->model_animator);
@@ -88,9 +88,7 @@ bool World::parseXml(string &fn) {
                 roomE->ambient_light.g = room.second.get<e_loc>("ambient_light.g");
 
         roomE->name = room.second.get<string>("shape.name");
-        cout << "Ambient light: " << roomE->ambient_light.r << ", " << roomE->ambient_light.g << ", " << roomE->ambient_light.b << endl;
-        cout << "FS--------------- " << fs << endl;
-        roomE->setModel(fs);
+        roomE->setModel(rmi->s);
         e_loc
         rx = room.second.get<e_loc>("location.x"),
                 ry = room.second.get<e_loc>("location.y"),
@@ -137,7 +135,7 @@ bool World::parseXml(string &fn) {
                         oe->addBoundingBox(mi->boundings[i]);
                     }
                     //oe->boundings=mi->boundings;
-                    continue;
+                   
                 } else {
                     oe->addBoundingBox(new BoundingCube(oe->getModel()));
                 }

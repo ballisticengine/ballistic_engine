@@ -8,51 +8,22 @@ ResourceManager::~ResourceManager() {
 
 }
 
-factory_items_vector  ResourceManager::getByType(ResourceType type = NONE) {
+factory_items_vector ResourceManager::getByType(ResourceType type = NONE) {
     factory_items_vector type_items;
-    for(size_t i=0; i<items_v.size(); i++) {
-       if(items_v[i]->type==type) {
-           type_items.push_back(items_v[i]);
-       }
-    }
+    if (type != NONE) {
+        for (size_t i = 0; i < items_v.size(); i++) {
+            if (items_v[i]->type == type) {
+                type_items.push_back(items_v[i]);
+            }
+        }
+    } else {
+        type_items = items_v;
+    } 
+    
     return type_items;
 }
 
 void * ResourceManager::get(string file_name, ResourceType type) {
-    //       string ext = Utils::getExt(fn);
-    //    this->force_common = force_common;
-    //    
-    //    if (items.find(fn) == items.end() || clone) {
-    //        string path;
-    //
-    //        if (fn[0] == '@' || force_common) {
-    //            uses_common = true;
-    //            string rfn;
-    //            if (fn[0] == '@') {
-    //                rfn = fn.substr(1, fn.size());
-    //            } else {
-    //                rfn = fn;
-    //            }
-    //            path = wd + DS + string(COMMON_DIR) + DS + getSubDir() + DS + rfn;
-    //        } else {
-    //            path = wd + DS + string(LVL_DIR) + DS + lvl + DS + getSubDir() + DS + fn;
-    //            uses_common = false;
-    //        }
-    //        
-    //        if(clone) {
-    //            LoadedResource *p=this->actualLoad(path, fn);
-    //            item_ptr.push_back(p);
-    //        } else {
-    //            items[fn] = this->actualLoad(path, fn);
-    //            item_ptr.push_back(items[fn]);
-    //        }
-    //        
-    //        items[fn]->resource->setFilename(path);
-    //        items[fn]->resource->setOrigFilename(fn);
-    //    }
-    //    return items[fn]->object;
-
-
 
     Loader *loader = LibLoad::getInstance()->getLoaderByExtension(Utils::getExt(file_name), type);
     if (!loader) {
@@ -61,16 +32,16 @@ void * ResourceManager::get(string file_name, ResourceType type) {
     string path;
     if (items.find(file_name) == items.end()) {
         path = resolveFilename(file_name, loader->getType());
-        LoadedResource *resource=new LoadedResource();
+        LoadedResource *resource = new LoadedResource();
         resource->object = loader->load(path);
         resource->type = loader->getType();
-        if(!resource) {
+        if (!resource) {
             throw ResourceNotFound(file_name);
         }
         dep_list dependencies = loader->getDependencies();
         for (size_t i = 0; i < dependencies.size(); i++) {
             cout << "Dependency " << dependencies[i].file_name << endl;
-            *dependencies[i].target=this->get(dependencies[i].file_name);
+            *dependencies[i].target = this->get(dependencies[i].file_name);
         }
         loader->cleanDependencies();
         items[file_name] = resource;
