@@ -45,8 +45,9 @@ public:
     virtual string getWD();
     virtual void setLevel(string lvl);
     virtual string getLevel();
-    factory_items_vector getByType(ResourceType type);
-
+    virtual factory_items_vector getByType(ResourceType type);
+    virtual void resolveDependencies(Loader *loader);
+    virtual void resolveAllDependencies();
     ResourceManager();
     ~ResourceManager();
 

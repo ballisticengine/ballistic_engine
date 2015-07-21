@@ -18,9 +18,27 @@ factory_items_vector ResourceManager::getByType(ResourceType type = NONE) {
         }
     } else {
         type_items = items_v;
-    } 
-    
+    }
+
     return type_items;
+}
+
+void ResourceManager::resolveDependencies(Loader *loader) {
+    dep_list dependencies = loader->getDependencies();
+    for (size_t i = 0; i < dependencies.size(); i++) {
+        cout << "Dependency " << dependencies[i].file_name << endl;
+        *dependencies[i].target = this->get(dependencies[i].file_name);
+    }
+    loader->cleanDependencies();
+}
+
+void ResourceManager::resolveAllDependencies() {
+    lib_vector libs = LibLoad::getInstance()->getAllLoaders();
+
+    for (size_t i=0; i < libs.size(); i++) {
+        Loader *loader = (Loader *)libs[i].module_class; 
+        resolveDependencies(loader);
+    }
 }
 
 void * ResourceManager::get(string file_name, ResourceType type) {
@@ -38,12 +56,7 @@ void * ResourceManager::get(string file_name, ResourceType type) {
         if (!resource) {
             throw ResourceNotFound(file_name);
         }
-        dep_list dependencies = loader->getDependencies();
-        for (size_t i = 0; i < dependencies.size(); i++) {
-            cout << "Dependency " << dependencies[i].file_name << endl;
-            *dependencies[i].target = this->get(dependencies[i].file_name);
-        }
-        loader->cleanDependencies();
+        resolveDependencies(loader);
         items[file_name] = resource;
         items_v.push_back(resource);
     }

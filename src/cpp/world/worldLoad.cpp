@@ -77,7 +77,7 @@ bool World::parseXml(string &fn) {
         //Shape *fs = shapef->getXML((ptree) room.second);
         ptree room_p = (ptree) room.second;
         ModelInfo *rmi = (ModelInfo *)xml_loader->loadFromData((void *)&room.second, 0); 
-        
+        resman->resolveAllDependencies();
         RoomEntity *roomE = new RoomEntity();
         
        // shapef->setAnimator(&roomE->model_animator);

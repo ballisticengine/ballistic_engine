@@ -42,6 +42,7 @@ public:
     Loader * getLoaderByExtension(string ext, ResourceType type=NONE);
     void registerModule(string name, string file_name, string entry_point_name);
     void * getModuleClass(string name);
+    lib_vector &  getAllLoaders();
 //    SdlIO * getIO();
     ~LibLoad();
     

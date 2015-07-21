@@ -32,6 +32,10 @@ void LibLoad::discoverLoaders() {
     }
 }
 
+lib_vector & LibLoad::getAllLoaders() {
+    return this->loads;
+}
+
 Module LibLoad::loadLib(string file_name, string entry_point_name) {
     Module module;
     module.entry_point_name = entry_point_name;
