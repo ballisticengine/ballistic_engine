@@ -1,9 +1,6 @@
 #include "world/World.hpp"
 
 bool World::parseXml(string &fn) {
-    /*
-     TODO: unless there is at least one XML model loaded world doesn't load.
-     */
     
     cout << "Loading...\n";
     this->observer.name = "observer";
