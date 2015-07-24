@@ -26,25 +26,21 @@ modules = [
 
     Glob(src + 'types/*.cpp'),
     Glob(src + 'entities/*.cpp'),
-
-
     Glob(src + 'libload/*.cpp'),
-
     Glob(src + 'config/*.cpp'),
     Glob(src + 'anim/*.cpp'),
     Glob(src + 'misc/*.cpp'),
     Glob(src + 'physics/*.cpp'),
     Glob(src + 'time/*.cpp'),
-      Glob(src + 'ui/*.cpp'),
-
-                             Glob(src + 'resources/ResourceManager.cpp'),
+    Glob(src + 'ui/*.cpp'),
+    Glob(src + 'resources/ResourceManager.cpp'),
     Glob(src + 'resources/LevelManager.cpp'),
-                    Glob(src + 'resources/exceptions.cpp'),
-                              Glob(src + 'world/*.cpp'),
-                             Glob(src + 'python/*.cpp'),
-                            Glob(src + 'engine.cpp'),
-                               Glob(src + 'io/*.cpp'),
-
+    Glob(src + 'resources/exceptions.cpp'),
+    Glob(src + 'world/*.cpp'),
+    Glob(src + 'python/*.cpp'),
+    Glob(src + 'engine.cpp'),
+    Glob(src + 'io/*.cpp'),
+    Glob(src + 'renderer/*.cpp')
 
 ]
 

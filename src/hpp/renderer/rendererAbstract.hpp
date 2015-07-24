@@ -64,7 +64,7 @@ protected:
     virtual void face(e_loc x, e_loc y, e_loc z);
 public:
     RendererAbstract();
-     virtual void init();
+    virtual void init();
     virtual void setVideoMode() = 0;
     virtual void setFlush(flushf flush_callback);
     virtual ~RendererAbstract();
