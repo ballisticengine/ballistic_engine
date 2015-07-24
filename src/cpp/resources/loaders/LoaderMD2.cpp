@@ -52,9 +52,10 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
         s->faces[i].uvs = new UV[s->v_per_poly];
         s->textures[i] = 0;
         s->materials[i] = 0;
-        for (int vi = 0; vi < 3; vi++) {
-            s->faces[i].index[vi] = md2->tris[i].vertex[vi];
-            int iv = md2->tris[i].st[vi];
+        for (int ivi = 0; ivi < 3; ivi++) {
+            int vi=2-ivi;
+            s->faces[i].index[vi] = md2->tris[i].vertex[ivi];
+            int iv = md2->tris[i].st[ivi];
             s->faces[i].uvs[vi].u = (float) md2->st[iv].s / (float) md2->header.skinwidth;
             s->faces[i].uvs[vi].v = (float) md2->st[iv].t / (float) md2->header.skinheight;
         }

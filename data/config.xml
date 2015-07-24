@@ -18,11 +18,11 @@
                 </shaders>
             </params>
         </renderer>
-         
-        <shaders>
-            <shader>
+          <shader>
                 light
-            </shader>  
+            </shader>
+        <shaders>
+             
         </shaders>
         <hud>
            
