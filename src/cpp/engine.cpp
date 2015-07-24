@@ -1,8 +1,3 @@
-/*
- TODO: engine state switching
- * States: normal - edit
- * In edit S saves current level to file
- */
 #include "engine.hpp"
 
 void Engine::pythonInit() {
