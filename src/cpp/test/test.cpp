@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 
 
-//#include "physics_test.cpp"
+#include "physics_test.cpp"
 #include "resource_test.cpp"
 
 
