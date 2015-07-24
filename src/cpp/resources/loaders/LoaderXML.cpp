@@ -11,30 +11,28 @@ ResourceType LoaderXML::getType() {
 }
 
 void *LoaderXML::load(string file_name) {
-    ModelInfo *mi = new ModelInfo;
-    mi->s = new Shape();
+    
+    Shape *shape_p = new Shape();
     ptree pt;
     read_xml(file_name, pt, boost::property_tree::xml_parser::trim_whitespace);
     ptree shp = pt.get_child("shape");
     ptree geom = shp.get_child("geom");
-    this->toShape(geom, shp, mi);
-    return (void *) mi;
+    this->toShape(geom, shp, shape_p);
+    return (void *)shape_p;
 }
 
 void *LoaderXML::loadFromData(void *data, size_t size) {
-
-    ModelInfo *mi = new ModelInfo();
-    mi->s = new Shape();
+    Shape *shape_p = new Shape();
     ptree *tree = (ptree *) data,
             & geom = tree->get_child("shape.geom"),
             & shape = tree->get_child("shape")
             ;
-    this->toShape(geom, shape, mi);
+    this->toShape(geom, shape, shape_p);
 
-    return (void *) mi;
+    return (void *) shape_p;
 }
 
-void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
+void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
 
     ptree
     verts = geom.get_child("vertices"),
@@ -57,7 +55,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
     }
 
 
-    Shape *s = mi->s;
+   
     s->f_count = f_count;
     s->v_count = v_count;
     s->v_per_poly = vpf;
@@ -196,7 +194,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
         }
     }
 
-    mi->s = s;
+    
     e_loc slocx = 0, slocy = 0, slocz = 0;
 
     try {
@@ -206,35 +204,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
     } catch (std::exception e) {
         cout << "No loc for " << type;
     }
-    try {
-        ptree bounds_xml = shape_xml.get_child("bounds");
-
-        BOOST_FOREACH(const ptree::value_type &bound_xml, bounds_xml) {
-            cout << "SLC " << slocx << endl;
-            e_loc
-            locx = bound_xml.second.get<e_loc>("loc.x"),
-                    locy = bound_xml.second.get<e_loc>("loc.y"),
-                    locz = bound_xml.second.get<e_loc>("loc.z"),
-                    minx = bound_xml.second.get<e_loc>("min.x") - slocx + locx,
-                    miny = bound_xml.second.get<e_loc>("min.y") - slocy + locy,
-                    minz = bound_xml.second.get<e_loc>("min.z") - slocz + locz,
-
-                    maxx = bound_xml.second.get<e_loc>("max.x") - slocx + locx,
-                    maxy = bound_xml.second.get<e_loc>("max.y") - slocy + locy,
-                    maxz = bound_xml.second.get<e_loc>("max.z") - slocz + locz
-                    ;
-            string name = bound_xml.second.get<string>("name");
-            BoundingCube *bc = new BoundingCube(minx, miny, minz, maxx, maxy, maxz);
-            bc->name = name;
-            cout << "Bounding names:\n";
-            cout << bc->name << endl;
-            mi->boundings.push_back(bc);
-
-        }
-
-    } catch (std::exception e) {
-
-    }
+    
 }
 
 extern "C" {

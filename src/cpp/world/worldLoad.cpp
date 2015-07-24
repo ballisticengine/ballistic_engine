@@ -1,7 +1,7 @@
 #include "world/World.hpp"
 
 bool World::parseXml(string &fn) {
-    
+
     cout << "Loading...\n";
     this->observer.name = "observer";
     this->observer.type = "observer";
@@ -11,7 +11,7 @@ bool World::parseXml(string &fn) {
 
     cout << "Level: " << level_path << endl;
     //ShapeFactory *shapef = (ShapeFactory *) ShapeFactory::getInstance();
-    ResourceManager *resman=ResourceManager::getInstance();
+    ResourceManager *resman = ResourceManager::getInstance();
     resman->setWD("./data");
     resman->setLevel(fn);
 
@@ -19,8 +19,8 @@ bool World::parseXml(string &fn) {
     ptree pt;
     read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace);
     string skyfn = pt.get<string>("world.config.skybox");
-    
-    this->sky = new Skybox((Texture *)resman->get(skyfn));
+
+    this->sky = new Skybox((Texture *) resman->get(skyfn));
     this->observer.current_weapon = Config::getInstance()->available_weapons[pt.get<string>("world.config.default_weapon")];
     ;
 
@@ -51,7 +51,7 @@ bool World::parseXml(string &fn) {
                 file = preload.second.get<string>("file");
         cout << "File " << file << ", " << name << endl;
         if (type == "model") {
-            Shape *shp = (Shape *)resman->get(file);
+            Shape *shp = (Shape *) resman->get(file);
             ps->shape_preloads[name] = shp;
         } else if (type == "texture") {
             Texture *tex = (Texture *) resman->get(file);
@@ -69,15 +69,16 @@ bool World::parseXml(string &fn) {
     read_xml(gfn, gpt, boost::property_tree::xml_parser::trim_whitespace);
     ptree &rooms = gpt.get_child("level.rooms");
     Loader *xml_loader = LibLoad::getInstance()->getLoaderByExtension("xml");
+
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
-        
+
         //Shape *fs = shapef->getXML((ptree) room.second);
         ptree room_p = (ptree) room.second;
-        ModelInfo *rmi = (ModelInfo *)xml_loader->loadFromData((void *)&room.second, 0); 
+        Shape *room_shape = (Shape *) xml_loader->loadFromData((void *) &room.second, 0);
         resman->resolveAllDependencies();
         RoomEntity *roomE = new RoomEntity();
-        
-       // shapef->setAnimator(&roomE->model_animator);
+
+        // shapef->setAnimator(&roomE->model_animator);
         //poly_list polys=fs->getPolys();
 
         roomE->ambient_light.r = room.second.get<e_loc>("ambient_light.r"),
@@ -85,7 +86,7 @@ bool World::parseXml(string &fn) {
                 roomE->ambient_light.g = room.second.get<e_loc>("ambient_light.g");
 
         roomE->name = room.second.get<string>("shape.name");
-        roomE->setModel(rmi->s);
+        roomE->setModel(room_shape);
         e_loc
         rx = room.second.get<e_loc>("location.x"),
                 ry = room.second.get<e_loc>("location.y"),
@@ -113,38 +114,24 @@ bool World::parseXml(string &fn) {
                 e_loc sc = entobj.second.get<e_loc>("scale");
                 bool physics = entobj.second.get<bool>("physics");
                 //shapef->setScale(sc);
-                ModelInfo *mi = (ModelInfo *) resman->get(entobj.second.get<string>("model"));
+                Shape *mshape = (Shape *) resman->get(entobj.second.get<string>("model"));
                 ObjectEntity *oe = new ObjectEntity();
                 //shp->calculateNormals(); //UWAGA!!
                 oe->no_physics = !physics;
-                oe->setModel(mi->s);
+                oe->setModel(mshape);
                 oe->locate(x, y, z);
-                if (mi->boundings.size() > 0) {
-                    cout << entobj.second.get<string>("model") << " has custom bounding boxes " << endl;
-                    for (int i = 0; i < mi->boundings.size(); i++) {
-                        cout << "Bounding " << mi->boundings[i]->name << endl;
-                        //                        mi->boundings[i]->max.x+=x;
-                        //                        mi->boundings[i]->max.y+=y;
-                        //                        mi->boundings[i]->max.z+=z;
-                        //                        mi->boundings[i]->min.x+=x;
-                        //                        mi->boundings[i]->min.y+=y;
-                        //                        mi->boundings[i]->min.z+=z;
-                        oe->addBoundingBox(mi->boundings[i]);
-                    }
-                    //oe->boundings=mi->boundings;
-                   
-                } else {
-                    oe->addBoundingBox(new BoundingCube(oe->getModel()));
-                }
+                
+                oe->addBoundingBox(new BoundingCube(oe->getModel()));
+                
                 oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
                 current_e = (Entity *) oe;
                 //oe->face(rx,ry,rz);
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
                 collisions.addEntity((Entity *) oe);
-//                if (mi->s->frame_count > 0) {
-//                    roomE->model_animator.addShape(mi->s);
-//                }
+                //                if (mi->s->frame_count > 0) {
+                //                    roomE->model_animator.addShape(mi->s);
+                //                }
             } else if (type == "light") {
                 PointLight *l = new PointLight();
                 //l->face(-90, 0, 0);
@@ -188,11 +175,9 @@ bool World::parseXml(string &fn) {
     return true;
 }
 
-
-
 bool World::saveXml(string fn) {
     //TODO: No such node (vertices)
-    ResourceManager *resman=ResourceManager::getInstance();
+    ResourceManager *resman = ResourceManager::getInstance();
     cout << "Dumping to " << fn << endl;
     ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
             vpf, uv_count, s_faces, s_vertices, f_material, f_texture, r_entities;
@@ -272,6 +257,24 @@ bool World::saveXml(string fn) {
     room.add_child("location", makeLocationNode(rcoords.translation.x, rcoords.translation.y, rcoords.translation.z));
     room.add_child("ambient_light", makeRGBANode(rambient.r, rambient.g, rambient.b, rambient.a));
     room.add_child("shape", r_shape);
+
+    for (size_t i = 0; i<this->active_room->models.size(); i++) {
+        ptree *r_entity = new ptree();
+
+        r_entity->put("name", "[OBJECT]" + active_room->models[i]->name);
+        r_entity->put("type", "object");
+        r_entity->put("physics", "1");
+        
+        Resource *mres=resman->getResource(active_room->models[i]->model);
+        cout << "mres" << mres << endl;
+        //string model_file = mres->getOrigFilename();
+       // r_entity->put("model", model_file);
+        r_entities.add_child("entity", *r_entity);
+
+        delete r_entity;
+    }
+
+
     room.add_child("entities", r_entities);
     rooms.add_child("room", room);
 

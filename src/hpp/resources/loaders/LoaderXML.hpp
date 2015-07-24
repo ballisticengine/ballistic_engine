@@ -21,11 +21,10 @@ using namespace boost::property_tree;
 #include "types/boundingCube.hpp"
 #include "misc/utils.hpp"
 #include "resources/Loader.hpp"
-#include "resources/ModelInfo.hpp"
 
 class LoaderXML : public Loader {
 protected:
-    void toShape(ptree &geom,ptree &shape_xml,ModelInfo *mi);
+    void toShape(ptree &geom,ptree &shape_xml,Shape *s);
 public:
     virtual extensions_s getFileExtensions();
     virtual ResourceType getType();

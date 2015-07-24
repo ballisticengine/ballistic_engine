@@ -68,51 +68,6 @@ void RoomEntity::removeObjectEntity(string name) {
     models.erase(models.begin() + i);
 }
 
-//CollisionInfo RoomEntity::collides(ObjectEntity *ent, Coords offset) {
-//    //ray_pos jest już w ent
-//    CollisionInfo ci;
-//    Vector3d a,b,c;
-//    
-//    bool pos=false;
-//    e_loc sum=0;
-//    for(size_t i=0; i<model->f_count; i++) {
-//      
-//        a=model->vertices[model->faces[i].index[0]];
-//        b=model->vertices[model->faces[i].index[1]];
-//        c=model->vertices[model->faces[i].index[2]];
-//        a=a+getCoords().translation;
-//        b=b+getCoords().translation;
-//        c=c+getCoords().translation;
-//       // a.y*=-1;b.y*=-1;c.y*=-1;
-//        Plane p(a,b,c);
-//        Vector3d v=ent->getCoords().translation;
-//        Vector3d r=ent->velocity.translation.normalize();
-//        
-//        e_loc dist=p.DistanceToPlane(v);
-//        //cout << dist << endl;
-//      
-//        sum+=dist;
-//
-//        Vector3d ri=p.RayIntersection(v,r);
-//        //r.write();
-//        Vector3d tri[3];
-//        tri[0]=a;
-//        tri[1]=b;
-//        tri[2]=c;
-//       
-//        bool pip=pointInPolygon(ri,tri,3);
-//        //cout << pip << endl;
-//       
-//       //cout << p.DistanceToPlane(v) << endl;
-//
-//        
-//        
-//        
-//    }
-//  
-//    return ci;
-//}
-
 void RoomEntity::calcBoundings() {
     
 }

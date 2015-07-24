@@ -39,7 +39,6 @@ using namespace boost::property_tree;
 #include "world/Octree.hpp"
 #include "physics/collisionDetector.hpp"
 #include "misc/xmlHelper.hpp"
-#include "resources/ModelInfo.hpp"
 #include "libload/LibLoad.hpp"
 
 

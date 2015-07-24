@@ -12,7 +12,6 @@ using namespace std;
 #include "resources/loaders/md2struct.hpp"
 #include "resources/Loader.hpp"
 #include "misc/singleton.hpp"
-#include "resources/ModelInfo.hpp"
 
 class LoaderMD2 : public Loader{
 protected:

@@ -66,7 +66,7 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
 }
 
 void * LoaderMD2::load(string file_name) {
-    ModelInfo *mi=new ModelInfo();
+    
     this->scale = 1;
     Shape *shape=new Shape();
     cout << "MD2: " << file_name << endl;
@@ -110,8 +110,8 @@ void * LoaderMD2::load(string file_name) {
     fclose(f);
 
     this->md2ToShape(md2, shape);
-    mi->s=shape;
-    return (void *)mi;
+    
+    return (void *)shape;
 }
 
 extern "C" {
