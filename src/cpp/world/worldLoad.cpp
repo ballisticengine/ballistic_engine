@@ -120,9 +120,9 @@ bool World::parseXml(string &fn) {
                 oe->no_physics = !physics;
                 oe->setModel(mshape);
                 oe->locate(x, y, z);
-                
+
                 oe->addBoundingBox(new BoundingCube(oe->getModel()));
-                
+
                 oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
                 current_e = (Entity *) oe;
                 //oe->face(rx,ry,rz);
@@ -263,17 +263,40 @@ bool World::saveXml(string fn) {
 
         r_entity->put("name", "[OBJECT]" + active_room->models[i]->name);
         r_entity->put("type", "object");
-        r_entity->put("physics", "1");
-        
-        Resource *mres=resman->getResource(active_room->models[i]->model);
-        cout << "mres" << mres << endl;
-        //string model_file = mres->getOrigFilename();
-       // r_entity->put("model", model_file);
+        r_entity->put("physics", (int) !active_room->models[i]->no_physics);
+        r_entity->put("scale", 1.0f);
+
+        Coords c = active_room->models[i]->getCoords();
+
+        r_entity->add_child("location", makeTranslationNode(c));
+        r_entity->add_child("facing", makeRotationNode(c));
+
+        string model_file = resman->getResource(active_room->models[i]->model)->getOrigFilename();
+        r_entity->put("model", model_file);
         r_entities.add_child("entity", *r_entity);
 
         delete r_entity;
     }
 
+    for (size_t i = 0; i<this->active_room->lights.size(); i++) {
+        ptree *r_entity = new ptree();
+        r_entity->put("name", active_room->lights[i]->name);
+        r_entity->put("type", "light");
+        Coords c = active_room->lights[i]->getCoords();
+        /*
+         TODO: pass and load diffuse and specular here,
+         *      load and pass energy here
+         */
+        ColorRGBA dc = active_room->lights[i]->getDiffuse();
+        r_entity->put("r", dc.r);
+        r_entity->put("g", dc.g);
+        r_entity->put("b", dc.b);
+        r_entity->put("energy", 1.0f);
+        r_entity->add_child("location", makeTranslationNode(c));
+        r_entity->add_child("facing", makeRotationNode(c));
+        r_entities.add_child("entity", *r_entity);
+        delete r_entity;
+    }
 
     room.add_child("entities", r_entities);
     rooms.add_child("room", room);
