@@ -22,9 +22,6 @@ using namespace boost::property_tree;
 #include "misc/utils.hpp"
 #include "resources/Loader.hpp"
 #include "resources/ModelInfo.hpp"
-#include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
 
 class LoaderXML : public Loader {
 protected:

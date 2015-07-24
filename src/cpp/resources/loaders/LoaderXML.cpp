@@ -235,11 +235,6 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, ModelInfo *mi) {
     } catch (std::exception e) {
 
     }
-
-    int cw = GL_CW;
-    mi->s->renderer_hint = (void *) new int;
-    *((int *) mi->s->renderer_hint) = cw;
-
 }
 
 extern "C" {

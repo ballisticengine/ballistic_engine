@@ -60,14 +60,9 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
             s->faces[i].uvs[vi].v = (float) md2->st[iv].t / (float) md2->header.skinheight;
         }
     }
-    //s->textures[0] = (Texture *) TextureFactory::getInstance()->get("@" + string((char *) md2->skin));
+
     this->addDependency("@" + string((char *) md2->skin), (void **)&s->textures[0]);
     s->calculateNormals();
-    int cw = GL_CCW;
-    s->renderer_hint = (void *) new int;
-    *((int *) s->renderer_hint) = cw;
-  
-
 }
 
 void * LoaderMD2::load(string file_name) {

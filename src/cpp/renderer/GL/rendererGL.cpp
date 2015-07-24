@@ -231,9 +231,7 @@ void RendererGL::renderFaceTexShape(Shape *s) {
 
     size_t ** polys = (size_t **) s->faces;
     size_t uvc = 0;
-    int dir = *((int *) s->renderer_hint), int_prev_dir;
-//    glGetIntegerv(GL_FRONT_FACE, &int_prev_dir);
-//    glFrontFace(dir);
+    
     for (size_t i = 0; i < s->f_count; i++) {
 
         if (s->materials && s->materials[i]) {
@@ -257,7 +255,7 @@ void RendererGL::renderFaceTexShape(Shape *s) {
         }
         glEnd();
     }
-//    glFrontFace(int_prev_dir);
+
 }
 
 void RendererGL::setVideoMode() {

@@ -12,9 +12,6 @@ using namespace std;
 #include "resources/loaders/md2struct.hpp"
 #include "resources/Loader.hpp"
 #include "misc/singleton.hpp"
-#include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include "resources/ModelInfo.hpp"
 
 class LoaderMD2 : public Loader{
