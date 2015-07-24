@@ -26,7 +26,7 @@ factory_items_vector ResourceManager::getByType(ResourceType type = NONE) {
 void ResourceManager::resolveDependencies(Loader *loader) {
     dep_list dependencies = loader->getDependencies();
     for (size_t i = 0; i < dependencies.size(); i++) {
-        cout << "Dependency " << dependencies[i].file_name << endl;
+        //cout << "Dependency " << dependencies[i].file_name << endl;
         *dependencies[i].target = this->get(dependencies[i].file_name);
     }
     loader->cleanDependencies();

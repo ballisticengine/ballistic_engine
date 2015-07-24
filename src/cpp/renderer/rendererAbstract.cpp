@@ -25,7 +25,6 @@ void RendererAbstract::setupTextures() {
     for (size_t i = 0; i < ts_size; i++) {
         
         if (ts[i]->object) {
-            cout << "TEX," << ts[i]->object << endl;
             this->setupTexture((Texture *) ts[i]->object);
         }
     }
