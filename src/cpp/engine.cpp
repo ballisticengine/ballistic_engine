@@ -31,30 +31,43 @@ void Engine::prepare() {
 
     VideoData vd = *Config::getInstance()->getVD();
 
-    LibLoad::getInstance()->registerModule("renderer", Config::getInstance()->getRenderer(), "returnRenderer");
+//    LibLoad::getInstance()->registerModule("renderer", Config::getInstance()->getRenderer(), "returnRenderer");
+//    
+//    this->r = (RendererAbstract *)LibLoad::getInstance()->getModuleClass("renderer");
     
-    r = (RendererAbstract *)LibLoad::getInstance()->getModuleClass("renderer");
+    
+    
+    
+    
+    LibLoad::getInstance()->registerModule("renderer2", "RendererOpenGL", "returnRenderer" );
+    RendererInterface *ri = (RendererInterface *)LibLoad::getInstance()->getModuleClass("renderer2");
+    ri->init(vd.width,vd.height);
+   
+    RenderingManager *rendering = RenderingManager::getInstance();
+    
+    rendering->setRenderer(ri);
+    cout << "Setup textures " << endl;
+    rendering->setupTextures();
+    cout << "Done" << endl;
+   
     
     cout << "IO\n";
-    
-
     io = new SdlIO();
 
     io->initWindow(io);
-    io->setRenderer(r);
+     rendering->setFlush(SdlIO::flush);
+    //io->setRenderer(r);
 
-    cout << "Renderer init\n";
-    r->init();
-    cout << "Camera set\n";
-    r->setCamera(w->getCurrentCamera());
-    cout << "Flush set\n";
-    r->setFlush(SdlIO::flush);
+//    cout << "Renderer init\n";
+//    r->init();
+//    cout << "Camera set\n";
+//    r->setCamera(w->getCurrentCamera());
+//    cout << "Flush set\n";
+//    r->setFlush(SdlIO::flush);
     
     this->pythonInit();
     cout << "World loop\n";
     boost::thread(boost::ref(*w));
-//         cout << "Renderer loop\n";
-//    boost::thread(boost::ref(*r));
 
 }
 

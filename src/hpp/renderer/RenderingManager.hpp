@@ -19,6 +19,7 @@ protected:
 public:
     RenderingManager();
     ~RenderingManager();
+    virtual void setupTextures();
     virtual void init();
     virtual void setRenderer(RendererInterface *renderer);
     virtual RendererInterface * getRenderer();

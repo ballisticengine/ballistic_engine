@@ -8,17 +8,10 @@ int SdlIO::window_h = 0;
 
 SdlIO::SdlIO() {
     w = World::getInstance();
-
+    rendering=RenderingManager::getInstance();
     EngineState::getInstance()->setBool("keypress", false);
 }
 
-void SdlIO::setRenderer(RendererAbstract *r) {
-    this->r = r;
-}
-
-RendererAbstract *SdlIO::getRenderer() {
-    return this->r;
-}
 
 void SdlIO::initWindow(SdlIO *me) {
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -77,7 +70,7 @@ void SdlIO::toggleFullscreen() {
         SDL_SetWindowFullscreen(window, 0);
     }
 
-    SdlIO::me->r->setVideoMode();
+   // SdlIO::me->r->setVideoMode();
     EngineState::getInstance()->toggleBool("fullscreen");
 }
 
@@ -231,7 +224,9 @@ void SdlIO::eventLoop() {
             }
 
         }
-        r->render();
+        
+        rendering->render();
+       // r->render();
     }
 }
 

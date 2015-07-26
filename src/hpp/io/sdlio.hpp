@@ -21,13 +21,15 @@ using namespace std;
 #include "config/path.hpp"
 #include "io/ttf.hpp"
 #include "python/scripting.hpp"
+#include "renderer/RenderingManager.hpp"
 
 class SdlIO : public Singleton<SdlIO> {
 private:
     static SDL_Surface *screen;
     static SDL_Renderer* displayRenderer;
     static SDL_Window *window;
-    RendererAbstract *r;
+//    RendererAbstract *r;
+    RenderingManager *rendering;
     static SdlIO *me;
     World *w;
     bool fullscreen;
@@ -36,8 +38,8 @@ private:
     size_t anykey(const Uint8 *state, int ksize);
 public:
     static void flush();
-    void setRenderer(RendererAbstract *r);
-    RendererAbstract *getRenderer();
+//    void setRenderer(RendererAbstract *r);
+//    RendererAbstract *getRenderer();
     static void initWindow(SdlIO *me);
     void eventLoop();
     void keyboardInputThread();

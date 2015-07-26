@@ -14,7 +14,7 @@ protected:
     void assignTexture(Texture *t);
     void assignMaterial(Material *m);
 public:
-    virtual void init();
+    virtual void init(size_t width, size_t height);
     virtual void renderShape(Shape *s);
     virtual void render2DShape(Shape2d *shape);
     virtual void resetMatrix();
@@ -23,7 +23,7 @@ public:
     virtual void translate(Vector3d v);
     virtual void rotate(Vector3d v, e_loc degrees);
     virtual void setupTexture(Texture *t);
-    virtual void positionCamera(Camera *c);
+    virtual void positionCamera(Camera *camera);
 };
 
 

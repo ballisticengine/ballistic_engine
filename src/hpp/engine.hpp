@@ -35,6 +35,7 @@ using namespace std;
 #include "python/scripting.hpp"
 #include "libload/LibLoad.hpp"
 #include "renderer/RenderingManager.hpp"
+#include "renderer/RendererInterface.hpp"
 
 
 

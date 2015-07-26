@@ -11,7 +11,7 @@ class RendererInterface {
 public:
     //TODO: lighting refactor 
 
-    virtual void init() = 0;
+    virtual void init(size_t width, size_t height) = 0;
     virtual void renderShape(Shape *s) = 0;
     virtual void render2DShape(Shape2d *shape) = 0;
     virtual void resetMatrix() = 0;

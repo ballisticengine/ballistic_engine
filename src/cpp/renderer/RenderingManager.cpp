@@ -8,6 +8,18 @@ void RenderingManager::init() {
 
 }
 
+void RenderingManager::setupTextures() {
+     vector<LoadedResource *> ts = ResourceManager::getInstance()->getByType(TEXTURE);
+
+    size_t ts_size = ts.size();
+    for (size_t i = 0; i < ts_size; i++) {
+        
+        if (ts[i]->object) {
+            this->renderer->setupTexture((Texture *) ts[i]->object);
+        }
+    }
+}
+
 void RenderingManager::face(Vector3d &v) {
     this->renderer->rotate(Vector3d(1, 0, 0), v.x);
     this->renderer->rotate(Vector3d(0, 1, 0), v.y);
@@ -49,11 +61,11 @@ void RenderingManager::render() {
     this->renderer->beforeFrame();
     this->renderer->resetMatrix();
     this->renderer->positionCamera(world->getObserver()->getCamera());
-    this->renderAllRooms();
+   this->renderAllRooms();
     //this->renderAllDecals();
     this->renderer->resetMatrix();
     this->renderer->positionCamera(world->getObserver()->getCamera());
-    this->renderAllEntities();
+   // this->renderAllEntities();
     this->renderer->afterFrame();
     this->flush_callback();
 }
