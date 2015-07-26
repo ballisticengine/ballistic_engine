@@ -111,14 +111,7 @@ void RendererGL::renderSprite(Sprite *sprite) {
         }
     glLoadMatrixf(mat);
 
-    //    glBegin(GL_QUADS);
-    //    //cout << sprite << endl;
-    //    for (size_t i = 0; i < 4; i++) {
-    //        glTexCoord2d(sprite->shape->uvs[i].u, sprite->shape->uvs[i].v);
-    //        glVertex3d(sprite->shape->vertices[i].x, sprite->shape->vertices[i].y, sprite->shape->vertices[i].z);
-    //
-    //    }
-    //    glEnd();
+
 
     renderShape2d(sprite->shape);
 }

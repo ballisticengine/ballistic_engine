@@ -1,3 +1,7 @@
+import sys
+sys.path.append('../../../site_scons')
+
+import lib_helper
 
 LIBS = ['SDL2', 'SDL2_ttf', 'SDL2_image',
         'boost_timer', 'boost_filesystem', 'boost_system', 'boost_thread', 'boost_python',
@@ -10,7 +14,7 @@ root = Dir('../../../').abspath
 
 src = root+'/src'
 
-def make_loader(file):
+def make_loaderx(file):
     print "MAKING", file
     env = Environment(CPPPATH=[
     '/usr/include/python2.7',
@@ -34,6 +38,12 @@ def make_loader(file):
         action = Copy("$TARGET", "$SOURCE"))
 
 
+def make_loader(file):
+    sources = [
+        './loaders/'+file+'.cpp',
+        './Loader.cpp',
+    ]
+    lib_helper.make_shared(file, sources, 'bin/loaders', LIBS)
 
 
 LOADERS = ['LoaderDummy', 'LoaderXML', 'LoaderMD2', 'TextureLoader']

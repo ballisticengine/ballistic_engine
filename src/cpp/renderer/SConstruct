@@ -1,35 +1,20 @@
+import sys
+sys.path.append('../../../site_scons')
+
+import lib_helper
+
 LIBS = ['stdc++', 'pthread', 'dl', 'GL', 'GLEW', 'GLU' ]
 
-root = Dir('../../../').abspath
-
-
-print "The root", root
-
-
-env = Environment(CPPPATH=[
-    '/usr/include/python2.7',
-    '/usr/include/bullet',
-    root+'/src/hpp',
-])
-
-env['SHLIBPREFIX'] = ''
+def make_renderer(file, subdir):
+    sources = [
+        './rendererAbstract.cpp',
+        subdir+'/'+file+'.cpp'
+    ]
+    lib_helper.make_shared(file, sources, 'bin', LIBS)
 
 
 
-rlib = env.SharedLibrary('rendererGL', [
+renderers = {'GL': 'rendererGL', 'GL': 'RendererOpenGL'}
 
-    './GL/rendererGL.cpp',
-    './rendererAbstract.cpp',
-
-
-],
-                         LIBS=LIBS,
-                         LIBPATH='.'
-)
-
-env.Append(LINKFLAGS=['-Wl,-soname,rendererGL.so'])
-c = Command(target = root+'/bin/',
-        source = rlib,
-        action = Copy("$TARGET", "$SOURCE"))
-
-env.AlwaysBuild( c )
+for subdir in renderers:
+    make_renderer(renderers[subdir], subdir)
