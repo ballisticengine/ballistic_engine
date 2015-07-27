@@ -1,6 +1,15 @@
 #include "renderer/GL/RendererOpenGL.hpp"
 
 void RendererOpenGL::init(size_t width, size_t height) {
+    light_numbers[0] = GL_LIGHT0;
+    light_numbers[1] = GL_LIGHT1;
+    light_numbers[2] = GL_LIGHT2;
+    light_numbers[3] = GL_LIGHT3;
+    light_numbers[4] = GL_LIGHT4;
+    light_numbers[5] = GL_LIGHT5;
+    light_numbers[6] = GL_LIGHT6;
+    light_numbers[7] = GL_LIGHT7;
+    light_counter = 0;
     glewInit();
     if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
         cout << "Shaders in place\n";
@@ -18,29 +27,129 @@ void RendererOpenGL::init(size_t width, size_t height) {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_NORMALIZE);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    //glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-    
+    addShader("light");
+
+}
+
+void RendererOpenGL::addLight(Light *l) {
+    if (light_counter > 7) {
+        cout << "Too much lights" << endl;
+        return;
+    }
+
+ 
+    GLfloat position[] = {0, 0, 0, 1.0f};
+
+
+
+    glEnable(light_numbers[light_counter]);
+    GLfloat ambientLight[] = {0, 0, 0, 1.0f}; //??
+    GLfloat diffuseLight[] = {0.8f, 0.8f, 0.8, 1.0f};
+    GLfloat specularLight[] = {0.5f, 0.5f, 0.5f, 1.0f};
+    ColorRGBA c = l->getDiffuse();
+    GLfloat intensity[] = {c.r, c.g, c.b, c.a};
+
+    GLfloat shin = 0.0001;
+    // glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight); //??
+    glLightfv(light_numbers[light_counter], GL_AMBIENT, intensity);
+    glLightfv(light_numbers[light_counter], GL_DIFFUSE, intensity);
+    glLightfv(light_numbers[light_counter], GL_SPECULAR, intensity);
+
+    glLightfv(light_numbers[light_counter], GL_POSITION, position);
+    //glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shin);
+    GLfloat ambient[] = {1.0f, 0.0f, 0.0f};
+    //glLightf(light_numbers[light_counter], GL_CONSTANT_ATTENUATION, 2);
+    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
+    //this->setAmbientLight(&w->getActiveRoom()->ambient_light);
+    light_counter++;
+}
+
+void RendererOpenGL::addShader(string name) {
+    char *vf = Utils::loadText("data/shaders" + string("/") + name + ".vert"), *ff =
+            Utils::loadText("data/shaders" + string("/") + name + ".frag");
+    const char *vfc = vf, *ffc = ff;
+    GLhandleARB vhandle = glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB),
+            fhandle = glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
+
+    size_t vfs = strlen(vfc), ffs = strlen(ffc);
+    GLint * vs = (GLint*) & vfs, * fs = (GLint*) & ffs;
+    glShaderSourceARB(vhandle, 1, &vfc, 0);
+    glShaderSourceARB(fhandle, 1, &ffc, 0);
+    delete ff;
+    delete vf;
+    glCompileShaderARB(vhandle);
+    glCompileShaderARB(fhandle);
+    GLint vcompiled, fcompiled, linked;
+
+
+    p = glCreateProgramObjectARB();
+    glAttachObjectARB(p, vhandle);
+    glAttachObjectARB(p, fhandle);
+    glLinkProgramARB(p);
+    glGetProgramiv(p, GL_LINK_STATUS, &linked);
+    glGetObjectParameterivARB(vhandle, GL_COMPILE_STATUS, &vcompiled);
+    glGetObjectParameterivARB(vhandle, GL_COMPILE_STATUS, &fcompiled);
+    if (!vcompiled || !fcompiled || !linked) {
+        cout << "Shader " << name << vcompiled << ", " << fcompiled << "error:\n";
+        if (!vcompiled) {
+            cout << "Vertex shader error\n";
+        }
+
+        if (!fcompiled) {
+            cout << "Frament shader error\n";
+        }
+
+        if (!linked) {
+            cout << "Link error\n";
+        }
+
+        GLint blen = 0;
+        GLsizei slen = 0;
+
+        glGetShaderiv(p, GL_INFO_LOG_LENGTH, &blen);
+
+        if (blen > 1) {
+            GLchar* compiler_log = (GLchar*) malloc(blen);
+
+            glGetInfoLogARB(p, blen, &slen, compiler_log);
+            cout << "compiler_log:\n" << compiler_log;
+            free(compiler_log);
+        }
+    }
+    glUseProgram(p);
+    texloc = glGetUniformLocation(p, "tex");
+    use_light_glsl = glGetUniformLocation(p, "use_light");
+    glsl_bounding = glGetUniformLocation(p, "bounding");
+    light_set = 1;
+    glUniform1i(use_light_glsl, light_set);
+    glUniform1i(glsl_bounding, 0);
+    glUniform1i(glGetUniformLocation(p, "light_count"), 7); //!!
+
+
+    //shaders.push_back(p);
+
 }
 
 void RendererOpenGL::renderSkybox(Skybox *sky) {
     this->resetMatrix();
     glFrontFace(GL_CCW);
-
+    glUseProgram(0);
     glDisable(GL_DEPTH_TEST);
-    /// glDisable(GL_LIGHTING);
+
 
     this->translate(Vector3d(0, 0, -18));
-    //glDisable(GL_TEXTURE_2D);
-    glColor4f(0, 1, 1, 1);
+
+
     this->assignTexture(sky->getTexture());
 
     Shape *skyshape = sky->getShape();
 
-    
+
     glBegin(GL_QUADS);
     for (size_t i = 0; i < skyshape->v_count; i++) {
         //glVertex3f(&s->vertices[i], 0, &s->uvs[i]);
@@ -49,9 +158,10 @@ void RendererOpenGL::renderSkybox(Skybox *sky) {
     }
     glEnd();
     glEnable(GL_DEPTH_TEST);
-    ///glEnable(GL_LIGHTING);
+
     glFrontFace(GL_CW);
-   // glEnable(GL_TEXTURE_2D);
+    glUseProgram(p);
+
 
 }
 
@@ -59,7 +169,7 @@ void RendererOpenGL::assignTexture(Texture *t) {
     GLuint tex_id;
     tex_id = this->textures_ids[t];
     glActiveTexture(GL_TEXTURE0);
-    //glUniform1i(texloc, 0);
+    glUniform1i(texloc, 0);
     glBindTexture(GL_TEXTURE_2D, tex_id);
 }
 
@@ -133,6 +243,7 @@ void RendererOpenGL::beforeFrame() {
 
 void RendererOpenGL::afterFrame() {
     glFlush();
+    light_counter=0;
 }
 
 void RendererOpenGL::translate(Vector3d v) {

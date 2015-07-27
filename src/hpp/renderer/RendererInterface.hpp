@@ -7,6 +7,7 @@
 #include "types/shape.hpp"
 #include "types/shape2d.hpp"
 #include "types/skybox.hpp"
+#include "entities/light.hpp"
 
 class RendererInterface {
 public:
@@ -23,6 +24,7 @@ public:
     virtual void rotate(Vector3d v, e_loc degrees) = 0;
     virtual void setupTexture(Texture *t) = 0;
     virtual void positionCamera(Camera *c) =0;
+    virtual void addLight(Light *l)=0;
 
 };
 

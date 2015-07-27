@@ -6,6 +6,9 @@
 #include <GL/glu.h>
 
 #include "renderer/RendererInterface.hpp"
+#include "misc/utils.hpp"
+
+
 
 class RendererOpenGL : public RendererInterface {
 protected:
@@ -13,6 +16,10 @@ protected:
     map<Texture *, GLuint> textures_ids;
     void assignTexture(Texture *t);
     void assignMaterial(Material *m);
+    void addShader(string name);
+    GLhandleARB p;
+    size_t light_counter;
+     map <int, GLint> light_numbers;
 public:
     void init(size_t width, size_t height);
     void renderShape(Shape *s);
@@ -25,6 +32,7 @@ public:
     void setupTexture(Texture *t);
     void positionCamera(Camera *camera);
     void renderSkybox(Skybox *sky);
+    void addLight(Light *l);
 };
 
 

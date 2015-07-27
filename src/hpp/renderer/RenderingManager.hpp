@@ -25,6 +25,7 @@ public:
     virtual RendererInterface * getRenderer();
     virtual void render();
     virtual void setFlush(flush_function flush_callback);
+    void positionLights();
 };
 
 #endif

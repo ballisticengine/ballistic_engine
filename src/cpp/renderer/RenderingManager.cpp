@@ -5,7 +5,7 @@ void RenderingManager::setFlush(flush_function flush_callback) {
 }
 
 void RenderingManager::init() {
-   
+
 }
 
 void RenderingManager::setupTextures() {
@@ -14,7 +14,7 @@ void RenderingManager::setupTextures() {
 
     size_t ts_size = ts.size();
     for (size_t i = 0; i < ts_size; i++) {
-        
+
         if (ts[i]->object) {
             cout << "Stextures" << endl;
             this->renderer->setupTexture((Texture *) ts[i]->object);
@@ -59,12 +59,26 @@ void RenderingManager::renderAllDecals() {
 
 }
 
+void RenderingManager::positionLights() {
+    lights_list lights = world->active_room->lights;
+    size_t lights_size = lights.size();
+
+    for (size_t i = 0; i < lights_size; i++) {
+        Coords lc = lights[i]->getCoords();
+        this->renderer->resetMatrix();
+        this->renderer->positionCamera(world->getObserver()->getCamera());
+        this->renderer->translate(lc.translation);
+        this->renderer->addLight(lights[i]);
+    }
+}
+
 void RenderingManager::render() {
     this->renderer->beforeFrame();
+    this->positionLights();
     this->renderer->renderSkybox(world->sky);
     this->renderer->resetMatrix();
     this->renderer->positionCamera(world->getObserver()->getCamera());
-   this->renderAllRooms();
+    this->renderAllRooms();
     //this->renderAllDecals();
     this->renderer->resetMatrix();
     this->renderer->positionCamera(world->getObserver()->getCamera());
@@ -75,7 +89,7 @@ void RenderingManager::render() {
 
 RenderingManager::RenderingManager() {
     this->world = World::getInstance();
-     world->sky->makeShape(20, 20);
+    world->sky->makeShape(20, 20);
 }
 
 RenderingManager::~RenderingManager() {
