@@ -5,7 +5,7 @@ void RendererOpenGL::init(size_t width, size_t height) {
     if (GLEW_ARB_vertex_shader && GLEW_ARB_fragment_shader) {
         cout << "Shaders in place\n";
     }
-    
+
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -23,6 +23,36 @@ void RendererOpenGL::init(size_t width, size_t height) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+    
+}
+
+void RendererOpenGL::renderSkybox(Skybox *sky) {
+    this->resetMatrix();
+    glFrontFace(GL_CCW);
+
+    glDisable(GL_DEPTH_TEST);
+    /// glDisable(GL_LIGHTING);
+
+    this->translate(Vector3d(0, 0, -18));
+    //glDisable(GL_TEXTURE_2D);
+    glColor4f(0, 1, 1, 1);
+    this->assignTexture(sky->getTexture());
+
+    Shape *skyshape = sky->getShape();
+
+    
+    glBegin(GL_QUADS);
+    for (size_t i = 0; i < skyshape->v_count; i++) {
+        //glVertex3f(&s->vertices[i], 0, &s->uvs[i]);
+        glTexCoord2d(skyshape->uvs[i].u, skyshape->uvs[i].v);
+        glVertex3d(skyshape->vertices[i].x, skyshape->vertices[i].y, skyshape->vertices[i].z);
+    }
+    glEnd();
+    glEnable(GL_DEPTH_TEST);
+    ///glEnable(GL_LIGHTING);
+    glFrontFace(GL_CW);
+   // glEnable(GL_TEXTURE_2D);
+
 }
 
 void RendererOpenGL::assignTexture(Texture *t) {
@@ -63,7 +93,7 @@ void RendererOpenGL::renderShape(Shape *s) {
             this->assignTexture(s->textures[i]);
 
         }
-       // glColor4f(0,1,0,1);
+        // glColor4f(0,1,0,1);
         glBegin(GL_TRIANGLES);
         for (size_t n = 0; n < s->v_per_poly; n++) {
             glNormal3d(s->faces[i].normals[n].x, s->faces[i].normals[n].y, s->faces[i].normals[n].z);
@@ -95,8 +125,8 @@ void RendererOpenGL::resetMatrix() {
 }
 
 void RendererOpenGL::beforeFrame() {
-    //glClearColor(1,0,0,1);
-    glClear(GL_DEPTH_BUFFER_BIT ); //| GL_COLOR_BUFFER_BIT
+    //    glClearColor(1,0,0,1);
+    glClear(GL_DEPTH_BUFFER_BIT); //| GL_COLOR_BUFFER_BIT
     glMatrixMode(GL_MODELVIEW);
     //glFrontFace(GL_CW);
 }
@@ -117,7 +147,7 @@ void RendererOpenGL::setupTexture(Texture *t) {
     GLuint tex_id;
     GLint tf;
     textureFormat tformat = t->getFormat();
-   
+
     switch (tformat) {
         case TF_BGR:
             tf = GL_BGR_EXT;

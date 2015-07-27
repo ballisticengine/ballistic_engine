@@ -6,6 +6,7 @@
 #include "types/mathTypes.hpp"
 #include "types/shape.hpp"
 #include "types/shape2d.hpp"
+#include "types/skybox.hpp"
 
 class RendererInterface {
 public:
@@ -14,6 +15,7 @@ public:
     virtual void init(size_t width, size_t height) = 0;
     virtual void renderShape(Shape *s) = 0;
     virtual void render2DShape(Shape2d *shape) = 0;
+    virtual void renderSkybox(Skybox *sky)=0;
     virtual void resetMatrix() = 0;
     virtual void beforeFrame() = 0;
     virtual void afterFrame() = 0;

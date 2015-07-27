@@ -14,16 +14,17 @@ protected:
     void assignTexture(Texture *t);
     void assignMaterial(Material *m);
 public:
-    virtual void init(size_t width, size_t height);
-    virtual void renderShape(Shape *s);
-    virtual void render2DShape(Shape2d *shape);
-    virtual void resetMatrix();
-    virtual void beforeFrame();
-    virtual void afterFrame();
-    virtual void translate(Vector3d v);
-    virtual void rotate(Vector3d v, e_loc degrees);
-    virtual void setupTexture(Texture *t);
-    virtual void positionCamera(Camera *camera);
+    void init(size_t width, size_t height);
+    void renderShape(Shape *s);
+    void render2DShape(Shape2d *shape);
+    void resetMatrix();
+    void beforeFrame();
+    void afterFrame();
+    void translate(Vector3d v);
+    void rotate(Vector3d v, e_loc degrees);
+    void setupTexture(Texture *t);
+    void positionCamera(Camera *camera);
+    void renderSkybox(Skybox *sky);
 };
 
 

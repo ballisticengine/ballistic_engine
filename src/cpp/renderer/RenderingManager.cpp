@@ -5,7 +5,7 @@ void RenderingManager::setFlush(flush_function flush_callback) {
 }
 
 void RenderingManager::init() {
-
+   
 }
 
 void RenderingManager::setupTextures() {
@@ -61,6 +61,7 @@ void RenderingManager::renderAllDecals() {
 
 void RenderingManager::render() {
     this->renderer->beforeFrame();
+    this->renderer->renderSkybox(world->sky);
     this->renderer->resetMatrix();
     this->renderer->positionCamera(world->getObserver()->getCamera());
    this->renderAllRooms();
@@ -74,6 +75,7 @@ void RenderingManager::render() {
 
 RenderingManager::RenderingManager() {
     this->world = World::getInstance();
+     world->sky->makeShape(20, 20);
 }
 
 RenderingManager::~RenderingManager() {
