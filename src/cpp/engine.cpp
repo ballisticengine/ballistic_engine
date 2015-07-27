@@ -29,15 +29,7 @@ void Engine::prepare() {
     cout << start_lvl << endl;
     w->parseXml(Config::getInstance()->getStart());
 
-    VideoData vd = *Config::getInstance()->getVD();
-
-//    LibLoad::getInstance()->registerModule("renderer", Config::getInstance()->getRenderer(), "returnRenderer");
-//    
-//    this->r = (RendererAbstract *)LibLoad::getInstance()->getModuleClass("renderer");
-    
-    
-    
-    
+    VideoData vd = *Config::getInstance()->getVD();    
     
     LibLoad::getInstance()->registerModule("renderer2", "RendererOpenGL", "returnRenderer" );
     RendererInterface *ri = (RendererInterface *)LibLoad::getInstance()->getModuleClass("renderer2");
@@ -58,14 +50,7 @@ void Engine::prepare() {
     ri->init(vd.width,vd.height);
     rendering->setupTextures();
     rendering->setFlush(SdlIO::flush);
-    //io->setRenderer(r);
-
-//    cout << "Renderer init\n";
-//    r->init();
-//    cout << "Camera set\n";
-//    r->setCamera(w->getCurrentCamera());
-//    cout << "Flush set\n";
-//    r->setFlush(SdlIO::flush);
+  
     
     this->pythonInit();
     cout << "World loop\n";

@@ -7,14 +7,13 @@ LIBS = ['stdc++', 'pthread', 'dl', 'GL', 'GLEW', 'GLU' ]
 
 def make_renderer(file, subdir):
     sources = [
-        './rendererAbstract.cpp',
         subdir+'/'+file+'.cpp'
     ]
     lib_helper.make_shared(file, sources, 'bin', LIBS)
 
 
 
-renderers = {'GL': 'rendererGL', 'GL': 'RendererOpenGL'}
+renderers = { 'GL': 'RendererOpenGL'}
 
 for subdir in renderers:
     make_renderer(renderers[subdir], subdir)

@@ -23,7 +23,6 @@ using namespace std;
 
 #include "misc/singleton.hpp"
 #include "world/World.hpp"
-#include "renderer/GL/RendererGL.hpp"
 #include "io/sdlio.hpp"
 #include "config/Config.hpp"
 
@@ -41,7 +40,6 @@ using namespace std;
 
 class Engine : public Singleton<Engine> {
     SdlIO *io;
-    RendererAbstract *r;
     World *world;
 public:
     void pythonInit();

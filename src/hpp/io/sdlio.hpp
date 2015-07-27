@@ -12,8 +12,6 @@ using namespace std;
 #include <SDL2/SDL_ttf.h>
 #endif
 #include <boost/thread/thread.hpp>
-#include "renderer/rendererAbstract.hpp"
-#include "renderer/GL/RendererGL.hpp"
 #include "misc/singleton.hpp"
 #include "config/EngineState.hpp"
 #include "world/World.hpp"
