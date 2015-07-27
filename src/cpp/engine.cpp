@@ -41,21 +41,23 @@ void Engine::prepare() {
     
     LibLoad::getInstance()->registerModule("renderer2", "RendererOpenGL", "returnRenderer" );
     RendererInterface *ri = (RendererInterface *)LibLoad::getInstance()->getModuleClass("renderer2");
-    ri->init(vd.width,vd.height);
+    
    
     RenderingManager *rendering = RenderingManager::getInstance();
     
     rendering->setRenderer(ri);
     cout << "Setup textures " << endl;
-    rendering->setupTextures();
+    
     cout << "Done" << endl;
    
     
     cout << "IO\n";
     io = new SdlIO();
-
+    
     io->initWindow(io);
-     rendering->setFlush(SdlIO::flush);
+    ri->init(vd.width,vd.height);
+    rendering->setupTextures();
+    rendering->setFlush(SdlIO::flush);
     //io->setRenderer(r);
 
 //    cout << "Renderer init\n";

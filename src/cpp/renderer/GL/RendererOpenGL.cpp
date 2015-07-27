@@ -18,7 +18,7 @@ void RendererOpenGL::init(size_t width, size_t height) {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_NORMALIZE);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-//    glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
@@ -29,7 +29,7 @@ void RendererOpenGL::assignTexture(Texture *t) {
     GLuint tex_id;
     tex_id = this->textures_ids[t];
     glActiveTexture(GL_TEXTURE0);
-    glUniform1i(texloc, 0);
+    //glUniform1i(texloc, 0);
     glBindTexture(GL_TEXTURE_2D, tex_id);
 }
 
@@ -55,15 +55,15 @@ void RendererOpenGL::renderShape(Shape *s) {
 
     for (size_t i = 0; i < s->f_count; i++) {
 
-//        if (s->materials && s->materials[i]) {
-//            this->assignMaterial(s->materials[i]);
-//        }
-//
+        if (s->materials && s->materials[i]) {
+            this->assignMaterial(s->materials[i]);
+        }
+
         if (s->textures && s->textures[i]) {
             this->assignTexture(s->textures[i]);
 
         }
-        glColor3f(0,1,0);
+       // glColor4f(0,1,0,1);
         glBegin(GL_TRIANGLES);
         for (size_t n = 0; n < s->v_per_poly; n++) {
             glNormal3d(s->faces[i].normals[n].x, s->faces[i].normals[n].y, s->faces[i].normals[n].z);
@@ -98,7 +98,7 @@ void RendererOpenGL::beforeFrame() {
     //glClearColor(1,0,0,1);
     glClear(GL_DEPTH_BUFFER_BIT ); //| GL_COLOR_BUFFER_BIT
     glMatrixMode(GL_MODELVIEW);
-    glFrontFace(GL_CW);
+    //glFrontFace(GL_CW);
 }
 
 void RendererOpenGL::afterFrame() {
@@ -114,7 +114,6 @@ void RendererOpenGL::rotate(Vector3d v, e_loc degrees) {
 }
 
 void RendererOpenGL::setupTexture(Texture *t) {
-    cout << "Setting up " << t->getFilename() << endl;
     GLuint tex_id;
     GLint tf;
     textureFormat tformat = t->getFormat();
@@ -141,7 +140,7 @@ void RendererOpenGL::setupTexture(Texture *t) {
     glGenTextures(1, &tex_id);
     this->textures_ids[t] = tex_id;
     glBindTexture(GL_TEXTURE_2D, tex_id);
-    //glTexStorage2D(GL_TEXTURE_2D, 8, tf, t->getWidth(), t->getHeight());
+    glTexStorage2D(GL_TEXTURE_2D, 8, tf, t->getWidth(), t->getHeight());
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,
             GL_LINEAR);
@@ -151,12 +150,10 @@ void RendererOpenGL::setupTexture(Texture *t) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    //glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
 
+    glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, tf, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
 
-    glTexImage2D(GL_TEXTURE_2D, 0, 4, t->getWidth(), t->getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid *) t->getPixels());
-
-   // glGenerateMipmap(GL_TEXTURE_2D);
+    glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 void RendererOpenGL::positionCamera(Camera *camera) {
