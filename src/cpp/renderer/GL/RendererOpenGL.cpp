@@ -42,7 +42,7 @@ void RendererOpenGL::addLight(Light *l) {
         return;
     }
 
- 
+
     GLfloat position[] = {0, 0, 0, 1.0f};
 
 
@@ -72,6 +72,9 @@ void RendererOpenGL::addLight(Light *l) {
 void RendererOpenGL::addShader(string name) {
     char *vf = Utils::loadText("data/shaders" + string("/") + name + ".vert"), *ff =
             Utils::loadText("data/shaders" + string("/") + name + ".frag");
+    if (!vf || !ff) {
+        return;
+    }
     const char *vfc = vf, *ffc = ff;
     GLhandleARB vhandle = glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB),
             fhandle = glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
@@ -243,7 +246,7 @@ void RendererOpenGL::beforeFrame() {
 
 void RendererOpenGL::afterFrame() {
     glFlush();
-    light_counter=0;
+    light_counter = 0;
 }
 
 void RendererOpenGL::translate(Vector3d v) {
@@ -305,6 +308,30 @@ void RendererOpenGL::positionCamera(Camera *camera) {
     this->translate(c.translation);
 }
 
+Vector3d RendererOpenGL::unproject(size_t x, size_t y) {
+    
+    GLint viewport[4];
+    GLdouble modelview[16];
+    GLdouble projection[16];
+    GLfloat winX, winY, winZ;
+    GLdouble posX, posY, posZ;
+
+    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+    glGetDoublev(GL_PROJECTION_MATRIX, projection);
+    glGetIntegerv(GL_VIEWPORT, viewport);
+
+    winX = (float) x;
+    winY = (float) viewport[3] - (float) y;
+    glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+
+    gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
+    
+    return Vector3d(posX, posY, posZ);
+}
+
+Vector3d RendererOpenGL::project(Vector3d coords) {
+
+}
 
 extern "C" {
 

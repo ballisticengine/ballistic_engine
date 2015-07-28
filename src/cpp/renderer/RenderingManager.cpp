@@ -89,7 +89,9 @@ void RenderingManager::render() {
 
 RenderingManager::RenderingManager() {
     this->world = World::getInstance();
-    world->sky->makeShape(20, 20);
+    if (world->sky) {
+        world->sky->makeShape(20, 20);
+    }
 }
 
 RenderingManager::~RenderingManager() {

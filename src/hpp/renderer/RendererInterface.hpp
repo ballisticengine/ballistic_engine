@@ -25,6 +25,8 @@ public:
     virtual void setupTexture(Texture *t) = 0;
     virtual void positionCamera(Camera *c) =0;
     virtual void addLight(Light *l)=0;
+    virtual Vector3d unproject(size_t x, size_t y)=0;
+    virtual Vector3d project(Vector3d coords)=0;
 
 };
 

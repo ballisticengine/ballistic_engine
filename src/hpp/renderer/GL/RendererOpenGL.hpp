@@ -33,6 +33,8 @@ public:
     void positionCamera(Camera *camera);
     void renderSkybox(Skybox *sky);
     void addLight(Light *l);
+    Vector3d unproject(size_t x, size_t y);
+    Vector3d project(Vector3d coords);
 };
 
 
