@@ -1,7 +1,7 @@
-#include "physics/collisionDetector.hpp"
+#include "physics/BulletPhysics.hpp"
 
 //TODO: use offset to prevent from 'jumping'
-CollisionInfo CollisionDetector::objectsCollide(ObjectEntity *ea, ObjectEntity *eb, Coords offset) {
+CollisionInfo BulletPhysics::objectsCollide(ObjectEntity *ea, ObjectEntity *eb, Coords offset) {
     CollisionInfo ci;
     ci.collided = false;
     static unsigned long cc = 0;
@@ -62,16 +62,16 @@ CollisionInfo CollisionDetector::objectsCollide(ObjectEntity *ea, ObjectEntity *
 
 }
 
-CollisionInfo CollisionDetector::roomCollide(RoomEntity *r, ObjectEntity *e, Coords offset) {
+CollisionInfo BulletPhysics::roomCollide(RoomEntity *r, ObjectEntity *e, Coords offset) {
 
     return this->objectsCollide(e, r, offset);
 }
 
-void CollisionDetector::setWorldTransform(Vector3d world_transform) {
+void BulletPhysics::setWorldTransform(Vector3d world_transform) {
     this->world_transform = world_transform;
 }
 
-CollisionDetector::CollisionDetector() {
+BulletPhysics::BulletPhysics() {
 
     broadphase = new btDbvtBroadphase();
 
@@ -84,16 +84,16 @@ CollisionDetector::CollisionDetector() {
 
 }
 
-CollisionDetector::~CollisionDetector() {
+BulletPhysics::~BulletPhysics() {
 
 }
 
-void CollisionDetector::step(e_loc timediff, rooms_list rooms) {
+void BulletPhysics::step(e_loc timediff, rooms_list rooms) {
 
    
 }
 
-void CollisionDetector::addRoom(RoomEntity *room) {
+void BulletPhysics::addRoom(RoomEntity *room) {
     cout << "addRoom" << endl;
     btTriangleMesh *mTriMesh = new btTriangleMesh();
     Shape *s = room->model;
@@ -117,7 +117,7 @@ void CollisionDetector::addRoom(RoomEntity *room) {
     //collisionShapes.push_back(mTriMesh);
 }
 
-void CollisionDetector::transformEntity(Entity *entity, Vector3d v) {
+void BulletPhysics::transformEntity(Entity *entity, Vector3d v) {
     btTransform btt;
     Coords ec = entity->getCoords(), c;
     btCollisionObject *body = (btCollisionObject*) entity->physics_data;
@@ -145,7 +145,7 @@ void CollisionDetector::transformEntity(Entity *entity, Vector3d v) {
     //body->setCenterOfMassTransform(btt);
 }
 
-void CollisionDetector::addEntity(Entity *entity) {
+void BulletPhysics::addEntity(Entity *entity) {
 
     cout << "Adding to CE: " << entity->name << endl;
     Coords c = entity->getCoords();

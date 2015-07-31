@@ -8,7 +8,7 @@
 #include "entities/entity.hpp"
 #include "entities/observerEntity.hpp"
 #include "entities/ObjectEntity.hpp"
-#include "physics/collisionDetector.hpp"
+#include "physics/BulletPhysics.hpp"
 
 
 TEST(Vector3d, Vector3dTest) {

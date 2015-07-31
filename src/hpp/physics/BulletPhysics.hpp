@@ -29,7 +29,7 @@ struct CollisionInfo {
 typedef map<Entity *,CollisionInfo> CiMap;
 typedef vector<CollisionInfo> CiList;
 
-class CollisionDetector {
+class BulletPhysics {
 private:
     btBroadphaseInterface* broadphase;
     btDefaultCollisionConfiguration* collisionConfiguration;
@@ -43,8 +43,8 @@ private:
     CiMap collision_map;
 public:
     void setWorldTransform(Vector3d world_transform);
-    CollisionDetector();
-    ~CollisionDetector();
+    BulletPhysics();
+    ~BulletPhysics();
     void addRoom(RoomEntity *room);
     void addEntity(Entity *entity);
     void step(e_loc timediff,rooms_list rooms);
