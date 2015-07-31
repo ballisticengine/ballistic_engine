@@ -50,6 +50,7 @@ public:
     void step(e_loc timediff,rooms_list rooms);
     CollisionInfo objectsCollide(ObjectEntity *a, ObjectEntity *b, Coords offset);
     CollisionInfo roomCollide(RoomEntity *r, ObjectEntity *e, Coords offset);
+    void rayTest(Vector3d origin, Vector3d direction);
 
 };
 

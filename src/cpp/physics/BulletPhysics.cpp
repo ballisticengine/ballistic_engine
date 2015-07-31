@@ -185,3 +185,7 @@ void BulletPhysics::addEntity(Entity *entity) {
 
     //collisionShapes.push_back(colShape);
 }
+
+ void BulletPhysics::rayTest(Vector3d origin, Vector3d direction) {
+     
+ }
