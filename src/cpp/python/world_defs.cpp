@@ -137,14 +137,20 @@ BOOST_PYTHON_MODULE(World) {
     bp::class_<lights_list>("lights_list")
             .def(bp::vector_indexing_suite<lights_list>());
 
-
+    bp::class_<BulletPhysics, BulletPhysics *>("Physics")
+        .def("ray_test", &BulletPhysics::rayTest)
+    ;
+    
     bp::class_<World, shared_ptr<World>, boost::noncopyable>("World", bp::no_init)//.add_property("instance", shared_ptr<&World::getInstance>())
             .def("getInstance", &getSharedWorldInstance)
             .def_readonly("active_room", &World::active_room)
             .def_readwrite("observer", &World::observer)
             .staticmethod("getInstance")
             .def("saveXml", &World::saveXml)
+            .def("get_physics", &World::getPhysicsEngine)
             ;
+    
+    
 
 };
 

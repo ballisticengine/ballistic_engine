@@ -149,3 +149,7 @@ World & World::getRef() {
 void World::addRoomEntity(RoomEntity *e) {
     this->rooms.push_back(e);
 }
+
+ BulletPhysics World::getPhysicsEngine() {
+     return this->collisions;
+ }

@@ -72,7 +72,7 @@ public:
     static World *getInstance();
     static World & getRef();
 
-
+    BulletPhysics getPhysicsEngine();
 
 
     World();
