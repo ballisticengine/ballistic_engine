@@ -1,13 +1,14 @@
 #include "physics/BulletPhysics.hpp"
 
 //TODO: use offset to prevent from 'jumping'
+
 CollisionInfo BulletPhysics::objectsCollide(ObjectEntity *ea, ObjectEntity *eb, Coords offset) {
     CollisionInfo ci;
     ci.collided = false;
     static unsigned long cc = 0;
-   
-    this->transformEntity(ea,offset.translation);
-    this->transformEntity(eb,Vector3d(0,0,0));
+
+    this->transformEntity(ea, offset.translation);
+    this->transformEntity(eb, Vector3d(0, 0, 0));
 
 
     btCollisionObject *a = (btCollisionObject *) (ea->physics_data),
@@ -35,12 +36,12 @@ CollisionInfo BulletPhysics::objectsCollide(ObjectEntity *ea, ObjectEntity *eb, 
             btVector3 ptA = pt.getPositionWorldOnA();
             btVector3 ptB = pt.getPositionWorldOnB();
             double ptdist = pt.getDistance();
-//            if (ptdist>0) {
-//                 ci.collided=false;
-//            } else {
-//               ci.collided=true; 
-//            }
-           
+            //            if (ptdist>0) {
+            //                 ci.collided=false;
+            //            } else {
+            //               ci.collided=true; 
+            //            }
+
             ci.A.name = a->name;
             ci.B.name = b->name;
             ci.A.cvec.x = ptA.x();
@@ -49,15 +50,15 @@ CollisionInfo BulletPhysics::objectsCollide(ObjectEntity *ea, ObjectEntity *eb, 
             ci.B.cvec.x = ptB.x();
             ci.B.cvec.y = ptB.y();
             ci.B.cvec.z = ptB.z();
-            ci.A.diff=ci.B.cvec-ci.A.cvec;
-            ci.B.diff=ci.A.cvec-ci.B.cvec;
-             ci.collided=true; 
-            ci.distance=ptdist;
+            ci.A.diff = ci.B.cvec - ci.A.cvec;
+            ci.B.diff = ci.A.cvec - ci.B.cvec;
+            ci.collided = true;
+            ci.distance = ptdist;
             //cc++;
             //cout << a->name << ", " << b->name << ", Dist:" << ptdist << ", " << cc << endl;
         }
     }
-    this->transformEntity(ea,-offset.translation);
+    this->transformEntity(ea, -offset.translation);
     return ci;
 
 }
@@ -90,7 +91,7 @@ BulletPhysics::~BulletPhysics() {
 
 void BulletPhysics::step(e_loc timediff, rooms_list rooms) {
 
-   
+
 }
 
 void BulletPhysics::addRoom(RoomEntity *room) {
@@ -113,7 +114,7 @@ void BulletPhysics::addRoom(RoomEntity *room) {
 
     body->setUserPointer((void *) room);
     dynamicsWorld->addCollisionObject(body);
-    this->transformEntity(room,Vector3d(0,0,0));
+    this->transformEntity(room, Vector3d(0, 0, 0));
     //collisionShapes.push_back(mTriMesh);
 }
 
@@ -128,11 +129,11 @@ void BulletPhysics::transformEntity(Entity *entity, Vector3d v) {
         Coords pc = entity->parent->getCoords();
         c.translation = c.translation; //+pc.translation;
     }
-    
+
     //TODO: proper checking
     if (entity->name == "observer") {
         //v.write();
-        btt.setOrigin(btVector3(c.translation.x+v.x, c.translation.y+v.y, c.translation.z+v.z));
+        btt.setOrigin(btVector3(c.translation.x + v.x, c.translation.y + v.y, c.translation.z + v.z));
     } else if (entity->name == "Room1") {
         //btt.setOrigin(btVector3(c.translation.x, c.translation.y, -c.translation.z));
         btt.setOrigin(btVector3(-c.translation.x, -c.translation.y, -c.translation.z));
@@ -166,7 +167,7 @@ void BulletPhysics::addEntity(Entity *entity) {
     body->setUserPointer((void *) entity);
 
     dynamicsWorld->addCollisionObject(body);
-    this->transformEntity(entity,Vector3d(0,0,0));
+    this->transformEntity(entity, Vector3d(0, 0, 0));
     btTransform abt;
     btVector3 min, max;
 
@@ -186,6 +187,19 @@ void BulletPhysics::addEntity(Entity *entity) {
     //collisionShapes.push_back(colShape);
 }
 
- void BulletPhysics::rayTest(Vector3d origin, Vector3d direction) {
-     
- }
+void BulletPhysics::rayTest(Vector3d origin, Vector3d direction) {
+    direction = direction * 1000.0f;
+
+    btCollisionWorld::ClosestRayResultCallback RayCallback(
+            btVector3(origin.x, origin.y, origin.z),
+            btVector3(direction.x, direction.y, direction.z)
+            );
+    dynamicsWorld->rayTest(
+            btVector3(origin.x, origin.y, origin.z),
+            btVector3(direction.x, direction.y, direction.z),
+            RayCallback
+            );
+    if(RayCallback.hasHit()) {
+        cout << "Ray has hit" << endl;
+    }
+}
