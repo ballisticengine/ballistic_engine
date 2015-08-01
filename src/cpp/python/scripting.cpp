@@ -20,6 +20,7 @@ PyScripting::PyScripting() {
 	init_world();
         init_hud(); 
         init_timer();
+        init_renderer();
         init_engine();
        
 }

@@ -8,7 +8,7 @@ class TestManipulator(manipulatorClass):
     def onMouseMove(self, deltax, deltay):
         self.world.observer.rotate(deltay, deltax, 0)
         physics = self.world.get_physics()
-        print physics
+        print self.rendering_manager
 
     def onSelfLoad(self):
         #self.world.observer.acceleration.translation.y=9
