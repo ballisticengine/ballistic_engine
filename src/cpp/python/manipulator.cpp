@@ -68,6 +68,12 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             int *b = (int *) paramB;
             f(*a, *b);
 
+        } 
+        else if (name == "MouseClick") {
+
+            unsigned int *a = (unsigned int *) paramA;
+            f(*a);
+
         } else if (name == "KeyDown") {
             Uint8 **keyboard_state = (Uint8**) paramA;
             bp::list a = PyManipulator::arrayToList(*keyboard_state);

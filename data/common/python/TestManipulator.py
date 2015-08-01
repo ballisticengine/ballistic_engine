@@ -7,8 +7,6 @@ class TestManipulator(manipulatorClass):
 
     def onMouseMove(self, deltax, deltay):
         self.world.observer.rotate(deltay, deltax, 0)
-        physics = self.world.get_physics()
-        print self.rendering_manager
 
     def onSelfLoad(self):
         #self.world.observer.acceleration.translation.y=9
@@ -61,6 +59,12 @@ class TestManipulator(manipulatorClass):
 
     def onEntityCollision(self,entitya,entityb, collision_info):
         print entitya.name, entityb.name
+
+
+    def onMouseClick(self, button):
+        print "Click"
+        #physics = self.world.get_physics()
+        #print self.rendering_manager
 
     def onLevelCollision(self,entity,room, collision_info):
 

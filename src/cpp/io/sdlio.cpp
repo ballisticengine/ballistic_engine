@@ -127,6 +127,7 @@ void SdlIO::mouseInputThread() {
     while (!EngineState::getInstance()->getBool("exit")) {
         delta_x = delta_y = 0;
         mouse_state = SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
+        
         if (mouse_x) {
 
             delta_x = mouse_x + last_x;
@@ -142,6 +143,10 @@ void SdlIO::mouseInputThread() {
 
         if (delta_x != 0 || delta_y != 0) {
             PyScripting::getInstance()->broadcast("MouseMove", &mouse_x, &mouse_y);
+        }
+        
+        if (mouse_state) {
+            PyScripting::getInstance()->broadcast("MouseClick", &mouse_state);
         }
         //mouse_x = mouse_y = delta_x = delta_y = 0;
     }
