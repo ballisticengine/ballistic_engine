@@ -18,9 +18,9 @@ BOOST_PYTHON_MODULE(RendererInterface) {
             .def_readwrite("z", &Vector3d::z)
             .def("write", &Vector3d::write)
             ;
-    bp::class_<RendererInterface, RendererInterface *>("rendering_interface", bp::no_init)
-            .def("unproject", &RendererInterface::unproject, bp::return_value_policy<bp::reference_existing_object>())
-            ;
+//    bp::class_<RendererInterface, RendererInterface *>("rendering_interface", bp::no_init)
+//            .def("unproject", &RendererInterface::unproject, bp::return_value_policy<bp::reference_existing_object>())
+//            ;
 }
 
 void init_renderer() {

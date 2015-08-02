@@ -67,7 +67,7 @@ class TestManipulator(manipulatorClass):
         physics = self.world.get_physics()
         c = self.world.observer.getCoords()
         renderer = self.rendering_manager.get_renderer()
-        x = renderer.unproject(10, 10)
+        
 
 
     def onMouseMove(self, deltax, deltay):
