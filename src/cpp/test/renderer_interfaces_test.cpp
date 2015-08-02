@@ -15,6 +15,8 @@ TEST(RendererInterface, RendererInterfaceTest) {
     SdlIO *io = new SdlIO();
     io->initWindow(io);
     ri->init(800, 600);
-    Vector3d un_v = rendering->getRenderer()->unproject(10,10);
-    un_v.write();
+     rendering->getRenderer()->unproject(10,10);
+     rendering->getRenderer()->unproject(0,0);
+     rendering->getRenderer()->unproject(1,1);
+    //un_v.write();
 }

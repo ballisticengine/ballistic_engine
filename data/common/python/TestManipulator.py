@@ -3,10 +3,11 @@ from World import Coords
 
 class TestManipulator(manipulatorClass):
     def __init__(self):
-        self.cc=0
+        self.cc = 0
+        self.mx = 0
+        self.my = 0
+        self.up = False
 
-    def onMouseMove(self, deltax, deltay):
-        self.world.observer.rotate(deltay, deltax, 0)
 
     def onSelfLoad(self):
         #self.world.observer.acceleration.translation.y=9
@@ -62,9 +63,17 @@ class TestManipulator(manipulatorClass):
 
 
     def onMouseClick(self, button):
-        print "Click"
-        #physics = self.world.get_physics()
-        #print self.rendering_manager
+        #print "Click"
+        physics = self.world.get_physics()
+        c = self.world.observer.getCoords()
+        renderer = self.rendering_manager.get_renderer()
+        x = renderer.unproject(10, 10)
+
+
+    def onMouseMove(self, deltax, deltay):
+        self.world.observer.rotate(deltay, deltax, 0)
+        self.mx = deltax
+        self.my = deltay
 
     def onLevelCollision(self,entity,room, collision_info):
 

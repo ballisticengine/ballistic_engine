@@ -308,25 +308,29 @@ void RendererOpenGL::positionCamera(Camera *camera) {
     this->translate(c.translation);
 }
 
-Vector3d RendererOpenGL::unproject(size_t x, size_t y) {
+Vector3d  RendererOpenGL::unproject(size_t x, size_t y) {
     
-    GLint viewport[4];
-    GLdouble modelview[16];
-    GLdouble projection[16];
-    GLfloat winX, winY, winZ;
-    GLdouble posX, posY, posZ;
-
-    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
-    glGetDoublev(GL_PROJECTION_MATRIX, projection);
-    glGetIntegerv(GL_VIEWPORT, viewport);
-
-    winX = (float) x;
-    winY = (float) viewport[3] - (float) y;
-    glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
-
-    gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
-    
-    return Vector3d(posX, posY, posZ);
+    cout << "unproject" << endl;
+//    return Vector3d(0,0,0);
+//    GLint viewport[4];
+//    GLdouble modelview[16];
+//    GLdouble projection[16];
+//    GLfloat winX, winY, winZ;
+//    GLdouble posX, posY, posZ;
+//
+//    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+//    glGetDoublev(GL_PROJECTION_MATRIX, projection);
+//    glGetIntegerv(GL_VIEWPORT, viewport);
+//
+//    winX = (float) x;
+//    winY = (float) viewport[3] - (float) y;
+//    glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+//
+//    gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
+//    Vector3d v(posX, posY, posZ);
+    ;
+    cout << "returning" << endl;
+    return Vector3d (0, 0, 0);
 }
 
 Vector3d RendererOpenGL::project(Vector3d coords) {

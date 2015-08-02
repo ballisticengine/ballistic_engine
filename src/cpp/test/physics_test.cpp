@@ -32,7 +32,7 @@ TEST(Vector3d, Vector3dTest) {
 }
 
 TEST(CollisionDetector, CollisionDetectorTest) {
-    CollisionDetector collisions;
+    BulletPhysics collisions;
     ObjectEntity *e1 = new ObjectEntity();        
     ObserverEntity *e2 = new ObserverEntity();
 
