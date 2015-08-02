@@ -38,13 +38,12 @@
            
         </weapons>
     </game>
-    <script>
-            TestManipulator
-        </script>
     <scripts>
         <script>
             ManipulatorClass
         </script>
-
+        <script>
+            TestManipulator
+        </script>
     </scripts>
 </config>

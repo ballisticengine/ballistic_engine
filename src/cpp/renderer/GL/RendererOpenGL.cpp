@@ -311,7 +311,7 @@ void RendererOpenGL::positionCamera(Camera *camera) {
 Vector3d  RendererOpenGL::unproject(size_t x, size_t y) {
     
     cout << "unproject" << endl;
-//    return Vector3d(0,0,0);
+    
 //    GLint viewport[4];
 //    GLdouble modelview[16];
 //    GLdouble projection[16];
@@ -326,11 +326,14 @@ Vector3d  RendererOpenGL::unproject(size_t x, size_t y) {
 //    winY = (float) viewport[3] - (float) y;
 //    glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
 //
-//    gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
-//    Vector3d v(posX, posY, posZ);
-    ;
-    cout << "returning" << endl;
-    return Vector3d (0, 0, 0);
+//    gluUnProject(winX, winY, winZ, mnodelview, projection, viewport, &posX, &posY, &posZ);
+//   
+//    cout << "returning" << endl;
+//    return Vector3d (posX, posY, posZ);
+    /*
+     GPF is caused by something inside this function, likely mouse coords
+     */
+    return Vector3d(0,0,0);
 }
 
 Vector3d RendererOpenGL::project(Vector3d coords) {

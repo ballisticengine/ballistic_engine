@@ -25,6 +25,15 @@ struct SignalType {
     void *paramA,*paramB,*paramC,*paramD;
 };
 
+enum SignalName {
+    ///Pass that to broadcast/signal instead of string
+};
+
+/*
+ * Instead of sending signals by name from engine, send signals by type and
+ * attach handler [Module.method] in PyScripting 
+ */
+
 class PyScripting : public Singleton<PyScripting> {
 protected:
 	man_list manipulators;

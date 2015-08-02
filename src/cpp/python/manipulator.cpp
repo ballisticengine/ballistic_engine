@@ -36,7 +36,7 @@ template <typename T> bp::list PyManipulator::arrayToList(T *array) {
 //like sdlio::assignSingnal or something
 
 void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC, void* paramD) {
-    cout << "Signal " << name << endl;
+    
     Py_BEGIN_ALLOW_THREADS
     PyLocker::getInstance()->lock();
     
