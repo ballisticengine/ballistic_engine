@@ -9,10 +9,10 @@ typedef boost::shared_ptr<EngineState> engine_state_ptr;
 
 BOOST_PYTHON_MODULE(EngineState) {
     bp::class_<EngineState, EngineState*>("EngineState")
-            .def("setBool", &EngineState::setBool)
-            .def("getBool", &EngineState::getBool)
-            .def("setString", &EngineState::setString)
-            .def("toggleBool", &EngineState::toggleBool)
+            .def("set_bool", &EngineState::setBool)
+            .def("get_bool", &EngineState::getBool)
+            .def("set_string", &EngineState::setString)
+            .def("get_string", &EngineState::toggleBool)
             ;
 }
 

@@ -53,7 +53,7 @@ BOOST_PYTHON_MODULE(World) {
             ;
 
     bp::class_<Entity, Entity *>("Entity")
-            .def("getCoords", &Entity::getCoords)
+            .def("get_coords", &Entity::getCoords)
             .def("locate", &Entity::locate)
             .def("face", &Entity::face)
             .def("translate3", &Entity::translate3)
@@ -64,8 +64,8 @@ BOOST_PYTHON_MODULE(World) {
             ;
 
     bp::class_<ObjectEntity, ObjectEntity*, bp::bases<Entity> >("ObjectEntity")
-            .def("getVelocity", &ObjectEntity::getVelocity)
-            .def("setVelocity", &ObjectEntity::setVelocity)
+            .def("get_velocity", &ObjectEntity::getVelocity)
+            .def("set_velocity", &ObjectEntity::setVelocity)
             .def_readwrite("velocity", &ObjectEntity::velocity)
             .def_readwrite("acceleration", &ObjectEntity::acceleration)
             .def_readwrite("no_physics", &ObjectEntity::no_physics)
@@ -73,36 +73,9 @@ BOOST_PYTHON_MODULE(World) {
             .def_readwrite("model", &ObjectEntity::model)
             ;
  
-
-    bp::class_<ObserverMovement, ObserverMovement *>("ObserverMovement")
-            .def_readwrite("forward", &ObserverMovement::forward)
-            .def_readwrite("left", &ObserverMovement::left)
-            .def_readwrite("right", &ObserverMovement::right)
-            .def_readwrite("back", &ObserverMovement::back)
-            .def_readwrite("up", &ObserverMovement::up)
-            .def_readwrite("down", &ObserverMovement::down)
-            .def_readwrite("prev_weapon", &ObserverMovement::prev_weapon)
-            .def_readwrite("next_weapon", &ObserverMovement::next_weapon)
-            ;
-
-    bp::class_<ObserverMouse, ObserverMouse *>("ObserverMouse")
-            .def_readwrite("left", &ObserverMouse::left)
-            .def_readwrite("right", &ObserverMouse::right)
-            .def_readwrite("middle", &ObserverMouse::middle)
-            .def_readwrite("leftclick", &ObserverMouse::leftclick)
-            .def_readwrite("rightclick", &ObserverMouse::rightclick)
-            .def_readwrite("middleclick", &ObserverMouse::middleclick)
-
-            ;
-
-    bp::class_<ObserverState, ObserverState *>("ObserverState")
-            .def_readwrite("movement", &ObserverState::movement)
-            .def_readwrite("mouse", &ObserverState::mouse)
-            ;
-
     bp::class_<ObserverEntity, ObserverEntity*, bp::bases<ObjectEntity> >("ObserverEntity")
-            .def("bobHead", &ObserverEntity::bobHead)
-            .def("kickBack", &ObserverEntity::kickBack)
+            .def("bob_head", &ObserverEntity::bobHead)
+            .def("kick_back", &ObserverEntity::kickBack)
             .def("face", &ObserverEntity::face)
             .def("rotate", &ObserverEntity::rotate)
             .def_readwrite("current_weapon", &ObserverEntity::current_weapon)
@@ -126,12 +99,12 @@ BOOST_PYTHON_MODULE(World) {
 
     bp::class_<RoomEntity, RoomEntity *, bp::bases<ObjectEntity> >("RoomEntity")
             .def_readwrite("models", &RoomEntity::models)
-            .def("placeDecal", &RoomEntity::placeDecal)
-            .def("placePreloadDecal", &RoomEntity::placePreloadDecal)
-            .def("placeDecalTexture", &RoomEntity::placeDecalTexture)
-            .def("spawnObject", &RoomEntity::spawnObject, bp::return_value_policy<bp::reference_existing_object>())
-            .def("spawnShape", &RoomEntity::spawnShape, bp::return_value_policy<bp::reference_existing_object>())
-            .def("removeObjectEntity", &RoomEntity::removeObjectEntity)
+            .def("place_decal", &RoomEntity::placeDecal)
+            .def("place_preload_decal", &RoomEntity::placePreloadDecal)
+            .def("place_decal_texture", &RoomEntity::placeDecalTexture)
+            .def("spawn_object", &RoomEntity::spawnObject, bp::return_value_policy<bp::reference_existing_object>())
+            .def("spawn_shape", &RoomEntity::spawnShape, bp::return_value_policy<bp::reference_existing_object>())
+            .def("remove_object_entity", &RoomEntity::removeObjectEntity)
             ;
 
     bp::class_<lights_list>("lights_list")
@@ -142,11 +115,11 @@ BOOST_PYTHON_MODULE(World) {
     ;
     
     bp::class_<World, shared_ptr<World>, boost::noncopyable>("World", bp::no_init)//.add_property("instance", shared_ptr<&World::getInstance>())
-            .def("getInstance", &getSharedWorldInstance)
+            .def("get_instance", &getSharedWorldInstance)
             .def_readonly("active_room", &World::active_room)
             .def_readwrite("observer", &World::observer)
-            .staticmethod("getInstance")
-            .def("saveXml", &World::saveXml)
+            .staticmethod("get_instance")
+            .def("save_xml", &World::saveXml)
             .def("get_physics", &World::getPhysicsEngine)
             ;
     

@@ -62,10 +62,8 @@ void World::moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision)
             if (ci.collided) {
                 lc = true;
 
-                PyScripting::getInstance()->broadcast("EntityCollision", (void *) e, (void *) objs[i], (void *) &ci);
-            } else {
-                //PyScripting::getInstance()->broadcast("EntityMovement",(void *)e);
-            }
+                PyScripting::getInstance()->broadcast("entity_collision", (void *) e, (void *) objs[i], (void *) &ci);
+            } 
         }
 
         /*
@@ -79,7 +77,7 @@ void World::moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision)
             
             if (ci.collided) {
                 lc=true;
-                PyScripting::getInstance()->broadcast("LevelCollision", (void *) e, (void *) rl[i], (void *) &ci);
+                PyScripting::getInstance()->broadcast("level_collision", (void *) e, (void *) rl[i], (void *) &ci);
                 
             } 
         }
@@ -88,7 +86,7 @@ void World::moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision)
 //    if (!lc) {
         e->translate(c); 
         if (movement) {
-            PyScripting::getInstance()->broadcast("EntityMovement", (void *) e);
+            PyScripting::getInstance()->broadcast("entity_movement", (void *) e);
         }
 //    }
     e->rotate(c.rotation.x, c.rotation.x, c.rotation.z);

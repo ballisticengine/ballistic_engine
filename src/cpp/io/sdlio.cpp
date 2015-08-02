@@ -110,11 +110,11 @@ void SdlIO::keyboardInputThread() {
         }
 
         if (down_count) {
-            PyScripting::getInstance()->broadcast("KeyDown", &keyboard_state);
+            PyScripting::getInstance()->broadcast("key_down", &keyboard_state);
         }
 
         if (up_count) {
-            PyScripting::getInstance()->broadcast("KeyUp", (void *)keyboard_state);
+            PyScripting::getInstance()->broadcast("key_up", (void *)keyboard_state);
         }
     }
 }
@@ -142,75 +142,14 @@ void SdlIO::mouseInputThread() {
         }
 
         if (delta_x != 0 || delta_y != 0) {
-            PyScripting::getInstance()->broadcast("MouseMove", &mouse_x, &mouse_y);
+            PyScripting::getInstance()->broadcast("mouse_move", &mouse_x, &mouse_y);
         }
         
         if (mouse_state) {
-            PyScripting::getInstance()->broadcast("MouseClick", &mouse_state);
+            PyScripting::getInstance()->broadcast("mouse_click", &mouse_state);
         }
         //mouse_x = mouse_y = delta_x = delta_y = 0;
     }
-}
-
-void SdlIO::inputThread() {
-    Uint32 mouse_state;
-
-    int mouse_x, mouse_y, last_x, last_y, delta_x, delta_y;
-    SDL_GetMouseState(&last_x, &last_y);
-    SDL_SetRelativeMouseMode(SDL_TRUE);
-    int ksize = 255, last_num_keys = 0, num_keys;
-    Uint8 last_keys[ksize];
-    memset(last_keys, 0, ksize);
-
-    while (!EngineState::getInstance()->getBool("exit")) {
-        delta_x = delta_y = 0;
-        mouse_state = SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
-
-        if (mouse_x) {
-
-            delta_x = mouse_x + last_x;
-            last_x = mouse_x;
-
-        }
-
-        if (mouse_y) {
-
-            delta_y = mouse_y + last_y;
-            last_y = mouse_y;
-        }
-
-        if (delta_x != 0 || delta_y != 0) {
-            PyScripting::getInstance()->broadcast("MouseMove", &mouse_x, &mouse_y);
-        }
-
-        const Uint8 *keyboard_state = SDL_GetKeyboardState(&ksize);
-        int down_count = 0, up_count = 0;
-
-        for (size_t i = 0; i < ksize; i++) {
-            if (keyboard_state[i] == 1) {
-                down_count++;
-
-            } else {
-                if (last_keys[i] == 1) {
-                    up_count++;
-                }
-            }
-            last_keys[i] = keyboard_state[i];
-        }
-
-        if (down_count) {
-            PyScripting::getInstance()->broadcast("KeyDown", &keyboard_state);
-        }
-
-        if (up_count) {
-           // cout << "KEYUP" << endl;
-            // Its invoked on mousemove
-             PyScripting::getInstance()->broadcast("KeyUp", last_keys); //GPF
-        }
-
-        mouse_x = mouse_y = delta_x = delta_y = 0;
-    }
-
 }
 
 void SdlIO::eventLoop() {
@@ -225,7 +164,7 @@ void SdlIO::eventLoop() {
             if (event.type == SDL_KEYDOWN) { //Maybe move io thread logic here...
                 EngineState::getInstance()->setBool("keypress", true);
 
-                PyScripting::getInstance()->broadcast("KeyPress", (void *)&event.key.keysym.sym);
+                PyScripting::getInstance()->broadcast("key_press", (void *)&event.key.keysym.sym);
             }
 
         }

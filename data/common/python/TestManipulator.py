@@ -1,7 +1,7 @@
 import math
 from World import Coords
 
-class TestManipulator(manipulatorClass):
+class TestManipulator(ManipulatorClass):
     def __init__(self):
         self.cc = 0
         self.mx = 0
@@ -9,32 +9,32 @@ class TestManipulator(manipulatorClass):
         self.up = False
 
 
-    def onSelfLoad(self):
+    def self_load(self):
         #self.world.observer.acceleration.translation.y=9
         pass
 
 
-    def onKeyUp(self, states):
+    def key_up(self, states):
         #TODO: KEYUP doesn't send upped key - fix
         self.world.observer.velocity.reset()
         #print 'Up', state_number(states)
 
-    def onKeyPress(self, key):
+    def key_press(self, key):
 
         if key == 1073741893: #F12
-            self.engine_state.toggleBool('edit_mode')
-            print self.engine_state.getBool('edit_mode')
+            self.engine_state.toggle_bool('edit_mode')
+            print self.engine_state.get_bool('edit_mode')
 
         if key == 1073741892: #F11
-            self.world.saveXml("test.xml")
+            self.world.save_xml("test.xml")
 
         if key == 27:
-            self.engine_state.setBool('exit', True)
+            self.engine_state.set_bool('exit', True)
             print "EXIT"
 
-    def onKeyDown(self, states):
+    def key_down(self, states):
         #print 'Down', state_number(states)
-        ocoords = self.world.observer.getCoords()
+        ocoords = self.world.observer.get_coords()
         step=5
         xdelta = deg2rad(ocoords.rotation.y)
         ydelta = deg2rad(ocoords.rotation.x)
@@ -58,24 +58,24 @@ class TestManipulator(manipulatorClass):
         self.world.observer.velocity=velocity
 
 
-    def onEntityCollision(self,entitya,entityb, collision_info):
+    def entity_collision(self,entitya,entityb, collision_info):
         print entitya.name, entityb.name
 
 
-    def onMouseClick(self, button):
+    def mouse_click(self, button):
         #print "Click"
         physics = self.world.get_physics()
-        c = self.world.observer.getCoords()
+        c = self.world.observer.get_coords()
         renderer = self.rendering_manager.get_renderer()
-        
+        x = renderer.unproject(10, 10)
 
 
-    def onMouseMove(self, deltax, deltay):
+    def mouse_move(self, deltax, deltay):
         self.world.observer.rotate(deltay, deltax, 0)
         self.mx = deltax
         self.my = deltay
 
-    def onLevelCollision(self,entity,room, collision_info):
+    def level_collision(self,entity,room, collision_info):
 
         return
         diff=collision_info.A.diff

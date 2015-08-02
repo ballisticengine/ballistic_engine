@@ -1,11 +1,13 @@
 def deg2rad(deg):
-    f=3.141/180
-    rad=deg*f
+    f = 3.141/180
+    rad = deg*f
     return rad
+
 
 def rad2deg(rad):
     deg = 180 * rad / 3.141
     return deg
+
 
 def state_number(states):
     i = 0
@@ -15,59 +17,56 @@ def state_number(states):
         i += 1
     return -1
 
-class manipulatorClass(object):
+
+class ManipulatorClass(object):
 
     score=0
 
 
-    def onInit(self, world, hud, engine_state, rendering_manager):
+    def init(self, world, hud, engine_state, rendering_manager):
         self.world = world
         self.hud = hud
         self.engine_state = engine_state
         self.rendering_manager = rendering_manager
 
 
-    def onEntityMovement(self, entity):
+    def entity_movement(self, entity):
         pass
 
-    def onEntityCollision(self,entitya,entityb, collision_info):
+    def entity_collision(self, entitya, entityb, collision_info):
        pass
 
-    def onLevelCollision(self,entity,room, collision_info):
+    def level_collision(self,entity,room, collision_info):
        pass
 
-
-    def onSelfLoad(self):
+    def self_load(self):
         pass
 
-    def onEngineLoad(self):
+    def engine_load(self):
         pass
 
-    def onEntityLoop(self,entity):
+    def entity_loop(self,entity):
         pass
 
-    def onTestSig(self):
+    def test_sig(self):
         pass
 
     """
     Rozwiazac jakos kilka klawiszy na raz. np argument cycles liczacy czy to ten sam cykl io
     """
-    def onMovementKey(self):
+
+    def mouse_move(self,deltax, deltay):
         pass
 
 
-    def onMouseMove(self,deltax, deltay):
+    def key_down(self,key):
         pass
 
-
-    def onKeyDown(self,key):
+    def key_up(self, key):
         pass
 
-    def onKeyUp(self, key):
+    def key_press(self, key):
         pass
 
-    def onKeyPress(self, key):
-        pass
-
-    def onMouseClick(self,button):
+    def mouse_click(self,button):
         pass

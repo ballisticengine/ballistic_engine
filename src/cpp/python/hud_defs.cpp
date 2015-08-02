@@ -12,21 +12,21 @@ typedef boost::shared_ptr<void *> void_ptr;
 BOOST_PYTHON_MODULE(HUD) {
 
     bp::class_<Texture, Texture*>("texture")
-            .def("getPixels", &Texture::getPixels, bp::return_value_policy< bp::return_opaque_pointer >())
-            .def("setPixels", &Texture::setPixels)
-            .def("getSurface", &Texture::getSurface, bp::return_value_policy< bp::return_opaque_pointer >())
-            .def("setSurface", &Texture::setSurface)
-            .def("getWidth", &Texture::getWidth)
-            .def("getHeight", &Texture::getHeight)
+            .def("get_pixels", &Texture::getPixels, bp::return_value_policy< bp::return_opaque_pointer >())
+            .def("set_pixels", &Texture::setPixels)
+            .def("get_surface", &Texture::getSurface, bp::return_value_policy< bp::return_opaque_pointer >())
+            .def("set_surface", &Texture::setSurface)
+            .def("get_width", &Texture::getWidth)
+            .def("get_height", &Texture::getHeight)
             ;
 
     bp::class_<UiImage, UiImage *>("UiImage")
             .def_readwrite("tex", &UiImage::tex)
-            .def("setText",&UiImage::setText)
+            .def("set_text",&UiImage::setText)
                     ;
     bp::class_<HUD, shared_ptr<HUD>, boost::noncopyable>("HUD", bp::no_init)
-            .def("getInstance", &getSharedHUDInstance)
-            .def("getImage", &HUD::getImage, bp::return_value_policy< bp::return_opaque_pointer >())
+            .def("get_instance", &getSharedHUDInstance)
+            .def("get_image", &HUD::getImage, bp::return_value_policy< bp::return_opaque_pointer >())
             
 
             //.def("getImages",&HUD::getImages)
