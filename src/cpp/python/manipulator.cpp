@@ -12,15 +12,23 @@ PyManipulator::PyManipulator(string file) {
 
     code = Utils::loadText(file);
     filename = boost::filesystem::basename(file);
-    PyRun_SimpleString(code);
+
+
+
     boost::filesystem::path p(filename);
     classname = p.stem().string();
     iname = classname + "_instance";
+
     string codeinit = iname + "=" + classname + "()";
     cout << "INIT: " << codeinit << endl;
-    PyRun_SimpleString(codeinit.c_str());
-    module = bp::import("__main__");
-    instance = module.attr(iname.c_str());
+    try {
+        PyRun_SimpleString(code);
+        PyRun_SimpleString(codeinit.c_str());
+        module = bp::import("__main__");
+        instance = module.attr(iname.c_str());
+    } catch (bp::error_already_set) {
+        PyErr_Print();
+    }
     cout << "Loaded python script " << filename << endl;
 }
 
@@ -36,20 +44,17 @@ template <typename T> bp::list PyManipulator::arrayToList(T *array) {
 //like sdlio::assignSingnal or something
 
 void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC, void* paramD) {
-    
+
     Py_BEGIN_ALLOW_THREADS
     PyLocker::getInstance()->lock();
-    
+
     bp::object f = bp::extract<bp::object>(instance.attr(name.c_str()));
     World *w = World::getInstance();
     HUD *h = HUD::getInstance();
     RenderingManager *rm = RenderingManager::getInstance();
     EngineState *es = EngineState::getInstance();
     try {
-        if (name == "init") {
-            //static Timer *t=new Timer();
-            f(boost::ref(*w), boost::ref(*h), boost::ref(*es), boost::ref(*rm));
-        } else if (name == "entity_collision") {
+        if (name == "entity_collision") {
             ObjectEntity *a, *b;
             a = (ObjectEntity *) paramA;
             b = (ObjectEntity *) paramB;
@@ -72,8 +77,7 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             int *b = (int *) paramB;
             f(*a, *b);
 
-        } 
-        else if (name == "mouse_click") {
+        } else if (name == "mouse_click") {
 
             unsigned int *a = (unsigned int *) paramA;
             f(*a);
@@ -87,7 +91,7 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
             bp::list a = PyManipulator::arrayToList(keyboard_state);
             f(a);
         } else if (name == "key_press") {
-            int *key = (int *)paramA;
+            int *key = (int *) paramA;
             f(*key);
 
         } else {

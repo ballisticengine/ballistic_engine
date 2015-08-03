@@ -1,3 +1,8 @@
+from World import World
+from HUD import HUD
+from Rendering import RenderingManager
+from Engine import EngineState
+
 def deg2rad(deg):
     f = 3.141/180
     rad = deg*f
@@ -22,12 +27,12 @@ class ManipulatorClass(object):
 
     score=0
 
-
-    def init(self, world, hud, engine_state, rendering_manager):
-        self.world = world
-        self.hud = hud
-        self.engine_state = engine_state
-        self.rendering_manager = rendering_manager
+    def __init__(self):
+        self.world = World.get_instance()
+        self.hud = HUD.get_instance()
+        self.rendering_manager = RenderingManager.get_instance()
+        self.engine_state = EngineState.get_instance()
+        print "init"
 
 
     def entity_movement(self, entity):

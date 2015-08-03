@@ -26,10 +26,8 @@ BOOST_PYTHON_MODULE(HUD) {
                     ;
     bp::class_<HUD, boost::shared_ptr<HUD>, boost::noncopyable>("HUD", bp::no_init)
             .def("get_instance", &getSharedHUDInstance)
+            .staticmethod("get_instance")
             .def("get_image", &HUD::getImage, bp::return_value_policy< bp::return_opaque_pointer >())
-            
-
-            //.def("getImages",&HUD::getImages)
             ;
 };
 

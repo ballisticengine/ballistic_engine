@@ -7,8 +7,11 @@ boost::shared_ptr<EngineState> getSharedEngineStateInstance() {
 
 typedef boost::shared_ptr<EngineState> engine_state_ptr;
 
-BOOST_PYTHON_MODULE(EngineState) {
-    bp::class_<EngineState, EngineState*>("EngineState")
+BOOST_PYTHON_MODULE(Engine) {
+    bp::class_<EngineState, boost::shared_ptr<EngineState>, boost::noncopyable>
+    ("EngineState",  bp::no_init)
+            .def("get_instance", &getSharedEngineStateInstance)
+            .staticmethod("get_instance")
             .def("set_bool", &EngineState::setBool)
             .def("get_bool", &EngineState::getBool)
             .def("set_string", &EngineState::setString)
@@ -17,5 +20,5 @@ BOOST_PYTHON_MODULE(EngineState) {
 }
 
 void init_engine() {
-    initEngineState();
+    initEngine();
 }

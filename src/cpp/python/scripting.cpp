@@ -10,7 +10,7 @@ void PyScripting::loadManipulators() {
             PyManipulator *pyman=new PyManipulator(pyfn);
 			manipulators.push_back(pyman);
         }
-	broadcast("init",0);
+        
 	broadcast("self_load",0);
 }
 

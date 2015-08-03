@@ -2,16 +2,20 @@
 #include "renderer/RendererInterface.hpp"
 #include "renderer/RenderingManager.hpp"
 
-BOOST_PYTHON_MODULE(RenderingManager) {
-    bp::class_<RenderingManager,
-            boost::shared_ptr<RenderingManager>,
-            boost::noncopyable>("rendering_manager", bp::no_init)
-            .def("get_renderer", &RenderingManager::getRenderer, bp::return_value_policy<bp::reference_existing_object>())
-            ;
+boost::shared_ptr<RenderingManager> getSharedRenderingManagerInstance() {
+    return boost::shared_ptr<RenderingManager>(RenderingManager::getInstance(), NullDeleter());
 }
 
-BOOST_PYTHON_MODULE(RendererInterface) {
-    // unproject .def("reset", &Coords::reset)
+typedef boost::shared_ptr<HUD> hud_ptr;
+
+BOOST_PYTHON_MODULE(Rendering) {
+    bp::class_<RenderingManager,
+            boost::shared_ptr<RenderingManager>,
+            boost::noncopyable>("RenderingManager", bp::no_init)
+            .def("get_renderer", &RenderingManager::getRenderer, bp::return_value_policy<bp::reference_existing_object>())
+            .def("get_instance", &getSharedRenderingManagerInstance)
+            .staticmethod("get_instance")
+            ;
     
     bp::class_<RendererInterface, RendererInterface *>("rendering_interface", bp::no_init)
             .def("unproject", &RendererInterface::unproject)
@@ -19,6 +23,5 @@ BOOST_PYTHON_MODULE(RendererInterface) {
 }
 
 void init_renderer() {
-    initRenderingManager();
-    initRendererInterface();
+    initRendering();
 }

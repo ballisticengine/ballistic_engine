@@ -5,7 +5,7 @@
 #include <boost/shared_ptr.hpp>
 
 
-
+#include "python/null_deleter.hpp"
 
 namespace bp=boost::python;
 

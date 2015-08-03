@@ -3,6 +3,7 @@ from World import Coords
 
 class TestManipulator(ManipulatorClass):
     def __init__(self):
+        super(TestManipulator, self).__init__()
         self.cc = 0
         self.mx = 0
         self.my = 0
