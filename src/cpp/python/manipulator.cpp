@@ -12,15 +12,12 @@ PyManipulator::PyManipulator(string file) {
 
     code = Utils::loadText(file);
     filename = boost::filesystem::basename(file);
-
-
-
     boost::filesystem::path p(filename);
     classname = p.stem().string();
     iname = classname + "_instance";
-
     string codeinit = iname + "=" + classname + "()";
     cout << "INIT: " << codeinit << endl;
+    
     try {
         PyRun_SimpleString(code);
         PyRun_SimpleString(codeinit.c_str());
@@ -29,7 +26,9 @@ PyManipulator::PyManipulator(string file) {
     } catch (bp::error_already_set) {
         PyErr_Print();
     }
+    
     cout << "Loaded python script " << filename << endl;
+
 }
 
 template <typename T> bp::list PyManipulator::arrayToList(T *array) {
