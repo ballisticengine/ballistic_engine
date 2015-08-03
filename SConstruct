@@ -1,3 +1,4 @@
+from common_flags import *
 BULLET_LIBS = ['BulletCollision', 'BulletSoftBody', 'BulletDynamics', 'LinearMath']
 BOOST_LIBS = ['boost_timer', 'boost_filesystem', 'boost_system', 'boost_thread', 'boost_python', ]
 SDL_LIBS = ['SDL2', 'SDL2_ttf', 'SDL2_image', ]
@@ -58,12 +59,12 @@ test_modules = modules + [
 
 env.Append(LINKFLAGS='-rdynamic')
 
-env.Program('./bin/ballistic', main_modules, LIBS=ALL_LIBS, LIBPATH='.')
+env.Program('./bin/ballistic', main_modules, LIBS=ALL_LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
 
 
 
 if 'test' in COMMAND_LINE_TARGETS:
-    test = env.Program('./test/test', test_modules, LIBS=ALL_LIBS+TEST_LIBS, LIBPATH='.')
+    test = env.Program('./test/test', test_modules, LIBS=ALL_LIBS+TEST_LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
     test_cmd = env.Command( None, None, "./test/test" )
 
 

@@ -1,5 +1,6 @@
 import os
 from SCons.Script import *
+from common_flags import *
 
 
 def make_shared(target_file, sources, target_path, LIBS):
@@ -19,6 +20,7 @@ def make_shared(target_file, sources, target_path, LIBS):
                             sources,
                          LIBS=LIBS,
                          LIBPATH='.',
+                        CXXFLAGS=COMMON_CXX_FLAGS,
     )
     fn = target_file+".so"
     env.Append(LINKFLAGS=['-Wl,-soname,'+fn])

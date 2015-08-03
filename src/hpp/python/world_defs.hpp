@@ -16,11 +16,7 @@
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>
 #include <boost/shared_ptr.hpp>
 
-#ifdef __WIN32__
-#include <boost/smart_ptr/make_shared_array.hpp>
-#else
-#include <boost/interprocess/smart_ptr/shared_ptr.hpp>
-#endif
+
 namespace bp=boost::python;
 
 #include "misc/singleton.hpp"

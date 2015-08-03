@@ -4,7 +4,7 @@
 
 BOOST_PYTHON_MODULE(RenderingManager) {
     bp::class_<RenderingManager,
-            shared_ptr<RenderingManager>,
+            boost::shared_ptr<RenderingManager>,
             boost::noncopyable>("rendering_manager", bp::no_init)
             .def("get_renderer", &RenderingManager::getRenderer, bp::return_value_policy<bp::reference_existing_object>())
             ;

@@ -1,8 +1,8 @@
 #include "python/engine_defs.hpp"
 #include "python/null_deleter.hpp"
 
-shared_ptr<EngineState> getSharedEngineStateInstance() {
-    return shared_ptr<EngineState>(EngineState::getInstance(), NullDeleter());
+boost::shared_ptr<EngineState> getSharedEngineStateInstance() {
+    return boost::shared_ptr<EngineState>(EngineState::getInstance(), NullDeleter());
 }
 
 typedef boost::shared_ptr<EngineState> engine_state_ptr;

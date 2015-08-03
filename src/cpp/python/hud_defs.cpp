@@ -1,8 +1,8 @@
 #include "python/hud_defs.hpp"
 #include "python/null_deleter.hpp"
 
-shared_ptr<HUD> getSharedHUDInstance() {
-    return shared_ptr<HUD>(HUD::getInstance(), NullDeleter());
+boost::shared_ptr<HUD> getSharedHUDInstance() {
+    return boost::shared_ptr<HUD>(HUD::getInstance(), NullDeleter());
 }
 
 typedef boost::shared_ptr<HUD> hud_ptr;
@@ -24,7 +24,7 @@ BOOST_PYTHON_MODULE(HUD) {
             .def_readwrite("tex", &UiImage::tex)
             .def("set_text",&UiImage::setText)
                     ;
-    bp::class_<HUD, shared_ptr<HUD>, boost::noncopyable>("HUD", bp::no_init)
+    bp::class_<HUD, boost::shared_ptr<HUD>, boost::noncopyable>("HUD", bp::no_init)
             .def("get_instance", &getSharedHUDInstance)
             .def("get_image", &HUD::getImage, bp::return_value_policy< bp::return_opaque_pointer >())
             

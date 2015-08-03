@@ -3,6 +3,7 @@ sys.path.append('../../../site_scons')
 
 import lib_helper
 
+
 LIBS = ['stdc++', 'pthread', 'dl', 'GL', 'GLEW', 'GLU' ]
 
 def make_renderer(file, subdir):
