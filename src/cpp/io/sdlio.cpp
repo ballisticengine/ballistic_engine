@@ -110,11 +110,11 @@ void SdlIO::keyboardInputThread() {
         }
 
         if (down_count) {
-            PyScripting::getInstance()->broadcast("key_down", &keyboard_state);
+            PyScripting::getInstance()->broadcast("key_down", {&keyboard_state});
         }
 
         if (up_count) {
-            PyScripting::getInstance()->broadcast("key_up", (void *)keyboard_state);
+            PyScripting::getInstance()->broadcast("key_up", {(void *)keyboard_state});
         }
     }
 }
@@ -142,11 +142,11 @@ void SdlIO::mouseInputThread() {
         }
 
         if (delta_x != 0 || delta_y != 0) {
-            PyScripting::getInstance()->broadcast("mouse_move", &mouse_x, &mouse_y);
+            PyScripting::getInstance()->broadcast("mouse_move", {&mouse_x, &mouse_y});
         }
         
         if (mouse_state) {
-            PyScripting::getInstance()->broadcast("mouse_click", &mouse_state);
+            PyScripting::getInstance()->broadcast("mouse_click", {&mouse_state});
         }
         //mouse_x = mouse_y = delta_x = delta_y = 0;
     }
@@ -164,7 +164,7 @@ void SdlIO::eventLoop() {
             if (event.type == SDL_KEYDOWN) { //Maybe move io thread logic here...
                 EngineState::getInstance()->setBool("keypress", true);
 
-                PyScripting::getInstance()->broadcast("key_press", (void *)&event.key.keysym.sym);
+                PyScripting::getInstance()->broadcast("key_press", {(void *)&event.key.keysym.sym});
             }
 
         }

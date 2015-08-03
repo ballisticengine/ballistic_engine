@@ -1,19 +1,13 @@
 #ifndef MANIPULATOR_HPP
 #define	MANIPULATOR_HPP
+
 #include <string>
 #include <iostream>
 #include <vector>
-
-using namespace std;
-
-
-
-
-
+#include <cstdarg>
 #include <boost/python.hpp>
 #include <boost/filesystem.hpp>
-
-
+#include <initializer_list>
 
 #include "entities/entity.hpp"
 #include "misc/singleton.hpp"
@@ -24,20 +18,20 @@ using namespace std;
 
 #include "python/locker.hpp"
 
-namespace bp=boost::python;
+namespace bp = boost::python;
 using namespace std;
 using namespace boost;
 
 class PyManipulator {
 protected:
-	char *code;
-	string filename,classname,iname;
-	bp::object module,instance;
-        template <typename T> static bp::list arrayToList(T *array);
+    char *code;
+    string filename, classname, iname;
+    bp::object module, instance;
+    template <typename T> static bp::list arrayToList(T *array);
 public:
-  PyManipulator(string file);
-  void signal(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);
-  ~PyManipulator();
+    PyManipulator(string file);
+    void signal(string name, initializer_list<void *> params);
+    ~PyManipulator();
 };
 
 

@@ -11,7 +11,7 @@ void PyScripting::loadManipulators() {
 			manipulators.push_back(pyman);
         }
         
-	broadcast("self_load",0);
+	broadcast("self_load",{0});
 }
 
 PyScripting::PyScripting() {
@@ -30,13 +30,13 @@ PyScripting::~PyScripting() {
 }
 
 
-void PyScripting::broadcast(string name,void *paramA,void *paramB,void* paramC,void* paramD) {
+void PyScripting::broadcast(string name, initializer_list<void *> params) {
     
     
     while(!m.try_lock()) {} ;
     
     for(int i=0; i<manipulators.size(); i++) {
-		manipulators[i]->signal(name,paramA,paramB,paramC,paramD); 
+		manipulators[i]->signal(name, params); 
 	}
     m.unlock();
 }

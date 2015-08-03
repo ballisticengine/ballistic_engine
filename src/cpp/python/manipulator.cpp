@@ -42,11 +42,11 @@ template <typename T> bp::list PyManipulator::arrayToList(T *array) {
 //better assign signals from python to concrete events
 //like sdlio::assignSingnal or something
 
-void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC, void* paramD) {
-
+void PyManipulator::signal(string name, initializer_list<void *> params) {
+    
     Py_BEGIN_ALLOW_THREADS
     PyLocker::getInstance()->lock();
-
+    vector<void *> params_v(params);
     bp::object f = bp::extract<bp::object>(instance.attr(name.c_str()));
     World *w = World::getInstance();
     HUD *h = HUD::getInstance();
@@ -55,42 +55,41 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
     try {
         if (name == "entity_collision") {
             ObjectEntity *a, *b;
-            a = (ObjectEntity *) paramA;
-            b = (ObjectEntity *) paramB;
-            //vector cvec=*(vector *)paramC;
-            CollisionInfo ci = *(CollisionInfo *) paramC;
+            a = (ObjectEntity *) params_v[0];
+            b = (ObjectEntity *) params_v[1];
+            CollisionInfo ci = *(CollisionInfo *) params_v[2];
             f(boost::ref(*a), boost::ref(*b), boost::ref(ci));
         } else if (name == "entity_movement") {
             ObjectEntity *a;
-            a = (ObjectEntity *) paramA;
+            a = (ObjectEntity *) params_v[0];
             f(boost::ref(*a));
         } else if (name == "level_collision") {
             ObjectEntity *a;
-            a = (ObjectEntity *) paramA;
-            RoomEntity *r = (RoomEntity *) paramB;
-            CollisionInfo cvec = *(CollisionInfo *) paramC;
+            a = (ObjectEntity *) params_v[0];
+            RoomEntity *r = (RoomEntity *) params_v[1];
+            CollisionInfo cvec = *(CollisionInfo *) params_v[2];
             f(boost::ref(*a), boost::ref(*r), boost::ref(cvec));
         } else if (name == "mouse_move") {
 
-            int *a = (int *) paramA;
-            int *b = (int *) paramB;
+            int *a = (int *) params_v[0];
+            int *b = (int *) params_v[1];
             f(*a, *b);
 
         } else if (name == "mouse_click") {
 
-            unsigned int *a = (unsigned int *) paramA;
+            unsigned int *a = (unsigned int *) params_v[0];
             f(*a);
 
         } else if (name == "key_down") {
-            Uint8 **keyboard_state = (Uint8**) paramA;
+            Uint8 **keyboard_state = (Uint8**) params_v[0];
             bp::list a = PyManipulator::arrayToList(*keyboard_state);
             f(a);
         } else if (name == "key_up") {
-            Uint8 *keyboard_state = (Uint8*) paramA;
+            Uint8 *keyboard_state = (Uint8*) params_v[0];
             bp::list a = PyManipulator::arrayToList(keyboard_state);
             f(a);
         } else if (name == "key_press") {
-            int *key = (int *) paramA;
+            int *key = (int *) params_v[0];
             f(*key);
 
         } else {
@@ -101,7 +100,7 @@ void PyManipulator::signal(string name, void *paramA, void *paramB, void* paramC
         assert(PyErr_Occurred());
         PyErr_Print();
     }
-
+   
     PyLocker::getInstance()->unlock();
     Py_END_ALLOW_THREADS
 

@@ -34,6 +34,8 @@ enum SignalName {
  * attach handler [Module.method] in PyScripting 
  */
 
+
+
 class PyScripting : public Singleton<PyScripting> {
 protected:
 	man_list manipulators;
@@ -44,7 +46,7 @@ protected:
 public:
 	PyScripting();
 	void operator()();
-        void broadcast(string name,void *paramA=0,void *paramB=0,void* paramC=0,void* paramD=0);
+        void broadcast(string name, initializer_list<void *> params);
 	void broadcastInit();
 	~PyScripting();
 	void loadManipulators();
