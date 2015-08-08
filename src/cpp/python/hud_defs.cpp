@@ -32,5 +32,5 @@ BOOST_PYTHON_MODULE(HUD) {
 };
 
 void init_hud() {
-    initHUD();
+   // initHUD();
 }

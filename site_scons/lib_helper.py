@@ -9,7 +9,8 @@ def make_shared(target_file, sources, target_path, LIBS):
     print "Making shared library", file
 
     env = Environment(CPPPATH=[
-    '/usr/include/python2.7',
+    WD + '/python_build/boost',
+    PYTHON_DIR + '/include/python3.4m',
     '/usr/include/bullet',
     root + '/src/hpp',
     ])
@@ -19,7 +20,8 @@ def make_shared(target_file, sources, target_path, LIBS):
     lib = env.SharedLibrary(target_file,
                             sources,
                          LIBS=LIBS,
-                         LIBPATH='.',
+                         LIBPATH=LIBPATH,
+                       #     LINKFLAGS="--static",
                         CXXFLAGS=COMMON_CXX_FLAGS,
     )
     fn = target_file+".so"

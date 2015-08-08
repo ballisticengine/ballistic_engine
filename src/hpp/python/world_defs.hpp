@@ -10,7 +10,10 @@
 #define BOOST_PYTHON_STATIC_LIB 1
 
 #define BOOST_PYTHON_NO_LIB 1
-
+/*
+ W Cpp World -> WorldClass
+ * W py World=WorldClass.get_instance
+ */
 #include <boost/python.hpp>
 
 #include <boost/python/suite/indexing/vector_indexing_suite.hpp>

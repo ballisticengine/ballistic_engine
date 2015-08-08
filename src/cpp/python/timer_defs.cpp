@@ -13,5 +13,5 @@ BOOST_PYTHON_MODULE(Timer) {
 }; 
 
 void init_timer() {
-    initTimer();
+  //  initTimer();
 }

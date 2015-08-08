@@ -23,5 +23,5 @@ BOOST_PYTHON_MODULE(Rendering) {
 }
 
 void init_renderer() {
-    initRendering();
+   // initRendering();
 }

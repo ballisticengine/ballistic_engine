@@ -128,7 +128,7 @@ BOOST_PYTHON_MODULE(World) {
 };
 
 void init_world() {
-    initWorld();
+   //initWorld();
 }
 
 
