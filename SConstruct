@@ -1,9 +1,9 @@
 from common_flags import *
 BULLET_LIBS = ['BulletCollision', 'BulletSoftBody', 'BulletDynamics', 'LinearMath']
-BOOST_LIBS = ['boost_timer', 'boost_filesystem', 'boost_system', 'boost_thread', 'boost_python', ]
+BOOST_LIBS = ['boost_timer', 'boost_filesystem', 'boost_system', 'boost_thread', 'boost_python-py34', ]
 SDL_LIBS = ['SDL2', 'SDL2_ttf', 'SDL2_image', ]
 GL_LIBS = ['GL', 'GLEW', 'GLU']
-GENERAL_LIBS = ['stdc++', 'pthread', 'python2.7', 'dl', ]
+GENERAL_LIBS = ['stdc++', 'pthread', 'python3.4m', 'dl', ]
 TEST_LIBS = ['gtest', 'gtest_main' ]
 
 ALL_LIBS = GENERAL_LIBS + BOOST_LIBS + SDL_LIBS + GL_LIBS + BULLET_LIBS
@@ -16,7 +16,7 @@ SConscript(src+'renderer/SConstruct')
 
 
 env = Environment(CPPPATH=[
-    '/usr/include/python2.7',
+    '/usr/include/python3.4m',
     '/usr/include/bullet',
     './src/hpp',
 ])
