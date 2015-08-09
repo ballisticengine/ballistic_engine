@@ -17,3 +17,6 @@ test.xml
 /.idea
 /python_build
 /python
+/boost
+/core
+/venv
