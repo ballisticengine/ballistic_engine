@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <map>
 
 #include "python/manipulator.hpp"
 #include "python/type_defs.hpp"
@@ -19,7 +20,8 @@
 
 using namespace std;
 
-typedef  vector<PyManipulator *> man_list;
+typedef  vector<PyManipulator *> man_vector;
+typedef  map<string name, PyManipulator *> man_map;
 
 struct SignalType {
     string name;
@@ -39,7 +41,7 @@ enum SignalName {
 
 class PyScripting : public Singleton<PyScripting> {
 protected:
-	man_list manipulators;
+	man_vector manipulators;
         queue<SignalType> sig_queue;
         bool processing,other_bcast;
         boost::mutex m;
@@ -47,8 +49,10 @@ protected:
 public:
 	PyScripting();
 	void operator()();
-        void broadcast(string name, initializer_list<void *> params);
+        void broadcast(string name, initializer_list<void *> params={});
 	void broadcastInit();
+        man_vector getManipulators();
+        PyManipulator* getManipulator();
 	~PyScripting();
 	void loadManipulators();
 };

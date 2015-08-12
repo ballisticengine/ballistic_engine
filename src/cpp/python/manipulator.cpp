@@ -106,6 +106,10 @@ void PyManipulator::signal(string name, initializer_list<void *> params) {
 
 }
 
+bool PyManipulator::hasSignal(string name) {
+    
+}
+
 PyManipulator::~PyManipulator() {
     delete code;
 }

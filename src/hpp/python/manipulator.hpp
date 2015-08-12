@@ -29,6 +29,12 @@ protected:
     bp::object module, instance;
     template <typename T> static bp::list arrayToList(T *array);
 public:
+    bool hasSignal(string name);
+    /*
+     * Tests if signal invocation doesn't cause exception
+     * Not implemented
+     */
+    bool testSignal(string name, initializer_list<void *> params)
     PyManipulator(string file);
     void signal(string name, initializer_list<void *> params);
     ~PyManipulator();

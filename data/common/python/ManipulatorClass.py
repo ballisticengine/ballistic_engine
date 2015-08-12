@@ -34,7 +34,6 @@ class ManipulatorClass(object):
         self.engine_state = EngineState.get_instance()
         print "init"
 
-
     def entity_movement(self, entity):
         pass
 

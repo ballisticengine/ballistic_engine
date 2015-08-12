@@ -15,7 +15,6 @@ class TestManipulator(ManipulatorClass):
         #self.world.observer.acceleration.translation.y=9
         pass
 
-
     def key_up(self, states):
         #TODO: KEYUP doesn't send upped key - fix
         self.world.observer.velocity.reset()
