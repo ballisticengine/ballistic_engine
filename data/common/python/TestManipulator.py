@@ -1,5 +1,6 @@
 import math
-from World import Coords
+from EngineTypes import Vector3d, Coords
+
 
 class TestManipulator(ManipulatorClass):
     def __init__(self):

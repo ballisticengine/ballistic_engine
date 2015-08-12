@@ -17,7 +17,8 @@ void PyScripting::loadManipulators() {
 PyScripting::PyScripting() {
 	Py_Initialize();
 	PyEval_InitThreads(); 
-	init_world();
+	init_types();
+        init_world();
         init_hud(); 
         init_timer();
         init_renderer();

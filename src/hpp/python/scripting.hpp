@@ -8,6 +8,7 @@
 #include <queue>
 
 #include "python/manipulator.hpp"
+#include "python/type_defs.hpp"
 #include "python/world_defs.hpp"
 #include "python/hud_defs.hpp"
 #include "python/timer_defs.hpp"
