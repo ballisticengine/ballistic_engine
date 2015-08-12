@@ -1,0 +1,6 @@
+<keybindings>
+    <key>
+        <id>K_X</id>
+        <action>x_press</action>
+    </key>
+</keybindings>
