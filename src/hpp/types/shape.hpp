@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/types.hpp"
 #include "types/material.hpp"
 #include "types/Resource.hpp"

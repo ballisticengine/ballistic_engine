@@ -3,7 +3,7 @@
 
 #include "entities/Camera.hpp"
 #include "types/types.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/shape.hpp"
 #include "types/shape2d.hpp"
 #include "types/skybox.hpp"

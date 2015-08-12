@@ -7,7 +7,7 @@ using namespace std;
 
 #include "types/types.hpp"
 #include "types/shape.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/boundingCube.hpp"
 #define COLLISION_BACK 0.0001
 

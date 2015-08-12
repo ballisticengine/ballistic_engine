@@ -4,7 +4,7 @@
 #include "renderer/RendererInterface.hpp"
 #include "libload/LibLoad.hpp"
 #include "io/sdlio.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 
 TEST(RendererInterface, RendererInterfaceTest) {
     RenderingManager *rendering = RenderingManager::getInstance();

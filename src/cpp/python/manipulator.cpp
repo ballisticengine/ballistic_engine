@@ -3,7 +3,7 @@
 #include "entities/ObjectEntity.hpp"
 #include "types/types.hpp"
 #include "entities/light.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "world/World.hpp"
 #include "config/EngineState.hpp"
 #include "renderer/RenderingManager.hpp"

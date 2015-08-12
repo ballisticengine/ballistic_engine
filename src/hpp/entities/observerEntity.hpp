@@ -2,7 +2,7 @@
 #define OBSERVER_ENTITY_H
 
 #include "types/types.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "entities/ObjectEntity.hpp"
 #include "entities/Camera.hpp"
 #include "entities/weapon.hpp"

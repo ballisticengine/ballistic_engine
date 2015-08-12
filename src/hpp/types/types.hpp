@@ -1,6 +1,6 @@
 /**
 * Zestaw klas definujący podstawowe typy używane przez silnik, nie uwzględnia struktur matematycznych (wektory,macierze), które
-* obsugiwane są w klasach zawartych w mathTypes.hpp
+* obsugiwane są w klasach zawartych w Vector3d.hpp
 */
 
 #ifndef TYPES_HPP
@@ -9,8 +9,9 @@
 #include <vector>
 #include <iostream>
 
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/texture.hpp"
+
 
 
 using namespace std;

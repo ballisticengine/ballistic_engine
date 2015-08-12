@@ -28,7 +28,7 @@ namespace bp=boost::python;
 #include "entities/sprite.hpp"
 #include "types/types.hpp"
 #include "entities/light.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/boundingCube.hpp"
 #include "world/World.hpp"
 #include "physics/BulletPhysics.hpp"

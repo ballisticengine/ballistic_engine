@@ -1,7 +1,7 @@
 #include <limits.h>
 #include <gtest/gtest.h>
 
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/plane.hpp"
 #include "types/shape.hpp"
 #include "types/boundingCube.hpp"

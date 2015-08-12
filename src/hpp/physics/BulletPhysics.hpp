@@ -8,7 +8,7 @@
 #include "entities/ObjectEntity.hpp"
 #include "entities/entity.hpp"
 #include "entities/RoomEntity.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 
 
 struct CollisionParty {

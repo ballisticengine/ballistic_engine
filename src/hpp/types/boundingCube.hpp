@@ -3,7 +3,7 @@
 
 #include "types/types.hpp"
 
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/shape.hpp"
 #include <vector>
 #include <string>

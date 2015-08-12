@@ -1,7 +1,7 @@
 #ifndef PLANE_HPP
 #define	PLANE_HPP
 
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "types/types.hpp"
 
 #define TOLERANCE 0.0000001

@@ -25,7 +25,7 @@ using namespace boost::property_tree;
 #include "config/Config.hpp"
 #include "resources/ResourceManager.hpp"
 #include "config/EngineState.hpp"
-#include "types/mathTypes.hpp"
+#include "types/Vector3d.hpp"
 #include "entities/light.hpp"
 #include "entities/pointlight.hpp"
 #include "time/timer.hpp"
