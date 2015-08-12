@@ -95,14 +95,19 @@ void SdlIO::keyboardInputThread() {
         keyboard_state = SDL_GetKeyboardState(&ksize);
         down_count = 0;
         up_count = 0;
-        
+
 
         for (size_t i = 0; i < ksize; i++) {
             //
             if (keyboard_state[i] == 1) {
-                keycode_t kcode = i+93;
-                string action = kmap[kcode];
-                PyScripting::getInstance()->broadcastExisting(action);
+                keycode_t kcode;
+                KeybindAction action = kmap[kcode];
+                if (action.key_type == KT_CHAR) {
+                    kcode = i + 93;
+                } else if (action.key_type == KT_SYM) {
+                    kcode = i;
+                }
+                PyScripting::getInstance()->broadcast(action.name, action.params, true);
                 down_count++;
 
             } else {

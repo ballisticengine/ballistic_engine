@@ -15,17 +15,18 @@
 #include "python/timer_defs.hpp"
 #include "python/renderer_defs.hpp"
 #include "python/engine_defs.hpp"
+#include "python/utils.hpp"
 #include "config/EngineState.hpp"
 
 
 using namespace std;
 
-typedef  vector<PyManipulator *> man_vector;
-typedef  map<string, PyManipulator *> man_map;
+typedef vector<PyManipulator *> man_vector;
+typedef map<string, PyManipulator *> man_map;
 
 struct SignalType {
     string name;
-    void *paramA,*paramB,*paramC,*paramD;
+    void *paramA, *paramB, *paramC, *paramD;
 };
 
 enum SignalName {
@@ -42,23 +43,25 @@ enum SignalName {
 
 class PyScripting : public Singleton<PyScripting> {
 protected:
-	man_vector manipulators;
-        man_map manipulators_map;
-        queue<SignalType> sig_queue;
-        bool processing,other_bcast;
-        boost::mutex m;
-        void lockWait();
-        
+    man_vector manipulators;
+    man_map manipulators_map;
+    queue<SignalType> sig_queue;
+    bool processing, other_bcast;
+    boost::mutex m;
+    void lockWait();
+
 public:
-	PyScripting();
-	void operator()();
-        void broadcast(string name, initializer_list<void *> params={});
-        void broadcastExisting(string name, initializer_list<void *> params={});
-	void broadcastInit();
-        man_vector getManipulatorsV();
-        PyManipulator* getManipulator(string name);
-	~PyScripting();
-	void loadManipulators();
+    PyScripting();
+    void operator()();
+    void broadcast(string name,
+            initializer_list<void *> params = {}, bool check_existing = false);
+    void broadcast(string name,
+            map<string,string> params, bool check_existing = false);
+    void broadcastInit();
+    man_vector getManipulatorsV();
+    PyManipulator* getManipulator(string name);
+    ~PyScripting();
+    void loadManipulators();
 };
 
 

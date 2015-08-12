@@ -31,31 +31,31 @@ PyScripting::~PyScripting() {
     Py_Finalize();
 }
 
-void PyScripting::broadcast(string name, initializer_list<void *> params) {
+void PyScripting::broadcast(string name, initializer_list<void *> params,
+        bool check_existing) {
 
 
     this->lockWait();
 
     for (int i = 0; i < manipulators.size(); i++) {
+        if (check_existing && !manipulators[i]->hasSignal(name)) {
+            continue;
+        }
         manipulators[i]->signal(name, params);
     }
     m.unlock();
 }
 
+void PyScripting::broadcast(string name,
+        map<string, string> params, bool check_existing) {
+
+    bp::dict d = toPythonDict(params);
+    this->broadcast(name, {(void *)&d}, true);
+}
+
 void PyScripting::lockWait() {
     while (!m.try_lock()) {
     };
-}
-
-void PyScripting::broadcastExisting(string name, initializer_list<void *> params) {
-    this->lockWait();
-
-    for (int i = 0; i < manipulators.size(); i++) {
-        if (manipulators[i]->hasSignal(name)) {
-            manipulators[i]->signal(name, params);
-        }
-    }
-    m.unlock();
 }
 
 man_vector PyScripting::getManipulatorsV() {

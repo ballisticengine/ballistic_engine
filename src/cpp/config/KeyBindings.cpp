@@ -18,23 +18,47 @@ bool KeyBindings::loadBindings() {
     ptree keybindings_xml = pt.get_child("keybindings");
 
     BOOST_FOREACH(const ptree::value_type &key, keybindings_xml) {
-
+        KeybindAction action;
         string key_id = key.second.get<string>("id"),
-                key_action = key.second.get<string>("action")
+                key_action = key.second.get<string>("action"),
+                action_type = key.second.get<string>("type")
                 ;
 
         keycode_t keycode;
 
         if (key_id.find("K_") != std::string::npos) {
             keycode = keycode_map[key_id];
+            action.key_type = KT_SYM;
         } else if (key_id.size() == 1) {
             //TODO to lower
             keycode = (keycode_t) key_id[0];
+            action.key_type = KT_CHAR;
 
         } else {
             keycode = 0;
+            action.key_type = KT_NONE;
         }
-        key_actions[keycode] = key_action;
+
+        action.name = key_action;
+
+        if (action_type == "KEYPRESS") {
+            action.stroke_type = KB_KEYPRESS;
+        } else if (action_type == "KEYUP") {
+            action.stroke_type = KB_KEYUP;
+        } else if (action_type == "KEYDOWN") {
+            action.stroke_type = KB_KEYDOWN;
+        }
+
+        key_actions[keycode] = action;
+
+        optional< const ptree& > params = key.second.get_child_optional("params");
+        if (params) {
+
+            BOOST_FOREACH(const ptree::value_type &param, *params) {
+                action.params[param.first.data()] = param.second.data();
+            }
+        }
+
         cout << "KEYCODE" << keycode << ", " << key_action << endl;
     }
 

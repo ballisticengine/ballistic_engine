@@ -2,11 +2,11 @@
     <key>
         <id>K_Q</id>
         <action>x_press</action>
-        <type>*</type>
+        <type>KEYPRESS</type>
     </key>
     <key>
         <id>w</id>
-        <type>*</type>
+        <type>KEYDOWN</type>
         <action>w_press</action>
         <params>
             <direction>forward</direction>

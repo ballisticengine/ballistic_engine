@@ -6,8 +6,8 @@ TEST(Scripting, ScriptingTest) {
     PyScripting *scripting = PyScripting::getInstance();
     scripting->loadManipulators();
     scripting->broadcast("self_load");
-    scripting->broadcastExisting("self_load");
-    scripting->broadcastExisting("dupa");
+    scripting->broadcast("self_load",{0},true);
+    scripting->broadcast("dupa", {0}, true);
     
 }
 
