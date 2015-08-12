@@ -28,6 +28,7 @@ bool KeyBindings::loadBindings() {
         if (key_id.find("K_") != std::string::npos) {
             keycode = keycode_map[key_id];
         } else if (key_id.size() == 1) {
+            //TODO to lower
             keycode = (keycode_t) key_id[0];
 
         } else {

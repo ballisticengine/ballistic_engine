@@ -5,7 +5,7 @@
         <type>*</type>
     </key>
     <key>
-        <id>W</id>
+        <id>w</id>
         <type>*</type>
         <action>w_press</action>
         <params>

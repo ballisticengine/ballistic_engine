@@ -21,6 +21,7 @@ using namespace boost::property_tree;
 #include "resources/ResourceManager.hpp"
 #include "ui/uiMesh.hpp"
 #include "config/EngineState.hpp"
+#include "config/KeyBindings.hpp"
 
 using boost::property_tree::ptree;
 
@@ -30,13 +31,19 @@ struct VideoData {
 };
 
 
-
+/* 
+ * Note, actually
+ * Engine state = config
+ * Config = config loader
+ */
 class Config : public Singleton<Config> {
+protected:    
     ptree pt;
     VideoData vd;
     string start_level;
     vector<string> scripts;
     void loadWeapons();
+    KeyBindings *key_bindings;
 
 public:
     weapon_map available_weapons;
@@ -47,7 +54,8 @@ public:
     vector <string> getScripts();
     const ptree & getPtree();
     ptree & getNode(string node);
-
+    KeyBindings *getKeyBindings();
+    void setKeyBindings(KeyBindings *key_bindings);
 };
 
 #endif	/* CONFIG_HPP */

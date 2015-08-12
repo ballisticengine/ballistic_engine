@@ -37,7 +37,8 @@ enum SignalName {
  * attach handler [Module.method] in PyScripting 
  */
 
-
+//better assign signals from python to concrete events
+//like sdlio::assignSingnal or something
 
 class PyScripting : public Singleton<PyScripting> {
 protected:

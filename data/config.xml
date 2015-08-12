@@ -46,4 +46,7 @@
             TestManipulator
         </script>
     </scripts>
+    <keybindings>
+        keybindings.xml
+    </keybindings>
 </config>

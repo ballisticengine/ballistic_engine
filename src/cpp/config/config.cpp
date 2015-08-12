@@ -8,13 +8,13 @@ void Config::loadWeapons() {
 
 string Config::getRenderer() {
     return pt.get<string>("config.screen.renderer.name");
-    
+
 }
 
 Config::Config() {
 
     string fn = string(CONFIG_DIR) + string(DS) + string(CONFIG_FN);
-    
+
     read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
 
     vd.width = pt.get<int>("config.screen.resx");
@@ -23,9 +23,9 @@ Config::Config() {
     vd.frustum_end = pt.get<float>("config.screen.frustum_end");
     vd.frustum_x = pt.get<float>("config.screen.frustum_width");
     vd.frustum_y = pt.get<float>("config.screen.frustum_height");
-    
-    
-    EngineState::getInstance()->setBool("fullscreen",pt.get<bool>("config.screen.fullscreen"));
+
+
+    EngineState::getInstance()->setBool("fullscreen", pt.get<bool>("config.screen.fullscreen"));
     EngineState::getInstance()->setBool("desktop_fs", pt.get<bool>("config.screen.use_desktop_fs"));
 
     start_level = pt.get<string>("config.game.start_level");
@@ -72,7 +72,7 @@ Config::Config() {
         w->model->c.rotation.y = weapon_xml.second.get<e_loc>("rotation.y");
         w->model->c.rotation.z = weapon_xml.second.get<e_loc>("rotation.z");
         w->model->scale = weapon_xml.second.get<e_loc>("scale");
-        w->bullet =(Shape *) ResourceManager::getInstance()->get(weapon_xml.second.get<string>("bullet"));
+        w->bullet = (Shape *) ResourceManager::getInstance()->get(weapon_xml.second.get<string>("bullet"));
         w->decal = (Texture *) ResourceManager::getInstance()->get(weapon_xml.second.get<string>("decal.texture"));
         w->prev = prev;
         w->next = 0;
@@ -104,4 +104,12 @@ const ptree & Config::getPtree() {
 
 vector <string> Config::getScripts() {
     return this->scripts;
+}
+
+KeyBindings * Config::getKeyBindings() {
+    return this->key_bindings;
+}
+
+void Config::setKeyBindings(KeyBindings *key_bindings) {
+    this->key_bindings = key_bindings;
 }

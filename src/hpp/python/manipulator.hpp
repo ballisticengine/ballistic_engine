@@ -34,7 +34,7 @@ public:
      * Tests if signal invocation doesn't cause exception
      * Not implemented
      */
-    bool testSignal(string name, initializer_list<void *> params)
+    bool testSignal(string name, initializer_list<void *> params);
     PyManipulator(string file);
     void signal(string name, initializer_list<void *> params);
     ~PyManipulator();

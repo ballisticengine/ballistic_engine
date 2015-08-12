@@ -39,8 +39,7 @@ template <typename T> bp::list PyManipulator::arrayToList(T *array) {
     return a;
 }
 
-//better assign signals from python to concrete events
-//like sdlio::assignSingnal or something
+
 
 void PyManipulator::signal(string name, initializer_list<void *> params) {
     
