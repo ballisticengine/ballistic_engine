@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <map>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/foreach.hpp>
@@ -12,17 +13,24 @@ using namespace std;
 using namespace boost::property_tree;
 using boost::property_tree::ptree;
 
+
 #include "config/path.hpp"
+#include "config/keycode_map.hpp"
+#include "types/basic_typedefs.hpp"
+
+typedef map<keycode_t, string> action_map;
 
 class KeyBindings {
 protected:
     FRIEND_TEST(KeyBindings, KeyBindingsTest);
-    string bindings_filename;
-    bool loadBindings();
+    string bindings_filename;  
     ptree pt;
+    action_map key_actions;
 public:
     KeyBindings(string bindings_filename);
-    ~KeyBindings();
+     bool loadBindings();
+     action_map getBindings();
+     ~KeyBindings();
 };
 
 #endif	

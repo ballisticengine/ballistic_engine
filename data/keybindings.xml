@@ -1,6 +1,13 @@
 <keybindings>
     <key>
-        <id>K_X</id>
+        <id>K_Q</id>
         <action>x_press</action>
+    </key>
+    <key>
+        <id>W</id>
+        <action>w_press</action>
+        <params>
+            <direction>forward</direction>
+        </params>
     </key>
 </keybindings>
