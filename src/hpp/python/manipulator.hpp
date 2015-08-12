@@ -28,8 +28,11 @@ protected:
     string filename, classname, iname;
     bp::object module, instance;
     template <typename T> static bp::list arrayToList(T *array);
+    void lockThreads();
+    void unlockThreads();
 public:
     bool hasSignal(string name);
+    
     /*
      * Tests if signal invocation doesn't cause exception
      * Not implemented

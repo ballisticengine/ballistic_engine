@@ -17,7 +17,7 @@ PyManipulator::PyManipulator(string file) {
     iname = classname + "_instance";
     string codeinit = iname + "=" + classname + "()";
     cout << "INIT: " << codeinit << endl;
-    
+
     try {
         PyRun_SimpleString(code);
         PyRun_SimpleString(codeinit.c_str());
@@ -26,7 +26,7 @@ PyManipulator::PyManipulator(string file) {
     } catch (bp::error_already_set) {
         PyErr_Print();
     }
-    
+
     cout << "Loaded python script " << filename << endl;
 
 }
@@ -42,7 +42,7 @@ template <typename T> bp::list PyManipulator::arrayToList(T *array) {
 
 
 void PyManipulator::signal(string name, initializer_list<void *> params) {
-    
+    //TODO: move those to lock and unlockthreads
     Py_BEGIN_ALLOW_THREADS
     PyLocker::getInstance()->lock();
     vector<void *> params_v(params);
@@ -99,17 +99,37 @@ void PyManipulator::signal(string name, initializer_list<void *> params) {
         assert(PyErr_Occurred());
         PyErr_Print();
     }
-   
+
     PyLocker::getInstance()->unlock();
     Py_END_ALLOW_THREADS
 
 }
 
 bool PyManipulator::hasSignal(string name) {
-    
+    bool result = true;
+    Py_BEGIN_ALLOW_THREADS
+    PyLocker::getInstance()->lock();
+    try {
+        bp::object sig = bp::extract<bp::object>(instance.attr(name.c_str()));
+    } catch (const bp::error_already_set& e) {
+
+        result = false;
+    }
+    PyLocker::getInstance()->unlock();
+    Py_END_ALLOW_THREADS
+    return result;
 }
 
 PyManipulator::~PyManipulator() {
     delete code;
 }
 
+void PyManipulator::lockThreads() {
+    //    Py_BEGIN_ALLOW_THREADS
+    //    PyLocker::getInstance()->lock();
+}
+
+void PyManipulator::unlockThreads() {
+    //    PyLocker::getInstance()->unlock();
+    //    Py_END_ALLOW_THREADS
+}
