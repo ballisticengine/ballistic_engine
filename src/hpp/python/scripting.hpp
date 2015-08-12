@@ -46,11 +46,13 @@ protected:
         queue<SignalType> sig_queue;
         bool processing,other_bcast;
         boost::mutex m;
+        void lockWait();
         
 public:
 	PyScripting();
 	void operator()();
         void broadcast(string name, initializer_list<void *> params={});
+        void broadcastExisting(string name, initializer_list<void *> params={});
 	void broadcastInit();
         man_vector getManipulatorsV();
         PyManipulator* getManipulator(string name);

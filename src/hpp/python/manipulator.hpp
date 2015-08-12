@@ -32,6 +32,7 @@ protected:
     void unlockThreads();
 public:
     bool hasSignal(string name);
+    
     /*
      * Tests if signal invocation doesn't cause exception
      * Not implemented

@@ -34,11 +34,26 @@ PyScripting::~PyScripting() {
 void PyScripting::broadcast(string name, initializer_list<void *> params) {
 
 
-    while (!m.try_lock()) {
-    };
+    this->lockWait();
 
     for (int i = 0; i < manipulators.size(); i++) {
         manipulators[i]->signal(name, params);
+    }
+    m.unlock();
+}
+
+void PyScripting::lockWait() {
+    while (!m.try_lock()) {
+    };
+}
+
+void PyScripting::broadcastExisting(string name, initializer_list<void *> params) {
+    this->lockWait();
+
+    for (int i = 0; i < manipulators.size(); i++) {
+        if (manipulators[i]->hasSignal(name)) {
+            manipulators[i]->signal(name, params);
+        }
     }
     m.unlock();
 }
