@@ -17,6 +17,7 @@ using namespace std;
 #include "world/World.hpp"
 #include "entities/observerEntity.hpp"
 #include "config/path.hpp"
+#include "config/Config.hpp"
 #include "io/ttf.hpp"
 #include "python/scripting.hpp"
 #include "renderer/RenderingManager.hpp"
@@ -34,10 +35,9 @@ private:
     static int window_w, window_h;
     static void toggleFullscreen();
     size_t anykey(const Uint8 *state, int ksize);
+    KeyBindings *key_bindings;
 public:
     static void flush();
-//    void setRenderer(RendererAbstract *r);
-//    RendererAbstract *getRenderer();
     static void initWindow(SdlIO *me);
     void eventLoop();
     void keyboardInputThread();

@@ -11,7 +11,7 @@ class TestManipulator(ManipulatorClass):
         self.up = False
 
     def w_press(self):
-        print "w pressed"
+        print "w pressed in python"
 
     def self_load(self):
         #self.world.observer.acceleration.translation.y=9

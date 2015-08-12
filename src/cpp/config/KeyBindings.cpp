@@ -35,6 +35,7 @@ bool KeyBindings::loadBindings() {
             keycode = 0;
         }
         key_actions[keycode] = key_action;
+        cout << "KEYCODE" << keycode << ", " << key_action << endl;
     }
 
 
@@ -42,6 +43,6 @@ bool KeyBindings::loadBindings() {
 
 }
 
-action_map KeyBindings::getBindings() {
+key_action_map KeyBindings::getBindings() {
     return key_actions;
 }

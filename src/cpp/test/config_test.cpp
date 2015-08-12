@@ -3,11 +3,14 @@
 #include "config/KeyBindings.hpp"
 
 TEST(ConfigTest, ConfigMainClassTest) {
+    Config *config = Config::getInstance();
+    ASSERT_NE(0, (unsigned long) config->getKeyBindings());
+    
     
 }
 
 TEST(ConfigTest, KeyBindingsTest) {
     KeyBindings *kb = new KeyBindings("data/keybindings.xml");
-    bool load_result = kb->loadBindings();
-    
+    kb->loadBindings();
+
 }

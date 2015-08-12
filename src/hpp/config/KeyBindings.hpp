@@ -18,19 +18,19 @@ using boost::property_tree::ptree;
 #include "config/keycode_map.hpp"
 #include "types/basic_typedefs.hpp"
 
-typedef map<keycode_t, string> action_map;
+typedef map<keycode_t, string> key_action_map;
 
 class KeyBindings {
 protected:
     FRIEND_TEST(KeyBindings, KeyBindingsTest);
-    string bindings_filename;  
+    string bindings_filename;
     ptree pt;
-    action_map key_actions;
+    key_action_map key_actions;
 public:
     KeyBindings(string bindings_filename);
-     bool loadBindings();
-     action_map getBindings();
-     ~KeyBindings();
+    bool loadBindings();
+    key_action_map getBindings();
+    ~KeyBindings();
 };
 
 #endif	

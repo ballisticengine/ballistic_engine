@@ -56,6 +56,7 @@ public:
     ptree & getNode(string node);
     KeyBindings *getKeyBindings();
     void setKeyBindings(KeyBindings *key_bindings);
+    //destructor (clean keybindings and whatnot)
 };
 
 #endif	/* CONFIG_HPP */

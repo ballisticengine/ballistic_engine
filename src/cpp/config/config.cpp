@@ -28,6 +28,10 @@ Config::Config() {
     EngineState::getInstance()->setBool("fullscreen", pt.get<bool>("config.screen.fullscreen"));
     EngineState::getInstance()->setBool("desktop_fs", pt.get<bool>("config.screen.use_desktop_fs"));
 
+    string keybindings_file = string(CONFIG_DIR) + string(DS)
+            + pt.get<string>("config.keybindings");
+
+
     start_level = pt.get<string>("config.game.start_level");
     ptree scripts_xml = pt.get_child("config.scripts");
 
@@ -83,7 +87,9 @@ Config::Config() {
         available_weapons[w->name] = w;
         cout << w->display_name << endl;
     }
-    cout << "Weapons loaded.\n";
+    KeyBindings *kb = new KeyBindings(keybindings_file);
+    kb->loadBindings();
+    this->setKeyBindings(kb);
 }
 
 VideoData * Config::getVD() {

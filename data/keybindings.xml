@@ -12,4 +12,12 @@
             <direction>forward</direction>
         </params>
     </key>
+    <key>
+        <id>a</id>
+        <type>*</type>
+        <action>w_press</action>
+        <params>
+            <direction>forward</direction>
+        </params>
+    </key>
 </keybindings>
