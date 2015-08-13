@@ -1,23 +1,12 @@
 <keybindings>
+   
     <key>
-        <id>K_Q</id>
-        <action>x_press</action>
-        <type>KEYPRESS</type>
-    </key>
-    <key>
-        <id>w</id>
+        <id>K_W</id>
         <type>KEYDOWN</type>
         <action>w_press</action>
         <params>
             <direction>forward</direction>
         </params>
     </key>
-    <key>
-        <id>a</id>
-        <type>*</type>
-        <action>w_press</action>
-        <params>
-            <direction>forward</direction>
-        </params>
-    </key>
+    
 </keybindings>

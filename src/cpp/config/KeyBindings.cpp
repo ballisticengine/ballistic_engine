@@ -53,7 +53,6 @@ bool KeyBindings::loadBindings() {
 
         optional< const ptree& > params = key.second.get_child_optional("params");
         if (params) {
-
             BOOST_FOREACH(const ptree::value_type &param, *params) {
                 action.params[param.first.data()] = param.second.data();
             }
