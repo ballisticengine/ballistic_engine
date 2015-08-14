@@ -96,22 +96,13 @@ void SdlIO::keyboardInputThread() {
         down_count = 0;
         up_count = 0;
 
-
         for (size_t i = 0; i < ksize; i++) {
-            //
             if (keyboard_state[i] == 1) {
-                cout << i << endl;
-                keycode_t kcode;
-                KeybindAction action = kmap[i];
-                if (action.key_type == KT_CHAR) {
-                    kcode = i + 93;
-                } else if (action.key_type == KT_SYM) {
-                    kcode = i;
-                }
-
-               
-                PyScripting::getInstance()->broadcast(action.name,{0}, true);
+               // cout << i << endl;
                 down_count++;
+                KeybindAction action = kmap[i];
+                PyScripting::getInstance()->enqueue(action.name,{0}, true);
+                
 
             } else {
                 if (last_keys[i] == 1) {
@@ -121,11 +112,14 @@ void SdlIO::keyboardInputThread() {
             last_keys[i] = keyboard_state[i];
         }
 
+        PyScripting::getInstance()->runQueue();
+        
         if (down_count) {
             PyScripting::getInstance()->broadcast("key_down",{&keyboard_state});
         }
-
+        
         if (up_count) {
+           // cout << "Up count " << up_count << endl;
             PyScripting::getInstance()->broadcast("key_up",{(void *) keyboard_state});
         }
     }

@@ -9,9 +9,19 @@ class TestManipulator(ManipulatorClass):
         self.mx = 0
         self.my = 0
         self.up = False
+        self.uc = 0
 
-    def w_press(self):
-        print "w pressed in python"
+    def player_forward(self):
+        self.move_player('f')
+
+    def player_backward(self):
+        self.move_player('b')
+
+    def player_left(self):
+        self.move_player('l')
+
+    def player_right(self):
+        self.move_player('r')
 
     def self_load(self):
         #self.world.observer.acceleration.translation.y=9
@@ -19,6 +29,8 @@ class TestManipulator(ManipulatorClass):
 
     def key_up(self, states):
         #TODO: KEYUP doesn't send upped key - fix
+        self.uc += 1
+        #print "keyup", self.uc
         self.world.observer.velocity.reset()
         #print 'Up', state_number(states)
 
@@ -36,29 +48,33 @@ class TestManipulator(ManipulatorClass):
             print "EXIT"
 
     def key_down(self, states):
+        return
+
+
+    def move_player(self, dir):
         #print 'Down', state_number(states)
         ocoords = self.world.observer.get_coords()
         step=5
         xdelta = deg2rad(ocoords.rotation.y)
         ydelta = deg2rad(ocoords.rotation.x)
 
-        velocity=Coords()
+        velocity = Coords()
 
-        if states[26]:
-            velocity.t.x += -math.sin(xdelta)*step
-            velocity.t.z += math.cos(xdelta)*step
-            velocity.t.y += math.sin(ydelta)*step
-        if states[22]:
-            velocity.t.x +=math.sin(xdelta)*step
-            velocity.t.z +=-math.cos(xdelta)*step
-        if states[4]:
-            velocity.t.x+=math.cos(xdelta)*step
-            velocity.t.z+=math.sin(xdelta)*step
-        if states[7]:
-            velocity.t.x+=-math.cos(xdelta)*step
-            velocity.t.z+=-math.sin(xdelta)*step
+        if dir == 'f':
+            self.world.observer.velocity.t.x += -math.sin(xdelta)*step
+            self.world.observer.velocity.t.z += math.cos(xdelta)*step
+            self.world.observer.velocity.t.y += math.sin(ydelta)*step
+        if dir == 'b':
+            self.world.observer.velocity.t.x += math.sin(xdelta)*step
+            self.world.observer.velocity.t.z += -math.cos(xdelta)*step
+        if dir == 'l':
+            self.world.observer.velocity.t.x += math.cos(xdelta)*step
+            self.world.observer.velocity.t.z += math.sin(xdelta)*step
+        if dir == 'r':
+            self.world.observer.velocity.t.x += -math.cos(xdelta)*step
+            self.world.observer.velocity.t.z += -math.sin(xdelta)*step
 
-        self.world.observer.velocity=velocity
+
 
 
     def entity_collision(self,entitya,entityb, collision_info):

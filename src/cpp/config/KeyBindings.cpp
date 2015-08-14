@@ -30,7 +30,7 @@ bool KeyBindings::loadBindings() {
             keycode = keycode_map[key_id];
             action.key_type = KT_SYM;
         } else if (key_id.size() == 1) {
-            //TODO to lower
+            //TODO to lower and convert to sym
             keycode = (keycode_t) key_id[0];
             action.key_type = KT_CHAR;
 
@@ -50,15 +50,6 @@ bool KeyBindings::loadBindings() {
         }
 
         key_actions[keycode] = action;
-
-        optional< const ptree& > params = key.second.get_child_optional("params");
-        if (params) {
-            BOOST_FOREACH(const ptree::value_type &param, *params) {
-                action.params[param.first.data()] = param.second.data();
-            }
-        }
-
-        cout << "KEYCODE" << keycode << ", " << key_action << endl;
     }
 
 

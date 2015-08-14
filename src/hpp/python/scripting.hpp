@@ -26,7 +26,8 @@ typedef map<string, PyManipulator *> man_map;
 
 struct SignalType {
     string name;
-    void *paramA, *paramB, *paramC, *paramD;
+    initializer_list<void *> params;
+    bool check_existing;
 };
 
 enum SignalName {
@@ -55,8 +56,14 @@ public:
     void operator()();
     void broadcast(string name,
             initializer_list<void *> params = {}, bool check_existing = false);
-    void broadcast(string name,
-            map<string,string> params, bool check_existing = false);
+    
+    void enqueue(string name,
+            initializer_list<void *> params = {}, bool check_existing = false);
+    
+    void clear_queue();
+    void runQueue();
+//    void broadcast(string name,
+//            map<string,string> params, bool check_existing = false);
     void broadcastInit();
     man_vector getManipulatorsV();
     PyManipulator* getManipulator(string name);

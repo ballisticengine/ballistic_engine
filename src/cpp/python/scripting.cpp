@@ -46,11 +46,36 @@ void PyScripting::broadcast(string name, initializer_list<void *> params,
     m.unlock();
 }
 
-void PyScripting::broadcast(string name,
-        map<string, string> params, bool check_existing) {
+//void PyScripting::broadcast(string name,
+//        map<string, string> params, bool check_existing) {
+//
+//    bp::dict d = toPythonDict(params);
+//    this->broadcast(name, {(void *)&d}, true);
+//}
 
-    bp::dict d = toPythonDict(params);
-    this->broadcast(name, {(void *)&d}, true);
+void PyScripting::enqueue(string name,
+        initializer_list<void *> params, bool check_existing) {
+    
+    SignalType signal;
+    signal.name = name;
+    signal.params = params;
+    signal.check_existing = check_existing;
+    sig_queue.push(signal);
+    
+}
+
+void PyScripting::clear_queue() {
+    while(!sig_queue.empty()) {
+        sig_queue.pop();
+    }
+}
+
+void PyScripting::runQueue() {
+    while(!sig_queue.empty()) {
+        SignalType signal = sig_queue.front();
+        sig_queue.pop();
+        this->broadcast(signal.name, signal.params, signal.check_existing);
+    }
 }
 
 void PyScripting::lockWait() {

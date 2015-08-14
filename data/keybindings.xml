@@ -3,10 +3,22 @@
     <key>
         <id>K_W</id>
         <type>KEYDOWN</type>
-        <action>w_press</action>
-        <params>
-            <direction>forward</direction>
-        </params>
+        <action>player_forward</action>
+    </key>
+    <key>
+        <id>K_S</id>
+        <type>KEYDOWN</type>
+        <action>player_backward</action>
+    </key>
+    <key>
+        <id>K_A</id>
+        <type>KEYDOWN</type>
+        <action>player_left</action>
+    </key>
+    <key>
+        <id>K_D</id>
+        <type>KEYDOWN</type>
+        <action>player_right</action>
     </key>
     
 </keybindings>
