@@ -1,0 +1,22 @@
+import sys
+sys.path.append('../../site_scons')
+
+import lib_helper
+from common_flags import *
+
+LIBS = ['SDL2', 'SDL2_ttf', 'SDL2_image', 'GL', 'GLEW', 'GLU', 'RocketCore', 'RocketControls', ]
+
+modules = [
+    "leveled.cpp",
+    "../../librocket_interfaces/RendererInterfaceSDL2.cpp",
+    "../../librocket_interfaces/SystemInterfaceSDL2.cpp",
+           ]
+
+env = Environment(CPPPATH=[
+    '/usr/include/python2.7',
+    '/usr/include/bullet',
+    '../../librocket_interfaces'
+    '/usr/local/include/Rocket'
+])
+
+env.Program('./leveled', modules, LIBS=LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
