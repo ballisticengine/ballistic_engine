@@ -1,0 +1,27 @@
+import sys
+import os
+
+sys.path.append('../../site_scons')
+
+import lib_helper
+from common_flags import *
+
+LIBS = ['SDL2', 'SDL2_ttf', 'SDL2_image', 'GL', 'GLEW', 'GLU', 'RocketCore', 'RocketControls', 'RocketDebugger', ]
+
+root = './../../'
+
+modules = [
+    "rtest.cpp",
+    root+"src/librocket_interfaces/RendererInterfaceSDL2.cpp",
+    root+"src/librocket_interfaces/SystemInterfaceSDL2.cpp",
+    root+"src/librocket_interfaces/ShellFileInterface.cpp",
+           ]
+
+env = Environment(CPPPATH=[
+    '/usr/include/python2.7',
+    '/usr/include/bullet',
+    root+'src/librocket_interfaces',
+    '/usr/local/include/Rocket',
+])
+
+env.Program('./rtest', modules, LIBS=LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
