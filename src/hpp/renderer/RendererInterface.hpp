@@ -1,6 +1,8 @@
 #ifndef RENDERERINTERFACE_HPP
 #define	RENDERERINTERFACE_HPP
 
+#include <Rocket/Core/RenderInterface.h>
+
 #include "entities/Camera.hpp"
 #include "types/types.hpp"
 #include "types/Vector3d.hpp"
@@ -22,12 +24,12 @@ public:
     virtual void afterFrame() { };
     virtual void translate(Vector3d v) { };
     virtual void rotate(Vector3d v, e_loc degrees) { };
-    virtual void setupTexture(Texture *t) { };
+    virtual void setupTexture(Ballistic::Types::Texture *t) { };
     virtual void positionCamera(Camera *c) { };
     virtual void addLight(Light *l){ };
     virtual Vector3d unproject(size_t x, size_t y){ };
     virtual Vector3d project(Vector3d coords){ };
-
+    virtual Rocket::Core::RenderInterface * getUiRenderer() {};
 };
 
 #endif

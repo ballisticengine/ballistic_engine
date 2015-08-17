@@ -8,19 +8,19 @@ from common_flags import *
 
 LIBS = ['SDL2', 'SDL2_ttf', 'SDL2_image', 'GL', 'GLEW', 'GLU', 'RocketCore', 'RocketControls', 'RocketDebugger', ]
 
-root = './../../'
+root = ''
 
 modules = [
     "rtest.cpp",
-    root+"src/librocket_interfaces/RendererInterfaceSDL2.cpp",
-    root+"src/librocket_interfaces/SystemInterfaceSDL2.cpp",
-    root+"src/librocket_interfaces/ShellFileInterface.cpp",
+    root+"./librocket_interfaces/RendererInterfaceSDL2.cpp",
+    root+"./librocket_interfaces/SystemInterfaceSDL2.cpp",
+    root+"./librocket_interfaces/ShellFileInterface.cpp",
            ]
 
 env = Environment(CPPPATH=[
     '/usr/include/python2.7',
     '/usr/include/bullet',
-    root+'src/librocket_interfaces',
+    './librocket_interfaces',
     '/usr/local/include/Rocket',
 ])
 

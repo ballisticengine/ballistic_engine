@@ -30,7 +30,7 @@ public:
 class Shape : public ShapeAbstract {
 public:
     Shape();
-    Texture **textures;
+    Ballistic::Types::Texture **textures;
     Material **materials;
     size_t frame_count;
     Frame *frames;

@@ -7,9 +7,9 @@
 class Texturable {
 	
 public:
-	Texture *tex;
-	virtual void setTexture(Texture *tex);
-	virtual Texture * getTexture();
+	Ballistic::Types::Texture *tex;
+	virtual void setTexture(Ballistic::Types::Texture *tex);
+	virtual Ballistic::Types::Texture * getTexture();
 };
 
 

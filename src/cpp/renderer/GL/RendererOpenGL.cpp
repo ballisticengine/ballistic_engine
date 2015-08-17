@@ -1,5 +1,10 @@
 #include "renderer/GL/RendererOpenGL.hpp"
 
+Rocket::Core::RenderInterface * RendererOpenGL::getUiRenderer() {
+    //ui_renderer = new RocketSDL2Renderer();
+    return 0;
+}
+
 void RendererOpenGL::init(size_t width, size_t height) {
     light_numbers[0] = GL_LIGHT0;
     light_numbers[1] = GL_LIGHT1;
@@ -19,7 +24,7 @@ void RendererOpenGL::init(size_t width, size_t height) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(90, 1, 1, 5000);
-
+//    glOrtho(0, 640, 480, 0, 0, 1);
     glCullFace(GL_FRONT);
     glFrontFace(GL_CW);
     glEnable(GL_CULL_FACE);
@@ -27,12 +32,12 @@ void RendererOpenGL::init(size_t width, size_t height) {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_NORMALIZE);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glEnable(GL_LIGHTING);
+//    glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-    addShader("light");
+    //addShader("light");
 
 }
 
@@ -168,7 +173,7 @@ void RendererOpenGL::renderSkybox(Skybox *sky) {
 
 }
 
-void RendererOpenGL::assignTexture(Texture *t) {
+void RendererOpenGL::assignTexture(Ballistic::Types::Texture *t) {
     GLuint tex_id;
     tex_id = this->textures_ids[t];
     glActiveTexture(GL_TEXTURE0);
@@ -257,21 +262,21 @@ void RendererOpenGL::rotate(Vector3d v, e_loc degrees) {
     glRotatef(degrees, v.x, v.y, v.z);
 }
 
-void RendererOpenGL::setupTexture(Texture *t) {
+void RendererOpenGL::setupTexture(Ballistic::Types::Texture *t) {
     GLuint tex_id;
     GLint tf;
-    textureFormat tformat = t->getFormat();
+    Ballistic::Types::textureFormat tformat = t->getFormat();
 
     switch (tformat) {
-        case TF_BGR:
+        case Ballistic::Types::TF_BGR:
             tf = GL_BGR_EXT;
             break;
 
-        case TF_RGB:
+        case Ballistic::Types::TF_RGB:
             tf = GL_RGB;
             break;
 
-        case TF_RGBA:
+        case Ballistic::Types::TF_RGBA:
             tf = GL_RGBA;
             break;
 

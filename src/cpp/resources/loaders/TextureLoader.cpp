@@ -17,7 +17,7 @@ ResourceType TextureLoader::getType() {
 
 void * TextureLoader::load(string file_name) {
 
-    Texture *tex=new Texture();
+    Ballistic::Types::Texture *tex=new Ballistic::Types::Texture();
     
     SDL_Surface * surf = IMG_Load(file_name.c_str()), *surf2;
     if (!surf) {

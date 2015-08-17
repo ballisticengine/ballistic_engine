@@ -77,7 +77,7 @@ Config::Config() {
         w->model->c.rotation.z = weapon_xml.second.get<e_loc>("rotation.z");
         w->model->scale = weapon_xml.second.get<e_loc>("scale");
         w->bullet = (Shape *) ResourceManager::getInstance()->get(weapon_xml.second.get<string>("bullet"));
-        w->decal = (Texture *) ResourceManager::getInstance()->get(weapon_xml.second.get<string>("decal.texture"));
+        w->decal = (Ballistic::Types::Texture *) ResourceManager::getInstance()->get(weapon_xml.second.get<string>("decal.texture"));
         w->prev = prev;
         w->next = 0;
         if (prev) {

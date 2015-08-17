@@ -22,31 +22,37 @@ using namespace std;
 #include "misc/utils.hpp"
 #include "types/Resource.hpp"
 
-enum textureFormat {
-    TF_RGBA,
-    TF_RGB,
-    TF_BGR,
-};
+namespace Ballistic {
+    namespace Types {
 
-class Texture : public Resource {
-  
-public:
-     SDL_Surface *surf;
-    Texture();
-    Texture(string filename, string orig_filename);
-    Texture *clone();
-    virtual textureFormat getFormat();
-   virtual void free();
-    
-    SDL_Surface *getSurface();
-    void setSurface(SDL_Surface *surf);
-    
-    virtual void * getPixels();
-    virtual void setPixels(void *pixels);
-    
-    virtual int getWidth();
-    virtual int getHeight();
-};
+        enum textureFormat {
+            TF_RGBA,
+            TF_RGB,
+            TF_BGR,
+        };
+
+        class Texture : public Resource {
+        public:
+            SDL_Surface *surf;
+            Texture();
+            Texture(string filename, string orig_filename);
+            Texture *clone();
+            virtual textureFormat getFormat();
+            virtual void free();
+
+            SDL_Surface *getSurface();
+            void setSurface(SDL_Surface *surf);
+
+            virtual void * getPixels();
+            virtual void setPixels(void *pixels);
+
+            virtual int getWidth();
+            virtual int getHeight();
+        };
+
+    }
+}
+
 
 
 

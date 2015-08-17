@@ -13,6 +13,14 @@ SdlIO::SdlIO() {
     key_bindings = Config::getInstance()->getKeyBindings();
 }
 
+SDL_Renderer * SdlIO::getSDLRenderer() {
+    return SdlIO::displayRenderer;
+}
+
+SDL_Window * SdlIO::getSDLWindow() {
+    return SdlIO::window;
+}
+
 void SdlIO::initWindow(SdlIO *me) {
     SDL_Init(SDL_INIT_EVERYTHING);
     //SDL_Init(SDL_INIT_VIDEO);
@@ -98,11 +106,11 @@ void SdlIO::keyboardInputThread() {
 
         for (size_t i = 0; i < ksize; i++) {
             if (keyboard_state[i] == 1) {
-               // cout << i << endl;
+                // cout << i << endl;
                 down_count++;
                 KeybindAction action = kmap[i];
                 PyScripting::getInstance()->enqueue(action.name,{0}, true);
-                
+
 
             } else {
                 if (last_keys[i] == 1) {
@@ -113,13 +121,13 @@ void SdlIO::keyboardInputThread() {
         }
 
         PyScripting::getInstance()->runQueue();
-        
+
         if (down_count) {
             PyScripting::getInstance()->broadcast("key_down",{&keyboard_state});
         }
-        
+
         if (up_count) {
-           // cout << "Up count " << up_count << endl;
+            // cout << "Up count " << up_count << endl;
             PyScripting::getInstance()->broadcast("key_up",{(void *) keyboard_state});
         }
     }
@@ -160,7 +168,13 @@ void SdlIO::mouseInputThread() {
 
 void SdlIO::eventLoop() {
     SDL_Event event;
+     UI::getInstance()->showTestUi();
+    //Context->();
     while (!EngineState::getInstance()->getBool("exit")) {
+//        SDL_SetRenderDrawColor(this->getSDLRenderer(), 0, 0, 255, 255);
+//        SDL_RenderClear(this->getSDLRenderer());
+        
+     //   SDL_RenderPresent(this->getSDLRenderer());
         while (SDL_PollEvent(& event)) {
 
             if (event.type == SDL_QUIT) {
@@ -175,8 +189,10 @@ void SdlIO::eventLoop() {
 
         }
 
-        rendering->render();
-        // r->render();
+        //
+      
+         rendering->render();
+         
     }
 }
 

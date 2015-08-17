@@ -8,11 +8,11 @@ Skybox::Skybox(string tex_name) {
     
 }
 
-Skybox::Skybox(Texture *tex) {
+Skybox::Skybox(Ballistic::Types::Texture *tex) {
     sky=tex;
 }
 
-Texture *Skybox::getTexture() {
+Ballistic::Types::Texture *Skybox::getTexture() {
     return this->sky;
 }
 

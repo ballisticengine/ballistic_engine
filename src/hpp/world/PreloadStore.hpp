@@ -11,7 +11,7 @@ using namespace std;
 #include "types/texture.hpp"
 
 typedef map<string,Shape*> preload_map;
-typedef map<string,Texture *> tex_preload_map;
+typedef map<string,Ballistic::Types::Texture *> tex_preload_map;
 
 class PreloadStore : public Singleton<PreloadStore> {
     public:

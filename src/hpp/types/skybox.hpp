@@ -14,14 +14,14 @@ using namespace std;
 
 
 class Skybox {
-    Texture *sky;
+    Ballistic::Types::Texture *sky;
     Shape *box;
    
 public:
     Skybox(string tex_name);
-    Skybox(Texture *tex);
+    Skybox(Ballistic::Types::Texture *tex);
     Shape *getShape();
-    Texture *getTexture();
+    Ballistic::Types::Texture *getTexture();
      void makeShape(float x,float y);
 };
 

@@ -4,6 +4,8 @@
 #include "misc/singleton.hpp"
 #include "renderer/RendererInterface.hpp"
 #include "world/World.hpp"
+#include "ui/ui.hpp"
+
 
 typedef void (*flush_function)();
 

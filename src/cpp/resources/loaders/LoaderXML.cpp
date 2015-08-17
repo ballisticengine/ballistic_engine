@@ -64,7 +64,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
     s->normals = new n_type[v_count];
     s->faces = new Face[f_count];
     //s->uvs = new uv[uv_count];
-    s->textures = new Texture*[f_count];
+    s->textures = new Ballistic::Types::Texture*[f_count];
     s->materials = new Material*[f_count];
     s->frame_count = 0;
     int i;

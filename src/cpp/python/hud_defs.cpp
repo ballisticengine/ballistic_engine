@@ -11,13 +11,13 @@ typedef boost::shared_ptr<void *> void_ptr;
 
 BOOST_PYTHON_MODULE(HUD) {
 
-    bp::class_<Texture, Texture*>("texture")
-            .def("get_pixels", &Texture::getPixels, bp::return_value_policy< bp::return_opaque_pointer >())
-            .def("set_pixels", &Texture::setPixels)
-            .def("get_surface", &Texture::getSurface, bp::return_value_policy< bp::return_opaque_pointer >())
-            .def("set_surface", &Texture::setSurface)
-            .def("get_width", &Texture::getWidth)
-            .def("get_height", &Texture::getHeight)
+    bp::class_<Ballistic::Types::Texture, Ballistic::Types::Texture*>("texture")
+            .def("get_pixels", &Ballistic::Types::Texture::getPixels, bp::return_value_policy< bp::return_opaque_pointer >())
+            .def("set_pixels", &Ballistic::Types::Texture::setPixels)
+            .def("get_surface", &Ballistic::Types::Texture::getSurface, bp::return_value_policy< bp::return_opaque_pointer >())
+            .def("set_surface", &Ballistic::Types::Texture::setSurface)
+            .def("get_width", &Ballistic::Types::Texture::getWidth)
+            .def("get_height", &Ballistic::Types::Texture::getHeight)
             ;
 
     bp::class_<UiImage, UiImage *>("UiImage")

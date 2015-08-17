@@ -21,6 +21,7 @@ using namespace std;
 #include "io/ttf.hpp"
 #include "python/scripting.hpp"
 #include "renderer/RenderingManager.hpp"
+#include "ui/ui.hpp"
 
 class SdlIO : public Singleton<SdlIO> {
 private:
@@ -43,6 +44,8 @@ public:
     void keyboardInputThread();
     void mouseInputThread();
     void inputThread();
+    SDL_Renderer * getSDLRenderer();
+    SDL_Window * getSDLWindow();
     SdlIO();
     ~SdlIO();
 };

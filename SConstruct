@@ -6,7 +6,7 @@ GL_LIBS = ['GL', 'GLEW', 'GLU']
 GENERAL_LIBS = ['stdc++', 'pthread', 'python2.7', 'dl', ]
 TEST_LIBS = ['gtest', 'gtest_main' ]
 
-ALL_LIBS = GENERAL_LIBS + BOOST_LIBS + SDL_LIBS + GL_LIBS + BULLET_LIBS
+ALL_LIBS = GENERAL_LIBS + BOOST_LIBS + SDL_LIBS + GL_LIBS + BULLET_LIBS + ROCKET_LIBS
 
 src = './src/cpp/'
 
@@ -18,13 +18,14 @@ SConscript(src+'renderer/SConstruct')
 env = Environment(CPPPATH=[
     '/usr/include/python2.7',
     '/usr/include/bullet',
+      './src/cpp/ui/librocket_interfaces',
+    '/usr/local/include/Rocket',
     './src/hpp',
 ])
 
 
 
 modules = [
-
     Glob(src + 'types/*.cpp'),
     Glob(src + 'entities/*.cpp'),
     Glob(src + 'libload/*.cpp'),
@@ -41,15 +42,12 @@ modules = [
     Glob(src + 'python/*.cpp'),
     Glob(src + 'engine.cpp'),
     Glob(src + 'io/*.cpp'),
-    Glob(src + 'renderer/*.cpp')
+    Glob(src + 'renderer/*.cpp'),
+    Glob('./src/cpp/ui/librocket_interfaces/*.cpp'),
 
 ]
 
-main_modules = modules + [Glob(src + 'main.cpp'),
-
-
-
-                          ]
+main_modules = modules + [Glob(src + 'main.cpp'),]
 
 test_modules = modules + [
     src + '/test/test.cpp',

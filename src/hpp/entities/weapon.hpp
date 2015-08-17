@@ -18,7 +18,7 @@ class Weapon : public Entity {
 public:
     e_loc initial_velocity;
     UiMesh *model;
-    Texture *decal; 
+    Ballistic::Types::Texture *decal; 
     Shape *bullet; 
     string display_name; 
     Weapon *next,*prev;

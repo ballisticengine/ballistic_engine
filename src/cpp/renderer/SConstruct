@@ -2,9 +2,10 @@ import sys
 sys.path.append('../../../site_scons')
 
 import lib_helper
+from common_flags import *
 
 
-LIBS = ['stdc++', 'pthread', 'dl', 'GL', 'GLEW', 'GLU' ]
+LIBS = ['stdc++', 'pthread', 'dl', 'GL', 'GLEW', 'GLU' ] + ROCKET_LIBS
 
 def make_renderer(file, subdir):
     sources = [
@@ -15,6 +16,7 @@ def make_renderer(file, subdir):
 
 
 renderers = { 'GL': 'RendererOpenGL'}
+
 
 for subdir in renderers:
     make_renderer(renderers[subdir], subdir)

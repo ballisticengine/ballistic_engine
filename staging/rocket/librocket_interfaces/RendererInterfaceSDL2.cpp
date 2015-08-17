@@ -27,7 +27,6 @@
 
 #include <Rocket/Core/Core.h>
 #include <SDL2/SDL_image.h>
-
 #include "RendererInterfaceSDL2.hpp"
 
 #if !(SDL_VIDEO_RENDER_OGL)
@@ -190,4 +189,3 @@ void RocketSDL2Renderer::ReleaseTexture(Rocket::Core::TextureHandle texture_hand
 {
     SDL_DestroyTexture((SDL_Texture*) texture_handle);
 }
-

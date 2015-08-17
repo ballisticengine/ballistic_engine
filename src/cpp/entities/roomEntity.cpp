@@ -29,13 +29,13 @@ void RoomEntity::placeDecal(Sprite *decal, Coords c) {
     decals.push_back(decal);
 }
 
-void RoomEntity::placeDecalTexture(Texture *tex, Coords c) {
+void RoomEntity::placeDecalTexture(Ballistic::Types::Texture *tex, Coords c) {
     Sprite *decal = new Sprite(tex);
     placeDecal(decal, c);
 }
 
 void RoomEntity::placePreloadDecal(string preload, Coords c) {
-    Texture *tex = preload_store->tex_preloads[preload];
+    Ballistic::Types::Texture *tex = preload_store->tex_preloads[preload];
     Sprite *decal = new Sprite(tex);
     placeDecal(decal, c);
 }

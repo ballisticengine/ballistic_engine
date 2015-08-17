@@ -11,6 +11,7 @@ def make_shared(target_file, sources, target_path, LIBS):
     env = Environment(CPPPATH=[
     '/usr/include/python2.7',
     '/usr/include/bullet',
+    
     root + '/src/hpp',
     ])
 

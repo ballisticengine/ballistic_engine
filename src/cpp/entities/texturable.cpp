@@ -1,10 +1,10 @@
 #include "entities/texturable.hpp"
 
-void Texturable::setTexture(Texture *tex) {
+void Texturable::setTexture(Ballistic::Types::Texture *tex) {
  this->tex=tex;
 }
 
-Texture * Texturable::getTexture() {
+Ballistic::Types::Texture * Texturable::getTexture() {
  return this->tex;
 }
 

@@ -15,8 +15,8 @@ protected:
 	virtual void setUp();
 public:
 	Sprite();
-	Sprite(Texture *tex);
-        Sprite(Texture *tex,e_loc w,e_loc h);
+	Sprite(Ballistic::Types::Texture *tex);
+        Sprite(Ballistic::Types::Texture *tex,e_loc w,e_loc h);
 	e_loc width;
 	e_loc height;
 	Shape2d *shape;

@@ -17,7 +17,7 @@ void RenderingManager::setupTextures() {
 
         if (ts[i]->object) {
             cout << "Stextures" << endl;
-            this->renderer->setupTexture((Texture *) ts[i]->object);
+            this->renderer->setupTexture((Ballistic::Types::Texture *) ts[i]->object);
         }
     }
 }
@@ -79,10 +79,12 @@ void RenderingManager::render() {
     this->renderer->resetMatrix();
     this->renderer->positionCamera(world->getObserver()->getCamera());
     this->renderAllRooms();
-    //this->renderAllDecals();
     this->renderer->resetMatrix();
     this->renderer->positionCamera(world->getObserver()->getCamera());
     this->renderAllEntities();
+    this->renderer->resetMatrix();
+    UI::getInstance()->getContext()->Render();
+    UI::getInstance()->getContext()->Update();
     this->renderer->afterFrame();
     this->flush_callback();
 }

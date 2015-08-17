@@ -36,7 +36,7 @@ public:
 	void addLightEntity(Light *e);
 	void placeDecal(Sprite *decal,Coords c);
         void placePreloadDecal(string preload,Coords c);
-        void placeDecalTexture(Texture *tex,Coords c);
+        void placeDecalTexture(Ballistic::Types::Texture *tex,Coords c);
         void removeObjectEntity(string name);
         ObjectEntity * spawnObject(string preload_name,Coords c,string object_name="");
         ObjectEntity * spawnShape(Shape *s,Coords c,string object_name="");

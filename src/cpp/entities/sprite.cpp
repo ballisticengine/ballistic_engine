@@ -17,12 +17,12 @@ Sprite::Sprite() {
 
 }
 
-Sprite::Sprite(Texture *tex) {
+Sprite::Sprite(Ballistic::Types::Texture *tex) {
     this->tex = tex;
     this->setUp();
 }
 
-Sprite::Sprite(Texture *tex,e_loc w,e_loc h) {
+Sprite::Sprite(Ballistic::Types::Texture *tex,e_loc w,e_loc h) {
      this->width=w;
      this->height=h;
      this->tex=tex;

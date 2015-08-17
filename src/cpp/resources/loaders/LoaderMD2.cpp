@@ -17,7 +17,7 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
     s->vertices = new Vector3d[s->v_count];
     s->f_count = md2->header.num_tris;
     s->v_per_poly = 3;
-    s->textures = new Texture*[s->f_count];
+    s->textures = new Ballistic::Types::Texture*[s->f_count];
     s->materials = new Material*[s->f_count];
     cout << "T: " << md2->frames[0].translate[2] << endl;
     for (int i = 0; i < s->v_count; i++) {

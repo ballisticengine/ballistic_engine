@@ -1,7 +1,7 @@
 <config>
     <screen>
-        <resx>320</resx>
-        <resy>200</resy>
+        <resx>640</resx>
+        <resy>480</resy>
         <fullscreen>0</fullscreen>
         <use_desktop_fs>1</use_desktop_fs>
         <frustum_start>2</frustum_start>

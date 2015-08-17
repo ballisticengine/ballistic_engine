@@ -20,7 +20,7 @@ bool World::parseXml(string &fn) {
     read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace);
     string skyfn = pt.get<string>("world.config.skybox");
 
-    this->sky = new Skybox((Texture *) resman->get(skyfn));
+    this->sky = new Skybox((Ballistic::Types::Texture *) resman->get(skyfn));
     this->observer.current_weapon = Config::getInstance()->available_weapons[pt.get<string>("world.config.default_weapon")];
     ;
 
@@ -54,7 +54,7 @@ bool World::parseXml(string &fn) {
             Shape *shp = (Shape *) resman->get(file);
             ps->shape_preloads[name] = shp;
         } else if (type == "texture") {
-            Texture *tex = (Texture *) resman->get(file);
+            Ballistic::Types::Texture *tex = (Ballistic::Types::Texture *) resman->get(file);
             ps->tex_preloads[name] = tex;
         }
 
@@ -167,7 +167,7 @@ bool World::parseXml(string &fn) {
     collisions.addEntity((Entity *) & observer);
     //observer.boundings[0]->rotate(-90,0,0);
     //texf->setWD(COMMON_DIR);
-    Texture *stex = (Texture *) resman->get("@car.bmp");
+    Ballistic::Types::Texture *stex = (Ballistic::Types::Texture *) resman->get("@car.bmp");
     this->testsprite = new Sprite(stex);
     this->active_room = this->rooms[0];
     // octree=generateOctree(this->rooms);
