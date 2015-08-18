@@ -133,12 +133,25 @@ void SdlIO::keyboardInputThread() {
     }
 }
 
+void SdlIO::attachMouse(bool attach) {
+    if (attach) {
+         SDL_SetRelativeMouseMode(SDL_TRUE);
+    } else {
+         SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
+}
+
 void SdlIO::mouseInputThread() {
     static int mouse_x, mouse_y, last_x, last_y, delta_x, delta_y;
     SDL_GetMouseState(&last_x, &last_y);
-    SDL_SetRelativeMouseMode(SDL_TRUE);
+ 
     static Uint32 mouse_state;
     while (!EngineState::getInstance()->getBool("exit")) {
+        if (EngineState::getInstance()->getBool("attach_mouse")) {
+            attachMouse();
+        } else {
+            attachMouse(false);
+        }
         delta_x = delta_y = 0;
         mouse_state = SDL_GetRelativeMouseState(&mouse_x, &mouse_y);
 
@@ -168,7 +181,7 @@ void SdlIO::mouseInputThread() {
 
 void SdlIO::eventLoop() {
     SDL_Event event;
-   
+    UI *ui = UI::getInstance();
     while (!EngineState::getInstance()->getBool("exit")) {
         while (SDL_PollEvent(& event)) {
 
@@ -181,6 +194,8 @@ void SdlIO::eventLoop() {
                 EngineState::getInstance()->setBool("keypress", true);
                 PyScripting::getInstance()->broadcast("key_press",{(void *) &event.key.keysym.sym});
             }
+            
+            ui->processSDLEvent(event);
 
         }
 

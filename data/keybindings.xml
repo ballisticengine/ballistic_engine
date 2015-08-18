@@ -20,5 +20,10 @@
         <type>KEYDOWN</type>
         <action>player_right</action>
     </key>
+    <key>
+        <id>K_M</id>
+        <type>KEYDOWN</type>
+        <action>attach_mouse</action>
+    </key>
     
 </keybindings>

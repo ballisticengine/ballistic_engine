@@ -20,6 +20,7 @@ void Engine::prepare() {
     EngineState::getInstance()->setBool("fullscreen", false);
     EngineState::getInstance()->setBool("desktop_fs", false);
     EngineState::getInstance()->setBool("light", false);
+    EngineState::getInstance()->setBool("attach_mouse", true);
     EngineState::getInstance()->setString("version", "Staging");
 
     cout << "Loading world...\n";
@@ -47,17 +48,19 @@ void Engine::prepare() {
     io = new SdlIO();
 
     io->initWindow(io);
+    //io->attachMouse();
+    
     ri->init(vd.width, vd.height);
     rendering->setupTextures();
     rendering->setFlush(SdlIO::flush);
     
     string ui_dir="./data/ui/";
     
-    Rocket::Core::RenderInterface *ui_renderer = new RocketSDL2Renderer(io->getSDLRenderer(), 
+    RocketSDL2Renderer *ui_renderer = new RocketSDL2Renderer(io->getSDLRenderer(), 
             io->getSDLWindow(),
             rendering->getRenderer());
-    Rocket::Core::SystemInterface *system_interface = new RocketSDL2SystemInterface();
-    Rocket::Core::FileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
+   RocketSDL2SystemInterface *system_interface = new RocketSDL2SystemInterface();
+    ShellFileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
     UI *ui = UI::getInstance();
         
     if(!ui->init(system_interface, ui_renderer, file_interface, rendering->getRenderer())) {

@@ -1,9 +1,10 @@
 #include "ui/ui.hpp"
 
-bool UI::init(RC::SystemInterface *system_interface,
-        RC::RenderInterface *rc_renderer_interface,
-        RC::FileInterface *file_interface,
-        RendererInterface *renderer_interface) {
+bool UI::init(RocketSDL2SystemInterface *system_interface,
+            RocketSDL2Renderer *rc_renderer_interface,
+            ShellFileInterface *file_interface,
+            RendererInterface *renderer_interface
+            ) {
 
     this->system_interface = system_interface;
     this->rc_renderer_interface = rc_renderer_interface;
@@ -51,6 +52,35 @@ void UI::addElement(std::string file) {
 
 RC::Context *UI::getContext() {
     return this->context;
+}
+
+void UI::processSDLEvent(SDL_Event &event) {
+    switch (event.type) {
+        case SDL_MOUSEMOTION:
+            context->ProcessMouseMove(event.motion.x,
+                    event.motion.y,
+                    system_interface->GetKeyModifiers());
+            break;
+
+        case SDL_MOUSEBUTTONDOWN:
+            context->ProcessMouseButtonDown(system_interface->TranslateMouseButton(event.button.button),
+                    system_interface->GetKeyModifiers());
+            break;
+
+        case SDL_MOUSEBUTTONUP:
+            context->ProcessMouseButtonUp(system_interface->TranslateMouseButton(event.button.button),
+                    system_interface->GetKeyModifiers());
+            break;
+
+        case SDL_MOUSEWHEEL:
+            context->ProcessMouseWheel(event.wheel.y, system_interface->GetKeyModifiers());
+            break;
+
+        case SDL_KEYDOWN:
+//            context->ProcessKeyDown(system_interface->TranslateKey(event.key.keysym.sym), 
+//                    system_interface->GetKeyModifiers());
+            break;
+    }
 }
 
 UI::~UI() {

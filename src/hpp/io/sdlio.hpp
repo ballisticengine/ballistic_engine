@@ -44,6 +44,7 @@ public:
     void keyboardInputThread();
     void mouseInputThread();
     void inputThread();
+    void attachMouse(bool attach=true);
     SDL_Renderer * getSDLRenderer();
     SDL_Window * getSDLWindow();
     SdlIO();

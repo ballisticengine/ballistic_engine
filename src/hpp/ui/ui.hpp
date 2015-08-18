@@ -7,36 +7,42 @@
 #include <Rocket/Core/RenderInterface.h>
 #include <Rocket/Core/SystemInterface.h>
 #include <Rocket/Core/FileInterface.h>
+#include <SDL2/SDL.h>
+
 #include <string>
 
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
 #include "renderer/RendererInterface.hpp"
 
+#include "ui/librocket_interfaces/RendererInterfaceSDL2.hpp"
+#include "ui/librocket_interfaces/SystemInterfaceSDL2.hpp"
+#include "ui/librocket_interfaces/ShellFileInterface.hpp"
+
 using namespace Rocket::Core;
 namespace RC = Rocket::Core;
 
 class UI : public Singleton<UI> {
 protected:
-    RC::SystemInterface *system_interface;
-    RC::RenderInterface *rc_renderer_interface;
-    RC::FileInterface *file_interface;
+    RocketSDL2SystemInterface *system_interface;
+    RocketSDL2Renderer *rc_renderer_interface;
+    ShellFileInterface *file_interface;
     RC::Context *context;
     RendererInterface *renderer;
 public:
-    bool init(RC::SystemInterface *system_interface,
-            RC::RenderInterface *rc_renderer_interface,
-            RC::FileInterface *file_interface,
+    bool init(RocketSDL2SystemInterface *system_interface,
+            RocketSDL2Renderer *rc_renderer_interface,
+            ShellFileInterface *file_interface,
             RendererInterface *renderer_interface
             );
-    
-    
+
+
     RC::Context *getContext();
-    
+
     void showTestUi();
     void addElement(std::string file);
-    
-    
+    void processSDLEvent(SDL_Event &event);
+
     ~UI();
 };
 
