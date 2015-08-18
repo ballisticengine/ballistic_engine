@@ -59,13 +59,13 @@ void Engine::prepare() {
     Rocket::Core::SystemInterface *system_interface = new RocketSDL2SystemInterface();
     Rocket::Core::FileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
     UI *ui = UI::getInstance();
-    
+        
     if(!ui->init(system_interface, ui_renderer, file_interface)) {
         cout << "UI loading error" << endl;
     } else {
         cout << "UI loaded!" << endl;
     }
-   
+    UI::getInstance()->showTestUi();
     this->pythonInit();
     cout << "World loop\n";
     

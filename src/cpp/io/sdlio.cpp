@@ -168,13 +168,8 @@ void SdlIO::mouseInputThread() {
 
 void SdlIO::eventLoop() {
     SDL_Event event;
-     UI::getInstance()->showTestUi();
-    //Context->();
+   
     while (!EngineState::getInstance()->getBool("exit")) {
-//        SDL_SetRenderDrawColor(this->getSDLRenderer(), 0, 0, 255, 255);
-//        SDL_RenderClear(this->getSDLRenderer());
-        
-     //   SDL_RenderPresent(this->getSDLRenderer());
         while (SDL_PollEvent(& event)) {
 
             if (event.type == SDL_QUIT) {
@@ -189,10 +184,8 @@ void SdlIO::eventLoop() {
 
         }
 
-        //
-      
-         rendering->render();
-         
+        rendering->render();
+
     }
 }
 

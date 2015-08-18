@@ -11,6 +11,7 @@ bool UI::init(RC::SystemInterface *system_interface,
     Rocket::Core::SetFileInterface(file_interface);
     Rocket::Core::SetRenderInterface(renderer_interface);
     Rocket::Core::SetSystemInterface(system_interface);
+
     if (!Rocket::Core::Initialise()) {
         return false;
     }
@@ -20,6 +21,7 @@ bool UI::init(RC::SystemInterface *system_interface,
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Italic.otf");
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Roman.otf");
 
+    //TODO: IMPORTANT!!!: move most of the logic from engine here
     VideoData *vd = Config::getInstance()->getVD();
     context = Rocket::Core::CreateContext("default",
             Rocket::Core::Vector2i(4, 4));
@@ -29,14 +31,21 @@ bool UI::init(RC::SystemInterface *system_interface,
 }
 
 void UI::showTestUi() {
-    Rocket::Core::ElementDocument *Document = context->LoadDocument("demo.rml");
-    if (Document) {
-        Document->Show();
-        Document->RemoveReference();
-        cout << "Document loaded" << endl;
-    } else {
-        cout << "Error" << endl;
-    }
+    Rocket::Core::ElementDocument *a = context->LoadDocument("demo.rml");
+    Rocket::Core::ElementDocument *b = context->LoadDocument("test.rml");
+    //    if (Document) {
+    a->Show();
+    a->RemoveReference();
+    b->Show();
+    b->RemoveReference();
+
+    //    } else {
+    //        cout << "Error" << endl;
+    //    }
+}
+
+void UI::addElement(std:string file) {
+    
 }
 
 RC::Context *UI::getContext() {
@@ -44,5 +53,6 @@ RC::Context *UI::getContext() {
 }
 
 UI::~UI() {
+    //TODO: cleanup
     Rocket::Core::Shutdown();
 }

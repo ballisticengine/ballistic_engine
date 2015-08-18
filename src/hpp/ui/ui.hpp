@@ -7,6 +7,7 @@
 #include <Rocket/Core/RenderInterface.h>
 #include <Rocket/Core/SystemInterface.h>
 #include <Rocket/Core/FileInterface.h>
+#include <string>
 
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
@@ -30,6 +31,8 @@ public:
     RC::Context *getContext();
     
     void showTestUi();
+    void addElement(std:string file);
+    
     
     ~UI();
 };
