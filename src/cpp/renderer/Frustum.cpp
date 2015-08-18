@@ -12,3 +12,11 @@ Frustum::Frustum(
         e_loc far
         ) : left(left), right(right), bottom(bottom), top(top), near(near), far(far) {
 }
+
+e_loc Frustum::getWidth() {
+    return abs(left)+abs(right);
+}
+
+e_loc Frustum::getHeight() {
+    return abs(top)+abs(bottom);
+}

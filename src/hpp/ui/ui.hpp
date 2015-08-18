@@ -11,6 +11,7 @@
 
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
+#include "renderer/RendererInterface.hpp"
 
 using namespace Rocket::Core;
 namespace RC = Rocket::Core;
@@ -18,14 +19,16 @@ namespace RC = Rocket::Core;
 class UI : public Singleton<UI> {
 protected:
     RC::SystemInterface *system_interface;
-    RC::RenderInterface *renderer_interface;
+    RC::RenderInterface *rc_renderer_interface;
     RC::FileInterface *file_interface;
-    
     RC::Context *context;
+    RendererInterface *renderer;
 public:
     bool init(RC::SystemInterface *system_interface,
-            RC::RenderInterface *renderer_interface,
-            RC::FileInterface *file_interface);
+            RC::RenderInterface *rc_renderer_interface,
+            RC::FileInterface *file_interface,
+            RendererInterface *renderer_interface
+            );
     
     
     RC::Context *getContext();

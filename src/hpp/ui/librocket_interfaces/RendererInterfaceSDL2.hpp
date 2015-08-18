@@ -5,7 +5,9 @@
 
 #include <iostream>
 #include <cmath>
+
 using namespace std;
+
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 

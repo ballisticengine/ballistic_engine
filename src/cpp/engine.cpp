@@ -60,7 +60,7 @@ void Engine::prepare() {
     Rocket::Core::FileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
     UI *ui = UI::getInstance();
         
-    if(!ui->init(system_interface, ui_renderer, file_interface)) {
+    if(!ui->init(system_interface, ui_renderer, file_interface, rendering->getRenderer())) {
         cout << "UI loading error" << endl;
     } else {
         cout << "UI loaded!" << endl;

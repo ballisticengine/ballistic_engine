@@ -30,8 +30,8 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
     Frustum frustum = this->renderer->getFrustum();
 
     float
-    f_width = abs(frustum.left) + abs(frustum.right),
-            f_height = abs(frustum.bottom) + abs(frustum.top),
+    f_width = frustum.getWidth(),
+            f_height = frustum.getHeight(),
             scale_x = f_width / vd->width,
             scale_y = f_height / vd->height
             ;

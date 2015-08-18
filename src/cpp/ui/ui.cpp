@@ -1,15 +1,17 @@
 #include "ui/ui.hpp"
 
 bool UI::init(RC::SystemInterface *system_interface,
-        RC::RenderInterface *renderer_interface,
-        RC::FileInterface *file_interface) {
+        RC::RenderInterface *rc_renderer_interface,
+        RC::FileInterface *file_interface,
+        RendererInterface *renderer_interface) {
 
     this->system_interface = system_interface;
-    this->renderer_interface = renderer_interface;
+    this->rc_renderer_interface = rc_renderer_interface;
     this->file_interface = file_interface;
+    this->renderer = renderer_interface;
 
     Rocket::Core::SetFileInterface(file_interface);
-    Rocket::Core::SetRenderInterface(renderer_interface);
+    Rocket::Core::SetRenderInterface(rc_renderer_interface);
     Rocket::Core::SetSystemInterface(system_interface);
 
     if (!Rocket::Core::Initialise()) {
@@ -21,10 +23,12 @@ bool UI::init(RC::SystemInterface *system_interface,
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Italic.otf");
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Roman.otf");
 
-    //TODO: IMPORTANT!!!: move most of the logic from engine here
     VideoData *vd = Config::getInstance()->getVD();
     context = Rocket::Core::CreateContext("default",
-            Rocket::Core::Vector2i(4, 4));
+            Rocket::Core::Vector2i(
+            renderer->getFrustum().getWidth(),
+            renderer->getFrustum().getHeight())
+            );
 
     Rocket::Debugger::Initialise(context);
     return true;
