@@ -48,32 +48,32 @@ void Engine::prepare() {
     io = new SdlIO();
 
     io->initWindow(io);
-    //io->attachMouse();
-    
+   
     ri->init(vd.width, vd.height);
     rendering->setupTextures();
     rendering->setFlush(SdlIO::flush);
-    
-    string ui_dir="./data/ui/";
-    
-    RocketSDL2Renderer *ui_renderer = new RocketSDL2Renderer(io->getSDLRenderer(), 
+
+    string ui_dir = "./data/ui/";
+
+    RocketSDL2Renderer *ui_renderer = new RocketSDL2Renderer(io->getSDLRenderer(),
             io->getSDLWindow(),
             rendering->getRenderer());
-   RocketSDL2SystemInterface *system_interface = new RocketSDL2SystemInterface();
+    RocketSDL2SystemInterface *system_interface = new RocketSDL2SystemInterface();
     ShellFileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
     UI *ui = UI::getInstance();
-        
-    if(!ui->init(system_interface, ui_renderer, file_interface, rendering->getRenderer())) {
+
+    if (!ui->init(system_interface, ui_renderer, file_interface, rendering->getRenderer())) {
         cout << "UI loading error" << endl;
     } else {
         cout << "UI loaded!" << endl;
     }
+
     UI::getInstance()->showTestUi();
     this->pythonInit();
     cout << "World loop\n";
-    
+
     boost::thread(boost::ref(*w));
-    
+
 }
 
 Engine::~Engine() {

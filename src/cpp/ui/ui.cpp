@@ -1,10 +1,10 @@
 #include "ui/ui.hpp"
 
 bool UI::init(RocketSDL2SystemInterface *system_interface,
-            RocketSDL2Renderer *rc_renderer_interface,
-            ShellFileInterface *file_interface,
-            RendererInterface *renderer_interface
-            ) {
+        RocketSDL2Renderer *rc_renderer_interface,
+        ShellFileInterface *file_interface,
+        RendererInterface *renderer_interface
+        ) {
 
     this->system_interface = system_interface;
     this->rc_renderer_interface = rc_renderer_interface;
@@ -77,13 +77,16 @@ void UI::processSDLEvent(SDL_Event &event) {
             break;
 
         case SDL_KEYDOWN:
-//            context->ProcessKeyDown(system_interface->TranslateKey(event.key.keysym.sym), 
-//                    system_interface->GetKeyModifiers());
+            //            context->ProcessKeyDown(system_interface->TranslateKey(event.key.keysym.sym), 
+            //                    system_interface->GetKeyModifiers());
             break;
     }
 }
 
 UI::~UI() {
-    //TODO: cleanup
+    context->RemoveReference();
     Rocket::Core::Shutdown();
+    delete system_interface;
+    delete rc_renderer_interface;
+    delete file_interface;
 }
