@@ -53,7 +53,9 @@ void Engine::prepare() {
     
     string ui_dir="./data/ui/";
     
-    Rocket::Core::RenderInterface *ui_renderer = new RocketSDL2Renderer(io->getSDLRenderer(), io->getSDLWindow());
+    Rocket::Core::RenderInterface *ui_renderer = new RocketSDL2Renderer(io->getSDLRenderer(), 
+            io->getSDLWindow(),
+            rendering->getRenderer());
     Rocket::Core::SystemInterface *system_interface = new RocketSDL2SystemInterface();
     Rocket::Core::FileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
     UI *ui = UI::getInstance();

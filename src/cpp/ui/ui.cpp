@@ -22,7 +22,7 @@ bool UI::init(RC::SystemInterface *system_interface,
 
     VideoData *vd = Config::getInstance()->getVD();
     context = Rocket::Core::CreateContext("default",
-            Rocket::Core::Vector2i(vd->width, vd->height));
+            Rocket::Core::Vector2i(4, 4));
 
     Rocket::Debugger::Initialise(context);
     return true;

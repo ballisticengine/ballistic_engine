@@ -21,10 +21,10 @@ void RendererOpenGL::init(size_t width, size_t height) {
     }
 
     glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(90, 1, 1, 5000);
-//    glOrtho(0, 640, 480, 0, 0, 1);
+
+
+    this->setFrustum(Frustum(-2, 2, -2, 2, 2, 5000));
+
     glCullFace(GL_FRONT);
     glFrontFace(GL_CW);
     glEnable(GL_CULL_FACE);
@@ -32,12 +32,12 @@ void RendererOpenGL::init(size_t width, size_t height) {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_NORMALIZE);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-//    glEnable(GL_LIGHTING);
+
     glShadeModel(GL_SMOOTH);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-    //addShader("light");
+    addShader("light");
 
 }
 
@@ -313,36 +313,55 @@ void RendererOpenGL::positionCamera(Camera *camera) {
     this->translate(c.translation);
 }
 
-Vector3d  RendererOpenGL::unproject(size_t x, size_t y) {
-    
+Vector3d RendererOpenGL::unproject(size_t x, size_t y) {
+
     cout << "unproject" << endl;
-    
-//    GLint viewport[4];
-//    GLdouble modelview[16];
-//    GLdouble projection[16];
-//    GLfloat winX, winY, winZ;
-//    GLdouble posX, posY, posZ;
-//
-//    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
-//    glGetDoublev(GL_PROJECTION_MATRIX, projection);
-//    glGetIntegerv(GL_VIEWPORT, viewport);
-//
-//    winX = (float) x;
-//    winY = (float) viewport[3] - (float) y;
-//    glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
-//
-//    gluUnProject(winX, winY, winZ, mnodelview, projection, viewport, &posX, &posY, &posZ);
-//   
-//    cout << "returning" << endl;
-//    return Vector3d (posX, posY, posZ);
+
+    //    GLint viewport[4];
+    //    GLdouble modelview[16];
+    //    GLdouble projection[16];
+    //    GLfloat winX, winY, winZ;
+    //    GLdouble posX, posY, posZ;
+    //
+    //    glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
+    //    glGetDoublev(GL_PROJECTION_MATRIX, projection);
+    //    glGetIntegerv(GL_VIEWPORT, viewport);
+    //
+    //    winX = (float) x;
+    //    winY = (float) viewport[3] - (float) y;
+    //    glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
+    //
+    //    gluUnProject(winX, winY, winZ, mnodelview, projection, viewport, &posX, &posY, &posZ);
+    //   
+    //    cout << "returning" << endl;
+    //    return Vector3d (posX, posY, posZ);
     /*
      GPF is caused by something inside this function, likely mouse coords
      */
-    return Vector3d(0,0,0);
+    return Vector3d(0, 0, 0);
 }
 
 Vector3d RendererOpenGL::project(Vector3d coords) {
 
+}
+
+void RendererOpenGL::setFrustum(Frustum frustum) {
+    this->frustum = frustum;
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glFrustum(
+            frustum.left,
+            frustum.right,
+            frustum.bottom,
+            frustum.top,
+            frustum.near,
+            frustum.far
+            );
+
+}
+
+Frustum RendererOpenGL::getFrustum() {
+    return this->frustum;
 }
 
 extern "C" {

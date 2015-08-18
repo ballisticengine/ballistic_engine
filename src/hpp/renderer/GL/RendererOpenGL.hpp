@@ -20,6 +20,7 @@ protected:
     size_t light_counter;
     map <int, GLint> light_numbers;
     Rocket::Core::RenderInterface *ui_renderer;
+    Frustum frustum;
 public:
     void init(size_t width, size_t height);
     void renderShape(Shape *s);
@@ -36,6 +37,8 @@ public:
     Vector3d unproject(size_t x, size_t y);
     Vector3d project(Vector3d coords);
     virtual Rocket::Core::RenderInterface * getUiRenderer();
+    virtual void setFrustum(Frustum frustum);
+    virtual Frustum getFrustum();
 };
 
 

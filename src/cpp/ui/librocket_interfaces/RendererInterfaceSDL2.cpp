@@ -1,30 +1,3 @@
-/*
- * This source file is part of libRocket, the HTML/CSS Interface Middleware
- *
- * For the latest information, see http://www.librocket.com
- *
- * Copyright (c) 2008-2010 Nuno Silva
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
-
 #include <Rocket/Core/Core.h>
 #include <SDL2/SDL_image.h>
 
@@ -34,28 +7,39 @@
 #error "Only the opengl sdl backend is supported. To add support for others, see http://mdqinc.com/blog/2013/01/integrating-librocket-with-sdl-2/"
 #endif
 
-RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* renderer, SDL_Window* screen) {
-    mRenderer = renderer;
+RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* sdl_renderer, SDL_Window* screen, RendererInterface *renderer) {
+    mRenderer = sdl_renderer;
     mScreen = screen;
+    this->renderer = renderer;
+    this->vd = Config::getInstance()->getVD();
 }
 
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
 
 void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation) {
-    // SDL uses shaders that we need to disable here  
-    static bool scaled = false;
+
     glUseProgramObjectARB(0);
     glMatrixMode(GL_PROJECTION | GL_MODELVIEW);
     glPushMatrix();
-   // glLoadIdentity();
-   // glOrtho(0, 640, 480, 0, 0, 1);
+
     glDisable(GL_DEPTH_TEST);
-    
+
     glDisable(GL_CULL_FACE);
-    glScalef(0.8,-1,1);
-    float fz = -250;
-    glTranslatef(translation.x-280, translation.y+fz, fz);
-    
+
+
+    Frustum frustum = this->renderer->getFrustum();
+
+    float
+    f_width = abs(frustum.left) + abs(frustum.right),
+            f_height = abs(frustum.bottom) + abs(frustum.top),
+            scale_x = f_width / vd->width,
+            scale_y = f_height / vd->height
+            ;
+
+    glScalef(scale_x, -scale_y, 1);
+//glTranslatef(translation.x*scale_x, translation.y*scale_y, -frustum.near);
+    glTranslatef(translation.x, translation.y, 0);
+
     std::vector<Rocket::Core::Vector2f> Positions(num_vertices);
     std::vector<Rocket::Core::Colourb> Colors(num_vertices);
     std::vector<Rocket::Core::Vector2f> TexCoords(num_vertices);
@@ -66,6 +50,8 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         sdl_texture = (SDL_Texture *) texture;
         SDL_GL_BindTexture(sdl_texture, &texw, &texh);
+//        texw *= scale_x;
+//        texh *= scale_y;
     }
 
     for (int i = 0; i < num_vertices; i++) {
@@ -86,6 +72,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, indices);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);
@@ -97,16 +84,9 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
 
     glColor4f(1.0, 1.0, 1.0, 1.0);
     glPopMatrix();
-    /* Reset blending and draw a fake point just outside the screen to let SDL know that it needs to reset its state in case it wants to render a texture */
-//    glDisable(GL_BLEND);
-   // SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_ADD);
-   // SDL_RenderDrawPoint(mRenderer, -1, -1);
+
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    //    glMatrixMode(GL_PROJECTION);
-    //    glLoadIdentity();
-    //    gluPerspective(90, 1, 1, 5000);
-
 
 }
 
