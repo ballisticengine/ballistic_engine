@@ -31,7 +31,7 @@ public:
     RC::Context *getContext();
     
     void showTestUi();
-    void addElement(std:string file);
+    void addElement(std::string file);
     
     
     ~UI();

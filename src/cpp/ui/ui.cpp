@@ -33,19 +33,16 @@ bool UI::init(RC::SystemInterface *system_interface,
 void UI::showTestUi() {
     Rocket::Core::ElementDocument *a = context->LoadDocument("demo.rml");
     Rocket::Core::ElementDocument *b = context->LoadDocument("test.rml");
-    //    if (Document) {
+
     a->Show();
     a->RemoveReference();
     b->Show();
     b->RemoveReference();
 
-    //    } else {
-    //        cout << "Error" << endl;
-    //    }
 }
 
-void UI::addElement(std:string file) {
-    
+void UI::addElement(std::string file) {
+
 }
 
 RC::Context *UI::getContext() {
