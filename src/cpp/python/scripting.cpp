@@ -20,7 +20,6 @@ PyScripting::PyScripting() {
     PyEval_InitThreads();
     init_types();
     init_world();
-    init_hud();
     init_timer();
     init_renderer();
     init_engine();

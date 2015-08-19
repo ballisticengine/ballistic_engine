@@ -1,5 +1,4 @@
 from World import World
-from HUD import HUD
 from Rendering import RenderingManager
 from Engine import EngineState
 
@@ -29,7 +28,6 @@ class ManipulatorClass(object):
 
     def __init__(self):
         self.world = World.get_instance()
-        self.hud = HUD.get_instance()
         self.rendering_manager = RenderingManager.get_instance()
         self.engine_state = EngineState.get_instance()
         print "init"

@@ -11,7 +11,6 @@
 #include "python/manipulator.hpp"
 #include "python/type_defs.hpp"
 #include "python/world_defs.hpp"
-#include "python/hud_defs.hpp"
 #include "python/timer_defs.hpp"
 #include "python/renderer_defs.hpp"
 #include "python/engine_defs.hpp"
