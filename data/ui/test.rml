@@ -5,6 +5,6 @@
         
     </head>
     <body template="window">
-        xxx
+        <button>Test</button>
     </body>
 </rml>

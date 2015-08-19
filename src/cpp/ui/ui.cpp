@@ -77,8 +77,8 @@ void UI::processSDLEvent(SDL_Event &event) {
             break;
 
         case SDL_KEYDOWN:
-            //            context->ProcessKeyDown(system_interface->TranslateKey(event.key.keysym.sym), 
-            //                    system_interface->GetKeyModifiers());
+                        context->ProcessKeyDown(system_interface->TranslateKey(event.key.keysym.sym), 
+                                system_interface->GetKeyModifiers());
             break;
     }
 }
