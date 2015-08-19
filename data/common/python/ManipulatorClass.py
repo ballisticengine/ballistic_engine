@@ -1,6 +1,7 @@
 from World import World
 from Rendering import RenderingManager
 from Engine import EngineState
+from BallisticUI import UI
 
 def deg2rad(deg):
     f = 3.141/180
@@ -30,6 +31,7 @@ class ManipulatorClass(object):
         self.world = World.get_instance()
         self.rendering_manager = RenderingManager.get_instance()
         self.engine_state = EngineState.get_instance()
+        self.ui = UI.get_instance()
         print "init"
 
     def entity_movement(self, entity):

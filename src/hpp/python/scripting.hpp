@@ -14,6 +14,7 @@
 #include "python/timer_defs.hpp"
 #include "python/renderer_defs.hpp"
 #include "python/engine_defs.hpp"
+#include "python/ui_defs.hpp"
 #include "python/utils.hpp"
 #include "config/EngineState.hpp"
 
