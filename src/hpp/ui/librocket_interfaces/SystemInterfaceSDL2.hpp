@@ -32,6 +32,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <chrono>
+
 class RocketSDL2SystemInterface : public Rocket::Core::SystemInterface
 {
 public:

@@ -27,12 +27,24 @@ class ManipulatorClass(object):
 
     score=0
 
+    #Those 4 temporary
+    def player_forward(self):
+        pass
+
+    def player_backward(self):
+        pass
+
+    def player_left(self):
+        pass
+
+    def player_right(self):
+        pass
+
     def __init__(self):
         self.world = World.get_instance()
         self.rendering_manager = RenderingManager.get_instance()
         self.engine_state = EngineState.get_instance()
         self.ui = UI.get_instance()
-        print "init"
 
     def entity_movement(self, entity):
         pass

@@ -5,6 +5,7 @@
         
     </head>
     <body template="window">
-        <button>Test</button>
+        <div id="dummy">dummy</div>
+        <button onclick=" print 'test' " >click this</button>
     </body>
 </rml>

@@ -1,8 +1,8 @@
 #include "engine.hpp"
 
 void Engine::pythonInit() {
+    PyScripting::getInstance()->init();
     PyScripting::getInstance()->loadManipulators();
-
 }
 
 void Engine::prepare() {
@@ -48,7 +48,7 @@ void Engine::prepare() {
     io = new SdlIO();
 
     io->initWindow(io);
-   
+
     ri->init(vd.width, vd.height);
     rendering->setupTextures();
     rendering->setFlush(SdlIO::flush);
@@ -68,7 +68,7 @@ void Engine::prepare() {
         cout << "UI loaded!" << endl;
     }
 
-    UI::getInstance()->showTestUi();
+
     this->pythonInit();
     cout << "World loop\n";
 

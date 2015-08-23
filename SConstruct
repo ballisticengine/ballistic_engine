@@ -21,6 +21,7 @@ env = Environment(CPPPATH=[
       './src/cpp/ui/librocket_interfaces',
     '/usr/local/include/Rocket',
     './src/hpp',
+   # './libRocket',
 ])
 
 
@@ -44,6 +45,8 @@ modules = [
     Glob(src + 'io/*.cpp'),
     Glob(src + 'renderer/*.cpp'),
     Glob('./src/cpp/ui/librocket_interfaces/*.cpp'),
+   # Glob('./libRocket/Source/Core/Factory.cpp'),
+   # Glob('./libRocket/Source/Core/Python/*.cpp'),
 
 ]
 

@@ -1,5 +1,29 @@
 #include "python/scripting.hpp"
 
+
+//#include "Python.h"
+//#include "Source/Core/Python/ContextProxy.h"
+//#include "Source/Core/Python/ContextDocumentProxy.h"
+//#include "Source/Core/Python/ElementInterface.h"
+//#include "Include/Rocket/Core/Factory.h"
+
+void PyScripting::init() {
+    Py_Initialize();
+    PyEval_InitThreads();
+    //    Py_XDECREF(PyImport_ImportModule("rocket"));
+    
+    init_types();
+    init_ui();
+    init_world();
+    init_timer();
+    init_renderer();
+    init_engine();
+    
+   
+   
+    
+}
+
 void PyScripting::loadManipulators() {
 
     vector<string> scripts = Config::getInstance()->getScripts();
@@ -16,14 +40,7 @@ void PyScripting::loadManipulators() {
 }
 
 PyScripting::PyScripting() {
-    Py_Initialize();
-    PyEval_InitThreads();
-    init_types();
-    init_ui();
-    init_world();
-    init_timer();
-    init_renderer();
-    init_engine();
+
 
 }
 
@@ -56,22 +73,24 @@ void PyScripting::broadcast(string name, initializer_list<void *> params,
 void PyScripting::enqueue(string name,
         initializer_list<void *> params, bool check_existing) {
     
+    //cout << "Enqueue " << sig_queue.size() << endl;
+    
     SignalType signal;
     signal.name = name;
     signal.params = params;
     signal.check_existing = check_existing;
     sig_queue.push(signal);
-    
+
 }
 
 void PyScripting::clear_queue() {
-    while(!sig_queue.empty()) {
+    while (!sig_queue.empty()) {
         sig_queue.pop();
     }
 }
 
 void PyScripting::runQueue() {
-    while(!sig_queue.empty()) {
+    while (!sig_queue.empty()) {
         SignalType signal = sig_queue.front();
         sig_queue.pop();
         this->broadcast(signal.name, signal.params, signal.check_existing);

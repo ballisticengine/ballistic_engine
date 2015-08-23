@@ -1,5 +1,8 @@
 import math
 from EngineTypes import Vector3d, Coords
+# import rocket #zakomentowane nie wydupia
+import os
+
 
 
 class TestManipulator(ManipulatorClass):
@@ -10,7 +13,8 @@ class TestManipulator(ManipulatorClass):
         self.my = 0
         self.up = False
         self.uc = 0
-
+        self.attach_mouse()
+        
     def attach_mouse(self):
         self.engine_state.set_bool('attach_mouse', not self.engine_state.get_bool('attach_mouse'))
 
@@ -26,16 +30,20 @@ class TestManipulator(ManipulatorClass):
     def player_right(self):
         self.move_player('r')
 
-    def self_load(self):
-        #self.world.observer.acceleration.translation.y=9
-        pass
+    def prinntest(self):
+        print "test"
 
+    def self_load(self):
+        print "Contexts"
+        self.ui.add_document("test.rml","test")
+        self.ui.show_doc("test")
+        self.ui.set_content_by_id("dummy", "CIPA")
+        #print element
+    
     def key_up(self, states):
         #TODO: KEYUP doesn't send upped key - fix
         self.uc += 1
-        #print "keyup", self.uc
         self.world.observer.velocity.reset()
-        #print 'Up', state_number(states)
 
     def key_press(self, key):
 
@@ -52,7 +60,6 @@ class TestManipulator(ManipulatorClass):
 
     def key_down(self, states):
         return
-
 
     def move_player(self, dir):
         ocoords = self.world.observer.get_coords()

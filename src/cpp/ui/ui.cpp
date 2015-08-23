@@ -25,36 +25,42 @@ bool UI::init(RocketSDL2SystemInterface *system_interface,
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Roman.otf");
 
     VideoData *vd = Config::getInstance()->getVD();
-    context = Rocket::Core::CreateContext("default",
+    context = Rocket::Core::CreateContext("ui",
             Rocket::Core::Vector2i(
             renderer->getFrustum().getWidth(),
             renderer->getFrustum().getHeight())
             );
 
-    Rocket::Debugger::Initialise(context);
+
     return true;
 }
 
-void UI::showTestUi() {
-    Rocket::Core::ElementDocument *a = context->LoadDocument("demo.rml");
-    Rocket::Core::ElementDocument *b = context->LoadDocument("test.rml");
-
-    a->Show();
-    a->RemoveReference();
-    b->Show();
-    b->RemoveReference();
-
+RC::Context * UI::getContext() {
+    return context;
 }
 
-void UI::addElement(std::string file) {
-
+void  UI::addDocument(std::string file, string name) {
+    if (name=="") {
+        name=file;
+    }
+    RC::ElementDocument *doc=context->LoadDocument(file.c_str());
+    docmap[name]=doc;
+    
+    
 }
 
-RC::Context *UI::getContext() {
-    return this->context;
+ void UI::showDoc(string name) {
+     docmap[name]->Show();
+ }
+
+void UI::setContentByID(string id, string content) {
+    Rocket::Core::Element * el = Rocket::Core::ElementUtilities::GetElementById(context->GetFocusElement(), id.c_str());
+    el->SetInnerRML(content.c_str());
 }
 
 void UI::processSDLEvent(SDL_Event &event) {
+
+    
     switch (event.type) {
         case SDL_MOUSEMOTION:
             context->ProcessMouseMove(event.motion.x,
@@ -77,14 +83,18 @@ void UI::processSDLEvent(SDL_Event &event) {
             break;
 
         case SDL_KEYDOWN:
-                        context->ProcessKeyDown(system_interface->TranslateKey(event.key.keysym.sym), 
-                                system_interface->GetKeyModifiers());
+
+            context->ProcessKeyDown(system_interface->TranslateKey(event.key.keysym.sym),
+                    system_interface->GetKeyModifiers());
+
             break;
     }
+    
+
 }
 
 UI::~UI() {
-    context->RemoveReference();
+    //for(size)
     Rocket::Core::Shutdown();
     delete system_interface;
     delete rc_renderer_interface;

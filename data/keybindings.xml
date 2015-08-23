@@ -22,8 +22,7 @@
     </key>
     <key>
         <id>K_M</id>
-        <type>KEYDOWN</type>
+        <type>KEYPRESS</type>
         <action>attach_mouse</action>
     </key>
-    
 </keybindings>

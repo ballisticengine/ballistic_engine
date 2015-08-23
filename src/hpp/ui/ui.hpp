@@ -7,9 +7,15 @@
 #include <Rocket/Core/RenderInterface.h>
 #include <Rocket/Core/SystemInterface.h>
 #include <Rocket/Core/FileInterface.h>
+#include <Rocket/Core/ElementUtilities.h>
+#include <Rocket/Core/Types.h>
 #include <SDL2/SDL.h>
 
 #include <string>
+#include <vector>
+#include <queue>
+#include <map>
+#include <boost/thread/mutex.hpp>
 
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
@@ -21,14 +27,20 @@
 
 using namespace Rocket::Core;
 namespace RC = Rocket::Core;
+using namespace std;
 
+typedef vector<RC::Context *> context_vector;
+//albo queue albo mutex
 class UI : public Singleton<UI> {
 protected:
+    boost::mutex m;
     RocketSDL2SystemInterface *system_interface;
     RocketSDL2Renderer *rc_renderer_interface;
     ShellFileInterface *file_interface;
-    RC::Context *context;
     RendererInterface *renderer;
+    context_vector contexts;
+    RC::Context * context;
+    map<string, RC::ElementDocument *> docmap;
 public:
     bool init(RocketSDL2SystemInterface *system_interface,
             RocketSDL2Renderer *rc_renderer_interface,
@@ -37,10 +49,11 @@ public:
             );
 
 
-    RC::Context *getContext();
-
-    void showTestUi();
-    void addElement(std::string file);
+    RC::Context * getContext();
+    void setContentByID(string id, string content);
+    
+    void  addDocument(string file, string name="");
+    void showDoc(string name);
     void processSDLEvent(SDL_Event &event);
 
     ~UI();

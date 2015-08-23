@@ -69,6 +69,7 @@ public:
     PyManipulator* getManipulator(string name);
     ~PyScripting();
     void loadManipulators();
+    void init();
 };
 
 
