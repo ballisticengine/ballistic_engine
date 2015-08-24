@@ -36,8 +36,10 @@ class TestManipulator(ManipulatorClass):
     def self_load(self):
         print "Contexts"
         self.ui.add_document("test.rml","test")
+        
+        self.ui.set_content_by_id("dummy", "xxx")
+        self.ui.add_event_listener_id("win","click", "jajko")
         self.ui.show_doc("test")
-        self.ui.set_content_by_id("dummy", "CIPA")
         #print element
     
     def key_up(self, states):

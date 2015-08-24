@@ -83,11 +83,7 @@ void RenderingManager::render() {
     this->renderer->positionCamera(world->getObserver()->getCamera());
     this->renderAllEntities();
     this->renderer->resetMatrix();
-//    context_vector contexts = UI::getInstance()->getContexts();
-//    for (size_t i = 0; i < contexts.size(); i++) {
-//        contexts[i]->Render();
-//        contexts[i]->Update();
-//    }
+
     UI::getInstance()->getContext()->Render();
     UI::getInstance()->getContext()->Update();
     this->renderer->afterFrame();

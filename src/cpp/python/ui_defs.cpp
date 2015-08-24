@@ -24,6 +24,7 @@ BOOST_PYTHON_MODULE(BallisticUI) {
     
     .def("add_document", &UI::addDocument)
     .def("set_content_by_id", &UI::setContentByID)
+    .def("add_event_listener_id", &UI::addEventListenerID)
     .def("show_doc", &UI::showDoc);
     ;
     

@@ -15,6 +15,9 @@ protected:
 public:
     UIDocument(string file_name);
     RC::Context * getContext();
+    void setContentByID(string id, string content);
+    void show();
+    void hide();
     
 
 };

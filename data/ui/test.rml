@@ -4,8 +4,8 @@
         <link type="text/template" href="window.rml" />
         
     </head>
-    <body template="window">
+    <body template="window" id="win">
         <div id="dummy">dummy</div>
-        <button onclick=" print 'test' " >click this</button>
+        <button>click this</button>
     </body>
 </rml>

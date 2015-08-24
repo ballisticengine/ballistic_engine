@@ -20,6 +20,7 @@
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
 #include "renderer/RendererInterface.hpp"
+#include "ui/SignalListener.hpp"
 
 #include "ui/librocket_interfaces/RendererInterfaceSDL2.hpp"
 #include "ui/librocket_interfaces/SystemInterfaceSDL2.hpp"
@@ -54,6 +55,7 @@ public:
     
     void  addDocument(string file, string name="");
     void showDoc(string name);
+    void addEventListenerID(string id, string event, string signal);
     void processSDLEvent(SDL_Event &event);
 
     ~UI();
