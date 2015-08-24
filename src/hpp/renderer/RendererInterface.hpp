@@ -67,6 +67,9 @@ public:
 
     virtual Frustum getFrustum() {
     };
+    
+    
+    virtual void renderUI() {}
 };
 
 #endif

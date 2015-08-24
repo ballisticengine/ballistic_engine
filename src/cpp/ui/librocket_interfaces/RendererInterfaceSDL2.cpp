@@ -17,7 +17,10 @@ RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* sdl_renderer, SDL_Window* s
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
 
 void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation) {
-
+    
+    
+    
+    
     glUseProgramObjectARB(0);
     glMatrixMode(GL_PROJECTION | GL_MODELVIEW);
     glPushMatrix();
@@ -35,11 +38,12 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
             scale_x = f_width / vd->width,
             scale_y = f_height / vd->height
             ;
-
-    glScalef(scale_x, -scale_y, 1);
-//glTranslatef(translation.x*scale_x, translation.y*scale_y, -frustum.near);
+    
+    glScalef(scale_x, -scale_y, 1);   
+   
     glTranslatef(translation.x, translation.y, 0);
-
+    //glScalef(scale_x, -scale_y, 1);
+    
     std::vector<Rocket::Core::Vector2f> Positions(num_vertices);
     std::vector<Rocket::Core::Colourb> Colors(num_vertices);
     std::vector<Rocket::Core::Vector2f> TexCoords(num_vertices);
