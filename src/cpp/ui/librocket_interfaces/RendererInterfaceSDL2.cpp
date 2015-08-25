@@ -2,14 +2,14 @@
 #include <SDL2/SDL_image.h>
 
 #include "ui/librocket_interfaces/RendererInterfaceSDL2.hpp"
+#include "io/sdlio.hpp"
 
-#if !(SDL_VIDEO_RENDER_OGL)
-#error "Only the opengl sdl backend is supported. To add support for others, see http://mdqinc.com/blog/2013/01/integrating-librocket-with-sdl-2/"
-#endif
-
-RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* sdl_renderer, SDL_Window* screen, RendererInterface *renderer) {
-    mRenderer = sdl_renderer;
-    mScreen = screen;
+RocketSDL2Renderer::RocketSDL2Renderer(RendererInterface *renderer) {
+    SdlIO *io = SdlIO::getInstance();
+   
+    mRenderer = io->getSDLRenderer();
+    mScreen = io->getSDLWindow();
+    
     this->renderer = renderer;
     this->vd = Config::getInstance()->getVD();
 }
@@ -17,9 +17,9 @@ RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* sdl_renderer, SDL_Window* s
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
 
 void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation) {
-     
+
     glUseProgramObjectARB(0);
-    
+
     glMatrixMode(GL_PROJECTION | GL_MODELVIEW);
     glPushMatrix();
 
@@ -34,13 +34,13 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
             scale_x = f_width / vd->width,
             scale_y = f_height / vd->height
             ;
-    
+
     glTranslatef(frustum.left, frustum.top, 0);
-    
-    glScalef(scale_x, -scale_y, 1);   
-   
+
+    glScalef(scale_x, -scale_y, 1);
+
     glTranslatef(translation.x, translation.y, 0);
-    
+
     std::vector<Rocket::Core::Vector2f> Positions(num_vertices);
     std::vector<Rocket::Core::Colourb> Colors(num_vertices);
     std::vector<Rocket::Core::Vector2f> TexCoords(num_vertices);
@@ -71,7 +71,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
+
     glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, indices);
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_COLOR_ARRAY);

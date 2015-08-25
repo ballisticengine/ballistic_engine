@@ -39,11 +39,7 @@ void Engine::prepare() {
     RenderingManager *rendering = RenderingManager::getInstance();
 
     rendering->setRenderer(ri);
-    cout << "Setup textures " << endl;
-
-    cout << "Done" << endl;
-
-
+    
     cout << "IO\n";
     io = new SdlIO();
 
@@ -55,9 +51,9 @@ void Engine::prepare() {
 
     string ui_dir = "./data/ui/";
 
-    RocketSDL2Renderer *ui_renderer = new RocketSDL2Renderer(io->getSDLRenderer(),
-            io->getSDLWindow(),
-            rendering->getRenderer());
+    RocketSDL2Renderer *ui_renderer = new RocketSDL2Renderer(
+            rendering->getRenderer()
+            );
     RocketSDL2SystemInterface *system_interface = new RocketSDL2SystemInterface();
     ShellFileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
     UI *ui = UI::getInstance();
