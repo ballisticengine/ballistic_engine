@@ -102,7 +102,9 @@ void UI::processSDLEvent(SDL_Event &event) {
 }
 
 UI::~UI() {
+    context->RemoveReference();
     Rocket::Core::Shutdown();
+    
     delete system_interface;
     delete rc_renderer_interface;
     delete file_interface;
