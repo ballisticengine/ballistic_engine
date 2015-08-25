@@ -31,14 +31,14 @@ class TestManipulator(ManipulatorClass):
         self.move_player('r')
 
     def prinntest(self):
-        print "test"
+        print "event test"
 
     def self_load(self):
         print "Contexts"
         self.ui.add_document("test.rml","test")
         
         self.ui.set_content_by_id("dummy", "xxx")
-        self.ui.add_event_listener_id("clickme","click", "jajko")
+        self.ui.add_event_listener_id("clickme","click", "prinntest")
         self.ui.show_doc("test")
         #print element
     

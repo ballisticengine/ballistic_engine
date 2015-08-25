@@ -7,6 +7,8 @@
 
 using namespace std;
 
+#include "python/scripting.hpp"
+
 class SignalListener : public Rocket::Core::EventListener {
 protected:
     string signal_name;

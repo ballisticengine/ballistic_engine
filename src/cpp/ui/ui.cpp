@@ -47,10 +47,6 @@ void  UI::addDocument(std::string file, string name) {
     RC::ElementDocument *doc=context->LoadDocument(file.c_str());
     doc->RemoveReference();
     docmap[name]=doc;
-    SignalListener *listen = new SignalListener("sraka");
-     docmap[name]->AddEventListener("load", listen, false);
-    
-    
 }
 
  void UI::showDoc(string name) {
@@ -106,7 +102,6 @@ void UI::processSDLEvent(SDL_Event &event) {
 }
 
 UI::~UI() {
-    //for(size)
     Rocket::Core::Shutdown();
     delete system_interface;
     delete rc_renderer_interface;

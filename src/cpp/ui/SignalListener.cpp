@@ -5,5 +5,5 @@ SignalListener::SignalListener(string signal_name) {
 }
 
 void SignalListener::ProcessEvent(Rocket::Core::Event& event) {
-    cout << "-------------Invoke " << signal_name << endl;
+    PyScripting::getInstance()->broadcast(signal_name, {0}, true);
 }

@@ -17,18 +17,14 @@ RocketSDL2Renderer::RocketSDL2Renderer(SDL_Renderer* sdl_renderer, SDL_Window* s
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
 
 void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation) {
-    
-    
-    
-    
+     
     glUseProgramObjectARB(0);
+    
     glMatrixMode(GL_PROJECTION | GL_MODELVIEW);
     glPushMatrix();
 
     glDisable(GL_DEPTH_TEST);
-
     glDisable(GL_CULL_FACE);
-
 
     Frustum frustum = this->renderer->getFrustum();
 
@@ -40,6 +36,7 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
             ;
     
     glTranslatef(frustum.left, frustum.top, 0);
+    
     glScalef(scale_x, -scale_y, 1);   
    
     glTranslatef(translation.x, translation.y, 0);
@@ -54,8 +51,6 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         sdl_texture = (SDL_Texture *) texture;
         SDL_GL_BindTexture(sdl_texture, &texw, &texh);
-//        texw *= scale_x;
-//        texh *= scale_y;
     }
 
     for (int i = 0; i < num_vertices; i++) {
