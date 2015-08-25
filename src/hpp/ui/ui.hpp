@@ -22,7 +22,6 @@
 #include "renderer/RendererInterface.hpp"
 #include "ui/SignalListener.hpp"
 
-#include "ui/librocket_interfaces/RendererInterfaceSDL2.hpp"
 #include "ui/librocket_interfaces/SystemInterfaceSDL2.hpp"
 #include "ui/librocket_interfaces/ShellFileInterface.hpp"
 
@@ -36,16 +35,16 @@ class UI : public Singleton<UI> {
 protected:
     boost::mutex m;
     RocketSDL2SystemInterface *system_interface;
-    RocketSDL2Renderer *rc_renderer_interface;
-    ShellFileInterface *file_interface;
+    Rocket::Core::RenderInterface *rc_renderer_interface;
+    Rocket::Core::FileInterface *file_interface;
     RendererInterface *renderer;
     context_vector contexts;
     RC::Context * context;
     map<string, RC::ElementDocument *> docmap;
 public:
     bool init(RocketSDL2SystemInterface *system_interface,
-            RocketSDL2Renderer *rc_renderer_interface,
-            ShellFileInterface *file_interface,
+            Rocket::Core::RenderInterface *rc_renderer_interface,
+            Rocket::Core::FileInterface *file_interface,
             RendererInterface *renderer_interface
             );
 

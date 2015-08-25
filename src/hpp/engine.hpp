@@ -35,7 +35,7 @@ using namespace std;
 #include "libload/LibLoad.hpp"
 #include "renderer/RenderingManager.hpp"
 #include "renderer/RendererInterface.hpp"
-#include "ui/librocket_interfaces/RendererInterfaceSDL2.hpp"
+
 #include "ui/librocket_interfaces/SystemInterfaceSDL2.hpp"
 #include "ui/librocket_interfaces/ShellFileInterface.hpp"
 

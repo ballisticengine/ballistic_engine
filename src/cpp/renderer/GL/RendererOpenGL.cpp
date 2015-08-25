@@ -1,8 +1,10 @@
 #include "renderer/GL/RendererOpenGL.hpp"
 
 Rocket::Core::RenderInterface * RendererOpenGL::getUiRenderer() {
-    //ui_renderer = new RocketSDL2Renderer();
-    return 0;
+    if (!ui_renderer) {
+        ui_renderer = new RocketSDL2Renderer(this);
+    }
+    return ui_renderer;
 }
 
 void RendererOpenGL::init(size_t width, size_t height) {
@@ -330,7 +332,7 @@ Vector3d RendererOpenGL::unproject(size_t x, size_t y) {
     glReadPixels(x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
 
     gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
-    
+
     return Vector3d(posX, posY, posZ);
 }
 

@@ -51,11 +51,10 @@ void Engine::prepare() {
 
     string ui_dir = "./data/ui/";
 
-    RocketSDL2Renderer *ui_renderer = new RocketSDL2Renderer(
-            rendering->getRenderer()
-            );
+    Rocket::Core::RenderInterface  *ui_renderer = ri->getUiRenderer();
     RocketSDL2SystemInterface *system_interface = new RocketSDL2SystemInterface();
-    ShellFileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
+    Rocket::Core::FileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
+    
     UI *ui = UI::getInstance();
 
     if (!ui->init(system_interface, ui_renderer, file_interface, rendering->getRenderer())) {

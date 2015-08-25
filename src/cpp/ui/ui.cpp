@@ -1,8 +1,8 @@
 #include "ui/ui.hpp"
 
 bool UI::init(RocketSDL2SystemInterface *system_interface,
-        RocketSDL2Renderer *rc_renderer_interface,
-        ShellFileInterface *file_interface,
+        Rocket::Core::RenderInterface *rc_renderer_interface,
+        Rocket::Core::FileInterface *file_interface,
         RendererInterface *renderer_interface
         ) {
 
