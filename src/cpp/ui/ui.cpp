@@ -25,11 +25,12 @@ bool UI::init(RocketSDL2SystemInterface *system_interface,
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Roman.otf");
 
     VideoData *vd = Config::getInstance()->getVD();
-        context = Rocket::Core::CreateContext("ui",
+          context = Rocket::Core::CreateContext("ui",
             Rocket::Core::Vector2i(
-            800,
-            600)
+            renderer->getFrustum().getWidth(),
+            renderer->getFrustum().getHeight())
             );
+
 
     Rocket::Debugger::Initialise(context);
     return true;

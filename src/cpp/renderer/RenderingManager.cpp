@@ -83,7 +83,13 @@ void RenderingManager::render() {
     this->renderer->positionCamera(world->getObserver()->getCamera());
     this->renderAllEntities();
     this->renderer->resetMatrix();
-
+    //tutaj translate to frustum.left i powinno być ok tylko w rmsdl2 coś poprawic
+//    this->renderer->translate(
+//            Vector3d(this->renderer->getFrustum().left,
+//            this->renderer->getFrustum().top,
+//           0
+//            )
+//            );
     UI::getInstance()->getContext()->Render();
     UI::getInstance()->getContext()->Update();
     this->renderer->afterFrame();

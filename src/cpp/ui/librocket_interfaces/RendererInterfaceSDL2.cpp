@@ -39,10 +39,10 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
             scale_y = f_height / vd->height
             ;
     
+    glTranslatef(frustum.left, frustum.top, 0);
     glScalef(scale_x, -scale_y, 1);   
    
     glTranslatef(translation.x, translation.y, 0);
-    //glScalef(scale_x, -scale_y, 1);
     
     std::vector<Rocket::Core::Vector2f> Positions(num_vertices);
     std::vector<Rocket::Core::Colourb> Colors(num_vertices);

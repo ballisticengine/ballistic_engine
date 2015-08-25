@@ -6,6 +6,6 @@
     </head>
     <body template="window" id="win">
         <div id="dummy">dummy</div>
-        <button>click this</button>
+        <button id="clickme">click this</button>
     </body>
 </rml>

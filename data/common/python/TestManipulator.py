@@ -38,7 +38,7 @@ class TestManipulator(ManipulatorClass):
         self.ui.add_document("test.rml","test")
         
         self.ui.set_content_by_id("dummy", "xxx")
-        self.ui.add_event_listener_id("win","click", "jajko")
+        self.ui.add_event_listener_id("clickme","click", "jajko")
         self.ui.show_doc("test")
         #print element
     
