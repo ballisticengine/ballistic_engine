@@ -96,4 +96,8 @@ UI::~UI() {
     delete system_interface;
     delete rc_renderer_interface;
     delete file_interface;
+    
+    for(auto doc: docmap) {
+        delete doc.second;
+    }
 }
