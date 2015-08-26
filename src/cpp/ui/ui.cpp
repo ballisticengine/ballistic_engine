@@ -40,31 +40,19 @@ RC::Context * UI::getContext() {
     return context;
 }
 
-void  UI::addDocument(std::string file, string name) {
+UIDocument * UI::addDocument(std::string file, string name) {
     if (name=="") {
         name=file;
     }
     RC::ElementDocument *doc=context->LoadDocument(file.c_str());
     doc->RemoveReference();
-    docmap[name]=doc;
+    docmap[name]=new UIDocument(doc, file, name);
+    return docmap[name];
 }
 
- void UI::showDoc(string name) {
-     docmap[name]->Show();
-     
- }
-
-void UI::setContentByID(string id, string content) {
-    Rocket::Core::Element * el = Rocket::Core::ElementUtilities::GetElementById(context->GetFocusElement(), id.c_str());
-    el->SetInnerRML(content.c_str());
+UIDocument * UI::getDocument(string name) {
+    return docmap[name];
 }
-
- void UI::addEventListenerID(string id, string event, string signal) {
-     Rocket::Core::Element * el = context->GetRootElement()->GetElementById(id.c_str());
-             //Rocket::Core::ElementUtilities::GetElementById(context->GetFocusElement(), id.c_str());
-     SignalListener *listen = new SignalListener(signal);
-     el->AddEventListener(event.c_str(), listen, false);
- }
 
 void UI::processSDLEvent(SDL_Event &event) {
 

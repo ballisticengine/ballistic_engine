@@ -21,6 +21,7 @@
 #include "config/Config.hpp"
 #include "renderer/RendererInterface.hpp"
 #include "ui/SignalListener.hpp"
+#include "ui/UIDocument.hpp"
 
 #include "ui/librocket_interfaces/SystemInterfaceSDL2.hpp"
 #include "ui/librocket_interfaces/ShellFileInterface.hpp"
@@ -40,7 +41,7 @@ protected:
     RendererInterface *renderer;
     context_vector contexts;
     RC::Context * context;
-    map<string, RC::ElementDocument *> docmap;
+    map<string, UIDocument *> docmap;
 public:
     bool init(RocketSDL2SystemInterface *system_interface,
             Rocket::Core::RenderInterface *rc_renderer_interface,
@@ -52,7 +53,8 @@ public:
     RC::Context * getContext();
     void setContentByID(string id, string content);
     
-    void  addDocument(string file, string name="");
+    UIDocument * addDocument(string file, string name);
+    UIDocument * getDocument(string name);
     void showDoc(string name);
     void addEventListenerID(string id, string event, string signal);
     void processSDLEvent(SDL_Event &event);

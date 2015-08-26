@@ -23,3 +23,4 @@ test.xml
 /engine_tools/leveled/leveled
 /staging/rocket/rtest
 /libRocket
+*.cppcheck

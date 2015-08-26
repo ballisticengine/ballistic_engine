@@ -30,18 +30,17 @@ class TestManipulator(ManipulatorClass):
     def player_right(self):
         self.move_player('r')
 
-    def prinntest(self):
-        print "event test"
+    def event_test(self):
+        doc = self.ui.get_document("test")
+        doc.hide()
 
     def self_load(self):
         print "Contexts"
-        self.ui.add_document("test.rml","test")
-        
-        self.ui.set_content_by_id("dummy", "xxx")
-        self.ui.add_event_listener_id("clickme","click", "prinntest")
-        self.ui.show_doc("test")
-        #print element
-    
+        doc = self.ui.add_document("test.rml","test")
+        doc.set_content_by_id("dummy", "xxx")
+        doc.show()
+        doc.add_event_listener_id("clickme","click", "event_test")
+         
     def key_up(self, states):
         #TODO: KEYUP doesn't send upped key - fix
         self.uc += 1

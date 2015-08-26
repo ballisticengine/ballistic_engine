@@ -8,17 +8,19 @@ using namespace Rocket::Core;
 namespace RC = Rocket::Core;
 using namespace std;
 
+#include "ui/SignalListener.hpp"
+
 class UIDocument {
 protected:
-    RC::Context * context;
-    string file_name;
+    string file_name, name;
+    RC::ElementDocument *document;
 public:
-    UIDocument(string file_name);
-    RC::Context * getContext();
+    UIDocument(RC::ElementDocument *document, string file_name, string name);
     void setContentByID(string id, string content);
+    void addEventListenerID(string id, string event, string signal);
     void show();
     void hide();
-    
+
 
 };
 
