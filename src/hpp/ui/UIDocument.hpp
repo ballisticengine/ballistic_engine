@@ -21,8 +21,9 @@ protected:
             );
 public:
     UIDocument(RC::ElementDocument *document, string file_name, string name);
-    void setContentByID(string id, string content);
-    void addEventListenerID(string id, string event, string signal);
+    void setContent(string id, string content);
+    void addEventListener(string id, string event, string signal);
+    void getElements(string selector, ElementList & elements);
     void show();
     void hide();
 

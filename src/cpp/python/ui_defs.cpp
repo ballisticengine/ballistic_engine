@@ -14,26 +14,25 @@ boost::shared_ptr<UI> getSharedUIInstance() {
 
 //typedef ElementDocument* (*el_str)(const String& document_path);
 
+BOOST_PYTHON_MODULE(BallisticUI) {
 
-BOOST_PYTHON_MODULE(BallisticUI) {    
-    
-    bp::class_<UI,  boost::shared_ptr<UI>, boost::noncopyable>("UI", bp::no_init)
-    .def("get_instance", &getSharedUIInstance)
-    .staticmethod("get_instance")
-    .def("get_context", &UI::getContext, bp::return_value_policy<bp::reference_existing_object>())
-    .def("add_document", &UI::addDocument, bp::return_value_policy<bp::reference_existing_object>())
-    .def("get_document", &UI::getDocument, bp::return_value_policy<bp::reference_existing_object>())
-    ;
-    
+    bp::class_<UI, boost::shared_ptr<UI>, boost::noncopyable>("UI", bp::no_init)
+            .def("get_instance", &getSharedUIInstance)
+            .staticmethod("get_instance")
+            .def("get_context", &UI::getContext, bp::return_value_policy<bp::reference_existing_object>())
+            .def("add_document", &UI::addDocument, bp::return_value_policy<bp::reference_existing_object>())
+            .def("get_document", &UI::getDocument, bp::return_value_policy<bp::reference_existing_object>())
+            ;
+
     bp::class_<RC::ElementDocument, RC::ElementDocument *>("element_document", bp::no_init)
-    ;
-    
+            ;
+
     bp::class_<UIDocument, UIDocument *>("ui_document", bp::no_init)
-        .def("set_content_by_id", &UIDocument::setContentByID)
-        .def("show", &UIDocument::show)
-        .def("hide", &UIDocument::hide)
-        .def("add_event_listener_id", &UIDocument::addEventListenerID)
-    ;  
+            .def("set_content", &UIDocument::setContent)
+            .def("add_event_listener", &UIDocument::addEventListener)
+            .def("show", &UIDocument::show)
+            .def("hide", &UIDocument::hide)
+            ;
 }
 
 void init_ui() {
