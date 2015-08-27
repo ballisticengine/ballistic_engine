@@ -33,7 +33,12 @@ bool UI::init(RocketSDL2SystemInterface *system_interface,
 
 
     Rocket::Debugger::Initialise(context);
+    
     return true;
+}
+
+void UI::showDebug(bool show) {
+    Rocket::Debugger::SetVisible(show);
 }
 
 RC::Context * UI::getContext() {

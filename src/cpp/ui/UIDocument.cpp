@@ -1,11 +1,20 @@
 #include "ui/UIDocument.hpp"
 
 UIDocument::UIDocument(RC::ElementDocument *document, string file_name, string name)
-: document(document), file_name(file_name), name(name) {
-   
-
-    
+: document(document), file_name(file_name), name(name) {    
 }
+
+//RC::ElementDocument *UIDocument::getElements(string selector) {
+//    RC::ElementDocument *el;
+//    if(selector[0]==".") {
+//        selector.substr(1);
+//        cout << "CNAME" << class_name << endl;
+//    } else if(selector[0]=="#") {
+//        
+//    } else {
+//        
+//    }
+//}
 
 void UIDocument::setContentByID(string id, string content) {
     Rocket::Core::Element * el = Rocket::Core::ElementUtilities::GetElementById(document, id.c_str());

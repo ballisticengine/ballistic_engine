@@ -14,6 +14,11 @@ class UIDocument {
 protected:
     string file_name, name;
     RC::ElementDocument *document;
+    void getElements(
+            ElementList& elements,
+            string selector,
+            RC::ElementDocument *root = 0
+            );
 public:
     UIDocument(RC::ElementDocument *document, string file_name, string name);
     void setContentByID(string id, string content);

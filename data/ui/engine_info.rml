@@ -1,0 +1,18 @@
+<rml>
+    <head>
+        <title>test</title>
+        <link type="text/template" href="window.rml" />
+        
+    </head>
+    <body template="window">
+ <div id="content">
+     <div>
+         Ballistic Engine 
+         <span id="engine-version"></span>
+     </div>
+     <button id="close-info">
+         Close
+     </button>
+ </div>
+    </body>
+</rml>

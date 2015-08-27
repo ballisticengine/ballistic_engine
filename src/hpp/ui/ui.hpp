@@ -58,7 +58,7 @@ public:
     void showDoc(string name);
     void addEventListenerID(string id, string event, string signal);
     void processSDLEvent(SDL_Event &event);
-
+    void showDebug(bool show);
     ~UI();
 };
 

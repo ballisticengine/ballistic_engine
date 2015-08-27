@@ -45,6 +45,9 @@
         <script>
             TestManipulator
         </script>
+        <script>
+            UIManipulator
+        </script>
     </scripts>
     <keybindings>
         keybindings.xml
