@@ -15,7 +15,7 @@ BOOST_PYTHON_MODULE(Engine) {
             .def("set_bool", &EngineState::setBool)
             .def("get_bool", &EngineState::getBool)
             .def("set_string", &EngineState::setString)
-            .def("get_string", &EngineState::toggleBool)
+            .def("get_string", &EngineState::getString)
             ;
 }
 
