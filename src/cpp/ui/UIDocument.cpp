@@ -7,9 +7,7 @@ UIDocument::UIDocument(RC::ElementDocument *document, string file_name, string n
 void UIDocument::getElements(string selector, ElementList & elements) {
 
     if (selector[0] == '.') {
-        string cname = selector.substr(1);
-        document->GetElementsByClassName(elements, cname.c_str());
-        cout << "CNAME" << cname << endl;
+        document->GetElementsByClassName(elements, selector.substr(1).c_str());
     } else if (selector[0] == '#') {
         RC::Element *el = document->GetElementById(selector.substr(1).c_str());
         elements.push_back(el);
