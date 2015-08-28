@@ -1,0 +1,19 @@
+<rml>
+    <head>
+        <title>test</title>
+        <link type="text/template" href="window.rml" />
+
+    </head>
+    <body template="window" >
+        <div id="content">
+            <div>
+                Form test
+                <form>
+                    <input type="text" name="inp" value="test input" />
+                    after input
+                </form>
+            </div>
+
+        </div>
+    </body>
+</rml>

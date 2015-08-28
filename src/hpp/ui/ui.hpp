@@ -2,6 +2,7 @@
 #define	UI_HPP
 
 #include <Rocket/Core.h>
+#include <Rocket/Controls.h>
 #include <Rocket/Core/Input.h>
 #include <Rocket/Debugger/Debugger.h>
 #include <Rocket/Core/RenderInterface.h>
@@ -23,6 +24,7 @@
 #include "ui/SignalListener.hpp"
 #include "ui/UIDocument.hpp"
 
+#include "ui/librocket_interfaces/Input.h"
 #include "ui/librocket_interfaces/SystemInterfaceSDL2.hpp"
 #include "ui/librocket_interfaces/ShellFileInterface.hpp"
 

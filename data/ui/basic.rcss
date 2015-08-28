@@ -42,3 +42,9 @@ tabset tabs
 	display: block;
 }
 
+input {
+    min-width: 100px;
+    color: #ffffff;
+    height: 20px;
+    display: block;
+}
