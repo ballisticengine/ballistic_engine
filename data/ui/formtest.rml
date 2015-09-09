@@ -8,9 +8,14 @@
         <div id="content">
             <div>
                 Form test
-                <form>
+                <form id="testform">
                     <input type="text" name="inp" value="test input" />
-                    after input
+                    <select name="graphics">
+                        <option value="bad">Bad</option>
+                        <option value="ok">OK</option>
+                        <option value="good" selected>good</option>
+                    </select>
+                    <input type="submit" value="accept">Accept</input>
                 </form>
             </div>
 

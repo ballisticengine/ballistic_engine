@@ -3,6 +3,9 @@ class UIManipulator(ManipulatorClass):
     def info_close(self):
         self.info_doc.hide()
         self.engine_state.set_bool('attach_mouse', True)
+        
+    def form_submit(self):
+        print "form submitted"
 
     def self_load(self):
         self.info_doc = self.ui.add_document("engine_info.rml","info")
@@ -11,6 +14,8 @@ class UIManipulator(ManipulatorClass):
         )
         self.info_doc.show()
         self.info_doc.add_event_listener(".close-info","click", "info_close")
+    
         form_test = self.ui.add_document("formtest.rml", "form")
+        form_test.add_event_listener('#testform',"submit","form_submit")
         form_test.show()
     
