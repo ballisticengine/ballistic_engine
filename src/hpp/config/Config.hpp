@@ -14,7 +14,6 @@ using namespace boost::property_tree;
 
 #include "config/path.hpp"
 
-#include "ui/hud.hpp"
 #include "entities/weapon.hpp"
 #include "entities/sprite.hpp"
 #include "types/types.hpp"

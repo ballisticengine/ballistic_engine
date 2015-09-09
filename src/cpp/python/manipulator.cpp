@@ -48,7 +48,7 @@ void PyManipulator::signal(string name, initializer_list<void *> params) {
     vector<void *> params_v(params);
     bp::object f = bp::extract<bp::object>(instance.attr(name.c_str()));
     World *w = World::getInstance();
-    HUD *h = HUD::getInstance();
+    
     RenderingManager *rm = RenderingManager::getInstance();
     EngineState *es = EngineState::getInstance();
     try {

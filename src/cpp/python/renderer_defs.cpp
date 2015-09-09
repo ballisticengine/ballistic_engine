@@ -6,8 +6,6 @@ boost::shared_ptr<RenderingManager> getSharedRenderingManagerInstance() {
     return boost::shared_ptr<RenderingManager>(RenderingManager::getInstance(), NullDeleter());
 }
 
-typedef boost::shared_ptr<HUD> hud_ptr;
-
 BOOST_PYTHON_MODULE(Rendering) {
     bp::class_<RenderingManager,
             boost::shared_ptr<RenderingManager>,

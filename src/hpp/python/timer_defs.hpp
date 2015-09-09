@@ -26,8 +26,6 @@ namespace bp=boost::python;
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
 #include "misc/utils.hpp"
-#include "ui/hud.hpp"
-#include "ui/image.hpp"
 #include "ui/uiMesh.hpp"
 #include "types/texture.hpp"
 #include "time/timer.hpp"

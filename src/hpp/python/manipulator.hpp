@@ -13,8 +13,6 @@
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
 #include "misc/utils.hpp"
-#include "ui/hud.hpp"
-
 
 #include "python/locker.hpp"
 
