@@ -2,6 +2,7 @@
 #define	UIELEMENT_HPP
 
 #include <string>
+#include <vector>
 #include <Rocket/Core.h>
 
 using namespace Rocket::Core;
@@ -19,8 +20,10 @@ protected:
             string selector,
             RC::ElementDocument *root = 0
             );
+    vector<SignalListener *> listeners;
 public:
     UIDocument(RC::ElementDocument *document, string file_name, string name);
+    ~UIDocument();
     void setContent(string id, string content);
     void addEventListener(string id, string event, string signal);
     void getElements(string selector, ElementList & elements);

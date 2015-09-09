@@ -10,7 +10,7 @@
          Ballistic Engine 
          <span id="engine-version"></span>
      </div>
-     <button id="close-info">
+     <button id="close-info" class="close-info">
          Close
      </button>
  </div>

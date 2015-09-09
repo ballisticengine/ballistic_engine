@@ -4,6 +4,12 @@ UIDocument::UIDocument(RC::ElementDocument *document, string file_name, string n
 : document(document), file_name(file_name), name(name) {
 }
 
+UIDocument::~UIDocument() {
+    for(auto l: listeners) {
+        delete l;
+    }
+}
+
 void UIDocument::getElements(string selector, ElementList & elements) {
 
     if (selector[0] == '.') {
@@ -28,9 +34,10 @@ void UIDocument::addEventListener(string id, string event, string signal) {
 
     ElementList elements;
     getElements(id, elements);
-
+    SignalListener *listen = new SignalListener(signal);
+    listeners.push_back(listen);
     for (auto el : elements) {
-        SignalListener *listen = new SignalListener(signal);
+        
         el->AddEventListener(event.c_str(), listen, false);
     }
 }
