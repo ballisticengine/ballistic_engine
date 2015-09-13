@@ -15,7 +15,7 @@ Config::Config() {
 
     string fn = string(CONFIG_DIR) + string(DS) + string(CONFIG_FN);
 
-    read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace);
+    read_xml(fn, pt, boost::property_tree::xml_parser::trim_whitespace | boost::property_tree::xml_parser::no_comments);
 
     vd.width = pt.get<int>("config.screen.resx");
     vd.height = pt.get<int>("config.screen.resy");

@@ -14,7 +14,7 @@ void *LoaderXML::load(string file_name) {
     
     Shape *shape_p = new Shape();
     ptree pt;
-    read_xml(file_name, pt, boost::property_tree::xml_parser::trim_whitespace);
+    read_xml(file_name, pt, boost::property_tree::xml_parser::trim_whitespace | boost::property_tree::xml_parser::no_comments);
     ptree shp = pt.get_child("shape");
     ptree geom = shp.get_child("geom");
     this->toShape(geom, shp, shape_p);

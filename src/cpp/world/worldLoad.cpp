@@ -17,7 +17,7 @@ bool World::parseXml(string &fn) {
 
     using boost::property_tree::ptree;
     ptree pt;
-    read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace);
+    read_xml(level_xml, pt, boost::property_tree::xml_parser::trim_whitespace | boost::property_tree::xml_parser::no_comments);
     string skyfn = pt.get<string>("world.config.skybox");
 
     this->sky = new Skybox((Ballistic::Types::Texture *) resman->get(skyfn));
@@ -66,7 +66,7 @@ bool World::parseXml(string &fn) {
 
     /* Geometria poziomu */
     ptree gpt;
-    read_xml(gfn, gpt, boost::property_tree::xml_parser::trim_whitespace);
+    read_xml(gfn, gpt, boost::property_tree::xml_parser::trim_whitespace | boost::property_tree::xml_parser::no_comments);
     ptree &rooms = gpt.get_child("level.rooms");
     Loader *xml_loader = LibLoad::getInstance()->getLoaderByExtension("xml");
 

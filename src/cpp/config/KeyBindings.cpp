@@ -13,7 +13,7 @@ KeyBindings::~KeyBindings() {
 bool KeyBindings::loadBindings() {
     read_xml(this->bindings_filename,
             pt,
-            boost::property_tree::xml_parser::trim_whitespace);
+            boost::property_tree::xml_parser::trim_whitespace | boost::property_tree::xml_parser::no_comments);
 
     ptree keybindings_xml = pt.get_child("keybindings");
 
