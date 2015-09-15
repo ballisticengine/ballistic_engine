@@ -10,6 +10,7 @@ namespace RC = Rocket::Core;
 using namespace std;
 
 #include "ui/SignalListener.hpp"
+#include "ui/FormSignalListener.hpp"
 
 class UIDocument {
 protected:
