@@ -7,6 +7,7 @@
 #include "world/World.hpp"
 #include "config/EngineState.hpp"
 #include "renderer/RenderingManager.hpp"
+#include "ui/FormSignalData.hpp"
 
 PyManipulator::PyManipulator(string file) {
 
@@ -41,7 +42,7 @@ template <typename T> bp::list PyManipulator::arrayToList(T *array) {
 
 
 
-void PyManipulator::signal(string name, initializer_list<void *> params) {
+void PyManipulator::signal(string name, initializer_list<void *> params, bool ui_signal) {
     //TODO: move those to lock and unlockthreads
     Py_BEGIN_ALLOW_THREADS
     PyLocker::getInstance()->lock();
@@ -92,7 +93,12 @@ void PyManipulator::signal(string name, initializer_list<void *> params) {
             f(*key);
 
         } else {
-            f();
+            if(ui_signal && params_v[0]!=0) {
+                FormSignalData *data = (FormSignalData *)params_v[0];
+                f(*data);
+            } else {
+                f();
+            }
         }
     } catch (const bp::error_already_set& e) {
         cout << "PyError:\n";

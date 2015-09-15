@@ -55,7 +55,7 @@ public:
     PyScripting();
     void operator()();
     void broadcast(string name,
-            initializer_list<void *> params = {}, bool check_existing = false);
+            initializer_list<void *> params = {}, bool check_existing = false, bool ui_signal=false);
     
     void enqueue(string name,
             initializer_list<void *> params = {}, bool check_existing = false);

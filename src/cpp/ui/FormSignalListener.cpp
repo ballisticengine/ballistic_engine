@@ -14,6 +14,7 @@ void FormSignalListener::ProcessEvent(Rocket::Core::Event& event) {
     // {{0}} => params (json?)
 
     const Rocket::Core::Dictionary *d = event.GetParameters();
+    FormSignalData *data = new FormSignalData();
     cout << "Dict" << endl;
     //bool Iterate(int &pos, String& key, Variant* &value) const;
     Rocket::Core::String s;
@@ -21,8 +22,9 @@ void FormSignalListener::ProcessEvent(Rocket::Core::Event& event) {
     int n;
     while (d->Iterate(n, s, v)) {
         Rocket::Core::String val = v->Get<Rocket::Core::String>();
+        data->set(string(s.CString()), string(val.CString()));
         cout << s.CString() << "=" << val.CString() << "---" << endl;
     }
 
-    PyScripting::getInstance()->broadcast(signal_name,{0}, true);
+    PyScripting::getInstance()->broadcast(signal_name,{data}, true, true);
 }

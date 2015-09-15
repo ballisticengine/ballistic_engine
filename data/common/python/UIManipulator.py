@@ -4,8 +4,10 @@ class UIManipulator(ManipulatorClass):
         self.info_doc.hide()
         self.engine_state.set_bool('attach_mouse', True)
         
-    def form_submit(self):
-        print "form submitted"
+    def form_submit(self, params=None):
+        print "form submitted", params
+        if params:
+            print "P", params.get('inp')
 
     def self_load(self):
         self.info_doc = self.ui.add_document("engine_info.rml","info")

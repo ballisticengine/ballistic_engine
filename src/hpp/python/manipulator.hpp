@@ -37,7 +37,7 @@ public:
      */
     bool testSignal(string name, initializer_list<void *> params);
     PyManipulator(string file);
-    void signal(string name, initializer_list<void *> params);
+    void signal(string name, initializer_list<void *> params, bool ui_signal=false);
     ~PyManipulator();
 };
 

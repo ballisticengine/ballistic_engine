@@ -49,7 +49,7 @@ PyScripting::~PyScripting() {
 }
 
 void PyScripting::broadcast(string name, initializer_list<void *> params,
-        bool check_existing) {
+        bool check_existing, bool ui_signal) {
 
 
     this->lockWait();
@@ -58,7 +58,7 @@ void PyScripting::broadcast(string name, initializer_list<void *> params,
         if (check_existing && !manipulators[i]->hasSignal(name)) {
             continue;
         }
-        manipulators[i]->signal(name, params);
+        manipulators[i]->signal(name, params, ui_signal);
     }
     m.unlock();
 }
