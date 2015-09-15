@@ -36,9 +36,9 @@ void UIDocument::addEventListener(string id, string event, string signal) {
     getElements(id, elements);
     SignalListener *listen;
     if (event == "submit") {
-        listen = new SignalListener(signal);
-    } else {
         listen = new FormSignalListener(signal);
+    } else {
+        listen = new SignalListener(signal);
     }
     
     listeners.push_back(listen);

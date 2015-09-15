@@ -7,6 +7,7 @@
 class FormSignalListener : public SignalListener {
     public:
         FormSignalListener(string signal_name);
+        void ProcessEvent(Rocket::Core::Event& event);
 };
 
 
