@@ -96,6 +96,7 @@ void PyManipulator::signal(string name, initializer_list<void *> params, bool ui
             if(ui_signal && params_v[0]!=0) {
                 FormSignalData *data = (FormSignalData *)params_v[0];
                 f(*data);
+                delete data;
             } else {
                 f();
             }
