@@ -7,7 +7,7 @@
 #include "world/World.hpp"
 #include "config/EngineState.hpp"
 #include "renderer/RenderingManager.hpp"
-#include "ui/FormSignalData.hpp"
+#include "ui/UISignalData.hpp"
 
 PyManipulator::PyManipulator(string file) {
 
@@ -94,7 +94,7 @@ void PyManipulator::signal(string name, initializer_list<void *> params, bool ui
 
         } else {
             if(ui_signal && params_v[0]!=0) {
-                FormSignalData *data = (FormSignalData *)params_v[0];
+                UISignalData *data = (UISignalData *)params_v[0];
                 f(*data);
                 delete data;
             } else {

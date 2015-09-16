@@ -1,14 +1,12 @@
-#ifndef FORMSIGNALDATA_HPP
-#define	FORMSIGNALDATA_HPP
+#ifndef UISIGNALDATA_HPP
+#define	UISIGNALDATA_HPP
 
 #include <string>
 #include <map>
 
 using namespace std;
 
-//change to more general UISignalData
-
-class FormSignalData {
+class UISignalData {
     map<string, string> sigmap;
 public:
     void set(string k, string v);

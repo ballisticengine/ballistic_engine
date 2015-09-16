@@ -2,7 +2,7 @@
 #define	FORMSIGNALLISTENER_HPP
 
 #include "ui/SignalListener.hpp"
-#include "ui/FormSignalData.hpp"
+#include "ui/UISignalData.hpp"
 
 
 class FormSignalListener : public SignalListener {

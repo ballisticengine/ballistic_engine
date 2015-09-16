@@ -14,7 +14,7 @@ void FormSignalListener::ProcessEvent(Rocket::Core::Event& event) {
     // {{0}} => params (json?)
 
     const Rocket::Core::Dictionary *d = event.GetParameters();
-    FormSignalData *data = new FormSignalData();
+    UISignalData *data = new UISignalData();
     cout << "Dict" << endl;
     //bool Iterate(int &pos, String& key, Variant* &value) const;
     Rocket::Core::String s;

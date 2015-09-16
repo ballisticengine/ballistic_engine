@@ -3,7 +3,7 @@
 #include "ui/rocket_context.hpp"
 #include "ui/ui.hpp"
 #include "ui/UIDocument.hpp"
-#include "ui/FormSignalData.hpp"
+#include "ui/UISignalData.hpp"
 
 boost::shared_ptr<UI> getSharedUIInstance() {
     return boost::shared_ptr<UI>(UI::getInstance(), NullDeleter());
@@ -28,9 +28,9 @@ BOOST_PYTHON_MODULE(BallisticUI) {
     bp::class_<RC::ElementDocument, RC::ElementDocument *>("element_document", bp::no_init)
             ;
     
-    bp::class_<FormSignalData, FormSignalData *>("form_signal_data")
-        .def("get", &FormSignalData::get)
-        .def("set", &FormSignalData::set)
+    bp::class_<UISignalData, UISignalData *>("ui_signal_data")
+        .def("get", &UISignalData::get)
+        .def("set", &UISignalData::set)
     ;
     
     bp::class_<UIDocument, UIDocument *>("ui_document", bp::no_init)
