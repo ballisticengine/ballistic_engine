@@ -24,7 +24,7 @@ def make_loader(file):
     lib_helper.make_shared(file, sources, 'bin/loaders', LIBS)
 
 
-LOADERS = ['LoaderDummy', 'LoaderXML', 'LoaderMD2', 'TextureLoader', 'WorldLoader', ]
+LOADERS = ['LoaderDummy', 'LoaderXML', 'LoaderMD2', 'TextureLoader', ]
 
 for l in LOADERS:
     make_loader(l)

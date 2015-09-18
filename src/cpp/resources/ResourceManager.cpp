@@ -27,7 +27,7 @@ void ResourceManager::resolveDependencies(Loader *loader) {
     dep_list dependencies = loader->getDependencies();
     for (size_t i = 0; i < dependencies.size(); i++) {
         //cout << "Dependency " << dependencies[i].file_name << endl;
-        *dependencies[i].target = this->get(dependencies[i].file_name);
+        *dependencies[i].target = this->get(dependencies[i].file_name, dependencies[i].type);
     }
     loader->cleanDependencies();
 }

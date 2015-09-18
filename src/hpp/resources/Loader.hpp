@@ -23,6 +23,7 @@ enum ResourceType {
 struct LoaderDependency {
     string file_name;
     void **target;
+    ResourceType type;
 };
 
 typedef vector<LoaderDependency> dep_list; 
@@ -31,7 +32,7 @@ typedef set<string> extensions_s;
 class Loader {
 protected:
     dep_list dependencies;
-    virtual void addDependency(string file_name, void **target);
+    virtual void addDependency(string file_name, void **target, ResourceType type=NONE);
 public:
     virtual extensions_s getFileExtensions()=0;
     virtual ResourceType getType()=0;
