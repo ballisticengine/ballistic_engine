@@ -51,7 +51,7 @@ bool World::parseXml(string &fn) {
                 file = preload.second.get<string>("file");
         cout << "File " << file << ", " << name << endl;
         if (type == "model") {
-            Shape *shp = (Shape *) resman->get(file);
+            Shape *shp = (Shape *) resman->get(file, SHAPE);
             ps->shape_preloads[name] = shp;
         } else if (type == "texture") {
             Ballistic::Types::Texture *tex = (Ballistic::Types::Texture *) resman->get(file);
@@ -68,7 +68,7 @@ bool World::parseXml(string &fn) {
     ptree gpt;
     read_xml(gfn, gpt, boost::property_tree::xml_parser::trim_whitespace | boost::property_tree::xml_parser::no_comments);
     ptree &rooms = gpt.get_child("level.rooms");
-    Loader *xml_loader = LibLoad::getInstance()->getLoaderByExtension("xml");
+    Loader *xml_loader = LibLoad::getInstance()->getLoaderByExtension("xml", SHAPE);
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
 
@@ -114,7 +114,7 @@ bool World::parseXml(string &fn) {
                 e_loc sc = entobj.second.get<e_loc>("scale");
                 bool physics = entobj.second.get<bool>("physics");
                 //shapef->setScale(sc);
-                Shape *mshape = (Shape *) resman->get(entobj.second.get<string>("model"));
+                Shape *mshape = (Shape *) resman->get(entobj.second.get<string>("model"), SHAPE);
                 ObjectEntity *oe = new ObjectEntity();
                 //shp->calculateNormals(); //UWAGA!!
                 oe->no_physics = !physics;

@@ -15,6 +15,9 @@ class TestManipulator(ManipulatorClass):
         self.uc = 0
         self.attach_mouse()
         
+    def self_load(self):
+        pass
+    
     def attach_mouse(self):
         self.engine_state.set_bool('attach_mouse', not self.engine_state.get_bool('attach_mouse'))
 

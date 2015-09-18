@@ -97,9 +97,9 @@ string ResourceManager::getSubDir(ResourceType type) {
         case SHAPE:
             subdir = MODEL_DIR;
             break;
-        case LEVEL:
-            subdir = LVL_DIR;
-            break;
+//        case LEVEL:
+//            subdir = LVL_DIR;
+//            break;
         default:
             subdir = "";
             break;

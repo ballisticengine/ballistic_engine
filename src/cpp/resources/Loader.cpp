@@ -26,3 +26,7 @@ void Loader::cleanDependencies() {
 void *Loader::loadFromData(void *data, size_t size) {
     
 }
+
+size_t Loader::getPriority() {
+    return 0;
+}

@@ -4,6 +4,7 @@
 #include "libload/LibLoad.hpp"
 #include "resources/Loader.hpp"
 #include "resources/ResourceManager.hpp"
+#include "world/World.hpp"
 
 TEST(LibLoad, LibLoadTest) {
     LibLoad *libload = LibLoad::getInstance();
@@ -32,9 +33,9 @@ TEST(ResourceManager, ResourceManagerTest) {
     rm->setWD("./data/test");
     rm->setLevel("test_level");
     void *res1 = rm->get("@test.txt"),
-          *res2 = rm->get("@w_machinegun.md2"),
+          *res2 = rm->get("@w_machinegun.md2"),  
           *res3 = rm->get("@car.bmp"),
-          *res4 = rm->get("@table.xml")
+          *res4 = rm->get("@table.xml", SHAPE)
             ;
     
     ASSERT_NE(0, (unsigned long) res1);
@@ -43,4 +44,12 @@ TEST(ResourceManager, ResourceManagerTest) {
     ASSERT_NE(0, (unsigned long) res4);
 
 
+};
+
+TEST(WorldLoader, WorldLoaderTest) {
+    ResourceManager *rm = ResourceManager::getInstance();
+    rm->setWD("./data");
+    rm->setLevel("level2");
+    void *world = rm->get("level2.xml", LEVEL);
+    ASSERT_NE(0, (unsigned long) world);
 };

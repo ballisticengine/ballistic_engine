@@ -35,6 +35,7 @@ protected:
 public:
     virtual extensions_s getFileExtensions()=0;
     virtual ResourceType getType()=0;
+    virtual size_t getPriority();
     virtual void *load(string file_name)=0;
     virtual void *loadFromData(void *data, size_t size);
     virtual bool handlesEntension(string extension);

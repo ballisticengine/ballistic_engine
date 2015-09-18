@@ -40,6 +40,7 @@ modules = [
     Glob(src + 'resources/LevelManager.cpp'),
     Glob(src + 'resources/exceptions.cpp'),
     Glob(src + 'resources/WorldLoader.cpp'),
+    Glob(src + 'resources/Loader.cpp'),
     Glob(src + 'world/*.cpp'),
     Glob(src + 'python/*.cpp'),
     Glob(src + 'engine.cpp'),
