@@ -18,6 +18,10 @@ World::~World() {
 
 }
 
+BulletPhysics *World::getPhysics() {
+    return &this->collisions;
+}
+
 Camera *World::getCurrentCamera() {
     return &this->default_Camera;
 }

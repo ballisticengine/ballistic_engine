@@ -41,19 +41,17 @@ using namespace boost::property_tree;
 #include "misc/xmlHelper.hpp"
 #include "libload/LibLoad.hpp"
 
-
-
 struct PyEntityCollisionParams {
     ObjectEntity *a, *b;
 };
 
 class World {
 protected:
-    Camera default_Camera;
+
     void moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision);
     void moveEntities();
     Timer time;
-    
+
     PyLocker *locker;
     bool moving_lock;
     queue<ObjectEntity *> spawn_queue;
@@ -62,6 +60,8 @@ protected:
     void cleanup();
 
 public:
+    BulletPhysics *getPhysics();
+    Camera default_Camera;
     ObserverEntity observer;
     RoomEntity *active_room;
     Sprite *testsprite;
@@ -87,7 +87,7 @@ public:
     void operator()();
     RoomEntity * getActiveRoom();
     ObserverEntity * getObserver();
-    
+
 
 
     void addRoomEntity(RoomEntity *e);

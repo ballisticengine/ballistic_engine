@@ -20,11 +20,12 @@ def make_loader(file):
     sources = [
         './loaders/'+file+'.cpp',
         './Loader.cpp',
+        './WorldLoader.cpp',
     ]
     lib_helper.make_shared(file, sources, 'bin/loaders', LIBS)
 
 
-LOADERS = ['LoaderDummy', 'LoaderXML', 'LoaderMD2', 'TextureLoader', ]
+LOADERS = ['LoaderDummy', 'LoaderXML', 'LoaderMD2', 'TextureLoader', 'XMLWorldLoader', ]
 
 for l in LOADERS:
     make_loader(l)
