@@ -8,6 +8,7 @@
 #include "config/EngineState.hpp"
 #include "renderer/RenderingManager.hpp"
 #include "ui/UISignalData.hpp"
+#include "world/WorldManager.hpp"
 
 PyManipulator::PyManipulator(string file) {
 
@@ -48,7 +49,7 @@ void PyManipulator::signal(string name, initializer_list<void *> params, bool ui
     PyLocker::getInstance()->lock();
     vector<void *> params_v(params);
     bp::object f = bp::extract<bp::object>(instance.attr(name.c_str()));
-    World *w = World::getInstance();
+    World *w = WorldManager::getInstance()->getCurrentWorld();
     
     RenderingManager *rm = RenderingManager::getInstance();
     EngineState *es = EngineState::getInstance();

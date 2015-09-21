@@ -138,16 +138,6 @@ ObserverEntity * World::getObserver() {
     return &this->observer;
 }
 
-World * World::getInstance() {
-    static World i;
-    return &i;
-
-}
-
-World & World::getRef() {
-    return *World::getInstance();
-}
-
 void World::addRoomEntity(RoomEntity *e) {
     this->rooms.push_back(e);
 }

@@ -2,11 +2,11 @@
 
 #include "python/null_deleter.hpp"
 
-boost::shared_ptr<World> getSharedWorldInstance() {
-    return boost::shared_ptr<World>(World::getInstance(), NullDeleter());
-}
+//boost::shared_ptr<World> getSharedWorldInstance() {
+//    return boost::shared_ptr<World>(World::getInstance(), NullDeleter());
+//}
 
-typedef boost::shared_ptr<World> World_ptr;
+//typedef boost::shared_ptr<World> World_ptr;
 
 BOOST_PYTHON_MODULE(World) {
     
@@ -101,10 +101,10 @@ BOOST_PYTHON_MODULE(World) {
     ;
     
     bp::class_<World, boost::shared_ptr<World>, boost::noncopyable>("World", bp::no_init)
-            .def("get_instance", &getSharedWorldInstance)
+//            .def("get_instance", &getSharedWorldInstance)
             .def_readonly("active_room", &World::active_room)
             .def_readwrite("observer", &World::observer)
-            .staticmethod("get_instance")
+//            .staticmethod("get_instance")
             .def("save_xml", &World::saveXml)
             .def("get_physics", &World::getPhysicsEngine)
             ;

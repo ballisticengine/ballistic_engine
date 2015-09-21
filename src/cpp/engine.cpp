@@ -1,4 +1,5 @@
 #include "engine.hpp"
+#include "resources/ResourceManager.hpp"
 
 void Engine::pythonInit() {
     PyScripting::getInstance()->init();
@@ -24,11 +25,14 @@ void Engine::prepare() {
     EngineState::getInstance()->setString("version", "Staging");
 
     cout << "Loading world...\n";
-    World *w = (World *) World::getInstance();
+    
+    //World *w = ResourceManager::getInstance()->get();
+    
+  //  World *w = (World *) World::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
             start_lvl = start_lvl_dir + DS + Config::getInstance()->getStart();
     cout << start_lvl << endl;
-    w->parseXml(Config::getInstance()->getStart());
+    // w->parseXml(Config::getInstance()->getStart());
 
     VideoData vd = *Config::getInstance()->getVD();
 
@@ -67,7 +71,7 @@ void Engine::prepare() {
     this->pythonInit();
     cout << "World loop\n";
 
-    boost::thread(boost::ref(*w));
+  //  boost::thread(boost::ref(*w));
 
 }
 

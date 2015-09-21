@@ -1,4 +1,5 @@
 #include "renderer/RenderingManager.hpp"
+#include "world/WorldManager.hpp"
 
 void RenderingManager::setFlush(flush_function flush_callback) {
     this->flush_callback = flush_callback;
@@ -97,7 +98,7 @@ void RenderingManager::render() {
 }
 
 RenderingManager::RenderingManager() {
-    this->world = World::getInstance();
+    this->world = WorldManager::getInstance()->getCurrentWorld();
     if (world->sky) {
         world->sky->makeShape(20, 20);
     }

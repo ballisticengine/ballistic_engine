@@ -13,7 +13,6 @@
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
 #include "misc/utils.hpp"
-
 #include "python/locker.hpp"
 
 namespace bp = boost::python;

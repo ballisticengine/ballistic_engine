@@ -69,9 +69,6 @@ public:
     rooms_list rooms;
     e_loc roomrot_x, roomrot_y, roomrot_z;
 
-    static World *getInstance();
-    static World & getRef();
-
     BulletPhysics getPhysicsEngine();
 
 

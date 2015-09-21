@@ -1,4 +1,6 @@
 #include "io/sdlio.hpp"
+#include "world/WorldManager.hpp"
+
 SDL_Window *SdlIO::window = 0;
 SDL_Renderer *SdlIO::displayRenderer = 0;
 SDL_Surface *SdlIO::screen = 0;
@@ -7,7 +9,7 @@ int SdlIO::window_w = 0;
 int SdlIO::window_h = 0;
 
 SdlIO::SdlIO() {
-    w = World::getInstance();
+    w = WorldManager::getInstance()->getCurrentWorld();;
     rendering = RenderingManager::getInstance();
     EngineState::getInstance()->setBool("keypress", false);
     key_bindings = Config::getInstance()->getKeyBindings();
