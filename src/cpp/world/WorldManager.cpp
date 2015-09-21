@@ -1,7 +1,11 @@
 #include "world/WorldManager.hpp"
 
 World *WorldManager::getCurrentWorld() {
-    return this->world;
+    if (this->world) {
+        return this->world;
+    } else {
+        return 0;
+    }
 }
 
 void WorldManager::setWorld(World *w) {
@@ -9,9 +13,9 @@ void WorldManager::setWorld(World *w) {
 }
 
 WorldManager::WorldManager() {
-    
+
 }
 
 WorldManager::~WorldManager() {
-    
+
 }
