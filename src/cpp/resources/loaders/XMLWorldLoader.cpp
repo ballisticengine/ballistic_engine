@@ -12,11 +12,12 @@ extensions_s XMLWorldLoader::getFileExtensions() {
     return exts;
 }
 
-
+XMLWorldLoader::XMLWorldLoader() {
+    
+}
 
 void *XMLWorldLoader::load(string level_name) {
     World *w = new World();
-
     ptree pt;
     read_xml(level_name, pt,
             boost::property_tree::xml_parser::trim_whitespace
@@ -96,7 +97,7 @@ void *XMLWorldLoader::load(string level_name) {
                 //oe->face(rx,ry,rz);
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
-                w->getPhysics()->addEntity((Entity *) oe); //TODO
+                w->getPhysics()->addEntity((Entity *) oe); 
                 //                if (mi->s->frame_count > 0) {
                 //                    roomE->model_animator.addShape(mi->s);
                 //                }
@@ -147,7 +148,7 @@ void *XMLWorldLoader::load(string level_name) {
 
 extern "C" {
 
-    Loader * returnLoader() {
-        return (Loader *) new XMLWorldLoader();
+    WorldLoader * returnLoader() {
+        return (WorldLoader *) new XMLWorldLoader();
     }
 }

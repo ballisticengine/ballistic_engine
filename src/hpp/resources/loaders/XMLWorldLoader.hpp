@@ -8,6 +8,7 @@
 
 class XMLWorldLoader : public WorldLoader {
     public:
+        XMLWorldLoader();
         virtual extensions_s getFileExtensions();
         virtual void *load(string file_name);
 };
