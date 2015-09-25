@@ -114,7 +114,8 @@ BOOST_PYTHON_MODULE(World) {
             .def("get_instance", &getSharedWorldManagerInstance)
             .staticmethod("get_instance")
             .def("get_current_world", &WorldManager::getCurrentWorld,  bp::return_value_policy<bp::reference_existing_object>())
-            ;
+            .def("save_into", &WorldManager::saveInto)
+     ;
 
 };
 

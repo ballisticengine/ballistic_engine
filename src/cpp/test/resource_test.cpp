@@ -5,21 +5,22 @@
 #include "resources/Loader.hpp"
 #include "resources/ResourceManager.hpp"
 #include "world/World.hpp"
+#include "world/WorldManager.hpp"
 
 TEST(LibLoad, LibLoadTest) {
     LibLoad *libload = LibLoad::getInstance();
     libload->discoverLoaders();
-    Loader *l1 = libload->getLoaderByExtension("txt"),
-            *l2 = libload->getLoaderByExtension("noexistent"),
+    Loader *l1 = (Loader *)libload->getLoaderByExtension("txt"),
+            *l2 = (Loader *)libload->getLoaderByExtension("noexistent"),
             *l3,
             *l4
             ;
     ASSERT_NE(0, (unsigned long) l1);
     ASSERT_EQ(0, l2);
-    l1 = libload->getLoaderByExtension("txt", OTHER);
-    l2 = libload->getLoaderByExtension("txt", SHAPE);
-    l3 = libload->getLoaderByExtension("nonexistent", OTHER);
-    l4 = libload->getLoaderByExtension("nonexistent", SHAPE);
+    l1 = (Loader *)libload->getLoaderByExtension("txt", OTHER);
+    l2 = (Loader *)libload->getLoaderByExtension("txt", SHAPE);
+    l3 = (Loader *)libload->getLoaderByExtension("nonexistent", OTHER);
+    l4 = (Loader *)libload->getLoaderByExtension("nonexistent", SHAPE);
     ASSERT_NE(0, (unsigned long) l1);
     ASSERT_EQ(0, l2);
     ASSERT_EQ(0, l3);
@@ -50,6 +51,9 @@ TEST(WorldLoader, WorldLoaderTest) {
     ResourceManager *rm = ResourceManager::getInstance();
     rm->setWD("./data");
     rm->setLevel("level2");
-    void *world = rm->get("level2.xml", LEVEL);
+    void *world = rm->get("level.xml", LEVEL);
     ASSERT_NE(0, (unsigned long) world);
+    WorldManager::getInstance()->setWorld((World *)world);
+    WorldManager::getInstance()->saveInto("./data/test/levels/save_level/test.xml");
 };
+

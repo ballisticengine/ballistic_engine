@@ -27,23 +27,16 @@ void Engine::prepare() {
 
     cout << "Loading world...\n";
     
-    ResourceManager::getInstance()->setWD("./data");
-    ResourceManager::getInstance()->setLevel("level2");
-    World *w = (World*)ResourceManager::getInstance()->get("level2.xml", LEVEL);
+    ResourceManager::getInstance()->setWD(string(CONFIG_DIR)); 
+    ResourceManager::getInstance()->setLevel(Config::getInstance()->getStart());
+    World *w = (World*)ResourceManager::getInstance()->get("level.xml", LEVEL);
     ResourceManager::getInstance()->resolveAllDependencies();
     WorldManager::getInstance()->setWorld(w);
-    cout << "DONE!" << endl;
-  //  World *w = (World *) World::getInstance();
-    string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
-            start_lvl = start_lvl_dir + DS + Config::getInstance()->getStart();
-    cout << start_lvl << endl;
-    // w->parseXml(Config::getInstance()->getStart());
-
+  
     VideoData vd = *Config::getInstance()->getVD();
 
     LibLoad::getInstance()->registerModule("renderer2", "RendererOpenGL", "returnRenderer");
     RendererInterface *ri = (RendererInterface *) LibLoad::getInstance()->getModuleClass("renderer2");
-
 
     RenderingManager *rendering = RenderingManager::getInstance();
 

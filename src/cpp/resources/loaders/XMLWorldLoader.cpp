@@ -41,7 +41,7 @@ void *XMLWorldLoader::load(string level_name) {
 
 
     ptree &rooms = pt.get_child("level.rooms");
-    Loader *xml_loader = LibLoad::getInstance()->getLoaderByExtension("xml", SHAPE);
+    Loader *xml_loader = (Loader *) LibLoad::getInstance()->getLoaderByExtension("xml", SHAPE);
     ResourceManager *resman = ResourceManager::getInstance();
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
@@ -145,6 +145,138 @@ void *XMLWorldLoader::load(string level_name) {
     
     return (void *) w;
 }
+
+ bool XMLWorldLoader::save(World *world, string file_name) {
+    ResourceManager *resman = ResourceManager::getInstance();
+    cout << "Dumping to " << file_name << endl;
+    ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
+            vpf, uv_count, s_faces, s_vertices, f_material, f_texture, r_entities;
+
+    Shape *shape = world->active_room->getModel();
+
+    v_count.put("", shape->v_count);
+    f_count.put("", shape->f_count);
+    uv_count.put("", shape->uv_count);
+    vpf.put("", shape->v_per_poly);
+
+
+    s_counts.add_child("vertices", v_count);
+    s_counts.add_child("faces", f_count);
+    s_counts.add_child("uvs", uv_count);
+    s_counts.add_child("v_p_f", vpf);
+
+    r_shape.put("name", "room");
+    s_geom.add_child("counts", s_counts);
+
+
+    //Faces
+    for (size_t fi = 0; fi < shape->f_count; fi++) {
+        ptree *p_face = new ptree(), *f_vertices = new ptree();
+        if (shape->textures[fi]) {
+            string tfn = resman->getResource(shape->textures[fi])->getOrigFilename();
+            p_face->put("texture", tfn);
+        }
+
+        if (shape->materials[fi]) {
+            ptree material, shining, emit;
+
+            material.add_child("specular", makeRGBANode(shape->materials[fi]->getSpecular()));
+            material.add_child("diffuse", makeRGBANode(shape->materials[fi]->getDiffuse()));
+            material.put("shining", shape->materials[fi]->getShininess());
+            material.put("emit", shape->materials[fi]->getEmission());
+
+            p_face->add_child("material", material);
+        }
+
+        for (size_t vi = 0; vi < shape->v_per_poly; vi++) {
+            ptree *p_vertex = new ptree(), *p_uv = new ptree();
+            p_vertex->put("i", shape->faces[fi].index[vi]);
+            *p_uv = makeUVNode(shape->faces[fi].uvs[vi].u, shape->faces[fi].uvs[vi].v);
+            p_vertex->add_child("uv", *p_uv);
+            f_vertices->add_child("vertex", *p_vertex);
+
+            delete p_vertex;
+            delete p_uv;
+        }
+        p_face->add_child("vertices", *f_vertices);
+        s_faces.add_child("face", *p_face);
+        delete p_face;
+        delete f_vertices;
+    }
+
+    //Vertices
+    for (size_t vi = 0; vi < shape->v_count; vi++) {
+        ptree *vertex = new ptree(), *coords = new ptree(), *normal = new ptree();
+
+        *coords = makeLocationNode(shape->vertices[vi].x, shape->vertices[vi].y, shape->vertices[vi].z);
+        *normal = makeLocationNode(shape->normals[vi].x, shape->normals[vi].y, shape->normals[vi].z);
+        vertex->add_child("coords", *coords);
+        vertex->add_child("normal", *normal);
+        s_vertices.add_child("vertex", *vertex);
+        delete vertex;
+        delete coords;
+        delete normal;
+    }
+
+    s_geom.add_child("faces", s_faces);
+    s_geom.add_child("vertices", s_vertices);
+    r_shape.add_child("geom", s_geom);
+
+    Coords rcoords = world->active_room->getCoords();
+    ColorRGBA rambient = world->active_room->ambient_light;
+    room.add_child("location", makeLocationNode(rcoords.translation.x, rcoords.translation.y, rcoords.translation.z));
+    room.add_child("ambient_light", makeRGBANode(rambient.r, rambient.g, rambient.b, rambient.a));
+    room.add_child("shape", r_shape);
+
+    for (size_t i = 0; i<world->active_room->models.size(); i++) {
+        ptree *r_entity = new ptree();
+
+        r_entity->put("name", "[OBJECT]" + world->active_room->models[i]->name);
+        r_entity->put("type", "object");
+        r_entity->put("physics", (int) !world->active_room->models[i]->no_physics);
+        r_entity->put("scale", 1.0f);
+
+        Coords c = world->active_room->models[i]->getCoords();
+
+        r_entity->add_child("location", makeTranslationNode(c));
+        r_entity->add_child("facing", makeRotationNode(c));
+
+        string model_file = resman->getResource(world->active_room->models[i]->model)->getOrigFilename();
+        r_entity->put("model", model_file);
+        r_entities.add_child("entity", *r_entity);
+
+        delete r_entity;
+    }
+
+    for (size_t i = 0; i<world->active_room->lights.size(); i++) {
+        ptree *r_entity = new ptree();
+        r_entity->put("name", world->active_room->lights[i]->name);
+        r_entity->put("type", "light");
+        Coords c = world->active_room->lights[i]->getCoords();
+        /*
+         TODO: pass and load diffuse and specular here,
+         *      load and pass energy here
+         */
+        ColorRGBA dc = world->active_room->lights[i]->getDiffuse();
+        r_entity->put("r", dc.r);
+        r_entity->put("g", dc.g);
+        r_entity->put("b", dc.b);
+        r_entity->put("energy", 1.0f);
+        r_entity->add_child("location", makeTranslationNode(c));
+        r_entity->add_child("facing", makeRotationNode(c));
+        r_entities.add_child("entity", *r_entity);
+        delete r_entity;
+    }
+
+    room.add_child("entities", r_entities);
+    rooms.add_child("room", room);
+
+
+    level.add_child("rooms", rooms);
+    root.add_child("level", level);
+
+    write_xml(file_name, root);
+ }
 
 extern "C" {
 

@@ -12,6 +12,7 @@ public:
     void setWorld(World *w);
     WorldManager();
     ~WorldManager();
+    bool saveInto(string file_name);
 };
 
 

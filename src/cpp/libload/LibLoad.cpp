@@ -9,13 +9,13 @@ void LibLoad::registerLoader(string file_name) {
     loads.push_back(loadLib(file_name,"returnLoader"));
 }
 
-Loader * LibLoad::getLoaderByExtension(string ext, ResourceType type) {
+void * LibLoad::getLoaderByExtension(string ext, ResourceType type) {
     for(size_t i=0; i<loads.size(); i++) {
         Loader * loader = (Loader *)loads[i].module_class;
         
         if (loader->handlesEntension(ext) && (loader->getType()==type || type==NONE)) {
             
-            return loader; 
+            return loads[i].module_class; 
         }
     }
     return 0;

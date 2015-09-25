@@ -43,7 +43,7 @@ void ResourceManager::resolveAllDependencies() {
 
 void * ResourceManager::get(string file_name, ResourceType type) {
 
-    Loader *loader = LibLoad::getInstance()->getLoaderByExtension(Utils::getExt(file_name), type);
+    Loader *loader = (Loader *)LibLoad::getInstance()->getLoaderByExtension(Utils::getExt(file_name), type);
     if (!loader) {
         return 0;
     }

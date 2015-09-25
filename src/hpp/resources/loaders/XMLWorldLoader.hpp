@@ -11,6 +11,7 @@ class XMLWorldLoader : public WorldLoader {
         XMLWorldLoader();
         virtual extensions_s getFileExtensions();
         virtual void *load(string file_name);
+        virtual bool save(World *world, string file_name);
 };
 
 #endif	
