@@ -55,5 +55,8 @@ TEST(WorldLoader, WorldLoaderTest) {
     ASSERT_NE(0, (unsigned long) world);
     WorldManager::getInstance()->setWorld((World *)world);
     WorldManager::getInstance()->saveInto("./data/test/levels/save_level/test.xml");
+    rm->setWD("./data/test");
+    rm->setLevel("save_level");
+    void *world_saved = rm->get("test.xml", LEVEL);
 };
 
