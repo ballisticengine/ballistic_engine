@@ -1,10 +1,11 @@
 #include "python/world_defs.hpp"
 
 #include "python/null_deleter.hpp"
+#include "world/WorldManager.hpp"
 
-//boost::shared_ptr<World> getSharedWorldInstance() {
-//    return boost::shared_ptr<World>(World::getInstance(), NullDeleter());
-//}
+boost::shared_ptr<WorldManager> getSharedWorldManagerInstance() {
+    return boost::shared_ptr<WorldManager>(WorldManager::getInstance(), NullDeleter());
+}
 
 //typedef boost::shared_ptr<World> World_ptr;
 
@@ -100,7 +101,7 @@ BOOST_PYTHON_MODULE(World) {
         .def("ray_test", &BulletPhysics::rayTest)
     ;
     
-    bp::class_<World, boost::shared_ptr<World>, boost::noncopyable>("World", bp::no_init)
+    bp::class_<World, World *>("World")
 //            .def("get_instance", &getSharedWorldInstance)
             .def_readonly("active_room", &World::active_room)
             .def_readwrite("observer", &World::observer)
@@ -109,7 +110,11 @@ BOOST_PYTHON_MODULE(World) {
             .def("get_physics", &World::getPhysicsEngine)
             ;
     
-    
+     bp::class_<WorldManager, boost::shared_ptr<WorldManager>, boost::noncopyable>("WorldManager", bp::no_init)
+            .def("get_instance", &getSharedWorldManagerInstance)
+            .staticmethod("get_instance")
+            .def("get_current_world", &WorldManager::getCurrentWorld,  bp::return_value_policy<bp::reference_existing_object>())
+            ;
 
 };
 

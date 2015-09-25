@@ -1,4 +1,4 @@
-from World import World
+from World import World, WorldManager
 from Rendering import RenderingManager
 from Engine import EngineState
 from BallisticUI import UI
@@ -41,7 +41,7 @@ class ManipulatorClass(object):
         pass
 
     def __init__(self):
-        self.world = World.get_instance()
+        self.world = WorldManager.get_instance().get_current_world()
         self.rendering_manager = RenderingManager.get_instance()
         self.engine_state = EngineState.get_instance()
         self.ui = UI.get_instance()

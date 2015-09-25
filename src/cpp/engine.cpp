@@ -1,5 +1,6 @@
 #include "engine.hpp"
 #include "resources/ResourceManager.hpp"
+#include "world/WorldManager.hpp"
 
 void Engine::pythonInit() {
     PyScripting::getInstance()->init();
@@ -26,8 +27,12 @@ void Engine::prepare() {
 
     cout << "Loading world...\n";
     
-    //World *w = ResourceManager::getInstance()->get();
-    
+    ResourceManager::getInstance()->setWD("./data");
+    ResourceManager::getInstance()->setLevel("level2");
+    World *w = (World*)ResourceManager::getInstance()->get("level2.xml", LEVEL);
+    ResourceManager::getInstance()->resolveAllDependencies();
+    WorldManager::getInstance()->setWorld(w);
+    cout << "DONE!" << endl;
   //  World *w = (World *) World::getInstance();
     string start_lvl_dir = string(CONFIG_DIR) + string(DS) + string(LVL_DIR),
             start_lvl = start_lvl_dir + DS + Config::getInstance()->getStart();
@@ -71,7 +76,7 @@ void Engine::prepare() {
     this->pythonInit();
     cout << "World loop\n";
 
-  //  boost::thread(boost::ref(*w));
+    boost::thread(boost::ref(*w));
 
 }
 
@@ -80,10 +85,11 @@ Engine::~Engine() {
 }
 
 void Engine::start() {
-
+    cout << "Start" << endl;
     boost::thread(boost::bind(&SdlIO::keyboardInputThread, SdlIO::getInstance()));
     boost::thread(boost::bind(&SdlIO::mouseInputThread, SdlIO::getInstance()));
 
+    cout << "io->eventLoop()" << endl;
     io->eventLoop();
 
 }
