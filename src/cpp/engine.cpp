@@ -9,8 +9,8 @@ void Engine::pythonInit() {
 
 void Engine::prepare() {
     cout << "Preparing..." << endl;
-
     cout << "Config init..." << endl;
+    
     Config::getInstance();
     LibLoad::getInstance()->discoverLoaders();
 
