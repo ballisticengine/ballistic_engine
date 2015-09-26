@@ -12,7 +12,7 @@ def make_shared(target_file, sources, target_path, LIBS):
     '/usr/include/python2.7',
     '/usr/include/bullet',
 
-    root + '/src/hpp',
+    root + '/src',
     ])
 
     env['SHLIBPREFIX'] = ''
