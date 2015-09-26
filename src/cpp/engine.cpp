@@ -4,7 +4,7 @@
 
 void Engine::pythonInit() {
     PyScripting::getInstance()->init();
-    PyScripting::getInstance()->loadManipulators();
+    PyScripting::getInstance()->loadManipulators(); 
 }
 
 void Engine::prepare() {
