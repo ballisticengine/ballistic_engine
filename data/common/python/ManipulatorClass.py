@@ -42,6 +42,7 @@ class ManipulatorClass(object):
 
     def __init__(self):
         self.world = WorldManager.get_instance().get_current_world()
+        self.world_manager = WorldManager.get_instance()
         self.rendering_manager = RenderingManager.get_instance()
         self.engine_state = EngineState.get_instance()
         self.ui = UI.get_instance()

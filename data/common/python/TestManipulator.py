@@ -47,7 +47,7 @@ class TestManipulator(ManipulatorClass):
             print self.engine_state.get_bool('edit_mode')
 
         if key == 1073741892: #F11
-            self.world.save_xml("test.xml")
+            self.world_manager.save_into("test.xml")
 
         if key == 27:
             self.engine_state.set_bool('exit', True)
