@@ -3,6 +3,7 @@
 #include "types/skybox.hpp"
 #include "resources/ResourceManager.hpp"
 #include "libload/LibLoad.hpp"
+#include "types/Vector3d.hpp"
 
 using boost::property_tree::ptree;
 
@@ -17,6 +18,7 @@ XMLWorldLoader::XMLWorldLoader() {
 }
 
 void *XMLWorldLoader::load(string level_name) {
+    ResourceManager *resman = ResourceManager::getInstance();
     World *w = new World();
     ptree pt;
     read_xml(level_name, pt,
@@ -26,6 +28,7 @@ void *XMLWorldLoader::load(string level_name) {
     string skyfn = pt.get<string>("level.config.skybox");
     Ballistic::Types::Texture *sky_texture;
     this->addDependency(skyfn, (void **) &sky_texture);
+    resman->resolveAllDependencies();
     w->sky = new Skybox(sky_texture);
 
     ptree& jump_point = pt.get_child("level.config.jump_point");
@@ -42,7 +45,7 @@ void *XMLWorldLoader::load(string level_name) {
 
     ptree &rooms = pt.get_child("level.rooms");
     Loader *xml_loader = (Loader *) LibLoad::getInstance()->getLoaderByExtension("xml", SHAPE);
-    ResourceManager *resman = ResourceManager::getInstance();
+    
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
         ptree room_p = (ptree) room.second;
@@ -149,9 +152,29 @@ void *XMLWorldLoader::load(string level_name) {
  bool XMLWorldLoader::save(World *world, string file_name) {
     ResourceManager *resman = ResourceManager::getInstance();
     cout << "Dumping to " << file_name << endl;
-    ptree root, level, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
+    ptree root, level, config, jumppoint, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
             vpf, uv_count, s_faces, s_vertices, f_material, f_texture, r_entities;
 
+    
+    /*
+     * Config resman->getResource(shape->textures[fi])->getOrigFilename()
+     */
+    
+    config.put("skybox", resman->getResource(world->sky->getTexture())->getOrigFilename());
+    Coords jump_point_c;
+    jump_point_c.rotation.x=0;
+    jump_point_c.rotation.y=0;
+    jump_point_c.rotation.z=0;
+    jump_point_c.translation.x=0;
+    jump_point_c.translation.y=0;
+    jump_point_c.translation.z=0;
+    
+    config.add_child("jump_point", makeCoordsNode(jump_point_c));
+    
+    
+    /*
+     * Geometry
+     */
     Shape *shape = world->active_room->getModel();
 
     v_count.put("", shape->v_count);
@@ -273,6 +296,7 @@ void *XMLWorldLoader::load(string level_name) {
 
 
     level.add_child("rooms", rooms);
+    level.add_child("config", config);
     root.add_child("level", level);
 
     write_xml(file_name, root);

@@ -46,3 +46,20 @@ ptree makeUVNode(e_loc u, e_loc v) {
     return uv;
 }
 
+ptree makeCoordsNode(Coords c) {
+    ptree location, lx, ly, lz, rx, ry, rz;
+
+    lx.put("", c.translation.x);
+    ly.put("", c.translation.y);
+    lz.put("", c.translation.z);
+    rx.put("", c.rotation.x);
+    ry.put("", c.rotation.y);
+    rz.put("", c.rotation.z);
+    location.add_child("x", lx);
+    location.add_child("y", ly);
+    location.add_child("z", lz);
+    location.add_child("rx", lx);
+    location.add_child("ry", ly);
+    location.add_child("rz", lz);
+    return location;
+}
