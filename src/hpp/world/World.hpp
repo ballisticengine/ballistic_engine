@@ -78,8 +78,6 @@ public:
     //obj_reflist getModelsRef();
 
     Camera *getCurrentCamera();
-    bool parseXml(string &fn);
-    bool saveXml(string fn);
     void prepare();
     void operator()();
     RoomEntity * getActiveRoom();

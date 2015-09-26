@@ -106,7 +106,6 @@ BOOST_PYTHON_MODULE(World) {
             .def_readonly("active_room", &World::active_room)
             .def_readwrite("observer", &World::observer)
 //            .staticmethod("get_instance")
-            .def("save_xml", &World::saveXml)
             .def("get_physics", &World::getPhysicsEngine)
             ;
     
