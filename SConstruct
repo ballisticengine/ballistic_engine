@@ -43,7 +43,7 @@ modules = [
     Glob(src + 'resources/Loader.cpp'),
     Glob(src + 'world/*.cpp'),
     Glob(src + 'python/*.cpp'),
-    Glob(src + 'engine.cpp'),
+    Glob(src + 'engine/*.cpp'),
     Glob(src + 'io/*.cpp'),
     Glob(src + 'renderer/*.cpp'),
     Glob('./src/ui/librocket_interfaces/*.cpp'),
