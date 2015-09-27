@@ -107,16 +107,9 @@ string ResourceManager::getSubDir(ResourceType type) {
     return subdir;
 }
 
-void ResourceManager::setWD(string wd) {
-    this->wd = wd;
-}
 
 void ResourceManager::setLevel(string lvl) {
     this->lvl = lvl;
-}
-
-string ResourceManager::getWD() {
-    return this->wd;
 }
 
 string ResourceManager::getLevel() {

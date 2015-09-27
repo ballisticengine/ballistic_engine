@@ -15,6 +15,7 @@ using namespace std;
 #include "types/Resource.hpp"
 #include "libload/LibLoad.hpp"
 #include "misc/utils.hpp"
+#include "misc/HasWD.hpp"
 #include "resources/Loader.hpp"
 
 
@@ -31,10 +32,10 @@ typedef vector<LoadedResource *> factory_items_vector;
 typedef map<void *, Resource *> res_obj;
 
 
-class ResourceManager : public Singleton<ResourceManager> {
+class ResourceManager : public HasWD, public Singleton<ResourceManager> {
 protected:
     FRIEND_TEST(ResourceManager, ResourceManagerTest);
-    string wd, lvl;
+    string lvl;
     factory_items_map items;
     factory_items_vector items_v;
     res_obj resmap;
@@ -42,8 +43,6 @@ protected:
     virtual string resolveFilename(string file_name, ResourceType type);
 public:
     void * get(string file_name, ResourceType type = NONE);
-    virtual void setWD(string wd);
-    virtual string getWD();
     virtual void setLevel(string lvl);
     virtual string getLevel();
     virtual factory_items_vector getByType(ResourceType type);
