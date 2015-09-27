@@ -14,7 +14,8 @@ RocketSDL2Renderer::RocketSDL2Renderer(
     this->mScreen = mScreen;
     
     this->renderer = renderer;
-    this->vd = Config::getInstance()->getVD();
+    SDL_GetWindowSize(mScreen, &width, &height);
+
 }
 
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
@@ -34,8 +35,8 @@ void RocketSDL2Renderer::RenderGeometry(Rocket::Core::Vertex* vertices, int num_
     float
     f_width = frustum.getWidth(),
             f_height = frustum.getHeight(),
-            scale_x = f_width / vd->width,
-            scale_y = f_height / vd->height
+            scale_x = f_width / width,
+            scale_y = f_height / height;
             ;
 
     glTranslatef(frustum.left, frustum.top, 0);

@@ -40,6 +40,7 @@ public:
     virtual Rocket::Core::RenderInterface * getUiRenderer();
     virtual void setFrustum(Frustum frustum);
     virtual Frustum getFrustum();
+    virtual void clear(ColorRGBA color);
 };
 
 

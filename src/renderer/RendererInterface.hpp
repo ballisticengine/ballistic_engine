@@ -71,6 +71,8 @@ public:
     
     
     virtual void renderUI() {}
+    
+    virtual void clear(ColorRGBA color) {}
 };
 
 #endif

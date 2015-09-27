@@ -23,7 +23,7 @@ bool UI::init(RocketSDL2SystemInterface *system_interface,
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Italic.otf");
     Rocket::Core::FontDatabase::LoadFontFace("Delicious-Roman.otf");
 
-    VideoData *vd = Config::getInstance()->getVD();
+   // VideoData *vd = Config::getInstance()->getVD();
     
     context = Rocket::Core::CreateContext("ui",
             Rocket::Core::Vector2i(

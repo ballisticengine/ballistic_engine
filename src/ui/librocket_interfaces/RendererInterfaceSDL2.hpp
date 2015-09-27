@@ -43,7 +43,7 @@ private:
     SDL_Renderer* mRenderer;
     SDL_Window* mScreen;
     RendererInterface *renderer;
-    VideoData *vd;
+    int width,height;
 };
 
 #endif

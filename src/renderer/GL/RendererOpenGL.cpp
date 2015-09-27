@@ -360,6 +360,11 @@ Frustum RendererOpenGL::getFrustum() {
     return this->frustum;
 }
 
+void RendererOpenGL::clear(ColorRGBA color) {
+   glClearColor(color.r, color.g, color.b, color.a);
+   glClear(GL_COLOR_BUFFER_BIT); 
+}
+
 extern "C" {
 
     void * returnRenderer() {

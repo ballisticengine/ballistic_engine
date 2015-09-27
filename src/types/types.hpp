@@ -23,7 +23,9 @@ using namespace std;
 
 class ColorRGB {
 public:
-	e_loc r,g,b;
+    ColorRGB() {};
+    ColorRGB(e_loc r, e_loc g,e_loc b) : r(r), g(b), b(b) {};
+    e_loc r,g,b;
 };
 
 /**
@@ -31,7 +33,9 @@ public:
 */
 class ColorRGBA : public ColorRGB {
 public:
-	e_loc a;
+    ColorRGBA() {};
+    ColorRGBA(e_loc r, e_loc g,e_loc b, e_loc a) :ColorRGB(r,g,b), a(a) {};
+    e_loc a;
 };
 
 class Coords {
