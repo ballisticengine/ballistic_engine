@@ -1,13 +1,7 @@
 #include "renderer/RenderingManager.hpp"
 #include "world/WorldManager.hpp"
 
-void RenderingManager::setFlush(flush_function flush_callback) {
-    this->flush_callback = flush_callback;
-}
 
-void RenderingManager::init() {
-
-}
 
 void RenderingManager::setupTextures() {
     cout << "setupTextures" << endl;
@@ -112,10 +106,3 @@ RenderingManager::~RenderingManager() {
 
 }
 
-void RenderingManager::setRenderer(RendererInterface *renderer) {
-    this->renderer = renderer;
-}
-
-RendererInterface * RenderingManager::getRenderer() {
-    return this->renderer;
-}

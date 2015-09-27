@@ -5,14 +5,13 @@
 #include "renderer/RendererInterface.hpp"
 #include "world/World.hpp"
 #include "ui/ui.hpp"
+#include "RenderingManagerInterface.hpp"
 
 
-typedef void (*flush_function)();
 
-class RenderingManager : public Singleton<RenderingManager> {
+
+class RenderingManager : public RenderingManagerInterface, public Singleton<RenderingManager> {
 protected:
-     flush_function flush_callback;
-     RendererInterface *renderer;
      World *world;
      virtual void renderAllRooms();
      virtual void renderAllEntities();
@@ -22,11 +21,10 @@ public:
     RenderingManager();
     ~RenderingManager();
     virtual void setupTextures();
-    virtual void init();
-    virtual void setRenderer(RendererInterface *renderer);
-    virtual RendererInterface * getRenderer();
+//    virtual void setRenderer(RendererInterface *renderer);
+//    virtual RendererInterface * getRenderer();
     virtual void render();
-    virtual void setFlush(flush_function flush_callback);
+//    virtual void setFlush(flush_function flush_callback);
     void positionLights();
 };
 
