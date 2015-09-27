@@ -47,7 +47,7 @@ void Engine::prepare() {
 
     io->init(io);
 
-    ri->init(vd.width, vd.height);
+    ri->init(vd.width, vd.height, io);
     rendering->setupTextures();
     rendering->setFlush(SdlIO::flush);
 

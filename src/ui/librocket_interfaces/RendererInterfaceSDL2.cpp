@@ -4,7 +4,7 @@
 #include "ui/librocket_interfaces/RendererInterfaceSDL2.hpp"
 #include "io/sdlio.hpp"
 
-RocketSDL2Renderer::RocketSDL2Renderer(RendererInterface *renderer, 
+RocketSDL2Renderer::RocketSDL2Renderer(
         RendererInterface *renderer, 
         SDL_Renderer* mRenderer,  
         SDL_Window* mScreen) {

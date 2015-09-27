@@ -21,8 +21,9 @@ protected:
     map <int, GLint> light_numbers;
     Rocket::Core::RenderInterface *ui_renderer;
     Frustum frustum;
+    SDLIOInterface *io;
 public:
-    void init(size_t width, size_t height);
+    void init(size_t width, size_t height, SDLIOInterface *io);
     void renderShape(Shape *s);
     void render2DShape(Shape2d *shape);
     void resetMatrix();

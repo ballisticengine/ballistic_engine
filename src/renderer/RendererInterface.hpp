@@ -11,13 +11,14 @@
 #include "types/skybox.hpp"
 #include "entities/light.hpp"
 #include "renderer/Frustum.hpp"
+#include "io/SDLIOInterface.hpp"
 
 
 class RendererInterface {
 public:
     //TODO: lighting refactor 
 
-    virtual void init(size_t width, size_t height) {
+    virtual void init(size_t width, size_t height, SDLIOInterface *io) {
     };
 
     virtual void renderShape(Shape *s) {

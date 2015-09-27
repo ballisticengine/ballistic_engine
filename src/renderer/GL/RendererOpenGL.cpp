@@ -2,12 +2,13 @@
 
 Rocket::Core::RenderInterface * RendererOpenGL::getUiRenderer() {
     if (!ui_renderer) {
-        ui_renderer = new RocketSDL2Renderer(this);
+        ui_renderer = new RocketSDL2Renderer(this, io->getSDLRenderer(), io->getSDLWindow());
     }
     return ui_renderer;
 }
 
-void RendererOpenGL::init(size_t width, size_t height) {
+void RendererOpenGL::init(size_t width, size_t height, SDLIOInterface *io) {
+    this->io = io;
     light_numbers[0] = GL_LIGHT0;
     light_numbers[1] = GL_LIGHT1;
     light_numbers[2] = GL_LIGHT2;
