@@ -12,6 +12,7 @@ void Engine::prepare() {
     cout << "Config init..." << endl;
     
     Config::getInstance();
+    LibLoad::getInstance()->setWD("./bin");
     LibLoad::getInstance()->discoverLoaders();
 
     EngineState::getInstance()->setBool("exit", false);

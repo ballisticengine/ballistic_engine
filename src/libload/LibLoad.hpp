@@ -12,6 +12,7 @@ using namespace std;
 namespace fs=boost::filesystem;
 
 #include "misc/singleton.hpp"
+#include "misc/HasWD.hpp"
 #include "resources/Loader.hpp"
 /*
  To możnaby potraktować jako fabrykę, przywoływaną zawsze do pobrania danego podsystemu
@@ -30,7 +31,7 @@ public:
 typedef vector<Module> lib_vector;
 typedef map<string, Module> lib_map;
 
-class LibLoad : public Singleton<LibLoad> {
+class LibLoad : public HasWD, public Singleton<LibLoad> {
 protected:
     lib_map libs;
     lib_vector loads;

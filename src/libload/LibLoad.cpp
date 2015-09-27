@@ -5,30 +5,29 @@ void LibLoad::error(string name) {
 }
 
 void LibLoad::registerLoader(string file_name) {
-     
-    loads.push_back(loadLib(file_name,"returnLoader"));
+
+    loads.push_back(loadLib(file_name, "returnLoader"));
 }
 
 void * LibLoad::getLoaderByExtension(string ext, ResourceType type) {
-    for(size_t i=0; i<loads.size(); i++) {
-        Loader * loader = (Loader *)loads[i].module_class;
-        
-        if (loader->handlesEntension(ext) && (loader->getType()==type || type==NONE)) {
-            
-            return loads[i].module_class; 
+    for (size_t i = 0; i < loads.size(); i++) {
+        Loader * loader = (Loader *) loads[i].module_class;
+
+        if (loader->handlesEntension(ext) && (loader->getType() == type || type == NONE)) {
+
+            return loads[i].module_class;
         }
     }
     return 0;
 }
 
-
 void LibLoad::discoverLoaders() {
     cout << "Discovering loaders..." << endl;
-    fs::path l_path("./bin/loaders");
+    fs::path l_path(this->wd + "/loaders");
     fs::directory_iterator end_itr;
     for (fs::directory_iterator itr(l_path); itr != end_itr; ++itr) {
         cout << "Registering " << itr->path().string() << endl;
-       this->registerLoader(itr->path().string());
+        this->registerLoader(itr->path().string());
     }
 }
 
@@ -61,7 +60,7 @@ Module LibLoad::loadLib(string file_name, string entry_point_name) {
 
 void LibLoad::registerModule(string name, string file_name, string entry_point_name) {
 
-    Module module = loadLib("./bin/" + file_name+ ".so", entry_point_name);
+    Module module = loadLib(this->wd + "/" + file_name + ".so", entry_point_name);
     libs[name] = module;
 }
 
