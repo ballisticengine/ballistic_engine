@@ -3,6 +3,7 @@
 SDL_Window *SDLIOInterface::window = 0;
 SDL_Renderer *SDLIOInterface::displayRenderer = 0;
 SDLIOInterface *SDLIOInterface::me = 0;
+SDL_Surface *SDLIOInterface::screen = 0;
 
 void SDLIOInterface::init(SDLIOInterface *me) {
      SDLIOInterface::me = me;

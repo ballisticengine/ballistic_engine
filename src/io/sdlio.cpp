@@ -1,10 +1,6 @@
 #include "io/sdlio.hpp"
 #include "world/WorldManager.hpp"
 
-SDL_Window *SdlIO::window = 0;
-SDL_Renderer *SdlIO::displayRenderer = 0;
-SDL_Surface *SdlIO::screen = 0;
-SdlIO *SdlIO::me = 0;
 int SdlIO::window_w = 0;
 int SdlIO::window_h = 0;
 
@@ -15,15 +11,8 @@ SdlIO::SdlIO() {
     key_bindings = Config::getInstance()->getKeyBindings();
 }
 
-SDL_Renderer * SdlIO::getSDLRenderer() {
-    return SdlIO::displayRenderer;
-}
 
-SDL_Window * SdlIO::getSDLWindow() {
-    return SdlIO::window;
-}
-
-void SdlIO::initWindow(SdlIO *me) {
+void SdlIO::initWindow() {
     SDL_Init(SDL_INIT_EVERYTHING);
     //SDL_Init(SDL_INIT_VIDEO);
     TTF::getInstance();
@@ -38,20 +27,16 @@ void SdlIO::initWindow(SdlIO *me) {
 
     SDL_CreateWindowAndRenderer(Config::getInstance()->getVD()->width, Config::getInstance()->getVD()->height,
             SDL_WINDOW_OPENGL, &SdlIO::window, &SdlIO::displayRenderer);
-    SdlIO::screen = SDL_GetWindowSurface(SdlIO::window);
+    SDLIOInterface::screen = SDL_GetWindowSurface(SdlIO::window);
     SDL_GLContext context;
-    SdlIO::me = me;
+   
     context = SDL_GL_CreateContext(window);
-    SdlIO::me->window_w = Config::getInstance()->getVD()->width;
-    SdlIO::me->window_h = Config::getInstance()->getVD()->height;
+    this->window_w = Config::getInstance()->getVD()->width;
+    this->window_h = Config::getInstance()->getVD()->height;
     if (EngineState::getInstance()->getBool("fullscreen")) {
         toggleFullscreen();
     }
 
-}
-
-void SdlIO::flush() {
-    SDL_GL_SwapWindow(SdlIO::window);
 }
 
 void SdlIO::toggleFullscreen() {
@@ -74,8 +59,8 @@ void SdlIO::toggleFullscreen() {
 
     } else {
         if (EngineState::getInstance()->getBool("desktop_fs")) {
-            Config::getInstance()->getVD()->width = SdlIO::me->window_w;
-            Config::getInstance()->getVD()->height = SdlIO::me->window_h;
+//            Config::getInstance()->getVD()->width = SdlIO::me->window_w;
+//            Config::getInstance()->getVD()->height = SdlIO::me->window_h;
         }
         SDL_SetWindowFullscreen(window, 0);
     }

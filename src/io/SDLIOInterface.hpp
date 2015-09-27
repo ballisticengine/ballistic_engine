@@ -14,7 +14,7 @@ protected:
     RenderingManager *rendering;
     static SDLIOInterface *me;
     
-    virtual void initWindow();
+    virtual void initWindow()=0;
 public:
     static void init(SDLIOInterface *me);
     static void flush();

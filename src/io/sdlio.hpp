@@ -22,31 +22,24 @@ using namespace std;
 #include "python/scripting.hpp"
 #include "renderer/RenderingManager.hpp"
 #include "ui/ui.hpp"
+#include "io/SDLIOInterface.hpp"
 
-class SdlIO : public Singleton<SdlIO> {
+class SdlIO : public SDLIOInterface, public Singleton<SdlIO> {
 private:
-    static SDL_Surface *screen;
-    static SDL_Renderer* displayRenderer;
-    static SDL_Window *window;
-//    RendererAbstract *r;
     RenderingManager *rendering;
-    static SdlIO *me;
     World *w;
     bool fullscreen;
     static int window_w, window_h;
     static void toggleFullscreen();
     size_t anykey(const Uint8 *state, int ksize);
     KeyBindings *key_bindings;
+    void initWindow();
 public:
-    static void flush();
-    static void initWindow(SdlIO *me);
     void eventLoop();
     void keyboardInputThread();
     void mouseInputThread();
     void inputThread();
     void attachMouse(bool attach=true);
-    SDL_Renderer * getSDLRenderer();
-    SDL_Window * getSDLWindow();
     SdlIO();
     ~SdlIO();
 };
