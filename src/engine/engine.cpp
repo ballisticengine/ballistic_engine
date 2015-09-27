@@ -45,7 +45,7 @@ void Engine::prepare() {
     cout << "IO\n";
     io = new SdlIO();
 
-    io->initWindow(io);
+    io->init(io);
 
     ri->init(vd.width, vd.height);
     rendering->setupTextures();
