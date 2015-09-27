@@ -22,7 +22,7 @@ using namespace std;
 class RocketSDL2Renderer : public Rocket::Core::RenderInterface
 {
 public:
-	RocketSDL2Renderer(RendererInterface *renderer);
+	RocketSDL2Renderer(RendererInterface *renderer, SDL_Renderer* mRenderer,  SDL_Window* mScreen);
 
 	/// Called by Rocket when it wants to render geometry that it does not wish to optimise.
 	virtual void RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation);

@@ -4,11 +4,14 @@
 #include "ui/librocket_interfaces/RendererInterfaceSDL2.hpp"
 #include "io/sdlio.hpp"
 
-RocketSDL2Renderer::RocketSDL2Renderer(RendererInterface *renderer) {
-    SdlIO *io = SdlIO::getInstance();
+RocketSDL2Renderer::RocketSDL2Renderer(RendererInterface *renderer, 
+        RendererInterface *renderer, 
+        SDL_Renderer* mRenderer,  
+        SDL_Window* mScreen) {
+    
    
-    mRenderer = io->getSDLRenderer();
-    mScreen = io->getSDLWindow();
+    this->mRenderer = mRenderer;
+    this->mScreen = mScreen;
     
     this->renderer = renderer;
     this->vd = Config::getInstance()->getVD();
