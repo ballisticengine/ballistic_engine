@@ -30,6 +30,10 @@ void UIDocument::setContent(string id, string content) {
     }
 }
 
+RC::ElementDocument * UIDocument::getDocument() {
+    return this->document;
+}
+
 void UIDocument::addEventListener(string id, string event, string signal) {
 
     ElementList elements;
