@@ -5,26 +5,14 @@
 #include "renderer/RendererInterface.hpp"
 #include "world/World.hpp"
 #include "ui/ui.hpp"
-#include "RenderingManagerInterface.hpp"
+#include "renderer/RenderingManagerEngine.hpp"
 
 
-
-
-class RenderingManager : public RenderingManagerInterface, public Singleton<RenderingManager> {
-protected:
-     World *world;
-     virtual void renderAllRooms();
-     virtual void renderAllEntities();
-     virtual void renderAllDecals();
-     virtual void face(Vector3d &v);
+class RenderingManager : public RenderingManagerEngine, public Singleton<RenderingManager> {
 public:
     RenderingManager();
     ~RenderingManager();
-    virtual void setupTextures();
-//    virtual void setRenderer(RendererInterface *renderer);
-//    virtual RendererInterface * getRenderer();
     virtual void render();
-//    virtual void setFlush(flush_function flush_callback);
     void positionLights();
 };
 
