@@ -5,15 +5,21 @@
 #include "renderer/RendererInterface.hpp"
 #include "world/World.hpp"
 #include "ui/ui.hpp"
-#include "renderer/RenderingManagerEngine.hpp"
 
-
-class RenderingManager : public RenderingManagerEngine, public Singleton<RenderingManager> {
+class RenderingManager : public RendererInterface, public Singleton<RenderingManager> {
+protected:
+    World *world;
+    virtual void renderAllRooms();
+    virtual void renderAllEntities();
+    virtual void renderAllDecals();
+    virtual void face(Vector3d &v);
 public:
     RenderingManager();
     ~RenderingManager();
     virtual void render();
-    void positionLights();
+    virtual void positionLights();
+    virtual void setupTextures();
+ 
 };
 
 #endif
