@@ -7,6 +7,10 @@ void Engine::pythonInit() {
     PyScripting::getInstance()->loadManipulators(); 
 }
 
+void Engine::registerModules() {
+    
+}
+
 void Engine::prepare() {
     cout << "Preparing..." << endl;
     cout << "Config init..." << endl;

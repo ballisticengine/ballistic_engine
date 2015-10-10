@@ -5,8 +5,9 @@
 #include "renderer/RendererInterface.hpp"
 #include "world/World.hpp"
 #include "ui/ui.hpp"
+#include "renderer/RenderingManagerInterface.hpp"
 
-class RenderingManager : public RendererInterface, public Singleton<RenderingManager> {
+class RenderingManager : public RenderingManagerInterface, public Singleton<RenderingManager> {
 protected:
     World *world;
     virtual void renderAllRooms();

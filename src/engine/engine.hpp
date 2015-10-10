@@ -44,8 +44,10 @@ using namespace std;
 class Engine : public Singleton<Engine> {
     SdlIO *io;
     World *world;
-public:
     void pythonInit();
+    
+public:
+    void registerModules();
     void prepare();
     void start();
     ~Engine();
