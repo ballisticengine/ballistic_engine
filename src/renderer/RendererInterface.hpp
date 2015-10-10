@@ -73,6 +73,8 @@ public:
     virtual void renderUI() {}
     
     virtual void clear(ColorRGBA color) {}
+    
+    virtual void face(Vector3d &v);
 };
 
 #endif

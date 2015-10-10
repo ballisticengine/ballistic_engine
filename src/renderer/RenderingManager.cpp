@@ -64,12 +64,6 @@ void RenderingManager::setupTextures() {
     }
 }
 
-void RenderingManager::face(Vector3d &v) {
-    this->renderer->rotate(Vector3d(1, 0, 0), v.x);
-    this->renderer->rotate(Vector3d(0, 1, 0), v.y);
-    this->renderer->rotate(Vector3d(0, 0, 1), v.z);
-}
-
 void RenderingManager::renderAllRooms() {
     rooms_list rooms = world->rooms;
     size_t rooms_size = rooms.size();
@@ -78,7 +72,7 @@ void RenderingManager::renderAllRooms() {
         this->renderer->resetMatrix();
         this->renderer->positionCamera(world->getObserver()->getCamera());
         this->renderer->translate(rc.translation);
-        this->face(rc.rotation);
+        this->renderer->face(rc.rotation);
         this->renderer->renderShape((Shape *) rooms[i]->getModel());
     }
 }
@@ -91,7 +85,7 @@ void RenderingManager::renderAllEntities() {
         this->renderer->resetMatrix();
         this->renderer->positionCamera(world->getObserver()->getCamera());
         this->renderer->translate(c.translation);
-        this->face(c.rotation);
+        this->renderer->face(c.rotation);
         this->renderer->renderShape(ents[i]->getModel());
 
     }

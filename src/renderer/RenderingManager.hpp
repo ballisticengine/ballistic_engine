@@ -13,7 +13,6 @@ protected:
     virtual void renderAllRooms();
     virtual void renderAllEntities();
     virtual void renderAllDecals();
-    virtual void face(Vector3d &v);
 public:
     RenderingManager();
     ~RenderingManager();
