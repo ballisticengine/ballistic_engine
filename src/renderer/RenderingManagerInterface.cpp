@@ -25,3 +25,7 @@ void RenderingManagerInterface::setFlush(flush_function flush_callback) {
  void RenderingManagerInterface::addAction(RenderingAction *action) {
      actions.push_back(action);
  }
+ 
+ vector<RenderingAction *> RenderingManagerInterface::getActions() {
+     return actions;
+ }

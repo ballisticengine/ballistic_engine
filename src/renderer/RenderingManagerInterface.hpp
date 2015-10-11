@@ -19,6 +19,7 @@ public:
     virtual void setFlush(flush_function flush_callback);
     virtual void render()=0;
     virtual void addAction(RenderingAction *action);
+    virtual vector<RenderingAction *> getActions();
 
 };
 
