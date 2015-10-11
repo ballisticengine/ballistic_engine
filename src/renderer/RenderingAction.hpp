@@ -6,13 +6,18 @@
 using namespace std;
 
 #include "renderer/RendererInterface.hpp"
+#include "world/World.hpp"
 
 
 class RenderingAction {
 protected:
     RendererInterface *renderer;
+    vector<void *> params;
+    World *world;
 public:
-    RenderingAction(RendererInterface *renderer_interface, vector<void *> params=vector<void *>());
+    RenderingAction();
+    virtual void setWorld(World *w);
+    virtual void setRenderer(RendererInterface *ri);
     virtual void render()=0;
 };
 

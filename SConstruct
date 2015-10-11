@@ -46,6 +46,7 @@ modules = [
     Glob(src + 'engine/*.cpp'),
     Glob(src + 'io/*.cpp'),
     Glob(src + 'renderer/*.cpp'),
+    Glob(src + 'renderer/actions/*.cpp'),
     Glob('./src/ui/librocket_interfaces/*.cpp'),
    # Glob('./libRocket/Source/Core/Factory.cpp'),
    # Glob('./libRocket/Source/Core/Python/*.cpp'),

@@ -13,7 +13,7 @@ class TestManipulator(ManipulatorClass):
         self.my = 0
         self.up = False
         self.uc = 0
-        self.attach_mouse()
+        #self.attach_mouse()
         
     def self_load(self):
         pass

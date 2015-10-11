@@ -1,6 +1,13 @@
 #include "renderer/RenderingAction.hpp"
 
-RenderingAction::RenderingAction(RendererInterface *renderer_interface, vector<void *> params) 
-: renderer(renderer_interface) {
-    
+RenderingAction::RenderingAction() {
+
+}
+
+void RenderingAction::setWorld(World *w) {
+    this->world = w;
+}
+
+void RenderingAction::setRenderer(RendererInterface *ri) {
+    this->renderer = ri;
 }
