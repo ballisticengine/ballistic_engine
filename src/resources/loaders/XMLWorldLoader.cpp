@@ -100,7 +100,7 @@ void *XMLWorldLoader::load(string level_name) {
                 //oe->face(rx,ry,rz);
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
-                w->getPhysics()->addEntity((Entity *) oe); 
+                w->getPhysics()->addEntity(oe); 
                 //                if (mi->s->frame_count > 0) {
                 //                    roomE->model_animator.addShape(mi->s);
                 //                }
@@ -137,7 +137,7 @@ void *XMLWorldLoader::load(string level_name) {
     w->observer.setCamera(&w->default_Camera);
     w->observer.locate(jx, jy, jz);
     w->observer.face(rx, ry, rz);
-    w->getPhysics()->addEntity((Entity *) & w->observer);
+    w->getPhysics()->addEntity((ObjectEntity *) & w->observer);
     
 //    Ballistic::Types::Texture *stex = (Ballistic::Types::Texture *) resman->get("@car.bmp"); //??
 //    

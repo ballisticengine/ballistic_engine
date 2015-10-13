@@ -41,12 +41,13 @@ private:
     void transformEntity(Entity *entity, Vector3d v);
     Vector3d world_transform;
     CiMap collision_map;
+    btTriangleMesh *makeTriangleMesh(Shape *s);
 public:
     void setWorldTransform(Vector3d world_transform);
     BulletPhysics();
     ~BulletPhysics();
     void addRoom(RoomEntity *room);
-    void addEntity(Entity *entity);
+    void addEntity(ObjectEntity *entity, bool triangles=false);
     void step(e_loc timediff,rooms_list rooms);
     CollisionInfo objectsCollide(ObjectEntity *a, ObjectEntity *b, Coords offset);
     CollisionInfo roomCollide(RoomEntity *r, ObjectEntity *e, Coords offset);

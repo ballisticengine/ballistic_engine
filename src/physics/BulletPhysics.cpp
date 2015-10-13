@@ -94,11 +94,9 @@ void BulletPhysics::step(e_loc timediff, rooms_list rooms) {
 
 }
 
-void BulletPhysics::addRoom(RoomEntity *room) {
-    cout << "addRoom" << endl;
-    btTriangleMesh *mTriMesh = new btTriangleMesh();
-    Shape *s = room->model;
+btTriangleMesh *BulletPhysics::makeTriangleMesh(Shape *s) {
     btVector3 *v;
+    btTriangleMesh *mTriMesh = new btTriangleMesh();
     for (size_t i = 0; i < s->f_count; i++) {
         v = new btVector3[3];
         for (size_t n = 0; n < s->v_per_poly; n++) {
@@ -107,10 +105,28 @@ void BulletPhysics::addRoom(RoomEntity *room) {
         }
         mTriMesh->addTriangle(v[0], v[1], v[2]);
     }
+    return mTriMesh;
+}
+
+void BulletPhysics::addRoom(RoomEntity *room) {
+    cout << "addRoom" << endl;
+//    btTriangleMesh *mTriMesh = new btTriangleMesh();
+//    Shape *s = room->model;
+//    btVector3 *v;
+//    for (size_t i = 0; i < s->f_count; i++) {
+//        v = new btVector3[3];
+//        for (size_t n = 0; n < s->v_per_poly; n++) {
+//            Vector3d vertex = s->vertices[s->faces[i].index[n]];
+//            v[n] = btVector3(-vertex.x, -vertex.y, -vertex.z);
+//        }
+//        mTriMesh->addTriangle(v[0], v[1], v[2]);
+//    }
+    
+    
     btCollisionObject *body = new btCollisionObject();
     room->physics_data = (void *) body;
 
-    body->setCollisionShape(new btBvhTriangleMeshShape(mTriMesh, false));
+    body->setCollisionShape(new btBvhTriangleMeshShape(this->makeTriangleMesh(room->model), false));
 
     body->setUserPointer((void *) room);
     dynamicsWorld->addCollisionObject(body);
@@ -146,18 +162,21 @@ void BulletPhysics::transformEntity(Entity *entity, Vector3d v) {
     //body->setCenterOfMassTransform(btt);
 }
 
-void BulletPhysics::addEntity(Entity *entity) {
+void BulletPhysics::addEntity(ObjectEntity *entity,  bool triangles) {
 
     cout << "Adding to CE: " << entity->name << endl;
     Coords c = entity->getCoords();
-    btCollisionShape* colShape = new btBoxShape(btVector3(entity->boundings[0]->width,
+    btCollisionShape* colShape;
+    
+    if(triangles) {
+       colShape = new btBvhTriangleMeshShape(this->makeTriangleMesh(entity->model), false);
+    } else {
+        colShape = new btBoxShape(btVector3(entity->boundings[0]->width,
             entity->boundings[0]->height,
             entity->boundings[0]->depth
             ));
-    cout << entity->boundings[0]->width << ", "
-            << entity->boundings[0]->height << ", "
-            << entity->boundings[0]->depth
-            << endl;
+    }
+    
     btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, 0, 0)));
 
     btCollisionObject *body = new btCollisionObject();
@@ -199,10 +218,10 @@ void BulletPhysics::rayTest(Vector3d origin, Vector3d direction) {
             btVector3(direction.x, direction.y, direction.z),
             RayCallback
             );
-    if(RayCallback.hasHit()) {
+    if (RayCallback.hasHit()) {
         cout << "Ray has hit" << endl;
-        Entity *a = (Entity *)  RayCallback.m_collisionObject->getUserPointer();
+        Entity *a = (Entity *) RayCallback.m_collisionObject->getUserPointer();
         cout << a->name << endl;
-       
+
     }
 }
