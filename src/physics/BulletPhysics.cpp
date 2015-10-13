@@ -201,5 +201,8 @@ void BulletPhysics::rayTest(Vector3d origin, Vector3d direction) {
             );
     if(RayCallback.hasHit()) {
         cout << "Ray has hit" << endl;
+        Entity *a = (Entity *)  RayCallback.m_collisionObject->getUserPointer();
+        cout << a->name << endl;
+       
     }
 }
