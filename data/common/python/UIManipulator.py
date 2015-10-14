@@ -17,7 +17,7 @@ class UIManipulator(ManipulatorClass):
         self.info_doc.show()
         self.info_doc.add_event_listener(".close-info","click", "info_close")
     
-        form_test = self.ui.add_document("formtest.rml", "form")
-        form_test.add_event_listener('#testform',"submit","form_submit")
-        form_test.show()
+        #form_test = self.ui.add_document("formtest.rml", "form")
+        #form_test.add_event_listener('#testform',"submit","form_submit")
+        #form_test.show()
     

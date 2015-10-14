@@ -4,6 +4,7 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -33,6 +34,7 @@ class Loader {
 protected:
     dep_list dependencies;
     virtual void addDependency(string file_name, void **target, ResourceType type=NONE);
+    map<string, string> params;
 public:
     virtual extensions_s getFileExtensions()=0;
     virtual ResourceType getType()=0;
@@ -42,6 +44,7 @@ public:
     virtual bool handlesEntension(string extension);
     virtual dep_list getDependencies();
     virtual void cleanDependencies();
+    
 };
 
 #endif	

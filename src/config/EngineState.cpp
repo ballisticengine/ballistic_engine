@@ -15,9 +15,7 @@ void EngineState::setString(string key, string setting) {
 }
 
 bool EngineState::getBool(string key) {
-    //    if (bool_settings.count(key)==0) {
-    //        
-    //    }
+
     return bool_settings[key];
 }
 

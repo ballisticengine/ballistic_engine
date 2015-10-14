@@ -14,7 +14,7 @@ extensions_s XMLWorldLoader::getFileExtensions() {
 }
 
 XMLWorldLoader::XMLWorldLoader() {
-    
+
 }
 
 void *XMLWorldLoader::load(string level_name) {
@@ -45,7 +45,6 @@ void *XMLWorldLoader::load(string level_name) {
 
     ptree &rooms = pt.get_child("level.rooms");
     Loader *xml_loader = (Loader *) LibLoad::getInstance()->getLoaderByExtension("xml", SHAPE);
-    
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
         ptree room_p = (ptree) room.second;
@@ -100,7 +99,10 @@ void *XMLWorldLoader::load(string level_name) {
                 //oe->face(rx,ry,rz);
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
-                w->getPhysics()->addEntity(oe); 
+
+                w->getPhysics()->addEntity(oe);
+
+
                 //                if (mi->s->frame_count > 0) {
                 //                    roomE->model_animator.addShape(mi->s);
                 //                }
@@ -133,45 +135,45 @@ void *XMLWorldLoader::load(string level_name) {
         }
 
     }
-    
+
     w->observer.setCamera(&w->default_Camera);
     w->observer.locate(jx, jy, jz);
     w->observer.face(rx, ry, rz);
     w->getPhysics()->addEntity((ObjectEntity *) & w->observer);
-    
-//    Ballistic::Types::Texture *stex = (Ballistic::Types::Texture *) resman->get("@car.bmp"); //??
-//    
-//    this->testsprite = new Sprite(stex);
+
+    //    Ballistic::Types::Texture *stex = (Ballistic::Types::Texture *) resman->get("@car.bmp"); //??
+    //    
+    //    this->testsprite = new Sprite(stex);
     w->active_room = w->rooms[0];
-    
+
     cout << "Loaded world" << endl;
-    
+
     return (void *) w;
 }
 
- bool XMLWorldLoader::save(World *world, string file_name) {
+bool XMLWorldLoader::save(World *world, string file_name) {
     ResourceManager *resman = ResourceManager::getInstance();
     cout << "Dumping to " << file_name << endl;
     ptree root, level, config, jumppoint, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
             vpf, uv_count, s_faces, s_vertices, f_material, f_texture, r_entities;
 
-    
+
     /*
      * Config resman->getResource(shape->textures[fi])->getOrigFilename()
      */
-    
+
     config.put("skybox", resman->getResource(world->sky->getTexture())->getOrigFilename());
     Coords jump_point_c;
-    jump_point_c.rotation.x=0;
-    jump_point_c.rotation.y=0;
-    jump_point_c.rotation.z=0;
-    jump_point_c.translation.x=0;
-    jump_point_c.translation.y=0;
-    jump_point_c.translation.z=0;
-    
+    jump_point_c.rotation.x = 0;
+    jump_point_c.rotation.y = 0;
+    jump_point_c.rotation.z = 0;
+    jump_point_c.translation.x = 0;
+    jump_point_c.translation.y = 0;
+    jump_point_c.translation.z = 0;
+
     config.add_child("jump_point", makeCoordsNode(jump_point_c));
-    
-    
+
+
     /*
      * Geometry
      */
@@ -251,7 +253,7 @@ void *XMLWorldLoader::load(string level_name) {
     room.add_child("ambient_light", makeRGBANode(rambient.r, rambient.g, rambient.b, rambient.a));
     room.add_child("shape", r_shape);
 
-    for (size_t i = 0; i<world->active_room->models.size(); i++) {
+    for (size_t i = 0; i < world->active_room->models.size(); i++) {
         ptree *r_entity = new ptree();
 
         r_entity->put("name", "[OBJECT]" + world->active_room->models[i]->name);
@@ -271,7 +273,7 @@ void *XMLWorldLoader::load(string level_name) {
         delete r_entity;
     }
 
-    for (size_t i = 0; i<world->active_room->lights.size(); i++) {
+    for (size_t i = 0; i < world->active_room->lights.size(); i++) {
         ptree *r_entity = new ptree();
         r_entity->put("name", world->active_room->lights[i]->name);
         r_entity->put("type", "light");
@@ -300,7 +302,7 @@ void *XMLWorldLoader::load(string level_name) {
     root.add_child("level", level);
 
     write_xml(file_name, root);
- }
+}
 
 extern "C" {
 
