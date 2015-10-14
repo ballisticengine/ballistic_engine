@@ -11,6 +11,7 @@ using namespace std;
 
 #include "resources/exceptions.hpp"
 #include "types/Resource.hpp"
+#include "misc/State.hpp"
 
 
 enum ResourceType {
@@ -30,7 +31,7 @@ struct LoaderDependency {
 typedef vector<LoaderDependency> dep_list; 
 typedef set<string> extensions_s;
 
-class Loader {
+class Loader : public State {
 protected:
     dep_list dependencies;
     virtual void addDependency(string file_name, void **target, ResourceType type=NONE);

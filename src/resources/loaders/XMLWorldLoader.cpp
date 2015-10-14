@@ -100,7 +100,15 @@ void *XMLWorldLoader::load(string level_name) {
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
 
-                w->getPhysics()->addEntity(oe);
+                
+                if(this->getBool("triangles")) {
+                    cout << "USING TRIANGLES" << endl;
+                    w->getPhysics()->addEntity(oe, true);
+                } else {
+                    w->getPhysics()->addEntity(oe);
+                }
+                
+                
 
 
                 //                if (mi->s->frame_count > 0) {
