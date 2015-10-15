@@ -207,7 +207,7 @@ void BulletPhysics::addEntity(ObjectEntity *entity,  bool triangles) {
 }
 
 void BulletPhysics::rayTest(Vector3d origin, Vector3d direction) {
-    direction = direction * 1000.0f;
+    //direction = direction * 1000.0f;
 
     btCollisionWorld::ClosestRayResultCallback RayCallback(
             btVector3(origin.x, origin.y, origin.z),

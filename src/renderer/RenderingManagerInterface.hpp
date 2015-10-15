@@ -11,6 +11,7 @@ protected:
      RendererInterface *renderer;
      flush_function flush_callback;
      vector<RenderingAction *> actions;
+     virtual void doActions();
 public:
     RenderingManagerInterface();
     virtual ~RenderingManagerInterface();
