@@ -23,7 +23,7 @@ public:
     ColorRGB(unsigned int i);
     ColorRGB(e_loc r, e_loc g,e_loc b);
     e_loc r,g,b;
-    bool operator=(const ColorRGB &color);
+    bool operator==(const ColorRGB &color);
 };
 
 
@@ -32,7 +32,7 @@ public:
     ColorRGBA() {};
     ColorRGBA(unsigned int i);
     ColorRGBA(e_loc r, e_loc g,e_loc b, e_loc a);
-    bool operator=(const ColorRGBA &color);
+    bool operator==(const ColorRGBA &color);
     e_loc a;
 };
 

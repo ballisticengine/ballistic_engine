@@ -24,7 +24,7 @@ ColorRGB::ColorRGB(e_loc r, e_loc g,e_loc b) : r(r), g(b), b(b) {
     
 }
 
-bool ColorRGB::operator=(const ColorRGB &color) {
+bool ColorRGB::operator==(const ColorRGB &color) {
     return (r==color.r && g==color.g && b==color.b);
 }
 
@@ -33,7 +33,7 @@ bool ColorRGB::operator=(const ColorRGB &color) {
 ColorRGBA::ColorRGBA(e_loc r, e_loc g,e_loc b, e_loc a) :ColorRGB(r,g,b), a(a) {
 }
 
-bool ColorRGBA::operator=(const ColorRGBA &color) {
+bool ColorRGBA::operator==(const ColorRGBA &color) {
     return (r==color.r && g==color.g && b==color.b && a==color.a);
 }
 

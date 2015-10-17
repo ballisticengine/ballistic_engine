@@ -149,16 +149,16 @@ BulletPhysics World::getPhysicsEngine() {
 void World::colorize() {
     cout << "COLORIZE" << endl;
     unsigned int i=0;
-//    for (auto r : this->rooms) {
-//        r->color =ColorRGBA(i);
-//        cout << "C " << r->color.r << ", " << r->color.g << ", " << r->color.b << "," << r->color.a << endl;
-//        i++;
-//        for(auto o: r->models) {
-//            o->color = ColorRGBA(i);
-//            i++;
-//            cout << "C " << o->color.r << ", " << o->color.g << ", " << o->color.b << "," << o->color.a << endl;
-//        }
-//    }
+    for (auto r : this->rooms) {
+        r->color =ColorRGBA(i);
+        cout << "C " << r->color.r << ", " << r->color.g << ", " << r->color.b << "," << r->color.a << endl;
+        i++;
+        for(auto o: r->models) {
+            o->color = ColorRGBA(i);
+            i++;
+            cout << "C " << o->color.r << ", " << o->color.g << ", " << o->color.b << "," << o->color.a << endl;
+        }
+    }
     
     
 }
@@ -174,19 +174,21 @@ ObjectEntity *World::findEntityByID(size_t id) {
             }
         }
     }
+    return 0;
 }
 
 ObjectEntity *World::findEntityByColor(ColorRGBA color) {
     
-//    for(auto r: this->rooms) {
-//        if (rooms[0]->color==color) {
-//            //return r;
-//        }
-//        for(auto o: r->models) {
-//            if(o->color==color) {
-//                return o;
-//            }
-//        }
-//    }
+    for(auto r: this->rooms) {
+        if (r->color==color) {
+            return r;
+        }
+        for(auto o: r->models) {
+            if(o->color==color) {
+                return o;
+            }
+        }
+    }
+    
     return 0;
 }
