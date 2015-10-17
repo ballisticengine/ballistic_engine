@@ -31,6 +31,7 @@ public:
     void printVelocity();
     virtual Material *getMaterial();
     virtual void setMaterial(Material *mat);
+    ColorRGBA color; //for color picking
 
 
 

@@ -40,6 +40,7 @@ public:
     string type;
     string subtype;
     Entity *parent;
+    size_t id;
    
     virtual void translate3(e_loc x, e_loc y, e_loc z);
     virtual void translate(e_loc x, e_loc y, e_loc z);

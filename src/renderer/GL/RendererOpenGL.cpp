@@ -8,6 +8,8 @@ Rocket::Core::RenderInterface * RendererOpenGL::getUiRenderer() {
 }
 
 void RendererOpenGL::init(size_t width, size_t height, SDLIOInterface *io) {
+    this->width = width;
+    this->height = height;
     this->io = io;
     light_numbers[0] = GL_LIGHT0;
     light_numbers[1] = GL_LIGHT1;
@@ -361,8 +363,37 @@ Frustum RendererOpenGL::getFrustum() {
 }
 
 void RendererOpenGL::clear(ColorRGBA color) {
-   glClearColor(color.r, color.g, color.b, color.a);
-   glClear(GL_COLOR_BUFFER_BIT); 
+    glClearColor(color.r, color.g, color.b, color.a);
+    glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void RendererOpenGL::setDrawColor(ColorRGBA color) {
+    glColor4f(color.r, color.g, color.b, color.a);
+}
+
+void RendererOpenGL::enableTexturing(bool enable) {
+    if (enable) {
+        glEnable(GL_TEXTURE_2D);
+    } else {
+        glDisable(GL_TEXTURE_2D);
+    }
+}
+
+ColorRGBA RendererOpenGL::readPixel(int x, int y) {
+    //void glReadPixels(GLint  x,  GLint  y,  GLsizei  width,  GLsizei  height,  GLenum  format,  GLenum  type,  GLvoid *  data);
+    glFlush();
+    glFinish();
+    y = height - y;
+    float data[4];
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glReadPixels(x, y, 1, 1, GL_RGBA, GL_FLOAT, data);
+    ColorRGBA c;
+    c.r = data[0];
+    c.g = data[1];
+    c.b = data[2];
+    c.a = data[3];
+    return c;
+    //    return ColorRGBA(data[0], data[1], data[2], data[3]);
 }
 
 extern "C" {

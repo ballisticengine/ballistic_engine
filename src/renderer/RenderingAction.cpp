@@ -22,6 +22,6 @@ void RenderingAction::renderWithDecorators() {
     }
 }
 
-void RenderingAction::setDecorator(RenderingActionDecorator *decorator) {
+void RenderingAction::setDecorator(RenderingActionDecorator *decorator, void *data) {
     this->decorator = decorator;
 }

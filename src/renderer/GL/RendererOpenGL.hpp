@@ -41,6 +41,9 @@ public:
     virtual void setFrustum(Frustum frustum);
     virtual Frustum getFrustum();
     virtual void clear(ColorRGBA color);
+    virtual void setDrawColor(ColorRGBA color);
+    virtual void enableTexturing(bool enable);
+    ColorRGBA readPixel(int x, int y);
 };
 
 

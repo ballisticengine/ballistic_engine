@@ -22,7 +22,7 @@ public:
     virtual void setRenderer(RendererInterface *ri);
     virtual void render()=0;
     virtual void renderWithDecorators();
-    virtual void setDecorator(RenderingActionDecorator *decorator);
+    virtual void setDecorator(RenderingActionDecorator *decorator, void *data=0);
 };
 
 

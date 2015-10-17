@@ -15,6 +15,8 @@
 
 
 class RendererInterface {
+protected:
+    size_t width, height;
 public:
     //TODO: lighting refactor 
 
@@ -70,11 +72,17 @@ public:
     };
     
     
+    virtual void setDrawColor(ColorRGBA color) {}
+    
+    virtual void enableTexturing(bool enable) {} ;
+    
     virtual void renderUI() {}
     
     virtual void clear(ColorRGBA color) {}
     
     virtual void face(Vector3d &v);
+    
+    virtual ColorRGBA readPixel(int x, int y) {}
 };
 
 #endif

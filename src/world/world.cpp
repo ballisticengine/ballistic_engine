@@ -1,6 +1,5 @@
 #include "world/World.hpp"
-
-
+#include "misc/utils.hpp"
 
 void World::prepare() {
 
@@ -40,7 +39,7 @@ void World::moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision)
     }
 
 
-   
+
 
     rooms_list rl = this->rooms;
     obj_list objs = this->active_room->models;
@@ -66,33 +65,33 @@ void World::moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision)
             if (ci.collided) {
                 lc = true;
 
-                PyScripting::getInstance()->broadcast("entity_collision", {(void *) e, (void *) objs[i], (void *) &ci});
-            } 
+                PyScripting::getInstance()->broadcast("entity_collision",{(void *) e, (void *) objs[i], (void *) &ci});
+            }
         }
 
         /*
         Kolizje z poziomem
          */
-       
+
         size_t rl_size = rl.size();
         CollisionInfo ci;
         for (int i = 0; i < rl_size; i++) {
             ci = collisions.roomCollide(rl[i], e, c); //rl[i]->collides(e, c);
-            
+
             if (ci.collided) {
-                lc=true;
-                PyScripting::getInstance()->broadcast("level_collision", {(void *) e, (void *) rl[i], (void *) &ci});
-                
-            } 
+                lc = true;
+                PyScripting::getInstance()->broadcast("level_collision",{(void *) e, (void *) rl[i], (void *) &ci});
+
+            }
         }
     }
     //TODO move this to python or stick with c++ only for collisions
-//    if (!lc) {
-        e->translate(c); 
-        if (movement) {
-            PyScripting::getInstance()->broadcast("entity_movement", {(void *) e});
-        }
-//    }
+    //    if (!lc) {
+    e->translate(c);
+    if (movement) {
+        PyScripting::getInstance()->broadcast("entity_movement",{(void *) e});
+    }
+    //    }
     e->rotate(c.rotation.x, c.rotation.x, c.rotation.z);
 
 
@@ -109,7 +108,7 @@ void World::moveEntities() {
     for (int i = 0; i < things.size(); i++) {
 
         ObjectEntity *e = things[i];
-         this->moveEntity((ObjectEntity *) e, lt, false);
+        this->moveEntity((ObjectEntity *) e, lt, false);
 
     }
 
@@ -140,8 +139,54 @@ ObserverEntity * World::getObserver() {
 
 void World::addRoomEntity(RoomEntity *e) {
     this->rooms.push_back(e);
+    entity_counter++;
 }
 
- BulletPhysics World::getPhysicsEngine() {
-     return this->collisions;
- }
+BulletPhysics World::getPhysicsEngine() {
+    return this->collisions;
+}
+
+void World::colorize() {
+    cout << "COLORIZE" << endl;
+    unsigned int i=0;
+//    for (auto r : this->rooms) {
+//        r->color =ColorRGBA(i);
+//        cout << "C " << r->color.r << ", " << r->color.g << ", " << r->color.b << "," << r->color.a << endl;
+//        i++;
+//        for(auto o: r->models) {
+//            o->color = ColorRGBA(i);
+//            i++;
+//            cout << "C " << o->color.r << ", " << o->color.g << ", " << o->color.b << "," << o->color.a << endl;
+//        }
+//    }
+    
+    
+}
+
+ObjectEntity *World::findEntityByID(size_t id) {
+    for(auto r: this->rooms) {
+        if(r->id==id) {
+            return r;
+        }
+        for(auto o: r->models) {
+            if(o->id==id) {
+                return o;
+            }
+        }
+    }
+}
+
+ObjectEntity *World::findEntityByColor(ColorRGBA color) {
+    
+//    for(auto r: this->rooms) {
+//        if (rooms[0]->color==color) {
+//            //return r;
+//        }
+//        for(auto o: r->models) {
+//            if(o->color==color) {
+//                return o;
+//            }
+//        }
+//    }
+    return 0;
+}

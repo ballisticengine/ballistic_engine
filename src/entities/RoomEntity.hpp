@@ -23,6 +23,7 @@ typedef vector <Sprite *> decal_list;
 class RoomEntity : public ObjectEntity {
 protected:
     PreloadStore *preload_store;
+    size_t entity_counter;
 public:
 	//ModelAnimator model_animator;
 	ent_list entities;

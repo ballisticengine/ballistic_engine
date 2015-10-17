@@ -12,6 +12,7 @@ RoomEntity::~RoomEntity() {
 
 void RoomEntity::addEntity(Entity *e) {
     this->entities.push_back(e);
+    entity_counter++;
 }
 void RoomEntity::addObjectEntity(ObjectEntity *e) {
     this->models.push_back(e);

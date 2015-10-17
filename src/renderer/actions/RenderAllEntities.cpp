@@ -5,6 +5,7 @@ void RenderAllEntities::render() {
     size_t ents_size = ents.size();
     for (size_t i = 0; i < ents_size; i++) {
         Coords c = ents[i]->getCoords();
+        this->renderer->setDrawColor(ColorRGBA(ents[i]->id));
         this->renderer->resetMatrix();
         this->renderer->positionCamera(world->getObserver()->getCamera());
         this->renderer->translate(c.translation);

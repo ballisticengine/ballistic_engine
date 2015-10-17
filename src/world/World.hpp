@@ -58,7 +58,7 @@ protected:
     OctreeNode *octree;
     BulletPhysics collisions;
     void cleanup();
-
+    size_t entity_counter;
 public:
     BulletPhysics *getPhysics();
     Camera default_Camera;
@@ -86,6 +86,9 @@ public:
 
 
     void addRoomEntity(RoomEntity *e);
+    void colorize();
+    ObjectEntity *findEntityByColor(ColorRGBA c);
+    ObjectEntity *findEntityByID(size_t id);
 
 };
 

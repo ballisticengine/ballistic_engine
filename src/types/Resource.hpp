@@ -6,7 +6,6 @@
 using namespace std;
 
 
-
 class Resource {
 protected:
     string filename, orig_filename;
@@ -16,7 +15,7 @@ public:
     virtual void setFilename(string fn);
     virtual void setOrigFilename(string fn);
     Resource * getResource();
-    
+
 };
 
 #endif	

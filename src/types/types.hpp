@@ -17,24 +17,22 @@
 using namespace std;
 
 
-/**
-* Pomocnicza klasa reprezentująca kolor RGB
-*/
-
 class ColorRGB {
 public:
     ColorRGB() {};
-    ColorRGB(e_loc r, e_loc g,e_loc b) : r(r), g(b), b(b) {};
+    ColorRGB(unsigned int i);
+    ColorRGB(e_loc r, e_loc g,e_loc b);
     e_loc r,g,b;
+    bool operator=(const ColorRGB &color);
 };
 
-/**
-* Rozszerzenie colorRGB o kanał Alpha
-*/
+
 class ColorRGBA : public ColorRGB {
 public:
     ColorRGBA() {};
-    ColorRGBA(e_loc r, e_loc g,e_loc b, e_loc a) :ColorRGB(r,g,b), a(a) {};
+    ColorRGBA(unsigned int i);
+    ColorRGBA(e_loc r, e_loc g,e_loc b, e_loc a);
+    bool operator=(const ColorRGBA &color);
     e_loc a;
 };
 
