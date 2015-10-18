@@ -15,7 +15,7 @@ protected:
     map<Ballistic::Types::Texture *, GLuint> textures_ids;
     void assignTexture(Ballistic::Types::Texture *t);
     void assignMaterial(Material *m);
-    void addShader(string name);
+    
     GLhandleARB p;
     size_t light_counter;
     map <int, GLint> light_numbers;
@@ -44,6 +44,7 @@ public:
     virtual void setDrawColor(ColorRGBA color);
     virtual void enableTexturing(bool enable);
     ColorRGBA readPixel(int x, int y);
+    void addShader(string name);
 };
 
 

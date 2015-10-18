@@ -46,6 +46,7 @@ RenderingManager::~RenderingManager() {
 }
 
 void RenderingManager::setupTextures() {
+    this->renderer->addShader("light");
     cout << "setupTextures" << endl;
     vector<LoadedResource *> ts = ResourceManager::getInstance()->getByType(TEXTURE);
 

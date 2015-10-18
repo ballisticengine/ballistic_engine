@@ -42,7 +42,7 @@ void RendererOpenGL::init(size_t width, size_t height, SDLIOInterface *io) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-    addShader("light");
+    //addShader("light");
 
 }
 
@@ -83,6 +83,7 @@ void RendererOpenGL::addShader(string name) {
     char *vf = Utils::loadText("data/shaders" + string("/") + name + ".vert"), *ff =
             Utils::loadText("data/shaders" + string("/") + name + ".frag");
     if (!vf || !ff) {
+        cout << "Error loading shaders" << endl;
         return;
     }
     const char *vfc = vf, *ffc = ff;
@@ -143,7 +144,7 @@ void RendererOpenGL::addShader(string name) {
     glUniform1i(glsl_bounding, 0);
     glUniform1i(glGetUniformLocation(p, "light_count"), 7); //!!
 
-
+    cout << "Shader " << name << " loaded" << endl;
     //shaders.push_back(p);
 
 }

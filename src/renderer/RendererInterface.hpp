@@ -83,6 +83,8 @@ public:
     virtual void face(Vector3d &v);
     
     virtual ColorRGBA readPixel(int x, int y) {}
+    
+    virtual void addShader(string name) {}
 };
 
 #endif
