@@ -25,9 +25,6 @@ RenderingManager::RenderingManager() {
     if (!this->world) {
         return;
     }
-    if (world->sky) {
-        world->sky->makeShape(20, 20); //TODO: move this to world loader
-    }
     
     addAction(new PositionLights());
     addAction(new RenderSkybox());

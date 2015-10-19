@@ -30,7 +30,8 @@ void *XMLWorldLoader::load(string level_name) {
     this->addDependency(skyfn, (void **) &sky_texture);
     resman->resolveAllDependencies();
     w->sky = new Skybox(sky_texture);
-
+    w->sky->makeShape(20, 20);
+            
     ptree& jump_point = pt.get_child("level.config.jump_point");
 
     e_loc jx = jump_point.get<e_loc>("x"),
