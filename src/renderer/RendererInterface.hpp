@@ -12,6 +12,7 @@
 #include "entities/light.hpp"
 #include "renderer/Frustum.hpp"
 #include "io/SDLIOInterface.hpp"
+#include "renderer/Shader.hpp"
 
 
 class RendererInterface {
@@ -85,6 +86,8 @@ public:
     virtual ColorRGBA readPixel(int x, int y) {}
     
     virtual void addShader(string name) {}
+    
+    virtual void useShader(string name) {}
 };
 
 #endif
