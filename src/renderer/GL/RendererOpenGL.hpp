@@ -45,6 +45,7 @@ public:
     virtual void enableTexturing(bool enable);
     ColorRGBA readPixel(int x, int y);
     void addShader(string name);
+    virtual void turnLights(bool on);
 };
 
 

@@ -88,6 +88,8 @@ public:
     virtual void addShader(string name) {}
     
     virtual void useShader(string name) {}
+    
+    virtual void turnLights(bool on) {}
 };
 
 #endif

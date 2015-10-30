@@ -7,6 +7,14 @@ Rocket::Core::RenderInterface * RendererOpenGL::getUiRenderer() {
     return ui_renderer;
 }
 
+void RendererOpenGL::turnLights(bool on) {
+    if(on) {
+        glUseProgram(p);
+    } else {
+        glUseProgram(0);
+    }
+}
+
 void RendererOpenGL::init(size_t width, size_t height, SDLIOInterface *io) {
     this->width = width;
     this->height = height;
