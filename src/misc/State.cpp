@@ -16,6 +16,10 @@ void State::setString(string key, string setting) {
     this->processHandlers(key);
 }
 
+void State::setPtr(string key, void *ptr) {
+    ptr_settings[key]=ptr;
+}
+
 bool State::getBool(string key) {
 
     return bool_settings[key];
@@ -23,6 +27,10 @@ bool State::getBool(string key) {
 
 string State::getString(string key) {
     return string_settings[key];
+}
+
+void * State::getPtr(string key) {
+    return ptr_settings[key];
 }
 
 void State::toggleBool(string key) {
@@ -45,14 +53,14 @@ void State::processHandlers(string key) {
         data.type = STATE_BOOL;
     }
     
-    state_change_callback callback = handlers[key];
-    callback(data);
+    handlers[key]->after(data);
+    
     
     
 }
 
-void State::setStateHandler(string key, state_change_callback callback) {
-    this->handlers[key] = callback;
+void State::setStateHandler(string key, StateHandler *handler) {
+    this->handlers[key] = handler;
 }
 
 void State::deleteStateHandler(string name) {
