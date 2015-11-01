@@ -28,6 +28,7 @@ public:
     void setContent(string id, string content);
     void addEventListener(string id, string event, string signal);
     void getElements(string selector, ElementList & elements);
+    RC::Element * getElementById(string id);
     RC::ElementDocument * getDocument();
     void show();
     void hide();

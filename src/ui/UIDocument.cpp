@@ -5,9 +5,13 @@ UIDocument::UIDocument(RC::ElementDocument *document, string file_name, string n
 }
 
 UIDocument::~UIDocument() {
-    for(auto l: listeners) {
+    for (auto l : listeners) {
         delete l;
     }
+}
+
+RC::Element * UIDocument::getElementById(string id) {
+    return document->GetElementById(id.c_str());
 }
 
 void UIDocument::getElements(string selector, ElementList & elements) {
@@ -44,10 +48,10 @@ void UIDocument::addEventListener(string id, string event, string signal) {
     } else {
         listen = new SignalListener(signal);
     }
-    
+
     listeners.push_back(listen);
     for (auto el : elements) {
-        
+
         el->AddEventListener(event.c_str(), listen, false);
     }
 }
