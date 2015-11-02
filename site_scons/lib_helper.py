@@ -19,8 +19,8 @@ def make_shared(target_file, sources, target_path, LIBS):
 
     lib = env.SharedLibrary(target_file,
                             sources,
-                         LIBS=LIBS,
-                         LIBPATH='.',
+                         LIBS=LIBS+['engine'],
+                         LIBPATH='../../bin',
                         CXXFLAGS=COMMON_CXX_FLAGS,
     )
     fn = target_file+".so"

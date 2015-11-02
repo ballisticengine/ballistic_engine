@@ -11,20 +11,21 @@ ALL_LIBS = GENERAL_LIBS + BOOST_LIBS + SDL_LIBS + GL_LIBS + BULLET_LIBS + ROCKET
 src = './src/'
 
 
-SConscript(src+'resources/SConstruct')
-SConscript(src+'renderer/SConstruct')
-
-
 env = Environment(CPPPATH=[
     '/usr/include/python2.7',
     '/usr/include/bullet',
-      './src/ui/librocket_interfaces',
+    './src/ui/librocket_interfaces',
     '/usr/local/include/Rocket',
     './src',
-   # './libRocket',
 ])
 
-
+main_env = Environment(CPPPATH=[
+    './src',
+     '/usr/include/python2.7',
+    '/usr/include/bullet',
+    './src/ui/librocket_interfaces',
+    '/usr/local/include/Rocket',
+])
 
 modules = [
     Glob(src + 'types/*.cpp'),
@@ -48,12 +49,9 @@ modules = [
     Glob(src + 'renderer/*.cpp'),
     Glob(src + 'renderer/actions/*.cpp'),
     Glob('./src/ui/librocket_interfaces/*.cpp'),
-   # Glob('./libRocket/Source/Core/Factory.cpp'),
-   # Glob('./libRocket/Source/Core/Python/*.cpp'),
-
 ]
 
-main_modules = modules + [Glob(src + 'main.cpp'),]
+main_modules =  [Glob(src + 'main.cpp'),]
 
 test_modules = modules + [
     src + '/test/test.cpp',
@@ -61,11 +59,15 @@ test_modules = modules + [
 
 ]
 
-env.Append(LINKFLAGS='-rdynamic')
+env.Append(LINKFLAGS=['-rdynamic'])
 
-env.Program('./bin/ballistic', main_modules, LIBS=ALL_LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
+env.Library('./bin/engine', modules, LIBS=ALL_LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS+' -fPIC', )
 
+main_env.Program('./bin/ballistic', main_modules, LIBS=['engine']+ALL_LIBS, LIBPATH='./bin', CXXFLAGS=COMMON_CXX_FLAGS, )
+main_env.Append(LINKFLAGS=['-rdynamic'])
 
+SConscript(src+'resources/SConstruct')
+SConscript(src+'renderer/SConstruct')
 
 if 'test' in COMMAND_LINE_TARGETS:
     test = env.Program('./test/test', test_modules, LIBS=ALL_LIBS+TEST_LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
