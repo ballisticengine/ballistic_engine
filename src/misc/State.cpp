@@ -54,6 +54,11 @@ void State::processHandlers(string key) {
         data.type = STATE_BOOL;
     }
     
+    if(ptr_settings.count(key)) {
+        data.value = &bool_settings[key];
+        data.type = STATE_PTR;
+    }
+    
     handlers[key]->after(data);
     
     
