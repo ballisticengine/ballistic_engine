@@ -55,7 +55,7 @@ void State::processHandlers(string key) {
     }
     
     if(ptr_settings.count(key)) {
-        data.value = &bool_settings[key];
+        data.value = ptr_settings[key];
         data.type = STATE_PTR;
     }
     
