@@ -61,7 +61,8 @@ test_modules = modules + [
 
 env.Append(LINKFLAGS=['-rdynamic'])
 
-env.Library('./bin/engine', modules, LIBS=ALL_LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
+env.SharedLibrary('./bin/engine', modules, LIBS=ALL_LIBS, LIBPATH='.', CXXFLAGS=COMMON_CXX_FLAGS, )
+env.Append(LINKFLAGS=['-Wl,-soname,libengine.so'])
 
 main_env.Program('./bin/ballistic', main_modules, LIBS=['engine']+ALL_LIBS, LIBPATH='./bin', CXXFLAGS=COMMON_CXX_FLAGS, )
 main_env.Append(LINKFLAGS=['-rdynamic'])
