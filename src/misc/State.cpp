@@ -18,6 +18,7 @@ void State::setString(string key, string setting) {
 
 void State::setPtr(string key, void *ptr) {
     ptr_settings[key]=ptr;
+    this->processHandlers(key);
 }
 
 bool State::getBool(string key) {
