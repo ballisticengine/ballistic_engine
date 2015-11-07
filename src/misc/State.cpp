@@ -21,6 +21,15 @@ void State::setPtr(string key, void *ptr) {
     this->processHandlers(key);
 }
 
+void State::setNumber(string key, double n) {
+    number_settings[key] = n;
+    this->processHandlers(key);
+}
+
+double State::getNumber(string key) {
+    return number_settings[key];
+}
+    
 bool State::getBool(string key) {
 
     return bool_settings[key];
