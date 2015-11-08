@@ -1,7 +1,6 @@
 
 class UIManipulator(ManipulatorClass):
     def info_close(self, x):
-        print "x=", x
         self.info_doc.hide()
         self.engine_state.set_bool('attach_mouse', True)
         
