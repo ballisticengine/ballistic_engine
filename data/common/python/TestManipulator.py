@@ -43,11 +43,9 @@ class TestManipulator(ManipulatorClass):
     def key_press(self, key):
 
         if key == 1073741893: #F12
-            self.engine_state.toggle_bool('edit_mode')
-            print self.engine_state.get_bool('edit_mode')
-
-        if key == 1073741892: #F11
-            self.world_manager.save_into("test.xml")
+           
+            print "F12"
+        
 
         if key == 27:
             self.engine_state.set_bool('exit', True)

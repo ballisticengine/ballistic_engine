@@ -89,7 +89,11 @@ void SdlIO::keyboardInputThread() {
     UI *ui = UI::getInstance();
     while (!EngineState::getInstance()->getBool("exit")) {
        // ui->kb_m.lock();
+        if(!ui->m.try_lock()) {
+            continue;
+        }
         keyboard_state = SDL_GetKeyboardState(&ksize);
+         ui->m.unlock();
         down_count = 0;
         up_count = 0;
 
@@ -98,7 +102,6 @@ void SdlIO::keyboardInputThread() {
                 // cout << i << endl;
                 down_count++;
                 KeybindAction action = kmap[i];
-                //PyScripting::getInstance()->enqueue(action.name,{0}, true); //TO WYDUPIA
                 PyScripting::getInstance()->enqueue(action.name,{0}, true); //TO WYDUPIA
 
             } else {
@@ -119,7 +122,7 @@ void SdlIO::keyboardInputThread() {
             // cout << "Up count " << up_count << endl;
             PyScripting::getInstance()->broadcast("key_up",{(void *) keyboard_state});
         }
-       /// ui->kb_m.unlock();
+       
     }
 }
 
@@ -137,7 +140,7 @@ void SdlIO::mouseInputThread() {
     
     static Uint32 mouse_state;
     while (!EngineState::getInstance()->getBool("exit")) {
-
+      
         if (EngineState::getInstance()->getBool("attach_mouse")) {
             attachMouse();
         } else {
@@ -181,14 +184,15 @@ void SdlIO::eventLoop() {
             if (event.type == SDL_QUIT) {
                 EngineState::getInstance()->setBool("exit", true);
             }
-            //Maybe move io thread logic here...
 
             if (event.type == SDL_KEYDOWN) {
                 EngineState::getInstance()->setBool("keypress", true);
                 PyScripting::getInstance()->broadcast("key_press",{(void *) &event.key.keysym.sym});
             }
 
+            PyScripting::getInstance()->lockWait();
             ui->processSDLEvent(event);
+            PyScripting::getInstance()->m.unlock();
         }
         
         rendering->render();

@@ -48,22 +48,23 @@ protected:
     man_map manipulators_map;
     queue<SignalType> sig_queue;
     bool processing, other_bcast;
-    boost::mutex m;
-    void lockWait();
+
 
 public:
+    boost::mutex m;
+    void lockWait();
     PyScripting();
     void operator()();
     void broadcast(string name,
-            initializer_list<void *> params = {}, bool check_existing = false, bool ui_signal=false);
-    
+            initializer_list<void *> params = {}, bool check_existing = false, bool ui_signal = false);
+
     void enqueue(string name,
             initializer_list<void *> params = {}, bool check_existing = false);
-    
+
     void clear_queue();
     void runQueue();
-//    void broadcast(string name,
-//            map<string,string> params, bool check_existing = false);
+    //    void broadcast(string name,
+    //            map<string,string> params, bool check_existing = false);
     void broadcastInit();
     man_vector getManipulatorsV();
     PyManipulator* getManipulator(string name);

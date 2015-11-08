@@ -44,7 +44,8 @@ void UI::showDebug(bool show) {
 }
 
 RC::Context * UI::getContext() {
-    return context;
+    
+    return RC::GetContext("ui");
 }
 
 UIDocument * UI::addDocument(std::string file, string name) {
@@ -61,9 +62,10 @@ UIDocument * UI::getDocument(string name) {
     return docmap[name];
 }
 
-void UI::processSDLEvent(SDL_Event &event) {
+void UI::processSDLEvent(SDL_Event event) {
 
-
+    RC::Context * context = getContext();
+    
     switch (event.type) {
         case SDL_MOUSEMOTION:
             context->ProcessMouseMove(event.motion.x,
@@ -95,8 +97,6 @@ void UI::processSDLEvent(SDL_Event &event) {
 
             break;
     }
-
-
 }
 
 UI::~UI() {

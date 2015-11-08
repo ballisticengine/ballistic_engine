@@ -1,4 +1,4 @@
-
+import rocket
 class UIManipulator(ManipulatorClass):
     def info_close(self):
         self.info_doc.hide()
@@ -15,7 +15,7 @@ class UIManipulator(ManipulatorClass):
          self.engine_state.get_string('version')
         )
         self.info_doc.show()
-        self.info_doc.add_event_listener(".close-info","click", "info_close")
+        #self.info_doc.add_event_listener(".close-info","click", "info_close")
     
         #form_test = self.ui.add_document("formtest.rml", "form")
         #form_test.add_event_listener('#testform',"submit","form_submit")

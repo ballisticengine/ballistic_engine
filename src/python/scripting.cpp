@@ -1,12 +1,6 @@
 #include "python/scripting.hpp"
 
 
-//#include "Python.h"
-//#include "Source/Core/Python/ContextProxy.h"
-//#include "Source/Core/Python/ContextDocumentProxy.h"
-//#include "Source/Core/Python/ElementInterface.h"
-//#include "Include/Rocket/Core/Factory.h"
-
 void PyScripting::init() {
     Py_Initialize();
     PyEval_InitThreads();
@@ -54,8 +48,7 @@ PyScripting::~PyScripting() {
 
 void PyScripting::broadcast(string name, initializer_list<void *> params,
         bool check_existing, bool ui_signal) {
-
-
+    
     this->lockWait();
 
     for (int i = 0; i < manipulators.size(); i++) {

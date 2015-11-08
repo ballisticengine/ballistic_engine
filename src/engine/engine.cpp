@@ -4,17 +4,17 @@
 
 void Engine::pythonInit() {
     PyScripting::getInstance()->init();
-    PyScripting::getInstance()->loadManipulators(); 
+    PyScripting::getInstance()->loadManipulators();
 }
 
 void Engine::registerModules() {
-    
+
 }
 
 void Engine::prepare() {
     cout << "Preparing..." << endl;
     cout << "Config init..." << endl;
-    
+
     Config::getInstance();
     LibLoad::getInstance()->setWD("./bin");
     LibLoad::getInstance()->discoverLoaders();
@@ -31,13 +31,13 @@ void Engine::prepare() {
     EngineState::getInstance()->setString("version", "Staging");
 
     cout << "Loading world...\n";
-    
-    ResourceManager::getInstance()->setWD(string(CONFIG_DIR)); 
+
+    ResourceManager::getInstance()->setWD(string(CONFIG_DIR));
     ResourceManager::getInstance()->setLevel(Config::getInstance()->getStart());
-    World *w = (World*)ResourceManager::getInstance()->get("level.xml", LEVEL);
+    World *w = (World*) ResourceManager::getInstance()->get("level.xml", LEVEL);
     ResourceManager::getInstance()->resolveAllDependencies();
     WorldManager::getInstance()->setWorld(w);
-  
+
     VideoData vd = *Config::getInstance()->getVD();
 
     LibLoad::getInstance()->registerModule("renderer2", "RendererOpenGL", "returnRenderer");
@@ -46,7 +46,7 @@ void Engine::prepare() {
     RenderingManager *rendering = RenderingManager::getInstance();
 
     rendering->setRenderer(ri);
-    
+
     cout << "IO\n";
     io = new SdlIO();
 
@@ -58,10 +58,10 @@ void Engine::prepare() {
 
     string ui_dir = "./data/ui/";
 
-    Rocket::Core::RenderInterface  *ui_renderer = ri->getUiRenderer();
+    Rocket::Core::RenderInterface *ui_renderer = ri->getUiRenderer();
     RocketSDL2SystemInterface *system_interface = new RocketSDL2SystemInterface();
     Rocket::Core::FileInterface *file_interface = new ShellFileInterface(ui_dir.c_str());
-    
+
     UI *ui = UI::getInstance();
 
     if (!ui->init(system_interface, ui_renderer, file_interface, rendering->getRenderer())) {
@@ -82,9 +82,9 @@ Engine::~Engine() {
 
 }
 
-void Engine::start() {    
+void Engine::start() {
     boost::thread(boost::bind(&SdlIO::keyboardInputThread, SdlIO::getInstance()));
     boost::thread(boost::bind(&SdlIO::mouseInputThread, SdlIO::getInstance()));
-    
+
     io->eventLoop();
 }
