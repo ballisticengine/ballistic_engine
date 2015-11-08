@@ -38,6 +38,7 @@ BOOST_PYTHON_MODULE(BallisticUI) {
             .def("add_event_listener", &UIDocument::addEventListener)
             .def("show", &UIDocument::show)
             .def("hide", &UIDocument::hide)
+            .def("get_document", &UIDocument::getDocument, bp::return_value_policy<bp::reference_existing_object>())
             ;
 }
 
