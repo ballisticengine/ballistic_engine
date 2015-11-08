@@ -72,6 +72,7 @@ public:
     void loadManipulators();
     void loadManipulator(string path, string name);
     void init();
+    void cleanup();
 };
 
 

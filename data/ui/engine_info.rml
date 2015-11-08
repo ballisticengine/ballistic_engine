@@ -1,8 +1,7 @@
 <rml>
     <head>
         <title>test</title>
-        <link type="text/template" href="window.rml" />
-        
+        <link type="text/template" href="window.rml" /> 
     </head>
     <body template="window">
  <div id="content">

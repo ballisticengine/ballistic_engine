@@ -42,8 +42,12 @@ PyScripting::PyScripting() {
 
 }
 
-PyScripting::~PyScripting() {
+void PyScripting::cleanup() {
     Py_Finalize();
+}
+
+PyScripting::~PyScripting() {
+    
 }
 
 void PyScripting::broadcast(string name, initializer_list<void *> params,
@@ -59,13 +63,6 @@ void PyScripting::broadcast(string name, initializer_list<void *> params,
     }
     m.unlock();
 }
-
-//void PyScripting::broadcast(string name,
-//        map<string, string> params, bool check_existing) {
-//
-//    bp::dict d = toPythonDict(params);
-//    this->broadcast(name, {(void *)&d}, true);
-//}
 
 void PyScripting::enqueue(string name,
         initializer_list<void *> params, bool check_existing) {

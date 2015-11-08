@@ -99,7 +99,7 @@ void UI::processSDLEvent(SDL_Event event) {
     }
 }
 
-UI::~UI() {
+void UI::cleanup() {
     context->RemoveReference();
     Rocket::Core::Shutdown();
 

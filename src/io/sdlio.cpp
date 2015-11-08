@@ -205,9 +205,3 @@ SdlIO::~SdlIO() {
     SDL_Quit();
 }
 
-extern "C" {
-
-    void * returnSdlIo() {
-        return (void *) SdlIO::getInstance();
-    }
-}

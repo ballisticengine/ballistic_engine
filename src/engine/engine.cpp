@@ -87,4 +87,8 @@ void Engine::start() {
     boost::thread(boost::bind(&SdlIO::mouseInputThread, SdlIO::getInstance()));
 
     io->eventLoop();
+    
+    UI::getInstance()->cleanup();
+    PyScripting::getInstance()->cleanup();
+
 }
