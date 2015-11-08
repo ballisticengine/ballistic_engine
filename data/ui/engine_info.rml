@@ -9,7 +9,7 @@
          Ballistic Engine 
          <span id="engine-version"></span>
      </div>
-     <button id="close-info" class="close-info" onclick="UIManipulator_instance.info_close()">
+     <button id="close-info" class="close-info" onclick="UIManipulator_instance.info_close(event)">
          Close
      </button>
  </div>

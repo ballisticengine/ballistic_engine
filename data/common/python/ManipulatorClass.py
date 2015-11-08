@@ -1,3 +1,4 @@
+import rocket
 from World import World, WorldManager
 from Rendering import RenderingManager
 from Engine import EngineState
