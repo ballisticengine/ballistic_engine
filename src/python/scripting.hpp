@@ -16,12 +16,14 @@
 #include "python/engine_defs.hpp"
 #include "python/ui_defs.hpp"
 #include "python/utils.hpp"
+#include "python/Script.hpp"
 #include "config/EngineState.hpp"
 
 
 using namespace std;
 
 typedef vector<PyManipulator *> man_vector;
+typedef map<string, Script *> script_map;
 typedef map<string, PyManipulator *> man_map;
 
 struct SignalType {
@@ -46,10 +48,9 @@ class PyScripting : public Singleton<PyScripting> {
 protected:
     man_vector manipulators;
     man_map manipulators_map;
+    script_map scripts;
     queue<SignalType> sig_queue;
     bool processing, other_bcast;
-
-
 public:
     boost::mutex m;
     void lockWait();
@@ -71,6 +72,8 @@ public:
     ~PyScripting();
     void loadManipulators();
     void loadManipulator(string path, string name);
+    void addScript(string name, string path);
+    void runScript(string name);
     void init();
     void cleanup();
 };

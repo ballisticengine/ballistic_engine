@@ -10,10 +10,9 @@
 #include "ui/UISignalData.hpp"
 #include "world/WorldManager.hpp"
 
-PyManipulator::PyManipulator(string file) {
+PyManipulator::PyManipulator(string filename) :  ScriptBase(filename) {
 
-    code = Utils::loadText(file);
-    filename = boost::filesystem::basename(file);
+
     boost::filesystem::path p(filename);
     classname = p.stem().string();
     iname = classname + "_instance";
@@ -128,9 +127,6 @@ bool PyManipulator::hasSignal(string name) {
     return result;
 }
 
-PyManipulator::~PyManipulator() {
-    delete code;
-}
 
 void PyManipulator::lockThreads() {
     //    Py_BEGIN_ALLOW_THREADS

@@ -43,11 +43,20 @@ PyScripting::PyScripting() {
 }
 
 void PyScripting::cleanup() {
+    //TODO: cleanup manipulators and scripts
     Py_Finalize();
 }
 
 PyScripting::~PyScripting() {
     
+}
+
+void PyScripting::addScript(string name, string path) {
+    scripts[name]=new Script(path);
+}
+
+void PyScripting::runScript(string name) {
+    scripts[name]->run();
 }
 
 void PyScripting::broadcast(string name, initializer_list<void *> params,

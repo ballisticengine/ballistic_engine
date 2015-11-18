@@ -13,17 +13,18 @@
 #include "misc/singleton.hpp"
 #include "config/Config.hpp"
 #include "misc/utils.hpp"
+#include "python/ScriptBase.hpp"
 #include "python/locker.hpp"
 
 namespace bp = boost::python;
 using namespace std;
 using namespace boost;
 
-class PyManipulator {
+class PyManipulator : public ScriptBase {
 protected:
-    char *code;
-    string filename, classname, iname;
-    bp::object module, instance;
+
+    string classname, iname;
+    bp::object instance;
     template <typename T> static bp::list arrayToList(T *array);
     void lockThreads();
     void unlockThreads();
@@ -35,9 +36,8 @@ public:
      * Not implemented
      */
     bool testSignal(string name, initializer_list<void *> params);
-    PyManipulator(string file);
+    PyManipulator(string filename);
     void signal(string name, initializer_list<void *> params, bool ui_signal=false);
-    ~PyManipulator();
 };
 
 
