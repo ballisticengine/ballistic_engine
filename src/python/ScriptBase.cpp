@@ -2,7 +2,8 @@
 #include "misc/utils.hpp"
 
 ScriptBase::ScriptBase(string filename) {
-    this->filename = boost::filesystem::basename(filename);
+    //this->filename = boost::filesystem::basename(filename);
+
     code = Utils::loadText(filename);
 }
 

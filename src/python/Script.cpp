@@ -2,6 +2,7 @@
 #include "misc/utils.hpp"
 
 Script::Script(string filename) : ScriptBase(filename) {
+
 }
 
 void Script::run() {

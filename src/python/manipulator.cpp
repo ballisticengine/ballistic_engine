@@ -11,8 +11,7 @@
 #include "world/WorldManager.hpp"
 
 PyManipulator::PyManipulator(string filename) :  ScriptBase(filename) {
-
-
+    this->filename = boost::filesystem::basename(filename);
     boost::filesystem::path p(filename);
     classname = p.stem().string();
     iname = classname + "_instance";
