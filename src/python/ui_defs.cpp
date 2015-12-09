@@ -24,9 +24,6 @@ BOOST_PYTHON_MODULE(BallisticUI) {
             .def("add_document", &UI::addDocument, bp::return_value_policy<bp::reference_existing_object>())
             .def("get_document", &UI::getDocument, bp::return_value_policy<bp::reference_existing_object>())
             ;
-
-    bp::class_<RC::ElementDocument, RC::ElementDocument *>("element_document", bp::no_init)
-            ;
     
     bp::class_<UISignalData, UISignalData *>("ui_signal_data")
         .def("get", &UISignalData::get)

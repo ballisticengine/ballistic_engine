@@ -34,7 +34,7 @@ bool UI::init(RocketSDL2SystemInterface *system_interface,
     
     ::Input::SetContext(context);
     
-    Rocket::Debugger::Initialise(context);
+    //Rocket::Debugger::Initialise(context);
 
     return true;
 }
