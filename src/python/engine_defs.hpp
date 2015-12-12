@@ -7,6 +7,7 @@
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
 #include "config/EngineState.hpp"
+#include "resources/ResourceManager.hpp"
 
 
 using namespace std;
