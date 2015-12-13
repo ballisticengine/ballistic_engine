@@ -1,0 +1,41 @@
+<level>
+    <config>
+        <skybox>
+            @skybox.bmp
+        </skybox>
+        <jump_point>
+            <x>180.0</x>
+            <y>-220.0</y>
+            <z>-50.0</z>
+            <rx>0.0</rx>
+            <ry>0.0</ry>
+            <rz>0.0</rz>
+        </jump_point>
+    </config>
+    <geometry>
+
+    </geometry>
+     <rooms>
+        <room>
+            <name>
+                Simple Room
+            </name>
+            <model>
+                square.txt
+            </model>
+            <location>
+                <x>-6.273571848869324</x>
+                <y>247.4196434020996</y>
+                <z>150.62457084655762</z>
+            </location>
+            <ambient_light>
+                <r>1.0</r>
+                <g>1.0</g>
+                <b>1.0</b>
+            </ambient_light>
+    <entities>
+
+    </entities>
+    </room>
+    </rooms>
+</level>
