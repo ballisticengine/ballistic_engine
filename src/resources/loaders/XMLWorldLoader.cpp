@@ -49,8 +49,9 @@ void *XMLWorldLoader::load(string level_name) {
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
         ptree room_p = (ptree) room.second;
-        Shape *room_shape = (Shape *) xml_loader->loadFromData((void *) &room.second, 0);
-        resman->resolveAllDependencies();
+        Shape *room_shape = (Shape *) resman->get("square.xml", SHAPE);
+        //resman->resolveAllDependencies();
+        
         RoomEntity *roomE = new RoomEntity();
 
 
@@ -58,7 +59,7 @@ void *XMLWorldLoader::load(string level_name) {
                 roomE->ambient_light.b = room.second.get<e_loc>("ambient_light.b"),
                 roomE->ambient_light.g = room.second.get<e_loc>("ambient_light.g");
 
-        roomE->name = room.second.get<string>("shape.name");
+        roomE->name = "Room1";
         roomE->setModel(room_shape);
         e_loc
         rx = room.second.get<e_loc>("location.x"),
@@ -66,7 +67,6 @@ void *XMLWorldLoader::load(string level_name) {
                 rz = room.second.get<e_loc>("location.z")
                 ;
         roomE->locate(rx, ry, rz);
-
         roomE->calcBoundings();
         w->addRoomEntity(roomE);
         w->getPhysics()->addRoom(roomE); //TODO
