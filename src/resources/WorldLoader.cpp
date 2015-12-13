@@ -9,6 +9,6 @@ extensions_s WorldLoader::getFileExtensions() {
     return exts;
 }
 
-bool WorldLoader::save(World *world, string file_name) {
+bool WorldLoader::save(World *world, string level_filename, string geometry_filename) {
     return false;
 }

@@ -16,7 +16,7 @@ void WorldManager::setWorld(World *w) {
 
 bool WorldManager::saveInto(string file_name) {
      WorldLoader *world_loader = (WorldLoader *) LibLoad::getInstance()->getLoaderByExtension("xml", LEVEL);
-     world_loader->save(this->world, file_name);
+     world_loader->save(this->world, file_name, "geometry.xml");
  }
 
 WorldManager::WorldManager() {

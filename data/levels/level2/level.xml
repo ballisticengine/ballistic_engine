@@ -17,6 +17,9 @@
     </geometry>
      <rooms>
         <room>
+            <name>
+                Simple Room
+            </name>
             <model>
                 square.xml
             </model>
