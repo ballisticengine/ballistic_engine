@@ -42,15 +42,13 @@ void *XMLWorldLoader::load(string level_name) {
             rz = jump_point.get<e_loc>("rz");
 
 
-
-
     ptree &rooms = pt.get_child("level.rooms");
     Loader *xml_loader = (Loader *) LibLoad::getInstance()->getLoaderByExtension("xml", SHAPE);
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
         ptree room_p = (ptree) room.second;
         Shape *room_shape = (Shape *) resman->get("square.xml", SHAPE);
-        //resman->resolveAllDependencies();
+        resman->resolveAllDependencies();
         
         RoomEntity *roomE = new RoomEntity();
 
