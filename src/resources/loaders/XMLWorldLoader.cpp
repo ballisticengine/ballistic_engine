@@ -42,15 +42,14 @@ void *XMLWorldLoader::load(string level_name) {
             rz = jump_point.get<e_loc>("rz");
 
 
-
-
     ptree &rooms = pt.get_child("level.rooms");
     Loader *xml_loader = (Loader *) LibLoad::getInstance()->getLoaderByExtension("xml", SHAPE);
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
         ptree room_p = (ptree) room.second;
-        Shape *room_shape = (Shape *) xml_loader->loadFromData((void *) &room.second, 0);
+        Shape *room_shape = (Shape *) resman->get("square.xml", SHAPE);
         resman->resolveAllDependencies();
+        
         RoomEntity *roomE = new RoomEntity();
 
 
@@ -58,7 +57,7 @@ void *XMLWorldLoader::load(string level_name) {
                 roomE->ambient_light.b = room.second.get<e_loc>("ambient_light.b"),
                 roomE->ambient_light.g = room.second.get<e_loc>("ambient_light.g");
 
-        roomE->name = room.second.get<string>("shape.name");
+        roomE->name = room.second.get<string>("name");
         roomE->setModel(room_shape);
         e_loc
         rx = room.second.get<e_loc>("location.x"),
@@ -66,7 +65,6 @@ void *XMLWorldLoader::load(string level_name) {
                 rz = room.second.get<e_loc>("location.z")
                 ;
         roomE->locate(rx, ry, rz);
-
         roomE->calcBoundings();
         w->addRoomEntity(roomE);
         w->getPhysics()->addRoom(roomE); //TODO
@@ -150,9 +148,6 @@ void *XMLWorldLoader::load(string level_name) {
     w->observer.face(rx, ry, rz);
     w->getPhysics()->addEntity((ObjectEntity *) & w->observer);
 
-    //    Ballistic::Types::Texture *stex = (Ballistic::Types::Texture *) resman->get("@car.bmp"); //??
-    //    
-    //    this->testsprite = new Sprite(stex);
     w->active_room = w->rooms[0];
 
     cout << "Loaded world" << endl;
@@ -160,9 +155,10 @@ void *XMLWorldLoader::load(string level_name) {
     return (void *) w;
 }
 
-bool XMLWorldLoader::save(World *world, string file_name) {
+/*TODO adapt this to a new format */
+bool XMLWorldLoader::save(World *world, string level_filename, string geometry_filename) {
     ResourceManager *resman = ResourceManager::getInstance();
-    cout << "Dumping to " << file_name << endl;
+    cout << "Dumping to " << level_filename << endl;
     ptree root, level, config, jumppoint, rooms, room, r_location, r_shape, s_geom, s_counts, v_count, f_count,
             vpf, uv_count, s_faces, s_vertices, f_material, f_texture, r_entities;
 
@@ -310,7 +306,7 @@ bool XMLWorldLoader::save(World *world, string file_name) {
     level.add_child("config", config);
     root.add_child("level", level);
 
-    write_xml(file_name, root);
+    write_xml(level_filename, root);
 }
 
 extern "C" {

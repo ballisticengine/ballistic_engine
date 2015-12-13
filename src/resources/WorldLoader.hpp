@@ -8,7 +8,7 @@ class WorldLoader : public Loader {
 public:
     virtual ResourceType getType();
     virtual extensions_s getFileExtensions();
-    virtual bool save(World *world, string file_name);
+    virtual bool save(World *world, string level_filename, string geometry_filename);
 };
 
 
