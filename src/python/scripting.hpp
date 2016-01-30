@@ -7,6 +7,7 @@
 #include <vector>
 #include <queue>
 #include <map>
+#define BOOST_PYTHON_STATIC_LIB 1
 
 #include "python/manipulator.hpp"
 #include "python/type_defs.hpp"

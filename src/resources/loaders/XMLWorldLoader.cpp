@@ -47,7 +47,7 @@ void *XMLWorldLoader::load(string level_name) {
 
     BOOST_FOREACH(const ptree::value_type &room, rooms) {
         ptree room_p = (ptree) room.second;
-        Shape *room_shape = (Shape *) resman->get("square.xml", SHAPE);
+        Shape *room_shape = (Shape *) resman->get(room.second.get<string>("model"), SHAPE);
         resman->resolveAllDependencies();
         
         RoomEntity *roomE = new RoomEntity();

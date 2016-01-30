@@ -1,10 +1,8 @@
 #include "python/scripting.hpp"
 
-
 void PyScripting::init() {
     Py_Initialize();
     PyEval_InitThreads();
-    //    Py_XDECREF(PyImport_ImportModule("rocket"));
 
     init_types();
     init_ui();
@@ -12,9 +10,6 @@ void PyScripting::init() {
     init_timer();
     init_renderer();
     init_engine();
-
-
-
 
 }
 
@@ -30,7 +25,7 @@ void PyScripting::loadManipulators() {
     vector<string> scripts = Config::getInstance()->getScripts();
     for (int i = 0; i < scripts.size(); i++) {
         string path = string(CONFIG_DIR) + DS + string(COMMON_DIR) + DS + string("python");
-        
+
         loadManipulator(path, scripts[i]);
     }
 
@@ -48,11 +43,11 @@ void PyScripting::cleanup() {
 }
 
 PyScripting::~PyScripting() {
-    
+
 }
 
 void PyScripting::addScript(string name, string path) {
-    scripts[name]=new Script(path);
+    scripts[name] = new Script(path);
 }
 
 void PyScripting::runScript(string name) {
@@ -61,7 +56,7 @@ void PyScripting::runScript(string name) {
 
 void PyScripting::broadcast(string name, initializer_list<void *> params,
         bool check_existing, bool ui_signal) {
-    
+
     this->lockWait();
 
     for (int i = 0; i < manipulators.size(); i++) {

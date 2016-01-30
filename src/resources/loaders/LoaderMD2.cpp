@@ -19,7 +19,7 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
     s->v_per_poly = 3;
     s->textures = new Ballistic::Types::Texture*[s->f_count];
     s->materials = new Material*[s->f_count];
-    cout << "T: " << md2->frames[0].translate[2] << endl;
+    
     for (int i = 0; i < s->v_count; i++) {
         md2_vertex_t md2v = md2->frames[0].verts[i];
         float * scale = md2->frames[0].scale;
@@ -44,7 +44,6 @@ void LoaderMD2::md2ToShape(md2file *md2, Shape *s) {
 
     }
 
-    cout << "MD2 Skin: " << md2->skin << endl;
     e_loc u, v;
     s->faces = new Face[s->f_count];
     for (int i = 0; i < s->f_count; i++) {
