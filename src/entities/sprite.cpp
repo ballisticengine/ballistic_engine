@@ -3,8 +3,8 @@
 void Sprite::setUp() {
     //videoData *vd=Config::getInstance()->getVD();
 
-    //this->width=((e_loc)this->tex->getWidth()/vd->width)*5;
-    //this->height=((e_loc)this->tex->getHeight()/vd->height)*5;
+    //this->width=((scalar_t)this->tex->getWidth()/vd->width)*5;
+    //this->height=((scalar_t)this->tex->getHeight()/vd->height)*5;
     if (this->width == 0 || this->height == 0) {
         this->width = 10;
         this->height = 10;
@@ -22,7 +22,7 @@ Sprite::Sprite(Ballistic::Types::Texture *tex) {
     this->setUp();
 }
 
-Sprite::Sprite(Ballistic::Types::Texture *tex,e_loc w,e_loc h) {
+Sprite::Sprite(Ballistic::Types::Texture *tex,scalar_t w,scalar_t h) {
      this->width=w;
      this->height=h;
      this->tex=tex;

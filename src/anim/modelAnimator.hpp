@@ -12,7 +12,7 @@ using namespace std;
 
 struct ShapeState {
  size_t current_keyframe;
- e_loc interpol;
+ scalar_t interpol;
  v_type *current_vertices;
  Timer start_time,end_time;
 };

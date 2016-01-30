@@ -16,8 +16,8 @@ class UiMesh  {
 public:
     Shape *model;
     Coords c;
-    e_loc scale;
-    UiMesh(string model,e_loc x,e_loc y,e_loc z);
+    scalar_t scale;
+    UiMesh(string model,scalar_t x,scalar_t y,scalar_t z);
 };
 
 #endif	

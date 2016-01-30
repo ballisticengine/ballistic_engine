@@ -10,11 +10,11 @@ using namespace boost::property_tree;
 
 ptree makeRotationNode(Coords c);
 ptree makeTranslationNode(Coords c);
-ptree makeLocationNode(e_loc x=0, e_loc y=0, e_loc z=0);
+ptree makeLocationNode(scalar_t x=0, scalar_t y=0, scalar_t z=0);
 ptree makeCoordsNode(Coords c);
-ptree makeRGBANode(e_loc r, e_loc g, e_loc b, e_loc a=1);
+ptree makeRGBANode(scalar_t r, scalar_t g, scalar_t b, scalar_t a=1);
 ptree makeRGBANode(ColorRGBA c);
-ptree makeUVNode(e_loc u, e_loc v);
+ptree makeUVNode(scalar_t u, scalar_t v);
 
 
 #endif	

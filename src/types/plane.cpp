@@ -1,11 +1,11 @@
 #include "types/plane.hpp"
 
-Plane::Plane(e_loc a, e_loc b, e_loc c, e_loc d) {
+Plane::Plane(scalar_t a, scalar_t b, scalar_t c, scalar_t d) {
     N = Vector3d(a, b, c);
     D = d;
 }
 
-Plane::Plane(Vector3d normal, e_loc d) {
+Plane::Plane(Vector3d normal, scalar_t d) {
     N = normal;
     D = d;
 }
@@ -42,8 +42,8 @@ const bool Plane::PointOnPlane(Vector3d & point) {
     return DistanceToPlane(point) == d;
 }
 
-e_loc Plane::DistanceToPlane(Vector3d &point) {
-    e_loc dist = N % point + D;
+scalar_t Plane::DistanceToPlane(Vector3d &point) {
+    scalar_t dist = N % point + D;
 //        if (abs(dist)<1) {
 //            dist=floor(dist);
 //        }
@@ -51,7 +51,7 @@ e_loc Plane::DistanceToPlane(Vector3d &point) {
 }
 
 Vector3d Plane::RayIntersection(Vector3d &ray_pos, Vector3d &ray_dir) {
-    e_loc a = N % ray_dir;
+    scalar_t a = N % ray_dir;
     if (a == 0) {
         return ray_pos;
     }

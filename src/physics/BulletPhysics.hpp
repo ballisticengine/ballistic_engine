@@ -20,7 +20,7 @@ struct CollisionParty {
 struct CollisionInfo {
     CollisionParty A,B;
     bool collided;
-    e_loc distance;
+    scalar_t distance;
 };
 
 
@@ -48,7 +48,7 @@ public:
     ~BulletPhysics();
     void addRoom(RoomEntity *room);
     void addEntity(ObjectEntity *entity, bool triangles=false);
-    void step(e_loc timediff,rooms_list rooms);
+    void step(scalar_t timediff,rooms_list rooms);
     CollisionInfo objectsCollide(ObjectEntity *a, ObjectEntity *b, Coords offset);
     CollisionInfo roomCollide(RoomEntity *r, ObjectEntity *e, Coords offset);
     void rayTest(Vector3d origin, Vector3d direction);

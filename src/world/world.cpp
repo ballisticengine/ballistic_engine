@@ -100,7 +100,7 @@ void World::moveEntity(ObjectEntity *e, time_int time_diff, bool skip_collision)
 
 void World::moveEntities() {
 
-    e_loc x, y, z;
+    scalar_t x, y, z;
     x, y, z = 0;
     obj_list things = this->getActiveRoom()->models;
     time_int lt = time.getDiffR();

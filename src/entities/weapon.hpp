@@ -16,7 +16,7 @@ using namespace std;
 
 class Weapon : public Entity {
 public:
-    e_loc initial_velocity;
+    scalar_t initial_velocity;
     UiMesh *model;
     Ballistic::Types::Texture *decal; 
     Shape *bullet; 

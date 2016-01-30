@@ -11,16 +11,16 @@
 class Plane {
 public:
     Vector3d N;
-    e_loc D;
-    Plane(e_loc a=1,e_loc b=0,e_loc c=0,e_loc d=0);
-    Plane(Vector3d normal,e_loc d=0);
+    scalar_t D;
+    Plane(scalar_t a=1,scalar_t b=0,scalar_t c=0,scalar_t d=0);
+    Plane(Vector3d normal,scalar_t d=0);
     Plane(const Plane &plane);
     Plane( Vector3d &a,  Vector3d &b, Vector3d &c);
     const Plane & operator=(const Plane &plane);
     const bool operator==( Plane &plane);
     const bool operator!=( Plane &plane);
     const bool PointOnPlane( Vector3d & point);
-    e_loc DistanceToPlane( Vector3d &point);
+    scalar_t DistanceToPlane( Vector3d &point);
     Vector3d RayIntersection( Vector3d &ray_pos, Vector3d &ray_dir);
 };
 

@@ -76,13 +76,13 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
         coords = vx.second.get_child("coords"),
                 normal = vx.second.get_child("normal")
                 ;
-        e_loc
-        x = coords.get<e_loc>("x"),
-                y = coords.get<e_loc>("y"),
-                z = coords.get<e_loc>("z"),
-                nx = normal.get<e_loc>("x"),
-                ny = normal.get<e_loc>("y"),
-                nz = normal.get<e_loc>("z")
+        scalar_t
+        x = coords.get<scalar_t>("x"),
+                y = coords.get<scalar_t>("y"),
+                z = coords.get<scalar_t>("z"),
+                nx = normal.get<scalar_t>("x"),
+                ny = normal.get<scalar_t>("y"),
+                nz = normal.get<scalar_t>("z")
                 ;
         s->vertices[i].x = x;
         s->vertices[i].y = y;
@@ -125,14 +125,14 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
             ptree material = face.second.get_child("material");
             ColorRGBA sc, dc;
 
-            sc.r = material.get<e_loc>("specular.r");
-            sc.g = material.get<e_loc>("specular.g");
-            sc.b = material.get<e_loc>("specular.b");
-            dc.r = material.get<e_loc>("diffuse.r");
-            dc.g = material.get<e_loc>("diffuse.g");
-            dc.b = material.get<e_loc>("diffuse.b");
-            e_loc shin = material.get<e_loc>("shining"),
-                    emit = material.get<e_loc>("emit")
+            sc.r = material.get<scalar_t>("specular.r");
+            sc.g = material.get<scalar_t>("specular.g");
+            sc.b = material.get<scalar_t>("specular.b");
+            dc.r = material.get<scalar_t>("diffuse.r");
+            dc.g = material.get<scalar_t>("diffuse.g");
+            dc.b = material.get<scalar_t>("diffuse.b");
+            scalar_t shin = material.get<scalar_t>("shining"),
+                    emit = material.get<scalar_t>("emit")
                     ;
             Material *m = new Material();
             m->setShininess(shin);
@@ -150,8 +150,8 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
             size_t index = f_vx.second.get<size_t>("i");
             s->faces[i].index[n] = index;
             ptree uv = f_vx.second.get_child("uv");
-            s->faces[i].uvs[n].u = uv.get<e_loc>("u");
-            s->faces[i].uvs[n].v = uv.get<e_loc>("v");
+            s->faces[i].uvs[n].u = uv.get<scalar_t>("u");
+            s->faces[i].uvs[n].v = uv.get<scalar_t>("v");
             s->faces[i].normals[n] = s->normals[index];
             uvc++;
             n++;
@@ -166,22 +166,22 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
         size_t frame_count = shape_xml.get<size_t>("frame_count");
         s->frame_count = frame_count;
         s->frames = new Frame[frame_count];
-        s->frame_times = new e_loc[frame_count];
+        s->frame_times = new scalar_t[frame_count];
         size_t frame_i = 0, vert_i;
 
         BOOST_FOREACH(const ptree::value_type &frame, frames) {
             ptree frame_verts = frame.second.get_child("vertices");
             s->frames[frame_i].verts = new v_type[v_count];
-            s->frames[frame_i].fnum = frame.second.get<e_loc>("fnum");
-            s->frames[frame_i].fval = frame.second.get<e_loc>("fval");
-            s->frame_times[frame_i] = frame.second.get<e_loc>("ftime");
+            s->frames[frame_i].fnum = frame.second.get<scalar_t>("fnum");
+            s->frames[frame_i].fval = frame.second.get<scalar_t>("fval");
+            s->frame_times[frame_i] = frame.second.get<scalar_t>("ftime");
             vert_i = 0;
 
             BOOST_FOREACH(const ptree::value_type &vert, frame_verts) {
-                e_loc
-                x = vert.second.get<e_loc>("x"),
-                        y = vert.second.get<e_loc>("y"),
-                        z = vert.second.get<e_loc>("z")
+                scalar_t
+                x = vert.second.get<scalar_t>("x"),
+                        y = vert.second.get<scalar_t>("y"),
+                        z = vert.second.get<scalar_t>("z")
                         ;
                 s->frames[frame_i].verts[vert_i].x = x;
                 s->frames[frame_i].verts[vert_i].y = y;
@@ -195,12 +195,12 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
     }
 
     
-    e_loc slocx = 0, slocy = 0, slocz = 0;
+    scalar_t slocx = 0, slocy = 0, slocz = 0;
 
     try {
-        slocx = shape_xml.get<e_loc>("loc.x");
-        slocy = shape_xml.get<e_loc>("loc.y");
-        slocz = shape_xml.get<e_loc>("loc.z");
+        slocx = shape_xml.get<scalar_t>("loc.x");
+        slocy = shape_xml.get<scalar_t>("loc.y");
+        slocz = shape_xml.get<scalar_t>("loc.z");
     } catch (std::exception e) {
         cout << "No loc for " << type;
     }

@@ -34,7 +34,7 @@ public:
     Material **materials;
     size_t frame_count;
     Frame *frames;
-    e_loc *frame_times;
+    scalar_t *frame_times;
     void *renderer_hint;
     virtual void calculateNormals();
     ~Shape();

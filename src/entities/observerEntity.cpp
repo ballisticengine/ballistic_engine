@@ -38,7 +38,7 @@ void ObserverEntity::setCamera(Camera *c) {
 
 
 
-void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) { //tu podejżane (bo w Entity jest duplikacja)
+void ObserverEntity::translate(scalar_t x, scalar_t y, scalar_t z) { //tu podejżane (bo w Entity jest duplikacja)
     this->x += x;
     this->y += y;
     this->z += z;
@@ -56,7 +56,7 @@ void ObserverEntity::translate(e_loc x, e_loc y, e_loc z) { //tu podejżane (bo 
     this->cam->translate(x, y, z);
 }
 
-void ObserverEntity::locate(e_loc x, e_loc y, e_loc z) {
+void ObserverEntity::locate(scalar_t x, scalar_t y, scalar_t z) {
     Entity::locate(x,y,y);
     //    this->x = x;
 //    this->y = y;
@@ -88,14 +88,14 @@ void ObserverEntity::bobHead() {
 
 }
 
-void ObserverEntity::kickBack(e_loc force) {
+void ObserverEntity::kickBack(scalar_t force) {
     cout << "Kickback";
     lock=true;
     this->cam->rotate(90,0,0);
     lock=false;
 }
 
-void ObserverEntity::rotate(e_loc x, e_loc y, e_loc z) {
+void ObserverEntity::rotate(scalar_t x, scalar_t y, scalar_t z) {
     if(lock) {
         return;
     }
@@ -103,7 +103,7 @@ void ObserverEntity::rotate(e_loc x, e_loc y, e_loc z) {
     this->cam->rotate(x, y, z);
 }
 
-void ObserverEntity::face(e_loc x, e_loc y, e_loc z) {
+void ObserverEntity::face(scalar_t x, scalar_t y, scalar_t z) {
     if(lock) {
         return;
     }

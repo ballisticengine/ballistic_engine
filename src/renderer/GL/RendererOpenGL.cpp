@@ -199,7 +199,7 @@ void RendererOpenGL::assignMaterial(Material *m) {
     ColorRGBA specular = m->getSpecular(),
             diffuse = m->getDiffuse();
 
-    e_loc shining = m->getShininess(), emit = m->getEmission();
+    scalar_t shining = m->getShininess(), emit = m->getEmission();
 
     GLfloat diff[] = {diffuse.r, diffuse.g, diffuse.b, diffuse.a};
     GLfloat spec[] = {specular.r, specular.g, specular.b, specular.a};
@@ -272,7 +272,7 @@ void RendererOpenGL::translate(Vector3d v) {
     glTranslated(v.x, v.y, v.z);
 }
 
-void RendererOpenGL::rotate(Vector3d v, e_loc degrees) {
+void RendererOpenGL::rotate(Vector3d v, scalar_t degrees) {
     glRotatef(degrees, v.x, v.y, v.z);
 }
 

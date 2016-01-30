@@ -1,10 +1,10 @@
 #include "types/shape2d.hpp"
 
-Shape2d::Shape2d(e_loc width,e_loc height) {
+Shape2d::Shape2d(scalar_t width,scalar_t height) {
 	this->vertices=new v_type[4];
 	this->uvs=new UV[4];
 	this->normals=new v_type[4];
-        e_loc 
+        scalar_t 
 		minx=-width/2,
 		maxx=width/2,
 		miny=height/2,

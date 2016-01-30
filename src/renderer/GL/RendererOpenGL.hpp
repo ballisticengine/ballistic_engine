@@ -30,7 +30,7 @@ public:
     void beforeFrame();
     void afterFrame();
     void translate(Vector3d v);
-    void rotate(Vector3d v, e_loc degrees);
+    void rotate(Vector3d v, scalar_t degrees);
     void setupTexture(Ballistic::Types::Texture *t);
     void positionCamera(Camera *camera);
     void renderSkybox(Skybox *sky);

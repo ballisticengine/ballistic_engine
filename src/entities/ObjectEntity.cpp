@@ -38,7 +38,7 @@ Coords ObjectEntity::nextCoords(time_int diff) {
     return c;
 }
 
-void ObjectEntity::setIfNotZero(e_loc &a, e_loc &b) {
+void ObjectEntity::setIfNotZero(scalar_t &a, scalar_t &b) {
     if (a != 0) {
         b = a;
     }

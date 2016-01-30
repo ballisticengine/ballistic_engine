@@ -10,10 +10,10 @@
 class ObjectEntity : public Entity {
 protected:
 	
-	void setIfNotZero(e_loc &a,e_loc &b);
+	void setIfNotZero(scalar_t &a,scalar_t &b);
 public:
 	Coords velocity,acceleration;
-        e_loc weight;
+        scalar_t weight;
 	ObjectEntity();
 	Coords nextCoords(time_int diff);
 	void changeVelocity(Coords velocity);

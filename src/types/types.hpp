@@ -21,8 +21,8 @@ class ColorRGB {
 public:
     ColorRGB() {};
     ColorRGB(unsigned int i);
-    ColorRGB(e_loc r, e_loc g,e_loc b);
-    e_loc r,g,b;
+    ColorRGB(scalar_t r, scalar_t g,scalar_t b);
+    scalar_t r,g,b;
     bool operator==(const ColorRGB &color);
 };
 
@@ -31,9 +31,9 @@ class ColorRGBA : public ColorRGB {
 public:
     ColorRGBA() {};
     ColorRGBA(unsigned int i);
-    ColorRGBA(e_loc r, e_loc g,e_loc b, e_loc a);
+    ColorRGBA(scalar_t r, scalar_t g,scalar_t b, scalar_t a);
     bool operator==(const ColorRGBA &color);
-    e_loc a;
+    scalar_t a;
 };
 
 class Coords {
@@ -44,19 +44,19 @@ public:
 };
 
 struct FrustumSizes {
- e_loc x,y,znear,zfar;
+ scalar_t x,y,znear,zfar;
 };
 
 
 struct UV {
- e_loc u,v;
+ scalar_t u,v;
 };
 
 typedef Vector3d v_type;
 typedef Vector3d n_type;
 
 struct Frame {
-	e_loc fnum,fval;
+	scalar_t fnum,fval;
 	v_type *verts;
 };
 

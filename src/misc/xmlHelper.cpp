@@ -8,7 +8,7 @@ ptree makeRotationNode(Coords c) {
     return makeLocationNode(c.rotation.x, c.rotation.y, c.rotation.z);
 }
 
-ptree makeLocationNode(e_loc x, e_loc y, e_loc z) {
+ptree makeLocationNode(scalar_t x, scalar_t y, scalar_t z) {
     ptree location, lx, ly, lz;
 
     lx.put("", x);
@@ -20,7 +20,7 @@ ptree makeLocationNode(e_loc x, e_loc y, e_loc z) {
     return location;
 }
 
-ptree makeRGBANode(e_loc r, e_loc g, e_loc b, e_loc a) {
+ptree makeRGBANode(scalar_t r, scalar_t g, scalar_t b, scalar_t a) {
     ptree color, lr, lg, lb, la;
     lr.put("", r);
     lg.put("", g);
@@ -37,7 +37,7 @@ ptree makeRGBANode(ColorRGBA c) {
     return makeRGBANode(c.r, c.g, c.b, c.a);
 }
 
-ptree makeUVNode(e_loc u, e_loc v) {
+ptree makeUVNode(scalar_t u, scalar_t v) {
     ptree uv, lu, lv;
     lu.put("", u);
     lv.put("", v);

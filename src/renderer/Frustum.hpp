@@ -9,16 +9,16 @@ using namespace std;
 
 class Frustum {
 public:
-    e_loc left, right, bottom, top, near, far;
+    scalar_t left, right, bottom, top, near, far;
     
     Frustum();
     
-    Frustum(e_loc left, e_loc right,
-            e_loc bottom, e_loc top,
-            e_loc near, e_loc far);
+    Frustum(scalar_t left, scalar_t right,
+            scalar_t bottom, scalar_t top,
+            scalar_t near, scalar_t far);
     
-    e_loc getWidth();
-    e_loc getHeight();
+    scalar_t getWidth();
+    scalar_t getHeight();
 };
 
 #endif	

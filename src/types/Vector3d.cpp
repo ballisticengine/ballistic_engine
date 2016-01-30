@@ -1,8 +1,8 @@
 #include "types/Vector3d.hpp"
 
-e_loc normalizeRotation(e_loc r) {
-    e_loc ra = std::abs(r);
-    e_loc rmod = fmod(ra, 360);
+scalar_t normalizeRotation(scalar_t r) {
+    scalar_t ra = std::abs(r);
+    scalar_t rmod = fmod(ra, 360);
     if (r >= 0) {
         r = rmod;
     } else {
@@ -58,7 +58,7 @@ Vector3d::Vector3d(const Vector3d &v) {
     z = v.z;
 }
 
-Vector3d::Vector3d(e_loc x, e_loc y, e_loc z) {
+Vector3d::Vector3d(scalar_t x, scalar_t y, scalar_t z) {
     this->x = x;
     this->y = y;
     this->z = z;
@@ -71,7 +71,7 @@ Vector3d & Vector3d::operator=(const Vector3d &v) {
     return *this;
 }
 
-e_loc Vector3d::ifZero(e_loc value) {
+scalar_t Vector3d::ifZero(scalar_t value) {
     if (value > 0) {
         return 1;
     } else if (value < 0) {
@@ -89,8 +89,8 @@ Vector3d Vector3d::diff(const Vector3d & v) {
     return lv;
 }
 
-e_loc Vector3d::length() {
-    e_loc length = (e_loc) sqrt(x * x + y * y + z * z);
+scalar_t Vector3d::length() {
+    scalar_t length = (scalar_t) sqrt(x * x + y * y + z * z);
     return length;
 }
 
@@ -108,8 +108,8 @@ Vector3d Vector3d::normalize() {
     return v;
 }
 
-e_loc Vector3d::dotProduct(const Vector3d & b) {
-    e_loc dp = x * b.x + y * b.y + z * b.z;
+scalar_t Vector3d::dotProduct(const Vector3d & b) {
+    scalar_t dp = x * b.x + y * b.y + z * b.z;
     return dp;
 }
 
@@ -129,7 +129,7 @@ Vector3d Vector3d::operator-(const Vector3d &b) {
     return v;
 }
 
-Vector3d Vector3d::operator/(const e_loc val) {
+Vector3d Vector3d::operator/(const scalar_t val) {
     Vector3d v;
 
     v.x = this->x / val;
@@ -162,18 +162,18 @@ Vector3d Vector3d::operator*(const double a) {
     return v;
 }
 
-e_loc Vector3d::operator!() {
+scalar_t Vector3d::operator!() {
     return sqrt(x * x + y * y + z * z);
 }
 
-Vector3d Vector3d::operator|(e_loc length) {
+Vector3d Vector3d::operator|(scalar_t length) {
     Vector3d ret;
     ret = *this;
     ret = ret * (length / !ret);
     return ret;
 }
 
-e_loc Vector3d::operator%(const Vector3d &b) {
+scalar_t Vector3d::operator%(const Vector3d &b) {
     return dotProduct(b);
 }
 

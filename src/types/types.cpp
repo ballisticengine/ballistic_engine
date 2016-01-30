@@ -20,7 +20,7 @@ ColorRGB::ColorRGB(unsigned int i) {
     
 }
 
-ColorRGB::ColorRGB(e_loc r, e_loc g,e_loc b) : r(r), g(b), b(b) {
+ColorRGB::ColorRGB(scalar_t r, scalar_t g,scalar_t b) : r(r), g(b), b(b) {
     
 }
 
@@ -30,7 +30,7 @@ bool ColorRGB::operator==(const ColorRGB &color) {
 
 ////////////
 
-ColorRGBA::ColorRGBA(e_loc r, e_loc g,e_loc b, e_loc a) :ColorRGB(r,g,b), a(a) {
+ColorRGBA::ColorRGBA(scalar_t r, scalar_t g,scalar_t b, scalar_t a) :ColorRGB(r,g,b), a(a) {
 }
 
 bool ColorRGBA::operator==(const ColorRGBA &color) {

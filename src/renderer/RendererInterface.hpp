@@ -45,7 +45,7 @@ public:
     virtual void translate(Vector3d v) {
     };
 
-    virtual void rotate(Vector3d v, e_loc degrees) {
+    virtual void rotate(Vector3d v, scalar_t degrees) {
     };
 
     virtual void setupTexture(Ballistic::Types::Texture *t) {

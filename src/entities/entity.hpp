@@ -24,7 +24,7 @@ BoundingCube offsetBounding(BoundingCube *bc, Coords offset);
 
 class Entity {
 protected:
-    e_loc x, y, z, rx, ry, rz;
+    scalar_t x, y, z, rx, ry, rz;
     Vector3d velocity;
     void syncBounding();
 public:
@@ -42,12 +42,12 @@ public:
     Entity *parent;
     size_t id;
    
-    virtual void translate3(e_loc x, e_loc y, e_loc z);
-    virtual void translate(e_loc x, e_loc y, e_loc z);
+    virtual void translate3(scalar_t x, scalar_t y, scalar_t z);
+    virtual void translate(scalar_t x, scalar_t y, scalar_t z);
     virtual void translate(Coords c);
-    virtual void rotate(e_loc x, e_loc y, e_loc z);
-    virtual void locate(e_loc x, e_loc y, e_loc z);
-    virtual void face(e_loc x, e_loc y, e_loc z);
+    virtual void rotate(scalar_t x, scalar_t y, scalar_t z);
+    virtual void locate(scalar_t x, scalar_t y, scalar_t z);
+    virtual void face(scalar_t x, scalar_t y, scalar_t z);
 
     virtual void makeBoundingBox();
     

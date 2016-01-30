@@ -19,8 +19,8 @@ void ModelAnimator::animate() {
 		 states[i].current_vertices[vi].y=r.y;
 		 states[i].current_vertices[vi].z=r.z;
 		}
-		e_loc tdiff=states[i].end_time.getDiffNR();
-				e_loc ratio=tdiff/shapes[i]->frame_times[next_key];
+		scalar_t tdiff=states[i].end_time.getDiffNR();
+				scalar_t ratio=tdiff/shapes[i]->frame_times[next_key];
 		//cout << tdiff << ", " << shapes[i]->frame_times[states[i].current_keyframe] << endl;
 		states[i].interpol=ratio;
 		//cout << tdiff << ", " << ratio << ", " << states[i].interpol << ", " << shapes[i]->frame_times[next_key]<< ", " <<states[i].current_keyframe << endl;

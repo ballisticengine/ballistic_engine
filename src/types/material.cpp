@@ -1,18 +1,18 @@
 #include "types/material.hpp"
 
-void Material::setEmission(e_loc e) {
+void Material::setEmission(scalar_t e) {
 	this->emission=e;
 }
 
-void Material::setShininess(e_loc s) {
+void Material::setShininess(scalar_t s) {
 	this->shininess=s;
 }
 
-e_loc Material::getEmission() {
+scalar_t Material::getEmission() {
 	return this->emission;
 }
 
-e_loc Material::getShininess() {
+scalar_t Material::getShininess() {
 	return this->shininess;
 }
 

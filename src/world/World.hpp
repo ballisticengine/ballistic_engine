@@ -67,7 +67,7 @@ public:
     Sprite *testsprite;
     Skybox *sky;
     rooms_list rooms;
-    e_loc roomrot_x, roomrot_y, roomrot_z;
+    scalar_t roomrot_x, roomrot_y, roomrot_z;
 
     BulletPhysics getPhysicsEngine();
 

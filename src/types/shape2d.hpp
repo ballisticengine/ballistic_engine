@@ -6,7 +6,7 @@
 
 class Shape2d : public ShapeAbstract {
 public:
-	Shape2d(e_loc width,e_loc height);
+	Shape2d(scalar_t width,scalar_t height);
 };
 
 #endif

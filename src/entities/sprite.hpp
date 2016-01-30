@@ -16,9 +16,9 @@ protected:
 public:
 	Sprite();
 	Sprite(Ballistic::Types::Texture *tex);
-        Sprite(Ballistic::Types::Texture *tex,e_loc w,e_loc h);
-	e_loc width;
-	e_loc height;
+        Sprite(Ballistic::Types::Texture *tex,scalar_t w,scalar_t h);
+	scalar_t width;
+	scalar_t height;
 	Shape2d *shape;
 };
 

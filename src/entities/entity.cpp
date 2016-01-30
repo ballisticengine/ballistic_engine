@@ -11,19 +11,19 @@ Coords Entity::getCoords() {
     return c;
 }
 
-void Entity::rotate(e_loc x, e_loc y, e_loc z) {
+void Entity::rotate(scalar_t x, scalar_t y, scalar_t z) {
     this->rx += x;
     this->ry += y;
     this->rz += z;
 
 }
 
-void Entity::translate3(e_loc x, e_loc y, e_loc z) {
+void Entity::translate3(scalar_t x, scalar_t y, scalar_t z) {
     this->translate(x, y, z);
 
 }
 
-void Entity::translate(e_loc x, e_loc y, e_loc z) {
+void Entity::translate(scalar_t x, scalar_t y, scalar_t z) {
 
     this->x += x;
     this->y += y;
@@ -42,7 +42,7 @@ void Entity::translate(e_loc x, e_loc y, e_loc z) {
 
 }
 
-void Entity::locate(e_loc x, e_loc y, e_loc z) {
+void Entity::locate(scalar_t x, scalar_t y, scalar_t z) {
     this->x = x;
     this->y = y;
     this->z = z;
@@ -63,7 +63,7 @@ void Entity::syncBounding() {
 
 }
 
-void Entity::face(e_loc x, e_loc y, e_loc z) {
+void Entity::face(scalar_t x, scalar_t y, scalar_t z) {
     this->rx = x;
     this->ry = y;
     this->rz = z;

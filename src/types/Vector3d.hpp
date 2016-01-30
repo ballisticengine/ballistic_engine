@@ -7,11 +7,11 @@
 
 class Vector3d {
 protected:
-    e_loc ifZero(e_loc value);
+    scalar_t ifZero(scalar_t value);
 
 public:
-    e_loc x, y, z;
-    Vector3d(e_loc x, e_loc y, e_loc z);
+    scalar_t x, y, z;
+    Vector3d(scalar_t x, scalar_t y, scalar_t z);
     Vector3d(const Vector3d &v);
     Vector3d();
     
@@ -20,25 +20,25 @@ public:
     virtual Vector3d unit();
     virtual Vector3d normalize();
     virtual Vector3d diff(const Vector3d & v);
-    e_loc length();
+    scalar_t length();
     Vector3d crossProduct(const Vector3d & b);
-    e_loc dotProduct(const Vector3d & b);
+    scalar_t dotProduct(const Vector3d & b);
     virtual std::ostream & operator<<(std::ostream & ostr);
     virtual void write();
     Vector3d operator^(const Vector3d &b);
     Vector3d operator+(const Vector3d &b);
     Vector3d operator-(const Vector3d &b);
     Vector3d operator-();
-    Vector3d operator/(const e_loc val);
+    Vector3d operator/(const scalar_t val);
     Vector3d operator/(const Vector3d &b);
     Vector3d operator*(const Vector3d &b);
     Vector3d operator*(const double a);
-    e_loc operator!();
-    Vector3d operator|(e_loc length);
-    e_loc operator%(const Vector3d &b);
+    scalar_t operator!();
+    Vector3d operator|(scalar_t length);
+    scalar_t operator%(const Vector3d &b);
 };
 
-e_loc normalizeRotation(e_loc r);
+scalar_t normalizeRotation(scalar_t r);
 
 #endif
 

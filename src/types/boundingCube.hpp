@@ -13,22 +13,22 @@ protected:
 	
 public:
         
-        e_loc width,height,depth;
+        scalar_t width,height,depth;
 	BoundingCube();
 	BoundingCube(Shape *s);
-	BoundingCube(e_loc width,e_loc height,e_loc depth);
-	BoundingCube(e_loc minx,e_loc miny,e_loc minz,e_loc maxx,e_loc maxy,e_loc maxz);
+	BoundingCube(scalar_t width,scalar_t height,scalar_t depth);
+	BoundingCube(scalar_t minx,scalar_t miny,scalar_t minz,scalar_t maxx,scalar_t maxy,scalar_t maxz);
 	
-        void rotate(e_loc x,e_loc y,e_loc z);
+        void rotate(scalar_t x,scalar_t y,scalar_t z);
         void calculateSizes();
 	void calculate(Shape *s);
-	e_loc toSphereRadius();
+	scalar_t toSphereRadius();
 	void print();
-	e_loc getWidth();
-	e_loc getHeight();
-	e_loc getDepth();
+	scalar_t getWidth();
+	scalar_t getHeight();
+	scalar_t getDepth();
         string name;
-	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
+	//scalar_t max_x,min_x,max_y,min_y,max_z,min_z;
 	Vector3d max,min,loc;
 
 

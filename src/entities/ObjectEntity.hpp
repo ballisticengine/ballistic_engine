@@ -13,7 +13,7 @@
 
 class ObjectEntity : public Entity, public Texturable {
 protected:
-    void setIfNotZero(e_loc &a, e_loc &b);
+    void setIfNotZero(scalar_t &a, scalar_t &b);
     Material *mat;
 public:
     virtual Shape * getModel();
@@ -21,7 +21,7 @@ public:
     Shape *model;
     virtual void setModel(Shape *model);
     Coords velocity, acceleration;
-    e_loc weight;
+    scalar_t weight;
     ObjectEntity();
     Coords nextCoords(time_int diff);
     void changeVelocity(Coords velocity);

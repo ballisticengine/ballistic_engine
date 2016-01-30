@@ -10,14 +10,14 @@
 class Material : public LightOrMaterial {
 protected:
 	//colorRGBA emission,shininess;
-	e_loc emission,shininess;
+	scalar_t emission,shininess;
 	Ballistic::Types::Texture *tex;
 public:
 	Material();
-	void setEmission(e_loc e);
-	void setShininess(e_loc s);
-	e_loc getEmission();
-	e_loc getShininess();
+	void setEmission(scalar_t e);
+	void setShininess(scalar_t s);
+	scalar_t getEmission();
+	scalar_t getShininess();
 
 };
 

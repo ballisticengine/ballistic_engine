@@ -34,12 +34,12 @@ void *XMLWorldLoader::load(string level_name) {
             
     ptree& jump_point = pt.get_child("level.config.jump_point");
 
-    e_loc jx = jump_point.get<e_loc>("x"),
-            jy = jump_point.get<e_loc>("y"),
-            jz = jump_point.get<e_loc>("z"),
-            rx = jump_point.get<e_loc>("rx"),
-            ry = jump_point.get<e_loc>("ry"),
-            rz = jump_point.get<e_loc>("rz");
+    scalar_t jx = jump_point.get<scalar_t>("x"),
+            jy = jump_point.get<scalar_t>("y"),
+            jz = jump_point.get<scalar_t>("z"),
+            rx = jump_point.get<scalar_t>("rx"),
+            ry = jump_point.get<scalar_t>("ry"),
+            rz = jump_point.get<scalar_t>("rz");
 
 
     ptree &rooms = pt.get_child("level.rooms");
@@ -53,16 +53,16 @@ void *XMLWorldLoader::load(string level_name) {
         RoomEntity *roomE = new RoomEntity();
 
 
-        roomE->ambient_light.r = room.second.get<e_loc>("ambient_light.r"),
-                roomE->ambient_light.b = room.second.get<e_loc>("ambient_light.b"),
-                roomE->ambient_light.g = room.second.get<e_loc>("ambient_light.g");
+        roomE->ambient_light.r = room.second.get<scalar_t>("ambient_light.r"),
+                roomE->ambient_light.b = room.second.get<scalar_t>("ambient_light.b"),
+                roomE->ambient_light.g = room.second.get<scalar_t>("ambient_light.g");
 
         roomE->name = room.second.get<string>("name");
         roomE->setModel(room_shape);
-        e_loc
-        rx = room.second.get<e_loc>("location.x"),
-                ry = room.second.get<e_loc>("location.y"),
-                rz = room.second.get<e_loc>("location.z")
+        scalar_t
+        rx = room.second.get<scalar_t>("location.x"),
+                ry = room.second.get<scalar_t>("location.y"),
+                rz = room.second.get<scalar_t>("location.z")
                 ;
         roomE->locate(rx, ry, rz);
         roomE->calcBoundings();
@@ -72,7 +72,7 @@ void *XMLWorldLoader::load(string level_name) {
 
         BOOST_FOREACH(const ptree::value_type &entobj, room_ents) {
             string type = entobj.second.get<string>("type"), name = entobj.second.get<string>("name");
-            e_loc x = entobj.second.get<float>("location.x"), y = entobj.second.get<float>("location.y"),
+            scalar_t x = entobj.second.get<float>("location.x"), y = entobj.second.get<float>("location.y"),
                     z = entobj.second.get<float>("location.z"), rx = entobj.second.get<float>("facing.x"),
                     ry = entobj.second.get<float>("facing.y"), rz = entobj.second.get<float>("facing.z");
             Entity *current_e = 0;
@@ -81,7 +81,7 @@ void *XMLWorldLoader::load(string level_name) {
             if (type == "object") {
                 string objectbraces = "[OBJECT]";
                 name = name.replace(name.find(objectbraces), objectbraces.length(), "");
-                e_loc sc = entobj.second.get<e_loc>("scale");
+                scalar_t sc = entobj.second.get<scalar_t>("scale");
                 bool physics = entobj.second.get<bool>("physics");
                 //shapef->setScale(sc);
                 Shape *mshape = (Shape *) resman->get(entobj.second.get<string>("model"), SHAPE);

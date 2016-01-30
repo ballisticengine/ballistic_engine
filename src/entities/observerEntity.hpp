@@ -34,7 +34,7 @@ public:
 class ObserverEntity : public ObjectEntity {
 protected:
     Camera *cam;
-    e_loc headbob_add, headbob_i, kickback;
+    scalar_t headbob_add, headbob_i, kickback;
     Timer bob_timer, kick_timer;
     ObserverState state, got_state;
     bool state_changed, lock;
@@ -48,17 +48,17 @@ public:
     virtual void setCamera(Camera *c);
     virtual Camera *getCamera();
     virtual void bobHead();
-    virtual void kickBack(e_loc force);
+    virtual void kickBack(scalar_t force);
 
     virtual ObserverState * getState();
     virtual void setState(ObserverState *state);
     virtual bool stateChanged();
     virtual void refreshState();
 
-    virtual void translate(e_loc x, e_loc y, e_loc z);
-    virtual void rotate(e_loc x, e_loc y, e_loc z);
-    virtual void locate(e_loc x, e_loc y, e_loc z);
-    virtual void face(e_loc x, e_loc y, e_loc z);
+    virtual void translate(scalar_t x, scalar_t y, scalar_t z);
+    virtual void rotate(scalar_t x, scalar_t y, scalar_t z);
+    virtual void locate(scalar_t x, scalar_t y, scalar_t z);
+    virtual void face(scalar_t x, scalar_t y, scalar_t z);
 
 
 

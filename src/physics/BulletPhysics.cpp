@@ -89,7 +89,7 @@ BulletPhysics::~BulletPhysics() {
 
 }
 
-void BulletPhysics::step(e_loc timediff, rooms_list rooms) {
+void BulletPhysics::step(scalar_t timediff, rooms_list rooms) {
 
 
 }

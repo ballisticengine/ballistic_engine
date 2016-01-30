@@ -11,15 +11,15 @@ BoundingCube::BoundingCube(Shape *s) {
 
 
 
-e_loc BoundingCube::toSphereRadius() {
+scalar_t BoundingCube::toSphereRadius() {
 	Vector3d E=(max-min)/2.0f;	
 	Vector3d center=min+E;
 	
 	return 0;
 }
 
-void BoundingCube::rotate(e_loc x,e_loc y,e_loc z) {
-//    e_loc tmp;
+void BoundingCube::rotate(scalar_t x,scalar_t y,scalar_t z) {
+//    scalar_t tmp;
 //    if(x) {
 //        tmp=max.z;
 //        max.z=max.y;
@@ -30,7 +30,7 @@ void BoundingCube::rotate(e_loc x,e_loc y,e_loc z) {
 //    }
 }
 
-BoundingCube::BoundingCube(e_loc width,e_loc height,e_loc depth) {
+BoundingCube::BoundingCube(scalar_t width,scalar_t height,scalar_t depth) {
 	this->width=width;
 	this->height=height;
 	this->depth=depth;
@@ -42,7 +42,7 @@ BoundingCube::BoundingCube(e_loc width,e_loc height,e_loc depth) {
 	min.z=-depth/2;
 }
 
-BoundingCube::BoundingCube(e_loc minx,e_loc miny,e_loc minz,e_loc maxx,e_loc maxy,e_loc maxz) {
+BoundingCube::BoundingCube(scalar_t minx,scalar_t miny,scalar_t minz,scalar_t maxx,scalar_t maxy,scalar_t maxz) {
  min.x=minx;
  min.y=miny;
  min.z=minz;
@@ -61,7 +61,7 @@ void BoundingCube::calculateSizes() {
 void BoundingCube::calculate(Shape * s) {
     cout << "BCC";
     //vert_list vs=s->getVertices();
-	//e_loc max_x,min_x,max_y,min_y,max_z,min_z;
+	//scalar_t max_x,min_x,max_y,min_y,max_z,min_z;
 	max.x=min.x=max.y=min.y=max.z=min.z=0;
 	
 	for (unsigned int i=0; i<s->v_count; i++) {
@@ -90,7 +90,7 @@ void BoundingCube::calculate(Shape * s) {
 		}
 	}
 //
-	e_loc tmp1,tmp2;
+	scalar_t tmp1,tmp2;
         tmp1=min.z;
         tmp2=max.z;
         min.z=min.y;
@@ -100,15 +100,15 @@ void BoundingCube::calculate(Shape * s) {
         
 }
 
-e_loc BoundingCube::getWidth() {
+scalar_t BoundingCube::getWidth() {
 	return this->width;
 }
 
-e_loc BoundingCube::getHeight() {
+scalar_t BoundingCube::getHeight() {
 	return this->height;
 }
 
-e_loc BoundingCube::getDepth() {
+scalar_t BoundingCube::getDepth() {
 	return this->depth;
 }
 

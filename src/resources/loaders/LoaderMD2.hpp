@@ -16,7 +16,7 @@ using namespace std;
 class LoaderMD2 : public Loader{
 protected:
 	void md2ToShape(md2file *md2,Shape *s);
-	e_loc scale;
+	scalar_t scale;
 public:
     virtual extensions_s getFileExtensions();
     virtual ResourceType getType();
