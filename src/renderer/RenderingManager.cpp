@@ -22,6 +22,7 @@ void RenderingManager::render() {
 RenderingManager::RenderingManager() {
     
     this->world = WorldManager::getInstance()->getCurrentWorld();
+    
     if (!this->world) {
         return;
     }
@@ -31,7 +32,6 @@ RenderingManager::RenderingManager() {
     addAction(new RenderAllRooms());
     addAction(new RenderAllEntities());
     addAction(new RenderUI());
-    
     
     for(auto a: this->actions) {
         a->setWorld(world);
@@ -43,15 +43,14 @@ RenderingManager::~RenderingManager() {
 }
 
 void RenderingManager::setupTextures() {
-    this->renderer->addShader("light");
-    cout << "setupTextures" << endl;
+   // this->renderer->addShader("light");
+
     vector<LoadedResource *> ts = ResourceManager::getInstance()->getByType(TEXTURE);
 
     size_t ts_size = ts.size();
     for (size_t i = 0; i < ts_size; i++) {
 
         if (ts[i]->object) {
-            cout << "Stextures" << endl;
             this->renderer->setupTexture((Ballistic::Types::Texture *) ts[i]->object);
         }
     }

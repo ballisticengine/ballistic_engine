@@ -15,7 +15,7 @@
     <geometry>
 
     </geometry>
-     <rooms>
+    <rooms>
         <room>
             <name>
                 Simple Room
@@ -33,9 +33,43 @@
                 <g>1.0</g>
                 <b>1.0</b>
             </ambient_light>
-    <entities>
-
-    </entities>
-    </room>
+            <entities>
+                <entity>
+                    <energy>1.0</energy>
+                    <r>1.0</r>
+                    <g>1.0</g>
+                    <b>1.0</b>
+                    <name>Point</name>
+                    <type>light</type>
+                    <location>
+                        <x>-188.67794036865234</x>
+                        <y>275.0364112854004</y>
+                        <z>125.69416046142578</z>
+                    </location>
+                    <facing>
+                        <x>0.0</x>
+                        <y>0.0</y>
+                        <z>0.0</z>
+                    </facing>
+                </entity>
+                <entity>
+                    <physics>1</physics>
+                    <scale>0.699999988079071</scale>
+                    <model>@test.xml</model>
+                    <name>[OBJECT]qmissle</name>
+                    <type>object</type>
+                    <location>
+                        <x>-96.71102523803711</x>
+                        <y>232.00851440429688</y>
+                        <z>247.92924880981445</z>
+                    </location>
+                    <facing>
+                        <x>0.0</x>
+                        <y>0.0</y>
+                        <z>0.0</z>
+                    </facing>
+                </entity>
+            </entities>
+        </room>
     </rooms>
 </level>

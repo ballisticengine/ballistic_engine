@@ -50,7 +50,7 @@ void RendererOpenGL::init(size_t width, size_t height, SDLIOInterface *io) {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-   // addShader("light");
+    addShader("light");
 
 }
 
