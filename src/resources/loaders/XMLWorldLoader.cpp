@@ -93,7 +93,7 @@ void *XMLWorldLoader::load(string level_name) {
 
                 oe->addBoundingBox(new BoundingCube(oe->getModel()));
 
-                oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
+                //oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
                 current_e = (Entity *) oe;
                 //oe->face(rx,ry,rz);
                 oe->parent = (Entity *) roomE;
