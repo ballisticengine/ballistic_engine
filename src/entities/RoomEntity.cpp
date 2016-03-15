@@ -7,7 +7,7 @@ RoomEntity::RoomEntity() {
 
 RoomEntity::~RoomEntity() {
     deleteVector3d(this->boundings);
-    deleteVector3d(this->entities); //to usunie modele, physical_entities i entities z powodo hierarchii (patrz add*Entity)
+    deleteVector3d(this->entities); //to usunie modele, physical_entities i entities z powodu hierarchii (patrz add*Entity)
 }
 
 void RoomEntity::addEntity(Entity *e) {

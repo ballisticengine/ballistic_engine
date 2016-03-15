@@ -44,14 +44,12 @@ RenderingManager::~RenderingManager() {
 
 void RenderingManager::setupTextures() {
     this->renderer->addShader("light");
-    cout << "setupTextures" << endl;
     vector<LoadedResource *> ts = ResourceManager::getInstance()->getByType(TEXTURE);
 
     size_t ts_size = ts.size();
     for (size_t i = 0; i < ts_size; i++) {
 
         if (ts[i]->object) {
-            cout << "Stextures" << endl;
             this->renderer->setupTexture((Ballistic::Types::Texture *) ts[i]->object);
         }
     }

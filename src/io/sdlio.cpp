@@ -88,7 +88,6 @@ void SdlIO::keyboardInputThread() {
     key_action_map kmap = key_bindings->getBindings();
     UI *ui = UI::getInstance();
     while (!EngineState::getInstance()->getBool("exit")) {
-       // ui->kb_m.lock();
         if(!ui->m.try_lock()) {
             continue;
         }
@@ -99,11 +98,9 @@ void SdlIO::keyboardInputThread() {
 
         for (size_t i = 0; i < ksize; i++) {
             if (keyboard_state[i] == 1) {
-                // cout << i << endl;
                 down_count++;
                 KeybindAction action = kmap[i];
-                PyScripting::getInstance()->enqueue(action.name,{0}, true); //TO WYDUPIA
-
+                PyScripting::getInstance()->enqueue(action.name,{0}, true);
             } else {
                 if (last_keys[i] == 1) {
                     up_count++;
@@ -119,7 +116,6 @@ void SdlIO::keyboardInputThread() {
         }
 
         if (up_count) {
-            // cout << "Up count " << up_count << endl;
             PyScripting::getInstance()->broadcast("key_up",{(void *) keyboard_state});
         }
        

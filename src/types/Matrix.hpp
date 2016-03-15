@@ -12,12 +12,17 @@ protected:
     scalar_t *data;
 public:
     Matrix(size_t cols, size_t rows);
-    void set(size_t col, size_t row, scalar_t value);
-    void set(scalar_t *data);
-    scalar_t get(size_t col, size_t row);
-    scalar_t *get();
-    ~Matrix();
-    operator scalar_t*();
+    virtual void set(size_t col, size_t row, scalar_t value);
+    virtual void set(scalar_t *data);
+    virtual scalar_t get(size_t col, size_t row);
+    virtual scalar_t *get();
+    virtual  ~Matrix();
+    virtual operator scalar_t*();
+};
+
+class Matrix4 : public Matrix {
+public:
+    Matrix4();
 };
 
 #endif

@@ -15,7 +15,7 @@
     <geometry>
 
     </geometry>
-     <rooms>
+    <rooms>
         <room>
             <name>
                 Simple Room
@@ -33,9 +33,25 @@
                 <g>1.0</g>
                 <b>1.0</b>
             </ambient_light>
-    <entities>
-
-    </entities>
-    </room>
+            <entities>
+                <entity>
+                    <physics>1</physics>
+                    <scale>0.699999988079071</scale>
+                    <model>@gun.xml</model>
+                    <name>[OBJECT]qmissle</name>
+                    <type>object</type>
+                    <location>
+                        <x>0</x>
+                        <y>0</y>
+                        <z>0</z>
+                    </location>
+                    <facing>
+                        <x>0.0</x>
+                        <y>0.0</y>
+                        <z>0.0</z>
+                    </facing>
+                </entity>
+            </entities>
+        </room>
     </rooms>
 </level>

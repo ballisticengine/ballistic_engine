@@ -9,6 +9,7 @@ using namespace std;
 #include "types/shape.hpp"
 #include "types/Vector3d.hpp"
 #include "types/boundingCube.hpp"
+#include "types/Matrix.hpp"
 #define COLLISION_BACK 0.0001
 
 
@@ -16,25 +17,22 @@ using namespace std;
 BoundingCube offsetBounding(BoundingCube *bc, Coords offset);
 
 
-
-
-/*
- Abstrakcyjna klasa opisująca wszystkie obiekty na mapie
- */
-
 class Entity {
 protected:
     scalar_t x, y, z, rx, ry, rz;
+    
     Vector3d velocity;
     void syncBounding();
 public:
+    Matrix4 transform_matrix, rotation_matrix;
+    
     bool no_collisions;
     BoundingCube *bounding_box;
     bounding_list boundings;
     BoundingCube *last_bound;
     Entity();
     virtual ~Entity();
-
+    
     virtual Coords getCoords();
     string name;
     string type;
