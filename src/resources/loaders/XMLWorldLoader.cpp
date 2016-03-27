@@ -93,9 +93,9 @@ void *XMLWorldLoader::load(string level_name) {
 
                 oe->addBoundingBox(new BoundingCube(oe->getModel()));
 
-                oe->face(-90, 0, 0); //tymczasowo, i tak wi�kszo�� obiekt�w potrzebuje dok�adnie takiego obrotu
+                
                 current_e = (Entity *) oe;
-                //oe->face(rx,ry,rz);
+                
                 oe->parent = (Entity *) roomE;
                 roomE->addObjectEntity(oe);
 
@@ -115,7 +115,6 @@ void *XMLWorldLoader::load(string level_name) {
                 //                }
             } else if (type == "light") {
                 PointLight *l = new PointLight();
-                //l->face(-90, 0, 0);
                 l->locate(x, y, z);
                 ColorRGBA color;
                 color.r = entobj.second.get<float>("r");

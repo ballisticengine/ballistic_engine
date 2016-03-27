@@ -11,14 +11,14 @@ ResourceType LoaderXML::getType() {
 }
 
 void *LoaderXML::load(string file_name) {
-    
+
     Shape *shape_p = new Shape();
     ptree pt;
     read_xml(file_name, pt, boost::property_tree::xml_parser::trim_whitespace | boost::property_tree::xml_parser::no_comments);
     ptree shp = pt.get_child("shape");
     ptree geom = shp.get_child("geom");
     this->toShape(geom, shp, shape_p);
-    return (void *)shape_p;
+    return (void *) shape_p;
 }
 
 void *LoaderXML::loadFromData(void *data, size_t size) {
@@ -36,14 +36,14 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
 
     ptree
     verts = geom.get_child("vertices"),
-            faces = geom.get_child("faces");
-    //uvs = geom.get_child("uvs")
-    ;
+            faces = geom.get_child("faces"),
+            uvs = geom.get_child("uvs")
+            ;
     size_t
-    v_count = geom.get<size_t>("counts.vertices"),
-            f_count = geom.get<size_t>("counts.faces"),
-            uv_count = geom.get<size_t>("counts.uvs"),
-            vpf = geom.get<size_t>("counts.v_p_f")
+    v_count = verts.size(),
+            f_count = faces.size(),
+            uv_count = uvs.size(),
+            vpf = 3
             ;
 
 
@@ -55,7 +55,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
     }
 
 
-   
+
     s->f_count = f_count;
     s->v_count = v_count;
     s->v_per_poly = vpf;
@@ -114,7 +114,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
             //Texture *t = (Texture *) TextureFactory::getInstance()->get(texname, this->force_common);
             //  Texture *t;
             //s->textures[i] = t;
-            this->addDependency(texname, (void **)&s->textures[i]);
+            this->addDependency(texname, (void **) &s->textures[i]);
             //s->textures[i] = 0;
         } catch (std::exception e) {
             s->textures[i] = 0;
@@ -194,7 +194,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
         }
     }
 
-    
+
     scalar_t slocx = 0, slocy = 0, slocz = 0;
 
     try {
@@ -204,7 +204,7 @@ void LoaderXML::toShape(ptree &geom, ptree &shape_xml, Shape *s) {
     } catch (std::exception e) {
         cout << "No loc for " << type;
     }
-    
+
 }
 
 extern "C" {
