@@ -16,6 +16,7 @@ public:
     virtual void set(scalar_t *data);
     virtual scalar_t get(size_t col, size_t row);
     virtual scalar_t *get();
+    virtual Matrix & operator*(Matrix &matrix);
     virtual  ~Matrix();
     virtual operator scalar_t*();
 };

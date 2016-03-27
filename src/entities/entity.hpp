@@ -9,7 +9,7 @@ using namespace std;
 #include "types/shape.hpp"
 #include "types/Vector3d.hpp"
 #include "types/boundingCube.hpp"
-#include "types/Matrix.hpp"
+//#include "types/Matrix.hpp"
 #define COLLISION_BACK 0.0001
 
 
@@ -24,7 +24,7 @@ protected:
     Vector3d velocity;
     void syncBounding();
 public:
-    Matrix4 transform_matrix, rotation_matrix;
+//    Matrix4 transform_matrix, rotation_matrix;
     
     bool no_collisions;
     BoundingCube *bounding_box;

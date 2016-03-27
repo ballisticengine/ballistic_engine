@@ -52,7 +52,7 @@
                         <z>0.0</z>
                     </facing>
                 </entity>
-                <entity>
+<!--                <entity>
                     <physics>1</physics>
                     <scale>0.699999988079071</scale>
                     <model>@test.xml</model>
@@ -69,7 +69,7 @@
                         <y>0.0</y>
                         <z>0.0</z>
                     </facing>
-                </entity>
+                </entity>-->
             </entities>
         </room>
     </rooms>
