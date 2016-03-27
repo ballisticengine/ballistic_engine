@@ -23,41 +23,42 @@
      <shining>50</shining>
      <emit>0.0</emit>
     </material>
-    <texture>metal.png</texture>
+    <texture/>
     <vertices>
      <vertex>
-      <i>31</i>
+      <i>0</i>
       <uv_i>0</uv_i>
       <uv>
-       <u>0.17073486745357513</u>
-       <v>0.5193369388580322</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>1</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>32</i>
+      <i>2</i>
       <uv_i>2</uv_i>
       <uv>
-       <u>0.1455891728401184</u>
-       <v>0.541946530342102</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>0</i>
+      <i>2</i>
       <uv_i>3</uv_i>
       <uv>
-       <u>0.7242045402526855</u>
+       <u>0.0</u>
        <v>0.0</v>
       </uv>
      </vertex>
@@ -65,1696 +66,1756 @@
       <i>1</i>
       <uv_i>4</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>2</i>
+      <i>3</i>
       <uv_i>5</uv_i>
       <uv>
-       <u>0.6865647435188293</u>
-       <v>0.001960612367838621</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>30</i>
+      <i>3</i>
       <uv_i>6</uv_i>
       <uv>
-       <u>0.20191769301891327</u>
-       <v>0.4981655180454254</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>7</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>31</i>
+      <i>4</i>
       <uv_i>8</uv_i>
       <uv>
-       <u>0.17073486745357513</u>
-       <v>0.5193369388580322</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>29</i>
+      <i>4</i>
       <uv_i>9</uv_i>
       <uv>
-       <u>0.23793931305408478</u>
-       <v>0.47924602031707764</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>10</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>30</i>
+      <i>5</i>
       <uv_i>11</uv_i>
       <uv>
-       <u>0.20191769301891327</u>
-       <v>0.4981655180454254</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>28</i>
+      <i>5</i>
       <uv_i>12</uv_i>
       <uv>
-       <u>0.2774154245853424</u>
-       <v>0.46330541372299194</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>13</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>29</i>
+      <i>6</i>
       <uv_i>14</uv_i>
       <uv>
-       <u>0.23793931305408478</u>
-       <v>0.47924602031707764</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>27</i>
+      <i>6</i>
       <uv_i>15</uv_i>
       <uv>
-       <u>0.3188290297985077</u>
-       <v>0.4509563446044922</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>16</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>28</i>
+      <i>7</i>
       <uv_i>17</uv_i>
       <uv>
-       <u>0.2774154245853424</u>
-       <v>0.46330541372299194</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>26</i>
+      <i>7</i>
       <uv_i>18</uv_i>
       <uv>
-       <u>0.36058855056762695</u>
-       <v>0.44267332553863525</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>19</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>27</i>
+      <i>8</i>
       <uv_i>20</uv_i>
       <uv>
-       <u>0.3188290297985077</u>
-       <v>0.4509563446044922</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>25</i>
+      <i>8</i>
       <uv_i>21</uv_i>
       <uv>
-       <u>0.40108925104141235</u>
-       <v>0.4387747049331665</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>22</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>26</i>
+      <i>9</i>
       <uv_i>23</uv_i>
       <uv>
-       <u>0.36058855056762695</u>
-       <v>0.44267332553863525</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>24</i>
+      <i>9</i>
       <uv_i>24</uv_i>
       <uv>
-       <u>0.4387747049331665</u>
-       <v>0.43941035866737366</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>25</uv_i>
       <uv>
-       <u>0.4387746751308441</u>
-       <v>0.9288198351860046</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>25</i>
+      <i>10</i>
       <uv_i>26</uv_i>
       <uv>
-       <u>0.40108925104141235</u>
-       <v>0.4387747049331665</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>23</i>
+      <i>10</i>
       <uv_i>27</uv_i>
       <uv>
-       <u>0.763143002986908</u>
-       <v>0.5476386547088623</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>28</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.9782928228378296</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>24</i>
+      <i>11</i>
       <uv_i>29</uv_i>
       <uv>
-       <u>0.7319602370262146</u>
-       <v>0.5688100457191467</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>22</i>
+      <i>11</i>
       <uv_i>30</uv_i>
       <uv>
-       <u>0.7991646528244019</u>
-       <v>0.5287191271781921</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>31</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.9782928228378296</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>23</i>
+      <i>12</i>
       <uv_i>32</uv_i>
       <uv>
-       <u>0.763143002986908</u>
-       <v>0.5476386547088623</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>21</i>
+      <i>12</i>
       <uv_i>33</uv_i>
       <uv>
-       <u>0.8386407494544983</u>
-       <v>0.5127785801887512</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>34</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.9782928228378296</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>22</i>
+      <i>13</i>
       <uv_i>35</uv_i>
       <uv>
-       <u>0.7991646528244019</u>
-       <v>0.5287191271781921</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>20</i>
+      <i>13</i>
       <uv_i>36</uv_i>
       <uv>
-       <u>0.8800543546676636</u>
-       <v>0.5004295110702515</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>37</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.9782928228378296</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>21</i>
+      <i>14</i>
       <uv_i>38</uv_i>
       <uv>
-       <u>0.8386407494544983</u>
-       <v>0.5127785801887512</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>19</i>
+      <i>14</i>
       <uv_i>39</uv_i>
       <uv>
-       <u>0.9218138456344604</u>
-       <v>0.4921465218067169</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>40</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.9782928228378296</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>20</i>
+      <i>15</i>
       <uv_i>41</uv_i>
       <uv>
-       <u>0.8800543546676636</u>
-       <v>0.5004295110702515</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>18</i>
+      <i>15</i>
       <uv_i>42</uv_i>
       <uv>
-       <u>0.9623145461082458</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>43</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.9782928228378296</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>19</i>
+      <i>16</i>
       <uv_i>44</uv_i>
       <uv>
-       <u>0.9218138456344604</u>
-       <v>0.4921465218067169</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>17</i>
+      <i>16</i>
       <uv_i>45</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.48888352513313293</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>46</uv_i>
       <uv>
-       <u>0.9999999403953552</u>
-       <v>0.9782928228378296</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>18</i>
+      <i>17</i>
       <uv_i>47</uv_i>
       <uv>
-       <u>0.9623145461082458</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>16</i>
+      <i>17</i>
       <uv_i>48</uv_i>
       <uv>
-       <u>0.6942747235298157</u>
-       <v>0.9782929420471191</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>49</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>17</i>
+      <i>18</i>
       <uv_i>50</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.9776573777198792</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>15</i>
+      <i>18</i>
       <uv_i>51</uv_i>
       <uv>
-       <u>0.6537740230560303</u>
-       <v>0.9743943810462952</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>52</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>16</i>
+      <i>19</i>
       <uv_i>53</uv_i>
       <uv>
-       <u>0.6942747235298157</u>
-       <v>0.9782929420471191</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>14</i>
+      <i>19</i>
       <uv_i>54</uv_i>
       <uv>
-       <u>0.6120144724845886</u>
-       <v>0.966111421585083</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>55</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>15</i>
+      <i>20</i>
       <uv_i>56</uv_i>
       <uv>
-       <u>0.6537740230560303</u>
-       <v>0.9743943810462952</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>13</i>
+      <i>20</i>
       <uv_i>57</uv_i>
       <uv>
-       <u>0.5706009268760681</u>
-       <v>0.9537622928619385</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>58</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>14</i>
+      <i>21</i>
       <uv_i>59</uv_i>
       <uv>
-       <u>0.6120144724845886</u>
-       <v>0.966111421585083</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>12</i>
+      <i>21</i>
       <uv_i>60</uv_i>
       <uv>
-       <u>0.5311248302459717</u>
-       <v>0.9378217458724976</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>61</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>13</i>
+      <i>22</i>
       <uv_i>62</uv_i>
       <uv>
-       <u>0.5706009268760681</u>
-       <v>0.9537622928619385</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>11</i>
+      <i>22</i>
       <uv_i>63</uv_i>
       <uv>
-       <u>0.4951031804084778</u>
-       <v>0.9189022183418274</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>64</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>12</i>
+      <i>23</i>
       <uv_i>65</uv_i>
       <uv>
-       <u>0.5311248302459717</u>
-       <v>0.9378217458724976</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>10</i>
+      <i>23</i>
       <uv_i>66</uv_i>
       <uv>
-       <u>0.46392038464546204</u>
-       <v>0.897730827331543</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>67</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>11</i>
+      <i>24</i>
       <uv_i>68</uv_i>
       <uv>
-       <u>0.4951031804084778</u>
-       <v>0.9189022183418274</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>9</i>
+      <i>24</i>
       <uv_i>69</uv_i>
       <uv>
-       <u>0.4387747049331665</u>
-       <v>0.8751212358474731</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>70</uv_i>
       <uv>
-       <u>0.7319601774215698</u>
-       <v>0.48824793100357056</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>10</i>
+      <i>25</i>
       <uv_i>71</uv_i>
       <uv>
-       <u>0.46392038464546204</u>
-       <v>0.897730827331543</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>8</i>
+      <i>25</i>
       <uv_i>72</uv_i>
       <uv>
-       <u>0.4623039960861206</u>
-       <v>0.09819184243679047</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>73</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>9</i>
+      <i>26</i>
       <uv_i>74</uv_i>
       <uv>
-       <u>0.4387747049331665</u>
-       <v>0.122479148209095</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>7</i>
+      <i>26</i>
       <uv_i>75</uv_i>
       <uv>
-       <u>0.49195513129234314</u>
-       <v>0.07492371648550034</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>76</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>8</i>
+      <i>27</i>
       <uv_i>77</uv_i>
       <uv>
-       <u>0.4623039960861206</u>
-       <v>0.09819184243679047</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>6</i>
+      <i>27</i>
       <uv_i>78</uv_i>
       <uv>
-       <u>0.5265886187553406</u>
-       <v>0.05356895178556442</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>79</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>7</i>
+      <i>28</i>
       <uv_i>80</uv_i>
       <uv>
-       <u>0.49195513129234314</u>
-       <v>0.07492371648550034</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>5</i>
+      <i>28</i>
       <uv_i>81</uv_i>
       <uv>
-       <u>0.5648735165596008</u>
-       <v>0.034948233515024185</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>82</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>6</i>
+      <i>29</i>
       <uv_i>83</uv_i>
       <uv>
-       <u>0.5265886187553406</u>
-       <v>0.05356895178556442</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>4</i>
+      <i>29</i>
       <uv_i>84</uv_i>
       <uv>
-       <u>0.6053385138511658</u>
-       <v>0.019777072593569756</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>85</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>5</i>
+      <i>30</i>
       <uv_i>86</uv_i>
       <uv>
-       <u>0.5648735165596008</u>
-       <v>0.034948233515024185</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>3</i>
+      <i>30</i>
       <uv_i>87</uv_i>
       <uv>
-       <u>0.646428644657135</u>
-       <v>0.008638483472168446</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>88</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>4</i>
+      <i>31</i>
       <uv_i>89</uv_i>
       <uv>
-       <u>0.6053385138511658</u>
-       <v>0.019777072593569756</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>32</i>
+      <i>31</i>
       <uv_i>90</uv_i>
       <uv>
-       <u>0.7579011917114258</u>
-       <v>0.00283201620914042</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>91</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>0</i>
+      <i>32</i>
       <uv_i>92</uv_i>
       <uv>
-       <u>0.7242045402526855</u>
+       <u>0.0</u>
        <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>2</i>
+      <i>32</i>
       <uv_i>93</uv_i>
       <uv>
-       <u>0.6865647435188293</u>
-       <v>0.001960612367838621</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>1</i>
       <uv_i>94</uv_i>
       <uv>
-       <u>0.7579013109207153</u>
-       <v>0.48824796080589294</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
-     <vertex>
-      <i>3</i>
-      <uv_i>95</uv_i>
-      <uv>
-       <u>0.646428644657135</u>
-       <v>0.008638483472168446</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
      <vertex>
       <i>0</i>
+      <uv_i>95</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>16</i>
       <uv_i>96</uv_i>
       <uv>
-       <u>0.24099525809288025</u>
-       <v>0.4387746751308441</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>2</i>
+      <i>24</i>
       <uv_i>97</uv_i>
       <uv>
-       <u>0.19777971506118774</u>
-       <v>0.4387747049331665</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>32</i>
+      <i>8</i>
       <uv_i>98</uv_i>
       <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>32</i>
+      <uv_i>99</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>0</i>
+      <uv_i>100</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>2</i>
+      <uv_i>101</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
     <vertices>
      <vertex>
       <i>2</i>
-      <uv_i>99</uv_i>
-      <uv>
-       <u>0.19777971506118774</u>
-       <v>0.4387747049331665</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>3</i>
-      <uv_i>100</uv_i>
-      <uv>
-       <u>0.1553945392370224</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>101</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>3</i>
       <uv_i>102</uv_i>
       <uv>
-       <u>0.1553945392370224</u>
-       <v>0.4303438067436218</v>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>3</i>
+      <uv_i>103</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>4</i>
-      <uv_i>103</uv_i>
-      <uv>
-       <u>0.1154685840010643</u>
-       <v>0.4138059616088867</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
       <uv_i>104</uv_i>
       <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
       <i>4</i>
       <uv_i>105</uv_i>
       <uv>
-       <u>0.1154685840010643</u>
-       <v>0.4138059616088867</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>5</i>
       <uv_i>106</uv_i>
       <uv>
-       <u>0.07953617721796036</u>
-       <v>0.3897967040538788</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>32</i>
+      <i>6</i>
       <uv_i>107</uv_i>
       <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>5</i>
+      <i>6</i>
       <uv_i>108</uv_i>
       <uv>
-       <u>0.07953617721796036</u>
-       <v>0.3897967040538788</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>6</i>
+      <i>7</i>
       <uv_i>109</uv_i>
       <uv>
-       <u>0.04897814989089966</u>
-       <v>0.35923871397972107</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>32</i>
+      <i>4</i>
       <uv_i>110</uv_i>
       <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>6</i>
+      <i>8</i>
       <uv_i>111</uv_i>
       <uv>
-       <u>0.04897814989089966</u>
-       <v>0.35923871397972107</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>7</i>
+      <i>9</i>
       <uv_i>112</uv_i>
       <uv>
-       <u>0.02496887370944023</u>
-       <v>0.3233063220977783</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>32</i>
+      <i>10</i>
       <uv_i>113</uv_i>
       <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>7</i>
+      <i>10</i>
       <uv_i>114</uv_i>
       <uv>
-       <u>0.02496887370944023</u>
-       <v>0.3233063220977783</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>8</i>
+      <i>11</i>
       <uv_i>115</uv_i>
       <uv>
-       <u>0.008430993184447289</u>
-       <v>0.283380389213562</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>116</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
      <vertex>
       <i>8</i>
+      <uv_i>116</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>12</i>
       <uv_i>117</uv_i>
       <uv>
-       <u>0.008430993184447289</u>
-       <v>0.283380389213562</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>9</i>
+      <i>13</i>
       <uv_i>118</uv_i>
       <uv>
-       <u>2.627955453249342e-08</u>
-       <v>0.24099525809288025</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>119</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>9</i>
-      <uv_i>120</uv_i>
-      <uv>
-       <u>2.627955453249342e-08</u>
-       <v>0.24099525809288025</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>10</i>
-      <uv_i>121</uv_i>
-      <uv>
        <u>0.0</u>
-       <v>0.19777972996234894</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>122</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>10</i>
-      <uv_i>123</uv_i>
-      <uv>
-       <u>0.0</u>
-       <v>0.19777972996234894</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>11</i>
-      <uv_i>124</uv_i>
-      <uv>
-       <u>0.00843091495335102</u>
-       <v>0.1553945690393448</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>125</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>11</i>
-      <uv_i>126</uv_i>
-      <uv>
-       <u>0.00843091495335102</u>
-       <v>0.1553945690393448</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>12</i>
-      <uv_i>127</uv_i>
-      <uv>
-       <u>0.02496875636279583</u>
-       <v>0.1154685765504837</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>128</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>12</i>
-      <uv_i>129</uv_i>
-      <uv>
-       <u>0.02496875636279583</u>
-       <v>0.1154685765504837</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>13</i>
-      <uv_i>130</uv_i>
-      <uv>
-       <u>0.04897801950573921</u>
-       <v>0.07953616231679916</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>131</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>27</i>
-      <uv_i>132</uv_i>
-      <uv>
-       <u>0.43034374713897705</u>
-       <v>0.283380389213562</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>25</i>
-      <uv_i>133</uv_i>
-      <uv>
-       <u>0.4387747049331665</u>
-       <v>0.19777967035770416</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>26</i>
-      <uv_i>134</uv_i>
-      <uv>
-       <u>0.4387747049331665</u>
-       <v>0.24099522829055786</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>13</i>
-      <uv_i>135</uv_i>
-      <uv>
-       <u>0.04897801950573921</u>
-       <v>0.07953616231679916</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>14</i>
-      <uv_i>136</uv_i>
-      <uv>
-       <u>0.07953600585460663</u>
-       <v>0.04897813871502876</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>15</i>
-      <uv_i>137</uv_i>
-      <uv>
-       <u>0.11546840518712997</u>
-       <v>0.024968834593892097</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>32</i>
-      <uv_i>138</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>13</i>
-      <uv_i>139</uv_i>
-      <uv>
-       <u>0.04897801950573921</u>
-       <v>0.07953616231679916</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>15</i>
-      <uv_i>140</uv_i>
-      <uv>
-       <u>0.11546840518712997</u>
-       <v>0.024968834593892097</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>18</i>
-      <uv_i>141</uv_i>
-      <uv>
-       <u>0.2409951090812683</u>
        <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>16</i>
-      <uv_i>142</uv_i>
+      <uv_i>119</uv_i>
       <uv>
-       <u>0.15539437532424927</u>
-       <v>0.008430954068899155</v>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>14</i>
+      <uv_i>120</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>15</i>
+      <uv_i>121</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>16</i>
+      <uv_i>122</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>16</i>
+      <uv_i>123</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>17</i>
-      <uv_i>143</uv_i>
+      <uv_i>124</uv_i>
       <uv>
-       <u>0.1977795511484146</u>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>18</i>
+      <uv_i>125</uv_i>
+      <uv>
+       <u>0.0</u>
        <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
       <i>18</i>
-      <uv_i>144</uv_i>
+      <uv_i>126</uv_i>
       <uv>
-       <u>0.2409951090812683</u>
+       <u>0.0</u>
        <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>15</i>
-      <uv_i>145</uv_i>
+      <i>19</i>
+      <uv_i>127</uv_i>
       <uv>
-       <u>0.11546840518712997</u>
-       <v>0.024968834593892097</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>16</i>
-      <uv_i>146</uv_i>
+      <i>20</i>
+      <uv_i>128</uv_i>
       <uv>
-       <u>0.15539437532424927</u>
-       <v>0.008430954068899155</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>20</i>
+      <uv_i>129</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>21</i>
+      <uv_i>130</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>22</i>
+      <uv_i>131</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>22</i>
+      <uv_i>132</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>23</i>
+      <uv_i>133</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>24</i>
+      <uv_i>134</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>24</i>
+      <uv_i>135</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>25</i>
+      <uv_i>136</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>26</i>
+      <uv_i>137</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>26</i>
+      <uv_i>138</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>27</i>
+      <uv_i>139</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>28</i>
+      <uv_i>140</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>28</i>
+      <uv_i>141</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>29</i>
+      <uv_i>142</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>32</i>
+      <uv_i>143</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>30</i>
+      <uv_i>144</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>31</i>
+      <uv_i>145</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>32</i>
+      <uv_i>146</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
     <vertices>
      <vertex>
       <i>32</i>
       <uv_i>147</uv_i>
       <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>15</i>
+      <i>2</i>
       <uv_i>148</uv_i>
       <uv>
-       <u>0.11546840518712997</u>
-       <v>0.024968834593892097</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>18</i>
+      <i>8</i>
       <uv_i>149</uv_i>
       <uv>
-       <u>0.2409951090812683</u>
+       <u>0.0</u>
        <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>21</i>
+      <i>4</i>
       <uv_i>150</uv_i>
       <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>19</i>
+      <i>7</i>
       <uv_i>151</uv_i>
       <uv>
-       <u>0.28338027000427246</u>
-       <v>0.008430927991867065</v>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>8</i>
+      <uv_i>152</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>8</i>
+      <uv_i>153</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>11</i>
+      <uv_i>154</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>12</i>
+      <uv_i>155</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>13</i>
+      <uv_i>156</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>14</i>
+      <uv_i>157</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>16</i>
+      <uv_i>158</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>16</i>
+      <uv_i>159</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>18</i>
+      <uv_i>160</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>24</i>
+      <uv_i>161</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>20</i>
+      <uv_i>162</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>22</i>
+      <uv_i>163</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>24</i>
+      <uv_i>164</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>24</i>
+      <uv_i>165</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>26</i>
+      <uv_i>166</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>32</i>
+      <uv_i>167</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>29</i>
+      <uv_i>168</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>30</i>
+      <uv_i>169</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>32</i>
+      <uv_i>170</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>2</i>
+      <uv_i>171</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>4</i>
+      <uv_i>172</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>8</i>
+      <uv_i>173</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>8</i>
+      <uv_i>174</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>12</i>
+      <uv_i>175</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+     <vertex>
+      <i>16</i>
+      <uv_i>176</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
+      </uv>
+     </vertex>
+    </vertices>
+   </face>
+   <face>
+    <texture/>
+    <vertices>
+     <vertex>
+      <i>18</i>
+      <uv_i>177</uv_i>
+      <uv>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>20</i>
-      <uv_i>152</uv_i>
-      <uv>
-       <u>0.32330626249313354</u>
-       <v>0.024968808516860008</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>21</i>
-      <uv_i>153</uv_i>
-      <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>18</i>
-      <uv_i>154</uv_i>
-      <uv>
-       <u>0.2409951090812683</u>
-       <v>0.0</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>19</i>
-      <uv_i>155</uv_i>
-      <uv>
-       <u>0.28338027000427246</u>
-       <v>0.008430927991867065</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>32</i>
-      <uv_i>156</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>18</i>
-      <uv_i>157</uv_i>
-      <uv>
-       <u>0.2409951090812683</u>
-       <v>0.0</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>21</i>
-      <uv_i>158</uv_i>
-      <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>24</i>
-      <uv_i>159</uv_i>
-      <uv>
-       <u>0.4303438067436218</u>
-       <v>0.15539447963237762</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>22</i>
-      <uv_i>160</uv_i>
-      <uv>
-       <u>0.3897966742515564</u>
-       <v>0.07953609526157379</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>23</i>
-      <uv_i>161</uv_i>
-      <uv>
-       <u>0.4138059616088867</u>
-       <v>0.11546849459409714</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>31</i>
-      <uv_i>162</uv_i>
-      <uv>
-       <u>0.32330605387687683</u>
-       <v>0.4138059914112091</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>32</i>
-      <uv_i>163</uv_i>
-      <uv>
-       <u>0.28338009119033813</u>
-       <v>0.4303438067436218</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>21</i>
-      <uv_i>164</uv_i>
-      <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>27</i>
-      <uv_i>165</uv_i>
-      <uv>
-       <u>0.43034374713897705</u>
-       <v>0.283380389213562</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>24</i>
-      <uv_i>166</uv_i>
-      <uv>
-       <u>0.4303438067436218</u>
-       <v>0.15539447963237762</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>25</i>
-      <uv_i>167</uv_i>
-      <uv>
-       <u>0.4387747049331665</u>
-       <v>0.19777967035770416</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>27</i>
-      <uv_i>168</uv_i>
-      <uv>
-       <u>0.43034374713897705</u>
-       <v>0.283380389213562</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>22</i>
-      <uv_i>169</uv_i>
-      <uv>
-       <u>0.3897966742515564</u>
-       <v>0.07953609526157379</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>24</i>
-      <uv_i>170</uv_i>
-      <uv>
-       <u>0.4303438067436218</u>
-       <v>0.15539447963237762</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>30</i>
-      <uv_i>171</uv_i>
-      <uv>
-       <u>0.35923853516578674</u>
-       <v>0.38979676365852356</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>31</i>
-      <uv_i>172</uv_i>
-      <uv>
-       <u>0.32330605387687683</u>
-       <v>0.4138059914112091</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>21</i>
-      <uv_i>173</uv_i>
-      <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>29</i>
-      <uv_i>174</uv_i>
-      <uv>
-       <u>0.38979655504226685</u>
-       <v>0.35923874378204346</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>30</i>
-      <uv_i>175</uv_i>
-      <uv>
-       <u>0.35923853516578674</u>
-       <v>0.38979676365852356</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>21</i>
-      <uv_i>176</uv_i>
-      <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
-      </uv>
-     </vertex>
-    </vertices>
-   </face>
-   <face>
-    <vertices>
-     <vertex>
-      <i>28</i>
-      <uv_i>177</uv_i>
-      <uv>
-       <u>0.41380584239959717</u>
-       <v>0.3233063519001007</v>
-      </uv>
-     </vertex>
-     <vertex>
-      <i>29</i>
       <uv_i>178</uv_i>
       <uv>
-       <u>0.38979655504226685</u>
-       <v>0.35923874378204346</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>21</i>
+      <i>24</i>
       <uv_i>179</uv_i>
       <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>27</i>
+      <i>26</i>
       <uv_i>180</uv_i>
       <uv>
-       <u>0.43034374713897705</u>
-       <v>0.283380389213562</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
       <i>28</i>
       <uv_i>181</uv_i>
       <uv>
-       <u>0.41380584239959717</u>
-       <v>0.3233063519001007</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>22</i>
+      <i>32</i>
       <uv_i>182</uv_i>
       <uv>
-       <u>0.3897966742515564</u>
-       <v>0.07953609526157379</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
    </face>
    <face>
+    <texture/>
     <vertices>
      <vertex>
-      <i>28</i>
+      <i>32</i>
       <uv_i>183</uv_i>
       <uv>
-       <u>0.41380584239959717</u>
-       <v>0.3233063519001007</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>21</i>
+      <i>8</i>
       <uv_i>184</uv_i>
       <uv>
-       <u>0.3592386841773987</u>
-       <v>0.048978086560964584</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
      <vertex>
-      <i>22</i>
+      <i>24</i>
       <uv_i>185</uv_i>
       <uv>
-       <u>0.3897966742515564</u>
-       <v>0.07953609526157379</v>
+       <u>0.0</u>
+       <v>0.0</v>
       </uv>
      </vertex>
     </vertices>
@@ -1764,8 +1825,8 @@
    <vertex>
     <coords>
      <x>0.0</x>
-     <y>-1.0</y>
-     <z>1.0</z>
+     <y>-10.0</y>
+     <z>-10.0</z>
     </coords>
     <normal>
      <x>0.0</x>
@@ -1776,8 +1837,8 @@
    <vertex>
     <coords>
      <x>0.0</x>
-     <y>1.0</y>
-     <z>0.0</z>
+     <y>10.0</y>
+     <z>-0.0</z>
     </coords>
     <normal>
      <x>0.0</x>
@@ -1787,9 +1848,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.19509032368659973</x>
-     <y>-1.0</y>
-     <z>0.9807852506637573</z>
+     <x>1.9509032368659973</x>
+     <y>-10.0</y>
+     <z>-9.807852506637573</z>
     </coords>
     <normal>
      <x>0.16855372488498688</x>
@@ -1799,9 +1860,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.3826834559440613</x>
-     <y>-1.0</y>
-     <z>0.9238795042037964</z>
+     <x>3.826834559440613</x>
+     <y>-10.0</y>
+     <z>-9.238795042037964</z>
     </coords>
     <normal>
      <x>0.33066806197166443</x>
@@ -1811,9 +1872,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.5555702447891235</x>
-     <y>-1.0</y>
-     <z>0.8314695954322815</z>
+     <x>5.555702447891235</x>
+     <y>-10.0</y>
+     <z>-8.314695954322815</z>
     </coords>
     <normal>
      <x>0.48005616664886475</x>
@@ -1823,9 +1884,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.7071067690849304</x>
-     <y>-1.0</y>
-     <z>0.7071067690849304</z>
+     <x>7.071067690849304</x>
+     <y>-10.0</y>
+     <z>-7.071067690849304</z>
     </coords>
     <normal>
      <x>0.6110110878944397</x>
@@ -1835,9 +1896,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.8314696550369263</x>
-     <y>-1.0</y>
-     <z>0.5555701851844788</z>
+     <x>8.314696550369263</x>
+     <y>-10.0</y>
+     <z>-5.555701851844788</z>
     </coords>
     <normal>
      <x>0.7184667587280273</x>
@@ -1847,9 +1908,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.9238795042037964</x>
-     <y>-1.0</y>
-     <z>0.3826834261417389</z>
+     <x>9.238795042037964</x>
+     <y>-10.0</y>
+     <z>-3.826834261417389</z>
     </coords>
     <normal>
      <x>0.7983337044715881</x>
@@ -1859,9 +1920,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.9807852506637573</x>
-     <y>-1.0</y>
-     <z>0.19509035348892212</z>
+     <x>9.807852506637573</x>
+     <y>-10.0</y>
+     <z>-1.9509035348892212</z>
     </coords>
     <normal>
      <x>0.8474990129470825</x>
@@ -1871,9 +1932,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>1.0</x>
-     <y>-1.0</y>
-     <z>7.549790126404332e-08</z>
+     <x>10.0</x>
+     <y>-10.0</y>
+     <z>-7.549790126404332e-07</z>
     </coords>
     <normal>
      <x>0.8641010522842407</x>
@@ -1883,9 +1944,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.9807853102684021</x>
-     <y>-1.0</y>
-     <z>-0.19509020447731018</z>
+     <x>9.807853102684021</x>
+     <y>-10.0</y>
+     <z>1.9509020447731018</z>
     </coords>
     <normal>
      <x>0.8474990129470825</x>
@@ -1895,9 +1956,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.9238795638084412</x>
-     <y>-1.0</y>
-     <z>-0.38268327713012695</z>
+     <x>9.238795638084412</x>
+     <y>-10.0</y>
+     <z>3.8268327713012695</z>
     </coords>
     <normal>
      <x>0.7983337044715881</x>
@@ -1907,9 +1968,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.8314696550369263</x>
-     <y>-1.0</y>
-     <z>-0.5555701851844788</z>
+     <x>8.314696550369263</x>
+     <y>-10.0</y>
+     <z>5.555701851844788</z>
     </coords>
     <normal>
      <x>0.7184667587280273</x>
@@ -1919,9 +1980,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.7071067690849304</x>
-     <y>-1.0</y>
-     <z>-0.7071067690849304</z>
+     <x>7.071067690849304</x>
+     <y>-10.0</y>
+     <z>7.071067690849304</z>
     </coords>
     <normal>
      <x>0.6110110878944397</x>
@@ -1931,9 +1992,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.5555701851844788</x>
-     <y>-1.0</y>
-     <z>-0.8314696550369263</z>
+     <x>5.555701851844788</x>
+     <y>-10.0</y>
+     <z>8.314696550369263</z>
     </coords>
     <normal>
      <x>0.48005616664886475</x>
@@ -1943,9 +2004,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.38268327713012695</x>
-     <y>-1.0</y>
-     <z>-0.9238796234130859</z>
+     <x>3.8268327713012695</x>
+     <y>-10.0</y>
+     <z>9.23879623413086</z>
     </coords>
     <normal>
      <x>0.33066806197166443</x>
@@ -1955,9 +2016,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>0.19509008526802063</x>
-     <y>-1.0</y>
-     <z>-0.9807853102684021</z>
+     <x>1.9509008526802063</x>
+     <y>-10.0</y>
+     <z>9.807853102684021</z>
     </coords>
     <normal>
      <x>0.16855372488498688</x>
@@ -1967,9 +2028,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-3.2584136988589307e-07</x>
-     <y>-1.0</y>
-     <z>-1.0</z>
+     <x>-3.2584136988589307e-06</x>
+     <y>-10.0</y>
+     <z>10.0</z>
     </coords>
     <normal>
      <x>0.0</x>
@@ -1979,9 +2040,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.19509072601795197</x>
-     <y>-1.0</y>
-     <z>-0.9807851910591125</z>
+     <x>-1.9509072601795197</x>
+     <y>-10.0</y>
+     <z>9.807851910591125</z>
     </coords>
     <normal>
      <x>-0.16855372488498688</x>
@@ -1991,9 +2052,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.3826838731765747</x>
-     <y>-1.0</y>
-     <z>-0.9238793253898621</z>
+     <x>-3.826838731765747</x>
+     <y>-10.0</y>
+     <z>9.23879325389862</z>
     </coords>
     <normal>
      <x>-0.33066806197166443</x>
@@ -2003,9 +2064,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.5555707216262817</x>
-     <y>-1.0</y>
-     <z>-0.8314692974090576</z>
+     <x>-5.555707216262817</x>
+     <y>-10.0</y>
+     <z>8.314692974090576</z>
     </coords>
     <normal>
      <x>-0.48005616664886475</x>
@@ -2015,9 +2076,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.7071072459220886</x>
-     <y>-1.0</y>
-     <z>-0.707106351852417</z>
+     <x>-7.071072459220886</x>
+     <y>-10.0</y>
+     <z>7.07106351852417</z>
     </coords>
     <normal>
      <x>-0.6110110878944397</x>
@@ -2027,9 +2088,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.8314700126647949</x>
-     <y>-1.0</y>
-     <z>-0.5555696487426758</z>
+     <x>-8.31470012664795</x>
+     <y>-10.0</y>
+     <z>5.555696487426758</z>
     </coords>
     <normal>
      <x>-0.7184667587280273</x>
@@ -2039,9 +2100,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.923879861831665</x>
-     <y>-1.0</y>
-     <z>-0.3826826810836792</z>
+     <x>-9.23879861831665</x>
+     <y>-10.0</y>
+     <z>3.826826810836792</z>
     </coords>
     <normal>
      <x>-0.7983337044715881</x>
@@ -2051,9 +2112,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.9807854294776917</x>
-     <y>-1.0</y>
-     <z>-0.1950894594192505</z>
+     <x>-9.807854294776917</x>
+     <y>-10.0</y>
+     <z>1.9508945941925049</z>
     </coords>
     <normal>
      <x>-0.8474990129470825</x>
@@ -2063,9 +2124,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-1.0</x>
-     <y>-1.0</y>
-     <z>9.655991561885457e-07</z>
+     <x>-10.0</x>
+     <y>-10.0</y>
+     <z>-9.655991561885457e-06</z>
     </coords>
     <normal>
      <x>-0.8641010522842407</x>
@@ -2075,9 +2136,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.980785071849823</x>
-     <y>-1.0</y>
-     <z>0.1950913518667221</z>
+     <x>-9.80785071849823</x>
+     <y>-10.0</y>
+     <z>-1.950913518667221</z>
     </coords>
     <normal>
      <x>-0.8474990129470825</x>
@@ -2087,9 +2148,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.923879086971283</x>
-     <y>-1.0</y>
-     <z>0.38268446922302246</z>
+     <x>-9.23879086971283</x>
+     <y>-10.0</y>
+     <z>-3.8268446922302246</z>
     </coords>
     <normal>
      <x>-0.7983337044715881</x>
@@ -2099,9 +2160,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.831468939781189</x>
-     <y>-1.0</y>
-     <z>0.5555712580680847</z>
+     <x>-8.31468939781189</x>
+     <y>-10.0</y>
+     <z>-5.555712580680847</z>
     </coords>
     <normal>
      <x>-0.7184667587280273</x>
@@ -2111,9 +2172,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.7071058750152588</x>
-     <y>-1.0</y>
-     <z>0.707107663154602</z>
+     <x>-7.071058750152588</x>
+     <y>-10.0</y>
+     <z>-7.0710766315460205</z>
     </coords>
     <normal>
      <x>-0.6110110878944397</x>
@@ -2123,9 +2184,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.5555691123008728</x>
-     <y>-1.0</y>
-     <z>0.8314703702926636</z>
+     <x>-5.555691123008728</x>
+     <y>-10.0</y>
+     <z>-8.314703702926636</z>
     </coords>
     <normal>
      <x>-0.48005616664886475</x>
@@ -2135,9 +2196,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.38268208503723145</x>
-     <y>-1.0</y>
-     <z>0.9238801002502441</z>
+     <x>-3.8268208503723145</x>
+     <y>-10.0</y>
+     <z>-9.238801002502441</z>
     </coords>
     <normal>
      <x>-0.33066806197166443</x>
@@ -2147,9 +2208,9 @@
    </vertex>
    <vertex>
     <coords>
-     <x>-0.19508881866931915</x>
-     <y>-1.0</y>
-     <z>0.9807855486869812</z>
+     <x>-1.9508881866931915</x>
+     <y>-10.0</y>
+     <z>-9.807855486869812</z>
     </coords>
     <normal>
      <x>-0.16855372488498688</x>
